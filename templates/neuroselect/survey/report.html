@@ -9,9 +9,9 @@
 {% set user = '' %}
 
 {% if query|length %}
-  {% set user = craft.users().email(query).one() %}
+{% set user = craft.users().email(query).one() %}
 {% elseif currentUser %}
-  {% set user = currentUser %}
+{% set user = currentUser %}
 {% endif %}
 
 
@@ -111,12 +111,13 @@
 
 
 {% if subject == 'sleep' or subject == 'stress' %}
-	{% if submission.product1 is empty and submission.product2 is empty and submission.product3 is empty and submission.product4 is empty and submission.product5 is empty %}
-		{# set prod = craft.products().id(104).one() #}
-	  {# set productList = productList|merge([prod]) #}
+{% if submission.product1 is empty and submission.product2 is empty and submission.product3 is empty and
+submission.product4 is empty and submission.product5 is empty %}
+{# set prod = craft.products().id(104).one() #}
+{# set productList = productList|merge([prod]) #}
 
-		{% set noProds = true %}
-	{% endif %}
+{% set noProds = true %}
+{% endif %}
 {% endif %}
 
 
@@ -153,63 +154,78 @@
         <div class="pir-utilities mb-4 no-print d-flex flex-justify-between flex-items-center">
 
           {% if currentUser %}
-          <a href="{{ siteUrl }}account/neuro-q/">< Back to Neuro Q dashboard</a>
-          {% else %}
-          <a href="{{ siteUrl }}neuro-q">< Retake survey</a>
-          {% endif %}
+          <a href="{{ siteUrl }}account/neuro-q/">
+            < Back to Neuro Q dashboard</a>
+              {% else %}
+              <a href="{{ siteUrl }}neuro-q">
+                < Retake survey</a>
+                  {% endif %}
 
-          {% if productList|length >= 1 %}
+                  {% if productList|length >= 1 %}
 
-          <div class="d-flex flex-justify-end">
-            {% set hasPDF = false %}
+                  <div class="d-flex flex-justify-end">
+                    {% set hasPDF = false %}
 
-            {% set filename = 'NS-SURVEY-' ~ report  ~ '.pdf' %}
+                    {% set filename = 'NS-SURVEY-' ~ report ~ '.pdf' %}
 
-            {% set fileCheck = '/surveys/' ~ filename %}
+                    {% set fileCheck = '/surveys/' ~ filename %}
 
-            {% set pdfGenerated = craft.assets().filename(filename).folderId('22').all() %}
+                    {% set pdfGenerated = craft.assets().filename(filename).folderId('22').all() %}
 
-						{% if submission.email %}
-            <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
-              <input type="hidden" name="action" value="/neuroselect/survey/email-survey">
-              {{ csrfInput() }}
-              <input type="hidden" name="submissionId" value="{{ report }}">
-			   			<input type="hidden" name="email" value="{{ submission.email }}">
-						<input type="hidden" name="name" value="{{ currentUser.name }}">
+                    {% if submission.email %}
+                    <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
+                      <input type="hidden" name="action" value="/neuroselect/survey/email-survey">
+                      {{ csrfInput() }}
+                      <input type="hidden" name="submissionId" value="{{ report }}">
+                      <input type="hidden" name="email" value="{{ submission.email }}">
+                      <input type="hidden" name="name" value="{{ currentUser.name }}">
 
-              <button class="d-flex flex-items-center" type="submit" id="pdf-email-form-submit">
-                <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24"><path d="M12.819 14.427c.064.267.077.679-.021.948-.128.351-.381.528-.754.528h-.637v-2.12h.496c.474 0 .803.173.916.644zm3.091-8.65c2.047-.479 4.805.279 6.09 1.179-1.494-1.997-5.23-5.708-7.432-6.882 1.157 1.168 1.563 4.235 1.342 5.703zm-7.457 7.955h-.546v.943h.546c.235 0 .467-.027.576-.227.067-.123.067-.366 0-.489-.109-.198-.341-.227-.576-.227zm13.547-2.732v13h-20v-24h8.409c4.858 0 3.334 8 3.334 8 3.011-.745 8.257-.42 8.257 3zm-12.108 2.761c-.16-.484-.606-.761-1.224-.761h-1.668v3.686h.907v-1.277h.761c.619 0 1.064-.277 1.224-.763.094-.292.094-.597 0-.885zm3.407-.303c-.297-.299-.711-.458-1.199-.458h-1.599v3.686h1.599c.537 0 .961-.181 1.262-.535.554-.659.586-2.035-.063-2.693zm3.701-.458h-2.628v3.686h.907v-1.472h1.49v-.732h-1.49v-.698h1.721v-.784z"/></svg>
-                <span>Email Report</span>
-              </button>
-            </form>
-			 		{% endif %}
+                      <button class="d-flex flex-items-center" type="submit" id="pdf-email-form-submit">
+                        <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24">
+                          <path
+                            d="M12.819 14.427c.064.267.077.679-.021.948-.128.351-.381.528-.754.528h-.637v-2.12h.496c.474 0 .803.173.916.644zm3.091-8.65c2.047-.479 4.805.279 6.09 1.179-1.494-1.997-5.23-5.708-7.432-6.882 1.157 1.168 1.563 4.235 1.342 5.703zm-7.457 7.955h-.546v.943h.546c.235 0 .467-.027.576-.227.067-.123.067-.366 0-.489-.109-.198-.341-.227-.576-.227zm13.547-2.732v13h-20v-24h8.409c4.858 0 3.334 8 3.334 8 3.011-.745 8.257-.42 8.257 3zm-12.108 2.761c-.16-.484-.606-.761-1.224-.761h-1.668v3.686h.907v-1.277h.761c.619 0 1.064-.277 1.224-.763.094-.292.094-.597 0-.885zm3.407-.303c-.297-.299-.711-.458-1.199-.458h-1.599v3.686h1.599c.537 0 .961-.181 1.262-.535.554-.659.586-2.035-.063-2.693zm3.701-.458h-2.628v3.686h.907v-1.472h1.49v-.732h-1.49v-.698h1.721v-.784z" />
+                        </svg>
+                        <span>Email Report</span>
+                      </button>
+                    </form>
+                    {% endif %}
 
-            <div class="{% if pdfGenerated|length == 0 %}d-none{% endif %}" id="download-pdf">
-              <a class="d-flex flex-items-center ml-4" href="{{ siteUrl }}surveys/{{filename}}" id="pir-download-report" target="_blank">
+                    <div class="{% if pdfGenerated|length == 0 %}d-none{% endif %}" id="download-pdf">
+                      <a class="d-flex flex-items-center ml-4" href="{{ siteUrl }}surveys/{{filename}}"
+                        id="pir-download-report" target="_blank">
 
-                <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24"><path d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>
-                <span>Download Report</span>
-              </a>
-            </div>
+                        <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24">
+                          <path
+                            d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z" />
+                        </svg>
+                        <span>Download Report</span>
+                      </a>
+                    </div>
 
 
-            <form id="pdf-gen-form" method="post" accept-charset="UTF-8" class="ml-4{% if pdfGenerated|length > 0 %} d-none{% endif %}">
-              <input type="hidden" name="action" value="/neuroselect/survey/survey-pdf">
-              {{ csrfInput() }}
+                    <form id="pdf-gen-form" method="post" accept-charset="UTF-8"
+                      class="ml-4{% if pdfGenerated|length > 0 %} d-none{% endif %}">
+                      <input type="hidden" name="action" value="/neuroselect/survey/survey-pdf">
+                      {{ csrfInput() }}
 
-              <input type="hidden" name="source" value="{{ craft.app.request.absoluteUrl }}?account={{ user.email }}">
+                      <input type="hidden" name="source"
+                        value="{{ craft.app.request.absoluteUrl }}?account={{ user.email }}">
 
-              <input type="hidden" name="submissionId" value="{{ report }}">
+                      <input type="hidden" name="submissionId" value="{{ report }}">
 
-              <button id="pdf-gen-form-submit" class="d-flex flex-items-center" type="submit">
-                <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24"><path d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>
-                <span>Generate Report</span>
-              </button>
-            </form>
+                      <button id="pdf-gen-form-submit" class="d-flex flex-items-center" type="submit">
+                        <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24">
+                          <path
+                            d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z" />
+                        </svg>
+                        <span>Generate Report</span>
+                      </button>
+                    </form>
 
-            <a id="new-file" class="sr-only no-print" href="{{ siteUrl }}surveys/{{filename}}"  target="_blank"></a>
-          </div>
-          {% endif %}
+                    <a id="new-file" class="sr-only no-print" href="{{ siteUrl }}surveys/{{filename}}"
+                      target="_blank"></a>
+                  </div>
+                  {% endif %}
         </div>
         <h1 class="h2 mb-4">NeuroScience Survey ID #{{ report }}</h1>
       </div>
@@ -228,7 +244,7 @@
         <div class="col-md-4 mt-4 mt-md-3 no-print d-none">
           <form method="POST" id="addToCart" class="text-group">
             <input type="hidden" name="action" value="commerce/cart/update-cart">
-            <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
+            <input type="hidden" name="successMessage" value="{{ 'Products added to the cart.'|hash }}">
             {{ redirectInput('shop/cart') }}
             {{ csrfInput() }}
 
@@ -268,25 +284,26 @@
 
         <div class="sleep-area">
           <div>Self-Rated Sleep Quality</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.overallSleepQuality }}</div>
+          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.overallSleepQuality }}
+          </div>
           <div>
             {% set rating = submission.finalQuality %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
@@ -297,46 +314,47 @@
           <div>
             {% set rating = submission.fallingAsleep %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
 
         <div class="sleep-area">
           <div>Ability to Stay Asleep</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.wakingUpAfterAsleep }}</div>
+          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.wakingUpAfterAsleep }}
+          </div>
           <div>
             {% set rating = submission.wakeUp %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
@@ -347,21 +365,21 @@
           <div>
             {% set rating = submission.vasomotorIssues %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
@@ -372,21 +390,21 @@
           <div>
             {% set rating = submission.finalPain %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
@@ -397,46 +415,47 @@
           <div>
             {% set rating = submission.daytimeFatigue %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
 
         <div class="sleep-area">
           <div>Daytime Motivation</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.daytimeMotivation }}</div>
+          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.daytimeMotivation }}
+          </div>
           <div>
             {% set rating = submission.daytimeMotivation %}
             <div class="star-rating">
-            {% if rating == 'Very Poor' %}
+              {% if rating == 'Very Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Poor' %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Fair' %}
+              {% elseif rating == 'Poor' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating == 'Great' %}
+              {% elseif rating == 'Fair' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
               <img src="/images/svgs/star.svg" alt="star icon" />
+              {% elseif rating == 'Great' %}
               <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              <img src="/images/svgs/star.svg" alt="star icon" />
+              {% endif %}
             </div>
           </div>
         </div>
@@ -448,715 +467,726 @@
 
 
   {% if submission.subject == 'stress' %}
-    {% set ss =  submission.stressScore %}
-    {% set level = 'healthy' %}
-    {% set ln = 'healthy' %}
-    {% if ss >= 16 and ss < 30  %}
-    {% set level = 'elevated' %}
-    {% set ln = 'elevated' %}
-    {% endif %}
-    {% if ss >= 30 and ss < 35  %}
-    {% set level = 'high' %}
-    {% set ln = 'high' %}
-    {% endif %}
-    {% if ss >= 35  %}
-    {% set level = 'veryHigh' %}
-    {% set ln = 'very high' %}
-    {% endif %}
+  {% set ss = submission.stressScore %}
+  {% set level = 'healthy' %}
+  {% set ln = 'healthy' %}
+  {% if ss >= 16 and ss < 30 %} {% set level='elevated' %} {% set ln='elevated' %} {% endif %} {% if ss>= 30 and ss < 35
+      %} {% set level='high' %} {% set ln='high' %} {% endif %} {% if ss>= 35 %}
+      {% set level = 'veryHigh' %}
+      {% set ln = 'very high' %}
+      {% endif %}
 
-    <div class="wrapper py-6 my-6">
-      <div class="survey-title-bar">
-        <h2 class="h3 text-white m-0">Stress Evalution</h2>
-      </div>
-      <div class="meter meter--stress" data-level="{{ level }}" data-score="{{ ss }}" data-max="40">
-        <div class="meter__score">Your Score<span>{{ ss }}</span></div>
-        <div class="meter__inner">
-          <span></span>
+      <div class="wrapper py-6 my-6">
+        <div class="survey-title-bar">
+          <h2 class="h3 text-white m-0">Stress Evalution</h2>
         </div>
+        <div class="meter meter--stress" data-level="{{ level }}" data-score="{{ ss }}" data-max="40">
+          <div class="meter__score">Your Score<span>{{ ss }}</span></div>
+          <div class="meter__inner">
+            <span></span>
+          </div>
 
-        <p class="text-center text-black p-lg mt-4">Your overall stress level is <span class="text-bold">{{ ss }}</span>, which indicates your stress level is <span class="text-bold">{{ ln }}</span>.</p>
-      </div>
-    </div>
-  {% endif %}
-
-
-  {% if submission.subject == 'wellness' %}
-
-    {% set ss =  submission.wellnessScore %}
-    {% set level = 'great' %}
-    {% set ln = 'great' %}
-    {% if ss > 37 and ss < 54  %}
-    {% set level = 'fair' %}
-    {% set ln = 'fair' %}
-    {% endif %}
-    {% if ss >= 54 and ss <= 67  %}
-    {% set level = 'poor' %}
-    {% set ln = 'poor' %}
-    {% endif %}
-    {% if ss > 68  %}
-    {% set level = 'veryPoor' %}
-    {% set ln = 'very poor' %}
-    {% endif %}
-
-    <div class="wrapper py-6 my-6">
-      <div class="survey-title-bar">
-        <h2 class="h3 text-white m-0">Fatigue Evalution</h2>
-      </div>
-      <div class="meter meter--stress" data-level="{{ level }}" data-score="{{ ss }}" data-max="99">
-        <div class="meter__score">Your Score<span>{{ ss }}</span></div>
-        <div class="meter__inner">
-          <span></span>
-        </div>
-
-        <p class="text-center text-black p-lg mt-4">Your overall fatigue level is <span class="text-bold">{{ ss }}</span>, which indicates your fatigue level is <span class="text-bold">{{ ln }}</span>.</p>
-      </div>
-
-    <div class="sleep-table mt-6 pt-6">
-      <div class="sleep-table__hd">
-        <div class="first">
-          <b>Fatigue area</b>
-        </div>
-        <div class="">
-          <b>Description</b>
-        </div>
-        <div class="">
-          <b>Rating</b>
+          <p class="text-center text-black p-lg mt-4">Your overall stress level is <span class="text-bold">{{ ss
+              }}</span>, which indicates your stress level is <span class="text-bold">{{ ln }}</span>.</p>
         </div>
       </div>
+      {% endif %}
 
-      <div class="sleep-table__bd">
 
-        <div class="sleep-area">
-          <div>General Fatigue</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.generalFatigue }}</div>
-          <div>
-            {% set rating = submission.generalWellness %}
-            <div class="star-rating">
-            {% if rating >= 17 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 14 and rating <= 16 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 8 and rating < 14 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating < 8 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
+      {% if submission.subject == 'wellness' %}
+
+      {% set ss = submission.wellnessScore %}
+      {% set level = 'great' %}
+      {% set ln = 'great' %}
+      {% if ss > 37 and ss < 54 %} {% set level='fair' %} {% set ln='fair' %} {% endif %} {% if ss>= 54 and ss <= 67 %}
+          {% set level='poor' %} {% set ln='poor' %} {% endif %} {% if ss> 68 %}
+          {% set level = 'veryPoor' %}
+          {% set ln = 'very poor' %}
+          {% endif %}
+
+          <div class="wrapper py-6 my-6">
+            <div class="survey-title-bar">
+              <h2 class="h3 text-white m-0">Fatigue Evalution</h2>
+            </div>
+            <div class="meter meter--stress" data-level="{{ level }}" data-score="{{ ss }}" data-max="99">
+              <div class="meter__score">Your Score<span>{{ ss }}</span></div>
+              <div class="meter__inner">
+                <span></span>
+              </div>
+
+              <p class="text-center text-black p-lg mt-4">Your overall fatigue level is <span class="text-bold">{{ ss
+                  }}</span>, which indicates your fatigue level is <span class="text-bold">{{ ln }}</span>.</p>
+            </div>
+
+            <div class="sleep-table mt-6 pt-6">
+              <div class="sleep-table__hd">
+                <div class="first">
+                  <b>Fatigue area</b>
+                </div>
+                <div class="">
+                  <b>Description</b>
+                </div>
+                <div class="">
+                  <b>Rating</b>
+                </div>
+              </div>
+
+              <div class="sleep-table__bd">
+
+                <div class="sleep-area">
+                  <div>General Fatigue</div>
+                  <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.generalFatigue
+                    }}</div>
+                  <div>
+                    {% set rating = submission.generalWellness %}
+                    <div class="star-rating">
+                      {% if rating >= 17 %}
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 14 and rating
+                      <= 16 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 8 and rating
+                      < 14 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating
+                      < 8 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sleep-area">
+                  <div>Physical Fatigue</div>
+                  <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.physicalFatigue
+                    }}</div>
+                  <div>
+                    {% set rating = submission.physicalWellness %}
+                    <div class="star-rating">
+                      {% if rating >= 15 %}
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 11 and rating
+                      < 15 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 8 and rating
+                      < 11 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating
+                      < 8 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sleep-area">
+                  <div>Activity Fatigue</div>
+                  <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.activityFatigue
+                    }}</div>
+                  <div>
+                    {% set rating = submission.activityWellness %}
+                    <div class="star-rating">
+                      {% if rating >= 12 %}
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 10 and rating
+                      < 12 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 7 and rating
+                      < 10 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating
+                      < 7 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sleep-area">
+                  <div>Motivation Fatigue</div>
+                  <div class="user-content user-content--survey">{{
+                    surveySubmissions.surveyResultsText.motivationFatigue }}</div>
+                  <div>
+                    {% set rating = submission.motivationWellness %}
+                    <div class="star-rating">
+                      {% if rating >= 13 %}
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 10 and rating
+                      < 13 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 7 and rating
+                      < 10 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating
+                      < 7 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sleep-area">
+                  <div>Mental Fatigue</div>
+                  <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.mentalFatigue }}
+                  </div>
+                  <div>
+                    {% set rating = submission.mentalWellness %}
+                    <div class="star-rating">
+                      {% if rating >= 15 %}
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 12 and rating
+                      < 15 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating >= 7 and rating
+                      <= 11 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% elseif rating
+                      < 7 %} <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      <img src="/images/svgs/star.svg" alt="star icon" />
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          {% endif %}
+
+
+          <div class="wrapper py-6 my-6 page-break-avoid">
+            <div class="survey-title-bar">
+              <h2 class="h3 text-white m-0">{{ subject|capitalize }} Product Recommendations</h2>
+            </div>
+
+            {% if noProds %}
+            <p class="text-center">Based on your current symptoms, NeuroScience products are not recommended at this
+              time</p>
             {% endif %}
+
+            {% for product in productList %}
+            <div class="survey-product">
+              <figure>
+                {% for row in product.productFields %}
+                {% for img in row.productImages.limit(1) %}
+                <img src="{{ img.url }}" alt="{{ img.title }}" />
+                {% endfor %}
+                {% endfor %}
+              </figure>
+
+              <div class="survey-product__content">
+                <h3 class="h3 mb-2">{{ product.title }}</h3>
+
+                <div class="user-content user-content--survey my-3">
+                  {{ product.productFields.shortDescription }}
+
+                  {% if submission.subject == 'sleep' %}
+                  {{ product.productSurveyDetails.sleepContent }}
+                  {% endif %}
+                  {% if submission.subject == 'stress' %}
+                  {{ product.productSurveyDetails.stressContent }}
+                  {% endif %}
+                  {% if submission.subject == 'wellness' %}
+                  {{ product.productSurveyDetails.fatigueContent }}
+                  {% endif %}
+                </div>
+
+                <div class="suggested-use mt-3">Suggested use: {{ product.productFields.recommendedUse }}</div>
+              </div>
+            </div>
+            {% endfor %}
+
+            {% if submission.product2 == 'NAD' or submission.product2 == 'nad' %}
+            <div class="survey-product">
+              <figure>
+                <img src="https://www.neuroscienceinc.com/images/products/Botanical_picture1.jpg" alt="bottle" />
+              </figure>
+              <div class="survey-product__content">
+                <h3 class="h3 mb-2">NAD</h3>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.nad }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.product3 == 'Black Cohosh' or submission.product3 == 'Black cohosh' or submission.product3
+            == 'black cohosh' %}
+            <div class="survey-product">
+              <figure>
+                <img src="https://www.neuroscienceinc.com/images/products/Botanical_picture1.jpg" alt="bottle" />
+              </figure>
+              <div class="survey-product__content">
+                <h3 class="h3 mb-2">Black Cohosh</h3>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.blackCohosh }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.product4 == 'CBD' or submission.product4 == 'cbd' %}
+            <div class="survey-product">
+              <figure>
+                <img src="https://www.neuroscienceinc.com/images/products/Botanical_picture1.jpg" alt="bottle" />
+              </figure>
+              <div class="survey-product__content">
+                <h3 class="h3 mb-2">CBD</h3>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.cbd }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          {% if submission.fruitsVegies != '' and submission.fruitsVegies != 'Select one...' and submission.fattyAcids
+          != '' and submission.fattyAcids != 'Select one...' and submission.fiber != '' and submission.fiber != 'Select
+          one...' and submission.protein != '' and submission.protein != 'Select one...' and submission.calcium != ''
+          and submission.calcium != 'Select one...' and submission.exercise != '' and submission.exercise != 'Select
+          one...' %}
+
+          <div class="wrapper py-6 my-6 page-break-avoid">
+            <div class="survey-title-bar">
+              <h2 class="h3 text-white m-0">Foundational Evaluation</h2>
+            </div>
+
+            {% if submission.fruitsVegies != '' and submission.fruitsVegies != 'Select one...' %}
+            <div class="foundation">
+              <div class="foundation__rating">
+                {% set rating = submission.fruitsVegies %}
+                {% set serving = '' %}
+                <div class="star-rating">
+                  {% if rating == 'Very Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 2' %}
+                  {% elseif rating == 'Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 2' %}
+                  {% elseif rating == 'Fair' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '3 to 5' %}
+                  {% elseif rating == 'Great' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '6 or more' %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-2">Fruits & Vegetables</p>
+                <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.fattyAcids != '' and submission.fattyAcids != 'Select one...' %}
+            <div class="foundation">
+              <div class="foundation__rating">
+                {% set rating = submission.fattyAcids %}
+                <div class="star-rating">
+                  {% if rating == 'Very Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 1' %}
+                  {% elseif rating == 'Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 1' %}
+                  {% elseif rating == 'Fair' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '2 to 3' %}
+                  {% elseif rating == 'Great' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '3 or more' %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-2">Essential Fatty Acids</p>
+                <p class="p mt-0">You report consuming {{ serving }} servings per week</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.fiber != '' and submission.fiber != 'Select one...' %}
+            <div class="foundation">
+              <div class="foundation__rating">
+                {% set rating = submission.fiber %}
+                <div class="star-rating">
+                  {% if rating == 'Very Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 1' %}
+                  {% elseif rating == 'Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 1' %}
+                  {% elseif rating == 'Fair' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '2 to 3' %}
+                  {% elseif rating == 'Great' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '3 or more' %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-2">Fiber</p>
+                <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.protein != '' and submission.protein != 'Select one...' %}
+            <div class="foundation">
+              <div class="foundation__rating">
+                {% set rating = submission.protein %}
+                <div class="star-rating">
+                  {% if rating == 'Very Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 1' %}
+                  {% elseif rating == 'Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 1' %}
+                  {% elseif rating == 'Fair' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '2 to 3' %}
+                  {% elseif rating == 'Great' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '3 or more' %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-2">Protein</p>
+                <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.calcium != '' and submission.calcium != 'Select one...' %}
+            <div class="foundation">
+              <div class="foundation__rating">
+                {% set rating = submission.calcium %}
+                <div class="star-rating">
+                  {% if rating == 'Very Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 2' %}
+                  {% elseif rating == 'Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '0 to 2' %}
+                  {% elseif rating == 'Fair' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '3 to 4' %}
+                  {% elseif rating == 'Great' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = '4 or more' %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-2">Calcium</p>
+                <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if submission.exercise != '' and submission.exercise != 'Select one...' %}
+            <div class="foundation">
+              <div class="foundation__rating">
+                {% set rating = submission.exercise %}
+                <div class="star-rating">
+                  {% if rating == 'Very Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = 'You reported that you are not very active and/or do not workout' %}
+                  {% elseif rating == 'Poor' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = 'You reported that you are somewhat active and/or workout rarely' %}
+                  {% elseif rating == 'Fair' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = 'You reported that you are fairly active and/or workout occasionally' %}
+                  {% elseif rating == 'Great' %}
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  <img src="/images/svgs/star.svg" alt="star icon" />
+                  {% set serving = 'You reported that you are very active and/or workout almost daily' %}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-2">Exercise</p>
+                <p class="p mt-0">{{ serving }}</p>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+
+
+
+          <div class="wrapper py-6 my-6 page-break-avoid">
+            <div class="survey-title-bar">
+              <h2 class="h3 text-white m-0">Foundational Recommendation</h2>
+            </div>
+
+            {% if surveySubmissions.surveyResultsText.multivitamin %}
+            <div class="foundation">
+              <div class="foundation__img">
+                <img src="/images/general/vitamins.png" alt="multivitamins icon" />
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Multivitamin</p>
+
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.multivitamin }}
+                  {% if submission.fruitsVegies == 'Poor' or submission.fruitsVegies == 'Very Poor' %}
+                  {{ surveySubmissions.surveyResultsText.multivitaminVeryPoor }}
+                  {% elseif submission.fruitsVegies == 'Fair' %}
+                  {{ surveySubmissions.surveyResultsText.multivitaminPoor }}
+                  {% elseif submission.fruitsVegies == 'Great' %}
+                  {{ surveySubmissions.surveyResultsText.multivitaminGreat }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if surveySubmissions.surveyResultsText.fishOil %}
+            <div class="foundation">
+              <div class="foundation__img">
+                <img src="/images/general/oil.png" alt="oil icon" />
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Fish Oil</p>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.fishOil }}
+
+                  {% if submission.fattyAcids == 'Poor' or submission.fattyAcids == 'Very Poor' %}
+                  {{ surveySubmissions.surveyResultsText.fishOilVeryPoor }}
+                  {% elseif submission.fattyAcids == 'Fair' %}
+                  {{ surveySubmissions.surveyResultsText.fishOilPoor }}
+                  {% elseif submission.fattyAcids == 'Great' %}
+                  {{ surveySubmissions.surveyResultsText.fishOilGreat }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if surveySubmissions.surveyResultsText.fiber %}
+            <div class="foundation">
+              <div class="foundation__img">
+                <img src="/images/general/fiber.png" alt="fiber icon" />
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Fiber</p>
+
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.fiber }}
+
+                  {% if submission.fiber == 'Poor' or submission.fiber == 'Very Poor'%}
+                  {{ surveySubmissions.surveyResultsText.fiberVeryPoor }}
+                  {% elseif submission.fiber == 'Fair' %}
+                  {{ surveySubmissions.surveyResultsText.fiberPoor }}
+                  {% elseif submission.fiber == 'Great' %}
+                  {{ surveySubmissions.surveyResultsText.fiberGreat }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if surveySubmissions.surveyResultsText.protein %}
+            <div class="foundation">
+              <div class="foundation__img">
+                <img src="/images/general/protein.png" alt="protein icon" />
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Protein</p>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.protein }}
+                  {% if submission.protein == 'Poor' or submission.protein == 'Very Poor' %}%}
+                  {{ surveySubmissions.surveyResultsText.proteinVeryPoor }}
+                  {% elseif submission.protein == 'Fair' %}
+                  {{ surveySubmissions.surveyResultsText.proteinPoor }}
+                  {% elseif submission.protein == 'Great' %}
+                  {{ surveySubmissions.surveyResultsText.proteinGreat }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if surveySubmissions.surveyResultsText.calcium %}
+            <div class="foundation">
+              <div class="foundation__img">
+                <img src="/images/general/calcium.png" alt="calcium icon" />
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Calcium</p>
+
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.calcium }}
+
+                  {% if submission.calcium == 'Poor' or submission.calcium == 'Very Poor' %}
+                  {{ surveySubmissions.surveyResultsText.calciumVeryPoor }}
+                  {% elseif submission.calcium == 'Fair' %}
+                  {{ surveySubmissions.surveyResultsText.calciumPoor }}
+                  {% elseif submission.calcium == 'Great' %}
+                  {{ surveySubmissions.surveyResultsText.calciumGreat }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if surveySubmissions.surveyResultsText.exercise %}
+            <div class="foundation">
+              <div class="foundation__img">
+                <img src="/images/general/fruits.png" alt="fruits icon" />
+              </div>
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Exercise</p>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.exercise }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+
+          <div class="wrapper py-6 my-6 page-break-avoid">
+            <div class="survey-title-bar">
+              <h2 class="h3 text-white m-0">Lifestyle Suggestions</h2>
+            </div>
+
+            {% if subject == 'sleep' %}
+            <div class="foundation">
+              <div class="foundation__bd">
+                <p class="h3 text-black mb-3">Sleep Hygiene</p>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.sleepHygiene }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if subject == 'stress' %}
+            <div class="foundation">
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Stress Hygiene</p>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.stressHygiene }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if subject == 'wellness' or subject == 'fatigue' %}
+            <div class="foundation">
+              <div class="foundation__bd">
+                <p class="p-lg text-black mb-3">Fatigue Hygiene</p>
+                <div class="user-content user-content--survey">
+                  {{ surveySubmissions.surveyResultsText.fatigueHygiene }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+
+          {% endif %}
+
+          <div class="wrapper-full bg-light page-break-avoid" id="references">
+            <div class="wrapper-wide py-6 my-4">
+              <h3 class="mb-5 p pir-section-title">References</h3>
+              <div class="d-sm-flex flex-wrap reference-list-content">
+                {% for ref in surveySubmissions.surveyResultsText.references %}
+                <div class="col-12 col-sm-6 col-md-4 pr-4 mb-3">
+                  <p>{{ ref.number }}. {{ ref.content }}</p>
+                </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sleep-area">
-          <div>Physical Fatigue</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.physicalFatigue }}</div>
-          <div>
-            {% set rating = submission.physicalWellness %}
-            <div class="star-rating">
-            {% if rating >= 15 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 11 and rating < 15 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 8 and rating < 11 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating < 8 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
-            </div>
+          {% if productList|length >= 1 %}
+          <div class="wrapper-wide disclaimer no-print pt-6 pb-6">
+            <b style="border: 1px solid #000; padding: 4px 4px 2px 4px; display: block; margin-bottom: 8px;">*These
+              statements have not been evaluated by the Food and Drug Administration. This product is not intended to
+              diagnose, treat, cure or prevent any disease.</b>
+            <small>Recommendations and product information provided was requested by the user and is not intended to
+              diagnose, treat, cure or prevent any disease.</small>
           </div>
-        </div>
+          {% endif %}
 
-        <div class="sleep-area">
-          <div>Activity Fatigue</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.activityFatigue }}</div>
-          <div>
-            {% set rating = submission.activityWellness %}
-            <div class="star-rating">
-            {% if rating >= 12 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 10 and rating < 12 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 7 and rating < 10 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating < 7 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
-            </div>
           </div>
-        </div>
-
-        <div class="sleep-area">
-          <div>Motivation Fatigue</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.motivationFatigue }}</div>
-          <div>
-            {% set rating = submission.motivationWellness %}
-            <div class="star-rating">
-            {% if rating >= 13 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 10 and rating < 13 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 7 and rating < 10 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating < 7 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
-            </div>
           </div>
-        </div>
 
-        <div class="sleep-area">
-          <div>Mental Fatigue</div>
-          <div class="user-content user-content--survey">{{ surveySubmissions.surveyResultsText.mentalFatigue }}</div>
-          <div>
-            {% set rating = submission.mentalWellness %}
-            <div class="star-rating">
-            {% if rating >= 15 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 12 and rating < 15 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating >= 7 and rating <= 11 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% elseif rating < 7 %}
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-              <img src="/images/svgs/star.svg" alt="star icon" />
-            {% endif %}
-            </div>
+
+          <div class="alert-box no-print" id="email-sent">
+            <span class="close" data-click-target="email-sent"><svg width="12px" height="12px" viewBox="0 0 14 14">
+                <path fill="#7B858E"
+                  d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7 14 1.4z" />
+              </svg></span>
+            <svg class="mx-auto mb-4" width="20px" height="20px" viewBox="0 0 8 6">
+              <path fill="#01B433" d="M2.9 4.4L.8 2.3l-.8.8L2.9 6 8 .8 7.2 0z" />
+            </svg>
+            <p class="h3 mb-2">Email sent successfully</p>
+            <p>Please allow a few minutes for the email to reach your inbox.</p>
           </div>
-        </div>
 
-      </div>
-    </div>
-
-    </div>
-
-  {% endif %}
-
-
-  <div class="wrapper py-6 my-6 page-break-avoid">
-    <div class="survey-title-bar">
-      <h2 class="h3 text-white m-0">{{ subject|capitalize }} Product Recommendations</h2>
-    </div>
-
-		{% if noProds %}
-		<p class="text-center">Based on your current symptoms, NeuroScience products are not recommended at this time</p>
-		{% endif %}
-
-    {% for product in productList %}
-    <div class="survey-product">
-      <figure>
-        {% for row in product.productFields %}
-        {% for img in row.productImages.limit(1) %}
-        <img src="{{ img.url }}" alt="{{ img.title }}"  />
-        {% endfor %}
-        {% endfor %}
-      </figure>
-
-      <div class="survey-product__content">
-        <h3 class="h3 mb-2">{{ product.title }}</h3>
-
-        <div class="user-content user-content--survey my-3">
-          {{ product.productFields.shortDescription }}
-
-          {% if submission.subject == 'sleep' %}
-          {{ product.productSurveyDetails.sleepContent }}
-          {% endif %}
-          {% if submission.subject == 'stress' %}
-          {{ product.productSurveyDetails.stressContent }}
-          {% endif %}
-          {% if submission.subject == 'wellness' %}
-          {{ product.productSurveyDetails.fatigueContent }}
-          {% endif %}
-        </div>
-
-        <div class="suggested-use mt-3">Suggested use: {{ product.productFields.recommendedUse }}</div>
-      </div>
-    </div>
-    {% endfor %}
-
-		{% if submission.product2 == 'NAD' or submission.product2 == 'nad' %}
-    <div class="survey-product">
-      <figure>
-      	<img src="https://www.neuroscienceinc.com/images/products/Botanical_picture1.jpg" alt="bottle" />
-      </figure>
-      <div class="survey-product__content">
-        <h3 class="h3 mb-2">NAD</h3>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.nad }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if submission.product3 == 'Black Cohosh' or submission.product3 == 'Black cohosh'  or submission.product3 == 'black cohosh' %}
-    <div class="survey-product">
-      <figure>
-      	<img src="https://www.neuroscienceinc.com/images/products/Botanical_picture1.jpg" alt="bottle" />
-      </figure>
-      <div class="survey-product__content">
-        <h3 class="h3 mb-2">Black Cohosh</h3>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.blackCohosh }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if submission.product4 == 'CBD' or submission.product4 == 'cbd' %}
-    <div class="survey-product">
-      <figure>
-      	<img src="https://www.neuroscienceinc.com/images/products/Botanical_picture1.jpg" alt="bottle" />
-      </figure>
-      <div class="survey-product__content">
-        <h3 class="h3 mb-2">CBD</h3>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.cbd }}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-  </div>
-
-	{% if submission.fruitsVegies != '' and submission.fruitsVegies != 'Select one...' and submission.fattyAcids != '' and submission.fattyAcids != 'Select one...' and submission.fiber != '' and submission.fiber != 'Select one...' and submission.protein != '' and submission.protein != 'Select one...' and submission.calcium != '' and submission.calcium != 'Select one...' and submission.exercise != '' and submission.exercise != 'Select one...' %}
-
-  <div class="wrapper py-6 my-6 page-break-avoid">
-    <div class="survey-title-bar">
-      <h2 class="h3 text-white m-0">Foundational Evaluation</h2>
-    </div>
-
-		{% if submission.fruitsVegies != '' and submission.fruitsVegies != 'Select one...'  %}
-    <div class="foundation">
-      <div class="foundation__rating">
-        {% set rating = submission.fruitsVegies %}
-				{% set serving = '' %}
-        <div class="star-rating">
-        {% if rating == 'Very Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 2' %}
-        {% elseif rating == 'Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 2' %}
-        {% elseif rating == 'Fair' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '3 to 5' %}
-        {% elseif rating == 'Great' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '6 or more' %}
-        {% endif %}
-        </div>
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-2">Fruits & Vegetables</p>
-        <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if submission.fattyAcids != '' and submission.fattyAcids != 'Select one...' %}
-    <div class="foundation">
-      <div class="foundation__rating">
-        {% set rating = submission.fattyAcids %}
-        <div class="star-rating">
-        {% if rating == 'Very Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 1' %}
-        {% elseif rating == 'Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 1' %}
-        {% elseif rating == 'Fair' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '2 to 3' %}
-        {% elseif rating == 'Great' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '3 or more' %}
-        {% endif %}
-        </div>
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-2">Essential Fatty Acids</p>
-        <p class="p mt-0">You report consuming {{ serving }} servings per week</p>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if submission.fiber != '' and submission.fiber != 'Select one...' %}
-    <div class="foundation">
-      <div class="foundation__rating">
-        {% set rating = submission.fiber %}
-        <div class="star-rating">
-        {% if rating == 'Very Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 1' %}
-        {% elseif rating == 'Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 1' %}
-        {% elseif rating == 'Fair' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '2 to 3' %}
-        {% elseif rating == 'Great' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '3 or more' %}
-        {% endif %}
-        </div>
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-2">Fiber</p>
-        <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if submission.protein != '' and submission.protein != 'Select one...' %}
-    <div class="foundation">
-      <div class="foundation__rating">
-        {% set rating = submission.protein %}
-        <div class="star-rating">
-        {% if rating == 'Very Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 1' %}
-        {% elseif rating == 'Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 1' %}
-        {% elseif rating == 'Fair' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '2 to 3' %}
-        {% elseif rating == 'Great' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '3 or more' %}
-        {% endif %}
-        </div>
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-2">Protein</p>
-        <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if submission.calcium != '' and submission.calcium != 'Select one...' %}
-    <div class="foundation">
-      <div class="foundation__rating">
-        {% set rating = submission.calcium %}
-        <div class="star-rating">
-        {% if rating == 'Very Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 2' %}
-        {% elseif rating == 'Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '0 to 2' %}
-        {% elseif rating == 'Fair' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '3 to 4' %}
-        {% elseif rating == 'Great' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = '4 or more' %}
-        {% endif %}
-        </div>
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-2">Calcium</p>
-        <p class="p mt-0">You report consuming {{ serving }} servings per day</p>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if submission.exercise != '' and submission.exercise != 'Select one...' %}
-    <div class="foundation">
-      <div class="foundation__rating">
-        {% set rating = submission.exercise %}
-        <div class="star-rating">
-        {% if rating == 'Very Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = 'You reported that you are not very active and/or do not workout' %}
-        {% elseif rating == 'Poor' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = 'You reported that you are somewhat active and/or workout rarely' %}
-        {% elseif rating == 'Fair' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = 'You reported that you are fairly active and/or workout occasionally' %}
-        {% elseif rating == 'Great' %}
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          <img src="/images/svgs/star.svg" alt="star icon" />
-          {% set serving = 'You reported that you are very active and/or workout almost daily' %}
-        {% endif %}
-        </div>
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-2">Exercise</p>
-        <p class="p mt-0">{{ serving }}</p>
-      </div>
-    </div>
-		{% endif %}
-  </div>
-
-
-
-
-  <div class="wrapper py-6 my-6 page-break-avoid">
-    <div class="survey-title-bar">
-      <h2 class="h3 text-white m-0">Foundational Recommendation</h2>
-    </div>
-
-		{% if surveySubmissions.surveyResultsText.multivitamin %}
-    <div class="foundation">
-      <div class="foundation__img">
-        <img src="/images/general/vitamins.png" alt="multivitamins icon" />
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Multivitamin</p>
-
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.multivitamin }}
-          {% if submission.fruitsVegies == 'Poor' or submission.fruitsVegies == 'Very Poor' %}
-          {{ surveySubmissions.surveyResultsText.multivitaminVeryPoor }}
-          {% elseif submission.fruitsVegies == 'Fair' %}
-          {{ surveySubmissions.surveyResultsText.multivitaminPoor }}
-          {% elseif submission.fruitsVegies == 'Great' %}
-          {{ surveySubmissions.surveyResultsText.multivitaminGreat }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if surveySubmissions.surveyResultsText.fishOil %}
-    <div class="foundation">
-      <div class="foundation__img">
-        <img src="/images/general/oil.png" alt="oil icon" />
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Fish Oil</p>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.fishOil }}
-
-          {% if submission.fattyAcids == 'Poor' or submission.fattyAcids == 'Very Poor' %}
-          {{ surveySubmissions.surveyResultsText.fishOilVeryPoor }}
-          {% elseif submission.fattyAcids == 'Fair' %}
-          {{ surveySubmissions.surveyResultsText.fishOilPoor }}
-          {% elseif submission.fattyAcids == 'Great' %}
-          {{ surveySubmissions.surveyResultsText.fishOilGreat }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if surveySubmissions.surveyResultsText.fiber %}
-    <div class="foundation">
-      <div class="foundation__img">
-        <img src="/images/general/fiber.png" alt="fiber icon" />
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Fiber</p>
-
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.fiber }}
-
-          {% if submission.fiber == 'Poor' or submission.fiber == 'Very Poor'%}
-          {{ surveySubmissions.surveyResultsText.fiberVeryPoor }}
-          {% elseif submission.fiber == 'Fair' %}
-          {{ surveySubmissions.surveyResultsText.fiberPoor }}
-          {% elseif submission.fiber == 'Great' %}
-          {{ surveySubmissions.surveyResultsText.fiberGreat }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if surveySubmissions.surveyResultsText.protein %}
-    <div class="foundation">
-      <div class="foundation__img">
-        <img src="/images/general/protein.png" alt="protein icon" />
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Protein</p>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.protein }}
-          {% if submission.protein == 'Poor' or submission.protein == 'Very Poor' %}%}
-          {{ surveySubmissions.surveyResultsText.proteinVeryPoor }}
-          {% elseif submission.protein == 'Fair' %}
-          {{ surveySubmissions.surveyResultsText.proteinPoor }}
-          {% elseif submission.protein == 'Great' %}
-          {{ surveySubmissions.surveyResultsText.proteinGreat }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if surveySubmissions.surveyResultsText.calcium %}
-    <div class="foundation">
-      <div class="foundation__img">
-        <img src="/images/general/calcium.png" alt="calcium icon" />
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Calcium</p>
-
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.calcium }}
-
-          {% if submission.calcium == 'Poor' or submission.calcium == 'Very Poor' %}
-          {{ surveySubmissions.surveyResultsText.calciumVeryPoor }}
-          {% elseif submission.calcium == 'Fair' %}
-          {{ surveySubmissions.surveyResultsText.calciumPoor }}
-          {% elseif submission.calcium == 'Great' %}
-          {{ surveySubmissions.surveyResultsText.calciumGreat }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if surveySubmissions.surveyResultsText.exercise %}
-    <div class="foundation">
-      <div class="foundation__img">
-        <img src="/images/general/fruits.png" alt="fruits icon" />
-      </div>
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Exercise</p>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.exercise }}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-  </div>
-
-
-  <div class="wrapper py-6 my-6 page-break-avoid">
-    <div class="survey-title-bar">
-      <h2 class="h3 text-white m-0">Lifestyle Suggestions</h2>
-    </div>
-
-		{% if subject == 'sleep' %}
-		<div class="foundation">
-      <div class="foundation__bd">
-        <p class="h3 text-black mb-3">Sleep Hygiene</p>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.sleepHygiene }}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if subject == 'stress' %}
-		<div class="foundation">
-      <div class="foundation__bd">
-        <p class="p-lg text-black mb-3">Stress Hygiene</p>
-        <div class="user-content user-content--survey">
-          {{ surveySubmissions.surveyResultsText.stressHygiene }}
-        </div>
-      </div>
-    </div>
-		{% endif %}
-
-		{% if subject == 'wellness' or subject == 'fatigue' %}
-		<div class="foundation">
-			<div class="foundation__bd">
-				<p class="p-lg text-black mb-3">Fatigue Hygiene</p>
-				<div class="user-content user-content--survey">
-					{{ surveySubmissions.surveyResultsText.fatigueHygiene }}
-				</div>
-			</div>
-		</div>
-		{% endif %}
-  </div>
-
-
-  {% endif %}
-
-    <div class="wrapper-full bg-light page-break-avoid" id="references">
-      <div class="wrapper-wide py-6 my-4">
-        <h3 class="mb-5 p pir-section-title">References</h3>
-        <div class="d-sm-flex flex-wrap reference-list-content">
-          {% for ref in surveySubmissions.surveyResultsText.references %}
-          <div class="col-12 col-sm-6 col-md-4 pr-4 mb-3">
-            <p>{{ ref.number }}. {{ ref.content }}</p>
+          <div class="alert-box no-print" id="email-fail">
+            <span class="close" data-click-target="email-fail"><svg width="12px" height="12px" viewBox="0 0 14 14">
+                <path fill="#7B858E"
+                  d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7 14 1.4z" />
+              </svg></span>
+            <p class="h3 mb-2">Email was not sent</p>
+            <p>Please try again. If the issue persists, please download the PDF manually and <a
+                href="mailto:customerservice@neurorelief.com">let us know about your issue</a>.</p>
           </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
-    {% if productList|length >= 1 %}
-  <div class="wrapper-wide disclaimer no-print pt-6 pb-6">
-    <b style="border: 1px solid #000; padding: 4px 4px 2px 4px; display: block; margin-bottom: 8px;">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</b>
-    <small>Recommendations and product information provided was requested by the user and is not intended to diagnose, treat, cure or prevent any disease.</small>
-  </div>
-  {% endif %}
-
-  </div>
-</div>
-
-
-<div class="alert-box no-print" id="email-sent">
-  <span class="close" data-click-target="email-sent"><svg width="12px" height="12px" viewBox="0 0 14 14"><path fill="#7B858E" d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7 14 1.4z"/></svg></span>
-  <svg class="mx-auto mb-4" width="20px" height="20px" viewBox="0 0 8 6"><path fill="#01B433" d="M2.9 4.4L.8 2.3l-.8.8L2.9 6 8 .8 7.2 0z"/></svg>
-  <p class="h3 mb-2">Email sent successfully</p>
-  <p>Please allow a few minutes for the email to reach your inbox.</p>
-</div>
-
-<div class="alert-box no-print" id="email-fail">
-  <span class="close" data-click-target="email-fail"><svg width="12px" height="12px" viewBox="0 0 14 14"><path fill="#7B858E" d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7 14 1.4z"/></svg></span>
-  <p class="h3 mb-2">Email was not sent</p>
-  <p>Please try again. If the issue persists, please download the PDF manually and <a href="mailto:customerservice@neurorelief.com">let us know about your issue</a>.</p>
-</div>
 
 </article>
 
@@ -1164,8 +1194,8 @@
   var $ = jQuery;
   $('main#content').addClass('pir-width');
 
-  $('#pdf-gen-form').submit(function(e) {
-		//console.log('generating...');
+  $('#pdf-gen-form').submit(function (e) {
+    //console.log('generating...');
     e.preventDefault();
     var form = $(this);
     $('html').addClass('thinking').addClass('generating');
@@ -1176,13 +1206,13 @@
       url: '/neuroselect/survey-pdf',
       dataType: 'json'
     }).done(function (data) {
-			//console.log(data);
-			//console.log('PDF generated successfully');
+      //console.log(data);
+      //console.log('PDF generated successfully');
       $('html').removeClass('thinking').removeClass('generating');
       $('#download-pdf').removeClass('d-none');
       form.addClass('d-none');
 
-      if( $('html').hasClass('email-queue') ) {
+      if ($('html').hasClass('email-queue')) {
         $('#pdf-email-form-submit')[0].click();
       } else {
         $('#new-file')[0].click();
@@ -1195,12 +1225,12 @@
   });
 
 
-  $('#pdf-email-form').submit(function(e) {
+  $('#pdf-email-form').submit(function (e) {
     e.preventDefault();
-		//console.log('Prepping email...');
+    //console.log('Prepping email...');
     var form = $(this);
 
-    if( $('#download-pdf').hasClass('d-none') ) {
+    if ($('#download-pdf').hasClass('d-none')) {
       //console.log('Genereating PDF first');
       $('#pdf-gen-form-submit')[0].click();
       $('html').addClass('email-queue');
@@ -1216,16 +1246,16 @@
       url: '/neuroselect/email-survey',
       dataType: 'json'
     }).done(function (data) {
-			//console.log(data);
+      //console.log(data);
       $('html').removeClass('email-queue thinking')
       $('#email-sent').addClass('is-active');
 
-      setTimeout(function(){
+      setTimeout(function () {
         $('#email-sent').removeClass('is-active');
       }, 5000);
 
     }).fail(function (error) {
-			//console.log(error);
+      //console.log(error);
       $('html').removeClass('email-queue thinking');
       $('#email-fail').addClass('is-active');
     });
@@ -1234,47 +1264,47 @@
 
 
 
-  $(document).ready(function(){
+  $(document).ready(function () {
 
-    $('.meter').each(function(){
+    $('.meter').each(function () {
       var el = $(this);
       var cap = el.attr('data-max');
       var score = el.attr('data-score');
       var bar = el.find('.meter__inner span');
       var s = el.find('.meter__score span');
 
-			var p = (score / cap) * 100;
-			var b = p;
-			if( p <= 10 ) {
-				p = 16;
-			}
+      var p = (score / cap) * 100;
+      var b = p;
+      if (p <= 10) {
+        p = 16;
+      }
       p = p + '%';
-			b = b + '%';
+      b = b + '%';
       bar.width(b);
       s.css('left', p);
 
     });
 
 
-    $('.user-content li').each(function(){
+    $('.user-content li').each(function () {
       var el = $(this);
-      if ( el.text().indexOf('(checkmark)') >= 0 ) {
-        var text = el.text().replace('(checkmark)','');
+      if (el.text().indexOf('(checkmark)') >= 0) {
+        var text = el.text().replace('(checkmark)', '');
         el.text(text);
         el.addClass("checkmark");
       }
-      if ( el.text().indexOf('(plus)') >= 0 ) {
-        var text = el.text().replace('(plus)','');
+      if (el.text().indexOf('(plus)') >= 0) {
+        var text = el.text().replace('(plus)', '');
         el.text(text);
         el.addClass("plus");
       }
-      if ( el.text().indexOf('(asterisk)') >= 0 ) {
-        var text = el.text().replace('(asterisk)','');
+      if (el.text().indexOf('(asterisk)') >= 0) {
+        var text = el.text().replace('(asterisk)', '');
         el.text(text);
         el.addClass("asterisk");
       }
-      if ( el.text().indexOf('(cancel)') >= 0 ) {
-        var text = el.text().replace('(cancel)','');
+      if (el.text().indexOf('(cancel)') >= 0) {
+        var text = el.text().replace('(cancel)', '');
         el.text(text);
         el.addClass("cancel");
       }

@@ -1,827 +1,894 @@
 {#
- # Register
- # ---------------
- #
- #}
+# Register
+# ---------------
+#
+#}
 
 {% extends "_layout" %}
 
 {% block content %}
-	{% set countries = craft.commerce.countries.allCountriesAsList %}
+{% set countries = craft.commerce.countries.allCountriesAsList %}
 
-	{% set model = address is defined ? address : null %}
+{% set model = address is defined ? address : null %}
 
-	{% include 'partials/contentModules' %}
+{% include 'partials/contentModules' %}
 
-	<div class="wrapper-full bg-light">
-		<div class="card register-form-wrap" data-animate="up">
-			<p class="p-sm">All fields are required</p>
-			<form class="form" method="post" accept-charset="UTF-8" novalidate="" enctype="multipart/form-data" validate>
-			    {{ csrfInput() }}
-			    <input type="hidden" name="action" value="users/saveUser">
+<div class="wrapper-full bg-light">
+	<div class="card register-form-wrap" data-animate="up">
+		<p class="p-sm">All fields are required</p>
+		<form class="form" method="post" accept-charset="UTF-8" novalidate="" enctype="multipart/form-data" validate>
+			{{ csrfInput() }}
+			<input type="hidden" name="action" value="users/saveUser">
 
-			    <input type="hidden" name="redirect" value="/account-pending/">
+			<input type="hidden" name="redirect" value="/account-pending/">
 
-			    {% macro errorList(errors) %}
-			        {% if errors %}
-			            <ul class="errors">
-			                {% for error in errors %}
-			                    <li>{{ error }}</li>
-			                {% endfor %}
-			            </ul>
-			        {% endif %}
-			    {% endmacro %}
+			{% macro errorList(errors) %}
+			{% if errors %}
+			<ul class="errors">
+				{% for error in errors %}
+				<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endmacro %}
 
-			    {% from _self import errorList %}
-				<div class="row">
-					<div class="col--xs--12 col--sm--5">
-						<div class="field-wrap">
-							<label for="firstName">First Name</label>
-						    <input id="firstName" type="text" name="firstName" {%- if account is defined %} value="{{ account.firstName }}"{% endif -%}>
-						    {% if account is defined %}
+			{% from _self import errorList %}
+			<div class="row">
+				<div class="col--xs--12 col--sm--5">
+					<div class="field-wrap">
+						<label for="firstName">First Name</label>
+						<input id="firstName" type="text" name="firstName" {%- if account is defined %}
+							value="{{ account.firstName }}" {% endif -%}>
+						{% if account is defined %}
 
-								{% if account.firstName == '' %}
-									<p class="error">First name cannot be blank.</p>
-								{% endif %}
-						    {% endif %}
-						</div>
+						{% if account.firstName == '' %}
+						<p class="error">First name cannot be blank.</p>
+						{% endif %}
+						{% endif %}
 					</div>
-					<div class="col--xs--12 col--sm--5">
-						<div class="field-wrap">
-							<label for="lastName">Last Name</label>
-						    <input id="lastName" type="text" name="lastName" {%- if account is defined %} value="{{ account.lastName }}"{% endif -%}>
-						    {% if account is defined %}
+				</div>
+				<div class="col--xs--12 col--sm--5">
+					<div class="field-wrap">
+						<label for="lastName">Last Name</label>
+						<input id="lastName" type="text" name="lastName" {%- if account is defined %} value="{{ account.lastName }}"
+							{% endif -%}>
+						{% if account is defined %}
 
-								{% if account.lastName == '' %}
-									<p class="error">Last name cannot be blank.</p>
-								{% endif %}
-						    {% endif %}
-						</div>
-					</div>
-
-					<div class="col--xs--12 col--sm--2">
-						<div class="field-wrap">
-							<label for="Credentials">Credentials</label>
-							<input id="credentials" type="text" name="fields[credentials]" {%- if account is defined %} value="{{ account.credentials}}" {% endif %} required>
-
-							{% if account is defined %}
-								{{ errorList(account.getErrors('credentials')) }}
-							{% endif %}
-						</div>
+						{% if account.lastName == '' %}
+						<p class="error">Last name cannot be blank.</p>
+						{% endif %}
+						{% endif %}
 					</div>
 				</div>
 
-				<div class="field-wrap">
-					<label for="nameFull">Full Name (first, middle initial and last name)</label>
-					<input type="text" class="required-field" name="fields[nameFull]" id="nameFull" {%- if account is defined %} value="{{ account.nameFull }}" {% endif %} minlength="2" maxlength="100" required />
-					{% if account is defined %}
-						{{ errorList(account.getErrors('nameFull')) }}
-					{% endif %}
-				</div>
+				<div class="col--xs--12 col--sm--2">
+					<div class="field-wrap">
+						<label for="Credentials">Credentials</label>
+						<input id="credentials" type="text" name="fields[credentials]" {%- if account is defined %}
+							value="{{ account.credentials}}" {% endif %} required>
 
-				<div class="field-wrap">
-					<label for="businessName">Business Name</label>
-					<input type="text" class="required-field" name="fields[businessName]" id="businessName" {%- if account is defined %} value="{{ account.businessName}}" {% endif %} minlength="2" maxlength="100" required />
-					{% if account is defined %}
-						{{ errorList(account.getErrors('businessName')) }}
-					{% endif %}
-				</div>
-
-				<div class="row">
-					<div class="col--xs--12 col--sm--6">
-						<div class="field-wrap">
-							<label for="address">Address Line 1</label>
-							<input id="address" class="required-field" type="text" name="fields[address]" {%- if account is defined %} value="{{ account.address}}" {% endif %} required>
-
-							{% if account is defined %}
-								{{ errorList(account.getErrors('address')) }}
-							{% endif %}
-						</div>
-					</div>
-					<div class="col--xs--12 col--sm--6">
-						<div class="field-wrap">
-							<label for="addressLine2">Address Line 2</label>
-							<input id="addressLine2" type="text" name="fields[addressLine2]" {%- if account is defined %} value="{{ account.addressLine2}}" {% endif %} required>
-
-							{% if account is defined %}
-								{{ errorList(account.getErrors('addressLine2')) }}
-							{% endif %}
-						</div>
-					</div>
-
-					<div class="col--xs--12 col--sm--5">
-						<div class="field-wrap">
-							<label for="city">City</label>
-							<input id="city" class="required-field" type="text" name="fields[city]" {%- if account is defined %} value="{{ account.city}}" {% endif %} required>
-
-							{% if account is defined %}
-								{{ errorList(account.getErrors('city')) }}
-							{% endif %}
-						</div>
-					</div>
-					<div class="col--xs--8 col--sm--5">
-						<div class="field-wrap">
-							<label for="state">State</label>
-							<input id="state" type="hidden" name="fields[state]" value="">
-							{% if account is defined %}
-								{{ errorList(account.getErrors('state')) }}
-							{% endif %}
-
-							<div class="select-wrap">
-								<select id="state-select" name="fields[state]">
-									<option>State*</option>
-									{% for state in craft.commerce.states.allEnabledStates %}
-									<option value="{{ state.name }}">{{ state.name }}</option>
-									{% endfor %}
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="col--xs--4 col--sm--2">
-						<div class="field-wrap">
-							<label for="zip">Zip</label>
-							<input id="zip" class="required-field" type="text" name="fields[zip]" maxlength="5" {%- if account is defined %} value="{{ account.zip }}" {% endif %} required>
-
-							{% if account is defined %}
-								{{ errorList(account.getErrors('zip')) }}
-							{% endif %}
-						</div>
-					</div>
-
-					<div class="col--xs--12">
-						<div class="field-wrap">
-							<label for="country">Country</label>
-							<div class="select-wrap">
-								<select class="address-country u-full-width" name="fields[country]">
-									{% for key, option in countries %}
-										{% set optionValue = (model ? model.countryId : '') %}
-										<option value="{{ option }}" {% if option == 'United States' %} selected{% endif %}>{{ option }}</option>
-									{% endfor %}
-								</select>
-							</div>
-						</div>
+						{% if account is defined %}
+						{{ errorList(account.getErrors('credentials')) }}
+						{% endif %}
 					</div>
 				</div>
+			</div>
 
-
-				<div class="row">
-					<div class="col--xs--12 col--sm--6">
-						<div class="field-wrap">
-							<label for="phone">Phone</label>
-							<input type="text" class="required-field" name="fields[phone]" id="phone" placeholder="(888) 342-7272" required {%- if account is defined %} value="{{ account.phone}}" {% endif %} />
-							{% if account is defined %}
-								{{ errorList(account.getErrors('phone')) }}
-							{% endif %}
-						</div>
-					</div>
-
-					<div class="col--xs--12 col--sm--6">
-						<div class="field-wrap">
-							<label for="fax">Fax</label>
-							<input type="text" name="fields[fax]" id="fax" placeholder="(715) 294-3921" required {%- if account is defined %} value="{{ account.fax }}" {% endif %} />
-							{% if account is defined %}
-								{{ errorList(account.getErrors('fax')) }}
-							{% endif %}
-						</div>
-					</div>
-				</div>
-
-			    <div class="field-wrap">
-					<label for="email">Email</label>
-				    <input id="email" class="required-field" type="text" name="email"
-				        {%- if account is defined %} value="{{ account.email }}"{% endif %}>
-
-				    {% if account is defined %}
-				        {{ errorList(account.getErrors('email')) }}
-				    {% endif %}
-				</div>
-
-				<div class="field-wrap">
-					<label for="website">Website</label>
-					<input type="text" name="fields[website]" id="website" {%- if account is defined %} value="{{ account.website}}" {% endif %} minlength="2" maxlength="100" required />
-					{% if account is defined %}
-						{{ errorList(account.getErrors('website')) }}
-					{% endif %}
-				</div>
-
-				<div class="field-wrap">
-					<label for="username">Username</label>
-				    <input id="username" type="text" name="username" {%- if account is defined %} value="{{ account.username }}"{% endif -%}>
-
-				    {% if account is defined %}
-				        {{ errorList(account.getErrors('username')) }}
-				    {% endif %}
-				</div>
-
-				<div class="row">
-					<div class="col--xs--12 col--sm--6">
-
-						<div class="field-wrap has-tool-tip">
-						    <label for="password">Password</label>
-						    <input id="password" class="required-field" minlength="8" type="password" name="password" required>
-
-						    {% if account is defined %}
-						        {{ errorList(account.getErrors('password')) }}
-						    {% endif %}
-
-							<div class="tool-tip">
-								<p>Password requires:</p>
-								<ul class="ul ul--sm">
-									<li>
-										Alpha and numeric characters
-									</li>
-									<li>
-										At least 6 characters
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-					<div class="col--xs--12 col--sm--6">
-
-						<div class="field-wrap">
-							<label for="passwordHint">Password Hint (Reminder)</label>
-							<input id="passwordHint" class="required-field" type="text" name="fields[passwordHint]" {%- if account is defined %} value="{{ account.passwordHint}}" {% endif %} required>
-
-							{% if account is defined %}
-								{{ errorList(account.getErrors('passwordHint')) }}
-							{% endif %}
-						</div>
-					</div>
-				</div>
-
-
-				{% set dropdownField = craft.fields.getFieldbyHandle('secretQuestion') %}
-
-				<div class="row">
-					<div class="col--xs--12 col--sm--6">
-						<div class="field-wrap">
-							<label for="secretQuestion">Secret Question</label>
-							<div class="select-wrap">
-								<select id="secretQuestion" name="fields[secretQuestion]" required>
-									 <option value="">select one</option>
-									 {% for option in dropdownField.settings.options %}
-									 	{%- if account is defined %}
-											{% if account.secretQuestion == option.value %}
-											<option value="{{ option.value }}" selected="selected">{{ option.label }}</option>
-											{% else %}
-							 			    <option value="{{ option.value }}">{{ option.label }}</option>
-											{% endif %}
-										{% else %}
-						 			    <option value="{{ option.value }}">{{ option.label }}</option>
-										{% endif %}
-						 			{% endfor %}
-
-								</select>
-							</div>
-							{% if account is defined %}
-								{{ errorList(account.getErrors('secretQuestion')) }}
-							{% endif %}
-						</div>
-					</div>
-					<div class="col--xs--12 col--sm--6">
-						<div class="field-wrap">
-							<label for="secretAnswer">Secret Answer</label>
-							<input type="text" name="fields[secretAnswer]" required id="secretAnswer" {%- if account is defined %} value="{{ account.secretAnswer}}" {% endif %} />
-							{% if account is defined %}
-								{{ errorList(account.getErrors('secretAnswer')) }}
-							{% endif %}
-						</div>
-					</div>
-				</div>
-
-				<div class="field-wrap">
-					<label for="taxAcknowledgement">NeuroScience products are taxable in some states. I acknowledge that I am registered with my state to purchase products from NeuroScience with sales tax exempt status.  I will complete the documentation that is sent to me so that I will not be charged sales tax when I order products from NeuroScience.</label>
-
-					<label class="radio-btn">
-						<input type="checkbox" name="fields[taxAcknowledgement]" id="taxAcknowledgement">
-						<span class="slider"></span>
-					</label>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('taxAgreement')) }}
-					{% endif %}
-				</div>
-
-
-				<div class="field-wrap">
-					<label for="licensePhotoUpload">License Photo Copy Upload</label>
-					<input id="licensePhotoUpload" type="file" name="fields[licensePhotoUpload][]" multiple>
-				</div>
-
-
-				<div class="field-wrap">
-					<label for="receiveUpdates">I’d like to receive occasional email updates from NeuroScience</label>
-
-					<label class="radio-btn">
-						<input type="checkbox" name="fields[receiveUpdates]" id="receiveUpdates" checked="checked">
-						<span class="slider"></span>
-					</label>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('receiveUpdates')) }}
-					{% endif %}
-				</div>
-
-
-				{% set docuSign = true %}
-				{% if docuSign %}
-
-				{% else %}
-
-				<div class="field-wrap">
-					<label for="n0007Terms">Please read & agree to our <a href="#n0007-terms-and-conditions" class="form-terms" data-click-target="n0007-terms-and-conditions" data-click-bodyClass="terms-modal">N0007 Terms and Conditions</a></label>
-
-					<label class="radio-btn">
-						<input id="n0007Terms" type="checkbox" class="required-field" name="fields[n0007Terms]" disabled required>
-						<span class="slider"></span>
-					</label>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('n0007Terms')) }}
-					{% endif %}
-				</div>
-
-				<div class="modal-wrap" id="n0007-terms-and-conditions">
-					<div class="modal">
-						<a class="modal__close" href="#" data-click-target="n0007-terms-and-conditions" data-click-bodyClass="terms-modal">
-				            <div>
-				                <p class="sr-only">Close Modal</p>
-				                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-				            </div>
-				        </a>
-						<div class="modal__inner">
-							<div class="user-content">
-								{{ legalDocuments.n0007Content }}
-							</div>
-
-							<div class="section-x-short text-center">
-								<p class="h4 text-dark">Medical or Healthcare Provider Disclosure</p>
-							</div>
-							<div class="row">
-
-								<div class="col--sm--6 stack-sm">
-									<div class="field-wrap">
-										<label for="providerAsA">Customer is a healthcare provider as a</label>
-										<input type="text" class="required-field" name="fields[providerAsA]" id="providerAsA" {%- if account is defined %} value="{{ account.providerAsA}}" {% endif %} maxlength="70" required />
-										{% if account is defined %}
-											{{ errorList(account.getErrors('providerAsA')) }}
-										{% endif %}
-									</div>
-								</div>
-								<div class="col--xs--12 col--sm--6">
-									<div class="field-wrap">
-										<label for="underTheLawsOfTheStateOf">Under the laws of the state of</label>
-
-										<div class="select-wrap">
-											<select class="address-country u-full-width required-field" name="fields[underTheLawsOfTheStateOf]" id="underTheLawsOfTheStateOf">
-												{% for key, option in craft.commerce.statesArray["233"] %}
-													{% set optionValue = (model ? model.stateId : '') %}
-													<option value="{{ option }}">{{ option }}</option>
-												{% endfor %}
-											</select>
-										</div>
-									</div>
-								</div>
-
-								<div class="col--xs--12">
-									<div class="field-wrap">
-										<label for="registrationCertificationLicense">Registration, Certification, License #</label>
-										<input type="text" class="required-field" name="fields[registrationCertificationLicense]" id="registrationCertificationLicense" {%- if account is defined %} value="{{ account.registrationCertificationLicense}}"{% endif %} maxlength="20" required />
-										{% if account is defined %}
-											{{ errorList(account.getErrors('registrationCertificationLicense')) }}
-										{% endif %}
-									</div>
-								</div>
-
-								<div class="col--sm--6 stack-sm">
-									<div class="field-wrap">
-										<label for="n0007TermsESignName">E-Signature</label>
-										<input type="text" class="required-field" name="fields[n0007TermsESignName]" id="n0007TermsESignName" {%- if account is defined %} value="{{ account.n0007TermsESignName}}"{% endif %} maxlength="70" required />
-										{% if account is defined %}
-											{{ errorList(account.getErrors('n0007TermsESignName')) }}
-										{% endif %}
-									</div>
-								</div>
-								<div class="col--xs--12 col--sm--6">
-									<div class="field-wrap">
-										<label for="n0007TermsESignDate">Date</label>
-										<input type="text" class="required-field" name="fields[n0007TermsESignDate]" id="n0007TermsESignDate" {%- if account is defined %} value="{{ account.n0007TermsESignDate}}"{% endif %} placeholder="09/24/2017" maxlength="20" required />
-										{% if account is defined %}
-											{{ errorList(account.getErrors('n0007TermsESignDate')) }}
-										{% endif %}
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center text-group-tall">
-								<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions. These terms will be available at anytime on your account page.</small>
-
-								<a class="btn" href="" data-click-target="n0007-terms-and-conditions" data-click-bodyClass="terms-modal">Continue</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="field-wrap">
-					<label for="n0011Terms">Please read & agree to our <a href="#n0011-terms-and-conditions" class="form-terms" data-click-target="n0011-terms-and-conditions" data-click-bodyClass="terms-modal">N0011 Product Resale Agreement</a></label>
-
-					<label class="radio-btn">
-						<input id="n0011Terms" class="required-field" type="checkbox" name="fields[n0011Terms]" disabled required>
-						<span class="slider"></span>
-					</label>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('n0011Terms')) }}
-					{% endif %}
-				</div>
-
-				<div class="modal-wrap" id="n0011-terms-and-conditions">
-					<div class="modal">
-						<a class="modal__close" href="#" data-click-target="n0011-terms-and-conditions" data-click-bodyClass="terms-modal">
-				            <div>
-				                <p class="sr-only">Close Modal</p>
-				                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-				            </div>
-				        </a>
-						<div class="modal__inner">
-							<div class="user-content">
-								{{ legalDocuments.n0011Content }}
-							</div>
-
-							<div class="section-x-short text-center">
-								<p class="h4 text-dark">Minimun Advertised Price Policy</p>
-							</div>
-							<div class="row">
-								<div class="col--sm--6 stack-sm">
-									<div class="field-wrap">
-										<label for="n0011TermsESignName">E-Signature</label>
-										<input type="text" class="required-field" name="fields[n0011TermsESignName]" id="n0011TermsESignName" {%- if account is defined %} value="{{ account.n0011TermsESignName}}"{% endif %} maxlength="70" required />
-										{% if account is defined %}
-											{{ errorList(account.getErrors('n0011TermsESignName')) }}
-										{% endif %}
-									</div>
-								</div>
-								<div class="col--xs--12 col--sm--6">
-									<div class="field-wrap">
-										<label for="n0011TermsESignDate">Date</label>
-										<input type="text" class="required-field" name="fields[n0011TermsESignDate]" id="n0011TermsESignDate" {%- if account is defined %} value="{{ account.n0011TermsESignDate}}"{% endif %} placeholder="09/24/2017" maxlength="20" required />
-										{% if account is defined %}
-											{{ errorList(account.getErrors('n0011TermsESignDate')) }}
-										{% endif %}
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center text-group-tall">
-								<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions. These terms will be available at anytime on your account page.</small>
-
-								<a class="btn" href="" data-click-target="n0011-terms-and-conditions" data-click-bodyClass="terms-modal">Continue</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="field-wrap">
-					<label for="n0003Terms">Please read & agree to our <a href="#n0003-terms-and-conditions" class="form-terms" data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">N0003 MAP Policy</a></label>
-
-					<label class="radio-btn">
-						<input id="n0003Terms" class="required-field" type="checkbox" name="fields[n0003Terms]" disabled required>
-						<span class="slider"></span>
-					</label>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('n0003Terms')) }}
-					{% endif %}
-				</div>
-
-				<div class="modal-wrap" id="n0003-terms-and-conditions">
-					<div class="modal">
-						<a class="modal__close" href="#" data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">
-				            <div>
-				                <p class="sr-only">Close Modal</p>
-				                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-				            </div>
-				        </a>
-						<div class="modal__inner">
-							<div class="user-content">
-								{{ legalDocuments.n0003Content }}
-							</div>
-
-							<div class="section-x-short text-center">
-								<p class="h4 text-dark">N0003 MAP Policy</p>
-							</div>
-							<div class="field-wrap">
-								<label for="n0003Agree">I have read and agree to these terms.</label>
-
-								<label class="radio-btn">
-									<input id="n0003Agree" class="required-field" type="checkbox" name="n0003Agree" required>
-									<span class="slider"></span>
-								</label>
-							</div>
-
-							<div class="text-center text-group-tall">
-								<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions. These terms will be available at anytime on your account page.</small>
-
-								<a class="btn" href="" data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">Continue</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
+			<div class="field-wrap">
+				<label for="nameFull">Full Name (first, middle initial and last name)</label>
+				<input type="text" class="required-field" name="fields[nameFull]" id="nameFull" {%- if account is defined %}
+					value="{{ account.nameFull }}" {% endif %} minlength="2" maxlength="100" required />
+				{% if account is defined %}
+				{{ errorList(account.getErrors('nameFull')) }}
 				{% endif %}
+			</div>
 
+			<div class="field-wrap">
+				<label for="businessName">Business Name</label>
+				<input type="text" class="required-field" name="fields[businessName]" id="businessName" {%- if account is
+					defined %} value="{{ account.businessName}}" {% endif %} minlength="2" maxlength="100" required />
+				{% if account is defined %}
+				{{ errorList(account.getErrors('businessName')) }}
+				{% endif %}
+			</div>
 
-
-
-				<div class="field-wrap">
-					<label for="howDidYouHearAboutNeuroscience">How did you hear about NeuroScience?</label>
-					<input type="hidden" name="fields[howDidYouHearAboutNeuroscience]" value="">
-					<ul class="radio-list">
-						{% for option in entry.howDidYouHearAboutNeuroscience.options %}
-						<li>
-							<label>
-								<input type="radio" name="fields[howDidYouHearAboutNeuroscience]" value="{{ option.value }}">
-								{{ option.label }}
-							</label>
-						</li>
-					    {% endfor %}
-					</ul>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('howDidYouHearAboutNeuroscience')) }}
-					{% endif %}
-				</div>
-
-				<div class="field-wrap text-group section-short mt-6">
-					<p class="pb-2">Help Us Get to Know Your Practice</p>
-
+			<div class="row">
+				<div class="col--xs--12 col--sm--6">
 					<div class="field-wrap">
-						<label for="whatIsTheSpecialtyScopeOfYourPractice">What is the specialty/scope of your practice?</label>
-						<input type="text" class="required-field" name="fields[whatIsTheSpecialtyScopeOfYourPractice]" id="whatIsTheSpecialtyScopeOfYourPractice" {%- if account is defined %} value="{{ account.whatIsTheSpecialtyScopeOfYourPractice }}" {% endif %} minlength="2" maxlength="100" />
+						<label for="address">Address Line 1</label>
+						<input id="address" class="required-field" type="text" name="fields[address]" {%- if account is defined %}
+							value="{{ account.address}}" {% endif %} required>
+
 						{% if account is defined %}
-							{{ errorList(account.getErrors('whatIsTheSpecialtyScopeOfYourPractice')) }}
+						{{ errorList(account.getErrors('address')) }}
 						{% endif %}
 					</div>
-
-
+				</div>
+				<div class="col--xs--12 col--sm--6">
 					<div class="field-wrap">
-						<label for="howManyYearsHaveYouBeenInBusiness">How many years have you been in business?</label>
-						<input type="text" class="required-field" name="fields[howManyYearsHaveYouBeenInBusiness]" id="howManyYearsHaveYouBeenInBusiness" {%- if account is defined %} value="{{ account.howManyYearsHaveYouBeenInBusiness }}" {% endif %} minlength="2" maxlength="100" required />
+						<label for="addressLine2">Address Line 2</label>
+						<input id="addressLine2" type="text" name="fields[addressLine2]" {%- if account is defined %}
+							value="{{ account.addressLine2}}" {% endif %} required>
+
 						{% if account is defined %}
-							{{ errorList(account.getErrors('howManyYearsHaveYouBeenInBusiness')) }}
+						{{ errorList(account.getErrors('addressLine2')) }}
 						{% endif %}
 					</div>
 				</div>
 
-				<div class="field-wrap">
-					<label for="howWillYouBeOrdering">How will you be ordering? (Select all that apply)</label>
+				<div class="col--xs--12 col--sm--5">
+					<div class="field-wrap">
+						<label for="city">City</label>
+						<input id="city" class="required-field" type="text" name="fields[city]" {%- if account is defined %}
+							value="{{ account.city}}" {% endif %} required>
 
-					<input type="hidden" name="fields[howWillYouBeOrdering]" value="">
-
-					<ul class="radio-list">
-						{% for option in entry.howWillYouBeOrdering.options %}
-						<li>
-							<label>
-								<input type="checkbox" name="fields[howWillYouBeOrdering][]" value="{{ option.value }}">
-								{{ option.label }}
-							</label>
-						</li>
-					    {% endfor %}
-					</ul>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('howWillYouBeOrdering')) }}
-					{% endif %}
+						{% if account is defined %}
+						{{ errorList(account.getErrors('city')) }}
+						{% endif %}
+					</div>
 				</div>
+				<div class="col--xs--8 col--sm--5">
+					<div class="field-wrap">
+						<label for="state">State</label>
+						<input id="state" type="hidden" name="fields[state]" value="">
+						{% if account is defined %}
+						{{ errorList(account.getErrors('state')) }}
+						{% endif %}
 
-				<div class="field-wrap">
-					<label for="howOftenWillYouBeOrdering">How often will you be ordering?</label>
-					<input type="hidden" name="fields[howOftenWillYouBeOrdering]" value="">
-					<ul class="radio-list">
-						{% for option in entry.howOftenWillYouBeOrdering.options %}
-						<li>
-							<label>
-								<input type="radio" name="fields[howOftenWillYouBeOrdering]" value="{{ option.value }}">
-								{{ option.label }}
-							</label>
-						</li>
-						{% endfor %}
-					</ul>
-
-					{% if account is defined %}
-						{{ errorList(account.getErrors('howOftenWillYouBeOrdering')) }}
-					{% endif %}
+						<div class="select-wrap">
+							<select id="state-select" name="fields[state]">
+								<option>State*</option>
+								{% for state in craft.commerce.states.allEnabledStates %}
+								<option value="{{ state.name }}">{{ state.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
 				</div>
+				<div class="col--xs--4 col--sm--2">
+					<div class="field-wrap">
+						<label for="zip">Zip</label>
+						<input id="zip" class="required-field" type="text" name="fields[zip]" maxlength="5" {%- if account is
+							defined %} value="{{ account.zip }}" {% endif %} required>
 
-
-				{% if docuSign %}
-				<div class="field-wrap">
-					<label for="docuSign">To complete application, please read and sign the NeuroScience Terms and Conditions, Product Resale Agreement, and MAP Policy via DocuSign.</label>
-
-					<label class="radio-btn sr-only">
-						<input id="n0007Terms" type="checkbox" class="required-field" name="fields[n0007Terms]" disabled required>
-						<span class="slider"></span>
-					</label>
-
-					<div class="mt-4 mb-6">
-						<a href="#docusign" data-click-target="docusign" data-click-bodyClass="terms-modal" class="btn">Sign Documents</a>
+						{% if account is defined %}
+						{{ errorList(account.getErrors('zip')) }}
+						{% endif %}
 					</div>
 				</div>
 
+				<div class="col--xs--12">
+					<div class="field-wrap">
+						<label for="country">Country</label>
+						<div class="select-wrap">
+							<select class="address-country u-full-width" name="fields[country]">
+								{% for key, option in countries %}
+								{% set optionValue = (model ? model.countryId : '') %}
+								<option value="{{ option }}" {% if option=='United States' %} selected{% endif %}>{{ option }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col--xs--12 col--sm--6">
+					<div class="field-wrap">
+						<label for="phone">Phone</label>
+						<input type="text" class="required-field" name="fields[phone]" id="phone" placeholder="(888) 342-7272"
+							required {%- if account is defined %} value="{{ account.phone}}" {% endif %} />
+						{% if account is defined %}
+						{{ errorList(account.getErrors('phone')) }}
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="col--xs--12 col--sm--6">
+					<div class="field-wrap">
+						<label for="fax">Fax</label>
+						<input type="text" name="fields[fax]" id="fax" placeholder="(715) 294-3921" required {%- if account is
+							defined %} value="{{ account.fax }}" {% endif %} />
+						{% if account is defined %}
+						{{ errorList(account.getErrors('fax')) }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+			<div class="field-wrap">
+				<label for="email">Email</label>
+				<input id="email" class="required-field" type="text" name="email" {%- if account is defined %}
+					value="{{ account.email }}" {% endif %}>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('email')) }}
+				{% endif %}
+			</div>
+
+			<div class="field-wrap">
+				<label for="website">Website</label>
+				<input type="text" name="fields[website]" id="website" {%- if account is defined %} value="{{ account.website}}"
+					{% endif %} minlength="2" maxlength="100" required />
+				{% if account is defined %}
+				{{ errorList(account.getErrors('website')) }}
+				{% endif %}
+			</div>
+
+			<div class="field-wrap">
+				<label for="username">Username</label>
+				<input id="username" type="text" name="username" {%- if account is defined %} value="{{ account.username }}" {%
+					endif -%}>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('username')) }}
+				{% endif %}
+			</div>
+
+			<div class="row">
+				<div class="col--xs--12 col--sm--6">
+
+					<div class="field-wrap has-tool-tip">
+						<label for="password">Password</label>
+						<input id="password" class="required-field" minlength="8" type="password" name="password" required>
+
+						{% if account is defined %}
+						{{ errorList(account.getErrors('password')) }}
+						{% endif %}
+
+						<div class="tool-tip">
+							<p>Password requires:</p>
+							<ul class="ul ul--sm">
+								<li>
+									Alpha and numeric characters
+								</li>
+								<li>
+									At least 6 characters
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col--xs--12 col--sm--6">
+
+					<div class="field-wrap">
+						<label for="passwordHint">Password Hint (Reminder)</label>
+						<input id="passwordHint" class="required-field" type="text" name="fields[passwordHint]" {%- if account is
+							defined %} value="{{ account.passwordHint}}" {% endif %} required>
+
+						{% if account is defined %}
+						{{ errorList(account.getErrors('passwordHint')) }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+
+			{% set dropdownField = craft.fields.getFieldbyHandle('secretQuestion') %}
+
+			<div class="row">
+				<div class="col--xs--12 col--sm--6">
+					<div class="field-wrap">
+						<label for="secretQuestion">Secret Question</label>
+						<div class="select-wrap">
+							<select id="secretQuestion" name="fields[secretQuestion]" required>
+								<option value="">select one</option>
+								{% for option in dropdownField.settings.options %}
+								{%- if account is defined %}
+								{% if account.secretQuestion == option.value %}
+								<option value="{{ option.value }}" selected="selected">{{ option.label }}</option>
+								{% else %}
+								<option value="{{ option.value }}">{{ option.label }}</option>
+								{% endif %}
+								{% else %}
+								<option value="{{ option.value }}">{{ option.label }}</option>
+								{% endif %}
+								{% endfor %}
+
+							</select>
+						</div>
+						{% if account is defined %}
+						{{ errorList(account.getErrors('secretQuestion')) }}
+						{% endif %}
+					</div>
+				</div>
+				<div class="col--xs--12 col--sm--6">
+					<div class="field-wrap">
+						<label for="secretAnswer">Secret Answer</label>
+						<input type="text" name="fields[secretAnswer]" required id="secretAnswer" {%- if account is defined %}
+							value="{{ account.secretAnswer}}" {% endif %} />
+						{% if account is defined %}
+						{{ errorList(account.getErrors('secretAnswer')) }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+			<div class="field-wrap">
+				<label for="taxAcknowledgement">NeuroScience products are taxable in some states. I acknowledge that I am
+					registered with my state to purchase products from NeuroScience with sales tax exempt status. I will complete
+					the documentation that is sent to me so that I will not be charged sales tax when I order products from
+					NeuroScience.</label>
+
+				<label class="radio-btn">
+					<input type="checkbox" name="fields[taxAcknowledgement]" id="taxAcknowledgement">
+					<span class="slider"></span>
+				</label>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('taxAgreement')) }}
+				{% endif %}
+			</div>
+
+
+			<div class="field-wrap">
+				<label for="licensePhotoUpload">License Photo Copy Upload</label>
+				<input id="licensePhotoUpload" type="file" name="fields[licensePhotoUpload][]" multiple>
+			</div>
+
+
+			<div class="field-wrap">
+				<label for="receiveUpdates">I’d like to receive occasional email updates from NeuroScience</label>
+
+				<label class="radio-btn">
+					<input type="checkbox" name="fields[receiveUpdates]" id="receiveUpdates" checked="checked">
+					<span class="slider"></span>
+				</label>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('receiveUpdates')) }}
+				{% endif %}
+			</div>
+
+
+			{% set docuSign = true %}
+			{% if docuSign %}
+
+			{% else %}
+
+			<div class="field-wrap">
+				<label for="n0007Terms">Please read & agree to our <a href="#n0007-terms-and-conditions" class="form-terms"
+						data-click-target="n0007-terms-and-conditions" data-click-bodyClass="terms-modal">N0007 Terms and
+						Conditions</a></label>
+
+				<label class="radio-btn">
+					<input id="n0007Terms" type="checkbox" class="required-field" name="fields[n0007Terms]" disabled required>
+					<span class="slider"></span>
+				</label>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('n0007Terms')) }}
+				{% endif %}
+			</div>
+
+			<div class="modal-wrap" id="n0007-terms-and-conditions">
+				<div class="modal">
+					<a class="modal__close" href="#" data-click-target="n0007-terms-and-conditions"
+						data-click-bodyClass="terms-modal">
+						<div>
+							<p class="sr-only">Close Modal</p>
+							<svg width="18" height="18">
+								<use xlink:href="#shape-close"></use>
+							</svg>
+						</div>
+					</a>
+					<div class="modal__inner">
+						<div class="user-content">
+							{{ legalDocuments.n0007Content }}
+						</div>
+
+						<div class="section-x-short text-center">
+							<p class="h4 text-dark">Medical or Healthcare Provider Disclosure</p>
+						</div>
+						<div class="row">
+
+							<div class="col--sm--6 stack-sm">
+								<div class="field-wrap">
+									<label for="providerAsA">Customer is a healthcare provider as a</label>
+									<input type="text" class="required-field" name="fields[providerAsA]" id="providerAsA" {%- if account
+										is defined %} value="{{ account.providerAsA}}" {% endif %} maxlength="70" required />
+									{% if account is defined %}
+									{{ errorList(account.getErrors('providerAsA')) }}
+									{% endif %}
+								</div>
+							</div>
+							<div class="col--xs--12 col--sm--6">
+								<div class="field-wrap">
+									<label for="underTheLawsOfTheStateOf">Under the laws of the state of</label>
+
+									<div class="select-wrap">
+										<select class="address-country u-full-width required-field" name="fields[underTheLawsOfTheStateOf]"
+											id="underTheLawsOfTheStateOf">
+											{% for key, option in craft.commerce.statesArray["233"] %}
+											{% set optionValue = (model ? model.stateId : '') %}
+											<option value="{{ option }}">{{ option }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="col--xs--12">
+								<div class="field-wrap">
+									<label for="registrationCertificationLicense">Registration, Certification, License #</label>
+									<input type="text" class="required-field" name="fields[registrationCertificationLicense]"
+										id="registrationCertificationLicense" {%- if account is defined %}
+										value="{{ account.registrationCertificationLicense}}" {% endif %} maxlength="20" required />
+									{% if account is defined %}
+									{{ errorList(account.getErrors('registrationCertificationLicense')) }}
+									{% endif %}
+								</div>
+							</div>
+
+							<div class="col--sm--6 stack-sm">
+								<div class="field-wrap">
+									<label for="n0007TermsESignName">E-Signature</label>
+									<input type="text" class="required-field" name="fields[n0007TermsESignName]" id="n0007TermsESignName"
+										{%- if account is defined %} value="{{ account.n0007TermsESignName}}" {% endif %} maxlength="70"
+										required />
+									{% if account is defined %}
+									{{ errorList(account.getErrors('n0007TermsESignName')) }}
+									{% endif %}
+								</div>
+							</div>
+							<div class="col--xs--12 col--sm--6">
+								<div class="field-wrap">
+									<label for="n0007TermsESignDate">Date</label>
+									<input type="text" class="required-field" name="fields[n0007TermsESignDate]" id="n0007TermsESignDate"
+										{%- if account is defined %} value="{{ account.n0007TermsESignDate}}" {% endif %}
+										placeholder="09/24/2017" maxlength="20" required />
+									{% if account is defined %}
+									{{ errorList(account.getErrors('n0007TermsESignDate')) }}
+									{% endif %}
+								</div>
+							</div>
+						</div>
+
+						<div class="text-center text-group-tall">
+							<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions.
+								These terms will be available at anytime on your account page.</small>
+
+							<a class="btn" href="" data-click-target="n0007-terms-and-conditions"
+								data-click-bodyClass="terms-modal">Continue</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="field-wrap">
+				<label for="n0011Terms">Please read & agree to our <a href="#n0011-terms-and-conditions" class="form-terms"
+						data-click-target="n0011-terms-and-conditions" data-click-bodyClass="terms-modal">N0011 Product Resale
+						Agreement</a></label>
+
+				<label class="radio-btn">
+					<input id="n0011Terms" class="required-field" type="checkbox" name="fields[n0011Terms]" disabled required>
+					<span class="slider"></span>
+				</label>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('n0011Terms')) }}
+				{% endif %}
+			</div>
+
+			<div class="modal-wrap" id="n0011-terms-and-conditions">
+				<div class="modal">
+					<a class="modal__close" href="#" data-click-target="n0011-terms-and-conditions"
+						data-click-bodyClass="terms-modal">
+						<div>
+							<p class="sr-only">Close Modal</p>
+							<svg width="18" height="18">
+								<use xlink:href="#shape-close"></use>
+							</svg>
+						</div>
+					</a>
+					<div class="modal__inner">
+						<div class="user-content">
+							{{ legalDocuments.n0011Content }}
+						</div>
+
+						<div class="section-x-short text-center">
+							<p class="h4 text-dark">Minimun Advertised Price Policy</p>
+						</div>
+						<div class="row">
+							<div class="col--sm--6 stack-sm">
+								<div class="field-wrap">
+									<label for="n0011TermsESignName">E-Signature</label>
+									<input type="text" class="required-field" name="fields[n0011TermsESignName]" id="n0011TermsESignName"
+										{%- if account is defined %} value="{{ account.n0011TermsESignName}}" {% endif %} maxlength="70"
+										required />
+									{% if account is defined %}
+									{{ errorList(account.getErrors('n0011TermsESignName')) }}
+									{% endif %}
+								</div>
+							</div>
+							<div class="col--xs--12 col--sm--6">
+								<div class="field-wrap">
+									<label for="n0011TermsESignDate">Date</label>
+									<input type="text" class="required-field" name="fields[n0011TermsESignDate]" id="n0011TermsESignDate"
+										{%- if account is defined %} value="{{ account.n0011TermsESignDate}}" {% endif %}
+										placeholder="09/24/2017" maxlength="20" required />
+									{% if account is defined %}
+									{{ errorList(account.getErrors('n0011TermsESignDate')) }}
+									{% endif %}
+								</div>
+							</div>
+						</div>
+
+						<div class="text-center text-group-tall">
+							<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions.
+								These terms will be available at anytime on your account page.</small>
+
+							<a class="btn" href="" data-click-target="n0011-terms-and-conditions"
+								data-click-bodyClass="terms-modal">Continue</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="field-wrap">
+				<label for="n0003Terms">Please read & agree to our <a href="#n0003-terms-and-conditions" class="form-terms"
+						data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">N0003 MAP
+						Policy</a></label>
+
+				<label class="radio-btn">
+					<input id="n0003Terms" class="required-field" type="checkbox" name="fields[n0003Terms]" disabled required>
+					<span class="slider"></span>
+				</label>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('n0003Terms')) }}
+				{% endif %}
+			</div>
+
+			<div class="modal-wrap" id="n0003-terms-and-conditions">
+				<div class="modal">
+					<a class="modal__close" href="#" data-click-target="n0003-terms-and-conditions"
+						data-click-bodyClass="terms-modal">
+						<div>
+							<p class="sr-only">Close Modal</p>
+							<svg width="18" height="18">
+								<use xlink:href="#shape-close"></use>
+							</svg>
+						</div>
+					</a>
+					<div class="modal__inner">
+						<div class="user-content">
+							{{ legalDocuments.n0003Content }}
+						</div>
+
+						<div class="section-x-short text-center">
+							<p class="h4 text-dark">N0003 MAP Policy</p>
+						</div>
+						<div class="field-wrap">
+							<label for="n0003Agree">I have read and agree to these terms.</label>
+
+							<label class="radio-btn">
+								<input id="n0003Agree" class="required-field" type="checkbox" name="n0003Agree" required>
+								<span class="slider"></span>
+							</label>
+						</div>
+
+						<div class="text-center text-group-tall">
+							<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions.
+								These terms will be available at anytime on your account page.</small>
+
+							<a class="btn" href="" data-click-target="n0003-terms-and-conditions"
+								data-click-bodyClass="terms-modal">Continue</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% endif %}
+
+
+
+
+			<div class="field-wrap">
+				<label for="howDidYouHearAboutNeuroscience">How did you hear about NeuroScience?</label>
+				<input type="hidden" name="fields[howDidYouHearAboutNeuroscience]" value="">
+				<ul class="radio-list">
+					{% for option in entry.howDidYouHearAboutNeuroscience.options %}
+					<li>
+						<label>
+							<input type="radio" name="fields[howDidYouHearAboutNeuroscience]" value="{{ option.value }}">
+							{{ option.label }}
+						</label>
+					</li>
+					{% endfor %}
+				</ul>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('howDidYouHearAboutNeuroscience')) }}
+				{% endif %}
+			</div>
+
+			<div class="field-wrap text-group section-short mt-6">
+				<p class="pb-2">Help Us Get to Know Your Practice</p>
 
 				<div class="field-wrap">
-					<label for="docusignCompleted">I acknowledge that I have read, signed, and completed the above NeuroScience policy agreements through DocuSign.</label>
-
-					<label class="radio-btn">
-						<input class="required-field" type="checkbox" name="fields[docusignCompleted]" required id="docusignCompleted">
-						<span class="slider"></span>
-					</label>
+					<label for="whatIsTheSpecialtyScopeOfYourPractice">What is the specialty/scope of your practice?</label>
+					<input type="text" class="required-field" name="fields[whatIsTheSpecialtyScopeOfYourPractice]"
+						id="whatIsTheSpecialtyScopeOfYourPractice" {%- if account is defined %}
+						value="{{ account.whatIsTheSpecialtyScopeOfYourPractice }}" {% endif %} minlength="2" maxlength="100" />
+					{% if account is defined %}
+					{{ errorList(account.getErrors('whatIsTheSpecialtyScopeOfYourPractice')) }}
+					{% endif %}
 				</div>
 
 
-				<div class="modal-wrap" id="docusign">
-					<div class="modal">
+				<div class="field-wrap">
+					<label for="howManyYearsHaveYouBeenInBusiness">How many years have you been in business?</label>
+					<input type="text" class="required-field" name="fields[howManyYearsHaveYouBeenInBusiness]"
+						id="howManyYearsHaveYouBeenInBusiness" {%- if account is defined %}
+						value="{{ account.howManyYearsHaveYouBeenInBusiness }}" {% endif %} minlength="2" maxlength="100"
+						required />
+					{% if account is defined %}
+					{{ errorList(account.getErrors('howManyYearsHaveYouBeenInBusiness')) }}
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="field-wrap">
+				<label for="howWillYouBeOrdering">How will you be ordering? (Select all that apply)</label>
+
+				<input type="hidden" name="fields[howWillYouBeOrdering]" value="">
+
+				<ul class="radio-list">
+					{% for option in entry.howWillYouBeOrdering.options %}
+					<li>
+						<label>
+							<input type="checkbox" name="fields[howWillYouBeOrdering][]" value="{{ option.value }}">
+							{{ option.label }}
+						</label>
+					</li>
+					{% endfor %}
+				</ul>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('howWillYouBeOrdering')) }}
+				{% endif %}
+			</div>
+
+			<div class="field-wrap">
+				<label for="howOftenWillYouBeOrdering">How often will you be ordering?</label>
+				<input type="hidden" name="fields[howOftenWillYouBeOrdering]" value="">
+				<ul class="radio-list">
+					{% for option in entry.howOftenWillYouBeOrdering.options %}
+					<li>
+						<label>
+							<input type="radio" name="fields[howOftenWillYouBeOrdering]" value="{{ option.value }}">
+							{{ option.label }}
+						</label>
+					</li>
+					{% endfor %}
+				</ul>
+
+				{% if account is defined %}
+				{{ errorList(account.getErrors('howOftenWillYouBeOrdering')) }}
+				{% endif %}
+			</div>
+
+
+			{% if docuSign %}
+			<div class="field-wrap">
+				<label for="docuSign">To complete application, please read and sign the NeuroScience Terms and Conditions,
+					Product Resale Agreement, and MAP Policy via DocuSign.</label>
+
+				<label class="radio-btn sr-only">
+					<input id="n0007Terms" type="checkbox" class="required-field" name="fields[n0007Terms]" disabled required>
+					<span class="slider"></span>
+				</label>
+
+				<div class="mt-4 mb-6">
+					<a href="#docusign" data-click-target="docusign" data-click-bodyClass="terms-modal" class="btn">Sign
+						Documents</a>
+				</div>
+			</div>
+
+
+			<div class="field-wrap">
+				<label for="docusignCompleted">I acknowledge that I have read, signed, and completed the above NeuroScience
+					policy agreements through DocuSign.</label>
+
+				<label class="radio-btn">
+					<input class="required-field" type="checkbox" name="fields[docusignCompleted]" required
+						id="docusignCompleted">
+					<span class="slider"></span>
+				</label>
+			</div>
+
+
+			<div class="modal-wrap" id="docusign">
+				<div class="modal">
+					<a class="modal__close" href="#" data-click-target="docusign" data-click-bodyClass="terms-modal">
+						<div>
+							<p class="sr-only">Close Modal</p>
+							<svg width="18" height="18">
+								<use xlink:href="#shape-close"></use>
+							</svg>
+						</div>
+					</a>
+					<div class="modal__inner">
+						<div class="text-center col-lg-8 mx-auto">
+							<p class="p mb-4 px-lg-6 ">Please enter your name and email address to begin. A copy of the documents will
+								be sent to the email address provided.</p>
+						</div>
+
+						<iframe class="border" style="width: 100%; height: 540px;"
+							src="https://na3.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=253d2dd8-b670-4d96-b9ff-582836d92ba4"></iframe>
+
+						<div class="text-center mt-4">
+							<a class="btn" href="#" data-click-target="docusign" data-click-bodyClass="terms-modal">
+								Close & Continue
+							</a>
+						</div>
+
 						<a class="modal__close" href="#" data-click-target="docusign" data-click-bodyClass="terms-modal">
-				            <div>
-				                <p class="sr-only">Close Modal</p>
-				                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-				            </div>
-				        </a>
-						<div class="modal__inner">
-							<div class="text-center col-lg-8 mx-auto">
-								<p class="p mb-4 px-lg-6 ">Please enter your name and email address to begin. A copy of the documents will be sent to the email address provided.</p>
+							<div>
+								<p class="sr-only">Close Modal</p>
+								<svg width="18" height="18">
+									<use xlink:href="#shape-close"></use>
+								</svg>
 							</div>
-
-							<iframe class="border" style="width: 100%; height: 540px;" src="https://na3.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=253d2dd8-b670-4d96-b9ff-582836d92ba4"></iframe>
-
-							<div class="text-center mt-4">
-								<a class="btn" href="#" data-click-target="docusign" data-click-bodyClass="terms-modal">
-						            Close & Continue
-						        </a>
-							</div>
-
-							<a class="modal__close" href="#" data-click-target="docusign" data-click-bodyClass="terms-modal">
-					            <div>
-					                <p class="sr-only">Close Modal</p>
-					                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-					            </div>
-					        </a>
-						</div>
+						</a>
 					</div>
 				</div>
+			</div>
 
-				{% endif %}
-
-
-				<div class="text-center field-wrap">
-					<input id="register-now" type="submit" value="Submit" class="disabled" disabled>
-				</div>
-
-				<div class="text-center">
-					<p class="p-sm">If you need assistance getting started, call <a class="tel" href="tel:+18883427272">(888) 342-7272</a> or email <a href="mailto:newaccounts@neurorelief.com">newaccounts@neurorelief.com</a></p>
-				</div>
+			{% endif %}
 
 
-			</form>
+			<div class="text-center field-wrap">
+				<input id="register-now" type="submit" value="Submit" class="disabled" disabled>
+			</div>
 
-		</div>
+			<div class="text-center">
+				<p class="p-sm">If you need assistance getting started, call <a class="tel" href="tel:+18883427272">(888)
+						342-7272</a> or email <a href="mailto:newaccounts@neurorelief.com">newaccounts@neurorelief.com</a></p>
+			</div>
+
+
+		</form>
+
 	</div>
+</div>
 
-	<div class="terms-screen" data-click-target="" data-click-bodyClass="terms-modal"></div>
-
-
-
-
-
-{% includejs %}
-	var $ = jQuery,
-		submit = $('#register-now');
-
-		function checkLegal(){
-			if( $('#n0007TermsESignName').val().length > 0 ) {
-				pass = true;
-			}
-			if( $('#n0011TermsESignName').val().length > 0 ) {
-				pass = true;
-			}
-			if( $('#n0011TermsESignName').val().length > 0 ) {
-				pass = true;
-			}
-
-		}
-
-	function validateForm() {
-		var isValid = true;
-		$('.required-field').each(function() {
-			if ( $(this).val() === '' || $(this).val() === false )
-			isValid = false;
-		});
-
-		if( !$(docusignCompleted).is(':checked') ) {
-			isValid = false;
-		}
-		return isValid;
-	}
-
-	$('form :input').change(function() {
-	    if( validateForm() == true ) {
-			submit.removeClass('disabled').removeAttr('disabled');
-		} else {
-			submit.addClass('disabled').attr('disabled', 'disabled');
-		}
-
-	});
-
-
-	var $ = jQuery;
-
-	$(document).ready(function(){
-		var name = false,
-			date = false;
-
-		$('#n0007TermsESignName').keyup(function() {
-			if( $(this).val().length > 0 ) {
-				name = true;
-			} else {
-				name = false;
-			}
-		});
-
-		$('#n0007TermsESignDate').keyup(function() {
-			if( $(this).val().length > 0 ) {
-				date = true;
-			} else {
-				date = false;
-			}
-		});
-
-		$('#n0007TermsESignName, #n0007TermsESignDate').focusout(function() {
-			if( name == true && date == true ) {
-				$('#n0007Terms').removeAttr('disabled');
-			} else {
-				$('#n0007Terms').attr('disabled', 'disabled');
-			}
-		});
-
-		$('#n0011TermsESignName').keyup(function() {
-			if( $(this).val().length > 0 ) {
-				name = true;
-			} else {
-				name = false;
-			}
-		});
-
-		$('#n0011TermsESignDate').keyup(function() {
-			if( $(this).val().length > 0 ) {
-				date = true;
-			} else {
-				date = false;
-			}
-		});
-
-		$('#n0011TermsESignDate, #n0011TermsESignName').focusout(function() {
-			if( name == true && date == true ) {
-				$('#n0011Terms').removeAttr('disabled');
-			} else {
-				$('#n0011Terms').attr('disabled', 'disabled');
-			}
-		});
-
-		$('#n0011TermsESignDate, #n0011TermsESignName').focusout(function() {
-			if( name == true && date == true ) {
-				$('#n0011Terms').removeAttr('disabled');
-			} else {
-				$('#n0011Terms').attr('disabled', 'disabled');
-			}
-		});
-
-		$('#n0003Agree').change(function() {
-
-			if( $('#n0003Agree:checked').length > 0 ) {
-				$('#n0003Terms').removeAttr('disabled').prop('checked', true);
-			} else {
-				$('#n0003Terms').attr('disabled', 'disabled').prop('checked', false);
-			}
-
-		});
-
-		$(document).ready(function(){
-			if( $('#n0007TermsESignName').val() != '' && $('#n0007TermsESignDate').val() != '') {
-				$('#n0007Terms').removeAttr('disabled');
-			}
-
-			if( $('#n0011TermsESignName').val() != '' && $('#n0011TermsESignDate').val() != '') {
-				$('#n0011Terms').removeAttr('disabled');
-			}
-		});
+<div class="terms-screen" data-click-target="" data-click-bodyClass="terms-modal"></div>
 
 
 
-	});
 
-{% endincludejs %}
+
+{% js %}
+var $ = jQuery,
+submit = $('#register-now');
+
+function checkLegal(){
+if( $('#n0007TermsESignName').val().length > 0 ) {
+pass = true;
+}
+if( $('#n0011TermsESignName').val().length > 0 ) {
+pass = true;
+}
+if( $('#n0011TermsESignName').val().length > 0 ) {
+pass = true;
+}
+
+}
+
+function validateForm() {
+var isValid = true;
+$('.required-field').each(function() {
+if ( $(this).val() === '' || $(this).val() === false )
+isValid = false;
+});
+
+if( !$(docusignCompleted).is(':checked') ) {
+isValid = false;
+}
+return isValid;
+}
+
+$('form :input').change(function() {
+if( validateForm() == true ) {
+submit.removeClass('disabled').removeAttr('disabled');
+} else {
+submit.addClass('disabled').attr('disabled', 'disabled');
+}
+
+});
+
+
+var $ = jQuery;
+
+$(document).ready(function(){
+var name = false,
+date = false;
+
+$('#n0007TermsESignName').keyup(function() {
+if( $(this).val().length > 0 ) {
+name = true;
+} else {
+name = false;
+}
+});
+
+$('#n0007TermsESignDate').keyup(function() {
+if( $(this).val().length > 0 ) {
+date = true;
+} else {
+date = false;
+}
+});
+
+$('#n0007TermsESignName, #n0007TermsESignDate').focusout(function() {
+if( name == true && date == true ) {
+$('#n0007Terms').removeAttr('disabled');
+} else {
+$('#n0007Terms').attr('disabled', 'disabled');
+}
+});
+
+$('#n0011TermsESignName').keyup(function() {
+if( $(this).val().length > 0 ) {
+name = true;
+} else {
+name = false;
+}
+});
+
+$('#n0011TermsESignDate').keyup(function() {
+if( $(this).val().length > 0 ) {
+date = true;
+} else {
+date = false;
+}
+});
+
+$('#n0011TermsESignDate, #n0011TermsESignName').focusout(function() {
+if( name == true && date == true ) {
+$('#n0011Terms').removeAttr('disabled');
+} else {
+$('#n0011Terms').attr('disabled', 'disabled');
+}
+});
+
+$('#n0011TermsESignDate, #n0011TermsESignName').focusout(function() {
+if( name == true && date == true ) {
+$('#n0011Terms').removeAttr('disabled');
+} else {
+$('#n0011Terms').attr('disabled', 'disabled');
+}
+});
+
+$('#n0003Agree').change(function() {
+
+if( $('#n0003Agree:checked').length > 0 ) {
+$('#n0003Terms').removeAttr('disabled').prop('checked', true);
+} else {
+$('#n0003Terms').attr('disabled', 'disabled').prop('checked', false);
+}
+
+});
+
+$(document).ready(function(){
+if( $('#n0007TermsESignName').val() != '' && $('#n0007TermsESignDate').val() != '') {
+$('#n0007Terms').removeAttr('disabled');
+}
+
+if( $('#n0011TermsESignName').val() != '' && $('#n0011TermsESignDate').val() != '') {
+$('#n0011Terms').removeAttr('disabled');
+}
+});
+
+
+
+});
+
+{% endjs %}
 
 {% endblock %}

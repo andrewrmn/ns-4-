@@ -27,7 +27,6 @@ return [
         'rememberedUserSessionDuration' => 'P1Y',
         'userSessionDuration' => 'P1Y',
         'timezone' => 'America/Chicago',
-        'siteName' => 'NeuroScience',
         'isSystemLive' => true,
         'extraAllowedFileExtensions' => ['htm', 'html'],
         'enableCsrfProtection' => false,
@@ -40,7 +39,6 @@ return [
     'dev' => [
         // Dev Mode (see https://craftcms.com/guides/what-dev-mode-does)
         'devMode' => true,
-        'siteUrl' => getenv('PRIMARY_SITE_URL'),
         'enableCsrfProtection' => false,
         'useProjectConfigFile' => false,
         'backupOnUpdate' => false,

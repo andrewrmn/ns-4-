@@ -203,9 +203,8 @@
 					$select.prop('disabled', 'disabled');
 					$('form#paymentPreferenceForm').append('<input type="hidden" name="' + name + '"
 						value="' + value + '" />').submit();
-					$('form#paymentPreferenceForm').append('<input type="hidden" name="cartUpdatedNotice"
-						value="Updated the cart’s ' + name + '" />').submit();
-					});
+					{% set successMessage = 'Cart updated.'|hash %} $('form#paymentPreferenceForm') .append('<input type="hidden"
+						name="successMessage" value="{{ successMessage }}" />') .submit();
 					{% endjs %}
 
 
@@ -559,11 +558,11 @@
 		}
 	</script>
 
-	{% includejs %}
+	{% js %}
 	$('#paymentMethod , #paymentCurrency').change(function(){
 	$('form#paymentMethod').submit();
 	});
-	{% endincludejs %}
+	{% endjs %}
 
 	{% js %}
 	$(document).ready(function() {

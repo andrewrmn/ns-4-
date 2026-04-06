@@ -12,8 +12,9 @@
 {% endfor %}
 
 {# Set product availability for patients. Only these products will be displayed to patients #}
-{% if currentUser and currentUser.isInGroup('patients') and currentUser.restrictedProducts|length and product.id not in currentUser.restrictedProducts.ids() %}
-  {% redirect "patients/dashboard" %}
+{% if currentUser and currentUser.isInGroup('patients') and currentUser.restrictedProducts|length and product.id not in
+currentUser.restrictedProducts.ids() %}
+{% redirect "patients/dashboard" %}
 {% endif %}
 
 <div class="wrapper-full bg-light product-banner">
@@ -53,7 +54,7 @@
             {% for img in row.productImages %}
             <div>
               <figure class="img-zoom" data-src="{{ img.url }}">
-                <img src="{{ img.url }}" alt="{{ img.title }}"  />
+                <img src="{{ img.url }}" alt="{{ img.title }}" />
               </figure>
             </div>
             {% endfor %}
@@ -61,24 +62,24 @@
           <div class="carousel carousel-synced-nav">
             {% for img in row.productImages %}
             <div>
-              <img src="{{ img.url }}" alt="{{ img.title }}"  />
+              <img src="{{ img.url }}" alt="{{ img.title }}" />
             </div>
             {% endfor %}
           </div>
 
           <script>
-          var $ = jQuery,
-          zoomin = true;
-          if ($(window).width() >= 800) {
-            $('.img-zoom').zoom();
-          }
+            var $ = jQuery,
+              zoomin = true;
+            if ($(window).width() >= 800) {
+              $('.img-zoom').zoom();
+            }
           </script>
 
           {% elseif row.productImages|length == 1 %}
           {% set img = row.productImages.one() %}
-          <img src="{{ img.url }}" alt="{{ img.title }}"  />
+          <img src="{{ img.url }}" alt="{{ img.title }}" />
           {% else %}
-          <img src="{{ siteUrl }}images/products/no-image.png" alt="no image available"  />
+          <img src="{{ siteUrl }}images/products/no-image.png" alt="no image available" />
           {% endif %}
 
           {% endfor %}
@@ -90,7 +91,7 @@
       <div class="col--xs--12 col--md--6 col--md--7 col--lg--offset--1 product-details">
         <div class="product-hd section-x-short">
           {% for purchasable in product.variants %}
-          <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;"{% endif %}>
+          <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;" {% endif %}>
             <div class="h5 text-light">Item Number: {{ purchasable.sku }}</div>
           </span>
           {% endfor %}
@@ -99,11 +100,12 @@
             <h1 class="h1 product-title">{{ product.title }}</h1>
           </div>
           <p class="product-count">
-	          {% set prodMaxQty = 100 %}
+            {% set prodMaxQty = 100 %}
             {% for purchasable in product.variants %}
-            <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;"{% endif %}>
-            {% if product.hideBottleCount != true %}{{ purchasable.bottleSize }}{% endif %}
-              {% if purchasable.maxQty|length %}  — <span class="text-error">Max Limit of {{ purchasable.maxQty }} per order </span>{% endif %}
+            <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;" {% endif %}>
+              {% if product.hideBottleCount != true %}{{ purchasable.bottleSize }}{% endif %}
+              {% if purchasable.maxQty|length %} — <span class="text-error">Max Limit of {{ purchasable.maxQty }} per
+                order </span>{% endif %}
               {% set prodMaxQty = purchasable.maxQty %}
             </span>
             {% endfor %}
@@ -117,8 +119,8 @@
           {% endif %}
           {% endfor %}
         </div>
-				
-				
+
+
         {% if canBuy %}
         <div class="text-group" id="product-buy">
           <form method="POST" id="addToCartForm" class="js-add-to-cart add-to-cart-form">
@@ -134,31 +136,34 @@
               {% set shownSales = false %}
               {%- for purchasable in product.variants -%}
 
-              <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;"{% endif %}>
+              <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;" {% endif %}>
                 <p class="h2 text-flush text-brand-alt">
-                  {% if currentUser and not currentUser.isInGroup('neuroselectOnly') and not currentUser.isInGroup('patients') %}
+                  {% if currentUser and not currentUser.isInGroup('neuroselectOnly') and not
+                  currentUser.isInGroup('patients') %}
                   {{ purchasable.salePrice|commerceCurrency(cart.currency) }}
                   {% else %}
-	                  {% if purchasable.suggestedRetailPrice %}${{ purchasable.suggestedRetailPrice }}{% endif %}
+                  {% if purchasable.suggestedRetailPrice %}${{ purchasable.suggestedRetailPrice }}{% endif %}
                   {% endif %}
                 </p>
               </span>
 
 
               {% if purchasable.sales %}
-              <ul data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;"{% endif %}>
-                {% for sale in purchasable.sales  %}
+              <ul data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;" {% endif %}>
+                {% for sale in purchasable.sales %}
                 <li><strong>{{ sale.name }}</strong> {{ sale.description }}</li>
                 {% endfor %}
               </ul>
 
               {% endif %}
 
-			  {% if product.hideSrp != true %}
-              {% if currentUser and not currentUser.isInGroup('neuroselectOnly') and not currentUser.isInGroup('patients') %}
+              {% if product.hideSrp != true %}
+              {% if currentUser and not currentUser.isInGroup('neuroselectOnly') and not
+              currentUser.isInGroup('patients') %}
               <div>
                 {% if purchasable.suggestedRetailPrice %}
-                <p data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;"{% endif %} class="p-sm text-italic">
+                <p data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;" {% endif %}
+                  class="p-sm text-italic">
                   Suggested Retail Price: ${{ purchasable.suggestedRetailPrice }}
                 </p>
                 {% endif %}
@@ -181,12 +186,9 @@
 
             <div class="product__qty">
               <label for="qty">Qty</label>
-              <input
-              type="number"
-              name="qty"
-              {% if minQty > 0 %}min="{{ minQty }}"{% endif %}
+              <input type="number" name="qty" {% if minQty> 0 %}min="{{ minQty }}"{% endif %}
               max="{{ prodMaxQty }}"
-              
+
               value="{% if minQty > 0 %}{{ minQty }}{% else %}1{% endif %}">
             </div>
 
@@ -195,322 +197,335 @@
               <select name="purchasableId" class="purchasableId ">
                 {% for purchasable in product.variants %}
 
-                <option 
-                data-id="{{ purchasable.id }}"
-                data-info="product-{{ product.id }}-purchasable-{{ purchasable.id }}"
-                value="{{ purchasable.id }}"
-                data-has-stock="{{ purchasable.hasStock ? 'true' : 'false' }}">
-                {{ purchasable.sku }} {{ purchasable.description }}
+                <option data-id="{{ purchasable.id }}"
+                  data-info="product-{{ product.id }}-purchasable-{{ purchasable.id }}" value="{{ purchasable.id }}"
+                  data-has-stock="{{ purchasable.hasStock ? 'true' : 'false' }}">
+                  {{ purchasable.sku }} {{ purchasable.description }}
 
-                {% if currentUser and not currentUser.isInGroup('patients') %}{{ purchasable.price|commerceCurrency(cart.currency) }}{% else %}${{ purchasable.suggestedRetailPrice }}{% endif %}
-              </option>
-              {% endfor %}
-            </select>
-          </div>
+                  {% if currentUser and not currentUser.isInGroup('patients') %}{{
+                  purchasable.price|commerceCurrency(cart.currency) }}{% else %}${{ purchasable.suggestedRetailPrice
+                  }}{% endif %}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
 
 
-          <div class="pricingOption d-none">
+            <div class="pricingOption d-none">
 
-	        {% set guestPrice = false %}
+              {% set guestPrice = false %}
 
-	        {% if not currentUser %}
-	        	{% set guestPrice = true %}
-	        {% endif %}
-	        {% if currentUser and currentUser.isInGroup('patients') %}
-	        	{% set guestPrice = true %}
-	        {% endif %}
+              {% if not currentUser %}
+              {% set guestPrice = true %}
+              {% endif %}
+              {% if currentUser and currentUser.isInGroup('patients') %}
+              {% set guestPrice = true %}
+              {% endif %}
 
-            <select name="options[guest]">
-              <option value="yes"{% if guestPrice %} selected{% endif %}>yes</option>
-              <option value="no"{% if not guestPrice %} selected{% endif %}>no</option>
-            </select>
-          </div>
+              <select name="options[guest]">
+                <option value="yes" {% if guestPrice %} selected{% endif %}>yes</option>
+                <option value="no" {% if not guestPrice %} selected{% endif %}>no</option>
+              </select>
+            </div>
 
-          {% set isPatient = 'no' %}
-          {% if currentUser and currentUser.isInGroup('patients') %}
+            {% set isPatient = 'no' %}
+            {% if currentUser and currentUser.isInGroup('patients') %}
             {% set isPatient = 'yes' %}
+            {% endif %}
+            <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
+            <input type="hidden" name="fields[isPatient]" value="{{isPatient}}" />
+
+            <input id="add-to-cart" {% for purchasable in product.variants %}{% if not purchasable.hasStock
+              %}class="submit-sm" {% endif %}{% endfor %} type="submit" class="submit-sm" value="{{ " Add to cart"|t
+              }}" />
+          </form>
+
+          {% if minQty > 0 %}
+          <small class="p-sm">Minimum of {{ minQty }} per order </small>
           {% endif %}
-          <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
-          <input type="hidden" name="fields[isPatient]" value="{{isPatient}}" />
-								
-          <input id="add-to-cart"{% for purchasable in product.variants %}{% if not purchasable.hasStock %}class="submit-sm"{% endif %}{% endfor %} type="submit" class="submit-sm"  value="{{ "Add to cart"|t }}" />
-        </form>
 
-        {% if minQty > 0 %}
-        <small class="p-sm">Minimum of {{ minQty }} per order </small>
-        {% endif %}
-        
-        
 
-        {% includejs %}
 
-        $(document).ready(function(){
+          {% js %}
+
+          $(document).ready(function(){
           var targets = $('*[data-variant-id]'),
           variant = $(this).find(":selected").attr('data-id');
 
           targets.each(function(){
-            $(this).hide();
+          $(this).hide();
 
-            if($(this).attr('data-variant-id') == variant){
-              $(this).show();
-            }
+          if($(this).attr('data-variant-id') == variant){
+          $(this).show();
+          }
           });
 
           $('.product-price--display').removeClass('d-none');
-        });
-        $( ".purchasableId" ).change(function(e) {
+          });
+          $( ".purchasableId" ).change(function(e) {
           var targets = $('*[data-variant-id]'),
           variant = $(this).find(":selected").attr('data-id');
 
           targets.each(function(){
-            $(this).hide();
+          $(this).hide();
 
-            if($(this).attr('data-variant-id') == variant){
-              $(this).show();
-            }
+          if($(this).attr('data-variant-id') == variant){
+          $(this).show();
+          }
           });
-          
-         
-				  var hasStock = $(this).find(":selected").data('has-stock');
-				  
-				  if(hasStock) {
-					   $("#add-to-cart").removeAttr('disabled').removeClass('disabled');
-				  } else {
-					   $("#add-to-cart").prop('disabled', !hasStock).addClass('disabled');
-				  }
-			
-				 
+
+
+          var hasStock = $(this).find(":selected").data('has-stock');
+
+          if(hasStock) {
+          $("#add-to-cart").removeAttr('disabled').removeClass('disabled');
+          } else {
+          $("#add-to-cart").prop('disabled', !hasStock).addClass('disabled');
+          }
+
+
 
           //console.log(variant);
           $(".purchasableInfo").hide();
           $('.price-lowest').hide();
           $("#"+($(this).find(":selected").data('info'))).toggle();
-        });
-        {% endincludejs %}
+          });
+          {% endjs %}
 
-        {% for purchasable in product.variants %}
-        <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;"{% endif %}>
-          {% if not purchasable.hasStock %}
-          <p class=" text-italic text-error">This product is currently out of stock.</p>
-          <script>
-	          jQuery('#add-to-cart').addClass('is-disabled');
-	          jQuery('#add-to-cart').attr('disabled','disabled');
-	          jQuery('#add-to-cart').attr('value','Out of Stock');
-	          jQuery('.product__qty').addClass('d-none');
-	          </script>
-	          <style>
-		          #add-to-cart.is-disabled {
-			          pointer-events: none;
-			          border-color: #bbb !important;
-			          color: #bbb !important;
-			          margin-bottom: 12px;
-		          }
-		        </style>
-          {% elseif purchasable.stock > 0 and purchasable.stock <= 3 %}
-          <p class="text-error p-sm text-italic">Only {{ purchasable.stock }} left in stock.</p>
-          {% endif %}
-        </span>
-        {% endfor %}
-      </div>
+          {% for purchasable in product.variants %}
+          <span data-variant-id="{{ purchasable.id }}" {% if not loop.first %}style="display: none;" {% endif %}>
+            {% if not purchasable.hasStock %}
+            <p class=" text-italic text-error">This product is currently out of stock.</p>
+            <script>
+              jQuery('#add-to-cart').addClass('is-disabled');
+              jQuery('#add-to-cart').attr('disabled', 'disabled');
+              jQuery('#add-to-cart').attr('value', 'Out of Stock');
+              jQuery('.product__qty').addClass('d-none');
+            </script>
+            <style>
+              #add-to-cart.is-disabled {
+                pointer-events: none;
+                border-color: #bbb !important;
+                color: #bbb !important;
+                margin-bottom: 12px;
+              }
+            </style>
+            {% elseif purchasable.stock > 0 and purchasable.stock <= 3 %} <p class="text-error p-sm text-italic">Only {{
+              purchasable.stock }} left in stock.</p>
+              {% endif %}
+          </span>
+          {% endfor %}
+        </div>
 
-      {% else %}
-      <div class="section-x-short section--flush-bottom text-group" id="product-buy-note">
-        {% if currentUser and currentUser.isInGroup('neuroselectOnly') %}
-        <p>You are not authorized to purchase products with this account type.</p>
         {% else %}
-        <p>To buy our products you must be a NeuroScience account holder.</p>
-        <p><a href="{{ siteUrl }}login">Login</a> or <a href="{{ siteUrl }}register">Create an Account</a>.</p>
-        {% endif %}
-      </div>
-      {% endif %}
-
-
-      <script>
-      var $ = jQuery;
-      {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
-      //$('#product-buy').removeClass('d-none').show();
-      //$('#product-buy-note').hide();
-      {% else %}
-      //$('#product-buy').hide();
-      //$('#product-buy-note').show();
-      {% endif %}
-
-      if ( localStorage.getItem('guest') ) {
-        //$('#product-buy').removeClass('d-none').show();
-        //$('#product-buy-note').hide();
-        //$('#rtbn').hide();
-      }
-      </script>
-
-
-      <div class="product-features text-group mt-4">
-
-        {% if product.bioLink %}
-        <div class="mb-3">
-          {{ product.bioLink }}
-        </div>
-        {% endif %}
-
-        {% if product.productFields.resources %}
-        <div>
-          {% for row in product.productFields %}
-          {% for resource in row.resources %}
-          <p class="text-flush">{{ resource.title }} <sup>{{ loop.index }}</sup></p>
-          {% endfor %}
-          {% endfor %}
-        </div>
-        {% endif %}
-
-        <div class="product__callouts">
-
-          {% for category in craft.categories.group('productCategories').level(1).title('network') %}
-          {% set children = category.getChildren().relatedTo(product) %}
-          {% for child in children %}
-          {% set networkColor = child.color %}
-          <p class="h3 product__network text-brand-alt" style="background: {{ networkColor }};">{{ child.title }}</p>
-
-          <style>
-          .theme-color { color: {{ networkColor }} }
-          </style>
-
-          {% endfor %}
-          {% endfor %}
-
-          <div>
-            {% for category in craft.categories.group('productCategories').level(1).title('Occasional Symptoms') %}
-            {% set children = category.getChildren().relatedTo(product) %}
-            <ul class="product-clinical-list">
-
-              {% for child in children %}
-              <li>
-                <a class="js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
-                  {% if child.icon|length %}
-                  <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}"  />
-                  {% else %}
-                  <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon"  />
-                  {% endif %}
-                  <span class="js-cat-title">{{ child.title }}</span>
-
-                  {% if child.body|length %}
-                  <div class="sr-only js-description">
-                    {% if child.featuredImage.one()|length %}
-                    <img class="img-full" src="{{  child.featuredImage.one().url }}" alt="{{  child.featuredImage.one().title }}"  />
-                    {% endif %}
-                    <div class="user-content section-x-short">
-                      {{ child.body }}
-                    </div>
-                  </div>
-                </a>
-                {% endif %}
-              </li>
-              {% endfor %}
-            </ul>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="text-group-tall prooduct-deets">
-
-          <div class="text-group">
-            <h3 class="h3 text-flush">Biomarkers</h3>
-            {% if product.biomarkerNote %}
-            <div class="rte">
-	            {{ product.biomarkerNote }}
-            </div>
-            {% endif %}
-            <ul class="product-tags">
-              {% for category in craft.categories.group('productCategories').level(1).id('or, 54, 642') %}
-
-              {% set children = category.getChildren().relatedTo(product) %}
-              {% if children | length %}
-              <li>
-                <b>{{ category.title }}:</b>
-                <ul>
-                  {% for child in children %}
-                  <li>
-                    <p>{{ child.title }}</p>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-              {% endif %}
-              {% endfor %}
-            </ul>
-          </div>
-
-          <div class="text-group pb-4">
-            <h3 class="h3 text-flush">Ingredients</h3>
-            <ul class="product-tags">
-              {% for category in craft.categories.group('productCategories').level(1).id('or, 70, 82, 542, 645') %}
-              {% set children = category.getChildren().relatedTo(product) %}
-              {% if children | length %}
-              <li>
-                <b>{{ category.title }}:</b>
-                <ul>
-                  {% for child in children %}
-                  <li>
-                    <p>{{ child.title }}</p>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-              {% endif %}
-              {% endfor %}
-            </ul>
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class="product-recommended-use">
-        {% for row in product.productFields %}
-
-        {% if row.recommendedUse|length %}
-        <div class="section-x-short text-group">
-          <h4 class="h3 text-flush">Suggested Use</h4>
-          <div>
-            {{ row.recommendedUse }}
-          </div>
-        </div>
-        {% endif %}
-
-        {% if row.ingredients|length %}
-        <div class="section-x-short section--flush-top text-group">
-          <h4 class="h3 text-flush">Additional Information</h4>
-          <div>
-            {{ row.ingredients }}
-          </div>
-        </div>
-        {% endif %}
-
-        {% if row.specSheet|length %}
-				{% if currentUser %}
-        <a class="product-spec-sheet section-x-short section--flush-top shape-inline shape-inline--no-animation" href="{{ row.specSheet.one().url }}" target="_blank">
-          <svg width="24" height="24"><use xlink:href="#shape-file"></use></svg>
-          <span>Download Spec Sheet</span>
-        </a>
-				{% endif %}
-        {% endif %}
-
-        <div>
-          {% for row in product.productFields %}
-          {% if row.resources|length %}
-          <ol class="product-resources">
-            {% for resource in row.resources %}
-            <li>{{ resource.body }}</li>
-            {% endfor %}
-          </ol>
+        <div class="section-x-short section--flush-bottom text-group" id="product-buy-note">
+          {% if currentUser and currentUser.isInGroup('neuroselectOnly') %}
+          <p>You are not authorized to purchase products with this account type.</p>
+          {% else %}
+          <p>To buy our products you must be a NeuroScience account holder.</p>
+          <p><a href="{{ siteUrl }}login">Login</a> or <a href="{{ siteUrl }}register">Create an Account</a>.</p>
           {% endif %}
+        </div>
+        {% endif %}
+
+
+        <script>
+          var $ = jQuery;
+          {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+          //$('#product-buy').removeClass('d-none').show();
+          //$('#product-buy-note').hide();
+          {% else %}
+          //$('#product-buy').hide();
+          //$('#product-buy-note').show();
+          {% endif %}
+
+          if (localStorage.getItem('guest')) {
+            //$('#product-buy').removeClass('d-none').show();
+            //$('#product-buy-note').hide();
+            //$('#rtbn').hide();
+          }
+        </script>
+
+
+        <div class="product-features text-group mt-4">
+
+          {% if product.bioLink %}
+          <div class="mb-3">
+            {{ product.bioLink }}
+          </div>
+          {% endif %}
+
+          {% if product.productFields.resources %}
+          <div>
+            {% for row in product.productFields %}
+            {% for resource in row.resources %}
+            <p class="text-flush">{{ resource.title }} <sup>{{ loop.index }}</sup></p>
+            {% endfor %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="product__callouts">
+
+            {% for category in craft.categories.group('productCategories').level(1).title('network') %}
+            {% set children = category.getChildren().relatedTo(product) %}
+            {% for child in children %}
+            {% set networkColor = child.color %}
+            <p class="h3 product__network text-brand-alt" style="background: {{ networkColor }};">{{ child.title }}</p>
+
+            <style>
+              .theme-color {
+                color: {
+                    {
+                    networkColor
+                  }
+                }
+              }
+            </style>
+
+            {% endfor %}
+            {% endfor %}
+
+            <div>
+              {% for category in craft.categories.group('productCategories').level(1).title('Occasional Symptoms') %}
+              {% set children = category.getChildren().relatedTo(product) %}
+              <ul class="product-clinical-list">
+
+                {% for child in children %}
+                <li>
+                  <a class="js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal"
+                    data-click-bodyClass="terms-modal">
+                    {% if child.icon|length %}
+                    <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}" />
+                    {% else %}
+                    <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon" />
+                    {% endif %}
+                    <span class="js-cat-title">{{ child.title }}</span>
+
+                    {% if child.body|length %}
+                    <div class="sr-only js-description">
+                      {% if child.featuredImage.one()|length %}
+                      <img class="img-full" src="{{  child.featuredImage.one().url }}"
+                        alt="{{  child.featuredImage.one().title }}" />
+                      {% endif %}
+                      <div class="user-content section-x-short">
+                        {{ child.body }}
+                      </div>
+                    </div>
+                  </a>
+                  {% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="text-group-tall prooduct-deets">
+
+            <div class="text-group">
+              <h3 class="h3 text-flush">Biomarkers</h3>
+              {% if product.biomarkerNote %}
+              <div class="rte">
+                {{ product.biomarkerNote }}
+              </div>
+              {% endif %}
+              <ul class="product-tags">
+                {% for category in craft.categories.group('productCategories').level(1).id('or, 54, 642') %}
+
+                {% set children = category.getChildren().relatedTo(product) %}
+                {% if children | length %}
+                <li>
+                  <b>{{ category.title }}:</b>
+                  <ul>
+                    {% for child in children %}
+                    <li>
+                      <p>{{ child.title }}</p>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="text-group pb-4">
+              <h3 class="h3 text-flush">Ingredients</h3>
+              <ul class="product-tags">
+                {% for category in craft.categories.group('productCategories').level(1).id('or, 70, 82, 542, 645') %}
+                {% set children = category.getChildren().relatedTo(product) %}
+                {% if children | length %}
+                <li>
+                  <b>{{ category.title }}:</b>
+                  <ul>
+                    {% for child in children %}
+                    <li>
+                      <p>{{ child.title }}</p>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="product-recommended-use">
+          {% for row in product.productFields %}
+
+          {% if row.recommendedUse|length %}
+          <div class="section-x-short text-group">
+            <h4 class="h3 text-flush">Suggested Use</h4>
+            <div>
+              {{ row.recommendedUse }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if row.ingredients|length %}
+          <div class="section-x-short section--flush-top text-group">
+            <h4 class="h3 text-flush">Additional Information</h4>
+            <div>
+              {{ row.ingredients }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if row.specSheet|length %}
+          {% if currentUser %}
+          <a class="product-spec-sheet section-x-short section--flush-top shape-inline shape-inline--no-animation"
+            href="{{ row.specSheet.one().url }}" target="_blank">
+            <svg width="24" height="24">
+              <use xlink:href="#shape-file"></use>
+            </svg>
+            <span>Download Spec Sheet</span>
+          </a>
+          {% endif %}
+          {% endif %}
+
+          <div>
+            {% for row in product.productFields %}
+            {% if row.resources|length %}
+            <ol class="product-resources">
+              {% for resource in row.resources %}
+              <li>{{ resource.body }}</li>
+              {% endfor %}
+            </ol>
+            {% endif %}
+            {% endfor %}
+          </div>
+
           {% endfor %}
         </div>
 
-        {% endfor %}
       </div>
-
     </div>
-  </div>
 
-</div>
+  </div>
 </div>
 
 
@@ -523,7 +538,9 @@
     <a class="modal__close" href="#" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
       <div>
         <p class="sr-only">Close Modal</p>
-        <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
+        <svg width="18" height="18">
+          <use xlink:href="#shape-close"></use>
+        </svg>
       </div>
     </a>
     <div class="modal__inner">
@@ -542,21 +559,21 @@
 </div>
 
 
-{% includejs %}
+{% js %}
 var $ = jQuery;
 $(document).ready(function(){
-  $('.js-symptom-link').click(function(){
-    var url = $(this).attr("href"),
-    modalContent = $(this).find('.js-description').html(),
-    modalTitle = $(this).find('.js-cat-title').text();
+$('.js-symptom-link').click(function(){
+var url = $(this).attr("href"),
+modalContent = $(this).find('.js-description').html(),
+modalTitle = $(this).find('.js-cat-title').text();
 
-    $('.js-product-symptoms-link').attr('href', url);
-    $('.js-modal-hd').text(modalTitle);
-    $('.js-modal-content').empty().append(modalContent);
-    $('#product-symptoms-link').prop('checked', false);
-  });
+$('.js-product-symptoms-link').attr('href', url);
+$('.js-modal-hd').text(modalTitle);
+$('.js-modal-content').empty().append(modalContent);
+$('#product-symptoms-link').prop('checked', false);
 });
-{% endincludejs %}
+});
+{% endjs %}
 {% endif %}
 
 

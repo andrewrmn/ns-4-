@@ -68,22 +68,23 @@
                 <div class="card">
                     <table class="u-full-width">
                         <thead>
-                        <tr>
-                            <th>{{ "Order"|t }}</th>
-                            <th>{{ "Date"|t }}</th>
-                            <th>{{ "Total Quantity"|t }}</th>
-                            <th>{{ "Total"|t }}</th>
-                        </tr>
+                            <tr>
+                                <th>{{ "Order"|t }}</th>
+                                <th>{{ "Date"|t }}</th>
+                                <th>{{ "Total Quantity"|t }}</th>
+                                <th>{{ "Total"|t }}</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {% for order in craft.commerce.orders.customer(craft.commerce.customer).find() %}
+                            {% for order in craft.commerce.orders.customer(craft.commerce.customer).find() %}
                             <tr>
-                                <td><a href="{{ url('shop/customer/order', { number: order.number }) }}">Order #{{ order.shortNumber }}</a></td>
+                                <td><a href="{{ url('shop/customer/order', { number: order.number }) }}">Order #{{
+                                        order.shortNumber }}</a></td>
                                 <td>{{ order.dateOrdered }}</td>
                                 <td>{{ order.totalQty }} items</td>
                                 <td>{{ order.totalPrice|commerceCurrency(cart.currency) }}</td>
                             </tr>
-                        {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -102,23 +103,24 @@
                 <div class="card">
                     <div class="row">
 
-                    {% for address in craft.commerce.customer.addresses %}
+                        {% for address in craft.commerce.customer.addresses %}
 
                         <div class="address-card col--xs--12 col--sm--6">
                             {% include 'shop/_includes/addresses/address' with {'address': address} %}
                             <div class="address-controls">
-                                <a class="link text-brand" href="{{ url('shop/customer/addresses/edit') }}?addressId={{ address.id }}">Edit</a>
+                                <a class="link text-brand"
+                                    href="{{ url('shop/customer/addresses/edit') }}?addressId={{ address.id }}">Edit</a>
                                 <span> | </span>
                                 <form method="POST">
                                     {{ csrfInput() }}
                                     <input type="hidden" name="action" value="commerce/customerAddresses/delete">
-                                    <input type="hidden" name="id" value="{{ address.id }}"/>
-                                    <input type="submit" class="link p-sm submit-plain" value="delete"/>
+                                    <input type="hidden" name="id" value="{{ address.id }}" />
+                                    <input type="submit" class="link p-sm submit-plain" value="delete" />
                                 </form>
                             </div>
                         </div>
 
-                    {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -132,7 +134,9 @@
                     <div class="card text-group-tall account-card">
                         <div class="text-group">
                             <div>
-                                Customer is a health care provider as a <span class="text-bold text-underline">{{ user.providerAsA }}</span> in the state of <span class="text-bold text-underline">{{ user.underTheLawsOfTheStateOf }}</span>.
+                                Customer is a health care provider as a <span class="text-bold text-underline">{{
+                                    user.providerAsA }}</span> in the state of <span class="text-bold text-underline">{{
+                                    user.underTheLawsOfTheStateOf }}</span>.
                             </div>
                             <div>
                                 <div class="text-bold">Registration, Certification, License #</div>
@@ -148,7 +152,8 @@
                         <div class="text-group">
                             <div>
                                 <p class="text-bold p-lg">N0007 Terms and Conditions</p>
-                                <a href="{{ legalDocuments.n0007Form.first.url }}" target="_blank" title="view form">Download N0007 form</a>
+                                <a href="{{ legalDocuments.n0007Form.first.url }}" target="_blank"
+                                    title="view form">Download N0007 form</a>
                             </div>
 
                             {% if user.n0007TermsESignName and user.n0007TermsESignDate %}
@@ -156,7 +161,8 @@
                             <div class="row">
                                 <div class="col--xs--6 col--lg--4">
                                     <div class="text-bold">E-signature</div>
-                                    {% if user.n0007TermsESignName|length %}{{ user.n0007TermsESignName }}{% else %}<span class="text-error">E-Signature Required</span>{% endif %}
+                                    {% if user.n0007TermsESignName|length %}{{ user.n0007TermsESignName }}{% else
+                                    %}<span class="text-error">E-Signature Required</span>{% endif %}
                                 </div>
                                 <div class="col--xs--6 col--lg--4">
                                     <div class="text-bold">Date of E-signature</div>
@@ -165,39 +171,46 @@
                             </div>
 
                             {% else %}
-                            <form class="form text-group" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                            <form class="form text-group" method="post" accept-charset="UTF-8"
+                                enctype="multipart/form-data">
                                 {{ csrfInput() }}
                                 <input type="hidden" name="action" value="users/saveUser">
                                 <input type="hidden" name="redirect" value="shop/customer?m=updated">
                                 <input type="hidden" name="userId" value="{{ currentUser.id }}">
 
                                 {% macro errorList(errors) %}
-                                    {% if errors %}
-                                        {% for error in errors %}
-                                            <p class="error-block">{{ error }}</p>
-                                        {% endfor %}
-                                    {% endif %}
+                                {% if errors %}
+                                {% for error in errors %}
+                                <p class="error-block">{{ error }}</p>
+                                {% endfor %}
+                                {% endif %}
                                 {% endmacro %}
 
                                 {% from _self import errorList %}
                                 <div class="row">
                                     <div class="col--sm--6 stack-sm">
                                         <div class="field-wrap">
-    										<label for="n0007TermsESignName">E-Signature</label>
-    										<input type="text" name="fields[n0007TermsESignName]" id="n0007TermsESignName" {%- if account is defined %} value="{{ account.n0007TermsESignName}}"{% endif %} maxlength="70" required />
-    										{% if account is defined %}
-    											{{ errorList(account.getErrors('n0007TermsESignName')) }}
-    										{% endif %}
-    									</div>
+                                            <label for="n0007TermsESignName">E-Signature</label>
+                                            <input type="text" name="fields[n0007TermsESignName]"
+                                                id="n0007TermsESignName" {%- if account is defined %}
+                                                value="{{ account.n0007TermsESignName}}" {% endif %} maxlength="70"
+                                                required />
+                                            {% if account is defined %}
+                                            {{ errorList(account.getErrors('n0007TermsESignName')) }}
+                                            {% endif %}
+                                        </div>
                                     </div>
                                     <div class="col--xs--12 col--sm--6">
                                         <div class="field-wrap">
-    										<label for="n0007TermsESignDate">Date</label>
-    										<input type="text" name="fields[n0007TermsESignDate]" id="n0007TermsESignDate" {%- if account is defined %} value="{{ account.n0007TermsESignDate}}"{% endif %} placeholder="09/24/2017" maxlength="20" required />
-    										{% if account is defined %}
-    											{{ errorList(account.getErrors('n0007TermsESignDate')) }}
-    										{% endif %}
-    									</div>
+                                            <label for="n0007TermsESignDate">Date</label>
+                                            <input type="text" name="fields[n0007TermsESignDate]"
+                                                id="n0007TermsESignDate" {%- if account is defined %}
+                                                value="{{ account.n0007TermsESignDate}}" {% endif %}
+                                                placeholder="09/24/2017" maxlength="20" required />
+                                            {% if account is defined %}
+                                            {{ errorList(account.getErrors('n0007TermsESignDate')) }}
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -210,7 +223,8 @@
                         <div class="text-group">
                             <div>
                                 <p class="text-bold p-lg">N0011 Product Resale Agreement</p>
-                                <a href="{{ legalDocuments.n0011Form.first.url }}" target="_blank" title="view form">Download N0011 form</a>
+                                <a href="{{ legalDocuments.n0011Form.first.url }}" target="_blank"
+                                    title="view form">Download N0011 form</a>
                             </div>
 
                             <small>Record of E-signature and date at the time of account creation for form:</small>
@@ -219,7 +233,8 @@
                             <div class="row">
                                 <div class="col--xs--6 col--lg--4">
                                     <div class="text-bold">E-signature</div>
-                                    {% if user.n0011TermsESignName|length %}{{ user.n0011TermsESignName }}{% else %}<span class="text-error">E-Signature Required</span>{% endif %}
+                                    {% if user.n0011TermsESignName|length %}{{ user.n0011TermsESignName }}{% else
+                                    %}<span class="text-error">E-Signature Required</span>{% endif %}
                                 </div>
                                 <div class="col--xs--6 col--lg--4">
                                     <div class="text-bold">Date of E-signature</div>
@@ -228,18 +243,19 @@
                             </div>
 
                             {% else %}
-                            <form class="form text-group" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                            <form class="form text-group" method="post" accept-charset="UTF-8"
+                                enctype="multipart/form-data">
                                 {{ csrfInput() }}
                                 <input type="hidden" name="action" value="users/saveUser">
                                 <input type="hidden" name="redirect" value="shop/customer?m=updated">
                                 <input type="hidden" name="userId" value="{{ currentUser.id }}">
 
                                 {% macro errorList(errors) %}
-                                    {% if errors %}
-                                        {% for error in errors %}
-                                            <p class="error-block">{{ error }}</p>
-                                        {% endfor %}
-                                    {% endif %}
+                                {% if errors %}
+                                {% for error in errors %}
+                                <p class="error-block">{{ error }}</p>
+                                {% endfor %}
+                                {% endif %}
                                 {% endmacro %}
 
                                 {% from _self import errorList %}
@@ -247,18 +263,24 @@
                                     <div class="col--sm--6 stack-sm">
                                         <div class="field-wrap">
                                             <label for="n0011TermsESignName">E-Signature</label>
-                                            <input type="text" name="fields[n0011TermsESignName]" id="n0011TermsESignName" {%- if account is defined %} value="{{ account.n0011TermsESignName}}"{% endif %} maxlength="70" required />
+                                            <input type="text" name="fields[n0011TermsESignName]"
+                                                id="n0011TermsESignName" {%- if account is defined %}
+                                                value="{{ account.n0011TermsESignName}}" {% endif %} maxlength="70"
+                                                required />
                                             {% if account is defined %}
-                                                {{ errorList(account.getErrors('n0011TermsESignName')) }}
+                                            {{ errorList(account.getErrors('n0011TermsESignName')) }}
                                             {% endif %}
                                         </div>
                                     </div>
                                     <div class="col--xs--12 col--sm--6">
                                         <div class="field-wrap">
                                             <label for="n0011TermsESignDate">Date</label>
-                                            <input type="text" name="fields[n0011TermsESignDate]" id="n0011TermsESignDate" {%- if account is defined %} value="{{ account.n0011TermsESignDate}}"{% endif %} placeholder="09/24/2017" maxlength="20" required />
+                                            <input type="text" name="fields[n0011TermsESignDate]"
+                                                id="n0011TermsESignDate" {%- if account is defined %}
+                                                value="{{ account.n0011TermsESignDate}}" {% endif %}
+                                                placeholder="09/24/2017" maxlength="20" required />
                                             {% if account is defined %}
-                                                {{ errorList(account.getErrors('n0011TermsESignDate')) }}
+                                            {{ errorList(account.getErrors('n0011TermsESignDate')) }}
                                             {% endif %}
                                         </div>
                                     </div>
@@ -273,84 +295,100 @@
                         <div class="text-group" id="map-policy">
                             <div>
                                 <p class="text-bold p-lg">N0003 MAP Policy</p>
-                                <a href="{{ legalDocuments.n0003Form.first.url }}" target="_blank" title="view form">Download N0003 form</a>
+                                <a href="{{ legalDocuments.n0003Form.first.url }}" target="_blank"
+                                    title="view form">Download N0003 form</a>
                             </div>
 
                             {% if user.n0003Terms %}
-                                <div class="text-bold">You have agreed to these terms</div>
+                            <div class="text-bold">You have agreed to these terms</div>
                             {% else %}
 
-                                {% if currentUser %}
-                                    <div class="section-x-short">
-                                        <div class="cardS text-group">
-                                            <form class="form text-group" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-                                                {{ csrfInput() }}
-                                                <input type="hidden" name="action" value="users/saveUser">
-                                                <input type="hidden" name="redirect" value="shop/customer?m=updated">
-                                                <input type="hidden" name="userId" value="{{ currentUser.id }}">
+                            {% if currentUser %}
+                            <div class="section-x-short">
+                                <div class="cardS text-group">
+                                    <form class="form text-group" method="post" accept-charset="UTF-8"
+                                        enctype="multipart/form-data">
+                                        {{ csrfInput() }}
+                                        <input type="hidden" name="action" value="users/saveUser">
+                                        <input type="hidden" name="redirect" value="shop/customer?m=updated">
+                                        <input type="hidden" name="userId" value="{{ currentUser.id }}">
 
-                                                {% macro errorList(errors) %}
-                                                    {% if errors %}
-                                                        {% for error in errors %}
-                                                            <p class="error-block">{{ error }}</p>
-                                                        {% endfor %}
-                                                    {% endif %}
-                                                {% endmacro %}
+                                        {% macro errorList(errors) %}
+                                        {% if errors %}
+                                        {% for error in errors %}
+                                        <p class="error-block">{{ error }}</p>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endmacro %}
 
-                                                {% from _self import errorList %}
+                                        {% from _self import errorList %}
 
-                                                <div class="field-wrap">
-                                					<label for="n0003Terms">You must read & agree to our <a href="#n0003-terms-and-conditions" class="form-terms" data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">N0003 MAP Policy</a></label>
+                                        <div class="field-wrap">
+                                            <label for="n0003Terms">You must read & agree to our <a
+                                                    href="#n0003-terms-and-conditions" class="form-terms"
+                                                    data-click-target="n0003-terms-and-conditions"
+                                                    data-click-bodyClass="terms-modal">N0003 MAP Policy</a></label>
 
-                                					<label class="radio-btn">
-                                						<input id="n0003Terms" type="checkbox" name="fields[n0003Terms]" disabled required>
-                                						<span class="slider"></span>
-                                					</label>
+                                            <label class="radio-btn">
+                                                <input id="n0003Terms" type="checkbox" name="fields[n0003Terms]"
+                                                    disabled required>
+                                                <span class="slider"></span>
+                                            </label>
 
-                                					{% if account is defined %}
-                                						{{ errorList(account.getErrors('n0003Terms')) }}
-                                					{% endif %}
-                                				</div>
-
-                                				<div class="modal-wrap" id="n0003-terms-and-conditions">
-                                					<div class="modal">
-                                						<a class="modal__close" href="#" data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">
-                                				            <div>
-                                				                <p class="sr-only">Close Modal</p>
-                                				                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-                                				            </div>
-                                				        </a>
-                                						<div class="modal__inner">
-                                							<div class="user-content">
-                                								{{ legalDocuments.n0003Content }}
-                                							</div>
-
-                                							<div class="field-wrap">
-                                								<label for="n0003Agree">I have read and agree to these terms.</label>
-
-                                								<label class="radio-btn">
-                                									<input id="n0003Agree" type="checkbox" name="n0003Agree" required>
-                                									<span class="slider"></span>
-                                								</label>
-                                							</div>
-
-                                							<div class="text-center text-group-tall">
-                                								<small class="text-thin">By electronically signing your name you are agreeing to our terms and conditions. These terms will be available at anytime on your account page.</small>
-
-                                								<a class="btn" href="" data-click-target="n0003-terms-and-conditions" data-click-bodyClass="terms-modal">Continue</a>
-                                							</div>
-                                						</div>
-                                					</div>
-                                				</div>
-
-
-                                                <input class="btn-alt" type="submit" value="Save changes" />
-
-                                            </form>
+                                            {% if account is defined %}
+                                            {{ errorList(account.getErrors('n0003Terms')) }}
+                                            {% endif %}
                                         </div>
-                                    </div>
 
-                                {% endif %}
+                                        <div class="modal-wrap" id="n0003-terms-and-conditions">
+                                            <div class="modal">
+                                                <a class="modal__close" href="#"
+                                                    data-click-target="n0003-terms-and-conditions"
+                                                    data-click-bodyClass="terms-modal">
+                                                    <div>
+                                                        <p class="sr-only">Close Modal</p>
+                                                        <svg width="18" height="18">
+                                                            <use xlink:href="#shape-close"></use>
+                                                        </svg>
+                                                    </div>
+                                                </a>
+                                                <div class="modal__inner">
+                                                    <div class="user-content">
+                                                        {{ legalDocuments.n0003Content }}
+                                                    </div>
+
+                                                    <div class="field-wrap">
+                                                        <label for="n0003Agree">I have read and agree to these
+                                                            terms.</label>
+
+                                                        <label class="radio-btn">
+                                                            <input id="n0003Agree" type="checkbox" name="n0003Agree"
+                                                                required>
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="text-center text-group-tall">
+                                                        <small class="text-thin">By electronically signing your name you
+                                                            are agreeing to our terms and conditions. These terms will
+                                                            be available at anytime on your account page.</small>
+
+                                                        <a class="btn" href=""
+                                                            data-click-target="n0003-terms-and-conditions"
+                                                            data-click-bodyClass="terms-modal">Continue</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <input class="btn-alt" type="submit" value="Save changes" />
+
+                                    </form>
+                                </div>
+                            </div>
+
+                            {% endif %}
 
 
 
@@ -366,25 +404,25 @@
     </div>
 
 
-{% endblock %}
+    {% endblock %}
 
 
-{% includejs %}
+    {% js %}
 
-	var $ = jQuery;
+    var $ = jQuery;
 
-	$(document).ready(function(){
+    $(document).ready(function(){
 
-		$('#n0003Agree').change(function() {
+    $('#n0003Agree').change(function() {
 
-			if( $('#n0003Agree:checked').length > 0 ) {
-				$('#n0003Terms').removeAttr('disabled').prop('checked', true);
-			} else {
-				$('#n0003Terms').attr('disabled', 'disabled').prop('checked', false);
-			}
+    if( $('#n0003Agree:checked').length > 0 ) {
+    $('#n0003Terms').removeAttr('disabled').prop('checked', true);
+    } else {
+    $('#n0003Terms').attr('disabled', 'disabled').prop('checked', false);
+    }
 
-		});
+    });
 
-	});
+    });
 
-{% endincludejs %}
+    {% endjs %}

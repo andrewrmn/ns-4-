@@ -1,10 +1,10 @@
-columnSuffix: null
+columnSuffix: wpimkcgx
 contentColumnType: boolean
-fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
-handle: disableInNueroselect
+fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
+handle: disableInPf
 instructions: ''
-name: 'Disable in NeuroSelect?'
-searchable: true
+name: 'Disable in PF?'
+searchable: false
 settings:
   default: false
   offLabel: null

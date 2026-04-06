@@ -2,48 +2,52 @@
 
 {% block content %}
 
-    {% include 'partials/contentModules' %}
+{% include 'partials/contentModules' %}
 
-    <div class="wrapper-full border-top">
-        <div class="wrapper section-short">
+<div class="wrapper-full border-top">
+    <div class="wrapper section-short">
 
-            {% for row in entry.accordion %}
-            <div class="accordion" id="accordion-{{ loop.index }}">
-                <h3 class="h3 text-brand accordion-question">{{ row.headline }}</h3>
-                <div class="user-content accordion-answer">
-                    {{ row.drawerContent }}
-                </div>
-
-                <figure class="accordion-trigger">
-                    <svg width="30" height="30" viewBox="0 0 28 32"><g fill="#0182B4"><path d="M13.4 7.8v7.6H5.8v1.2h7.6v7.6h1.2v-7.6h7.6v-1.2h-7.6V7.8z"/></g></svg>
-                </figure>
+        {% for row in entry.accordion %}
+        <div class="accordion" id="accordion-{{ loop.index }}">
+            <h3 class="h3 text-brand accordion-question">{{ row.headline }}</h3>
+            <div class="user-content accordion-answer">
+                {{ row.drawerContent }}
             </div>
-            {% endfor %}
+
+            <figure class="accordion-trigger">
+                <svg width="30" height="30" viewBox="0 0 28 32">
+                    <g fill="#0182B4">
+                        <path d="M13.4 7.8v7.6H5.8v1.2h7.6v7.6h1.2v-7.6h7.6v-1.2h-7.6V7.8z" />
+                    </g>
+                </svg>
+            </figure>
         </div>
+        {% endfor %}
     </div>
+</div>
 
-    <div class="section"></div>
+<div class="section"></div>
 
-    {% includejs %}
-        var accordion = $('.accordion'),
-            qs = $('.accordion-answer');
+{% js %}
+var accordion = $('.accordion'),
+qs = $('.accordion-answer');
 
-        qs.slideUp(300);
+qs.slideUp(300);
 
-        accordion.click(function(){
-            var el = $(this),
-                q = el.find('.accordion-answer');
+accordion.click(function(){
+var el = $(this),
+q = el.find('.accordion-answer');
 
-            if( el.hasClass('is-active') ){
-                el.removeClass('is-active');
-                q.slideUp(300);
-            } else {
-                qs.slideUp(300);
-                accordion.removeClass('is-active');
-                el.addClass('is-active');
-                q.slideDown(300);
-            }
-        });
+if( el.hasClass('is-active') ){
+el.removeClass('is-active');
+q.slideUp(300);
+} else {
+qs.slideUp(300);
+accordion.removeClass('is-active');
+el.addClass('is-active');
+q.slideDown(300);
+}
+});
 
-    {% endincludejs %}
+{% endjs %}
 {% endblock %}

@@ -3,6 +3,6 @@ isFrontendEnabled: true
 name: 'Pay with card'
 paymentType: authorize
 settings:
-  onlyAllowForZeroPriceOrders: ''
+  onlyAllowForZeroPriceOrders: '0'
 sortOrder: 1
 type: craft\commerce\gateways\Manual

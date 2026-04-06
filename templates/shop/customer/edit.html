@@ -11,251 +11,263 @@
     <div class="wrapper">
 
         <header>
-            <a class="mb-3 d-block" href="{{ siteUrl }}account/">< Back to account</a>
-            <h1>Edit account</h1>
+            <a class="mb-3 d-block" href="{{ siteUrl }}account/">
+                < Back to account</a>
+                    <h1>Edit account</h1>
 
         </header>
 
         {% if currentUser %}
-            <div class="section-x-short">
-                <div class="card text-group">
-                    <form class="form text-group" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-                        {{ csrfInput() }}
-                        <input type="hidden" name="action" value="users/save-user">
+        <div class="section-x-short">
+            <div class="card text-group">
+                <form class="form text-group" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+                    {{ csrfInput() }}
+                    <input type="hidden" name="action" value="users/save-user">
 
 
-                        {{ redirectInput('shop/customer?m=updated') }}
+                    {{ redirectInput('shop/customer?m=updated') }}
 
-                        <input type="hidden" name="userId" value="{{ currentUser.id }}">
+                    <input type="hidden" name="userId" value="{{ currentUser.id }}">
 
-                        {% macro errorList(errors) %}
-                            {% if errors %}
-                                {% for error in errors %}
-                                    <p class="error-block">{{ error }}</p>
-                                {% endfor %}
+                    {% macro errorList(errors) %}
+                    {% if errors %}
+                    {% for error in errors %}
+                    <p class="error-block">{{ error }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endmacro %}
+
+                    {% from _self import errorList %}
+
+                    <fieldset>
+                        <div class="field-wrap">
+                            <label for="firstName">Username</label>
+                            <input id="username" type="text" name="username" value="{{ currentUser.username}}">
+                            {% if account is defined %}
+                            {{ errorList(account.getErrors('username')) }}
                             {% endif %}
-                        {% endmacro %}
+                        </div>
 
-                        {% from _self import errorList %}
+                        <div class="field-wrap">
+                            <label for="firstName">Name</label>
+                            <input id="nameFull" type="text" name="fields[nameFull]" value="{{ currentUser.nameFull }}">
+                            {% if account is defined %}
+                            {{ errorList(account.getErrors('nameFull')) }}
+                            {% endif %}
+                        </div>
 
-                        <fieldset>
-                            <div class="field-wrap">
-                                <label for="firstName">Username</label>
-                                <input id="username" type="text" name="username" value="{{ currentUser.username}}">
-                                {% if account is defined %}
+                        <div class="row">
+                            <div class="col--xs--12 col--sm--5">
+                                <div class="field-wrap">
+                                    <label for="firstName">First name</label>
+                                    <input id="firstName" type="text" name="firstName"
+                                        value="{{ currentUser.firstName}}">
+                                    {% if account is defined %}
                                     {{ errorList(account.getErrors('username')) }}
-                                {% endif %}
-                            </div>
-
-                            <div class="field-wrap">
-                                <label for="firstName">Name</label>
-                                <input id="nameFull" type="text" name="fields[nameFull]" value="{{ currentUser.nameFull }}">
-                                {% if account is defined %}
-                                    {{ errorList(account.getErrors('nameFull')) }}
-                                {% endif %}
-                            </div>
-
-                            <div class="row">
-                                <div class="col--xs--12 col--sm--5">
-                                    <div class="field-wrap">
-                                        <label for="firstName">First name</label>
-                                        <input id="firstName" type="text" name="firstName" value="{{ currentUser.firstName}}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('username')) }}
-                                        {% endif %}
-                                    </div>
-                                </div>
-
-                                <div class="col--xs--12 col--sm--5">
-                                    <div class="field-wrap">
-                                        <label for="lastName">Last name</label>
-                                        <input id="lastName" type="text" name="lastName" value="{{ currentUser.lastName }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('username')) }}
-                                        {% endif %}
-                                    </div>
-                                </div>
-
-                                <div class="col--xs--12 col--sm--2">
-                                    <div class="field-wrap">
-                                        <label for="credentials">Credentials</label>
-                                        <input id="credentials" type="text" name="fields[credentials]" value="{{ currentUser.credentials }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('username')) }}
-                                        {% endif %}
-                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
-                        </fieldset>
 
-                        <fieldset class="text-group">
-                            <small>If you wish to change your email address please reach out to customer service.</small>
-
-                            <div class="row">
-                                <div class="col--xs--12 col--sm--6">
-                                    <div class="field-wrap">
-                                        <label for="email">Email</label>
-                                        <input id="email" type="text" name="email" disabled value="{{ currentUser.email }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('email')) }}
-                                        {% endif %}
-                                        
-                                    </div>
-                                </div>
-                                <div class="col--xs--12 col--sm--6 d-none">
-                                    <div class="field-wrap">
-                                        <label for="password">Current Password</label>
-                                        <input type="text" id="currentPassword" name="password" />
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('currentPassword')) }}
-                                        {% endif %}
-                                    </div>
+                            <div class="col--xs--12 col--sm--5">
+                                <div class="field-wrap">
+                                    <label for="lastName">Last name</label>
+                                    <input id="lastName" type="text" name="lastName" value="{{ currentUser.lastName }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('username')) }}
+                                    {% endif %}
                                 </div>
                             </div>
-                        </fieldset>
 
-
-                        <fieldset class="text-group">
-                            <div class="row">
-                                <div class="col--xs--12 col--sm--6">
-                                    <div class="field-wrap">
-                                        <label for="businessName">Business Name</label>
-                                        <input id="businessName" type="text" name="fields[businessName]" value="{{ currentUser.businessName }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('businessName')) }}
-                                        {% endif %}
-                                    </div>
+                            <div class="col--xs--12 col--sm--2">
+                                <div class="field-wrap">
+                                    <label for="credentials">Credentials</label>
+                                    <input id="credentials" type="text" name="fields[credentials]"
+                                        value="{{ currentUser.credentials }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('username')) }}
+                                    {% endif %}
                                 </div>
-
-                                <div class="col--xs--12 col--sm--6">
-                                    <div class="field-wrap">
-                        				<label for="phone">Phone</label>
-                        				<input type="text" name="fields[phone]" id="phone" placeholder="(715) 555-5555" required value="{{ currentUser.phone }}" />
-                        				{% if account is defined %}
-                        					{{ errorList(account.getErrors('phone')) }}
-                        				{% endif %}
-                        			</div>
-                                </div>
-
                             </div>
-                        </fieldset>
+                        </div>
+                    </fieldset>
 
+                    <fieldset class="text-group">
+                        <small>If you wish to change your email address please reach out to customer service.</small>
 
+                        <div class="row">
+                            <div class="col--xs--12 col--sm--6">
+                                <div class="field-wrap">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="text" name="email" disabled value="{{ currentUser.email }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('email')) }}
+                                    {% endif %}
 
-                        <fieldset class="text-group">
-                            <p class="text-bold text-dark">Main Address</p>
-                            <div class="row">
-                                <div class="col--xs--6">
-                                    <div class="field-wrap">
-                                        <label for="address">Street Address</label>
-                                        <input id="address" type="text" name="fields[address]" value="{{ currentUser.address }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('address')) }}
-                                        {% endif %}
-                                    </div>
                                 </div>
-                                <div class="col--xs--6">
-                                    <div class="field-wrap">
-                                        <label for="addressLine2">Suite/Apt #</label>
-                                        <input id="addressLine2" type="text" name="fields[addressLine2]" value="{{ currentUser.addressLine2 }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('addressLine2')) }}
-                                        {% endif %}
-                                    </div>
+                            </div>
+                            <div class="col--xs--12 col--sm--6 d-none">
+                                <div class="field-wrap">
+                                    <label for="password">Current Password</label>
+                                    <input type="text" id="currentPassword" name="password" />
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('currentPassword')) }}
+                                    {% endif %}
                                 </div>
+                            </div>
+                        </div>
+                    </fieldset>
 
 
-                                <div class="col--xs--6 col--sm--4">
-                                    <div class="field-wrap">
-                                        <label for="city">City</label>
-                                        <input id="city" type="text" name="fields[city]" value="{{ currentUser.city }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('city')) }}
-                                        {% endif %}
-                                    </div>
+                    <fieldset class="text-group">
+                        <div class="row">
+                            <div class="col--xs--12 col--sm--6">
+                                <div class="field-wrap">
+                                    <label for="businessName">Business Name</label>
+                                    <input id="businessName" type="text" name="fields[businessName]"
+                                        value="{{ currentUser.businessName }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('businessName')) }}
+                                    {% endif %}
                                 </div>
-                                <div class="col--xs--6 col--sm--4">
-                                    <div class="field-wrap">
-                                        <label for="state">State</label>
-                                        <input id="state" type="hidden" name="fields[state]" value="{{ currentUser.state }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('state')) }}
-                                        {% endif %}
+                            </div>
 
-                                        <div class="select-wrap">
-                                            <select id="state-select" name="fields[state]">
-                                                <option>State*</option>
-                                                {% for state in craft.commerce.states.allEnabledStates %}
-                                                <option value="{{ state.name }}"{% if state.name == currentUser.state %} selected{% endif %}>{{ state.name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
+                            <div class="col--xs--12 col--sm--6">
+                                <div class="field-wrap">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" name="fields[phone]" id="phone" placeholder="(715) 555-5555"
+                                        required value="{{ currentUser.phone }}" />
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('phone')) }}
+                                    {% endif %}
                                 </div>
-                                <div class="col--xs--6 col--sm--4">
-                                    <div class="field-wrap">
-                                        <label for="zip">Zip</label>
-                                        <input id="zip" type="text" name="fields[zip]" value="{{ currentUser.zip }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('zip')) }}
-                                        {% endif %}
-                                    </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+
+
+
+                    <fieldset class="text-group">
+                        <p class="text-bold text-dark">Main Address</p>
+                        <div class="row">
+                            <div class="col--xs--6">
+                                <div class="field-wrap">
+                                    <label for="address">Street Address</label>
+                                    <input id="address" type="text" name="fields[address]"
+                                        value="{{ currentUser.address }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('address')) }}
+                                    {% endif %}
                                 </div>
+                            </div>
+                            <div class="col--xs--6">
+                                <div class="field-wrap">
+                                    <label for="addressLine2">Suite/Apt #</label>
+                                    <input id="addressLine2" type="text" name="fields[addressLine2]"
+                                        value="{{ currentUser.addressLine2 }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('addressLine2')) }}
+                                    {% endif %}
+                                </div>
+                            </div>
 
 
-                                <div class="col--xs--6 col--sm--4">
-                                    <div class="field-wrap">
-                                        <label for="country">Country</label>
-                                        <input id="country" type="hidden" name="fields[country]" value="{{ currentUser.country }}">
-                                        {% if account is defined %}
-                                            {{ errorList(account.getErrors('country')) }}
-                                        {% endif %}
-                                        <div class="select-wrap">
-                                          <select id="country-select" name="fields[country]">
-                                            {% for country in craft.commerce.countries.allCountries %}
-                                                {% if country.name != 'Canada' %}
-                                                    <option value="{{ country.name }}" {% if country.name == currentUser.country %}selected{% elseif country.name == 'United States' %}selected{% endif %}>{{ country.name }}</option>
-                                                {% endif %}
+                            <div class="col--xs--6 col--sm--4">
+                                <div class="field-wrap">
+                                    <label for="city">City</label>
+                                    <input id="city" type="text" name="fields[city]" value="{{ currentUser.city }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('city')) }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col--xs--6 col--sm--4">
+                                <div class="field-wrap">
+                                    <label for="state">State</label>
+                                    <input id="state" type="hidden" name="fields[state]"
+                                        value="{{ currentUser.state }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('state')) }}
+                                    {% endif %}
+
+                                    <div class="select-wrap">
+                                        <select id="state-select" name="fields[state]">
+                                            <option>State*</option>
+                                            {% for state in craft.commerce.states.allEnabledStates %}
+                                            <option value="{{ state.name }}" {% if state.name==currentUser.state %}
+                                                selected{% endif %}>{{ state.name }}</option>
                                             {% endfor %}
-                                            </select>
-                                        </div>
-
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                        </fieldset>
+                            <div class="col--xs--6 col--sm--4">
+                                <div class="field-wrap">
+                                    <label for="zip">Zip</label>
+                                    <input id="zip" type="text" name="fields[zip]" value="{{ currentUser.zip }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('zip')) }}
+                                    {% endif %}
+                                </div>
+                            </div>
 
-                        <input class="btn-alt" type="submit" value="Save changes" />
 
-                    </form>
-                </div>
+                            <div class="col--xs--6 col--sm--4">
+                                <div class="field-wrap">
+                                    <label for="country">Country</label>
+                                    <input id="country" type="hidden" name="fields[country]"
+                                        value="{{ currentUser.country }}">
+                                    {% if account is defined %}
+                                    {{ errorList(account.getErrors('country')) }}
+                                    {% endif %}
+                                    <div class="select-wrap">
+                                        <select id="country-select" name="fields[country]">
+                                            {% for country in craft.commerce.countries.allCountries %}
+                                            {% if country.name != 'Canada' %}
+                                            <option value="{{ country.name }}" {% if country.name==currentUser.country
+                                                %}selected{% elseif country.name=='United States' %}selected{% endif %}>
+                                                {{ country.name }}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
 
+                    <input class="btn-alt" type="submit" value="Save changes" />
+
+                </form>
             </div>
+
+
+        </div>
 
         {% endif %}
 
 
-        </div>
     </div>
+</div>
 
-    {% includejs %}
-        var $ = jQuery,
-            state = $('#state'),
-            statedd = $('#state-select'),
-            country = $('#country'),
-            countrydd = $('#country-select');
+{% js %}
+var $ = jQuery,
+state = $('#state'),
+statedd = $('#state-select'),
+country = $('#country'),
+countrydd = $('#country-select');
 
-        $(document).on("change", statedd, function(){
-    		var v = $( "#state-select option:selected" ).val();
-            state.val(v);
-    	});
+$(document).on("change", statedd, function(){
+var v = $( "#state-select option:selected" ).val();
+state.val(v);
+});
 
-        $(document).on("change", statedd, function(){
-    		var cv = $( "#country-select option:selected" ).val();
-            console.log(cv);
-            country.val(cv);
-    	});
+$(document).on("change", statedd, function(){
+var cv = $( "#country-select option:selected" ).val();
+console.log(cv);
+country.val(cv);
+});
 
-    {% endincludejs %}
+{% endjs %}
 {% endblock %}

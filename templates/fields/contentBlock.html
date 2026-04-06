@@ -1,7 +1,7 @@
 {#
- # Icon Banner Field
- # -------------------
- #}
+# Icon Banner Field
+# -------------------
+#}
 {% set header = false %}
 {% if block.headline|length or block.subHeadline|length or block.body|length %}
 {% set header = true %}
@@ -11,25 +11,29 @@
 {% set height = 'section' %}
 
 
-<div class="wrapper-full content-block {{ block.background }} {{ height }} {% if block.triangleBelow %}has-triangle{% endif %}">
+<div
+    class="wrapper-full content-block {{ block.background }} {{ height }} {% if block.triangleBelow %}has-triangle{% endif %}">
     <div class="wrapper wrapper--thin text-center">
-        {% if block.headline|length %}<h3 class="h4 {% if block.subHeadline|length %}text-brand{% endif %}" data-animate="up">{{ block.headline }}</h3>{% endif %}
+        {% if block.headline|length %}<h3 class="h4 {% if block.subHeadline|length %}text-brand{% endif %}"
+            data-animate="up">{{ block.headline }}</h3>{% endif %}
         {% if block.subHeadline|length %}<h2 class="h2" data-animate="up">{{ block.subHeadline }}</h2>{% endif %}
         {% if block.body|length %}
-            <div class="user-content banner-content" data-animate="up">
-                {{ block.body }}
-            </div>
+        <div class="user-content banner-content" data-animate="up">
+            {{ block.body }}
+        </div>
         {% endif %}
 
         {% if block.button|length %}
-            <a class="btn" href="{{ block.button.url }}" {% if block.button.target|length %}target="{{ block.button.target }}"{% endif %}>
-                {{ block.button.text }}
-            </a>
+        <a class="btn" href="{{ block.button.url }}" {% if block.button.target|length
+            %}target="{{ block.button.target }}" {% endif %}>
+            {{ block.button.text }}
+        </a>
         {% endif %}
         {% if block.button2|length %}
-            <a class="btn-alt" href="{{ block.button2.url }}" {% if block.button2.target|length %}target="{{ block.button2.target }}"{% endif %}>
-                {{ block.button2.text }}
-            </a>
+        <a class="btn-alt" href="{{ block.button2.url }}" {% if block.button2.target|length
+            %}target="{{ block.button2.target }}" {% endif %}>
+            {{ block.button2.text }}
+        </a>
         {% endif %}
     </div>
 
@@ -41,17 +45,20 @@
                 <div class="{% if row.tile %}col--xs--12 is-tile{% endif %}">
 
                     {% set img = row.icon.one() %}
+                    {% if img %}
                     <img class="mb-4" style="width: 44px;" src="{{ img.url }}" alt="{{ img.title }}" />
+                    {% endif %}
 
                     {% if row.headline|length %}<h4 class="h3 mb-3">{{ row.headline }}</h4>{% endif %}
                     <div class="text-group">
                         {% if row.body|length %}
-                            <div class="user-content">
-                                {{ row.body }}
-                            </div>
+                        <div class="user-content">
+                            {{ row.body }}
+                        </div>
                         {% endif %}
                         {% if row.cta|length %}
-                        <a href="{{ row.cta.url }}" {% if row.cta.target|length %}target="{{ row.cta.target }}"{% endif %}>
+                        <a href="{{ row.cta.url }}" {% if row.cta.target|length %}target="{{ row.cta.target }}" {% endif
+                            %}>
                             {{ row.cta.text }} >
                         </a>
                         {% endif %}
@@ -75,7 +82,7 @@
                     {% if row.image|length %}
                     <figure class="img-circle img-circle--has-shadow" style="color: {{ row.color }}">
                         <div class="img-circle-wrap">
-                            <img src="{{ row.image.one().url }}" alt="{{ row.image.one().title }}"  />
+                            <img src="{{ row.image.one().url }}" alt="{{ row.image.one().title }}" />
                         </div>
                     </figure>
                     {% endif %}
@@ -98,33 +105,35 @@
             {% set cat = block.productCategoryLinks %}
 
             {% for child in cat.all() %}
-                    {% if child.level == 2 %}
+            {% if child.level == 2 %}
 
-                    <div class="" data-animate="up">
-                        <a class="text-group js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
-                            {% if child.icon|length %}
-                                <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}"  />
-                            {% else %}
-                                <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon"  />
-                            {% endif %}
-                            <p class="p">
-                                <span class="js-cat-title">{{ child.title }}</span>
-                            </p>
-
-                            {% if child.body|length %}
-                            <div class="sr-only js-description">
-                                {% if child.featuredImage.one()|length %}
-                                    <img class="img-full" src="{{  child.featuredImage.one().url }}" alt="{{  child.featuredImage.one().title }}"  />
-                                {% endif %}
-                                <div class="user-content section-x-short wrapperS wrapper--thinS">
-                                    {{ child.body }}
-                                </div>
-                            </div>
-                            {% endif %}
-                        </a>
-                    </div>
-
+            <div class="" data-animate="up">
+                <a class="text-group js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal"
+                    data-click-bodyClass="terms-modal">
+                    {% if child.icon|length %}
+                    <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}" />
+                    {% else %}
+                    <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon" />
                     {% endif %}
+                    <p class="p">
+                        <span class="js-cat-title">{{ child.title }}</span>
+                    </p>
+
+                    {% if child.body|length %}
+                    <div class="sr-only js-description">
+                        {% if child.featuredImage.one()|length %}
+                        <img class="img-full" src="{{  child.featuredImage.one().url }}"
+                            alt="{{  child.featuredImage.one().title }}" />
+                        {% endif %}
+                        <div class="user-content section-x-short wrapperS wrapper--thinS">
+                            {{ child.body }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </a>
+            </div>
+
+            {% endif %}
 
             {% endfor %}
         </div>
@@ -139,35 +148,37 @@
             {% set cat = block.productCategoryLinks.all() %}
 
             {% for category in cat %}
-                    {% set children = category.getChildren().all() %}
+            {% set children = category.getChildren().all() %}
 
-                    {% for child in children %}
+            {% for child in children %}
 
-                    <div class="" data-animate="up">
-                        <a class="text-group js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
-                            {% if child.icon|length %}
-                                <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}"  />
-                            {% else %}
-                                <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon"  />
-                            {% endif %}
-                            <p class="p">
-                                <span class="js-cat-title">{{ child.title }}</span>
-                            </p>
+            <div class="" data-animate="up">
+                <a class="text-group js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal"
+                    data-click-bodyClass="terms-modal">
+                    {% if child.icon|length %}
+                    <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}" />
+                    {% else %}
+                    <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon" />
+                    {% endif %}
+                    <p class="p">
+                        <span class="js-cat-title">{{ child.title }}</span>
+                    </p>
 
-                            {% if child.body|length %}
-                            <div class="sr-only js-description">
-                                {% if child.featuredImage.one()|length %}
-                                    <img class="img-full" src="{{  child.featuredImage.one().url }}" alt="{{  child.featuredImage.one().title }}"  />
-                                {% endif %}
-                                <div class="user-content section-x-short wrapperS wrapper--thinS">
-                                    {{ child.body }}
-                                </div>
-                            </div>
-                            {% endif %}
-                        </a>
+                    {% if child.body|length %}
+                    <div class="sr-only js-description">
+                        {% if child.featuredImage.one()|length %}
+                        <img class="img-full" src="{{  child.featuredImage.one().url }}"
+                            alt="{{  child.featuredImage.one().title }}" />
+                        {% endif %}
+                        <div class="user-content section-x-short wrapperS wrapper--thinS">
+                            {{ child.body }}
+                        </div>
                     </div>
+                    {% endif %}
+                </a>
+            </div>
 
-                    {% endfor %}
+            {% endfor %}
             {% endfor %}
         </div>
     </div>
@@ -176,55 +187,57 @@
 </div>
 
 {% if block.productCategoryLinks|length %}
-    <div class="modal-wrap" id="symptom-modal">
-        <div class="modal">
-            <a class="modal__close" href="#" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
-                <div>
-                    <p class="sr-only">Close Modal</p>
-                    <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-                </div>
-            </a>
-            <div class="modal__inner">
-                <div class="modal__inner-hd">
-                    <div class="h2 text-flush js-modal-hd">
+<div class="modal-wrap" id="symptom-modal">
+    <div class="modal">
+        <a class="modal__close" href="#" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
+            <div>
+                <p class="sr-only">Close Modal</p>
+                <svg width="18" height="18">
+                    <use xlink:href="#shape-close"></use>
+                </svg>
+            </div>
+        </a>
+        <div class="modal__inner">
+            <div class="modal__inner-hd">
+                <div class="h2 text-flush js-modal-hd">
 
-                    </div>
-                    <div class="text-center">
-                        <a class="btn js-product-symptoms-link" href="">Sort Products</a>
-                    </div>
                 </div>
-                <div class="user-content js-modal-content">
-
+                <div class="text-center">
+                    <a class="btn js-product-symptoms-link" href="">Sort Products</a>
                 </div>
             </div>
+            <div class="user-content js-modal-content">
+
+            </div>
         </div>
-        <span class="modal-screen" data-click-target="symptom-modal" data-click-bodyClass="terms-modal"></span>
     </div>
+    <span class="modal-screen" data-click-target="symptom-modal" data-click-bodyClass="terms-modal"></span>
+</div>
 
-    {% js %}
+{% js %}
 
-        var $ = jQuery;
+var $ = jQuery;
 
-        $(document).ready(function(){
+$(document).ready(function(){
 
-            $('.js-symptom-link').click(function(){
-                var url = $(this).attr("href"),
-                    modalContent = $(this).find('.js-description').html(),
-                    modalTitle = $(this).find('.js-cat-title').text();
+$('.js-symptom-link').click(function(){
+var url = $(this).attr("href"),
+modalContent = $(this).find('.js-description').html(),
+modalTitle = $(this).find('.js-cat-title').text();
 
-                $('.js-product-symptoms-link').attr('href', url);
-                $('.js-modal-hd').text(modalTitle);
-                $('.js-modal-content').empty().append(modalContent);
-                $('#product-symptoms-link').prop('checked', false);
-            });
+$('.js-product-symptoms-link').attr('href', url);
+$('.js-modal-hd').text(modalTitle);
+$('.js-modal-content').empty().append(modalContent);
+$('#product-symptoms-link').prop('checked', false);
+});
 
 
 
-    	});
+});
 
-    {% endjs %}
+{% endjs %}
 
-    <!-- <script>
+<!-- <script>
     $('.js-product-symptoms-link').addClass('disabled');
     $('#product-symptoms-link').change(function() {
         if( $('#product-symptoms-link:checked').length > 0 ) {

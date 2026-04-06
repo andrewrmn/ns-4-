@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 1a7dbb25-bb4f-4039-9a1a-49a727ed8a9b # Headline
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 0c30c94f-3304-4354-8d31-58ceeb9f0f9a # Sub Headline
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: ea628848-2ee7-4dee-8d16-12284700d5d6 # Body
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: 1f85f594-bab5-499f-85b9-c9f89ca211e9 # Button
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: 65256469-cb0a-466f-b0f6-1622df1cf8d8 # Image
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -53,7 +53,7 @@ fieldLayouts:
             fieldUid: 7e4d0918-e3e2-44b8-996f-f35030e5dcc5 # Layout
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -72,7 +72,7 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: text
       initialRows: '4'
       multiline: ''
@@ -92,7 +92,7 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: text
       initialRows: '4'
       multiline: ''
@@ -122,71 +122,184 @@ fields:
               __assoc__:
                 -
                   - enabled
-                  - 1
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
           -
             - fruitstudios\linkit\models\Phone
             -
               __assoc__:
                 -
                   - enabled
-                  - 1
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
           -
             - fruitstudios\linkit\models\Url
             -
               __assoc__:
                 -
                   - enabled
-                  - 1
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
+                -
+                  - allowAlias
+                  - '1'
+                -
+                  - allowMailto
+                  - '1'
+                -
+                  - allowHash
+                  - '1'
+                -
+                  - allowPaths
+                  - '1'
+          -
+            - fruitstudios\linkit\models\Twitter
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - ''
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
+          -
+            - fruitstudios\linkit\models\Facebook
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - ''
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
+          -
+            - fruitstudios\linkit\models\Instagram
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - ''
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
+          -
+            - fruitstudios\linkit\models\LinkedIn
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - ''
+                -
+                  - customLabel
+                  - ''
+                -
+                  - customPlaceholder
+                  - ''
           -
             - fruitstudios\linkit\models\Entry
             -
               __assoc__:
-                0:
+                -
                   - enabled
-                  - 1
-                2:
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select an entry'
           -
             - fruitstudios\linkit\models\Category
             -
               __assoc__:
-                0:
+                -
                   - enabled
-                  - 1
-                2:
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select a category'
           -
             - fruitstudios\linkit\models\Asset
             -
               __assoc__:
-                0:
+                -
                   - enabled
-                  - 1
-                2:
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select an asset'
+          -
+            - fruitstudios\linkit\models\User
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - ''
+                -
+                  - customLabel
+                  - ''
+                -
+                  - sources
+                  - '*'
+                -
+                  - customSelectionLabel
+                  - ''
+                -
+                  - userPath
+                  - ''
           -
             - fruitstudios\linkit\models\Product
             -
               __assoc__:
-                0:
+                -
                   - enabled
-                  - 1
-                2:
+                  - '1'
+                -
+                  - customLabel
+                  - ''
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select an entry'
     translationKeyFormat: null
@@ -279,10 +392,10 @@ fields:
       purifierConfig: ''
       purifyHtml: ''
       redactorConfig: Standard.json
-      removeEmptyTags: true
-      removeInlineStyles: true
-      removeNbsp: true
-      showHtmlButtonForNonAdmins: true
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
