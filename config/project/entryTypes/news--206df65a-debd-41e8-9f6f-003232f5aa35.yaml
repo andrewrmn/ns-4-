@@ -30,7 +30,7 @@ fieldLayouts:
             fieldUid: e91746b9-71f0-4bd2-85e8-5e472ca29df7 # Featured Image
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -39,7 +39,7 @@ fieldLayouts:
             fieldUid: 49e5c2c1-438f-4d0b-81cf-bee8735532de # Excerpt
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -48,7 +48,7 @@ fieldLayouts:
             fieldUid: 4f5a97f7-34f5-4b71-8ccc-e7a53f72315d # Body
             instructions: null
             label: null
-            required: '1'
+            required: 1
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -57,7 +57,7 @@ fieldLayouts:
             fieldUid: bb37393d-7459-4b7c-932a-bd3f1aa80196 # Tags
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -70,7 +70,7 @@ fieldLayouts:
             fieldUid: 15437087-f989-4528-b5cd-e42a5aad58ad # SEO
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

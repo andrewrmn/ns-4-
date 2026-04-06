@@ -31,7 +31,7 @@ fieldLayouts:
             fieldUid: 465b7c35-c93e-4d9f-ab1d-b25bf2915bcd # Sales Reps
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: c4cb6c4f-c6f5-4541-a22f-a7f25ca9c846 # Sales Rep States
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -53,7 +53,7 @@ fieldLayouts:
             fieldUid: 107c7d86-7c10-442b-a404-cf9af017954b # Sales Rep Counties
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -62,7 +62,7 @@ fieldLayouts:
             fieldUid: 8962ff6b-4893-4cea-80d0-d7e5bff9400c # Sales Rep Zips
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

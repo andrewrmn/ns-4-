@@ -30,7 +30,7 @@ fieldLayouts:
             fieldUid: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -43,7 +43,7 @@ fieldLayouts:
             fieldUid: 15437087-f989-4528-b5cd-e42a5aad58ad # SEO
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

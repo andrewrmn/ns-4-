@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 130b86fd-43ec-46b6-b161-fca9e3a1ebce # Clinical Symptoms
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 75be2701-eb22-4d93-8669-85d837ffa402 # Associated Product
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: 089c96c7-150c-49e6-9e6e-cc5a82eef4e1 # Age
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: cd620454-bac9-4cbb-946d-c91e533d2372 # Age Check
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: dbecde4e-9b37-4570-9322-33bdc3b18b9f # Immune/ Adrenal
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

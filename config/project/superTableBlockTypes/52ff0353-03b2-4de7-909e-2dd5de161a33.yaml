@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 7024b210-f463-4600-9ac7-05625e3883f6 # Icon
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 7528b442-be60-430f-b0cc-020db103633a # Headline
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: b59e4497-6d6b-4c2b-a77e-11c197e02a07 # Hours of Operation
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: 6edadbad-87ae-4215-9fc3-f66a52c1182b # Phone Number
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: 175237b9-6eeb-4dbf-9db8-90e23c0f1eeb # Email Address
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -53,7 +53,7 @@ fieldLayouts:
             fieldUid: 84930ff9-6399-4255-96ec-c812788e899d # Fax
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -62,7 +62,7 @@ fieldLayouts:
             fieldUid: 8187a7e0-4154-4f90-8e1c-f1a9f19291f0 # Address
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -86,7 +86,7 @@ fields:
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -94,7 +94,7 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   7024b210-f463-4600-9ac7-05625e3883f6: # Icon
     columnSuffix: null
     contentColumnType: string
@@ -192,7 +192,7 @@ fields:
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -200,7 +200,7 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   175237b9-6eeb-4dbf-9db8-90e23c0f1eeb: # Email Address
     columnSuffix: null
     contentColumnType: text
@@ -217,7 +217,7 @@ fields:
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -225,7 +225,7 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   b59e4497-6d6b-4c2b-a77e-11c197e02a07: # Hours of Operation
     columnSuffix: null
     contentColumnType: text

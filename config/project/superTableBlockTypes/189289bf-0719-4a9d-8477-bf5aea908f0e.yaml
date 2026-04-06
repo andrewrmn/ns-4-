@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 31e17892-d11f-4668-b77a-d1c5f554b623 # Phone title
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 73f5344f-421b-4541-8df5-eceab6dcb840 # Phone link
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -61,7 +61,7 @@ fields:
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -69,4 +69,4 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField

@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 3c1e103a-5e56-4e37-994e-6ae6a7e4101f # Facebook Url
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 4328bdab-17ae-4784-afa2-f6a596c482d2 # LinkedIn Url
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: 543dfba1-a252-4ba2-abad-cd4c1af0409d # Twitter Url
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: f88b8399-a224-4f0b-8fc0-d59df2d28f1a # Youtube Url
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: 4d3c3f6a-36ab-4da9-9e37-4a58fbce22a7 # Instagram URL
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

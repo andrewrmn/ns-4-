@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 3b9b83ef-8163-4bee-a54c-86cf1f20e357 # Neurotransmitters
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: ed9194f8-1118-4fd9-9feb-9e30aa0f946d # Associated Product
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: 346613b5-251f-48f4-9b41-514ae1815608 # Age
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: 97cc8338-8c49-45d4-bcce-2f0b3559df22 # Age Check
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: b003223c-e81f-4944-aae6-d97851e26349 # Immune/ Adrenal
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

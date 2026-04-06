@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 8c554832-84e2-4539-aff9-2bb81dcdf9cb # Headshot
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 59c64a2c-277d-44ff-9353-009292105a82 # Phone #
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: 6c31e057-1749-4bb2-9ee4-0ac2c38f7e0c # Email
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: e5391192-5b85-4f09-8f42-f11e09a52743 # About
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

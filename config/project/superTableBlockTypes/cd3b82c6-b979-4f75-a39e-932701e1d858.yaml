@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: 77c96813-c888-4f32-9389-7adaa4c60c08 # ID
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: a546818e-ea6e-498f-917b-1051858d588a # Date
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: a191927a-b8ff-47fa-ac71-d2084abb3538 # Concerns
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: 37b5cda2-9e71-498a-abda-51ed1bf25db9 # Relevant Pathways
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: f7b661c1-0613-4ac7-91d8-fb0b26478dd6 # Excluded ingredients
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -53,7 +53,7 @@ fieldLayouts:
             fieldUid: 539dbc05-009f-419c-a40c-53272f8a2263 # Preferred Phase
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -62,7 +62,7 @@ fieldLayouts:
             fieldUid: 99498dc7-ec84-4c07-b83b-f2170b8b9aeb # Age
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -71,7 +71,7 @@ fieldLayouts:
             fieldUid: d3a87941-2208-4ecf-88ca-11e07da23fdc # Gender
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -80,7 +80,7 @@ fieldLayouts:
             fieldUid: 371ccaf7-286b-4dd7-9322-4b6ad5dd7387 # PDF Generated
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

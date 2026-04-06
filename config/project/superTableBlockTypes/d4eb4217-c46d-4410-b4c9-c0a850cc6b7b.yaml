@@ -8,7 +8,7 @@ fieldLayouts:
             fieldUid: b9cbf7cc-8594-4e02-abbe-0c17c35ef005 # Neurotransmitters
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -17,7 +17,7 @@ fieldLayouts:
             fieldUid: 8b1dd37a-41df-402f-af40-ccbc41273def # Range
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -26,7 +26,7 @@ fieldLayouts:
             fieldUid: cd95af5f-59e3-44f1-ab1a-0c66d740d9b9 # Associated Product
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -35,7 +35,7 @@ fieldLayouts:
             fieldUid: 564c5e54-0206-4672-a25f-a9d52fce7d72 # Age
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -44,7 +44,7 @@ fieldLayouts:
             fieldUid: 0615a5a7-ecbf-4023-ad4f-602c6b1815b2 # Age Check
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -53,7 +53,7 @@ fieldLayouts:
             fieldUid: 84ff1395-1a14-4763-9cc7-5ee23a880dcd # Immune/ Adrenal
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -62,7 +62,7 @@ fieldLayouts:
             fieldUid: 1443ab41-a4dc-40a3-9de7-9b8a6e4d395c # Product Checks
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -71,7 +71,7 @@ fieldLayouts:
             fieldUid: 352f6db0-4f86-4e06-bae7-63d61504e1a1 # end
             instructions: null
             label: null
-            required: '0'
+            required: 0
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
