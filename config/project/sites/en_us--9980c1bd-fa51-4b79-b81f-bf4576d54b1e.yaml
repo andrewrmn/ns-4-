@@ -1,0 +1,9 @@
+baseUrl: 'http://local.neuroscience'
+enabled: true
+handle: en_us
+hasUrls: true
+language: en-US
+name: NeuroScience
+primary: true
+siteGroup: b50e4f04-54f3-4fb5-ab12-9e59b6a94a9a # NeuroScience (en-US)
+sortOrder: 1

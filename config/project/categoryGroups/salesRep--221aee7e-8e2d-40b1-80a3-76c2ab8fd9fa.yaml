@@ -1,0 +1,81 @@
+defaultPlacement: end
+fieldLayouts:
+  ec0286e3-c27d-4a44-9945-0195fc625c7a:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: 465b7c35-c93e-4d9f-ab1d-b25bf2915bcd # Sales Reps
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Profile
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: c4cb6c4f-c6f5-4541-a22f-a7f25ca9c846 # Sales Rep States
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 107c7d86-7c10-442b-a404-cf9af017954b # Sales Rep Counties
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8962ff6b-4893-4cea-80d0-d7e5bff9400c # Sales Rep Zips
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Locations
+        sortOrder: 2
+handle: salesRep
+name: 'Sales Rep'
+siteSettings:
+  9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
+    hasUrls: false
+    template: null
+    uriFormat: null
+structure:
+  maxLevels: 1
+  uid: 045f63f6-9820-4c0f-815b-59058a520ef5

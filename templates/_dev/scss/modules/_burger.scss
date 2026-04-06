@@ -1,0 +1,76 @@
+// ---------------------------------------------------------------------
+//  Burger Styles
+// ---------------------------------------------------------------------
+
+$burger-width: 22px;
+$burger-height: 12px;
+$burger-color: $brand;
+$burger-bg-color: $white;
+
+
+.burger {
+	overflow: hidden;
+	position: relative;
+	z-index: 14;
+	transition: background $transition;
+}
+
+.burger-inner {
+	align-self: center;
+	width: $burger-width;
+	height: $burger-height;
+	position: relative;
+	margin: 0 auto;
+	left: 0;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateZ(0);
+
+	> * {
+	   position: absolute;
+	   display: block;
+	   height: 2px;
+	   width: 100%;
+	   background-color: $burger-color;
+	   margin: 0 auto;
+	   transition: all 0.6s ease-in-out;
+	   -webkit-backface-visibility: hidden;
+   }
+}
+
+.burger-top { top: 0; }
+.burger-middle { top: 50%; margin-top: -1px; }
+.burger-bottom { bottom: 0; }
+
+
+// ----------------------------------------
+// Active Styles
+// ----------------------------------------
+
+.mobile-menu-is-open {
+
+	.burger {
+		background: $brand;
+	}
+
+	.burger-inner > * {
+		background: $white;
+	}
+
+
+	.burger-top {
+		top: 50%;
+		margin-top: -2px;
+		transform: rotate(45deg);
+	}
+
+	.burger-middle {
+		transform: rotate(-135deg);
+		opacity: 0;
+	}
+
+	.burger-bottom {
+		bottom: 50%;
+		margin-top: 1px;
+		transform: rotate(-45deg);
+	}
+}

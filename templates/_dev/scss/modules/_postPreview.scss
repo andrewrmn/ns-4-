@@ -1,0 +1,173 @@
+// ---------------------------------------------------------------------
+//  Post Preview
+// ---------------------------------------------------------------------
+
+$post-bp: $medium;
+
+.post-preview {
+    position: relative;
+    width: 100%;
+    box-shadow: 0 0 5px 0 rgba(black, 0.4);
+    background: $white;
+    border-radius: 2px;
+
+    @include start-at($post-bp) {
+        display: flex;
+        align-items: stretch;
+        min-height: 346px;
+    }
+
+    + .post-preview {
+        margin-top: 30px;
+    }
+}
+
+.post-preview__img.bg-image {
+    position: relative;
+    height: 280px;
+    display: none;
+
+    @include start-at($post-bp) {
+        display: block;
+        width: 360px;
+        min-width: 360px;
+        height: auto;
+    }
+}
+
+@include stop-at($post-bp) {
+    .post-preview__excerpt,
+    .post-preview__date {
+        display: none;
+    }
+}
+
+// ----------------------------------------
+// Content
+// ----------------------------------------
+
+.post-preview__content {
+    padding: 30px 85px 30px 15px;
+
+    @include start-at($post-bp) {
+        padding: 40px 60px 40px 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    @include start-at($large) {
+        padding: 40px 110px 40px 30px;
+    }
+
+    p, ul, li, > * {
+        color: $gray;
+    }
+}
+.post-preview__date {
+    color: $gray;
+    margin-bottom: 10px;
+}
+.post-preview__title,
+.post-preview__title a {
+    color: $black;
+    margin-bottom: 20px;
+}
+.post-preview__url {
+    margin-top: 20px;
+    display: block;
+    font-weight: bold;
+}
+
+
+// ----------------------------------------
+// Tags
+// ----------------------------------------
+
+
+.post-tag {
+    position: relative;
+
+    &:after {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: lighten($brand, 5%);
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        line-height: 1;
+        text-align: center;
+        font-size: 1.2rem;
+
+
+        @include start-at($large) {
+            width: 80px;
+            height: 80px;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+// Post Preview
+.post-preview.post-tag:after {
+    top: 10px;
+    right: 10px;
+
+    @include stop-at($post-bp) {
+        top: 20px;
+        right: 10px;
+    }
+
+    @include start-at($large) {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+// Single Post
+.post.post-tag:after {
+    top: -30px;
+    left: -15px;
+    opacity: 0.9;
+
+    @include start-at($large) {
+        top: -40px;
+        left: -40px;
+        opacity: 0.8;
+    }
+}
+
+.post-tag--events {
+    &:after {
+        content: 'Events';
+        background: $orange;
+    }
+}
+.post-tag--press-releases {
+    &:after {
+        content: 'Press Release';
+    }
+}
+.post-tag--product-updates {
+    &:after {
+        content: 'Product Update';
+        background: $purple-dark;
+    }
+}
+
+.post-tag--new-product {
+    &:after {
+        content: 'New Product';
+        background: $brand-alt;
+    }
+}
+
+.post-tag--video {
+    &:after {
+        content: 'Video';
+        background: $pink;
+    }
+}

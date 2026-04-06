@@ -1,0 +1,511 @@
+// ---------------------------------------------------------------------
+//  Lists Styles
+// ---------------------------------------------------------------------
+//
+// .ul > * {
+// 	list-style-type: disc;
+// 	margin-left: 36px;
+// }
+
+
+ul.checklist {
+	color: $gray-dark;
+	background: $gray-light;
+	border-radius: 4px;
+	padding: 16px 16px 4px;
+	font-size: 14px;
+
+	li {
+		position: relative;
+		padding-left: 18px;
+		margin-bottom: 12px;
+
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 6px;
+			width: 12px;
+			height: 9px;
+			background: url('../images/svgs/check-brand.svg') center / auto no-repeat;
+		}
+	}
+
+	@include start-at($medium) {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-start;
+
+		> * {
+			width: calc(50% - 12px);
+		}
+	}
+}
+
+// ol {
+// 	list-style-type: decimal;
+// 	list-style-position: outside;
+// 	padding-left: 35px;
+//
+// 	li {
+// 		padding-left: 10px;
+// 	}
+// }
+
+.js-filter-list {
+	position: relative;
+	min-height: 400px;
+	transition: opacity $trans;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 200px;
+		left: calc(50% - 25px);
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		display: block;
+		opacity: 0;
+		background: url('../images/svgs/loading.svg') center / cover no-repeat;
+		transition: transform 2.4s ease;
+	}
+
+	&.is-filtering {
+		opacity: 0.1;
+
+		&:after {
+			opacity: 1;
+			transform: rotate(720deg);
+		}
+	}
+}
+
+.js-filter-list .filter-item {
+	display: none;
+
+	&.is-active {
+		display: block;
+	}
+}
+
+
+// ----------------------------------------
+// Icon List
+// ----------------------------------------
+
+.icon-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	a {
+		color: $gray;
+		font-size: 14px;
+	}
+
+	> * {
+		width: 50%;
+		padding: 10px 30px;
+
+		@include start-at($small) {
+			width: 33%;
+		}
+		@include start-at($medium) {
+			width: 20%;
+		}
+	}
+}
+
+
+// ----------------------------------------
+// Education List
+// ----------------------------------------
+
+.edu-list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+
+	> * {
+		margin-bottom: 20px;
+		display: flex;
+	}
+
+	img {
+		width: 44px;
+	}
+
+	a {
+		display: block;
+		width: 100%;
+		transition: box-shadow $trans;
+
+		&:hover {
+			box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.4);
+		}
+	}
+}
+
+// ----------------------------------------
+// Ordered List
+// ----------------------------------------
+
+.ul,
+.user-content > ul {
+	list-style-type: none;
+	list-style-position: outside;
+	margin-left: 10px;
+
+	li {
+		position: relative;
+		padding-left: 18px;
+		color: $gray;
+
+		+ li {
+			margin-top: 10px;
+		}
+
+		&:before {
+			content: '•';
+			color: $brand;
+			margin-right: 5px;
+			position: absolute;
+			top: -2px;
+			left: 0;
+		}
+	}
+
+	ul {
+		margin: 10px 0 10px 30px;
+		list-style-type: none;
+
+		li {
+
+			&:before {
+				content: '-';
+				color: $black;
+				// margin-right: 5px;
+				// position: absolute;
+				// top: -2px;
+				// left: 0;
+			}
+			//
+			+ li {
+				margin-top: 5px;
+			}
+		}
+	}
+}
+
+.ul--sm {
+	margin-left: 0;
+
+	li {
+        padding-left: 8px;
+
+        + li {
+            margin-top: 4px;
+        }
+    }
+}
+
+.ol,
+.user-content > ol {
+	list-style-type: decimal;
+	list-style-position: outside;
+	font-size: 12px;
+	margin: 20px 0 20px 24px;
+
+	li {
+		position: relative;
+		padding-left: 4px;
+		color: $gray;
+
+		+ li {
+			margin-top: 5px;
+		}
+	}
+}
+
+// .ol,
+// .user-content ol {
+// 	columns: 200px 2;
+// 	margin: 0;
+// 	counter-reset: item;
+// 	column-fill: auto;
+//
+//     li {
+// 		display: block;
+// 		margin-bottom: 25px;
+// 		break-inside: avoid;
+//
+// 		&:before {
+// 	        content: counter(item) ". ";
+// 	        counter-increment: item;
+// 	        color: $brand;
+// 	    }
+// 	}
+// }
+
+.user-content > ul {
+	margin-top: 10px;
+}
+
+.file-list {
+	width: 100%;
+
+	li + li {
+		margin-top: 10px;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		padding: 5px 0;
+		line-height: 1;
+
+		span {
+			width: calc(100% - 30px);
+		}
+
+		&:hover {
+			opacity: 0.5;
+		}
+
+		svg {
+
+			margin-right: 10px;
+		}
+	}
+}
+// ----------------------------------------
+// Pill style list
+// ----------------------------------------
+$cp-breakpoint: $medium;
+
+.cat-pills-wrap {
+	margin-bottom: 20px;
+
+	@include start-at($cp-breakpoint){
+		display: flex;
+		align-items: center;
+		margin-bottom: 0;
+	}
+
+	> a {
+		margin-left: 20px;
+	}
+
+	a {
+		font-size: 1.3rem;
+	}
+}
+
+.cat-pills {
+	display: flex;
+	width: auto;
+	align-items: center;
+	background: $white;
+	border-radius: 50px;
+	margin: 30px 0;
+	font-size: 1.3rem;
+
+	@include stop-at($cp-breakpoint){
+		display: block;
+		margin: 30px 0 10px;
+		border-radius: 10px;
+		padding: 15px 0 25px;
+	}
+
+	.cat-pills__title {
+		margin-right: 20px;
+		border-right: 1px solid $gray-light;
+		color: $gray;
+		padding: 10px 20px;
+
+		@include stop-at($cp-breakpoint) {
+			border-bottom: 1px solid $gray-light;
+			border-right: none;
+			margin-right: 0;
+			margin-bottom: 10px;
+		}
+	}
+
+	ul {
+		display: flex;
+		align-items: center;
+
+		@include stop-at($cp-breakpoint){
+			display: block;
+			padding-left: 10px;
+		}
+	}
+
+	li {
+		margin-right: 10px;
+		display: flex;
+		align-items: center;
+		color: $brand;
+
+		@include stop-at($cp-breakpoint){
+			display: inline-block;
+			margin-right: 10px;
+			margin-bottom: 5px;
+		}
+
+		&.events {
+			color: $orange;
+		}
+		&.product-updates {
+			color: $purple-dark;
+		}
+		&.video {
+			color: $pink;
+		}
+		&.new-product {
+			color: $brand-alt;
+		}
+		&.is-active a,
+		a:hover {
+			background: $gray-light;
+		}
+	}
+}
+
+.cat-pills a,
+.blog-post-tags a {
+	display: flex;
+	align-items: center;
+	padding: 3px 10px;
+	border-radius: 50px;
+	color: currentColor;
+	transition: background $trans;
+
+	&:before {
+		content: '';
+		width: 8px;
+		height: 8px;
+		display: block;
+		border-radius: 50%;
+		background: currentColor;
+		margin-right: 5px;
+	}
+
+	&.events {
+		color: $orange;
+	}
+	&.product-updates {
+		color: $purple-dark;
+	}
+	&.new-product {
+		color: $brand-alt;
+	}
+	&.video {
+		color: $pink;
+	}
+
+	&:hover {
+		background: $gray-light;
+	}
+}
+
+.blog-post-tags a {
+	display: inline-block;
+	padding-left: 24px;
+	position: relative;
+	padding: 6px 10px 6px 24px;
+
+	&:before {
+		content: '';
+		width: 8px;
+		height: 8px;
+		display: block;
+		border-radius: 50%;
+		background: currentColor;
+		position: absolute;
+		left: 10px;
+		top: 9px;
+
+	}
+}
+
+
+// ----------------------------------------
+// Inline List Styles
+// ----------------------------------------
+
+.ul-inline {
+    overflow: hidden;
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+
+	> * {
+		padding-right: 10px;
+	}
+}
+
+.ul-pipe {
+
+	> * + *:before {
+	   content: "|";
+	   margin-right: 10px;
+	   display: inline-block;
+   }
+}
+
+.comma-list {
+	> * {
+		&:after {
+			content: ', ';
+		}
+
+		&:last-child:after {
+			display: none;
+		}
+	}
+}
+
+// ----------------------------------------
+// Social List Styles
+// ----------------------------------------
+
+.social-list {
+    display: flex;
+	margin-bottom: 20px;
+
+    > * {
+        display: inline-block;
+        vertical-align: middle;
+		margin-right: 15px;
+
+        &:last-child {
+			margin-right: 0;
+		}
+    }
+
+	a {
+		display: block;
+
+		img {
+			width: 40px;
+			display: block;
+		}
+
+		&:hover {
+	        opacity: 0.6;
+
+	        svg {
+	            fill: $black;
+	        }
+	    }
+	}
+
+    svg {
+        fill: $gray-light;
+		transition: all $transition;
+    }
+}

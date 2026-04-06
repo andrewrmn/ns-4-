@@ -1,0 +1,36 @@
+{% set productIds = craft.app.request.getBodyParam('recommendedProducts') %}
+{% set recProductIds = [] %}
+{% for product in productIds %}
+    {% set recProductIds = recProductIds|merge([product['value']]) %}
+{% endfor %}
+{% set products = craft.products.id(recProductIds).order('title').all() %}
+
+{% for product in products %}
+    <div class="row">
+        <div class="col-lg-5">
+            {% if product.bottleSizeImage|length %}
+            {% for img in product.bottleSizeImage %}
+            <div>
+                <img src="{{ img.url }}" alt="{{ img.title }}"  />
+            </div>
+            {% endfor %}
+            {% else %}
+            {% for row in product.productFields %}
+            {% if row.productImages|length > 1 %}
+                <img src="{{ row.productImages.one().url }}" alt="{{ product.title }}">
+            {% endif %}
+            {% endfor %}
+            {% endif %}        
+        </div>
+        <div class="col-lg-7">
+            <h3>{{ product.title }}</h3>
+            {% for row in product.productFields %}
+            {% if row.shortDescription %}
+            <div class="pt-15">
+                <p class="theme-color">{{ row.shortDescription }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

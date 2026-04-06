@@ -1,0 +1,600 @@
+field: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
+fieldLayouts:
+  7a956c89-1608-4dd6-8bdb-f84e8d907a0c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: a12aab03-6629-46b6-ab5b-a47bc4cd4fec # Headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9f98b43e-1f86-4335-bb84-a299bf6817c0 # Sub Headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 58ba51e8-f8a3-4ccc-85fd-b89c5b3e930f # Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0c5cf0e8-3681-4b2c-8d27-cc0e0a81abe8 # Button
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 94a0c1a1-5d4d-43c3-8459-09aeba74b114 # Button Color
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 15fb17e6-59b9-49c6-845c-e8f374b93306 # Button 2
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9e88b5e2-b277-4519-91a7-e1921ad2209d # Button 2 Color
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: df5bb03d-741e-499b-89e6-3597953a9c87 # Background Image
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1d3c8d26-b6af-4b75-a54b-9128142ff890 # Text align
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: fffc0f1a-393b-4bd2-944f-11ae1770fb26 # BG - Brand Color with shapes
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 446f4ecc-bfa8-49a2-a77f-08c419261d74 # Height
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6e49a478-3f89-4b69-b078-7718a7b59fa9 # Color Scheme
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0c5cf0e8-3681-4b2c-8d27-cc0e0a81abe8: # Button
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: button
+    instructions: ''
+    name: Button
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: '1'
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Url
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Entry
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField
+  1d3c8d26-b6af-4b75-a54b-9128142ff890: # Text align
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: textAlign
+    instructions: ''
+    name: 'Text align'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Left
+            -
+              - value
+              - left
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Center
+            -
+              - value
+              - center
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Right
+            -
+              - value
+              - right
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Full
+            -
+              - value
+              - full
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  6e49a478-3f89-4b69-b078-7718a7b59fa9: # Color Scheme
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: colorScheme
+    instructions: ''
+    name: 'Color Scheme'
+    searchable: true
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Standard
+            -
+              - value
+              - standard
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - White
+            -
+              - value
+              - white
+            -
+              - default
+              - '1'
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\RadioButtons
+  9e88b5e2-b277-4519-91a7-e1921ad2209d: # Button 2 Color
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: button2Color
+    instructions: ''
+    name: 'Button 2 Color'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Standard
+            -
+              - value
+              - btn
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Outline
+            -
+              - value
+              - btn-alt
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - White
+            -
+              - value
+              - btn-white
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  9f98b43e-1f86-4335-bb84-a299bf6817c0: # Sub Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: subHeadline
+    instructions: ''
+    name: 'Sub Headline'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  15fb17e6-59b9-49c6-845c-e8f374b93306: # Button 2
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: button2
+    instructions: ''
+    name: 'Button 2'
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: '1'
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Url
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Entry
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField
+  58ba51e8-f8a3-4ccc-85fd-b89c5b3e930f: # Body
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: ''
+      redactorConfig: Standard.json
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  94a0c1a1-5d4d-43c3-8459-09aeba74b114: # Button Color
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: buttonColor
+    instructions: ''
+    name: 'Button Color'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Standard
+            -
+              - value
+              - btn
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Outline
+            -
+              - value
+              - btn-alt
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - White
+            -
+              - value
+              - btn-white
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  446f4ecc-bfa8-49a2-a77f-08c419261d74: # Height
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: height
+    instructions: ''
+    name: Height
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Full Height'
+            -
+              - value
+              - section-full
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Standard
+            -
+              - value
+              - section-tall
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  a12aab03-6629-46b6-ab5b-a47bc4cd4fec: # Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headline
+    instructions: ''
+    name: Headline
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  df5bb03d-741e-499b-89e6-3597953a9c87: # Background Image
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: backgroundImage
+    instructions: ''
+    name: 'Background Image'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      defaultUploadLocationSubpath: ''
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: ''
+      selectionLabel: ''
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: large
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  fffc0f1a-393b-4bd2-944f-11ae1770fb26: # BG - Brand Color with shapes
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: background
+    instructions: ''
+    name: 'BG - Brand Color with shapes'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - default
+              - '1'
+            -
+              - label
+              - 'Brand Color w/ shapes'
+            -
+              - value
+              - neuro-shapes
+        -
+          __assoc__:
+            -
+              - default
+              - ''
+            -
+              - label
+              - 'Brand Color'
+            -
+              - value
+              - bg-brand
+        -
+          __assoc__:
+            -
+              - default
+              - ''
+            -
+              - label
+              - 'White w/ Shapes'
+            -
+              - value
+              - neuro-shapes-light
+        -
+          __assoc__:
+            -
+              - default
+              - ''
+            -
+              - label
+              - White
+            -
+              - value
+              - bg-white
+        -
+          __assoc__:
+            -
+              - default
+              - ''
+            -
+              - label
+              - 'Light Gray'
+            -
+              - value
+              - bg-light
+        -
+          __assoc__:
+            -
+              - default
+              - ''
+            -
+              - label
+              - 'Has Image'
+            -
+              - value
+              - has-image
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: banner
+name: Banner
+sortOrder: 1

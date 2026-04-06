@@ -1,0 +1,17 @@
+// ---------------------------------------------------------------------
+//  Post Preview
+// ---------------------------------------------------------------------
+
+$post-bp: $medium;
+
+.post {
+    margin-top: 90px;
+}
+
+.post__img,
+.post__img.bg-image {
+    max-height: 380px;
+    position: relative;
+    margin-bottom: 60px;
+    border-radius: 2px;
+}

@@ -1,0 +1,65 @@
+{% set title = 'Product Information Requests' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+
+{% set query = craft.app.request.getParam('search') %}
+
+<div class="wrapper-wide pir-submission-tables">
+  <div class="mt-6">
+    <header class="d-lg-flex flex-items-endS flex-justify-between mb-2">
+      <div class="col-12 col-md-6  col-lg-9 mb-3 mb-lg-0">
+        <h2>Neuro-Q Dashboard</h2>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 pir-search d-md-flex flex-justify-end">
+        <div>
+          <p class="sr-only">Search Reports by ID</p>
+          <form method="GET" action="{{ url(craft.app.request.absoluteUrl) }}">
+            <input type="text" name="search" placeholder="Search Reports by ID" id="search"{% if query | length %} value="{{ query }}"{% endif %}/>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <div class="mb-5 mt-3 mt-md-0">
+ 
+      <p class="p mt-2 col-lg-8 mb-3">Use Neuro-Q virtually with your custom Neuro-Q link below. ﻿It's simple - just copy the link and send it to your patients! Once they complete the survey, you ﻿will receive results via email and the report will be stored on your dashboard ﻿below.</p>
+       <p>Your custom Neuro-Q link: <span class="text-bold">{{ siteUrl }}neuro-q/?account={{ currentUser.email }}</span></p>
+    </div>
+
+
+    <div class="mt-4 mb-4">
+      <div class="text-group account-card">
+        <div class="d-flex flex-wrap flex-items-stretch">
+          {% include 'neuroselect/survey/preview' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+var $ = jQuery;
+$('.js-additional-reports').each(function(){
+  $(this).hide(0);
+});
+
+$('.js-show-all-reports').click(function(){
+  el = $(this);
+  target = el.attr('data-group');
+
+  if( el.hasClass('is-active') ) {
+    $('.js-additional-reports[data-group=' + target + ']').hide();
+    el.removeClass('is-active').html('Show All Reports').removeClass('btn-alt').addClass('btn-alt');
+  } else {
+    $('.js-additional-reports[data-group=' + target + ']').show();
+    el.addClass('is-active').html('Hide Reports').removeClass('btn-alt').addClass('btn-alt');
+  }
+
+});
+
+</script>
+
+
+{% endblock %}

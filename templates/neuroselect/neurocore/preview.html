@@ -1,0 +1,159 @@
+{% set showManual = true %}
+{% set loopLimit = 5 %}
+{% set showAdditional = true %}
+
+{% if query | length %}
+{% set showAdditional = false %}
+{% set loopLimit = null %}
+
+{% set showManual = false %}
+{% for row in user.neuroCoreSubmissions %}
+{% if row.activationCode == query %}
+{% set showManual = true %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if user.neuroCoreSubmissions|length >= 1 %}
+<div class="col-12 mb-4 d-flex">
+  <div class="card col-12 table-wrap">
+    <div class="d-sm-flex flex-items-center flex-justify-between mb-3">
+      <h2 class="h4 text-black mr-3">NeuroCore Lab Results</h2>
+    </div>
+    {% if showManual %}
+    <table class="u-full-width full-borders pir-tables">
+      <thead>
+        <tr>
+          <th>Activation Code</th>
+          <th>Date</th>
+          <th class="text-right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in user.neuroCoreSubmissions.limit(loopLimit).all() %}
+        {% if query | length %}
+        {% if row.activationCode == query %}
+        <tr>
+          <td>{{ row.activationCode }}</td>
+          <td>{{ row.date|date('Y-m-d') }}</td>
+          <td class="text-right">
+            {% if row.reportUrl %}
+            <a href="/account/neuroselect/neurocore/{{ row.activationCode }}">View Report</a>
+            {% else %}
+            <a class="neurocore-generate-report" data-activationCode="{{ row.activationCode }}" href="#">Generate Report</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endif %}
+        {% else %}
+        <tr>
+          <td>{{ row.activationCode }}</td>
+          <td>{{ row.date|date('Y-m-d') }}</td>
+          <td class="text-right">
+            {% if row.reportUrl %}
+            <a href="/account/neuroselect/neurocore/{{ row.activationCode }}">View Report</a>
+            {% else %}
+            <a class="neurocore-generate-report" data-activationCode="{{ row.activationCode }}" href="#">Generate Report</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+      </tbody>
+
+      {% if showAdditional and user.neuroCoreSubmissions|length > loopLimit %}
+      <tbody class="js-additional-reports" data-group="manual">
+        {% for row in user.neuroCoreSubmissions.offset(loopLimit).all() %}
+        {% if query | length %}
+        {% if row.activationCode == query %}
+        <tr>
+          <td>{{ row.activationCode }}</td>
+          <td>{{ row.date|date('Y-m-d') }}</td>
+          <td class="text-right">
+            {% if row.reportUrl %}
+            <a href="/account/neuroselect/neurocore/{{ row.activationCode }}">View Report</a>
+            {% else %}
+            <a class="neurocore-generate-report" data-activationCode="{{ row.activationCode }}" href="#">Generate Report</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endif %}
+        {% else %}
+        <tr>
+          <td>{{ row.activationCode }}</td>
+          <td>{{ row.date|date('Y-m-d') }}</td>
+          <td class="text-right">
+            {% if row.reportUrl %}
+            <a href="/account/neuroselect/neurocore/{{ row.activationCode }}">View Report</a>
+            {% else %}
+            <a class="neurocore-generate-report" data-activationCode="{{ row.activationCode }}" href="#">Generate Report</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+
+    </table>
+
+    {% if showAdditional and user.neuroCoreSubmissions|length > 5 %}
+    <div class="text-center mt-4">
+      <div class="btn-alt btn--sm js-show-all-reports" data-group="manual">Show All Reports</div>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <p class="p-sm mt-4">No reports found</p>
+    {% endif %}
+
+
+    <form id="form" class="d-none">
+      <input type="hidden" name="action" value="/neuroselect/pdf/generate-lab">
+      <input type="hidden" name="userId" value="{{ user.id }}">
+      {{ csrfInput() }}
+      <input type="hidden" name="activationCode" id="activationCode" value="">
+    </form>
+
+  </div>
+</div>
+
+
+
+<script>
+  var form = $('#form');
+  $('.neurocore-generate-report').click(function(e){
+    e.preventDefault();
+    var ac = $(this).attr('data-activationCode');
+    $('#activationCode').val(ac);
+    form.submit();
+  });
+
+  form.submit(function(e) {
+    e.preventDefault();
+    $('html').addClass('thinking');
+    $("body").css({'opacity': '.6', 'pointer-events': 'none'});
+    var atc = $('#activationCode').val();
+ 
+    $.ajax({
+      type: 'post',
+      cache: false,
+      data: form.serialize(),
+      url: '/neuroselect/generate-lab',
+      dataType: 'json',
+    }).done(function (data) {
+      //var str = JSON.parse(data);
+      //str.labKitId
+      console.log(data);
+      var url = '{{ siteUrl }}account/neuroselect/neurocore/' + atc;
+      window.location.replace(url);
+    }).fail(function (error) {
+      console.log(error);
+      $('html').removeClass('thinking');
+      $("body").css({'opacity': '1', 'pointer-events': 'inherit'});
+    });
+  });
+</script>
+{% endif %}

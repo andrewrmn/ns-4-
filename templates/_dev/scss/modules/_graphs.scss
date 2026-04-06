@@ -1,0 +1,276 @@
+// ---------------------------------------------------------------------
+//  Graphs
+// ---------------------------------------------------------------------
+
+.demographic-tile {
+	max-width: 838px;
+	background: #FFFFFF;
+	box-shadow: 0 5px 20px 0 rgba(0,0,0,0.10);
+	border-radius: 6px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 48px 16px;
+
+	@include breakpoint(md) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 276px;
+
+	}
+}
+
+.demographic-tile__inner {
+	display: flex;
+	justify-content: center;
+
+	@include breakpoint(md) {
+
+	}
+}
+
+
+// ----------------------------------------
+// Bar Graph
+// ----------------------------------------
+
+.graph-group {
+    display: inline-flex;
+    border-bottom: 1px solid $border;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+
+    @include start-at($small) {
+        padding: 0 24px;
+    }
+
+    .bar-graph + .bar-graph {
+        margin-left: 12px;
+    }
+}
+
+.bar-graph {
+	min-width: 34px;
+
+    @include start-at($small) {
+        min-width: 44px;
+    }
+
+	max-width: calc(25% - 5px);
+	text-align: center;
+
+	p {
+
+		font-size: 14px;
+		color: $brand;
+		margin-bottom: 0;
+		//margin-top: 4px;
+        display: none;
+
+		@include stop-at($small) {
+			font-size: 9px;
+		}
+	}
+
+	&.in-view {
+		.graph p {
+			transition-delay: 0.4s;
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
+
+	.graph {
+		width: 44px;
+		max-width: 94%;
+		height: 128px;
+		margin: 0 auto;
+		background: rgba($brand, 0.1);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: stretch;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+
+		p {
+			flex-grow: 1;
+			padding: 10px 0;
+			opacity: 0;
+			transform: translate3d(0, 30px, 0);
+			transition: opacity $trans, transform $trans;
+		}
+	}
+}
+
+.bar-graph + .bar-graph {
+	margin-left: 10px;
+
+	@include breakpoint(md) {
+		margin-left: 30px;
+	}
+}
+
+.graph-fill {
+	background: $brand;
+	height: 0;
+	width: 100%;
+	align-self: flex-end;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+// ----------------------------------------
+// Bar Graph Horizontal
+// ----------------------------------------
+
+.bar-graph.bar-graph--horizontal {
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	text-align: left;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+
+	+ .bar-graph--horizontal {
+		margin-top: 16px;
+		margin-left: 0;
+	}
+
+	@include breakpoint(md) {
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+
+		+ .bar-graph--horizontal {
+			margin-top: 32px;
+		}
+	}
+
+	> p {
+		order: 1;
+		width: 160px;
+	}
+
+	.graph {
+		width: 100%;
+		height: 32px;
+		max-width: 100%;
+		justify-content: space-between;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		order: 2;
+		margin-top: 8px;
+
+		@include breakpoint(md) {
+			margin-top: 0;
+		}
+
+		p {
+			padding: 4px 16px;
+		    justify-self: flex-end;
+		    flex-grow: 0;
+			transform: translate3d(30px, 0, 0);
+			margin-top: 0;
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	&.in-view p {
+		transform: translate3d(0, 0, 0);
+	}
+
+	.graph-fill {
+		height: 32px;
+		width: 0;
+		position: relative;
+	}
+}
+
+.bar-graph-horizontal-wrap {
+	width: 684px;
+	max-width: 100%;
+}
+
+
+
+// ----------------------------------------
+// Round Graph Horizontal
+// ----------------------------------------
+
+.round-graph__wrap {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	max-width: 100%;
+
+	> * {
+		min-width: 50%;
+		flex-grow: 1;
+		width: 50%;
+		margin-bottom: 20px;
+	}
+
+	@include breakpoint(md) {
+
+		> * {
+			min-width: 25%;
+			width: 25%;
+		}
+	}
+}
+
+.round-graph {
+	text-align: center;
+	padding: 0 30px;
+
+	// p {
+	// 	color: $brand;
+	// 	margin: 0;
+	// 	font-size: 14px;
+    //
+	// 	@include stop-at($small) {
+	// 		font-size: 9px;
+	// 	}
+	// }
+
+	figure {
+		position: relative;
+		margin: 0 0 4px;
+		padding: 0;
+
+		p {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate3d(-50%, -50%, 0);
+			opacity: 0;
+			margin-top: 20px;
+			transition: opacity $trans, margin-top $trans;
+		}
+	}
+
+	svg {
+		width: 100px;
+		max-width: 100%;
+		transform-origin: center;
+		transform: rotate(-90deg);
+		margin: 0 auto;
+	}
+
+	&.in-view {
+
+		figure p {
+			transition-delay: 0.5s;
+			opacity: 1;
+			margin-top: 0;
+		}
+	}
+}

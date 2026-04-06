@@ -1,0 +1,68 @@
+tabs:
+  -
+    elements:
+      -
+        fieldUid: b54253b5-0c89-41eb-9805-c21109cdbe9f # HCP Email
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 50
+      -
+        fieldUid: 2b050d78-a129-4319-9c2c-8591311c7c52 # Is Patient
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 25
+      -
+        fieldUid: 9c583f7f-a5b9-4bd3-875a-b7421182cccb # Autoship
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 25
+      -
+        fieldUid: d745f96f-2d43-4ca8-a687-de15c0f3b565 # MAS ID
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 100
+      -
+        fieldUid: 6c063a5d-b93a-4c1f-9619-08db1ebf8dac # Make this a recurring order?
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 50
+      -
+        fieldUid: d3c24e93-20db-4900-9830-ae23042e4051 # Recurring Order Frequency
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 50
+      -
+        fieldUid: 9b5c02d9-ff4d-4dd6-9507-1df13772e0b8 # Cancel Subscription Order Id
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        warning: null
+        width: 100
+    name: Customer
+    sortOrder: 1

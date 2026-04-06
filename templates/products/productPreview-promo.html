@@ -1,0 +1,55 @@
+
+
+<li class="product-preview">
+    <a href="{{ product.url }}?q=welcome">
+        {% for row in product.productFields %}
+            {% set img = row.productImages.one() %}
+            {% if img|length %}
+                <img src="{{ img.url }}" alt="{{ img.title }}"  />
+            {% else %}
+                <img src="{{ siteUrl }}images/products/product-fallback.svg" alt="Bottle icon"  />
+            {% endif %}
+        {% endfor %}
+
+        <div class="product-info">
+            <h3 class="p text-flush">{{ product.title }}</h3>
+        </div>
+
+        {% for tag in craft.tags.relatedTo(product) %}
+            {% if tag.slug == 'best-seller' %}
+                <span class="tag tag--best">Best Seller</span>
+            {% endif %}
+
+            {% if tag.slug == 'new' or tag.slug == 'New Product' %}
+                <span class="tag tag--new">New Product</span>
+            {% endif %}
+
+            {% if tag.slug == 'sale' or tag.slug == 'Sale' %}
+                <span class="tag tag--sale">Promo</span>
+            {% endif %}
+        {% endfor %}
+    </a>
+
+    <a class="product-hover-info" href="{{ product.url }}?q=welcome">
+        <div>
+            <h3 class="h5 text-white mb-2">{{ product.variants[0].title }}</h3>
+            {% set pId = product.variants[0].id %}
+
+            <p class="p">{{ product.variants[0].salePrice|commerceCurrency(cart.currency) }}</p>
+
+            {% if pId != '' %}
+            <form method="POST" class="js-add-to-cart">
+                <input type="hidden" name="action" value="commerce/cart/update-cart">
+                <input type="hidden" name="qty" value="1">
+                <input type="hidden" name="purchasableId" value="{{ pId }}">
+                <input type="submit" value="Add to cart">
+            </form>
+            {% endif %}
+        </div>
+
+        <span>View product</span>
+    </a>
+
+
+    <div class="product-preview__success"></div>
+</li>

@@ -1,0 +1,90 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
+handle: cta
+instructions: ''
+name: CTA
+searchable: true
+settings:
+  allowCustomText: '1'
+  allowTarget: '1'
+  defaultText: ''
+  selectLinkText: ''
+  types:
+    __assoc__:
+      -
+        - fruitstudios\linkit\models\Email
+        -
+          __assoc__:
+            -
+              - enabled
+              - 1
+      -
+        - fruitstudios\linkit\models\Phone
+        -
+          __assoc__:
+            -
+              - enabled
+              - 1
+      -
+        - fruitstudios\linkit\models\Url
+        -
+          __assoc__:
+            -
+              - enabled
+              - 1
+      -
+        - fruitstudios\linkit\models\Entry
+        -
+          __assoc__:
+            0:
+              - enabled
+              - 1
+            2:
+              - sources
+              - '*'
+            3:
+              - customSelectionLabel
+              - 'Select an entry'
+      -
+        - fruitstudios\linkit\models\Category
+        -
+          __assoc__:
+            0:
+              - enabled
+              - 1
+            2:
+              - sources
+              - '*'
+            3:
+              - customSelectionLabel
+              - 'Select a category'
+      -
+        - fruitstudios\linkit\models\Asset
+        -
+          __assoc__:
+            0:
+              - enabled
+              - 1
+            2:
+              - sources
+              - '*'
+            3:
+              - customSelectionLabel
+              - 'Select an asset'
+      -
+        - fruitstudios\linkit\models\Product
+        -
+          __assoc__:
+            0:
+              - enabled
+              - 1
+            2:
+              - sources
+              - '*'
+            3:
+              - customSelectionLabel
+              - 'Select an entry'
+translationKeyFormat: null
+translationMethod: none
+type: fruitstudios\linkit\fields\LinkitField

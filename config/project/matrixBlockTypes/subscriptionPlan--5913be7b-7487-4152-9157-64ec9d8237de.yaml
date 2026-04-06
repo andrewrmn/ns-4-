@@ -1,0 +1,217 @@
+field: b2c62793-dcd1-429d-b85e-d9677e577944 # Add Plan
+fieldLayouts:
+  1b49a687-03a9-4dd5-8892-6139432b5929:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 8e138809-0508-47ce-961e-811fc89971e4 # Select Plan
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cd8887b5-8383-434b-af8f-2aeec2a42ddf # Custom Label
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c6c8e8e0-e994-4e0e-b96d-12f55e78fdee # Setup Fee
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 24f4a893-3e75-478c-aaf7-fbf752fdf0a3 # Default
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  8e138809-0508-47ce-961e-811fc89971e4: # Select Plan
+    columnSuffix: tatfqsbz
+    contentColumnType: string
+    fieldGroup: null
+    handle: selectPlan
+    instructions: 'Can''t see your plans? Go to [Subscriptions](https://www.neuroscienceinc.com/admin/enupal-stripe/settings/subscriptions) and click on Refresh Plans'
+    name: 'Select Plan'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Select Plan...'
+            -
+              - value
+              - ''
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1668015590 | 1668015590 | $38.66/30 days'
+            -
+              - value
+              - '1668015590'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1668014179 | 1668014179 | $61.19/30 days'
+            -
+              - value
+              - '1668014179'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1668014170 | 1668014170 | $38.66/30 days'
+            -
+              - value
+              - '1668014170'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1668013235 | 1668013235 | $38.66/30 days'
+            -
+              - value
+              - '1668013235'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1667990171 | 1667990171 | $47.91/30 days'
+            -
+              - value
+              - '1667990171'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1667987930 | 1667987930 | $50.50/30 days'
+            -
+              - value
+              - '1667987930'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1667986796 | 1667986796 | $50.50/30 days'
+            -
+              - value
+              - '1667986796'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Custom Plan - 1667986485 | 1667986485 | $71.96/30 days'
+            -
+              - value
+              - '1667986485'
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Dropdown
+  24f4a893-3e75-478c-aaf7-fbf752fdf0a3: # Default
+    columnSuffix: jxantjux
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: default
+    instructions: 'Please make sure that just one default is enabled'
+    name: Default
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Lightswitch
+  c6c8e8e0-e994-4e0e-b96d-12f55e78fdee: # Setup Fee
+    columnSuffix: vjfohnaq
+    contentColumnType: 'decimal(12,2)'
+    fieldGroup: null
+    handle: setupFee
+    instructions: 'Setup Fee for the first payment'
+    name: 'Setup Fee'
+    searchable: true
+    settings:
+      decimals: '2'
+      defaultValue: null
+      max: null
+      min: null
+      prefix: null
+      previewCurrency: null
+      previewFormat: decimal
+      size: null
+      suffix: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Number
+  cd8887b5-8383-434b-af8f-2aeec2a42ddf: # Custom Label
+    columnSuffix: qvxixrfw
+    contentColumnType: text
+    fieldGroup: null
+    handle: customLabel
+    instructions: 'Override the default text displayed for each plan (i.e. “Nickname amount/interval”)'
+    name: 'Custom Label'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: 'Awesome Plan $35.00/month'
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\PlainText
+handle: subscriptionPlan
+name: 'Subscription Plan'
+sortOrder: 1

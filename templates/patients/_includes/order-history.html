@@ -1,0 +1,45 @@
+{% set patientOrderQuery = craft.orders().user(currentUser).limit(100).orderBy('dateCreated DESC').isCompleted(true) %}
+{% paginate patientOrderQuery as pageInfo, pageOrders %}
+<section class="patientOrderHistory my-6 py-4" id="order-history">
+  <h4 class="h3 text-bold mb-3">Order History</h4>
+  <div class="recent-wrapper">
+    {% if patientOrderQuery.count() %}
+    <table width="100%" border="0">
+      <thead>
+        <tr>
+          <th>Order #</th>
+          <th>Order Date</th>
+          <th class="text-center">Autoship</th>
+          <th class="text-center">{{ "Total Quantity"|t }}</th>
+          <th>{{ "Total"|t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all()|reverse %}
+
+        {% for order in orders %}
+        <tr>
+            <td><a href="{{ url('patients/order', { number: order.number }) }}">#{{ order.reference }}</a></td>
+            <td>{{ order.dateOrdered|date('M d, Y') }}</td>
+            <td class="text-center">
+            {% if order.autoship == 'yes' %}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+              <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+            </svg>
+            {% else %}
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+               <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+             </svg>
+            {% endif %}
+            </td>
+            <td class="text-center">{{ order.totalQty }} items</td>
+            <td>{{ order.totalPrice|commerceCurrency(cart.currency) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No Orders Placed</p>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,595 @@
+field: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
+fieldLayouts:
+  9531118f-7cfb-429c-bda4-b0cb1567ca2a:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 70aaa32d-63e8-4e2a-9dd4-d135d3d23622 # Height
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9dbd7401-c17c-4b13-84de-3aa754b0ea5b # Triangle Below
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: bf91eb58-f08e-4f71-b01d-c5bc0a162e00 # Headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c61fd31b-cbb9-4944-9867-4146db1274c3 # Sub headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4f471081-ba35-4cc2-a632-2be9520440e5 # Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 03397f76-ca48-45bc-94be-01dd05745908 # Button
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 18beeece-8e5d-446b-9661-6f85f57720ff # Button 2
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 2c984c17-8feb-4039-a5fe-d49c4202d079 # Background
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 29f04a5b-7cef-482b-94f3-66a0cdc010a8 # CTA Tiles
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 55fae896-2a87-4393-aa94-39432a7c2675 # Image Blocks
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 778de849-e005-474b-93a9-298268c75d37 # Product Category Links
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  2c984c17-8feb-4039-a5fe-d49c4202d079: # Background
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: background
+    instructions: ''
+    name: Background
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'White w/ Shapes'
+            -
+              - value
+              - neuro-shapes-light
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - White
+            -
+              - value
+              - bg-white
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 'Light Gray'
+            -
+              - value
+              - bg-light
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  4f471081-ba35-4cc2-a632-2be9520440e5: # Body
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: ''
+      redactorConfig: Standard.json
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  9dbd7401-c17c-4b13-84de-3aa754b0ea5b: # Triangle Below
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: triangleBelow
+    instructions: ''
+    name: 'Triangle Below'
+    searchable: true
+    settings:
+      default: true
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  18beeece-8e5d-446b-9661-6f85f57720ff: # Button 2
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: button2
+    instructions: ''
+    name: 'Button 2'
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: '1'
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Email
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Phone
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Url
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Entry
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+          -
+            - fruitstudios\linkit\models\Category
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select a category'
+          -
+            - fruitstudios\linkit\models\Asset
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an asset'
+          -
+            - fruitstudios\linkit\models\Product
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField
+  29f04a5b-7cef-482b-94f3-66a0cdc010a8: # CTA Tiles
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: ctaTile
+    instructions: ''
+    name: 'CTA Tiles'
+    searchable: true
+    settings:
+      columns:
+        65:
+          __assoc__:
+            -
+              - width
+              - ''
+        66:
+          __assoc__:
+            -
+              - width
+              - ''
+        67:
+          __assoc__:
+            -
+              - width
+              - ''
+        68:
+          __assoc__:
+            -
+              - width
+              - ''
+        122:
+          __assoc__:
+            -
+              - width
+              - ''
+      contentTable: '{{%stc_4_ctatile}}'
+      fieldLayout: row
+      maxRows: null
+      minRows: null
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add Tile'
+      staticField: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  55fae896-2a87-4393-aa94-39432a7c2675: # Image Blocks
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: imageBlocks
+    instructions: ''
+    name: 'Image Blocks'
+    searchable: true
+    settings:
+      columns:
+        74:
+          __assoc__:
+            -
+              - width
+              - ''
+        75:
+          __assoc__:
+            -
+              - width
+              - ''
+        76:
+          __assoc__:
+            -
+              - width
+              - ''
+        77:
+          __assoc__:
+            -
+              - width
+              - ''
+      contentTable: '{{%stc_4_imageblocks}}'
+      fieldLayout: row
+      maxRows: null
+      minRows: null
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add a row'
+      staticField: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  70aaa32d-63e8-4e2a-9dd4-d135d3d23622: # Height
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: height
+    instructions: ''
+    name: Height
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Standard
+            -
+              - value
+              - section
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Short
+            -
+              - value
+              - section-short
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Tall
+            -
+              - value
+              - section-tall
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - X-tall
+            -
+              - value
+              - section-x-tall
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  778de849-e005-474b-93a9-298268c75d37: # Product Category Links
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: productCategoryLinks
+    instructions: ''
+    name: 'Product Category Links'
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: 'group:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  03397f76-ca48-45bc-94be-01dd05745908: # Button
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: button
+    instructions: ''
+    name: Button
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: '1'
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Email
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Phone
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Url
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Entry
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+          -
+            - fruitstudios\linkit\models\Category
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select a category'
+          -
+            - fruitstudios\linkit\models\Asset
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an asset'
+          -
+            - fruitstudios\linkit\models\Product
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField
+  bf91eb58-f08e-4f71-b01d-c5bc0a162e00: # Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headline
+    instructions: ''
+    name: Headline
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  c61fd31b-cbb9-4944-9867-4146db1274c3: # Sub headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: subHeadline
+    instructions: ''
+    name: 'Sub headline'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: contentBlock
+name: 'Content Block'
+sortOrder: 2

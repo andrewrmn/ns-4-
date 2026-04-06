@@ -1,0 +1,13 @@
+<section class="mb-6" id="welcome">
+  {% if currentUser.relatedHcp|length %}
+  <h2 class="h1">Hello <span class="text-bold">{{ patientName }}</span>!</h2>
+  {#<p>{{ currentUser.relatedHcp.one().hpcStoreFrontText }}</p>#}
+  <h3 class="h3 mb-0">{{ hcpName }} welcomes you to their NeuroScience Storefront</h3>
+
+  {% if currentUser.relatedHcp.one().hpcStoreFrontText %}
+  <div class="mt-3">
+    <p>{{ currentUser.relatedHcp.one().hpcStoreFrontText }}</p>
+  </div>
+  {% endif %}
+  {% endif %}
+</section>

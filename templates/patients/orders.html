@@ -1,0 +1,90 @@
+{% if not currentUser or not currentUser.isInGroup('patients') %}
+{% redirect "patients/login" %}
+{% endif %}
+{% set title = 'Patient Dashboard' %}
+{% extends 'layouts/_accounts-patient' %}
+{% block content %}
+{% set patientName = currentUser.firstName ? currentUser.firstName ~ ' ' ~ currentUser.lastName : currentUser.username %}
+
+<img class="patient-portal__bg" src="https://www.neuroscienceinc.com/images/general/accent.jpg" alt="">
+
+<div class="patient-portal-content">
+
+  <div class="patient-portal-content__content">
+    <div class="mb-4">
+      <a class="mb-4 d-inline-block" href="/patients/dashboard/">< Return to Dashboard</a>
+      <h2 class="m-0">Order History:</h2>
+    </div>
+
+    <section class="patientOrderHistory">
+      <div class="row">
+        <div class="col-lg-12 col-12 px-3 pb-lg-0 pb-4 recent-order">
+          <div class="recent-wrapper">
+            <table width="100%" border="0">
+              <thead>
+                <tr>
+                  <th>{{ "Order"|t }}</th>
+                  <th>{{ "Date"|t }}</th>
+                  <th class="text-center">Autoship</th>
+                  <th class="text-center">{{ "Total Quantity"|t }}</th>
+                  <th>{{ "Total"|t }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all()|reverse %}
+
+                {% for order in orders %}
+                <tr>
+                    <td><a href="{{ url('patients/order', { number: order.number }) }}">#{{ order.reference }}</a></td>
+                    <td>{{ order.dateOrdered|date('M d, Y') }}</td>
+                    <td class="text-center">
+                    {% if order.autoship == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                      <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+                    </svg>
+                    {% else %}
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                       <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+                     </svg>
+                    {% endif %}
+                    </td>
+                    <td class="text-center">{{ order.totalQty }} items</td>
+                    <td>{{ order.totalPrice|commerceCurrency(cart.currency) }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="patient-portal-content__sidebar">
+      {% include 'patients/sidebar' %}
+  </div>
+</div>
+
+<form method="post" id="frm-cancel-subscription">
+  <input type="hidden" name="action" value="enupal-stripe/stripe/cancel-subscription">
+  <input type="hidden" name="subscriptionId" value="">
+  <input type="hidden" name="cancelAtPeriodEnd" value="true">
+  <input type="hidden" name="redirect" value="{{ 'patients/auto-ship'|hash }}">
+  {{ csrfInput() }}
+</form>
+{% endblock %}
+
+{% js %}
+$(document).ready(function(){
+  $(document).on("click", "a#btn-cancel-subscription", function() {
+    let subscriptionId = $(this).attr('data-subscriptionId');
+    let text = "Are you sure to cancel subscription?";
+    if (confirm(text) == true) {
+      $("form#frm-cancel-subscription input[name='subscriptionId']").val(subscriptionId);
+      $("form#frm-cancel-subscription").submit();
+    }else{
+      return false;
+    }
+  })
+})
+{% endjs %}

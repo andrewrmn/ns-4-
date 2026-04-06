@@ -1,0 +1,14 @@
+columnSuffix: null
+contentColumnType: boolean
+fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
+handle: accpetedTermsAndConditions
+instructions: ''
+name: 'Accepted Terms and Conditions'
+searchable: false
+settings:
+  default: false
+  offLabel: 'No'
+  onLabel: 'Yes'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

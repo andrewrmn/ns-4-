@@ -1,0 +1,287 @@
+{% set ps = craft.app.request.getSegment(2) %}
+
+
+{% set product = '' %}
+{% for prod in craft.products.all() %}
+	{% if prod.slug == ps %}
+		{% set product = prod %}
+	{% endif %}
+{% endfor %}
+
+{% set title = product.title %}
+{% extends "_layout" %}
+
+{% block content %}
+
+
+{% set tags = craft.categories.relatedTo(product) %}
+
+<div class="wrapper">
+  <div class="row">
+    <div class="col--xs--12 col--md--6 col--md--6 product-details">
+      <div class="product-hd mt-6 pb-4">
+
+        <h1 class="h1 product-title">{{ product.title }}</h1>
+
+        {% for row in product.productFields %}
+        {% if row.shortDescription %}
+        <div class="pt-15">
+          <p class="theme-color">{{ row.shortDescription }}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+      {% set ln = craft.app.request.getParam('lot') %}
+      {% set match = '' %}
+      {% if ln %}
+      {% set lot = product.lotNumbers %}
+      {% for block in product.lotNumbers %}
+        {% if block.lotNumber == ln %}
+          {% set match = block %}
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      <section class="py-4 py-md-5">
+        <p class="h5 text-black">Search Lot #</p>
+        <p class="p-sm mb-3">Search your bottle's lot number for additional allergen information</p>
+
+        <form class="form-inline-icon" method="GET" action="{{ url(craft.app.request.absoluteUrl) }}">
+          <label for="search">
+            <span class="sr-only">Search lot number</span>
+            <span><svg width="14" height="14"><use xlink:href="#shape-search"></use></svg></span>
+          </label>
+          <input type="text" name="lot" placeholder="Enter lot #" value="{% if ln %}{{ ln }}{% endif %}">
+        </form>
+
+        {% if ln %}
+        <div class="lot-number-detail mt-4">
+          {% if match %}
+          <p class="h4 mb-3">Lot #: <span>{{ match.lotNumber }}</span> Allergen Info</p>
+          <div class="user-content">
+            {{ match.description }}
+          </div>
+          {% else %}
+          <p class="h4 mb-3">Could not locate lot #: <span>{{ ln }}</span>.</p>
+          <p class="p-sm">Please double check your lot number. If there has been an error and you need assistance, please feel free to contact Customer Service at <a href="tel:+18883427272">888-342-7272</a>.</p>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        {% if product.disclaimers | length %}
+        <div class="mt-4">
+          <div class="user-content user-content--sm">
+            {{ product.disclaimers }}
+          </div>
+        </div>
+        {% endif %}
+      </section>
+
+    </div>
+
+    <div class="col--xs--12 col--md--5">
+      <div class="product__images">
+        {% if product.bottleSizeImage|length %}
+        {% for img in product.bottleSizeImage %}
+        <div>
+          <img src="{{ img.url }}" alt="{{ img.title }}"  />
+        </div>
+        {% endfor %}
+        {% else %}
+        {% for row in product.productFields %}
+        {% if row.productImages|length > 1 %}
+        <img src="{{ row.productImages.one().url }}" alt="{{ product.title }}">
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="mt-0">
+        {% for category in craft.categories.group('productCategories').level(1).title('Occasional Symptoms') %}
+        {% set children = category.getChildren().relatedTo(product) %}
+        <ul class="product-clinical-list product-clinical-list--start flex-justify-center">
+
+          {% for child in children %}
+          <li>
+            <a class="js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
+              {% if child.icon|length %}
+              <img width="70" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}"  />
+              {% else %}
+              <img width="70" src="/images/ns-clynical-fallback.svg" alt="fallback icon"  />
+              {% endif %}
+              <span class="js-cat-title">{{ child.title }}</span>
+
+              {% if child.body|length %}
+              <div class="sr-only js-description">
+                {% if child.featuredImage.one()|length %}
+                <img class="img-full" src="{{  child.featuredImage.one().url }}" alt="{{  child.featuredImage.one().title }}"  />
+                {% endif %}
+                <div class="user-content section-x-short">
+                  {{ child.body }}
+                </div>
+              </div>
+            </a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endfor %}
+      </div>
+
+      {% if product.consumerSellingPoints | length %}
+      <ul class="checklist mt-2 mb-4">
+        {% for row in product.consumerSellingPoints %}
+        {# Assuming 'text' is the column handle of the text field #}
+        <li>{{ row.text }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<hr class="mt-6" />
+
+<aside class="wrapper py-6">
+  <h2 class="h2 in-view" data-animate="up">Additional resources</h2>
+
+  <div class="row row--stretch flex--justify-center">
+    {% if product.additionalTiles|length %}
+    {% for row in product.additionalTiles %}
+    <div class="col--sm--6 col--md--4 stack-md mb-4" data-animate="up">
+      <div class="card">
+        <div class="icon-wrap">
+          {% if row.icon %}
+          <img src="{{ row.icon.one().url }}" alt="Provider">
+          {% endif %}
+          <h4 class="h3">{{ row.headline }}</h4>
+        </div>
+        <div class="text-group">
+          <div class="user-content">
+            {{ row.body }}
+          </div>
+
+          {% if row.tile_link|length %}
+          <a href="{{ row.tile_link.url }}" {% if row.tile_link.target|length %}target="{{ row.tile_link.target }}"{% endif %}>
+            {{ row.tile_link.text }} &gt;
+          </a>
+          {% endif %}
+
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+
+    <div class="col--sm--6 col--md--4 stack-md mb-4" data-animate="up">
+      <div class="card">
+        <div class="icon-wrap">
+          <img src="{{siteUrl}}images/general/Icons/provider.svg" alt="Provider">
+          <h4 class="h3">Find a Provider</h4>
+        </div>
+        <div class="text-group">
+          <div class="user-content">
+            <p>We may be able to connect you with healthcare providers using NeuroScience in your area.</p>
+          </div>
+          <a href="{{siteUrl}}contact">
+            Contact Us &gt;
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col--sm--6 col--md--4 stack-md mb-4" data-animate="up">
+      <div class="card">
+        <div class="icon-wrap">
+          <img src="{{siteUrl}}images/general/Icons/FAQ-icon.svg" alt="Faq Icon">
+          <h4 class="h3">FAQ</h4>
+        </div>
+        <div class="text-group">
+          <div class="user-content">
+            <p>You have questions and we want to help. Visit our FAQ to find answers to our most common inquiries.</p>
+          </div>
+          <a href="{{siteUrl}}faq">
+            Visit FAQ &gt;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col--sm--6 col--md--4 stack-md mb-4" data-animate="up">
+      <div class="card">
+        <div class="icon-wrap">
+          <img src="{{siteUrl}}images/general/Icons/who_we_are.svg" alt="Who We Are">
+          <h4 class="h3">Who We Are</h4>
+        </div>
+        <div class="text-group">
+          <div class="user-content">
+            <p>We would love to share the history of NeuroScience that has shaped who we are and where we want to go.</p>
+          </div>
+          <a href="{{siteUrl}}about">
+            About &gt;
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</aside>
+
+
+
+{% for category in craft.categories.group('productCategories').level(1).title('network') %}
+{% set children = category.getChildren().relatedTo(product) %}
+{% for child in children %}
+{% set networkColor = child.color %}
+<style>
+.theme-color { color: {{ networkColor }} }
+</style>
+{% endfor %}
+{% endfor %}
+
+
+{% if craft.categories.group('productCategories').level(1).title('Occasional Symptoms') %}
+<div class="modal-wrap" id="symptom-modal">
+  <div class="modal">
+    <a class="modal__close" href="#" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
+      <div>
+        <p class="sr-only">Close Modal</p>
+        <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
+      </div>
+    </a>
+    <div class="modal__inner">
+      <div class="modal__inner-hd">
+        <div class="h2 text-flush js-modal-hd">
+
+        </div>
+
+      </div>
+      <div class="user-content js-modal-content">
+
+      </div>
+    </div>
+  </div>
+  <span class="modal-screen" data-click-target="symptom-modal" data-click-bodyClass="terms-modal"></span>
+</div>
+
+
+{% js %}
+var $ = jQuery;
+$(document).ready(function(){
+  $('.js-symptom-link').click(function(){
+    var url = $(this).attr("href"),
+    modalContent = $(this).find('.js-description').html(),
+    modalTitle = $(this).find('.js-cat-title').text();
+
+    $('.js-product-symptoms-link').attr('href', url);
+    $('.js-modal-hd').text(modalTitle);
+    $('.js-modal-content').empty().append(modalContent);
+    $('#product-symptoms-link').prop('checked', false);
+  });
+});
+{% endjs %}
+{% endif %}
+{% endblock %}

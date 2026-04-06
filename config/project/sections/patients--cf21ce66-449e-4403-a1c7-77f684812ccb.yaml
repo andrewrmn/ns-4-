@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+handle: patients
+name: Patients
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - Primary
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
+    enabledByDefault: true
+    hasUrls: true
+    template: patients/_entry
+    uriFormat: '{% if object.level == 1 %}patients/{slug}{% else %}{parent.uri}/{slug}{% endif %}'
+structure:
+  maxLevels: null
+  uid: 0aa7c6d8-dcee-4900-b657-9cee7807b31f
+type: structure

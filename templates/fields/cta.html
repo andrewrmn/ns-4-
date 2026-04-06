@@ -1,0 +1,30 @@
+{#
+ # Banner Field
+ # -------------------
+ #}
+
+<div class="wrapper-full {{ block.background }}">
+    <div class="wrapper wrapper--thin section-tall text-center">
+        <div>
+            {% if block.headline|length %}<h2 class="h3">{{ block.headline }}</h2>{% endif %}
+            {% if block.subHeadline|length %}<h3 class="h2">{{ block.subHeadline }}</h3>{% endif %}
+            {% if block.body|length %}
+                <div class="user-content">
+                    {{ block.body }}
+                </div>
+            {% endif %}
+
+            {% if block.button|length %}
+                <a class="btn" href="{{ block.button.url }}" {% if block.button.target|length %}target="{{ block.button.target }}"{% endif %}>
+                    {{ block.button.text }}
+                </a>
+            {% endif %}
+            {% if block.button2|length %}
+                <a class="btn-alt" href="{{ block.button2.url }}" {% if block.button2.target|length %}target="{{ block.button2.target }}"{% endif %}>
+                    {{ block.button2.text }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

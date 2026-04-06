@@ -1,0 +1,210 @@
+// ---------------------------------------------------------------------
+//  Typography Styles
+// ---------------------------------------------------------------------
+
+// ----------------------------------------
+// Heading Mixins
+// ----------------------------------------
+
+@mixin h-xl {
+    display: block;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    //color: $white;
+    margin-bottom: 15px;
+    max-width: 750px;
+
+    @include start-at($medium) {
+        font-size: 48px;
+    }
+}
+
+@mixin h1 {
+    display: block;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 1.3;
+    color: $black;
+    margin-bottom: 16px;
+
+    @include start-at($medium) {
+        font-size: 36px;
+    }
+
+    @include start-at($large) {
+        font-size: 40px;
+    }
+}
+
+@mixin h2 {
+    display: block;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 1.5;
+    color: $black;
+    margin-bottom: 15px;
+
+    @include start-at($medium) {
+        font-size: 28px;
+    }
+}
+
+@mixin h3 {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.4;
+    max-width: 750px;
+    color: $black;
+    margin-bottom: 28px;
+
+    @include start-at($medium) {
+        font-size: 22px;
+    }
+}
+
+@mixin h4 {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: $base-line-height;
+    margin-bottom: 10px;
+}
+
+@mixin h5 {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: $base-line-height;
+    margin-bottom: 8px;
+}
+
+@mixin h6 {
+    font-family: $sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: $base-line-height;
+    margin-bottom: 8px;
+}
+
+
+// ----------------------------------------
+// Headings
+// ----------------------------------------
+
+.hxl {
+    @include h-xl;
+}
+
+.h1 {
+    @include h1;
+}
+
+.h2 {
+    @include h2;
+}
+
+.h3 {
+    @include h3;
+}
+
+.h4 {
+    @include h4;
+}
+
+.h5 {
+    @include h5;
+}
+
+.h6 {
+    @include h6;
+}
+
+
+// ----------------------------------------
+// Paragraph Style Mixins
+// ----------------------------------------
+
+@mixin para {
+    display: block;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    color: $gray;
+
+    @include stop-at($small) {
+        font-size: 1.4rem;
+    }
+}
+
+@mixin p-lg {
+    display: block;
+    font-size: 2.0rem;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: $gray;
+}
+
+@mixin p-sm {
+    display: block;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: $gray;
+}
+
+
+// ----------------------------------------
+// Paragraph Styles
+// ----------------------------------------
+
+.p,
+p {
+    @include para;
+}
+
+.user-content p + p {
+    margin-top: 30px;
+}
+
+p, .p, .user-content {
+    + [class^=btn] {
+        margin-top: 20px;
+
+        @include start-at($medium){
+            margin-top: 30px;
+        }
+    }
+
+    + .text-flush {
+        margin-top: 0;
+    }
+}
+
+.text-flush + .text-flush {
+    margin-top: 0;
+}
+
+.p-lg {
+    @include p-lg;
+}
+
+.p-sm,
+small {
+    @include p-sm;
+}
+
+.text-flush {
+    margin-bottom: 0;
+}

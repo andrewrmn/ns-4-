@@ -1,0 +1,210 @@
+field: f62131d2-f0cf-4654-8dbf-4aa73cd62619 # Updated Pathways Table
+fieldLayouts:
+  2e7d72cf-adfe-4c0e-bd49-246cfe81631c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 3b9b83ef-8163-4bee-a54c-86cf1f20e357 # Neurotransmitters
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: ed9194f8-1118-4fd9-9feb-9e30aa0f946d # Associated Product
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 346613b5-251f-48f4-9b41-514ae1815608 # Age
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 97cc8338-8c49-45d4-bcce-2f0b3559df22 # Age Check
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: b003223c-e81f-4944-aae6-d97851e26349 # Immune/ Adrenal
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  3b9b83ef-8163-4bee-a54c-86cf1f20e357: # Neurotransmitters
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: neurotransmitters
+    instructions: ''
+    name: Neurotransmitters
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: 'group:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  97cc8338-8c49-45d4-bcce-2f0b3559df22: # Age Check
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: ageCheck
+    instructions: ''
+    name: 'Age Check'
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  346613b5-251f-48f4-9b41-514ae1815608: # Age
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: age
+    instructions: ''
+    name: Age
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Not specified'
+            -
+              - value
+              - notSpecified
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 13+
+            -
+              - value
+              - '13'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 12-
+            -
+              - value
+              - '12'
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  b003223c-e81f-4944-aae6-d97851e26349: # Immune/ Adrenal
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: immuneAdrenal
+    instructions: ''
+    name: 'Immune/ Adrenal'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Not specified'
+            -
+              - value
+              - notSpecified
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Immune
+            -
+              - value
+              - immune
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Adrenal
+            -
+              - value
+              - adrenal
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  ed9194f8-1118-4fd9-9feb-9e30aa0f946d: # Associated Product
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: associatedProduct
+    instructions: ''
+    name: 'Associated Product'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      limit: ''
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\commerce\fields\Products

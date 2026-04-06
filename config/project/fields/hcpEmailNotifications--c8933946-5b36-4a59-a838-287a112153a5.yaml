@@ -1,0 +1,14 @@
+columnSuffix: ravjgxwb
+contentColumnType: boolean
+fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
+handle: hcpEmailNotifications
+instructions: ''
+name: 'HCP Email Notifications'
+searchable: false
+settings:
+  default: true
+  offLabel: 'No'
+  onLabel: 'Yes'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

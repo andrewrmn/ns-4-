@@ -1,0 +1,14 @@
+columnSuffix: null
+contentColumnType: boolean
+fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
+handle: disableInNueroselect
+instructions: ''
+name: 'Disable in NueroSelect?'
+searchable: true
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

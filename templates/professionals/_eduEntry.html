@@ -1,0 +1,157 @@
+{% set login = true %}
+{% for row in entry.educationMaterials %}
+{% if row.restrictedAccess | length %}
+{% set login = false %}
+{% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+{% if not currentUser.isInGroup('patients') %}
+{% set login = true %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+
+<article>
+    <header class="banner bg-light section-tall colors-standard banner--align-center ">
+        <div class="banner__content in-view" data-animate="up">
+            <div>
+                <h3 class="h2">{{ entry.title }}</h3>
+                <div class="user-content">
+                    {{ entry.body }}
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    {% if login == true %}
+
+    {% set hasAccordion = false %}
+
+    {% for row in entry.educationMaterials.all() %}
+        {% if row.accordionDrawer|length %}
+            {% if hasAccordion == false %}
+                {% set hasAccordion = true %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if hasAccordion and craft.app.request.segments|last == 'ingredient-index' %}
+    <div class="wrapper">
+        <nav class="cat-pills-wrap">
+            <div class="cat-pills">
+
+                <ul>
+                {% for row in entry.educationMaterials %}
+                    {% set headline = row.headline %}
+                    {% if row.accordionDrawer|length %}
+                    <li style="color: {{ row.color }}">
+                        <a href="#{{ row.headline |lower|replace('/[^\\w]+/', '-') }}" data-scroll-to="{{ headline |lower|replace('/[^\\w]+/', '-') }}">{{ row.headline }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% endif %}
+
+    <div class="row">
+
+        {% for row in entry.educationMaterials %}
+
+        {% set headline = row.headline %}
+        <div class="col--xs--12 col--md--12" id="{{ headline |lower|replace('/[^\\w]+/', '-') }}">
+            <section class="wrapper-full section-short">
+                <div class="wrapper">
+                    <div class="text-group-tall">
+                        <header>
+                            <h3 class="h2">{{ row.headline }}</h3>
+                            {% if row.body %}
+                            <div class="user-content">
+                                {{ row.body }}
+                            </div>
+                            {% endif %}
+                        </header>
+
+                        {% if row.materials %}
+                        <ul class="file-list">
+                            {% for row in row.materials %}
+                                {% if row.file.url %}
+                                <li>
+                                    <a href="{{ row.file.url }}" target="_blank">
+                                        <svg width="24" height="24"><use xlink:href="#shape-{{ row.iconType }}"></use></svg>
+                                        <span>{{ row.file.text }}</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        {% if row.accordionDrawer|length %}
+
+                            {% for row in row.accordionDrawer %}
+                            <div class="accordion" id="accordion-{{ loop.index }}">
+                                <h3 class="h3 text-brand accordion-question">{{ row.headline }}</h3>
+                                <div class="user-content accordion-answer">
+                                    {{ row.drawerContent }}
+                                </div>
+
+                                <figure class="accordion-trigger">
+                                    <svg width="30" height="30" viewBox="0 0 28 32"><g fill="#0182B4"><path d="M13.4 7.8v7.6H5.8v1.2h7.6v7.6h1.2v-7.6h7.6v-1.2h-7.6V7.8z"/></g></svg>
+                                </figure>
+                            </div>
+                            {% endfor %}
+
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="wrapper wrapper--x-thin section-short text-center">
+        {% if currentUser and currentUser.isInGroup('neuroselectOnly') %}
+            <p>Please login to main account to view this information.</p>
+        {% else %}
+          {% if currentUser.isInGroup('patients') %}
+            <p>Your account type does not have access to these materials.</p>
+            {% redirect "/patients/dashboard" %}
+          {% else %}
+            {{ generalTextNotifications.mustBeRegistered }}
+          {% endif %}
+
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+    <footer class="section-short text-center">
+        <a href="{{ siteUrl }}healthcare-providers/education" class="btn">Back to Education</a>
+    </footer>
+</article>
+
+{% includejs %}
+    var accordion = $('.accordion'),
+        qs = $('.accordion-answer');
+
+    qs.slideUp(300);
+
+    accordion.click(function(){
+        var el = $(this),
+            q = el.find('.accordion-answer');
+
+        if( el.hasClass('is-active') ){
+            el.removeClass('is-active');
+            q.slideUp(300);
+        } else {
+            qs.slideUp(300);
+            accordion.removeClass('is-active');
+            el.addClass('is-active');
+            q.slideDown(300);
+        }
+    });
+
+{% endincludejs %}

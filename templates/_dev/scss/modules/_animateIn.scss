@@ -1,0 +1,25 @@
+// ---------------------------------------------------------------------
+//  Animate In
+// ---------------------------------------------------------------------
+
+[data-animate] {
+	opacity: 0;
+	transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+[data-animate="up"] {
+	transform: translate3d(0, 8px, 0);
+}
+
+[data-animate="down"] {
+	transform: translate3d(0, -8px, 0);
+}
+
+[data-animate="fadeIn"] {
+	transform: translate3d(0, 0, 0);
+}
+
+[data-animate].in-view {
+	opacity: 1;
+	transform: none;
+}

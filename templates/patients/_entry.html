@@ -1,0 +1,104 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+    <nav class="sub-nav">
+        <ul class="ul-inline">
+            <li>
+                <a href="{{ siteUrl }}patients/">Overview</a>
+            </li>
+            {% for page in craft.entries.section('patients') %}
+            <li>
+                <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+
+    <div class="wrapper section">
+
+
+        {% if craft.app.request.segments|last == 'physician-finder' %}
+        <section>
+            <div class="text-group">
+
+                <h2 class="h1">{{ entry.title }}</h2>
+                <p>Complete the fields below to locate a physician(s) in your area.</p>
+
+                <form class="form filter-form js-filter-form-complex">
+                    <div class="flex flex--align-end">
+                        <div>
+                            <label>City</label>
+                            <input class="filter-form__city" type="text" placeholder="city" />
+                        </div>
+                        <div>
+                            <label>My State</label>
+                            <!-- <input class="filter-form__input" type="text" placeholder="state" /> -->
+                            <div class="select-wrap">
+                                <select class="filter-form__state">
+                                    <option value=""></option>
+                                    <option value="ca">CA</option>
+                                    <option value="mn">MN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Zip</label>
+                            <input class="filter-form__zip" type="text" placeholder="zip" />
+                        </div>
+                        <div>
+                            <label>Type of practitioner</label>
+                            <div class="select-wrap" class="filter-form__input">
+                                <select class="filter-form__type">
+                                    <option value="">no preference</option>
+                                    <option value="dentist">Dentist</option>
+                                    <option value="naturopath">Naturopath</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="filter-form__submit" type="submit" value="search" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="">
+                <p><span class="js-filter-text"></span><span class="js-results comma-list"></span></p>
+
+                <div class="text-center">
+                    <p class="h3 js-filter-result-message"></p>
+                </div>
+                <ul class="filter-list">
+                    <li class="" data-filter-city="minneapolis" data-filter-state="mn" data-filter-zip="55418" data-filter-type="dentist">
+                        <figure>
+                            <img src="https://pbs.twimg.com/profile_images/743138182607175680/ZJzktgBk_400x400.jpg" alt="" />
+                        </figure>
+                        <div class="section section--short">
+                            <h4>Dr. Crentist</h4>
+                            <p>Dentist</p>
+                            <p><a href="">(612) 555-555</a>   |   <a href="">jon.snow@crentalcleaners.com</a></p>
+                            <p>Minneapolis, Minneasota 55418</p>
+                            <p>763.222.2222</p>
+                        </div>
+                    </li>
+                    <li class="" data-filter-city="los angeles" data-filter-state="ca" data-filter-zip="90210" data-filter-type="naturopath">
+                        <figure>
+                            <img src="https://pbs.twimg.com/profile_images/668279339838935040/8sUE9d4C.jpg" alt="" />
+                        </figure>
+                        <div class="section section--short">
+                            <h4>Dr. Hippy</h4>
+                            <p>Naturopath</p>
+                            <p><a href="">(612) 555-555</a>   |   <a href="">hippy.man@natures.com</a></p>
+                            <p>Los Angeles, California 90210</p>
+                            <p>555.235.6412</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        {% endif %}
+    </div>
+
+{% endblock %}

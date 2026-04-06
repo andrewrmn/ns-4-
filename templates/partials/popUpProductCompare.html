@@ -1,0 +1,61 @@
+<div id="overlay"></div>
+<div class="compare-modal position-absolute bg-white " id="popup">
+    <div class="modal-content">
+        <a href="javascript:void(0)" class="js-modal-close position-absolute close">×</a>
+        <h3 class="text-center">Compare Products</h3>
+        <div class="select-products">
+            <h4 class="text-left">Select Products</h4>
+            <ul class="m-0 p-0">
+            	{% set products = craft.products.orderBy('title asc').id(patientAvailableProducts).all() %}
+            	{% for product in products %}
+            	{% if product.inComparisonTool %}
+              	<li class="product-tag-filter in-active d-inline-block mt-0" data-product-id="{{ product.id }}">
+                  <span class="js-cat-title">{{ product.title }}</span>
+              	</li>
+              	{% endif %}
+              {% endfor %}
+            </ul>
+            
+            <small class="p-sm mt-3 d-none">*Not all products are available for comparison</small>
+        </div>
+        <div class="d-flex products-table">
+        </div>
+        <div class="number-direction mt-4 d-none">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 px-2 mb-3 mb-md-0">
+              <ul>
+                <li><img src="../images/svgs/chart-arrow.svg" />&nbsp;Mild</li>
+                <li><img src="../images/svgs/chart-arrow.svg" />&nbsp;<img src="../images/svgs/chart-arrow.svg" />&nbsp;Moderate</li>
+                <li><img src="../images/svgs/chart-arrow.svg" />&nbsp;<img src="../images/svgs/chart-arrow.svg" />&nbsp;<img src="../images/svgs/chart-arrow.svg" />&nbsp;Strong</li>
+              </ul>
+            </div>
+            <div class="col-sm-12 col-md-8 px-2">
+                <p>The number and direction of the arrows reflect the precursor potential for metabolic end products and/or the mechanisms of action of select ingredient relationships, as compared to other NeuroScience products.</p>
+            </div>
+           
+        </div>
+        
+        <div class="mt-4">
+	        <a class="link p-sm text-center" href="#references" id="references-link">View References</a>
+	        
+	        <div id="references">
+		        <div class="user-content pt-4">
+			        {{ globalObjects.ct_references }}
+		        </div>
+	        </div>
+	        
+	        <script>
+		        var $ = jQuery;
+		        var rl = $('#references-link');
+		        var r = $('#references');
+		        r.hide();
+		        
+		        rl.click(function(e){
+			       e.preventDefault();
+			       r.slideToggle(200);
+		        });
+		    </script>
+        </div>
+      </div>
+    </div>
+</div>

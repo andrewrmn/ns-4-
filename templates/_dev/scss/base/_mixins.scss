@@ -1,0 +1,88 @@
+// ---------------------------------------------------------------------
+//  Mixins
+// ---------------------------------------------------------------------
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin wrapper {
+    width: $wrapper-percentage;
+    margin: 0 auto;
+    max-width: $wrapper-width;
+}
+
+@mixin cover-parent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+@mixin centerImg($position) {
+    position: $position;
+    width: auto;
+    height: auto;
+    min-height: 100%;
+    min-width: 100%;
+    max-width: none;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+
+    .isIE8 &,
+    .isIE9 & {
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+}
+
+@mixin visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+@mixin no-select {
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@mixin bg-image {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.bg-image--fallback {
+
+        img {
+            display: none;
+        }
+    }
+}

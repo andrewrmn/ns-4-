@@ -1,0 +1,63 @@
+{#
+ # Double CTA Field
+ # -------------------
+ #}
+{% set img1 = block.block1Image %}
+{% set img2 = block.block2Image %}
+
+<div class="double-cta">
+    <div {% if img1|length %} class="bg-overlay" style="background: url({{ img1.one().url }}) center / cover no-repeat;"{% else %} style="background: {{ block.block1BgColor }}" {% endif %}>
+        <div class="wrapper wrapper--x-thin section-x-tall text-white">
+            {% if block.headline|length %}<h2 class="h3">{{ block.headline }}</h2>{% endif %}
+            {% if block.body|length %}
+                <div class="user-content">
+                    {{ block.body }}
+                </div>
+            {% endif %}
+            {% if block.button|length %}
+            <div>
+                <a class="btn-white" href="{{ block.button.url }}" {% if block.button.target|length %}target="{{ block.button.target }}"{% endif %}>
+                    {{ block.button.text }}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if not img1|length %}
+        <figure class="acids d-none">
+            {% include '_dev/images/acids/Dopamine.svg' %}
+            {% include '_dev/images/acids/GABA.svg' %}
+            {% include '_dev/images/acids/Phenylalanine.svg' %}
+        </figure>
+        {% endif %}
+    </div>
+
+    <div {% if img2|length %} class="bg-overlay" style="background: url({{ img2.one().url }}) center / cover no-repeat;"{% else %} style="background: {{ block.block2BgColor }}" {% endif %}>
+        <div class="wrapper section-x-tall text-white">
+            {% if block.block2Headline|length %}<div class="h3">{{ block.block2Headline|striptags }}</div>{% endif %}
+            {% if block.block2Body|length %}
+                <div class="user-content">
+                    {{ block.block2Body }}
+                </div>
+            {% endif %}
+            {% if block.block2Button|length %}
+            <div>
+                <a class="btn-white" href="{{ block.block2Button.url }}" {% if block.block2Button.target|length %}target="{{ block.block2Button.target }}"{% endif %}>
+                    {{ block.block2Button.text }}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if not img2|length %}
+        <figure class="acids acids--2 d-none">
+            {% include '_dev/images/acids/Serotonin.svg' %}
+            {% include '_dev/images/acids/Tryptophan.svg' %}
+            {% include '_dev/images/acids/Tyrosine.svg' %}
+        </figure>
+        {% endif %}
+
+    </div>
+
+
+</div>

@@ -1,0 +1,358 @@
+// ---------------------------------------------------------------------
+//  Media Styles
+// ---------------------------------------------------------------------
+
+.img-full {
+    width: 100%;
+}
+
+.img-zoom {
+    &:hover {
+        cursor: zoom-in;
+    }
+}
+
+.img-cover {
+    object-fit: cover;
+    width:100%;
+    height:100%;
+}
+
+.bg-image {
+    @include bg-image;
+}
+
+.isIE .bg-image img {
+    object-fit: none;
+    width: auto;
+    max-width: 120%;
+    height: auto;
+    min-height: 100%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.img-circle {
+    @include bg-image;
+    //background: red;
+    position: relative;
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    padding-top: 100%;
+    overflow: hidden;
+    z-index: 1;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+}
+
+.img-circle-wrap {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.img-circle.img-circle--has-shadow {
+    overflow: visible;
+
+    &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: currentColor;
+        z-index: -1;
+    }
+}
+
+.icon-wrap {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+
+    > * {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        margin-bottom: 0;
+    }
+
+    img {
+        margin-right: 8px;
+    }
+}
+
+.banner-content,
+.text-center .banner-content {
+    img {
+        // display: inline-block;
+        // vertical-align: middle;
+        //margin: 30px 15px;
+        // width: 40%;
+        //
+        // @include start-at($small) {
+        //     width: 20%;
+        // }
+
+    }
+}
+
+// ----------------------------------------
+// Hexagon Images
+// ----------------------------------------
+
+$hex-bp: $medium;
+
+.hexagon-image {
+    position: relative;
+    max-width: 345px;
+    height: auto;
+	width: 100%;
+    margin-bottom: 10px;
+
+    .hexagon-image__img {
+        object-fit: cover;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .holder {
+        opacity: 1;
+    }
+
+    &.hexagon-image--border .hexagon-image__img {
+        width: calc(100% - 8px);
+        height: calc(100% - 8px);
+        top: 4px;
+        left: 4px;
+    }
+}
+
+.triple-hex {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+
+    @include start-at($large) {
+        .wrapper {
+        //    position: relative;
+        }
+    }
+
+    @include start-at($xlarge) {
+        .wrapper {
+            position: static;
+        }
+    }
+}
+
+.triple-hex__content {
+    padding: 100px 0;
+
+    @include start-at($hex-bp) {
+        max-width: 560px;
+    }
+
+    @include start-at($xlarge) {
+        max-width: 720px;
+    }
+}
+
+.triple-hex-images {
+    position: absolute;
+    width: 200px;
+    right: -60px;
+    margin-top: -80px;
+    display: none;
+    overflow: hidden;
+
+    @include start-at($hex-bp) {
+        display: block;
+        width: 710px;
+        right: auto;
+        left: 580px;
+        margin-top: -100px;
+    }
+
+    @include start-at($large) {
+        left: calc(580px + 120px);
+    }
+
+    @include start-at($xlarge) {
+        left: auto;
+        right: -200px;
+    }
+
+    .hexagon-image {
+        width: calc(50% - 1px);
+
+        @include start-at($hex-bp) {
+            width: calc(50% - 10px);
+        }
+    }
+
+    > .hexagon-image:nth-child(2) {
+        position: absolute;
+        left: calc(50% + 2px);
+        top: 0;
+
+        @include start-at($hex-bp) {
+            left: calc(50% + 10px);
+        }
+    }
+
+    > .hexagon-image:nth-child(3) {
+        left: calc(25% + 1px);
+        margin-top: -36px;
+
+        @include start-at($hex-bp) {
+            left: calc(25% + 5px);
+            margin-top: -95px;
+        }
+    }
+
+}
+
+
+.triple-hex-image-wrap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    max-width: 620px;
+    z-index: -1;
+    display: none;
+
+    @include start-at($medium) {
+        display: block;
+    }
+
+    @include start-at(1500px) {
+        max-width: 920px;
+    }
+}
+
+
+
+// ----------------------------------------
+// SVGs
+// ----------------------------------------
+
+svg {
+	display: block;
+	fill: currentColor;
+}
+
+.hex-icon {
+    margin-bottom: 15px;
+}
+
+.shape-inline {
+    display: inline-block;
+
+    > * {
+		display: inline-block;
+		vertical-align: middle;
+        line-height: 1;
+    }
+
+
+}
+
+.shape-inline--animate {
+    > * + * {
+        margin-left: 5px;
+		transition: transform $transition;
+    }
+}
+
+.shape-inline + .shape-inline {
+    margin-left: 24px;
+}
+
+a.shape-inline:hover {
+
+	 > * + * {
+		transform: translateX(4px);
+	}
+}
+
+a.shape-inline.shape-inline--no-animation:hover,
+.shape-inline--no-animation:hover {
+    > * + * {
+       transform: translateX(0);
+   }
+}
+
+
+// ----------------------------------------
+// Media Object
+// ----------------------------------------
+
+.media-object {
+    width: 100%;
+    overflow: hidden;
+
+    @include start-at($medium) {
+        display: flex;
+        align-items: center;
+
+        &.media-object--equalWidth > * {
+            width: 48%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        &.media-object--flip .media-object__media {
+            order: 2;
+            margin: 0 0 0 24px;
+        }
+    }
+}
+
+.media-object__media {
+    margin: 0 0 24px 0;
+
+    img {
+       display: block;
+   }
+
+   @include start-at($medium) {
+       margin: 0 24px 0 0;
+       flex-grow: 1;
+       min-width: 200px;
+   }
+}
+
+.media-object__bd {
+    overflow: hidden;
+}
+
+
+.media-object-pull-top {
+    margin-top: -100px;
+}

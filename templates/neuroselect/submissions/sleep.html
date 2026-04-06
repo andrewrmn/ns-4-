@@ -1,0 +1,158 @@
+
+
+
+    {% for submission in user.sleepSubmission %}
+        {% if craft.app.request.segments|last == submission.submissionId %}
+
+            <!-- String Fields -->
+            {% set age = submission.age %}
+            {% set sex = submission.gender %}
+
+
+            <!-- Array Fields -->
+            {% set concerns = submission.concerns| split(', ') %}
+            {% set relevantPathways = submission.relevantPathways| split(', ') %}
+            {% set excludedIngredients = submission.excludedIngredients| split(', ') %}
+            {% set preferredPhase = submission.preferredPhase| split(', ') %}
+
+
+            {% set subConcerns = submission.concerns %}
+            {% if subConcerns == 'Not applicable' %}
+                {% set subConcerns = '' %}
+            {% endif %}
+
+            {% set subExcludedIng = submission.excludedIngredients %}
+            {% if subExcludedIng == 'Not applicable' %}
+                {% set subExcludedIng = '' %}
+            {% endif %}
+
+
+            {% set recommendedProducts = [] %}
+            {% set productList = [] %}
+
+            {% set concernsUsed = [] %}
+            {% set biomarkersUsed = [] %}
+
+
+            <!-- Comparison Table Rows -->
+            {% for row in sleepTable.sleepTable.limit(200) %}
+                {% set continue = true %}
+
+
+                {% for item in row.clinicalIndications %}
+                    {% if item.title not in concerns %}
+                        {% set continue = false %}
+                    {% endif %}
+
+                    <!-- Make sure it's not already being used -->
+                    {% if item.title in concernsUsed %}
+                        {% set continue = false %}
+                    {% endif %}
+                {% endfor %}
+
+
+
+                {% if row.biomarkers|length %}
+
+                    <!-- Check for pathways -->
+                    {% for item in row.biomarkers %}
+                        {% if item.title not in relevantPathways %}
+                            {% set continue = false %}
+                        {% endif %}
+
+                        <!-- Make sure it's not already being used -->
+                        {% if item.title in biomarkersUsed %}
+                            {% set continue = false %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+
+                <!-- Check for excluded ingredients -->
+                {% for item in row.excludedIngredients %}
+                    {% if item.title in excludedIngredients %}
+                        {% set continue = false %}
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Check for matching support type -->
+                {% set supportMatch = false %}
+                {% for item in row.supportType %}
+                    {% if item.label in preferredPhase %}
+                        {% set supportMatch = true %}
+                    {% endif %}
+                {% endfor %}
+                {% if supportMatch == false %}
+                    {% set continue = false %}
+                {% endif %}
+
+
+
+                {% if row.clinicalIndications|length == '0' and row.biomarkers|length == '0'  %}
+                    {% if subConcerns != '' or submission.relevantPathways != '' %}
+                        {% set continue = false %}
+                    {% endif %}
+                {% endif %}
+
+
+                {% if continue %}
+
+                    {% set addProduct = true %}
+                    {% set addInfo = '' %}
+                    {% set product = row.product.one() %}
+
+                    {% if row.age != 'notSpecified' %}
+                        {% set addProduct = false %}
+                            {% if row.age.value == 13 %}
+                                {% if submission.age >= 13 and submission.age != '' %}
+                                    {% set addProduct = true %}
+                                    {% set addInfo = '(13+)' %}
+                                {% endif %}
+                            {% endif %}
+                            {% if row.age.value == 12 %}
+                                {% if submission.age <= 12 and submission.age != '' %}
+                                    {% set addProduct = true %}
+                                    {% set addInfo = '(12-)' %}
+                                {% endif %}
+                            {% endif %}
+                            {% if row.age.value == 'notSpecified' and submission.age == '' %}
+                                {% set addProduct = true %}
+                                {% set addInfo = '(no age)' %}
+                            {% endif %}
+                    {% endif %}
+
+
+
+                    {% if addProduct == true %}
+
+                        {% if product.title not in recommendedProducts and recommendedProducts|length < 3 %}
+                            {% set recommendedProducts = recommendedProducts|merge([product.title]) %}
+
+                            <!-- Only allow 2 sleep sugeestions -->
+                            {% if productList|length < 2 %}
+                            {% set productList = productList|merge([product]) %}
+                            {% endif %}
+
+                            {% for item in row.clinicalIndications %}
+                                {% if item.title in concerns %}
+                                    {% set concernsUsed = concernsUsed|merge([item.title]) %}
+                                {% endif %}
+                            {% endfor %}
+
+
+                            {% for item in row.biomarkers %}
+                                {% if item.title in relevantPathways %}
+                                    {% set biomarkersUsed = biomarkersUsed|merge([item.title]) %}
+                                {% endif %}
+                            {% endfor %}
+
+                        {% endif %}
+
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% include 'neuroselect/submissions/report' %}
+
+        {% endif %}
+    {% endfor %}

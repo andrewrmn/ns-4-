@@ -1,0 +1,121 @@
+
+{% for submission in user.clinicalIndicationSubmission %}
+    {% if craft.app.request.segments|last == submission.submissionId %}
+
+        {% set age = submission.age %}
+        {% set sex = submission.gender %}
+
+        {% set symptoms = submission.clinicalindicators| split(', ')%}
+
+        <div class="wrapper mb-4 is-hidden">
+            {% set mySymptoms = submission.clinicalindicators | split(', ') %}
+            <ul class="ul mb-4">
+                {% for symptom in mySymptoms %}
+                    <li>
+                        {{ symptom }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+            {% set recommendedProducts = [] %}
+            {% set productList = [] %}
+            {% set symptomsUsed = [] %}
+
+            {% for row in clinicalIndicatorsTable.clinicalIndicatorsTable %}
+
+                {% set continue = true %}
+
+                {% for cs in row.clinicalSymptoms %}
+                    {% if cs.title not in symptoms %}
+                        {% set continue = false %}
+                    {% endif %}
+
+                    {% if cs.title in symptomsUsed %}
+                        {% set continue = false %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if continue %}
+
+                    {% set addProduct = true %}
+                    {% set addInfo = '' %}
+
+                    {% if row.ageCheck  %}
+                        {% set addProduct = false %}
+
+
+                            {% if row.age.value == 13 %}
+                                {% if submission.age >= 13 and submission.age != '' %}
+
+                                    {% set addProduct = true %}
+
+                                    {% set addInfo = '(13+)' %}
+
+                                {% endif %}
+                            {% endif %}
+                            {% if row.age.value == 12 %}
+                                {% if submission.age <= 12 and submission.age != '' %}
+                                    {% set addProduct = true %}
+                                    {% set addInfo = '(12-)' %}
+
+                                {% endif %}
+                            {% endif %}
+
+                            {% if row.age.value == 'notSpecified' and submission.age == '' %}
+                                {% set addProduct = true %}
+                                {% set addInfo = '(no age)' %}
+                            {% endif %}
+
+                    {% endif %}
+
+
+                    {% if row.immuneAdrenal.value != 'notSpecified' %}
+                        {% set addProduct = false %}
+
+                        {% if row.immuneAdrenal.value == 'immune' %}
+                            {% if submission.category == 'Immune' %}
+
+                                {% set addProduct = true %}
+                                {% set addInfo = '(immune)' %}
+
+
+                            {% endif %}
+                        {% endif %}
+
+                        {% if row.immuneAdrenal.value == 'adrenal' %}
+                            {% if submission.category == 'Adrenal' %}
+
+                                {% set addProduct = true %}
+                                {% set addInfo = '(adrenal)' %}
+
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+
+                    {% if addProduct == true %}
+
+                        {% set product = row.associatedProduct.one() %}
+
+                        {% if product.title not in recommendedProducts and recommendedProducts|length < 3 %}
+
+                            {% set recommendedProducts = recommendedProducts|merge([product.title]) %}
+                            {% set productList = productList|merge([product]) %}
+
+                            {% for cs in row.clinicalSymptoms %}
+                                {% if cs.title in symptoms %}
+                                    {% set symptomsUsed = symptomsUsed|merge([cs.title]) %}
+                                {% endif %}
+                            {% endfor %}
+
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {% include 'shop/customer/submissions/report' %}
+
+    {% endif %}
+{% endfor %}

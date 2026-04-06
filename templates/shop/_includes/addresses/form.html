@@ -1,0 +1,119 @@
+{% set countries = craft.commerce.countries.allEnabledCountriesAsList %}
+{% set states = craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
+
+{% set modelName = modelName is defined ? modelName : 'address' %}
+{% set model = address is defined ? address : null %}
+
+
+<div class="addressBox {{ modelName }} form-sm text-group">
+	<h3>Add/ Edit Address</h3>
+	
+	<h6 class="h6 mb-4">*Required fields</h6>
+	<div class="row text-group">
+		<div class="col--xs--12 col--sm--6 col--md--4">
+			<label for="{{ modelName }}-firstName">First Name*</label>
+			<input type="text" id="{{ modelName }}-firstName" class="u-full-width"  name="{{ modelName }}[firstName]" value="{{ model ? model.firstName : '' }}" {% if modelName == 'shippingAddress' %}required{% endif %}>
+			{% if model and model.getErrors('firstName') %}
+			<span class="flash">{{ model.getErrors('firstName')|join }}</span>
+			{% endif %}
+		</div>
+		<div class="col--xs--12 col--sm--6 col--md--4">
+			<label for="{{ modelName }}-lastName">Last Name*</label>
+			<input type="text" id="{{ modelName }}-lastName" class="u-full-width"  name="{{ modelName }}[lastName]" value="{{ model ? model.lastName : '' }}" {% if modelName == 'shippingAddress' %}required{% endif %}>
+			{% if model and model.getErrors('lastName') %}
+			<span class="flash">{{ model.getErrors('lastName')|join }}</span>
+			{% endif %}
+		</div>
+
+		<div class="col--xs--12 col--sm--12 col--md--4">
+			<label for="{{ modelName }}-businessName">Business Name</label>
+			<input type="text" id="{{ modelName }}-businessName" class="u-full-width" name="{{ modelName }}[businessName]" value="{{ model ? model.businessName : '' }}">
+			{% if model and model.getErrors('businessName') %}
+			<span class="flash">{{ model.getErrors('businessName')|join }}</span>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="row text-group">
+		<div class="col--xs--12 col--sm--6 col--md--4">
+			<label for="{{ modelName }}-address1">Street Address*</label>
+			<input type="text" id="{{ modelName }}-address1" class="u-full-width" { name="{{ modelName }}[address1]" value="{{ model ? model.address1 : '' }}" {% if modelName == 'shippingAddress' %}required{% endif %}>
+			{% if model and model.getErrors('address1') %}
+			<span class="flash">{{ model.getErrors('address1')|join }}</span>
+			{% endif %}
+		</div>
+
+		<div class="col--xs--12 col--sm--6 col--md--2">
+			<label for="{{ modelName }}-address2">Suite/Apt #</label>
+			<input type="text" id="{{ modelName }}-address2" class="u-full-width" name="{{ modelName }}[address2]" value="{{ model ? model.address2 : '' }}">
+			{% if model and model.getErrors('address2') %}
+			<span class="flash">{{ model.getErrors('address2')|join }}</span>
+			{% endif %}
+		</div>
+
+		<div class="col--xs--12 col--sm--6 col--md--4">
+			<label for="{{ modelName }}-city">City*</label>
+			<input type="text" id="{{ modelName }}-city" class="u-full-width"  name="{{ modelName }}[city]" value="{{ model ? model.city : '' }}" {% if modelName == 'shippingAddress' %}required{% endif %}>
+			{% if model and model.getErrors('city') %}
+			<span class="flash">{{ model.getErrors('city')|join }}</span>
+			{% endif %}
+		</div>
+
+		<div class="col--xs--12 col--sm--6 col--md--2">
+			<label for="{{ modelName }}-zipCode">Zip Code*</label>
+			<input type="text" id="{{ modelName }}-zipCode" class="u-full-width"  name="{{ modelName }}[zipCode]" value="{{ model ? model.zipCode : '' }}" {% if modelName == 'shippingAddress' %}required{% endif %}>
+			{% if model and model.getErrors('zipCode') %}
+			<span class="flash">{{ model.getErrors('zipCode')|join }}</span>
+			{% endif %}
+		</div>
+	</div>
+
+	{% set notUSA = true %}
+	<div class="row text-group">
+		<div class="col--xs--12 col--sm--6">
+			<label for="{{ modelName }}-countryId">Country*</label>
+			<div class="select-wrap">
+				<select class="address-country u-full-width" name="{{ modelName }}[countryId]">
+					{% for key, option in countries %}
+					{% set optionValue = (model ? model.countryId : '233') %}
+
+					<option value="{{ key }}" {% if key == optionValue %} selected{% endif %}>{{ option }}</option>
+
+					{% endfor %}
+				</select>
+			</div>
+			{% if model and model.getErrors('countryId') %}
+			<span class="flash">{{ model.getErrors('countryId')|join }}</span>
+			{% endif %}
+		</div>
+
+
+
+		<div class="col--xs--12 col--sm--6">
+			<label for="{{ modelName }}-state">State*</label>
+			{% set statesByCountryId = craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
+			<div class="select-wrap">
+				<select data-modelname="{{ modelName }}" class="js-address-stateId w-full" name="{{ modelName }}[stateValue]" >
+				{% for countryId, states in statesByCountryId %}
+				    {% set country = craft.commerce.countries.getCountryById(countryId) %}
+				    <optgroup label="{{ country.name }}">
+				    {% for stateId, stateName in states %}
+				        <option {% if model and model.stateId == stateId %}selected="selected"{% endif %} value="{{ stateId }}">{{ stateName }}</option>
+					  {% endfor %}
+				  </optgroup>
+				{% endfor %}
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<div class="row text-group section-short section--flush-top">
+		<div class="col--xs--12 col--sm--6">
+			<label for="{{ modelName }}-phone">Phone*</label>
+			<input type="text" id="{{ modelName }}-phone" class="u-full-width"  name="{{ modelName }}[phone]" value="{{ model ? model.phone : '' }}">
+			{% if model and model.getErrors('phone') %}
+			<span class="flash">{{ model.getErrors('phone')|join }}</span>
+			{% endif %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+{#
+ # Content Modules Base
+ # ---------------
+ #
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+	{% include 'partials/contentModules' %}
+	
+	
+  
+	<script>
+	document.body.classList.add('page-{{ entry.title |replace(' ', '-') | lower }}');
+	</script>
+	
+	
+	{% if entry.id == '727254' %}
+  {% include '/partials/referral.html' %}
+  {% endif %}
+  
+{% endblock %}

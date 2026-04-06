@@ -1,0 +1,48 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+	<article class="post wrapper wrapper--thin section section--flush-top {% for tag in entry.tags %}post-tag post-tag--{{tag.slug}} {% endfor %}">
+
+		<figure>
+			{% if entry.featuredImage.one() != '' %}
+	        <img src="{{ entry.featuredImage.one().url }}" alt="{{ entry.featuredImage.one().title }}" />
+	        {% else %}
+	        <img src="{{ siteUrl }}images/general/science-pattern.png" alt="" />
+	        {% endif %}
+	    </figure>
+
+		<div class="text-group user-content">
+			<p>{{ entry.postDate.format('F d, Y') }}</p>
+			<h1 class="h2">{{ entry.title }}</h1>
+			{{ entry.body }}
+		</div>
+
+
+		<footer class="blog-post-tags section">
+            <p class="p-sm">View more like this: {% for tag in entry.tags %}<a class="{{ tag.slug }}" href="{{siteUrl}}news?q={{ tag.slug }}">{{ tag.title }}</a>{% endfor %}</p>
+        </footer>
+
+
+		<div class="text-center">
+			<a class="btn-alt" href="{{ siteUrl }}news/">Back To All</a>
+		</div>
+
+
+	</article>
+{% endblock %}

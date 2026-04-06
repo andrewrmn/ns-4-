@@ -1,0 +1,99 @@
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+    <div class="tabcontent patient-tabcontent pb-5">
+        <div class="dashboard grey-bg px-md-6 px-4 py-md-5 py-4">
+            {% include 'hcp/_includes/top-search-patient' %}
+        </div>
+        <div class="new-product grey-bg pb-5 pt-4 px-xl-4">
+            <div class="container px-3">
+                <a class="d-block mb-4" href="{{ url('hcp/dashboard') }}">< Back</a>
+                <div class="newpatient pb-4 pb-md-5">
+                    <div class="circle">
+                        <h2><a href="#">+</a></h2>
+                    </div>
+                    <h2>New Patient</h2>
+
+                </div>
+                <form class="form newPatientForm" id="newPatientForm" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+                    {{ csrfInput() }}
+                    {{ actionInput('neuroselect/hcp/save-patient') }}
+                    {{ redirectInput('hcp/dashboard') }}
+                    {{ hiddenInput('sendRecommendation', 0) }}
+                    <div class="row newPatientdetails">
+                        <div class="col-12">
+                            <h3>Please fill in new patient information.</h3>
+                            {% set errorMessage = craft.app.session.getFlash('error', null, true) %}
+                            <div class="errorMessage">
+                            {% if errorMessage %}
+                                <p class="text-red">{{ errorMessage }}</p>
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="firstName" value="" placeholder="First Name*" required />
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="lastName" value="" placeholder="Last Name*" required />
+                        </div>
+                        <div class="col-12">
+                            <input type="email" name="email" value="" placeholder="Email*" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="Patient">
+                                <button class="submit" name="btnInvitePatient" type="submit">Invite Patient</button>&nbsp;&nbsp;&nbsp;<button type="text" class="btn" name="invitePatientSendRecommendation">Invite Patient + Send Recommendation</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-wrap" id="success-message-modal">
+        <div class="modal" style="height: auto;">
+          <div class="modal__inner">
+            <div class="user-content js-modal-content">
+              <p>An email invitation has been sent to your patient.</p>
+            </div>
+            <div class="d-flex flex-items-center flex-justify-start mt-4">
+              <p><a class="mr-4" href="{{ url('hcp/dashboard') }}">Return to Dashboard ></a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% js %}
+    $(document).ready(function(){
+        $(document).on("click", "button[name='invitePatientSendRecommendation']", function() {
+            $("input[name='sendRecommendation']").val(1);
+            $("form#newPatientForm").submit();
+        })
+
+        $('#newPatientForm').submit(function(ev) {
+            ev.preventDefault();
+            $("input[name='sendRecommendation']").val(0);
+            var data = $(this).serialize();
+            $.post('/',
+                data,
+                function(response) {
+                    if (response.success) {
+                        $('#newPatientForm')[0].reset();
+                        $("div.errorMessage").html('');
+                        $("div#success-message-modal").addClass('is-active');
+                        $('div#success-message-modal').html($('div#success-message-modal').html().replace('[patientId]', response.patientId));
+                    } else {
+                        $("div.errorMessage").html("<p class='text-red'>" + response.message + "</p>")
+                    }
+                }
+            );
+        })
+    })
+{% endjs %}

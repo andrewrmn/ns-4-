@@ -1,0 +1,65 @@
+{#
+# Contact Form
+# -------------------
+#}
+{% set form = craft.formBuilder2.getFormByHandle('mainContactForm') %}
+{% set formSettings = form.formSettings %}
+{% set spamProtectionSettings = form.spamProtectionSettings %}
+{% set tabs = form.fieldLayout.getFieldLayout().getTabs() %}
+{% set scripts = craft.formBuilder2.includeScripts(form) %}
+
+<div class="form-wrap">
+
+    <form method="post" accept-charset="utf-8" name="{{ form.handle }}" class="formbuilder2 contact-form-main" id="{{ form.handle }}"{% if formSettings.hasFileUploads == '1' %} enctype="multipart/form-data"{% endif %} validate>
+        <input type="hidden" name="action" value="formBuilder2/entry/submitEntry">
+        <input type="hidden" name="redirect" data-custom-redirect="{{ formSettings.formRedirect.customRedirect }}" value="{{ formSettings.formRedirect.customRedirectUrl }}">
+        <input type="hidden" name="formHandle" value="{{ form.handle }}">
+        {% if spamProtectionSettings.spamTimeMethod == '1' %}<input type="hidden" name="spamTimeMethod" value="{{ 'now'|date('U') }}">{% endif %}
+        {% if spamProtectionSettings.spamHoneypotMethod == '1' %}<div style="display:none;"><label for="email-addresss-new">{{ spamProtectionSettings.spamHoneypotMethodMessage }}</label><input name="email-address-new" value="" id="email-addresss-new"></div>{% endif %}
+        {{ csrfInput() }}
+
+        {# Fields #}
+        {% for tab in tabs %}
+        {% set fields = tab.getFields() %}
+        <fieldset class="{{ tab.name | camelCase(tab.name) }}">
+            {% for field in fields %}
+            <div class="field-wrap">
+                {% set value = value is defined ? value : [] %}
+                {% set input = craft.formBuilder2.getInputHtml(field, value) %}
+                {{ input |raw }}
+            </div>
+
+
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+
+        {% if form.extra['termsAndConditions'] is defined and form.extra['termsAndConditions'] %}
+        {{ craft.formBuilder2.getTermsInputs(form) |raw }}
+        {% endif %}
+
+        {# Errors/Success Messages #}
+        <div class="notifications">
+            <p class="notification error-message">{{ craft.app.session.getFlash('error') | raw }}</p>
+            <p class="notification success-message">{{ craft.app.session.getFlash('success') | raw }}</p>
+            {% set errors = (errors is defined ? errors : null) %}
+            {% if errors %}
+            <ul class="errors">
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <button class="btn" type="submit" id="form-submit">{% if formSettings.submitButtonText %}{{ formSettings.submitButtonText }}{% else %}Submit Message{% endif %}</button>
+        </div>
+
+    </form>
+
+    <div class="js-form-success">
+        <p class="h3">{{ form.messageSettings.successMessage }}</p>
+    </div>
+
+</div>

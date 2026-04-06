@@ -1,0 +1,104 @@
+{#
+ # Content Modules Base
+ # ---------------
+ #
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+    {% if currentUser.admin %}
+
+    <div class="wrapper-wide pt-8 pb-8">
+        {% set query = craft.app.request.getParam('q') %}
+
+        <div class="col-12 col-md-6 mb-5">
+            <h2 class="h3 mb-2">Search Reports by user</h2>
+            <form method="GET" action="{{ url('/reports/neuroselect/') }}">
+                <input type="text" name="q" placeholder="Search user by email or name" id="search"{% if query | length %} value="{{ query }}"{% endif %}/>
+            </form>
+        </div>
+
+        {% if query | length %}
+            {% set users = craft.users.search(query).order('score') %}
+            <p class="h4 mb-5">{{ users|length }} user(s) found.</p>
+            <div class="mb-6">
+                <table class="u-full-width full-borders">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>type</th>
+                            <th class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            {% if user.qrScanSubmissions|length %}
+                                {% for row in user.qrScanSubmissions %}
+                                    <tr>
+                                        <td>
+                                            {{ row.submissionId }}
+                                        </td>
+                                        <td>{{ row.date }}</td>
+                                        <td>
+                                            {{ user.email }}
+                                        </td>
+                                        <td>
+                                            QR Scan
+                                        </td>
+                                        <td class="text-right"><a href="/account/neuroselect/qrscan/{{ row.submissionId }}?q={{ user.email }}" target="_blank">Generate Report</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            {% if user.pathwaySubmissions|length %}
+                                {% for row in user.pathwaySubmissions %}
+                                    <tr>
+                                        <td>
+                                            {{ row.submissionId }}
+                                        </td>
+                                        <td>{{ row.date }}</td>
+                                        <td>
+                                            {{ user.email }}
+                                        </td>
+                                        <td>
+                                            Pathway
+                                        </td>
+                                        <td class="text-right"><a href="/account/neuroselect/pathway/{{ row.submissionId }}?q={{ user.email }}" target="_blank">Generate Report</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            {% if user.clinicalIndicationSubmission|length %}
+                                {% for row in user.clinicalIndicationSubmission %}
+                                    <tr>
+                                        <td>
+                                            {{ row.submissionId }}
+                                        </td>
+                                        <td>{{ row.date }}</td>
+                                        <td>
+                                            {{ user.email }}
+                                        </td>
+                                        <td>
+                                            Clinical Indication
+                                        </td>
+                                        <td class="text-right"><a href="/account/neuroselect/clinicalindication/{{ row.submissionId }}?q={{ user.email }}" target="_blank">Generate Report</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+        {% endif %}
+    </div>
+
+
+    {% else %}
+        {% redirect '/404/' %}
+    {% endif %}
+{% endblock %}

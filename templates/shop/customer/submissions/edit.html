@@ -1,0 +1,464 @@
+
+{% set title = 'Edit - Product Information Requests' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+
+
+
+    {% set query = craft.app.request.getParam('q') %}
+    {% if query | length %}
+        {% for u in craft.users.email(query) %}
+            {% set user = u %}
+        {% endfor %}
+    {% endif %}
+
+    {% set submissionType = craft.app.request.getParam('type') %}
+    {% set submissionId = craft.app.request.getParam('id') %}
+
+
+    <div class="wrapper-wide pir-update-wrap">
+        <div class="mt-6">
+            <header>
+                {% if currentUser %}<p class="mb-3"><a id="pir-back" href="{{ url('account/neuroselect/') }}">< Back</a></p>{% endif %}
+                {% if submissionId %}
+                    <h2>Edit Submission #{{ submissionId }}</h2>
+                {% else %}
+                    <h2>Add Submission</h2>
+                {% endif %}
+
+            </header>
+            <div class="mt-4 mb-4">
+                <div class=" text-group account-card">
+                    <div class="card col-12">
+
+                        {% set pathways = '' %}
+                        {% set clinicalindicators = '' %}
+                        {% set products = '' %}
+                        {% set category = '' %}
+                        {% set age = '' %}
+                        {% set sex = '' %}
+                        {% set url = '' %}
+
+                        {% if submissionType == 'pathway' %}
+                            {% for submission in user.pathwaySubmissions %}
+                                {% if submissionId == submission.submissionId %}
+
+                                    {% set pathways = submission.pathways| split(', ') %}
+                                    {% set category = submission.category|lower %}
+                                    {% set age = submission.age|lower %}
+                                    {% set sex = submission.gender|lower %}
+
+                                {% endif %}
+                            {% endfor %}
+
+                            {% set url = siteUrl ~ 'account/neuroselect/pathway/' ~ submissionId %}
+                        {% endif %}
+
+
+                        {% if submissionType == 'clinicalindication' %}
+                            {% for submission in user.clinicalIndicationSubmission %}
+                                {% if submissionId == submission.submissionId %}
+
+                                    {% set clinicalindicators = submission.clinicalindicators| split(', ') %}
+                                    {% set category = submission.category|lower %}
+                                    {% set age = submission.age|lower %}
+                                    {% set sex = submission.gender|lower %}
+
+                                {% endif %}
+                            {% endfor %}
+
+                            {% set url = siteUrl ~ 'account/neuroselect/clinicalindication/' ~ submissionId %}
+
+                        {% endif %}
+
+
+                        {% if submissionType == 'products' %}
+                            {% for submission in user.productSubmission %}
+                                {% if submissionId == submission.submissionId %}
+
+                                    {% set products = submission.products| split(', ') %}
+                                    {% set age = submission.age|lower %}
+                                    {% set sex = submission.gender|lower %}
+
+                                {% endif %}
+                            {% endfor %}
+
+                            {% set url = siteUrl ~ 'account/neuroselect/products/' ~ submissionId %}
+
+                        {% endif %}
+
+
+                        <div class="pir-update-error mb-4 d-none">
+                            <p class="text-error text-italic">Your submission could not be saved.</p>
+                        </div>
+                        <div class="pir-update-success mb-4 d-none">
+                            {% if query | length %}
+                            <p class="text-brand-alt">Your submission has been updated successfully. <a id="submission-url" href="{{ url }}?q={{ user.email }}">View the report here.</a></p>
+                            {% else %}
+                            <p class="text-brand-alt">Your submission has been updated successfully. <a id="submission-url" href="{{ url }}">View the report here.</a></p>
+                            {% endif %}
+
+                        </div>
+
+                        <form id="edit-pir-form" class="col-lg-10" action="" method="post" accept-charset="UTF-8" class="">
+                            <input type="hidden" name="action" value="/appConnector/update/UpdatePir">
+                            {{ csrfInput() }}
+
+                            <input type="hidden" id="submissionId" name="submissionId" value="{{ submissionId }}">
+
+                            <input type="hidden" name="submissionType" value="{{ submissionType }}">
+                            <input type="hidden" name="userId" value="{{ user.id }}">
+
+
+                            {% if submissionType == 'pathway' %}
+                            <div class="field-wrap mb-5" id="selections">
+                                <div class="mb-4">
+                                    <label class="mb-3">Select Pathways</label>
+                                    <small>* Indicates product with applicable mechanism currently unavailable.</small>
+                                </div>
+
+                                {% set pathwayList = 'updatedPathways' %}
+
+                                {% set pathwayBase = [] %}
+
+                                {% for category in craft.categories.group(pathwayList).order('title asc') %}
+                                    {% set base = category.title | replace('Low') | replace('High') | replace(' ') %}
+                                    {% if base not in pathwayBase %}
+                                        {% set pathwayBase = pathwayBase|merge([base]) %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="radio-group-head">
+                                    <p>Low</p>
+                                    <span></span>
+                                    <p>High</p>
+                                </div>
+
+                                {% for item in pathwayBase|sort %}
+                                    <div class="radio-group">
+
+                                        {% set low = 'Low ' ~ item %}
+                                        {% if low in craft.categories.group(pathwayList) %}
+                                            {% set checked = false %}
+                                            {% for item in pathways %}
+                                                {% if low == item %}
+                                                    {% set checked = true %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        <input type="radio" name="{{ item }}" value="{{ low }}" id="low-{{ item }}" {% if checked %}checked{% endif %} />
+                                        <label class="radio-button" for="low-{{ item }}"></label>
+                                        {% else %}
+                                        <span class="no-value">*</span>
+                                        {% endif %}
+
+
+                                        <span class="pathway">{{ item }}</span>
+
+
+                                        {% set high = 'High ' ~ item %}
+                                        {% if high in craft.categories.group(pathwayList) %}
+                                            {% set checked = false %}
+                                            {% for item in pathways %}
+                                                {% if high == item %}
+                                                    {% set checked = true %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        <input type="radio" name="{{ item }}" value="{{ high }}" id="high-{{ item }}" {% if checked %}checked{% endif %} />
+                                        <label class="radio-button" for="high-{{ item }}"></label>
+                                        {% else %}
+                                        <span class="no-value">*</span>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+
+
+                                <div class="d-none" id="pathway-radios">
+                                    {% for category in craft.categories.group(pathwayList).order('title asc') %}
+
+
+                                    <div class="pr-3 mb-4 col-6 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="pathway-{{ category.slug }}" name="pathways[]" value="{{ category.title }}">
+                                            <label for="pathway-{{ category.slug }}">{{ category.title }}</label>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+                            {% if submissionType == 'clinicalindication' %}
+                            <div class="field-wrap mb-5" id="selections">
+                                <label class="mb-3">Select Clinical Indicators</label>
+
+                                <div class="d-flex flex-wrap">
+                                    {% for category in craft.categories.group('clinicalSymptoms').order('title asc') %}
+                                    {% set checked = false %}
+
+                                    {% if category.title in clinicalindicators %}
+                                        {% set checked = true %}
+                                    {% endif %}
+
+                                    <div class="pr-3 mb-4 col-6 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="clinicalindicators-{{ category.slug }}" name="clinicalindicators[]" {% if checked %}checked{% endif %} value="{{ category.title }}">
+                                            <label for="clinicalindicators-{{ category.slug }}">{{ category.title }}</label>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+                            {% if submissionType == 'products' %}
+                            <div class="field-wrap mb-5" id="selections">
+                                <label class="mb-3">Select Products</label>
+
+                                <div class="d-flex flex-wrap">
+                                    {% set allProducts = craft.products({
+                                        hasVariant: {
+                                            hasStock: true
+                                        }
+                                    }) %}
+
+                                    {% for product in allProducts.order('title asc') %}
+                                    {% set checked = false %}
+
+                                    {% if product.id in products %}
+                                        {% set checked = true %}
+                                    {% endif %}
+
+
+                                    <div class="pr-3 mb-4 col-6 col-sm-4 col-md-4 col-lg-4">
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="products-{{ product.slug }}" name="products[]" {% if checked %}checked{% endif %} value="{{ product.id }}">
+                                            <label for="products-{{ product.slug }}">{{ product.title }}</label>
+                                        </div>
+                                    </div>
+
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+                            <div class="d-sm-flex">
+                                {% if submissionType != 'products' %}
+                                <div class="mb-3 col-12 col-sm-6 col-md-4" id="categories">
+                                    <div class="field-wrap">
+                                        <label class="mb-4">Category</label>
+
+                                        <div class="d-flex flex-wrap">
+                                            <div class="mb-4 mr-4">
+                                                <div class="checkbox">
+                                                    <input type="radio" id="pathway-category-immune" name="Category" {% if category == 'immune' %}checked{% endif %} value="Immune">
+                                                    <label for="pathway-category-immune">Immune</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <div class="checkbox">
+                                                    <input type="radio" id="pathway-category-adrenal" name="Category" {% if category == 'adrenal' %}checked{% endif %} value="Adrenal">
+                                                    <label for="pathway-category-adrenal">Adrenal</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="mt-2" style="font-size: 10px">Selection of preference does not exclude other product categories when product information requests are generated.</small>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                <div class="mb-3 col-12 col-sm-6 col-md-4" id="sex">
+                                    <div class="field-wrap">
+                                        <label class="mb-4">Sex</label>
+
+                                        <div class="d-flex flex-wrap">
+                                            <div class="mb-4 mr-4">
+                                                <div class="checkbox">
+                                                    <input type="radio" id="pathway-sex-male" name="Gender" {% if sex == 'male' %}checked{% endif %} value="Male">
+                                                    <label for="pathway-sex-male">Male</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4 mr-4">
+                                                <div class="checkbox">
+                                                    <input type="radio" id="pathway-sex-female" name="Gender" {% if sex == 'female' %}checked{% endif %} value="Female">
+                                                    <label for="pathway-sex-female">Female</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4 mr-4">
+                                                <div class="checkbox">
+                                                    <input type="radio" id="pathway-sex-unspecified" name="Gender" {% if sex == 'unspecified' %}checked{% endif %} value="Unspecified">
+                                                    <label for="pathway-sex-unspecified">Unspecified</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-4">
+                                    <div class="field-wrap">
+                                        <label>Age</label>
+                                        <input type="number" name="Age" id="Age" value="{{ age }}">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="text-center">
+                                <input type="submit" class="button disabled" disabled value="{% if submissionId %}Edit{% else %}Add{% endif %} Submission" />
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert-box" id="pir-success">
+        <span class="close" data-click-target="pir-success"><svg width="12px" height="12px" viewBox="0 0 14 14"><path fill="#7B858E" d="M14 1.4L12.6 0 7 5.6 1.4 0 0 1.4 5.6 7 0 12.6 1.4 14 7 8.4l5.6 5.6 1.4-1.4L8.4 7 14 1.4z"/></svg></span>
+        <svg class="mx-auto mb-4" width="20px" height="20px" viewBox="0 0 8 6"><path fill="#01B433" d="M2.9 4.4L.8 2.3l-.8.8L2.9 6 8 .8 7.2 0z"/></svg>
+        <p class="h3 mb-2">Submission Successful</p>
+        <p>You will be redirected to the PIR report shortly.</p>
+    </div>
+
+
+    <script>
+        var $ = jQuery;
+
+        function disableSubmit() {
+            $('#edit-pir-form .button').addClass('disabled').attr('disabled', 'disabled');
+        }
+
+        $('#edit-pir-form :input').on('keyup change', function() {
+            var pass = false;
+
+            if( $('#selections input:checked').length > 0 ) {
+                pass = true;
+            } else {
+                pass = false;
+                disableSubmit();
+                return;
+            }
+            if( $('#categories').length ){
+                if( $('#categories input[type=radio]:checked').length ) {
+                    pass = true;
+                } else {
+                    pass = false;
+                    disableSubmit();
+                    return;
+                }
+            }
+
+            if( $('#sex input[type=radio]:checked').length ) {
+                pass = true;
+            } else {
+                pass = false;
+                disableSubmit();
+                return;
+            }
+
+            var age = $('#Age').val();
+            if( age.length > 0 ) {
+                pass = true;
+                console.log('Age pass');
+            } else {
+                pass = false;
+                console.log('Age fail');
+                disableSubmit();
+                return;
+            }
+
+            if(pass == true) {
+                $('#edit-pir-form .button').removeClass('disabled').removeAttr('disabled');
+            }
+        });
+
+
+        $('#edit-pir-form').submit(function(e) {
+            e.preventDefault();
+
+            $('.radio-group input').each(function(){
+                var el = $(this);
+                if( el.is(':checked') ) {
+                    var rVal = el.val();
+                    $('#pathway-radios input').each(function(){
+                        if( $(this).val() === rVal ) {
+                            $(this).prop( "checked", true );
+                        }
+                    });
+                }
+            });
+
+
+            var form = $(this);
+
+            $('html').addClass('thinking');
+
+            $.ajax({
+                type: 'post',
+                cache: false,
+                data: form.serialize(),
+                url: '/appConnector/updatePir',
+                dataType: 'json'
+            }).done(function (data) {
+
+                console.log(data);
+
+                if( data.submissionId == '' ) {
+                    $('.pir-update-error').removeClass('d-none');
+                    $('html').removeClass('thinking');
+                } else {
+
+                    setTimeout(function(){
+                        if( $('#submissionId').val() != '' ){
+                            $('html').removeClass('thinking');
+                            $('.pir-update-success').removeClass('d-none');
+                            $('.pir-update-error').addClass('d-none');
+                            $('#edit-pir-form .button').addClass('disabled').attr('disabled');
+                        } else {
+
+                            $('html').addClass('submission-successful');
+                            setTimeout(function(){
+                                $('html').removeClass('submission-successful').addClass('submission-generating');
+                            }, 2000);
+
+                            var link = document.getElementById('submission-url').href + data.submissionId;
+
+                            setTimeout(function(){
+                                location.href = link;
+                            }, 5000);
+                        }
+                    }, 2000);
+                }
+
+
+
+            }).fail(function (error) {
+               console.log("Took an L");
+
+               setTimeout(function(){
+                   $('html').removeClass('thinking');
+                   $('.pir-update-error').removeClass('d-none');
+                   $('.pir-update-success').addClass('d-none');
+               }, 2000);
+            });
+        });
+
+    </script>
+
+
+{% endblock %}

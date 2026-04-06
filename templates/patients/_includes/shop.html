@@ -1,0 +1,56 @@
+{# Set product availability for patients. Only these products will be displayed to patients #}
+{% set patientAvailableProducts = null %}
+
+{% if currentUser and currentUser.isInGroup('patients') and currentUser.restrictedProducts|length %}
+{% set patientAvailableProducts = currentUser.restrictedProducts.ids() %}
+{% endif %}
+
+{% if currentUser.relatedHcp.one().hcpProductsStore|length %}
+	{% set hcpRecommendedProducts = currentUser.relatedHcp.one().hcpProductsStore
+			.id(patientAvailableProducts)
+			.disableInNueroselect(false)
+			.all() %}
+{% else %}
+	{% set hcpRecommendedProducts = craft.products()
+    .orderBy('title')
+    .id(patientAvailableProducts)
+    .disableInNueroselect(false)
+    .all() %}
+{% endif %}
+{% if hcpRecommendedProducts | length %}
+<section class="hcpStoreProducts my-6" id="shop-product-store">
+  <h4 class="h3 text-bold mt-5 mb-3">Shop {{ hcpName }}'s storefront</h4>
+
+  {% if currentUser.relatedHcp.one().hcpStorefrontDiscount and currentUser.relatedHcp.one().hcpStorefrontDiscount != '0' %}
+  <p class="text-italic mb-4">{{ hcpName }} has enabled a <b>{{ currentUser.relatedHcp.one().hcpStorefrontDiscount }}% discount</b> for you</p>
+  {% endif %}
+
+  <ul class="products">
+    {% for product in hcpRecommendedProducts %}
+    <li class="product-preview {% if 'Bundle' in product.productCategories %} js-preview-bundle{% endif %}">
+      <a href="{{ product.url }}">
+        {% for row in product.productFields.all() %}
+        {% set img = row.productImages.one() %}
+        {% if img|length %}
+        <img src="{{ img.url }}" alt="{{ img.title }}"  />
+        {% else %}
+        <img src="{{ siteUrl }}images/products/product-fallback.svg" alt="Bottle icon"  />
+        {% endif %}
+        {% endfor %}
+
+        <div class="product-info">
+          <h3 class="p text-flush">{{ product.title }}</h3>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <script>
+    var $ = jQuery;
+    let prodPreviews = $('.js-preview-bundle');
+    $($('.js-preview-bundle').get().reverse()).each(function() {
+      $(this).prependTo("ul.products");
+    });
+  </script>
+</section>
+{% endif %}

@@ -1,0 +1,149 @@
+field: 334b094b-e2f3-4ede-a38f-667378ae3d9c # QR Scan Submissions
+fieldLayouts:
+  95738e61-f603-4e3e-a2d3-4b845b75abec:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 1494120d-5382-4a39-ab20-eda95189eb8b # ID
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 36a53fab-5ce1-4a7d-bee3-72939426ff8d # Date
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 68ed3805-7765-40d4-91ed-14adbf0c9f24 # Data
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1065e241-1779-49e7-984b-5604c0355f65 # Category
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f8b329e7-2c51-419c-b1d4-58afb77f0b95 # PDF Generated
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  36a53fab-5ce1-4a7d-bee3-72939426ff8d: # Date
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: date
+    instructions: ''
+    name: Date
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  68ed3805-7765-40d4-91ed-14adbf0c9f24: # Data
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: data
+    instructions: ''
+    name: Data
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  1065e241-1779-49e7-984b-5604c0355f65: # Category
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: category
+    instructions: ''
+    name: Category
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  1494120d-5382-4a39-ab20-eda95189eb8b: # ID
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: submissionId
+    instructions: ''
+    name: ID
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  f8b329e7-2c51-419c-b1d4-58afb77f0b95: # PDF Generated
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: pdfGenerated
+    instructions: ''
+    name: 'PDF Generated'
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch

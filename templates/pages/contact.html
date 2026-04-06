@@ -1,0 +1,76 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+    <script src="/js/jquery.js"></script>
+
+    {% include 'partials/contentModules' %}
+
+    <div class="wrapper-full bg-light">
+        <div class="wrapper-wide section-short">
+
+            <div class="row text-group-tall">
+                <div class="col--xs--12 col--md--4 col--md--12 text-group-tall">
+                    {% for row in entry.contactTiles.all() %}
+                    <div class="card text-group">
+                        <div>
+                            {% set icon = row.icon.one() %}
+                            <div class="flex-inline">
+                                {% if icon %}
+                                <img width="36" src="{{ icon.url }}" alt="{{ icon.title }}" />
+                                {% endif %}
+                                <h3 class="h3">{{ row.headline }}</h3>
+                            </div>
+                        </div>
+                        <div class="text-group-short">
+                            <p>{{ row.hoursOfOperation }}</p>
+                            {% if row.phoneNumber|length %}
+                            <div>
+                                <a class="tel" href="{{ row.phoneNumber.url }}" {% if row.phoneNumber.target|length %}target="{{ row.phoneNumber.target }}"{% endif %}>
+                                    {{ row.phoneNumber.text }}
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if row.emailAddress|length %}
+                            <div>
+                                <a href="{{ row.emailAddress.url }}" {% if row.emailAddress.target|length %}target="{{ row.emailAddress.target }}"{% endif %}>
+                                    {{ row.emailAddress.text }}
+                                </a>
+                            </div>
+                            {% endif %}
+
+                            {% if row.fax %}
+                            <div>
+                                <p>Fax:
+                                <a href="{{ row.fax.url }}" {% if row.emailAddress.target|length %}target="{{ row.fax.target }}"{% endif %}>
+                                    {{ row.fax.text }}
+                                </a></p>
+                            </div>
+                            {% endif %}
+
+                            {% if row.address %}
+                            <div class="pt-15">
+                                {{ row.address }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="col--xs--12 col--md--8 d-none">
+                    <div class="card text-group-tall">
+                        <div class="text-center">
+                            <p>Complete the form below and it will be directed to the appropriate department.</p>
+                        </div>
+
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

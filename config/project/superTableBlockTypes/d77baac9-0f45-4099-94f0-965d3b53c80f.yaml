@@ -1,0 +1,75 @@
+field: 0ff0c9d9-e670-425c-b768-c0026a5cd4c1 # Lot numbers
+fieldLayouts:
+  e07bdebe-5dba-48d2-b111-3609bb436ae8:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 97448ca3-d63e-46a6-a2b1-b2e4e1b93193 # Lot #
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 57aa7d91-dfe0-4596-bd52-8469cd1be41b # Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  57aa7d91-dfe0-4596-bd52-8469cd1be41b: # Description
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: description
+    instructions: ''
+    name: Description
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: ''
+      redactorConfig: Standard.json
+      removeEmptyTags: ''
+      removeInlineStyles: ''
+      removeNbsp: ''
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  97448ca3-d63e-46a6-a2b1-b2e4e1b93193: # Lot #
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: lotNumber
+    instructions: ''
+    name: 'Lot #'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

@@ -1,0 +1,410 @@
+<?php
+/**
+* neuroselect plugin for Craft CMS 3.x
+*
+* Pull Data from the NeuroScience app and display in User Profiles
+*
+* @link      andrewross.co
+* @copyright Copyright (c) 2020 Andrew Ross
+*/
+
+namespace neuroscience\neuroselect\controllers;
+
+use neuroscience\neuroselect\Neuroselect;
+
+use Craft;
+use craft\web\Controller;
+use craft\elements\GlobalSet;
+use verbb\supertable\SuperTable;
+use craft\helpers\DateTimeHelper;
+use craft\mail\Message;
+
+/**
+* Sleep Controller
+*
+*
+* https://craftcms.com/docs/plugins/controllers
+*
+* @author    Andrew Ross
+* @package   Neuroselect
+* @since     1.0.0
+*/
+class SurveyController extends Controller
+{
+  protected $allowAnonymous = true;
+
+  public function actionSurveySubmission()
+  {
+
+    $age = $_POST['age'];
+    $name = $_POST['name'];
+    $sex = $_POST['sex'];
+    $state = $_POST['state'];
+    $subject = $_POST['subject'];
+
+    $date = DateTimeHelper::currentTimeStamp();
+    $submissionId = $date;
+    if( isset($_POST['submissionId']) ) {
+      $submissionId = $_POST['submissionId'];
+    }
+
+    $product1 = '';
+    if( isset($_POST['product1']) ) {
+      $product1 = $_POST['product1'];
+    }
+    $product2 = '';
+    if( isset($_POST['product2']) ) {
+      $product2 = $_POST['product2'];
+    }
+    $product3 = '';
+    if( isset($_POST['product3']) ) {
+      $product3 = $_POST['product3'];
+    }
+    $product4 = '';
+    if( isset($_POST['product4']) ) {
+      $product4 = $_POST['product4'];
+    }
+    $product5 = '';
+    if( isset($_POST['product5']) ) {
+      $product5 = $_POST['product5'];
+    }
+
+    $email = '';
+    if( isset($_POST['email']) ) {
+      $email = $_POST['email'];
+    }
+
+
+    $sleepScore = '';
+    if( isset($_POST['sleepScore']) ) {
+      $sleepScore = $_POST['sleepScore'];
+    }
+    $stressScore = '';
+    if( isset($_POST['stressScore']) ) {
+      $stressScore = $_POST['stressScore'];
+    }
+    $wellnessScore = '';
+    if( isset($_POST['wellnessScore']) ) {
+      $wellnessScore = $_POST['wellnessScore'];
+    }
+
+
+    $fruitsVegies = '';
+    if( isset($_POST['fruitsVegies']) ) {
+      $fruitsVegies = $_POST['fruitsVegies'];
+    }
+    $fattyAcids = '';
+    if( isset($_POST['fattyAcids']) ) {
+      $fattyAcids = $_POST['fattyAcids'];
+    }
+    $fiber = '';
+    if( isset($_POST['fiber']) ) {
+      $fiber = $_POST['fiber'];
+    }
+    $protein = '';
+    if( isset($_POST['protein']) ) {
+      $protein = $_POST['protein'];
+    }
+    $calcium = '';
+    if( isset($_POST['calcium']) ) {
+      $calcium = $_POST['calcium'];
+    }
+    $exercise = '';
+    if( isset($_POST['exercise']) ) {
+      $exercise = $_POST['exercise'];
+    }
+
+    $finalQuality = '';
+    if( isset($_POST['finalQuality']) ) {
+      $finalQuality = $_POST['finalQuality'];
+    }
+    $fallingAsleep = '';
+    if( isset($_POST['fallingAsleep']) ) {
+      $fallingAsleep = $_POST['fallingAsleep'];
+    }
+    $wakeUp = '';
+    if( isset($_POST['wakeUp']) ) {
+      $wakeUp = $_POST['wakeUp'];
+    }
+    $vasomotorIssues = '';
+    if( isset($_POST['vasomotorIssues']) ) {
+      $vasomotorIssues = $_POST['vasomotorIssues'];
+    }
+    $finalPain = '';
+    if( isset($_POST['finalPain']) ) {
+      $finalPain = $_POST['finalPain'];
+    }
+    $daytimeFatigue = '';
+    if( isset($_POST['daytimeFatigue']) ) {
+      $daytimeFatigue = $_POST['daytimeFatigue'];
+    }
+    $daytimeMotivation = '';
+    if( isset($_POST['daytimeMotivation']) ) {
+      $daytimeMotivation = $_POST['daytimeMotivation'];
+    }
+
+
+    $generalWellness = '';
+    if( isset($_POST['generalWellness']) ) {
+      $generalWellness = $_POST['generalWellness'];
+    }
+
+    $physicalWellness = '';
+    if( isset($_POST['physicalWellness']) ) {
+      $physicalWellness = $_POST['physicalWellness'];
+    }
+    $activityWellness = '';
+    if( isset($_POST['activityWellness']) ) {
+      $activityWellness = $_POST['activityWellness'];
+    }
+    $motivationWellness = '';
+    if( isset($_POST['motivationWellness']) ) {
+      $motivationWellness = $_POST['motivationWellness'];
+    }
+    $mentalWellness = '';
+    if( isset($_POST['mentalWellness']) ) {
+      $mentalWellness = $_POST['mentalWellness'];
+    }
+
+    $globalSetHandle = 'surveySubmissions';
+    $globalSet = Craft::$app->globals->getSetById('436182');
+
+
+    // Access Super Table Field
+    $superTableData = array();
+    $currentSubmissions = '';
+
+    // get super table field
+    $field = Craft::$app->getFields()->getFieldByHandle('surveySubmissions');
+    $currentSubmissions = $globalSet->surveySubmissions;
+    $blockTypes = SuperTable::$plugin->getService()->getBlockTypesByFieldId($field->id);
+    $blockType = $blockTypes[0];
+
+    $superTableData['new1'] = array(
+      'type' => $blockType->id,
+      'enabled' => true,
+      'fields' => array(
+        'submissionId' => $submissionId,
+        'email' => $email,
+        'subName' => $name,
+        'age' => $age,
+        'sex' => $sex,
+        'state' => $state,
+        'subject' => $subject,
+        'product1' => $product1,
+        'product2' => $product2,
+        'product3' => $product3,
+        'product4' => $product4,
+        'product5' => $product5,
+        'sleepScore' => $sleepScore,
+        'stressScore' => $stressScore,
+        'wellnessScore' => $wellnessScore,
+        'fruitsVegies' => $fruitsVegies,
+        'fattyAcids' => $fattyAcids,
+        'fiber' => $fiber,
+        'protein' => $protein,
+        'calcium' => $calcium,
+        'exercise' => $exercise,
+        'finalQuality' => $finalQuality,
+        'fallingAsleep' => $fallingAsleep,
+        'wakeUp' => $wakeUp,
+        'vasomotorIssues' => $vasomotorIssues,
+        'finalPain' => $finalPain,
+        'daytimeFatigue' => $daytimeFatigue,
+        'daytimeMotivation' => $daytimeMotivation,
+        'generalWellness' => $generalWellness,
+        'physicalWellness' => $physicalWellness,
+        'activityWellness' => $activityWellness,
+        'motivationWellness' => $motivationWellness,
+        'mentalWellness' => $mentalWellness
+      )
+    );
+
+    // Make sure old submissions are imap_saved
+    $i = 2;
+    foreach ($currentSubmissions as $block){
+      $superTableData[$i] = array(
+        'type' => $blockType->id,
+        'enabled' => true,
+        'fields' => array(
+          'submissionId' => $block->submissionId,
+          'email' => $block->email,
+          'subName' => $block->subName,
+          'age' => $block->age,
+          'sex' => $block->sex,
+          'state' => $block->state,
+          'subject' => $block->subject,
+          'product1' => $block->product1,
+          'product2' => $block->product2,
+          'product3' => $block->product3,
+          'product4' => $block->product4,
+          'product5' => $block->product5,
+          'sleepScore' => $block->sleepScore,
+          'stressScore' => $block->stressScore,
+          'wellnessScore' => $block->wellnessScore,
+          'fruitsVegies' => $block->fruitsVegies,
+          'fattyAcids' => $block->fattyAcids,
+          'fiber' => $block->fiber,
+          'protein' => $block->protein,
+          'calcium' => $block->calcium,
+          'exercise' => $block->exercise,
+          'finalQuality' => $block->finalQuality,
+          'fallingAsleep' => $block->fallingAsleep,
+          'wakeUp' => $block->wakeUp,
+          'vasomotorIssues' => $block->vasomotorIssues,
+          'finalPain' => $block->finalPain,
+          'daytimeFatigue' => $block->daytimeFatigue,
+          'daytimeMotivation' => $block->daytimeMotivation,
+          'generalWellness' => $block->generalWellness,
+          'physicalWellness' => $block->physicalWellness,
+          'activityWellness' => $block->activityWellness,
+          'motivationWellness' => $block->motivationWellness,
+          'mentalWellness' => $block->mentalWellness
+        )
+      );
+      $i++;
+    }
+
+    $globalSet->setFieldValues(['surveySubmissions' => $superTableData]);
+
+    Craft::$app->elements->saveElement($globalSet);
+
+    $success = Craft::$app->getElements()->saveElement($globalSet);
+
+    if($success) {
+      $save = 'success';
+    } else {
+      $save = 'fail';
+    }
+
+    $response = [
+      'status' => $save,
+      'submissionId' => $submissionId
+    ];
+
+    return $this->asJson($response);
+  }
+
+
+  public function actionSurveyPdf()
+  {
+
+    if( !empty($_POST['source']) ) {
+
+      $source = $_POST['source'];
+      $submissionId = $_POST['submissionId'];
+      
+      $header = array(
+        "source" => "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>",
+        "spacing" => '80px'
+      );
+
+      $footer = array(
+        "source" => "<div style=\"border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; \"><div style=\"font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; \">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</div><div style=\"font-size: 4pt; font-family: sans-serif;\">Recommendations and product information provided was requested by the user and is not intended to diagnose, treat, cure or prevent any disease.</div></div>",
+        "spacing" => '80px'
+      );
+
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.pdfshift.io/v2/convert/",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode(array("source" => $source, "css" => 'https://www.neuroscienceinc.com/css/pdf-survey.css', "sandbox" => false, "use_print" => false, "header" => $header, "footer" => $footer )),
+        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+        CURLOPT_USERPWD => 'e53c829dce5f4013a28cf3eee62b731c'
+      ));
+
+      $response = curl_exec($curl);
+
+      // Create the filename
+      $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
+      // Save to correct folder
+      $saveTo = './surveys/' . $filename;
+
+
+      file_put_contents($saveTo, $response);
+
+      if ($response) {
+        $status = 'success';
+      } else {
+        $status = 'error';
+      }
+
+      $response = [
+        'Status ' => $status,
+        'filename' => $filename
+      ];
+
+      return $this->asJson($response);
+    }
+  }
+
+
+  public function actionEmailSurvey()
+  {
+    $this->requirePostRequest();
+    
+
+
+    if( !empty($_POST['email']) ) {
+
+      $submissionId = $_POST['submissionId'];
+      $toEmail = $_POST['email'];
+      
+      $name = 'Hello, <br /><br />';
+	    if( isset($_POST['name']) && !empty($_POST['name']) ) {
+	      $name = 'Dear ' . $_POST['name'] . ', <br /><br />';
+	    }
+
+      $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
+      $filePath = './surveys/' . $filename;
+
+      $settings = Craft::$app->systemSettings->getSettings('email');
+      $message = new Message();
+
+      // Send to
+      $mail = $toEmail;
+
+      // Subject
+      $subject = "NeuroScience Survey #" . $submissionId;
+
+      // Body of the email
+      $html   = '<img style="margin: 24px auto 36px;" width="60" src="https://www.neuroscienceinc.com/images/general/NeuroScience-logomark.png" alt="NeuroScience logo" /><br />';
+      $html   .= $name;
+      $html   .= 'Thank you for using Neuro-Q! Product and lifestyle recommendations are attached<br />for the recent Neuro-Q submission. Please download the report to keep for your <br />records and print/email to your patient for reference after their appointment.<br /><br />';
+      $html   .= 'If you have any questions, please contact our Customer Support team at <a href="tel+18883427272">888-342-7272</a>.<br /><br /> Please do not reply to this email.<br /><br />';
+      $html   .= 'As always, we appreciate your business.<br /><br />';
+      $html   .= 'Thank you!<br />NeuroScience<br /><br />';
+	  
+	  $html   .= '<span style="width: 600px; display: block; height: 1px; background: #0081B6;"></span><br />';
+      $html   .= '<img width="110" src="https://www.neuroscienceinc.com/images/general/Neuro-Q.png" alt="Neuro Q logo" /> <br />';
+      
+      $html   .= 'Clinically validated. Scientific symptom assessment. Targeted supplement selection.';
+
+
+      $message->setFrom([$settings['fromEmail'] => $settings['fromName']]);
+      $message->setTo($mail);
+      $message->setSubject($subject);
+      $message->setHtmlBody($html);
+      $message->attach($filePath, []);
+
+      return Craft::$app->mailer->send($message);
+
+      $response = [
+        'Status ' => 'Email Sent'
+      ];
+
+      return $this->asJson($response);
+
+    } else {
+	    
+	    $response = [
+	        'Status ' => 'missing info'
+	      ];
+	
+	      return $this->asJson($response);
+
+    }
+  }
+}

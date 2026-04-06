@@ -1,0 +1,569 @@
+// ---------------------------------------------------------------------
+//  Global Header Styles
+// ---------------------------------------------------------------------
+
+$header-height: 70px;
+
+.site-header {
+	position: relative;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: $header-height;
+	padding: 10px $wrapper-padding;
+	width: 100%;
+	background: $white;
+	border-bottom: 1px solid rgba($gray, 0.2);
+
+	@include stop-at($header-breakpoint) {
+		padding: 0 $wrapper-padding;
+		height: 56px;
+	}
+
+	@media (min-width: $header-breakpoint) and (max-width: $large){
+		height: 134px;
+		padding: 73px 0 0 0;
+
+		.logo {
+			position: absolute;
+			top: 20px;
+			left: $wrapper-padding;
+		}
+
+		.site-navigation  {
+			max-width: 100%;
+			padding-left: $wrapper-padding;
+			padding-right: $wrapper-padding;
+		}
+
+		.site-header-panel {
+			width: 100%;
+			border-top: 1px solid $border;
+		}
+
+		.utility-navigation {
+			position: absolute;
+			top: 27px;
+			right: $wrapper-padding;
+		}
+
+	}
+}
+
+// ----------------------------------------
+// Logo Styles
+// ----------------------------------------
+
+$logo-width: 164px;
+$logo-height: 72px;
+
+@include stop-at($header-breakpoint) {
+	.logo {
+		max-width: 140px;
+	}
+}
+
+.logo a {
+	width: $logo-width;
+	display: block;
+
+	img {
+		width: 100%;
+	}
+}
+
+
+// ----------------------------------------
+// Site Navigation Panel
+// ----------------------------------------
+
+.site-navigation > ul > li.is-active {
+	> a {
+		color: $brand;
+	}
+}
+
+.site-navigation {
+	width: 100%;
+
+	a,
+	li > span {
+		display: block;
+		padding: 14px 10px;
+		color: $gray;
+		font-size: 1.3rem;
+
+		&:hover {
+			color: $brand;
+		}
+	}
+
+	@include stop-at($header-breakpoint) {
+		> ul {
+			padding: 0 20px;
+
+			> li {
+				border-bottom: 1px solid $border;
+
+				&:last-child {
+					border-bottom: none;
+					margin-bottom: 40px;
+				}
+			}
+
+		}
+	}
+
+	.shop-link.btn {
+		display: inline-block;
+		color: $white;
+		margin-left: 20px;
+		min-width: 102px;
+
+		@include stop-at($header-breakpoint) {
+			min-width: 200px;
+			margin-top: 20px;
+		}
+
+		&:hover {
+			color: $brand-alt;
+		}
+	}
+
+	@include start-at($header-breakpoint) {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 11px 0 11px 30px;
+		flex-grow: 1;
+
+		> ul {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			margin: 0;
+			max-width: 660px;
+		}
+
+		> ul > li:first-child {
+			display: none;
+		}
+
+		a,
+		li span {
+			display: inline-block;
+			font-size: 1.4rem;
+			padding: 4px;
+		}
+
+		.shop-link.btn {
+			margin-left: 0;
+		}
+	}
+}
+
+.after-bp-only {
+
+	@include stop-at($header-breakpoint) {
+		display: none;
+	}
+}
+.before-bp-only {
+
+	@include start-at($header-breakpoint) {
+		display: none;
+	}
+}
+
+
+// ----------------------------------------
+// Utility Navigation
+// ----------------------------------------
+
+.utility-navigation {
+
+	> *,
+	> a,
+	> span {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		white-space: nowrap;
+		position: relative;
+		color: $gray;
+		font-size: 1.3rem;
+
+		@include stop-at($header-breakpoint) {
+			padding: 14px 10px;
+		}
+	}
+
+	svg {
+		fill: currentColor;
+		margin-right: 8px;
+		opacity: 0.7;
+	}
+
+	.un-one--active {
+		color: $brand-alt;
+	}
+
+	@include start-at($header-breakpoint) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		> * {
+			justify-content: center;
+			font-size: 14px;
+			padding: 3px 0;
+			transition: color $trans;
+
+			&:hover {
+				color: $brand;
+			}
+		}
+
+		.un-one {
+			padding-right: 10px;
+			border-right: 1px solid rgba($gray, 0.2);
+		}
+
+		.account-link {
+			margin-right: 0;
+			//margin-left: 17px;
+			min-width: 63px;
+			padding-left: 10px;
+			//border-left: 1px solid rgba($gray, 0.2);
+
+			// &:before {
+			// 	content: '';
+			// 	position: absolute;
+			// 	height: 100%;
+			// 	width: 1px;
+			// 	background: $white;
+			// 	display: block;
+			// 	left: 0;
+			// 	top: 0;
+			// 	background: rgba($gray, 0.2);
+			// }
+
+			svg {
+				min-width: 14px;
+			}
+		}
+	}
+
+	@include stop-at($header-breakpoint) {
+		//border-top: 1px solid $gray;
+		//padding: 20px 0;
+	}
+}
+
+.utility-navigation {
+
+	.account-link {
+
+		svg {
+			fill: currentColor;
+		}
+
+		.arrow-wrap {
+			margin: 0 3px;
+
+			svg{
+				fill: $brand;
+				margin: 0 auto;
+			}
+		}
+
+		.sub-nav {
+			left: auto;
+			right: 0;
+
+			li + li {
+				margin-top: 5px;
+			}
+		}
+
+		@include stop-at($header-breakpoint) {
+			flex-wrap: wrap;
+			padding: 8px 20px;
+			font-size: 1.8rem;
+
+			.sub-nav {
+				width: 100%;
+				margin-top: 10px;
+			}
+		}
+
+	}
+}
+
+
+// ----------------------------------------
+// Sub Nav
+// ----------------------------------------
+
+.has-sub-nav {
+	position: relative;
+
+	svg {
+		display: inline-block;
+		fill: $brand;
+	    //margin: 0 8px 0 0px;
+	}
+
+	.arrow-wrap {
+		display: inline-block;
+		transition: transform $trans;
+		transform-origin: center;
+
+		@include stop-at($header-breakpoint) {
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	&.is-active {
+		.arrow-wrap {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+.sub-nav {
+	position: relative;
+
+	// &:before {
+	// 	width: 10px;
+	// 	height: 10px;
+	// 	background: $white;
+	// 	transform-origin: center;
+	// 	transform: rotate(45deg);
+	// 	position: absolute;
+	// 	top: -5px;
+	// 	z-index: 0;
+	// 	right: 20px;
+	// 	box-shadow: -2px -2px 2px 0px rgba($gray, 0.35);
+	// 	content: '';
+	// }
+
+	@include stop-at($header-breakpoint) {
+		overflow: hidden;
+		max-height: 0;
+		transition: max-height 1s ease;
+		background: $white;
+		width: calc(100% + 40px);
+		margin-left: -20px;
+		padding: 0 20px;
+		box-shadow: none;
+
+		> li:first-child {
+			margin-top: 7px;
+		}
+
+		> li:last-child {
+			margin-bottom: 7px;
+		}
+
+		> li.is-active a {
+			color: $brand;
+		}
+
+		a {
+			font-size: 13px;
+			padding: 7px 10px;
+			color: $gray;
+		}
+
+		&.is-active,
+		.has-sub-nav.is-active & {
+			max-height: 500px;
+		}
+	}
+
+	@include start-at($header-breakpoint) {
+		display: none;
+		position: absolute;
+		top: calc(100% + 16px);
+		left: 0;
+		width: 200px;
+		padding: 15px 10px;
+		background: $white;
+		z-index: 10;
+		box-shadow: 0px 0px 5px 0px rgba($gray, 0.75);
+
+		&.is-active,
+		.has-sub-nav.is-active & {
+			display: block;
+		}
+	}
+}
+
+@include start-at($header-breakpoint) {
+	.site-header .sub-nav {
+
+		a {
+			display: block;
+			border-radius: 6px;
+			transition: background $trans, color $trans;
+			padding: 4px 12px;
+
+			&:hover {
+				background: $brand;
+				color: $white;
+			}
+		}
+
+		> li.is-active a {
+			background: $brand;
+			color: $white;
+		}
+	}
+}
+
+
+// ----------------------------------------
+// Slidding Panel
+// ----------------------------------------
+
+.site-header-panel {
+	width: 100%;
+	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+}
+
+@include stop-at($header-breakpoint) {
+
+	$panel-width: 100%;
+
+	.site-header-panel {
+		position: fixed;
+		height: calc(100% - 104px);
+		width: $panel-width;
+		left: 0;
+		margin-left: -$panel-width;
+		background: $gray-light;
+		z-index: 10;
+		bottom: $header-height;
+		top: 56px;
+		padding-bottom: $header-height;
+		overflow-x: hidden;
+		overflow-y: auto;
+	//	transition: margin-left 0.4s ease-in-out;
+
+		.mobile-menu-is-open & {
+			margin-left: 0;
+		}
+	}
+}
+
+.mobile-menu-is-open {
+	overflow: hidden;
+}
+
+
+// ----------------------------------------
+// Professionals Nav Is Open
+// ----------------------------------------
+@include start-at($header-breakpoint) {
+	.menu-mask {
+		opacity: 0;
+		transition: opacity $transition;
+
+		&:hover {
+			cursor: default;
+		}
+	}
+
+	.sub-nav-is-active {
+		.menu-mask {
+			display: block;
+			position: absolute;
+			z-index: 8;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			opacity: 1;
+			background: rgba(white, 0);
+		}
+	}
+}
+
+// ----------------------------------------
+// Mobile Nav Bar
+// ----------------------------------------
+
+.mobile-nav-bar,
+.site-header > .tel {
+	display: none;
+}
+
+@include stop-at($header-breakpoint) {
+
+.site-header > .tel {
+	display: block;
+	font-size: 1.3rem;
+	font-weight: 700;
+}
+
+.mobile-nav-bar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 48px;
+	display: flex;
+	align-items: stretch;
+	z-index: 11;
+	background: $white;
+	box-shadow: 0 -1px 2px 0 rgba(0,0,0,0.10);
+
+	> * {
+		width: 25%;
+		display: flex;
+		align-items: center;
+		height: 48px;
+		justify-content: center;
+
+		+ * {
+			border-left: 1px solid $border;
+		}
+
+		a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	svg {
+		display: block;
+		margin: 0 auto;
+		fill: $brand;
+		transition: all $trans;
+	}
+}
+
+	.mobile-menu-is-open {
+		.mobile-nav-bar {
+
+			svg {
+				fill: $gray;
+				opacity: 0.6;
+			}
+		}
+
+		.site-header {
+			position: fixed;
+			top: 0;
+		}
+	}
+}

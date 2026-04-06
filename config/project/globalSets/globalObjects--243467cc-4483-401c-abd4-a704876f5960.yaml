@@ -1,0 +1,91 @@
+fieldLayouts:
+  50cd1481-b935-4994-b3cf-9eca0a1e125e:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 37076289-5388-494c-ab16-50f8f15ef55d # HCP NeuroCash Percentage
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 84bbdaa0-4f51-45c4-87fc-da34da0bb16c # Free Shipping Mark
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: bc1a584e-9391-460b-a62b-19c4c88bec4b # Chat Enabled
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3a205d9c-a63e-47ed-ad38-3bf91c604902 # Alert Message
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: fa19d720-9a33-4fb2-9371-3ca8cabc3cb9 # Phone Links
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c600ba22-fc96-435d-9dee-28bea2237969 # Address
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6155050f-240b-4ccc-9afc-095f7b936e55 # Social Links
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4f5a97f7-34f5-4b71-8ccc-e7a53f72315d # Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f5e28e8c-7385-4979-9781-4073154127ad # References
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: globalObjects
+name: 'Global Objects'
+sortOrder: 4

@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 6329f165-1216-4dee-8071-071c8c5cb854 # Comparison table
+handle: comparisonAttributes
+instructions: ''
+name: 'Comparison Attributes'
+searchable: false
+settings:
+  contentTable: '{{%matrixcontent_comparisonattributes}}'
+  maxBlocks: '5'
+  minBlocks: ''
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

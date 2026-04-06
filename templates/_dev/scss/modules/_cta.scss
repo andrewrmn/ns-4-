@@ -1,0 +1,121 @@
+// ---------------------------------------------------------------------
+//  CTA Styles
+// ---------------------------------------------------------------------
+
+
+
+
+
+
+// ----------------------------------------
+// Double CTA
+// ----------------------------------------
+
+.double-cta {
+    text-align: center;
+    color: $white;
+    background: $gray-light;
+
+    @include stop-at($small) {
+        > * + * {
+            border-top: 1px solid $border;
+        }
+    }
+
+    p {
+        color: $white;
+    }
+
+    > * {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 3;
+
+        &:after {
+            content: '';
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            position: absolute;
+            z-index: -1;
+            background: url('../images/molecule.png') center / cover no-repeat;
+            opacity: 0.8;
+        }
+
+        .h3 {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn,
+        .btn-white {
+            margin-right: 0;
+        }
+    }
+
+
+    @include start-at($small){
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+
+        > * {
+            width: 50%;
+        }
+    }
+}
+
+
+
+.double-cta__inner {
+    display: block;
+    margin: 48px auto;
+
+    @include start-at($small){
+        margin: 72px auto;
+    }
+
+    @include start-at($large){
+        margin: 100px auto;
+    }
+
+    padding: 24px;
+    text-align: center;
+
+    background: transparent;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    transition: background $trans, box-shadow $trans;
+
+    > * {
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+
+
+
+    @include start-at($large) {
+        padding: 44px;
+    }
+}
+
+
+.double-cta__inner-first {
+    background: darken($white, 2%);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+}
+
+
+.double-cta-img {
+    position: absolute;
+    width: 75%;
+    right: 0;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+}

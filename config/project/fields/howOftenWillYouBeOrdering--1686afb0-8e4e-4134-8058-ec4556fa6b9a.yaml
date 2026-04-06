@@ -1,0 +1,45 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
+handle: howOftenWillYouBeOrdering
+instructions: ''
+name: 'How often will you be ordering?'
+searchable: true
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Weekly
+        -
+          - value
+          - weekly
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Monthly
+        -
+          - value
+          - monthly
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Every few months'
+        -
+          - value
+          - everyFewMonths
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\RadioButtons

@@ -1,0 +1,111 @@
+
+
+
+{% set el = 'li' %}
+
+{% if craft.app.request.segments|first == '' %}
+    {% set el = 'div' %}
+{% endif %}
+
+{% set tags = craft.categories.relatedTo(product).level(2).all() %}
+
+<{{el}} class="product-preview " data-tags="{% for tag in tags %}{{ tag.slug}}, {% if loop.last %}{{ tag.slug }}{% endif %}{% endfor %}">
+    <a href="{{ product.url }}">
+
+
+
+        {% set seg1 = craft.app.request.getSegment(1) %}
+        {% set segLast = craft.app.request.segments|last %}
+
+        {% if seg1 != segLast %}
+        {% if product.networkApproach %}
+        <div class="product-networkApproach d-none">
+            <p class="h5 m-0">{{ product.networkApproach }}</p>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        {% for row in product.productFields.all() %}
+            {% set img = row.productImages.one() %}
+            {% if img|length %}
+                <img src="{{ img.url }}" alt="{{ img.title }}"  />
+            {% else %}
+                <img src="{{ siteUrl }}images/products/product-fallback.svg" alt="Bottle icon"  />
+            {% endif %}
+        {% endfor %}
+
+        {% if seg1 == segLast %}
+        <div class="product-info">
+            <h3 class="p text-flush">{{ product.title }}</h3>
+        </div>
+        {% endif %}
+
+        {% for tag in craft.tags.relatedTo(product).all() %}
+            {% if tag.slug == 'best-seller' %}
+                <span class="tag tag--best">Best Seller</span>
+            {% endif %}
+
+            {% if tag.slug == 'new' or tag.slug == 'New Product' %}
+                <span class="tag tag--new">New Product</span>
+            {% endif %}
+            
+            {% if tag.slug == 'New Size' or tag.slug == 'new-size' %}
+                <span class="tag tag--new-size" style="background: #19acf3;">New Size</span>
+            {% endif %}
+         
+            {% if tag.slug == 'sale' or tag.slug == 'Sale' %}
+                {% if currentUser %}
+                <span class="tag tag--sale">Promo</span>
+                {% endif %}
+            {% endif %}
+
+            {% if tag.slug == 'Pre sale' or tag.slug == 'Pre-Sale' or tag.slug == 'pre-sale' or tag.slug == 'Pre-sale' %}
+                <span class="tag tag--sale">Pre-sale</span>
+            {% endif %}
+        {% endfor %}
+    </a>
+
+    {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+    {% set inStock = product.variants|filter(v => v.hasStock())|length %}
+    <a class="product-hover-info" href="{{ product.url }}">
+        <div>
+            <h3 class="h5 text-white mb-2">{{ product.variants[0].title }}</h3>
+            {% set pId = product.variants[0].id %}
+
+            <p class="p">{{ product.variants[0].salePrice|commerceCurrency(cart.currency) }}</p>
+
+            {% if pId != '' and inStock %}
+            <form method="POST" class="js-add-to-cart">
+                <input type="hidden" name="action" value="commerce/cart/update-cart">
+                {{ csrfInput() }}
+                <input type="hidden" name="qty" value="{% if product.variants[0].minQty > 0 %}{{ product.variants[0].minQty }}{% else %}1{% endif %}">
+                <input type="hidden" name="purchasableId" value="{{ pId }}">
+
+                <div class="pricingOption d-none">
+                    <select name="options[guest]">
+                        <option value="no" selected>no</option>
+                    </select>
+                </div>
+                
+                   {% set isPatient = 'no' %}
+			{% if currentUser and currentUser.isInGroup('patients') %}
+            {% set isPatient = 'yes' %}
+          {% endif %}
+          <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
+          <input type="hidden" name="fields[isPatient]" value="{{isPatient}}" />
+          
+                <input type="submit" value="Add to cart">
+            </form>
+            {% endif %}
+
+            {% if not inStock %}
+            <span class="h6 text-light">Out of stock</span>
+            {% endif %}
+        </div>
+
+        <span>View product</span>
+    </a>
+    {% endif %}
+
+    <div class="product-preview__success"></div>
+</{{el}}>

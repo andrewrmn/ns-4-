@@ -1,0 +1,57 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
+handle: neuroCoreSubmissions
+instructions: ''
+name: 'Neuro Core Submissions'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - de22c2aa-368f-4397-ad6b-83302764a060 # Activation Code
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 7a5c6e36-9eb8-49ff-98df-45ed7ca4bbf7 # Date
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - e5e26333-eeb2-42e6-b9f4-ef4e4a3ef600 # Products
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 4d735f1f-648f-40a2-94f2-226c55539003 # Report URL
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - e5ab4171-1bff-4512-b790-ccadb0f66228 # Lab Kit ID
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_neurocoresubmissions}}'
+  fieldLayout: table
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

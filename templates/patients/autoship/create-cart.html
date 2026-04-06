@@ -1,0 +1,33 @@
+{% if not currentUser or not currentUser.isInGroup('patients') %}
+  {% redirect "patients/login" %}
+{% endif %}
+
+{% set number = craft.app.request.getRequiredParam('number') %}
+{% set order = craft.enupalStripe.getOrderByNumber(number) %}
+
+{% set formData = order.getFormFields() %}
+{% set comOrderNumber = formData.orderNumber %}
+{% set comOrder = craft.orders.number(comOrderNumber).one() %}
+
+{% set lineItemsArr = [] %}
+{% set itemsArr = [] %}
+{% for item in comOrder.lineItems %}
+  {% set lineItemsArr = lineItemsArr|merge([item.purchasableId]) %}
+  {% set itemsArr = itemsArr|merge([{(item.purchasableId) : item.qty}]) %}
+{% endfor %}
+
+{% set cart = craft.commerce.carts.cart(true) %}
+{% set data = craft.app.request.getBodyParams() %}
+{% for purchasablesId in data.purchasablesIds %}
+  {% set qty = 1 %}
+  {% if purchasablesId in lineItemsArr %}
+    {% for key, it in itemsArr %}
+      {% if it[purchasablesId] is defined %}{% set qty = it[purchasablesId] %}{% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set lineItem = craft.commerce.lineitems.createLineItem(cart.id, purchasablesId, {"note":""}, qty, "") %}
+  {% do cart.addLineItem(lineItem) %}
+{% endfor %}
+{% do cart.setFieldValues({"cancelSubscriptionOrderId": data.cancelSubscriptionOrderId, "recurringOrderFrequency": data.recurringOrderFrequency, "makeThisARecurringOrder": 1}) %}
+{% do craft.app.elements.saveElement(cart) %}
+{% redirect "shop/cart" %}

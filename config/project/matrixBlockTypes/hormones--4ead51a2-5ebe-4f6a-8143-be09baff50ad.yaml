@@ -1,0 +1,58 @@
+field: e36ca748-a185-4fc2-b8c0-b0d4213bf0c8 # Comparison Attributes
+fieldLayouts:
+  d564b70d-fe8b-4746-b4a5-aed8147726e6:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: c6a86332-cec0-423e-a200-4b3de8509a95 # Key Ingredients
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  c6a86332-cec0-423e-a200-4b3de8509a95: # Key Ingredients
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: keyIngredients
+    instructions: ''
+    name: 'Key Ingredients'
+    searchable: false
+    settings:
+      columns:
+        __assoc__:
+          -
+            - 32faaac3-a839-4748-aa11-945c9ee98336 # Ingredients
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+          -
+            - 8a9a811a-3a61-4edf-b448-213fd07541d0 # Precursor Potential
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+      contentTable: '{{%stc_16_keyingredients}}'
+      fieldLayout: table
+      maxRows: '2'
+      minRows: ''
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add Ingredient'
+      staticField: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+handle: hormones
+name: Hormones
+sortOrder: 3

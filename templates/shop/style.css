@@ -1,0 +1,439 @@
+/*
+* Skeleton V2.0.4
+* Copyright 2014, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/29/2014
+*/
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Grid
+- Base Styles
+- Typography
+- Links
+- Buttons
+- Forms
+- Lists
+- Code
+- Tables
+- Spacing
+- Utilities
+- Clearing
+- Media Queries
+- Progress Bar
+- Commerce Layout and Styles
+*/
+
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,
+button:not(.stripe-button-el),
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    display: inline-block;
+    height: 38px;
+    padding: 0 30px;
+    color: #555;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.button .fa,
+button .fa {
+    font-size:16px;
+}
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+    color: #333;
+    border-color: #888;
+    outline: 0;
+}
+
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+    color: #FFF;
+    background-color: #DA5A17;
+    border-color: #DA5A17;
+}
+
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+    color: #FFF;
+    background-color: #DA5A17;
+    border-color: #DA5A17;
+}
+.button.link {
+    display:inline;
+    border:none;
+    text-transform: none;
+    padding: 0px;
+    font-size: 1em; /* currently ems cause chrome bug misinterpreting rems on body element */
+    line-height: 1;
+    font-weight: 400;
+    color:#DA5A17;
+    text-align:left;
+    height: auto;
+}
+
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    height: 38px;
+    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    min-height: 65px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #DA5A17;
+    outline: 0;
+}
+
+label,
+legend {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+
+fieldset {
+    padding: 0;
+    border-width: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline;
+}
+
+label > .label-body {
+    display: inline-block;
+    margin-left: .5rem;
+    font-weight: normal;
+}
+
+/* Lists
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul {
+    list-style: circle inside;
+}
+
+ol {
+    list-style: decimal inside;
+}
+
+ol, ul {
+    padding-left: 0;
+    margin-top: 0;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+    margin: 1.5rem 0 1.5rem 3rem;
+    font-size: 90%;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Code
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+code {
+    padding: .2rem .5rem;
+    margin: 0 .2rem;
+    font-size: 90%;
+    white-space: nowrap;
+    background: #F1F1F1;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+pre > code {
+    display: block;
+    padding: 1rem 1.5rem;
+    white-space: pre;
+}
+
+/* Tables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 0;
+}
+
+/* Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*button,
+.button {
+    margin-bottom: 1rem;
+}
+
+input,
+textarea,
+select,
+fieldset {
+    margin-bottom: 1.5rem;
+}*/
+
+/*pre,
+blockquote,
+dl,
+figure,
+table,
+p,
+ul,
+ol,
+form {
+    margin-bottom: 2.5rem;
+}*/
+
+/* Utilities
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.u-full-width {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.u-max-full-width {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.u-pull-right {
+    float: right;
+}
+
+.u-pull-left {
+    float: left;
+}
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+hr {
+    margin-top: 3rem;
+    margin-bottom: 3.5rem;
+    border-width: 0;
+    border-top: 1px solid #E1E1E1;
+}
+
+/* Clearing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Self Clearing Goodness */
+.container:after,
+.row:after,
+.u-cf {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Helpers
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.rounded {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.right{
+    float:right;
+}
+
+.text-right{
+    text-align: right;
+}
+
+/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+}
+
+/* Steps
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.steps { margin-bottom: 40px; }
+.steps ul { display: flex; display: -webkit-flex; margin-bottom: 0; }
+.steps ul li { list-style: none; display: block; flex:1; }
+.steps ul li { color: #aaa; }
+.steps ul li a { color: #aaa; }
+.steps ul li.done { color: #DA5A17; opacity: .5; }
+.steps ul li.done a { color: #DA5A17; }
+.steps ul li.sel { color: #DA5A17; opacity: 1; }
+.steps ul li.sel a { color: #DA5A17; }
+.steps .meter { height: 10px; position: relative; border: 1px solid #bbb; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; padding: 3px; margin-bottom: 10px; }
+.steps .meter > span { display: block; height: 100%; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; background-color: #DA5A17; position: relative; overflow: hidden; }
+
+@media (max-width: 750px) {
+    .steps ul { display: block; margin-left: 24px; }
+    .steps ul li { list-style: decimal; display: list-item; }
+    .steps .meter { display: none; }
+}
+
+/* Commerce Design
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+img.logo{ width:400px; }
+
+img.product { width: 100%; }
+
+.flash{ color: #DA5A17; margin-bottom:10px;}
+
+.has-error input{
+    border:1px solid #DA5A17;
+}
+
+.has-error .help-block{
+    color: #DA5A17;
+}
+
+.address-select { background: #fff; border: 1px solid #eee; margin-bottom: 1em; position: relative; border-radius: 4px; }
+.address-select .radio input { margin: 0 5px 0 0; position: relative; top: -1px; }
+
+.address-select .radio { padding: 14px 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.address-select ul.address-data { display: inline; }
+.address-select ul.address-data li { display: inline; }
+.address-select ul.address-data li { display: inline; }
+.address-select ul.address-data li strong { display: none; }
+.address-select ul.address-data li span[data-key=firstName] { font-weight: bold; }
+.address-select ul.address-data li span[data-key=lastName] { font-weight: bold; }
+
+.address-select .actions { float: right; padding: 14px 15px; font-size: 0.9em; }
+.address-select .actions ul { margin:0; }
+.address-select .actions ul li { display: inline-block; margin: 0 0 0 1em; }
+.address-select .actions ul li a { color: #999; text-decoration: underline; }
+
+.address-select .body { padding: 14px; }
+
+.hidden { display: none; }
+
+.product.row {
+    border-bottom: 1px solid #fafafa;
+    margin-bottom: 2.5rem;
+}
+
+.product-details {
+    padding-top: 2rem;
+}
+
+
+.address-card { background-color: transparent; border-radius: 5px; padding:20px 0px 0px 20px; border: 1px solid #E1E1E1; margin-bottom: 15px; position: relative;  }
+.address-card form { display:inline; margin:0px; }
+.address-card .edit { position: absolute; top: 20px; right: 20px; }
+.address-card ul { list-style: none; }
+
+.shipping-select { background: #fff; border: 1px solid #eee; margin-bottom: 1em; position: relative; border-radius: 4px; }
+.shipping-select input { margin: 0 5px 0 0; }
+.shipping-select label { padding: 10px 14px; }
+.shipping-select .price { float: right; padding: 4px 4px; font-size: 0.9em; font-weight: normal; }
+
+.review-card { background-color: transparent; border-radius: 5px; padding:20px; border: 1px solid #E1E1E1; margin-bottom: 15px; position: relative;  }
+.review-card ul { list-style: none; margin: 0; }
+.review-card ul li { border-top: 1px solid #E1E1E1; padding: 10px 0;  }

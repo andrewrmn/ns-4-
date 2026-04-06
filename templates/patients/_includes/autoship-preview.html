@@ -1,0 +1,54 @@
+<section class="patientOrderHistory" id="autoship-orders">
+  <div class="d-flex flex-items-baseline flex-justify-between">
+    <h3 class="mb-3">Autoship Orders:</h3>
+    <a class="link" href="{{ url('patients/autoship/') }}">View all</a>
+  </div>
+
+  <div class="recent-wrapper">
+    {% set orders = craft.enupalStripe.getSubscriptionsByUser(currentUser.id) %}
+    {% if orders|length %}
+    <table width="100%" border="0">
+      <thead>
+        <tr>
+          <th>Order #</th>
+          <th class="text-center">Order Date</th>
+          <th class="text-center">Frequency</th>
+          <th class="text-center">Next Shipment</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Order Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders|reverse %}
+        {% set subscription = order.getSubscription() %}
+        
+        {% set frequency = order.getPaymentForm('description') %}
+        <tr>
+          <td><a href="{{ url('patients/autoship/order', { number: order.number }) }}">{{ order.number }}</a></td>
+          <td class="text-center">{{ subscription.startDate|date }}</td>
+          <td class="text-center">{{ frequency }}</td>
+          <td class="text-center">{{ subscription.endDate|date }}</td>
+          <td class="text-center" style="text-transform: capitalize;">
+	          	{% if subscription.status != 'canceled' %}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+              <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+            </svg>
+            {% else %}
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+               <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+             </svg>
+            {% endif %}
+
+	          
+          </td>
+          <td class="text-center">{{ order.totalPrice|currency(order.currency) }}</td>
+        </tr>
+        
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No Autoship Orders</p>
+    {% endif %}
+  </div>
+</section>

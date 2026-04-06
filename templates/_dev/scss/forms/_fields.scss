@@ -1,0 +1,466 @@
+// ---------------------------------------------------------------------
+//  Fields
+// ---------------------------------------------------------------------
+
+.form {
+
+}
+
+.form-wrap {
+    transition: opacity $transition;
+
+    &.is-thinking {
+        opacity: 0.3;
+    }
+}
+
+
+// ----------------------------------------
+// Erros
+// ----------------------------------------
+
+.field-error {
+
+    input[type="text"],
+    input[type="email"] {
+        border-color: $error;
+    }
+
+    .error-message {
+        display: block;
+    }
+}
+
+.error-message {
+    display: none;
+}
+
+ul.errors,
+p.field-error,
+.error-block {
+    color: $error;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.error-block {
+    margin-top: 4px;
+}
+
+// ----------------------------------------
+// Success
+// ----------------------------------------
+
+// .field-error {
+//
+// }
+
+
+// ----------------------------------------
+// Labels
+// ----------------------------------------
+label {
+    display: block;
+    font-family: $sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: #383F44;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin-bottom: 5px;
+}
+
+
+// ----------------------------------------
+// Layouts
+// ----------------------------------------
+
+
+
+// ----------------------------------------
+// Containers
+// ----------------------------------------/
+$INPUT-HEIGHT: 50px;
+
+.field-wrap {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+// ----------------------------------------
+// Input Styles
+// ----------------------------------------
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+    display: inline-block;
+    -webkit-appearance: none;
+    width: 100%;
+    height: $INPUT-HEIGHT;
+    margin: 0;
+    padding: 0 8px;
+    box-shadow: none;
+    border-radius: 2px;
+    border: 1px solid $border;
+    background: $white;
+    font-size: 1.6rem;
+    letter-spacing: -0.2px;
+    color: $gray;
+    transition: all $transition;
+
+    &:disabled {
+        opacity: 0.2;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $brand;
+    }
+
+    &.input-auto {
+        width: auto;
+    }
+
+    .form-sm & {
+        height: 35px;
+        font-size: 1.3rem;
+    }
+}
+
+textarea {
+    min-height: 120px;
+    max-height: 240px;
+    padding: 10px 15px;
+    overflow: auto;
+    resize: vertical;
+}
+
+
+input[type="submit"] {
+    @include btn;
+    border-color: $brand-alt;
+    position: relative;
+    z-index: 2;
+    height: $INPUT-HEIGHT;
+    padding: 8px;
+    box-shadow: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+
+    transition: all $transition;
+    background: transparent;
+    color: $brand-alt;
+
+    &.submit-sm {
+        min-width: 118px;
+        padding: 3px 15px;
+        font-size: 1.3rem;
+        height: 42px;
+    }
+
+    &.disabled,
+    &.disabled:hover,
+    &.disabled:focus,
+    &.disabled:active {
+        opacity: 0.2;
+        border-color: $gray;
+        color: $gray;
+        background: transparent;
+        cursor: default;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        outline: none;
+        background: $brand-alt;
+        color: $white;
+    }
+}
+
+.submit-plain,
+input[type="submit"].submit-simple,
+input[type="submit"].submit-plain {
+    background: transparent;
+    border: none;
+    color: $brand;
+    //text-decoration: underline;
+    padding: 0;
+    min-width: 0;
+    max-width: 100%;
+    width: auto;
+    font-size: 14px;
+}
+
+
+// ----------------------------------------
+// Custom Select Dropdown
+// ----------------------------------------
+
+.select-wrap {
+    position: relative;
+
+    select {
+        display: block;
+        -webkit-appearance: none;
+        position: relative;
+        -moz-appearance: none;
+        text-indent: 0.01px;
+        text-overflow: '';
+        cursor: pointer;
+        padding-right: 30px;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 44px;
+        height: calc(100% - 2px);
+        top: 1px;
+        right: 1px;
+        background: url('../images/svgs/arrow-down.svg') no-repeat;
+        background-size: 14px 8px;
+        background-position: center;
+        pointer-events: none;
+    }
+}
+
+#paymentForm .select-wrap select {
+    padding-right: 30px;
+}
+
+.isIE .select select::-ms-expand,
+.isIE .select-wrap select::-ms-expand {
+    display: none;
+}
+
+.isIE .select .ginput_container{
+     select {
+        padding-right: 0;
+    }
+
+    &:after {
+        //display: none;
+    }
+}
+
+
+// ----------------------------------------
+// Custom Radio Button
+// ----------------------------------------
+
+.radio-list {
+    margin-top: 10px;
+
+    label{
+        padding: 4px 0;
+    }
+
+    input {
+        margin-right: 4px;
+    }
+
+    @include start-at($medium){
+        display: flex;
+        flex-wrap: wrap;
+
+        > * {
+            width: 33.333%;
+        }
+    }
+}
+
+.radio-btn {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    margin-top: 5px;
+
+    input {
+        @include visually-hidden;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50px;
+        background-color: $error;
+        -webkit-transition: .4s;
+        transition: .4s;
+
+        &:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+    }
+
+    input:checked + .slider {
+        background-color: $brand-alt;
+    }
+
+    input:disabled + .slider {
+        opacity: 0.2;
+        background: $gray;
+    }
+
+    input:focus + .slider {
+        box-shadow: $shadow;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+}
+
+
+
+// ----------------------------------------
+// Custom Checkbox
+// ----------------------------------------
+
+.radio-inline,
+.checkbox {
+    display: flex;
+    align-items: center;
+
+    > * + * {
+        margin-left: 10px;
+    }
+
+    label {
+        margin-bottom: 0;
+        line-height: 0;
+        padding-top: 2px;
+    }
+}
+
+.gfield_radio,
+.gfield_checkbox {
+    display: table;
+    width: 100%;
+
+    input {
+        @include visually-hidden;
+    }
+
+    label:before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+        border: 1px solid $black;
+        background-color: $white;
+        transition: background-color $transition;
+        cursor: pointer;
+    }
+
+    input:checked + label {
+
+        &:before {
+            background-color: $black;
+        }
+    }
+}
+
+
+// ----------------------------------------
+// File Uploader
+// ----------------------------------------
+.fileUpload {
+
+    input {
+        height: auto;
+        display: block;
+        border: 1px dashed $gray-light;
+        text-align: center;
+        padding: 38px 24px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all $transition;
+
+        &:hover {
+            border-color: $brand;
+            color: $brand;
+        }
+    }
+
+    .ginput_container {
+        height: auto;
+    }
+
+    .gform_drop_instructions {
+        //display: none;
+    }
+}
+
+
+// ----------------------------------------
+// touch styles
+// ----------------------------------------
+.isTouch {
+
+    .ginput_container {
+
+        input,
+        textarea,
+        select {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+
+
+@mixin placeholder {
+    color: $gray;
+    opacity: 0.4;
+    transition: opacity $trans;
+}
+@mixin placeholder-focus {
+    color: $gray;
+    opacity: 0.1;
+}
+
+::-webkit-input-placeholder {
+    @include placeholder;
+}
+::-moz-placeholder {
+    @include placeholder;
+}
+:-ms-input-placeholder {
+    @include placeholder;
+}
+input:focus::-webkit-input-placeholder {
+    @include placeholder-focus;
+}
+input:focus::-moz-placeholder {
+    @include placeholder-focus;
+}
+input:focus:-ms-input-placeholder {
+    @include placeholder-focus;
+}

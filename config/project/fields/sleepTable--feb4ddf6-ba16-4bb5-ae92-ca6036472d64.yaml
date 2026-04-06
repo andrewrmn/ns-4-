@@ -1,0 +1,51 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
+handle: sleepTable
+instructions: ''
+name: 'Sleep Table'
+searchable: true
+settings:
+  columns:
+    329:
+      __assoc__:
+        -
+          - width
+          - ''
+    330:
+      __assoc__:
+        -
+          - width
+          - ''
+    331:
+      __assoc__:
+        -
+          - width
+          - ''
+    332:
+      __assoc__:
+        -
+          - width
+          - ''
+    333:
+      __assoc__:
+        -
+          - width
+          - ''
+    334:
+      __assoc__:
+        -
+          - width
+          - ''
+  contentTable: '{{%stc_sleeptable}}'
+  fieldLayout: table
+  maxRows: null
+  minRows: null
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a row'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

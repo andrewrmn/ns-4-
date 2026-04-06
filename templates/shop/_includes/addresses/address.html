@@ -1,0 +1,60 @@
+<div class="address-data p-sm">
+    {% if address.firstName is not empty or address.lastName is not empty %}
+        <span>
+            <strong class="text-black">
+                {% if address.attention is not empty %}
+                    Att: {{ address.attention }}<br />
+                {% endif %}
+
+                {% if address.title is not empty %}
+                    {{ address.title }}<br />
+                {% endif %}
+
+                {% if address.firstName is not empty %}
+                    {{ address.firstName }}
+                {% endif %}
+
+                {% if address.lastName is not empty %}
+                    {{ address.lastName }}
+                {% endif %}
+                <br>
+                {% if address.businessName is not empty %}
+                    {{ address.businessName }}
+                {% endif %}
+            </strong>
+        </span>
+    {% endif %}
+
+
+    {% if address.address1 is not empty %}
+        <div>{{ address.address1 }}</div>
+    {% endif %}
+
+    {% if address.address2 is not empty %}
+        <div>{{ address.address2 }}</div>
+    {% endif %}
+
+    <div>
+        {% if address.city is defined %}
+            <span>{{ address.city }}</span>
+        {% endif %}
+
+        {% if address.stateText is defined %}
+            <span>, {{ address.stateText }}</span>
+        {% endif %}
+
+        {% if address.zipCode is defined %}
+            <span> {{ address.zipCode }}</span>
+        {% endif %}
+    </div>
+
+
+
+    {% if address.countryText is defined %}
+        <div>{{ address.countryText }}</div>
+    {% endif %}
+
+    {% if address.phone is not empty %}
+        <div>p: {{ address.phone }}</div>
+    {% endif %}
+</div>

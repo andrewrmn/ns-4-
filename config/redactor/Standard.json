@@ -1,0 +1,60 @@
+{
+  "buttons": [
+    "format",
+    "bold",
+    "italic",
+    "lists",
+    "link",
+    "file",
+    "horizontalrule",
+    "image",
+    "html"
+  ],
+  "plugins": [
+    "fullscreen"
+  ],
+  "formatting": [
+    "p",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "blockquote"
+  ],
+  "formattingAdd": {
+    "h1": {
+      "title": "Heading 1",
+      "args": [
+        "h2",
+        "class",
+        "h1"
+      ]
+    },
+    "small-paragraph": {
+      "title": "Small",
+      "args": [
+        "span",
+        "class",
+        "p-sm"
+      ]
+    },
+    "align-left": {
+      "title": "Align left",
+      "args": ["p","class","align-left"]
+    },
+    "align-right": {
+      "title": "Align right",
+      "args": ["p","class","align-right"]
+    },
+    "align-center": {
+      "title": "Align center",
+      "args": ["p","class","align-center"]
+    },
+    "align-justify": {
+      "title": "Justify",
+      "args": ["p","class","align-justify"]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+defaultPlacement: end
+enableVersioning: true
+handle: login
+name: Login
+propagationMethod: all
+siteSettings:
+  9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
+    enabledByDefault: true
+    hasUrls: true
+    template: pages/login
+    uriFormat: login
+type: single

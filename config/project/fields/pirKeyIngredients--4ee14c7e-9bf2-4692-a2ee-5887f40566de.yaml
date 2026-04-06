@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
+handle: pirKeyIngredients
+instructions: ''
+name: 'PIR Key Ingredients'
+searchable: true
+settings:
+  columns:
+    297:
+      __assoc__:
+        -
+          - width
+          - ''
+    298:
+      __assoc__:
+        -
+          - width
+          - ''
+    299:
+      __assoc__:
+        -
+          - width
+          - ''
+  contentTable: '{{%stc_pirkeyingredients}}'
+  fieldLayout: row
+  maxRows: null
+  minRows: null
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a row'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

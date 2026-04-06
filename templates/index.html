@@ -1,0 +1,57 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	
+	
+	
+	<div class="video-hero">
+		<figure class="video-hero__video">
+			<video muted autoplay loop>
+				<source src="{{ '/images/particles.mp4' }}" type="video/mp4">
+			</video>
+			<img src="{{ '/images/particles.jpg' }}" alt="image of a brain made up by black and white particles">
+		</figure>
+
+		<div class="video-hero__content wrapper-wide">
+			<div class="">
+				<div class="video-hero__content__inner">
+					<h1 class="hxl">Brain-focused.<br />
+					<span>Premium products.</span>
+					</h1>
+					<a class="btn mt-4" href="/products/">Explore Products</a>
+				</div>
+			</div>
+		</div>
+
+		<a class="video-hero__ft" href="#neuroscience-content" data-scroll-to="neuroscience-content">
+			<p class="h6">Learn more</p>
+			<img src="{{ '/images/svgs/arrow-down-green.svg' }}" alt="arrow icon" />
+		</a>
+	</div>
+	<div id="neuroscience-content"></div>
+	
+	
+
+	{% include 'partials/contentModules' %}
+
+
+{% endblock %}

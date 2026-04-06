@@ -1,0 +1,57 @@
+columnSuffix: etshmbdd
+contentColumnType: string
+fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
+handle: hcpStorefrontDiscount
+instructions: ''
+name: 'HCP Storefront Discount'
+searchable: false
+settings:
+  optgroups: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'No Discount'
+        -
+          - value
+          - '0'
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - '5% off SRP'
+        -
+          - value
+          - '5'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '10% off SRP'
+        -
+          - value
+          - '10'
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '15% off SRP'
+        -
+          - value
+          - '15'
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

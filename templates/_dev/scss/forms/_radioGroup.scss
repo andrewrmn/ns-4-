@@ -1,0 +1,103 @@
+// ---------------------------------------------------------------------
+//  Radio Group
+// ---------------------------------------------------------------------
+
+.radio-group-head {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 16px;
+
+    p {
+        font-size: 14px;
+        font-weight: 700;
+        width: 44px;
+        color: $black;
+    }
+
+    span {
+        width: 120px;
+        display: block;
+        height: 1px;
+        margin: 0 12px;
+    }
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    text-align: center;
+
+    span.pathway {
+        display: block;
+        margin: 0 12px;
+        width: 120px;
+        text-align: center;
+        color: $black;
+    }
+
+    .no-value {
+        color: $black;
+        width: 44px;
+        text-align: center;
+    }
+}
+
+
+
+// ----------------------------------------
+// Filter Form
+// ----------------------------------------
+
+.radio-group {
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .radio-button {
+        background: $white;
+        width: 44px;
+        height: 24px;
+        border-radius: 50px;
+        display: block;
+        border: 1px solid darken($gray-light, 5%);
+        position: relative;
+        transition: background 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            border-radius: 50%;
+            height: 22px;
+            width: 22px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: $white;
+            box-shadow: 1px 1px 2px 0px rgba($gray,0.6);
+            transition: left 0.2s ease-out;
+        }
+    }
+
+
+
+    input:checked + .radio-button {
+        background: darken($green, 10%);
+
+        &:after {
+            left: calc(100% - 22px);
+        }
+    }
+
+}

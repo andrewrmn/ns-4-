@@ -1,0 +1,173 @@
+field: 9901899c-95b6-402f-ac0d-0b5709e44b9c # Education Materials
+fieldLayouts:
+  c16d8ef2-c6de-4ef1-b2d1-6b5bc686af4b:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 0d914fff-b4b8-42a3-b98d-77caaba8781d # Restricted Access?
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cabe8363-0383-4075-9726-56e6e2fe76af # Headline
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9ab250b7-b056-45ef-91cd-52918b0599bd # Color
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cbfc2c81-26c5-478c-a8a1-ad3429910c78 # Body
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cf76daff-2c39-465f-8d83-9acd3b0d172b # Materials
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: ed70687a-ec3a-482b-aa3a-e6643ae25324 # Accordion Drawer
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0d914fff-b4b8-42a3-b98d-77caaba8781d: # Restricted Access?
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: restrictedAccess
+    instructions: ''
+    name: 'Restricted Access?'
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  9ab250b7-b056-45ef-91cd-52918b0599bd: # Color
+    columnSuffix: null
+    contentColumnType: string(7)
+    fieldGroup: null
+    handle: color
+    instructions: ''
+    name: Color
+    searchable: true
+    settings:
+      defaultColor: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Color
+  cabe8363-0383-4075-9726-56e6e2fe76af: # Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headline
+    instructions: ''
+    name: Headline
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  cbfc2c81-26c5-478c-a8a1-ad3429910c78: # Body
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Standard.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  cf76daff-2c39-465f-8d83-9acd3b0d172b: # Materials
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: materials
+    instructions: ''
+    name: Materials
+    searchable: true
+    settings:
+      contentTable: '{{%matrixcontent_materials}}'
+      maxBlocks: ''
+      minBlocks: ''
+      propagationKeyFormat: null
+      propagationMethod: all
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Matrix
+  ed70687a-ec3a-482b-aa3a-e6643ae25324: # Accordion Drawer
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: accordionDrawer
+    instructions: ''
+    name: 'Accordion Drawer'
+    searchable: true
+    settings:
+      contentTable: '{{%matrixcontent_accordiondrawer}}'
+      maxBlocks: ''
+      minBlocks: ''
+      propagationKeyFormat: null
+      propagationMethod: all
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Matrix

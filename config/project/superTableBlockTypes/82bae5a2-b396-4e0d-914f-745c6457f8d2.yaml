@@ -1,0 +1,178 @@
+field: cfbe0147-1cfa-4cbd-a0a2-42dfb7278536 # Product Submission
+fieldLayouts:
+  10b5ccef-ed59-489b-8483-ac44c2a8d688:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: d2f95df2-89ea-43b8-b84d-0e937ee47715 # ID
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c90899ec-f418-4c3a-88c4-ab2d5ad78a9c # Date
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 13a41bcb-8067-42ec-b258-9b6704d154f5 # Products
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8e5f4c47-beb0-4ec2-b5ad-56803a4cadec # Age
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 213d7db1-82b4-4083-8c16-e9c869c87f1c # Gender
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c0157df9-eb24-42fb-b900-cbbe439d951e # PDF Generated
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  8e5f4c47-beb0-4ec2-b5ad-56803a4cadec: # Age
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: age
+    instructions: ''
+    name: Age
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  13a41bcb-8067-42ec-b258-9b6704d154f5: # Products
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: products
+    instructions: ''
+    name: Products
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  213d7db1-82b4-4083-8c16-e9c869c87f1c: # Gender
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: gender
+    instructions: ''
+    name: Gender
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  c0157df9-eb24-42fb-b900-cbbe439d951e: # PDF Generated
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: pdfGenerated
+    instructions: ''
+    name: 'PDF Generated'
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  c90899ec-f418-4c3a-88c4-ab2d5ad78a9c: # Date
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: date
+    instructions: ''
+    name: Date
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  d2f95df2-89ea-43b8-b84d-0e937ee47715: # ID
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: submissionId
+    instructions: ''
+    name: ID
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

@@ -1,0 +1,56 @@
+{% set orders = craft.enupalStripe.getSubscriptionsByUser(currentUser.id) %}
+
+<section class="patientOrderHistory" id="autoship-orders">
+
+  {% if orders|length %}
+  <div class="d-flex flex-items-baseline flex-justify-between">
+    <h3 class="mb-3">Active Autoship Orders</h3>
+    <a class="link" href="{{ url('patients/autoship/') }}">View all</a>
+  </div>
+  <div class="recent-wrapper">
+    <div class="autoship-fancy">
+      {% for order in orders|reverse %}
+
+      {% set subscription = order.getSubscription() %}
+      {% if subscription.status != 'canceled' %}
+      {% set frequency = order.getPaymentForm('description') %}
+      {% set formData = order.getFormFields() %}
+      {% set craftOrderNumber = formData.orderNumber %}
+      {% set myOrderQuery = craft.orders().number(craftOrderNumber) %}
+      {% set craftOrder = myOrderQuery.one() %}
+
+      <div class="autoship-preview-fancy">
+        <a href="{{ url('patients/autoship/order', { number: order.number }) }}">
+          {% set hit = false %}
+          {% for item in craftOrder.lineItems %}
+          {% set prodFields = item.purchasable.product.productFields %}
+          {% set img = prodFields.productImages.one() %}
+          {% if not hit %}
+          <figure>
+            <img src="{{ img.url }}" />
+            {% set hit = true %}
+          </figure>
+          {% endif %}
+          {% endfor %}
+          <div>
+            <div class="autoship-preview-fancy__products">
+              {% for item in craftOrder.lineItems %}<span class="h6">{{ item.description }} <span>x {{ item.qty }}</span></span>{% endfor %}
+            </div>
+            <div class="h6 m-0">Start date: {{ subscription.startDate|date }}</div>
+            <div class="h6 m-0">Frequency: {{ frequency }}</div>
+            <div class="h6 m-0">Next shipment: {{ subscription.endDate|date }}</div>
+          </div>
+        </a>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% else %}
+  <h3 class="mb-3">Active Autoship Orders</h3>
+  <div class="recent-wrapper">
+    <p>No Active Autoship Orders</p>
+  </div>
+  {% endif %}
+</section>

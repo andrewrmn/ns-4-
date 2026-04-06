@@ -1,0 +1,329 @@
+{% if not currentUser or not currentUser.isInGroup('patients') %}
+{% redirect "patients/login" %}
+{% endif %}
+{% set title = 'Patient Dashboard' %}
+{% extends 'layouts/_accounts-patient' %}
+
+{% set number = craft.app.request.getRequiredParam('number') %}
+{% set order = craft.enupalStripe.getOrderByNumber(number) %}
+{% set subscription = order.getSubscription() %}
+{% set frequency = order.getPaymentForm('description') %}
+{% set formData = order.getFormFields() %}
+{% set craftOrderNumber = formData.orderNumber %}
+{% set craftOrder = craft.orders.number(craftOrderNumber).one() %}
+{% set productsInOrder = [] %}
+
+{% set autoshipDuration = ['15 Days', '30 Days', '45 Days', '60 Days'] %}
+
+{% block content %}
+
+<img class="patient-portal__bg" src="https://www.neuroscienceinc.com/images/general/accent.jpg" alt="">
+
+<div class="wrapper-wide py-6">
+
+  <div class="customer-order-pdf mt-6 pb-4">
+
+    <a class="mb-4 d-inline-block" href="/patients/autoship/">< All Autoship Orders</a>
+
+    <h1 class="mb-3">Order #{{ craftOrder.reference }}</h1>
+
+    <section class="customer-order-pdf-autoship mb-5">
+      <table width="100%" border="0">
+        <thead>
+          <tr>
+            <th width="16%">Autoship Reference #</th>
+            <th width="16%">Order Date</th>
+            <th width="16%">Frequency</th>
+            <th width="16%">Next Shipment</th>
+            <th width="16%">Status</th>
+            <th width="16%">Order Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ order.number }}</td>
+            <td>{{ subscription.startDate|date }}</td>
+            <td>{{ frequency }}</td>
+            <td>{{ subscription.endDate|date }}</td>
+            <td><span style="text-transform: capitalize">{{ subscription.status }}</span></td>
+            <td>{{ order.totalPrice|currency(order.currency) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex flex-justify-ends flex-items-center mt-4">
+        <a class="btn btn--sm btn-alt mb-0 mr-3" href="#" data-subscriptionId="{{ order.stripeTransactionId }}" id="btn-cancel-subscription" class="btn">Pause Autoship [in progress]</a>
+
+        {% if subscription.status == 'active' and not subscription.cancelAtPeriodEnd %}
+          <a class="btn btn--sm btn-alt mt-0 mr-3" href="#" data-subscriptionId="{{ order.stripeTransactionId }}" id="btn-cancel-subscription">Cancel Autoship</a>
+          <a class="btn btn--sm btn-alt mt-0 mr-3" href="{{ url('patients/autoship/create-cart?number=' ~ order.number) }}" data-subscriptionId="{{ order.stripeTransactionId }}" data-click-target="edit-autoship-order">Edit</a>
+          <a class="btn btn--sm btn-alt mt-0" href="" data-click-target="delay-autoship-order">Delay Autoship</a>
+          <a class="btn btn--sm btn-alt mt-0 mr-3" href="" data-click-target="edit-autoship-order">Edit Example</a>
+
+        {% else %}
+          <a class="btn btn--sm btn-alt mt-0" href="" data-click-target="delay-autoship-order">Delay Autoship</a>
+          <a class="btn btn--sm btn-alt mt-0" href="#" data-subscriptionId="{{ order.stripeTransactionId }}" id="btn-reactive-subscription" class="btn">Reactivate</a>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="d-md-flex customer-order-pdf__lists">
+      <div class="pr-md-6 mb-5" style="flex-grow: 1;">
+        <h4>Order Details</h4>
+        <ul>
+          <li><strong>Order ID:</strong> {{ craftOrder.id }}</li>
+          <li><strong>{{ "Customer"|t }}:</strong> {{ craftOrder.customer.email }}</li>
+          <li><strong>{{ "Total"|t }}:</strong> {{ craftOrder.totalPrice|commerceCurrency(cart.currency) }}</li>
+          <li><strong>{{ "Amount Paid"|t }}:</strong> {{ craftOrder.totalPaid|commerceCurrency(cart.currency) }}</li>
+          <li><strong>{{ "Date"|t }}:</strong> {{ craftOrder.dateOrdered|date('D jS M Y') }}<br></li>
+          {% if craftOrder.pdfUrl %}
+          <li><strong>Receipt:</strong> <a href="{{ craftOrder.getPdfUrl('receipt') }}">Download</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="pr-md-6 mb-4">
+        <h4>Shipping Address</h4>
+        {% if craftOrder.shippingAddress %}
+        {% include 'shop/_includes/addresses/address' with { address: craftOrder.shippingAddress } %}
+        {% endif %}
+      </div>
+      <div class="pr-md-4 mb-4">
+        <h4>Billing Address</h4>
+        {% if craftOrder.billingAddress %}
+        {% include 'shop/_includes/addresses/address' with { address: craftOrder.billingAddress } %}
+        {% endif %}
+      </div>
+    </section>
+
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th class="text-right">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in craftOrder.lineItems %}
+        <tr class="line-item">
+          <td>
+            <strong>{{ item.description }}</strong><br>
+            SKU: {{ item.sku }}
+          </td>
+          <td>
+            {% if item.onSale %}
+            <strike>{{ item.price|commerceCurrency(cart.currency) }}</strike>   {{ item.salePrice|commerceCurrency(cart.currency) }}
+            {% else %}
+            {{ item.price|commerceCurrency(cart.currency) }}
+            {% endif %}
+          </td>
+          <td>{{ item.qty }}</td>
+          <td class="text-right">{{ item.subtotal|commerceCurrency(cart.currency) }}</td>
+        </tr>
+
+        {% set productsInOrder = productsInOrder|merge([item.sku]) %}
+        {% endfor %}
+
+        {% for adjustment in craftOrder.adjustments %}
+        <tr class="adjustment">
+          <td class="adjustment__title">{{ adjustment.type }}</td>
+          <td colspan="2"><strong>{{ adjustment.name }}</strong>{% if adjustment.description %}<br>({{ adjustment.description }}){% endif %}</td>
+          <td class="text-right">{{ adjustment.amount|commerceCurrency(cart.currency) }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr class="totals">
+          <td colspan="4" class="text-right">
+            <span class="subtotal">Item Subtotal: {{ craftOrder.itemTotal|commerceCurrency(cart.currency) }}</span>
+            <span class="total">Total: {{ craftOrder.totalPrice|commerceCurrency(cart.currency) }}</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="customer-order-pdf mt-6 pb-4">
+    <h2>Payment History</h2>
+    <table width="100%" border="0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Payment Amount</th>
+        </tr>
+      </thead>
+      {% for invoice in subscription.getPaidInvoices() %}
+      <tbody>
+        <tr>
+          <td>{{ invoice.created|date("m/d/Y") }}</td>
+          <td>{{ craft.enupalStripe.convertFromCents(invoice.amount_paid, invoice.currency) }}</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+
+    <form class="mt-4" method="POST" target="_blank">
+      {{ csrfInput() }}
+      {{ actionInput('enupal-stripe/stripe/create-customer-portal') }}
+      <input type="hidden" name="returnUrl" value="{{ siteUrl('/account') }}">
+      <button class="btn btn--sm btn-alt" type="submit">Manage billing</button>
+      {% if customerPortalError is defined %}
+      <div class="error">
+        {{ customerPortalError }}
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
+
+
+<div class="modal-wrap" id="edit-autoship-order">
+  <div class="modal">
+    <a class="modal__close" href="#" data-click-target="edit-autoship-order">
+      <div>
+        <p class="sr-only">Close Modal</p>
+        <img src="../../images/svgs/close.svg" width="16" />
+      </div>
+    </a>
+    <div class="modal__inner">
+      <form method="post" action="{{ url('patients/autoship/create-cart') }}">
+        <input type="hidden" name="cancelSubscriptionOrderId" value="{{ order.stripeTransactionId }}">
+        {{ csrfInput() }}
+        <div class="row">
+          <div class="col-md-10">
+          <header class="d-md-flex mb-4">
+            <div>
+              <h2 class="h5">Update your autoship order</h2>
+              <p class="mb-0">Choose your products and autoship duration below to proceed</p>
+            </div>
+          </header>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn--sms mt-4 mr-0 mt-md-0">Proceed</button>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h3 class="mb-3">Duration</h3>
+
+          <div class="auto-ship-duration-list">
+            {% set field = craft.app.fields.getFieldByHandle('recurringOrderFrequency') %}
+            <ul class="row ml-2">
+              {% for option in field.options %}
+                <li class="d-inline-block col-md-3">
+                  <label>
+                    <input type="radio" name="recurringOrderFrequency" value="{{ option.value }}" />&nbsp;{{ option.label }}
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="mb-3">Product Selection</h3>
+          <div class="product-mini-list">
+
+            {# Set product availability for patients. Only these products will be displayed to patients #}
+            {% set patientAvailableProducts = null %}
+            {% if currentUser and currentUser.isInGroup('patients') and currentUser.restrictedProducts|length %}
+              {% set patientAvailableProducts = currentUser.restrictedProducts.ids() %}
+            {% endif %}
+
+            {% if currentUser.relatedHcp.one().hcpProductsStore|length %}
+              {% set products = currentUser.relatedHcp.one().hcpProductsStore.id(patientAvailableProducts).order('title asc').all() %}
+            {% else %}
+              {% set products = craft.products().order('title asc').id(patientAvailableProducts).all() %}
+            {% endif %}
+            <div class="row">
+              {% for product in products %}
+              {% for purchasable in product.variants %}
+              <!--div class="product-mini {% if purchasable.sku in productsInOrder %} is-active{% endif %}"-->
+              <div class="col-sm-2 col-md-3 col-3 px-2">
+                <figure>
+                  {% set img = product.productFields.productImages.one() %}
+                  {% if img|length %}
+                      <a href="{{ product.url }}"><img src="{{ img.url }}" alt="{{ img.title }}" /></a>
+                  {% endif %}
+                </figure>
+                <div class="text-center">
+                  <label style="cursor: pointer;">
+                    <input type="checkbox" name="purchasablesIds[]" value="{{ purchasable.id }}"{% if purchasable.sku in productsInOrder %} checked{% endif %} />&nbsp;{{ purchasable.description }}
+                  </label>
+                  <span>{% if purchasable.suggestedRetailPrice %}${{ purchasable.suggestedRetailPrice }}{% endif %}</span>
+                </div>
+              </div>
+              {% endfor %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal-wrap" id="delay-autoship-order">
+  <div class="modal">
+    <a class="modal__close" href="#" data-click-target="delay-autoship-order">
+      <div>
+        <p class="sr-only">Close Modal</p>
+        <img src="../../images/svgs/close.svg" width="16" />
+      </div>
+    </a>
+    <div class="modal__inner">
+      <form method="post">
+        {{ actionInput('neuroselect/hcp/delay-autoship') }}
+        <input type="hidden" name="subscriptionId" value="{{ order.stripeTransactionId }}">
+        {{ redirectInput('patients/autoship/order?number=' ~ number) }}
+        {{ csrfInput() }}
+        <input type="date" name="delayAutoshipDate" />
+        <button class="btn mt-4 mr-0 mt-md-0" type="submit">Delay Autoship</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<form method="post" id="frm-cancel-subscription">
+  <input type="hidden" name="action" value="enupal-stripe/stripe/cancel-subscription">
+  <input type="hidden" name="subscriptionId" value="">
+  <input type="hidden" name="cancelAtPeriodEnd" value="true">
+  <input type="hidden" name="redirect" value="{{ 'patients/autoship'|hash }}">
+  {{ csrfInput() }}
+</form>
+
+<form method="post" id="frm-reactivate-subscription">
+  <input type="hidden" name="action" value="enupal-stripe/stripe/reactivate-subscription">
+  <input type="hidden" name="subscriptionId" value="">
+  <input type="hidden" name="cancelAtPeriodEnd" value="true">
+  {{ csrfInput() }}
+</form>
+{% endblock %}
+
+{% js %}
+$(document).ready(function(){
+  $(document).on("click", "a#btn-cancel-subscription", function() {
+    let subscriptionId = $(this).attr('data-subscriptionId');
+    let text = "Are you sure to cancel subscription?";
+    if (confirm(text) == true) {
+      $("form#frm-cancel-subscription input[name='subscriptionId']").val(subscriptionId);
+      $("form#frm-cancel-subscription").submit();
+    }else{
+      return false;
+    }
+  })
+
+  $(document).on("click", "a#btn-reactive-subscription", function() {
+    let subscriptionId = $(this).attr('data-subscriptionId');
+    let text = "Are you sure to reactivate subscription?";
+    if (confirm(text) == true) {
+      $("form#frm-reactivate-subscription input[name='subscriptionId']").val(subscriptionId);
+      $("form#frm-reactivate-subscription").submit();
+    }else{
+      return false;
+    }
+  })  
+})
+{% endjs %}

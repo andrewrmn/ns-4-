@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'partials/head' %}
+
+	{% set canBuy = false %}
+	{% set allowedGuest = false %}
+	{% set isGuest = craft.app.request.getParam('guestportal') %}
+	{% if isGuest == 'ordering' %}
+	    {{ craft.app.session.set('allowGuest', 'true') }}
+	 
+	{% endif %}
+
+	{% if craft.app.session.get('allowGuest') == 'true' %}
+	    {% set allowedGuest = true %}
+	{% endif %}
+
+	{% if allowedGuest or currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+	    {% set canBuy = true %}
+	{% endif %}
+</head>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N46834T"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	
+	<!-- Start of HubSpot Embed Code -->
+	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/23208015.js"></script>
+	<!-- End of HubSpot Embed Code -->
+
+	<!-- Loading script asynchronously -->
+	<script type="text/javascript">
+	(function(a,b,c,d){ a='//tags.tiqcdn.com/utag/advantagepublisherservices/aps/prod/utag.js'; b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true; a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a); })();
+	</script>
+
+	<a href="#content" class="sr-only">Skip to content</a>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+{% set cart = craft.commerce.carts.cart %}
+
+	{% include 'header' %}
+
+	{% block header %}
+		<div class="is-hidden">
+			<div class="row">
+				<div class="twelve columns">
+					<a href="{{ url('shop') }}">{%- include "shop/_images/logo" with {'class': 'logo'} -%}</a>
+
+					{% include "shop/_includes/nav" %}
+
+					<div class="flash">{{ craft.app.session.getFlash('notice') }}</div>
+					<div class="flash">{{ craft.app.session.getFlash('error') }}</div>
+
+	                <div class="row">
+	                    <div class="twelve columns">
+	                        {% for error in cart.errors %}
+	                            <div class="flash">{{ error|join(' ') }}</div>
+	                        {% endfor  %}
+	                    </div>
+	                </div>
+
+
+	            </div>
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block body %}
+		<div id="main" class="content">
+			{% block main %}
+				<h4>Default Content</h4>
+				<p>You should not see this.</p>
+			{% endblock %}
+		</div>
+	{% endblock %}
+
+	{% include 'footer' %}
+
+
+	<script src="/js/main.js"></script>
+
+	<span class="menu-mask" data-click-target="" data-click-bodyClass="sub-nav-is-active"></span>
+	<div class="is-hidden">
+		{% include 'partials/svgs.svg' %}
+	</div>
+	{% set customerMasId = '' %}
+	{% if currentUser %}
+		{% set customerMasId = currentUser.masId %}
+	{% endif %}
+	<script>
+		var $ = jQuery,
+			form = $("#addToCartForm");
+
+		$(document).on('submit', '.js-add-to-cart', function(e){
+			e.preventDefault();
+			var form = $(this);
+
+			console.log('add to cart clicked');
+
+			var qty = form.find("input[name='qty']").val(),
+				curQty = $('.js-cart-qty').text(),
+				newQty = parseInt(qty) + parseInt(curQty),
+				form_data = form.serializeArray();
+
+			form_data['action'] = 'commerce/cart/update-cart';
+			//console.log('data' + form_data);
+
+			form_data.push({
+				name: window.csrfTokenName,
+				value: window.csrfTokenValue
+			});
+
+			form_data.push({
+				name: 'fields[masId]',
+				value: '{{ customerMasId }}'
+			});
+
+			$.ajax({
+				type: 'post',
+				url: '/',
+				data: form_data,
+				dataType: 'json',
+				success: function(response) {
+
+					console.log(response);
+					// if product index page, give different success indication
+					{% if craft.app.request.segments|last == "products" %}
+					console.log('product added to cart via index page');
+					ps = form.parents('.product-preview').find('.product-preview__success');
+					form.parents('.product-preview').addClass('product-added');
+					ps.append("<span><span>Item Added!</span></span>").fadeIn(400);
+					setTimeout(function(){
+						ps.fadeOut(400);
+						form.parents('.product-preview').removeClass('product-added');
+					}, 3000);
+
+					{% else %}
+					console.log('product added to cart');
+					$('.js-cart-alert').html('<p><b>Item Added!</b> This product is now in your cart. <a href="/products/">Continue Shopping.</a></p>').addClass('is-active success');
+
+					{% endif %}
+
+					$('.js-cart-qty').text(newQty);
+					$('.js-cart-qty-hd').text(newQty);
+
+					setTimeout(function(){
+						$('.js-cart-alert').slideUp();
+					}, 5000);
+
+					$.ajax({
+						type: 'post',
+						url: '/',
+						data: '',
+						dataType: 'json',
+						success: function(response) {
+							console.log('double');
+						}
+					});
+
+				},
+				error: function(response) {
+					console.log(response);
+					$('.js-cart-alert').html('<p><b>Error:</b> There was an issue adding your item to the cart. Please try again or <a href="/contact">contact us if the error persists</a>.</p>').addClass('is-active error');
+				}
+			});
+		});
+	</script>
+	
+		<!-- Use of this pixel is subject to the Amazon ad specs and policies at
+http://www.amazon.com/b/?&node=7253015011 --><script type='text/javascript'>var _pix =
+document.getElementById('_pix_id_7a98c45b-9f53-5e6e-a834-92a1b6b8f005');if (!_pix) { var protocol =
+'//'; var a = Math.random() * 1000000000000000000; _pix = document.createElement('iframe');
+_pix.style.display = 'none'; _pix.setAttribute('src', protocol +
+'s.amazon-adsystem.com/iu3?d=generic&ex-fargs=%3Fid%3D7a98c45b-9f53-5e6e-a834-92a1b6b8f005
+%26type%3DUNKNOWN%26m%3D1&ex-fch=416613&ex-src=https://www.neuroscienceinc.com/&ex-harg
+s=v%3D1.0%3Bc%3D1975113980101%3Bp%3D7A98C45B-9F53-5E6E-A834-92A1B6B8F005' + '&cb=' + a);
+_pix.setAttribute('id','_pix_id_7a98c45b-9f53-5e6e-a834-92a1b6b8f005');
+document.body.appendChild(_pix);}</script><noscript> <img height='1' width='1' border='0' alt=''
+src='https://s.amazon-adsystem.com/iui3?d=forester-did&ex-fargs=%3Fid%3D7a98c45b-9f53-5e6e-a834
+-92a1b6b8f005%26type%3DUNKNOWN%26m%3D1&ex-fch=416613&ex-src=https://www.neurosciencein
+c.com/&ex-hargs=v%3D1.0%3Bc%3D1975113980101%3Bp%3D7A98C45B-9F53-5E6E-A834-92A1B6B8F005'
+/></noscript>
+</body>
+</html>

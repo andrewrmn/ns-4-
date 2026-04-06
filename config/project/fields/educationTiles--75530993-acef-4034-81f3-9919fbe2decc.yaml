@@ -1,0 +1,43 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
+handle: educationTiles
+instructions: ''
+name: 'Education Tiles'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - b59301e5-6591-4faa-b898-e3cf66b98f13 # Icon
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - e74c556b-8b21-47ab-bcc6-68a570fd85da # Title
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 38c73914-fbc8-48af-9aa8-342a11249be6 # URL
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_educationtiles}}'
+  fieldLayout: table
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add tile'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

@@ -1,0 +1,33 @@
+<svg width="229px" height="169px" viewBox="0 0 229 169" version="1.1" id="phenylalanine" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Phenylalanine</title>
+    <defs></defs>
+    <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.300000012">
+        <g  transform="translate(-760.000000, -182.000000)">
+            <g  transform="translate(873.763106, 260.994611) rotate(-20.000000) translate(-873.763106, -260.994611) translate(752.763106, 196.494611)">
+                <polygon  stroke="#FFFFFF" stroke-linecap="round" points="72.59 107.36 72.59 65.74 36.55 44.93 0.5 65.74 0.5 107.36 36.55 128.17"></polygon>
+                <polyline  stroke="#FFFFFF" stroke-linecap="round" points="74.04 65.74 110.08 44.93 146.13 65.74 146.13 91.36"></polyline>
+                <polyline  stroke="#FFFFFF" stroke-linecap="round" points="217 65.74 181.95 44.93 145.91 65.74"></polyline>
+                <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="224.572" y="71.75">OH</tspan>
+                </text>
+                <text font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="176.95" y="11.91">O</tspan>
+                </text>
+                <path d="M63.13,71.62 L63.13,103.21"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M36.55,119.41 L9.19,103.61"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M34.44,55.33 L7.08,71.13"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M185.62,20.62 L185.62,46.59" stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M176.67,20.62 L176.67,46.59" stroke="#FFFFFF" stroke-linecap="round"></path>
+                <polygon stroke="#FFFFFF" stroke-width="0.5" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" points="146.16 66.27 142.91 99.75 149.4 99.75"></polygon>
+                <g  transform="translate(137.000000, 107.000000)" font-family="Akkurat" fill="#FFFFFF" font-weight="normal">
+                    <text font-size="12">
+                        <tspan x="0.288" y="11">NH</tspan>
+                    </text>
+                    <text font-size="10">
+                        <tspan x="19" y="14">2</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+handle: healthcareProfessionals
+name: 'Healthcare Providers'
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - Primary
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
+    enabledByDefault: true
+    hasUrls: true
+    template: professionals/_entry
+    uriFormat: '{% if object.level == 1 %}healthcare-providers/{slug}{% else %}{parent.uri}/{slug}{% endif %}'
+structure:
+  maxLevels: null
+  uid: a3e039c8-44aa-4a54-9bd7-764b1a9f0712
+type: structure

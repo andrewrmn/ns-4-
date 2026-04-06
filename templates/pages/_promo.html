@@ -1,0 +1,48 @@
+
+{% extends "_layout" %}
+
+{% block content %}
+
+
+<div class="banner bg-light section-tall colors-dark banner--align-left">
+    <div class="banner__content" data-animate="up">
+        <div>
+
+            {% if entry.subHeading|length %}<h2 class="h4">{{ entry.subHeading }}</h2>{% endif %}
+            {% if entry.heading|length %}
+                <h3 class="h1">{{ entry.heading }}</h3>
+            {% endif %}
+            {% if entry.body|length %}
+                <div class="user-content">
+                    {{ entry.body }}
+                </div>
+            {% endif %}
+
+            {% if entry.cta|length %}
+                <a class="btn" href="{{ entry.cta.url }}" {% if entry.cta.target|length %}target="{{ entry.cta.target }}"{% endif %}>
+                    {{ entry.cta.text }}
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div class="wrapper py-6">
+        <ul class="products">
+            {% for product in entry.promoProducts  %}
+                {% include 'products/productPreview-promo.html' %}
+            {% endfor %}
+        </ul>
+	</div>
+
+
+    {% include 'partials/contentModules' %}
+
+    <script>
+        localStorage.setItem('guest', 'true');
+    </script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{
+  "id": 850018,
+  "orderStatus": "Completed",
+  "shortNumber": "815b0de",
+  "number": "815b0dea98dff4d0fb097847aaac1f55",
+  "dateOrdered": {
+    "date": "2022-05-24 14:21:00.000000",
+    "timezone_type": 3,
+    "timezone": "America/Chicago"
+  },
+  "isPaid": true,
+  "paymentMethod": "Pay with card",
+  "totalQty": 3,
+  "totalTaxIncluded": 0,
+  "totalDiscount": 0,
+  "couponCode": null,
+  "totalPrice": "71.00",
+  "adjustments": [
+    {
+      "name": "FedEx",
+      "description": "",
+      "amount": 12
+    },
+    {
+      "name": "Sales Tax",
+      "description": "Adds $0 of tax to the order",
+      "amount": 0
+    }
+  ],
+  "lineItems": [
+    {
+      "id": 53479,
+      "price": "17",
+      "qty": 1,
+      "purchasableId": "117",
+      "description": "GABA Trex Chewable Tablets",
+      "sku": "20025",
+      "tax": 0,
+      "discount": 0,
+      "NeuroRewardsCount": 0,
+      "subtotal": "17.00",
+      "total": "17.00"
+    },
+    {
+      "id": 53478,
+      "price": "21",
+      "qty": 2,
+      "purchasableId": "133",
+      "description": "SeroTrex",
+      "sku": "20026",
+      "tax": 0,
+      "discount": 0,
+      "NeuroRewardsCount": 0,
+      "subtotal": "42.00",
+      "total": "42.00"
+    }
+  ],
+  "customerEmail": "drslattery17@hotmail.com",
+  "billingAddress": {
+    "firstName": "Todd",
+    "lastName": "Slattery",
+    "address1": "4013 NW 22nd Street",
+    "address2": "",
+    "city": "Cape Coral",
+    "zip": "33993",
+    "phone": "563-249-2585",
+    "businessName": "",
+    "state": "Florida",
+    "country": "United States"
+  },
+  "shippingAddress": {
+    "firstName": "Todd",
+    "lastName": "Slattery",
+    "address1": "4013 NW 22nd Street",
+    "address2": "",
+    "city": "Cape Coral",
+    "zip": "33993",
+    "phone": "563-249-2585",
+    "businessName": "",
+    "state": "Florida",
+    "country": "United States"
+  },
+  "shippingMethodHandle": "fedexStandardMethods",
+  "totalShippingCost": 12,
+  "HCPEmail": "hcpemailhere@domain.com",
+  "NEUROCASH": "UDF_NEUROCASH"
+}

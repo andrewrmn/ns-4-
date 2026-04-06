@@ -1,0 +1,22 @@
+<nav class="patient-links mt-3 border-top mb-6 pt-4 pb-4">
+  <div>
+    <div>
+      <a {% if craft.app.request.getSegment(2) == 'dashboard' %}class="is-active"{% endif %} href="/patients/dashboard/">Dashboard</a>
+    </div>
+    <div>
+      <a {% if craft.app.request.getSegment(2) == 'recommendations' %}class="is-active"{% endif %} href="/patients/recommendations/">Recommendations</a>
+    </div>
+    <div>
+      <a {% if craft.app.request.segments|last == 'orders' %}class="is-active"{% endif %} href="/patients/orders/">Order History</a>
+    </div>
+    <div>
+      <a {% if craft.app.request.getSegment(2) == 'autoship' %}class="is-active"{% endif %} href="/patients/autoship/">Autoship</a>
+    </div>
+    <div>
+      <a {% if craft.app.request.segments|last == 'account' %}class="is-active"{% endif %} href="/account/">Account</a>
+    </div>
+    <div>
+      <a href="{{ logoutUrl }}">Logout</a>
+    </div>
+  </div>
+</nav>

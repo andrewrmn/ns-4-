@@ -1,0 +1,76 @@
+{% requireLogin %}
+
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+
+{% set hcpNeurocashPercentage = globalObjects.hcpNeurocashPercentage ? globalObjects.hcpNeurocashPercentage : 0 %}
+{% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().innerJoin('craft_commerce_customers', 'craft_commerce_customers.userId=users.id').select('craft_commerce_customers.id AS customerId').asArray().all() %}
+{% set customerIds = [] %}
+{% for hcpPatient in hcpPatients %}
+{% set customerIds = customerIds|merge([hcpPatient.customerId]) %}
+{% endfor %}
+
+
+
+<div class="tabcontent patient-tabcontent">
+
+  <div class="patient-details py-4 px-md-6 px-4">
+
+    {% include 'hcp/_includes/top-search-patient' %}
+
+    <a class="d-inline-block mb-4" href="{{ url('hcp/dashboard') }}">< Back</a>
+
+    <h3>All Patient Orders</h3>
+    <div class="patient-table mt-3">
+      {% set recentOrders = craft.orders().customerId(customerIds).isCompleted(true).limit(-1).inReverse().all() %}
+      {% if recentOrders|length %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Patient</th>
+            <th class="text-center" scope="col">Order Date</th>
+            <th class="text-center" scope="col">Autoship</th>
+            <th class="text-center" scope="col">Total</th>
+            <th class="text-center" scope="col">Invoice #</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in recentOrders %}
+          <tr>
+            <td><a href="{{ url('hcp/patient?id=' ~ order.user.id ) }}">{{ order.user.firstName }} {{ order.user.lastName }}</a></td>
+            <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
+            <td class="text-center">
+	                {% if order.autoship == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                      <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+                    </svg>
+                    {% else %}
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                       <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+                     </svg>
+                    {% endif %}
+
+                </td>
+            <td class="text-center">{{ order.total|commerceCurrency }}</td>
+            <td class="text-center"><a class="" href="{{ url('hcp/order?number=' ~ order.number) }}">#{{ order.id }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+      <div class="text-center">
+        <hr class="mb-6"/>
+        <p class>No Recent Orders</p>
+      </div>
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

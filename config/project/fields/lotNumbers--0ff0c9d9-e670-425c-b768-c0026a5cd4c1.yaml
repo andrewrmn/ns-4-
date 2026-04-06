@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: a8843661-a567-4e21-8928-2108d60edafe # Avatax
+handle: lotNumbers
+instructions: ''
+name: 'Lot numbers'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - 97448ca3-d63e-46a6-a2b1-b2e4e1b93193 # Lot #
+        -
+          __assoc__:
+            -
+              - width
+              - '20'
+      -
+        - 57aa7d91-dfe0-4596-bd52-8469cd1be41b # Description
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_lotnumbers}}'
+  fieldLayout: row
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

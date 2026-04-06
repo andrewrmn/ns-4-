@@ -1,0 +1,103 @@
+{#
+# Contact Form
+# -------------------
+#}
+
+
+{% from _self import errorList %}
+
+<div class="form-wrap">
+
+
+    {% if craft.app.session.hasFlash('error') %}
+        <p class="message error">{{ craft.app.session.getFlash('error') }}</p>
+    {% endif %}
+
+    <div class="notifications">
+        {% macro errorList(errors) %}
+            {% if errors %}
+                <ul class="errors">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endmacro %}
+    </div>
+    {% from _self import errorList %}
+
+
+    {% if craft.app.request.getQueryParam('success') %}
+    <div class="js-form-success mt-6 mb-4 text-center">
+        <p class="h3 mb-2">Thank you!</p>
+        <p>We've received your message and will get back to you shortly. </p>
+    </div>
+
+    {% else %}
+
+
+    <form method="post" action="" accept-charset="UTF-8" class="contact-form-main" validate id="my-form">
+        {{ csrfInput() }}
+        <input type="hidden" name="action" value="contact-form/send">
+        {{ redirectInput('contact?success=true') }}
+
+        <fieldset>
+            <div class="field-wrap">
+                <label for="from-name">Name*</label>
+                <input id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">
+                {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+            </div>
+
+            <div class="field-wrap">
+                <label for="from-email">Email*</label>
+                <input id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">
+                {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+            </div>
+
+            <div class="field-wrap d-none">
+                <label for="Company">Company</label>
+                <input id="Company" name="Company" type="text">
+            </div>
+
+            <div class="field-wrap">
+                <label for="from-phone">Phone</label>
+                <input id="from-phone" type="text" name="message[phone]" value="{{ message.message.phone ?? '' }}">
+            </div>
+
+
+            <div class="field-wrap">
+                <label for="subject">Subject</label>
+                <div class="select-wrap">
+                    <select class="select" id="subject" name="subject">
+                        <option value="" selected="">Select one...</option>
+                        <option value="products">Products</option>
+                        <option value="sales">Sales</option>
+                        <option value="returns">Returns</option>
+                        <option value="websiteQuestions">Website Questions</option>
+                        <option value="findAProvider">Find a Provider</option>
+                        <option value="orderStatus">Order Status</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field-wrap">
+                <label for="message">Message*</label></h3>
+                <textarea rows="10" cols="40" id="message" name="message[body]">{{ message.message.body ?? '' }}</textarea>
+            </div>
+        </fieldset>
+
+
+
+        <div class="text-center">
+            <button class="btn" type="submit" id="form-submitS">Submit Message</button>
+        </div>
+
+    </form>
+    {% endif %}
+
+
+
+
+</div>

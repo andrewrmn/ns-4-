@@ -1,0 +1,58 @@
+field: e36ca748-a185-4fc2-b8c0-b0d4213bf0c8 # Comparison Attributes
+fieldLayouts:
+  da2222d8-6abf-407b-ab26-cefee65be4ee:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: c0016ea1-20c0-4590-8cc7-1359f3dadac0 # Key Ingredients
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  c0016ea1-20c0-4590-8cc7-1359f3dadac0: # Key Ingredients
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: keyIngredients
+    instructions: ''
+    name: 'Key Ingredients'
+    searchable: false
+    settings:
+      columns:
+        __assoc__:
+          -
+            - aba94e3f-0f87-4c20-a5fb-27aa0dc5ab3a # Ingredients
+            -
+              __assoc__:
+                -
+                  - width
+                  - 70%
+          -
+            - 69300f6d-e971-4ea3-ae30-550b3f2449f7 # Precursor Potential
+            -
+              __assoc__:
+                -
+                  - width
+                  - 30%
+      contentTable: '{{%stc_14_keyingredients}}'
+      fieldLayout: table
+      maxRows: ''
+      minRows: ''
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add Ingredient'
+      staticField: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+handle: impactfulIngredients
+name: 'Impactful ingredients'
+sortOrder: 1

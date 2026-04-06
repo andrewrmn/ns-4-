@@ -1,0 +1,57 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
+handle: socialLinks
+instructions: ''
+name: 'Social Links'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 190
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 191
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 192
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 193
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - new1
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_sociallinks}}'
+  fieldLayout: row
+  maxRows: '1'
+  minRows: '1'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'add '
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

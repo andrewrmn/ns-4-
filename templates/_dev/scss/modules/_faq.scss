@@ -1,0 +1,74 @@
+// ---------------------------------------------------------------------
+//  FAQ Styles
+// ---------------------------------------------------------------------
+
+.accordion {
+    position: relative;
+    border-bottom: 1px solid $border;
+
+    &:hover {
+        cursor: pointer;
+
+        .accordion-trigger {
+            transform: rotate(45deg);
+        }
+
+        .accordion-question {
+            opacity: 0.5;
+        }
+    }
+}
+
+// ----------------------------------------
+// Questions
+// ----------------------------------------
+
+.accordion-question {
+    padding: 20px 50px 20px 0;
+    margin-bottom: 0;
+    transition: opacity $trans;
+}
+
+// ----------------------------------------
+// Answers
+// ----------------------------------------
+
+.accordion-answer {
+    padding:0 0 20px;
+}
+
+
+// ----------------------------------------
+// Trigger
+// ----------------------------------------
+
+.accordion-trigger {
+    position: absolute;
+    right: 0;
+    top: 19px;
+    transition: transform $trans, color $trans;
+    color: $brand;
+
+    svg {
+        display: block;
+        fill: currentColor;
+        transition: all $trans;
+    }
+}
+
+
+// ----------------------------------------
+// Is-active
+// ----------------------------------------
+
+.accordion.is-active {
+
+    .accordion-answer {
+        transform: scaleX(1);
+    }
+
+    .accordion-trigger {
+        color: $border;
+        transform: rotate(135deg);
+    }
+}

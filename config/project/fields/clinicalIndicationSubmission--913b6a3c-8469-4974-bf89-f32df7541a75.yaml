@@ -1,0 +1,71 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
+handle: clinicalIndicationSubmission
+instructions: ''
+name: 'Clinical Indication Submission'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 261
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 262
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 244
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 245
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 246
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 247
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 304
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_clinicalindicationsubmission}}'
+  fieldLayout: table
+  maxRows: null
+  minRows: null
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add submission'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

@@ -1,0 +1,40 @@
+{% set title = 'Order History' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+
+    {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all()|reverse %}
+
+        <div class="wrapper-wide">
+            <div class="mt-6">
+                <header>
+                    <h2>Order History</h2>
+                </header>
+
+                <div class="card col-12 mt-4 mb-4">
+                    <table class="u-full-width">
+                        <thead>
+                        <tr>
+                            <th>{{ "Order"|t }}</th>
+                            <th>{{ "Date"|t }}</th>
+                            <th>{{ "Total Quantity"|t }}</th>
+                            <th>{{ "Total"|t }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td><a href="{{ url('shop/customer/order', { number: order.number }) }}">Order {{ order.reference }}</a></td>
+                                <td>{{ order.dateOrdered|date }}</td>
+                                <td>{{ order.totalQty }} items</td>
+                                <td>{{ order.totalPrice|commerceCurrency(cart.currency) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

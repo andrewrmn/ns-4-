@@ -1,0 +1,630 @@
+{% requireLogin %}
+
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+{% set patientId = craft.app.request.getQueryParam('id') %}
+{% if patientId is null %}
+{% redirect "hcp/dashboard" %}
+{% else %}
+  {% set patientUser = craft.users().id(patientId).relatedTo({targetElement: currentUser, field: 'relatedHcp'}).anyStatus().one() %}
+  {% if patientUser is null %}
+  {% redirect "hcp/dashboard" %}
+{% endif %}
+{% endif %}
+
+<div class="tabcontent patient-tabcontent">
+  <div class="dashboard grey-bg px-md-6 px-4 py-md-5 py-4">
+    {% include 'hcp/_includes/top-search-patient' %}
+    <div class="newpatient jennifer-test pb-4">
+      <a class="d-block mb-4" href="{{ url('hcp/dashboard') }}">< Back</a>
+      <h2><span>Patient:</span> <strong>{% if patientUser.fullName %}{{ patientUser.fullName }}{% else %}{{ patientUser.username }}{% endif %}</strong> {% if patientUser.status == 'suspended' %}(Suspended){% endif %}</h2>
+
+
+
+      <p>{{ patientUser.email }} - <a class="p-sm link d-inline text-brand" href="#" data-click-target="edit-patient-modal">Edit Patient</a> | <a href="#" class="p-sm link d-inline text-brand" data-click-target="suspend-modal">{% if patientUser.status == 'suspended' %}Re-activate Patient{% else %}Suspend Patient{% endif %}</a></p>
+    </div>
+    <div class="patient-options pb-5">
+      <a href="{{ url('hcp/recommendation?patientId=' ~ patientUser.id) }}" class="btn">+ Create Recommendation</a>
+      <a href="#" class="js-symptom-link btn" data-click-target="productsAvailability-modal">+ Set Products Availability</a>
+    </div>
+
+
+    {% set orderTotalPrice = craft.orders().isCompleted().user(patientUser).sum('itemTotal') %}
+
+    <div class="weekly-highlight">
+      <h3>Patient Snapshot</h3>
+      <div class="weekly-circle pt-3">
+        <div class="circle">
+          <div>
+            <h2 class="text-center"><span class="arrow-right mb-2">
+
+              {% if patientUser.lastLoginDate > patientUser.dateCreated %}
+              <img src="../images/svgs/chart-checkmark.svg" width="24" />
+              {% else %}
+              <img src="../images/svgs/close.svg" width="24" />
+              {% endif %}
+
+              <p>Account Setup</p>
+            </div>
+          </div>
+          <div class="circle">
+            <div>
+              <h2 class="text-center"><span class="arrow-right mb-2">{% if craft.orders().isCompleted().user(patientUser).count() %}<img src="../images/svgs/chart-checkmark.svg" width="24" />{% else %}<img src="../images/svgs/close.svg" width="24" />{% endif %}</span></h2>
+              <p>First Order Placed</p>
+            </div>
+          </div>
+          <div class="circle">
+            <div>
+              <h2>{% if orderTotalPrice %}{{ orderTotalPrice|commerceCurrency(convert=true, format=true) }}{% else %}$0{% endif %}</h2>
+              <p>in Sales</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper-full bg-white py-6">
+    <div class="wrapper-wide">
+      <div class="d-lg-flex flex-wrap" style="max-width: 1000px;">
+        <div class="col-12 mb-6">
+          <section class="list-recommendations list-recommendations--old">
+            {% set recProductIds = [] %}
+            {% set recommendations = craft.entries().section('hcpRecommendations').relatedTo({targetElement: currentUser, field: 'relatedHcp'}).relatedTo({targetElement: patientUser, field: 'patientAccount'}).all() %}
+            {% if recommendations|length %}
+            <h3 class="mb-3">Recent Recommendations</h3>
+            {% else %}
+            <h3>There are no recommendations at this time</h3>
+            {% endif %}
+            {% for recommendation in recommendations %}
+            <div class="recommendation">
+              <div class="recommendation__hd">
+                <div class="d-flex flex-items-center flex-jusitfy-center">
+                  <img src="/images/green-arrow.png" alt="">
+                  <span class="h6 m-0">Sent {{ recommendation.postDate|date('m/d/y') }}</span>
+                </div>
+
+                <div class="d-flex flex-justify-end">
+                  <div class="col-12">
+                    <a href="{{ url('actions/neuroselect/hcp/re-send-recommendation?recId=' ~ recommendation.id) }}">Resend</a>
+                  </div>
+
+                  <a href="#" class="js-symptom-link" data-click-target="product-recommendation-modal-{{ loop.index }}">Update</a>
+
+                  <a href="{{ url('actions/neuroselect/hcp/remove-recommendation?recId=' ~ recommendation.id ~ '&patientId=' ~ patientId) }}" onclick="return confirm('Are you sure you want to remove this recommendation?');">Remove</a>
+                </div>
+              </div>
+
+              <div class="recommendation__products">
+                {% for recommendedProduct in recommendation.recommendedProducts.all() %}
+                {% set recProductIds = recProductIds|merge([recommendedProduct.id]) %}
+                <div class="recommendation-product">
+                  <figure>
+                    {% if recommendedProduct.bottleSizeImage|length %}
+                    {% for img in recommendedProduct.bottleSizeImage %}
+                    <div>
+                      <img src="{{ img.url }}" alt="{{ img.title }}"  />
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {% for row in recommendedProduct.productFields %}
+                    {% if row.productImages|length > 1 %}
+                    <img src="{{ row.productImages.one().url }}" alt="{{ recommendedProduct.title }}">
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                  </figure>
+                  {% set variant = recommendedProduct.defaultVariant %}
+                  <div class="recommendation-product__details">
+                    <div>
+                      <h4>{{ variant.title }}</h4>
+                      <ul>
+                        <li>
+                          <svg width="16" height="16" viewBox="0 0 16 16">
+                            <circle fill="#0081B6" cx="8" cy="8" r="8"/>
+                            <path fill="#FFFFFF" d="M5.9,11.8L9.8,8L5.9,4.2L7.1,3l5,5l-5,5L5.9,11.8z"/>
+                          </svg>
+                          <span>{{ variant.bottleSize }}</span>
+                        </li>
+                        {% if recommendedProduct.productFields.recommendedUse %}
+                        <li>
+                          <svg width="16" height="16" viewBox="0 0 16 16">
+                            <circle fill="#0081B6" cx="8" cy="8" r="8"/>
+                            <path fill="#FFFFFF" d="M5.9,11.8L9.8,8L5.9,4.2L7.1,3l5,5l-5,5L5.9,11.8z"/>
+                          </svg>
+                          <span>{{ recommendedProduct.productFields.recommendedUse }}</span>
+                        </li>
+                        {% endif %}
+                        {% if recommendedProduct.productNote %}
+                        <li>
+                          <svg width="16" height="16" viewBox="0 0 16 16">
+                            <circle fill="#0081B6" cx="8" cy="8" r="8"/>
+                            <path fill="#FFFFFF" d="M5.9,11.8L9.8,8L5.9,4.2L7.1,3l5,5l-5,5L5.9,11.8z"/>
+                          </svg>
+                          <span>{{ recommendedProduct.productNote }}</span>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% if recommendation.recommendationNote %}
+                <div class="mt-4 px-3 rte border-top pt-3 px-lg-6">
+                  <p class="h6">Note:</p>
+                  <p>{{ recommendation.recommendationNote|nl2br|raw }}</p>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="modal-wrap" id="product-recommendation-modal-{{ loop.index }}">
+              <div class="modal">
+                <a class="modal__close" href="#" data-click-target="product-recommendation-modal-{{ loop.index }}">
+                  <div>
+                    <p class="sr-only">Close Modal</p>
+                    <img src="../images/svgs/close.svg" width="16" />
+                  </div>
+                </a>
+                <div class="modal__inner">
+                  <div class="user-content js-modal-content">
+                    <h3 class="text-center mx-auto">Update Products</h3>
+                    {% set products = craft.products.orderBy('score').all() %}
+                    {% set recProds = recommendation.recommendedProducts.all() %}
+                    {% set prodsInRec = [] %}
+                    {% for product in recProds %}
+                      {% set prodsInRec = prodsInRec|merge([product.id]) %}
+                    {% endfor %}
+
+                    <div class="mt-3">
+                      <form class="form" id="recommendedProductsForm-{{ loop.index }}" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+                        {{ csrfInput() }}
+                        {{ actionInput('neuroselect/hcp/save-recommendation') }}
+                        {{ redirectInput('hcp/dashboard') }}
+                        {{ hiddenInput('patientId', patientId) }}
+
+                        <div class="row">
+                          {% for product in products %}
+                          <div class="col--xs--6 col--md--4 pr-2">
+                            <div class="form-check py-1">
+                              <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}-{{ loop.index }}"{% if product.id in prodsInRec %} checked{% endif %}>
+                              <label class="form-check-label d-inline" for="{{ product.slug }}-{{ loop.index }}">{{ product.title }}</label>
+                            </div>
+                          </div>
+                          {% endfor %}
+                        </div>
+
+                        <div class="form-group rec-note mt-3">
+                          <label for="recommendationNote">Recommendation Note</label>
+                          <small class="mb-3">If note is product specific, mention which product it applies to.</small>
+                          <textarea name="recommendationNote" id="recommendationNote-{{ loop.index }}" rows="3" class="form-control" style="white-space: pre-wrap !important;">{% if recommendation.recommendationNote %}{{ recommendation.recommendationNote }}{% endif %}</textarea>
+                        </div>
+
+                        <div class="d-flex flex-items-center flex-justify-center mt-5 col-12">
+                          <button type="submit" class="btn btn--sm mx-2">Submit</button>
+                          <a class="btn btn--sm btn-alt mx-2 mt-0" href="#" data-click-target="product-recommendation-modal-{{ loop.index }}">Cancel</a>
+                        </div>
+                      </form>
+
+                      <script>
+
+                      var $ = jQuery;
+                      var recForm = $('#recommendedProductsForm-{{ loop.index }}');
+                      $('#recommendedProductsForm-{{ loop.index }}').submit(function(e){
+                        e.preventDefault();
+                        //alert('hit');
+                        //$('#recommendedProductsForm').submit();
+                        $.ajax({
+                          type: 'post',
+                          cache: false,
+                          data: $('#recommendedProductsForm-{{ loop.index }}').serialize(),
+                          url: '/neuroselect/hcp/save-recommendation',
+                          dataType: 'json'
+                        }).done(function (data) {
+                          $('#save-recommendation-modal').addClass('is-active');
+                          $('#product-recommendation-modal-{{ loop.index }}').removeClass('is-active');
+                        }).fail(function (data) {
+                          $('#error-recommendation-modal').addClass('is-active');
+
+                        });
+                      });
+
+                      </script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </section>
+        </div>
+
+        {% set autoshipOrders = craft.enupalStripe.getSubscriptionsByUser(patientId) %}
+        <div class="col-12 mb-6">
+          <section class="wrapper-wides">
+            <h3>Autoship Orders</h3>
+            <div class="mt-3">
+              {% if autoshipOrders %}
+              <div class="patient-table">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Order Date</th>
+                      <th class="text-center" scope="col">Active</th>
+                      <th class="text-center" scope="col">Frequency</th>
+                      <th class="text-center" scope="col">Next Shipment</th>
+                      <th class="text-center" scope="col">Total</th>
+                      <th class="text-center" scope="col">Invoice #</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for order in autoshipOrders|reverse %}
+                    {% set subscription = order.getSubscription() %}
+                    {% set frequency = order.getPaymentForm('description') %}
+                    <tr>
+                      <td>{{ order.dateOrdered|date('m/d/y') }}</td>
+                      <td class="text-center">
+                        {% if subscription.status == 'active' and not subscription.cancelAtPeriodEnd %}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+                        </svg>
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+                        </svg>
+                        {% endif %}
+                      </td>
+                      <td class="text-center">{{frequency }}</td>
+                      <td class="text-center">
+                        {{ subscription.endDate|date('M d, Y') }}
+                      </td>
+                      <td class="text-center">{{ order.totalPrice|currency(order.currency) }}</td>
+                      <td class="text-center"><a class="" href="{{ url('hcp/autoshipOrder?number=' ~ order.number ~ '&patientId=' ~ patientId) }}">#{{ order.id }}</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% else %}
+              <p>No autoship orders</p>
+              {% endif %}
+            </div>
+          </section>
+        </div>
+
+
+        <div class="col-12">
+          <section class="wrapper-wides">
+            <h3>Orders</h3>
+            {% set recentOrders = craft.orders().user(patientUser).limit('-1').orderBy('dateOrdered DESC').isCompleted().all() %}
+
+            <div class="mt-3">
+              {% if recentOrders|length %}
+              <div class="patient-table">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Patient</th>
+                      <th class="text-center" scope="col">Order Date</th>
+                      <th class="text-center" scope="col">Autoship</th>
+                      <th class="text-center" scope="col">Total</th>
+                      <th class="text-center" scope="col">Invoice #</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in recentOrders %}
+                    <tr>
+                      <td><a href="{{ url('hcp/patient?id=' ~ order.user.id ) }}">{{ order.user.firstName }} {{ order.user.lastName }}</a></td>
+                      <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
+                      <td class="text-center">
+                        {% if order.autoship == 'yes' %}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+                        </svg>
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+                        </svg>
+                        {% endif %}
+                      </td>
+
+                      <td class="text-center">{{ order.total|commerceCurrency }}</td>
+
+                      <td class="text-center"><a class="" href="{{ url('hcp/order?number=' ~ order.number) }}">#{{ order.id }}</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% else %}
+              <p>No recent orders</p>
+              {% endif %}
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal-wrap" id="NeuroCash-discount-modal">
+    <div class="modal" style="width: 50%;">
+      <a class="modal__close" href="#" data-click-target="NeuroCash-discount-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+          <h3 class="text-center">NeuroCash Discount Percentage for {% if patientUser.fullName %}{{ patientUser.fullName }}{% else %}{{ patientUser.username }}{% endif %}</h3>
+          <form class="form" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+            {{ csrfInput() }}
+            {{ actionInput('neuroselect/hcp/save-patient-discount') }}
+            {{ hiddenInput('patientId', patientUser.id) }}
+            {{ redirectInput('hcp/patient?id=' ~ patientUser.id) }}
+            <div class="row">
+              <div class="col-lg-12 mb-3">
+                <input name="percentDiscount" type="number" placeholder="NeuroCash Discount Percentage" value="{{ patientUser.patientNeurocashDiscount }}" pattern="[0-9.]+" required />
+              </div>
+            </div>
+            <div class="row pt-5">
+              <div class="col-lg-12 text-center">
+                <button class="btn" type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-wrap" id="productsAvailability-modal">
+    <div class="modal">
+      <a class="modal__close" href="#" data-click-target="productsAvailability-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+          {% set restrictedProductIds = patientUser.restrictedProducts.ids() %}
+          <h3>Products available to {% if patientUser.fullName %}{{ patientUser.fullName }}{% else %}{{ patientUser.username }}{% endif %}:</h3>
+          <p>The products listed below are available for purchase on your storefront. If you would like to customize for this patient, adjust product selections below.</p>
+          {% if currentUser.hcpProductsStore|length %}
+          {% set hcpProductIds = currentUser.hcpProductsStore.ids() %}
+          {% else %}
+          {% set hcpProductIds = null %}
+          {% endif %}
+          <form method="post" id="form-set-products-availability">
+            {{ csrfInput() }}
+            {{ actionInput('neuroselect/hcp/set-products-availability') }}
+            {{ hiddenInput('patientId', patientUser.id) }}
+            {{ redirectInput('hcp/patient?id=' ~ patientId) }}
+            {{ hiddenInput('hiddenAvailableProducts', '') }}
+            <div class="row mt-3 pl-2 pl-m-0 js-product-checks">
+              {% set products = craft.products.id(hcpProductIds).orderBy('title asc').all() %}
+              {% for product in products %}
+             <div class="col--xs--12 col--lg--4 mb-2 {% if 'Bundle' in product.productCategories %} js-preview-bundle{% endif %}">
+                <div class="form-check py-1">
+                  {% if not patientUser.restrictedProducts|length %}
+                  <input class="form-check-input" name="availableProducts[]" type="checkbox" value="{{ product.id }}" id="avail-{{ product.slug }}" checked />
+                  {% else %}
+                  <input class="form-check-input" name="availableProducts[]" type="checkbox" value="{{ product.id }}" id="avail-{{ product.slug }}"{% if product.id in restrictedProductIds %} checked{% endif %} />
+                  {% endif %}
+                  <label class="form-check-label d-inline mb-0" for="avail-{{ product.slug }}">{{ product.title }}</label>
+                </div>
+              </div>
+              {% endfor %}
+              <script>
+                var $ = jQuery;
+                $($('.js-preview-bundle').get().reverse()).each(function() {
+                  $(this).prependTo(".js-product-checks");
+                });
+              </script>
+            </div>
+
+            <div class="mt-4 d-flex flex-items-center">
+              <a class="link mr-4 js-select-all-checks d-none" href="">Select all</a>
+              <button type="submit" class="btn text-center">Update selections</button>
+            </div>
+          </form>
+
+          <script>
+          var $ = jQuery;
+          var selectAllBtn = $('.js-select-all-checks');
+          var inputs = $('.form-check-input');
+
+          selectAllBtn.click(function(e){
+
+            e.preventDefault();
+            inputs.each(function(){
+              $(this).prop( "checked", true );
+            });
+          });
+          </script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-wrap" id="suspend-modal">
+    <div class="modal">
+      <a class="modal__close" href="#" data-click-target="suspend-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+
+          <div class="text-center mb-5">
+            <div class="mb-2 h5">{% if patientUser.status == 'suspended' %}Re-activate Patient{% else %}Suspend Patient{% endif %}</div>
+            <p>Submit the form below to suspend your patient.</p>
+          </div>
+
+          {% if patientUser.status == 'suspended' %}
+          <form class="col-12 text-center" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrfInput() }}
+            {{ actionInput('users/unsuspend-user') }}
+            {{ hiddenInput('userId', patientId) }}
+            {{ redirectInput('/hcp/patient?id=' ~ patientId) }}
+            <input type="hidden" name="suspended" value="0">
+            <div class="d-flex flex-items-center flex-justify-center">
+              <input class="btn mx-2" type="submit" value="Re-activate Patient" />
+              <a class="btn-alt mt-0 mx-2" href="#" data-click-target="suspend-modal">Cancel</a>
+            </div>
+          </form>
+          {% else %}
+          <form class="col-12 text-center" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrfInput() }}
+            {{ actionInput('users/suspend-user') }}
+            {{ hiddenInput('userId', patientId) }}
+            {{ redirectInput('/hcp/patient?id=' ~ patientId) }}
+            <input type="hidden" name="suspended" value="1">
+            <div class="d-flex flex-items-center flex-justify-center">
+              <input class="btn mx-2" type="submit" value="Suspend Patient" />
+              <a class="btn-alt mt-0 mx-2" href="#" data-click-target="suspend-modal">Cancel</a>
+            </div>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrap" id="edit-patient-modal">
+    <div class="modal">
+      <a class="modal__close" href="#" data-click-target="edit-patient-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+
+          <div class="text-center mb-5">
+            <div class="mb-2 h5">Edit Patient</div>
+            <p>Edit patient details below.</p>
+          </div>
+
+          <form class="col-12" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrfInput() }}
+            {{ actionInput('users/save-user') }}
+            {{ hiddenInput('userId', patientId) }}
+            {{ redirectInput('/hcp/patient?id=' ~ patientId) }}
+
+            <div class="d-flex flex-items-center flex-justify-center">
+              <div class="col-12 col-sm-6 pr-2 mb-3">
+                <label for="firstName" class="h6 mb-1">First name</label>
+                <input type="text" name="firstName" placeholder="First name" value="{{ patientUser.firstName }}" />
+              </div>
+              <div class="col-12 col-sm-6 pl-2 mb-3">
+                <label for="lastName" class="h6 mb-1">Last name</label>
+                <input type="text" name="lastName" placeholder="Last name" value="{{ patientUser.lastName }}" />
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <label for="email" class="h6 mb-1">Email</label>
+              <small>Please contact customer service at <a href="tel:+18883427272">+1 (888) 342-7272</a> to change your patients email address.</small>
+            </div>
+
+            <div class="d-flex flex-items-center flex-justify-center text-center mt-5">
+              <input class="btn mx-2" type="submit" value="Update Patient" />
+              <a class="btn-alt mt-0 mx-2" href="#" data-click-target="edit-patient-modal">Cancel</a>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-wrap" id="save-recommendation-modal">
+    <div class="modal" style="height: auto;">
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+          <p>Recommendation has been sent to your patient. They will receive an email notification to visit their portal for the full recommendation.</p>
+        </div>
+        <div class="d-flex flex-items-center flex-justify-start mt-4">
+          <a class="mr-4" href="{{ url('hcp/dashboard') }}">Return to Dashboard ></a></p>
+          <a href="{{ siteUrl }}hcp/patient?id={{patientId}}">View Patient ></a></p>
+        </div>
+      </div>
+
+      <a class="modal__close" href="#" data-click-target="save-recommendation-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="modal-wrap" id="error-recommendation-modal">
+    <div class="modal" style="height: auto;">
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+          <h6>Error</h6>
+          <p>Your recommendation has not been sent. Please try again or contact us if the issue persists.</p>
+        </div>
+        <div class="d-flex flex-items-center flex-justify-start mt-4">
+          <a class="btn btn--sm" href="#" data-click-target="error-recommendation-modal">Close</a></p>
+        </div>
+      </div>
+
+      <a class="modal__close" href="#" data-click-target="error-recommendation-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% js %}
+$(document).ready(function(){
+  $(document).on("click", "button[name='savePatientNotes']", function() {
+    var formData = $("form#formSavePatientNotes").serialize();
+    $.ajax({
+      url: "/",
+      dataType: "json",
+      method: "POST",
+      data: formData,
+      success: function( data ) {
+
+      }
+    });
+  })
+  /*
+  $(document).on("click", "#form-set-products-availability button[type='submit']", function(e) {
+  e.preventDefault();
+  var products = [];
+  $("input[name='availableProducts']:not(:checked)").each(function(){
+  products.push($(this).val());
+})
+if( $("input[name='availableProducts']:not(:checked)").length ){
+$("input[name='hiddenAvailableProducts']").val(products);
+$("#form-set-products-availability").submit();
+}
+})
+*/
+})
+{% endjs %}

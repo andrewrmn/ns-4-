@@ -1,0 +1,133 @@
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+    {% set number = craft.app.request.getRequiredParam('number') %}
+    {% set order = craft.orders.number(number).one() %}
+    {% set patient = craft.users().email(order.customer.email).relatedTo({targetElement: currentUser, field: 'relatedHcp'}).one() %}
+
+
+    {% if patient is null %}
+        {% redirect 'hcp/dashboard' %}
+    {% endif %}
+
+    <div class="tabcontent patient-tabcontent pb-5 bg-light">
+        <div class="dashboard grey-bg px-md-6 px-4 py-md-5 py-4">
+          <div class="d-md-flex flex-items-center flex-justify-between">
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
+              <a onclick="history.back()">< Back</a>
+            </div>
+            <div class="search">
+                <form>
+                    <input type="text" name="searchPatient" autocomplete="off" placeholder="Search Patient">
+                </form>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper-wide pb-6">
+
+          <div class="customer-order-pdf pb-4">
+
+            <h1 class="mb-3">Order #{{ order.reference }}</h1>
+
+            <div class="d-md-flex customer-order-pdf__lists">
+              <div class="pr-md-6 mb-5" style="flex-grow: 1;">
+                <h4>Order Details</h4>
+                <ul>
+                  <li><strong>Order ID:</strong> {{ order.id }}</li>
+                  <li><strong>{{ "Customer"|t }}:</strong> {{ order.customer.email }}</li>
+                  <li><strong>{{ "Total"|t }}:</strong> {{ order.totalPrice|commerceCurrency(cart.currency) }}</li>
+                  <li><strong>{{ "Amount Paid"|t }}:</strong> {{ order.totalPaid|commerceCurrency(cart.currency) }}</li>
+                  <li><strong>{{ "Date"|t }}:</strong> {{ order.dateOrdered|date('D jS M Y') }}<br></li>
+                  {% if order.pdfUrl %}
+                  <li><strong>Receipt:</strong> <a href="{{ order.getPdfUrl('receipt') }}">Download</a></li>
+                  {% endif %}
+                </ul>
+
+              </div>
+              <div class="pr-md-6 mb-4">
+                <h4>Shipping Address</h4>
+
+                {% if order.shippingAddress %}
+                {% include 'shop/_includes/addresses/address' with { address: order.shippingAddress } %}
+                {% endif %}
+              </div>
+              <div class="pr-md-4 mb-4">
+                <h4>Billing Address</h4>
+                {% if order.billingAddress %}
+                {% include 'shop/_includes/addresses/address' with { address: order.billingAddress } %}
+                {% endif %}
+              </div>
+            </div>
+
+
+
+            <table class="u-full-width">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Unit Price</th>
+                  <th>Quantity</th>
+                  <th class="text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in order.lineItems %}
+                <tr class="line-item">
+                  <td>
+                    <strong>{{ item.description }}</strong><br>
+                    SKU: {{ item.sku }}
+                  </td>
+                  <td>
+                    {% if item.onSale %}
+                    <strike>{{ item.price|commerceCurrency(cart.currency) }}</strike>   {{ item.salePrice|commerceCurrency(cart.currency) }}
+                    {% else %}
+                    {{ item.price|commerceCurrency(cart.currency) }}
+                    {% endif %}
+                  </td>
+                  <td>{{ item.qty }}</td>
+                  <td class="text-right">{{ item.subtotal|commerceCurrency(cart.currency) }}</td>
+                </tr>
+                {% endfor %}
+
+                {% for adjustment in order.adjustments %}
+                <tr class="adjustment">
+                  <td class="adjustment__title">{{ adjustment.type }}</td>
+                  <td colspan="2"><strong>{{ adjustment.name }}</strong>{% if adjustment.description %}<br>({{ adjustment.description }}){% endif %}</td>
+                  <td class="text-right">{{ adjustment.amount|commerceCurrency(cart.currency) }}</td>
+                </tr>
+                {% endfor %}
+
+                <tr class="totals">
+                  <td colspan="4" class="text-right">
+                    <span class="subtotal">Item Subtotal: {{ order.itemTotal|commerceCurrency(cart.currency) }}</span>
+                    <span class="total">Total: {{ order.totalPrice|commerceCurrency(cart.currency) }}</span>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+
+
+    {% set craftMatch = order.number %}
+
+
+    {% for order in craft.enupalStripe.getSubscriptionsByUser(patient.id) %}
+	{% set formData = order.getFormFields() %}
+	{% set craftOrderNumber = formData.orderNumber %}
+
+
+	{% if craftOrderNumber == craftMatch %}
+	{% set autoshipOrder = order.number %}
+
+	{% redirect "hcp/autoshipOrder?number=" ~ autoshipOrder ~ "&patientId=" ~ patient.id %}
+	{% endif %}
+{% endfor %}
+
+{% endblock %}

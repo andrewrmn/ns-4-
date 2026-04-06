@@ -1,0 +1,56 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
+handle: contactTiles
+instructions: ''
+name: 'Contact Tiles'
+searchable: true
+settings:
+  columns:
+    98:
+      __assoc__:
+        -
+          - width
+          - ''
+    99:
+      __assoc__:
+        -
+          - width
+          - ''
+    100:
+      __assoc__:
+        -
+          - width
+          - ''
+    101:
+      __assoc__:
+        -
+          - width
+          - ''
+    102:
+      __assoc__:
+        -
+          - width
+          - ''
+    200:
+      __assoc__:
+        -
+          - width
+          - ''
+    201:
+      __assoc__:
+        -
+          - width
+          - ''
+  contentTable: '{{%stc_contacttiles}}'
+  fieldLayout: row
+  maxRows: null
+  minRows: null
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a row'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

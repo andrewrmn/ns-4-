@@ -1,0 +1,99 @@
+{#
+ # Login
+ # ---------------
+ #}
+
+
+{% extends "_layout" %}
+
+
+{% block content %}
+
+
+	<div class="wrapper-full section-short bg-light">
+		<header class="wrapper text-center section-x-short section--flush-top" id="login-message">
+			<h2 class="h2 text-flush">Login</h2>
+			<p>Welcome back. Login to access products, education, and resources.</p>
+		</header>
+		<div class="section section--flush-top">
+			<div class="card wrapper wrapper--x-thin">
+
+				<form class="form login-form" method="post" accept-charset="UTF-8">
+				    {{ csrfInput() }}
+				    <input type="hidden" name="action" value="users/login">
+
+
+					<div class="field-wrap">
+						<label for="loginName">Username or email</label>
+					    <input id="loginName" type="text" name="loginName" value="{{ craft.app.user.rememberedUsername }}">
+					</div>
+
+					<div class="field-wrap">
+						<div class="flex flex--justify-between flex--align-base">
+							 <label for="password">Password</label>
+							 <a class="text-bold p-sm text-brand" href="{{ siteUrl }}reset-password/">Forgot Password?</a>
+						</div>
+
+					    <input id="password" type="password" name="password">
+					</div>
+
+					<small class="pb-15 text-italic">Contact <a href="mailto:customerservice@neurorelief.com">customer service</a> for assistance.</small>
+
+					<div class="field-wrap">
+					    <label>
+					        <input class="mr-1" type="checkbox" name="rememberMe" value="1">
+					        Remember me
+					    </label>
+					</div>
+
+					{% if errorMessage is defined %}
+					<div class="field-wrap pb-15">
+						<p class="field-error">{{ errorMessage }}</p>
+					</div>
+				    {% endif %}
+
+					<div class="text-center">
+						<div class="field-wrap">
+						    <input type="submit" value="Login">
+						</div>
+						<p>Interested in an account? <a href="{{ siteUrl }}register/">Create an Account</a></p>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+
+	$(document).ready(function(){
+
+			// Redirect user back to page on site they came from
+			//console.log(document.referrer);
+			// var str = document.referrer,
+			// 	redirect = $('.login-form input[name="redirect"]');
+			//
+			// if ( str.includes("local.ns3") || str.includes("neuroscienceinc.com") ) {
+			// 	if ( !str.includes("setPassword") ) {
+			// 		redirect.val(str);
+			// 	}
+			// }
+			//
+			// if( str.includes('shop/checkout/payment') ) {
+			// 	document.getElementById('login-message').innerHTML = '<h2 class="h3 mb-0">You have been logged out. Please login to proceed to checkout.</h2>';
+			//
+			// 	var redUrl = 'https://www.neuroscienceinc.com/shop/cart';
+			// 	if( window.location.hostname == 'local.ns' ) {
+			// 		redUrl = 'http://local.ns/shop/cart';
+			// 	}
+			//
+			// 	//document.getElementById('redirect').value = redUrl;
+			// 	redirect.val(redUrl);
+			//
+			//
+			// }
+		});
+	</script>
+
+{% endblock %}

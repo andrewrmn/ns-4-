@@ -1,0 +1,60 @@
+{#
+ # Double CTA Field
+ # -------------------
+ #}
+{% set img1 = block.block1Image %}
+{% set img2 = block.block2Image %}
+
+
+<img class="double-cta-img" src="/images/molecule-crop.png" />
+<div class="double-cta">
+    <div>
+
+
+        <div class="double-cta__inner double-cta__inner-first">
+
+            <div>
+                {% if block.headline|length %}<h2 class="h3">{{ block.headline }}</h2>{% endif %}
+                {% if block.body|length %}
+                    <div class="user-content">
+                        {{ block.body }}
+                    </div>
+                {% endif %}
+
+                {% if block.button|length %}
+                <a class="btn" href="{{ block.button.url }}" {% if block.button.target|length %}target="{{ block.button.target }}"{% endif %}>
+                    {{ block.button.text }}
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+
+
+        <div class="double-cta__inner">
+
+            <div>
+                {% if block.block2Headline|length %}<h2 class="h3">{{ block.block2Headline }}</h2>{% endif %}
+                {% if block.block2Body|length %}
+                    <div class="user-content">
+                        {{ block.block2Body }}
+                    </div>
+                {% endif %}
+
+                {% if block.block2Button|length %}
+                <a class="btn" href="{{ block.block2Button.url }}" {% if block.button.target|length %}target="{{ block.block2Button.target }}"{% endif %}>
+                    {{ block.block2Button.text }}
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

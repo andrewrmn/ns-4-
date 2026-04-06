@@ -1,0 +1,24 @@
+defaultPlacement: end
+enableVersioning: true
+handle: neuroQ
+name: 'Neuro Q'
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
+    enabledByDefault: true
+    hasUrls: true
+    template: neuroselect/survey/questions.html
+    uriFormat: Neuro-Q
+type: single

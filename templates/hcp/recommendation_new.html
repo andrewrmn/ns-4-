@@ -1,0 +1,175 @@
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+    {% set patientId = craft.app.request.getQueryParam('patientId') %}
+    {% if patientId is null %}
+        {% redirect "hcp/dashboard" %}
+    {% else %}
+        {% set patient = craft.users().group('patients').id(patientId).relatedTo({targetElement: currentUser, field: 'relatedHcp'}).anyStatus().one() %}
+        {% if patient is null %}
+            {% redirect "hcp/dashboard" %}
+        {% endif %}
+    {% endif %}
+    <div class="tabcontent patient-tabcontent">
+        <div class="dashboard grey-bg px-4 py-md-5 py-4">
+            <div class="search">
+                <form>
+                    <input type="text" name="searchPatient" autocomplete="off" name="searchPatient" placeholder="Search Patient">
+                </form>
+            </div>
+            <div class="container">
+               <div class="newpatient jennifer-test pt-4">
+                    <h2><strong>{{ patient.firstName }}</strong> {{ patient.lastName }}</h2>
+                    <p><strong>{{ patient.email }}</strong></h2>
+               </div>
+            </div>
+        </div>
+        <div class="new-product bg-white py-md-5 py-4  px-xl-4">
+            <div class="container">
+                <h3>New Product Recommendation</h3>
+
+                <div class="user-content">
+                    <div class="row mt-3">
+                    <form class="form pl-3" id="recommendedProductsForm" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+                        {{ csrfInput() }}
+                        {{ actionInput('neuroselect/hcp/save-recommendation') }}
+                        {{ redirectInput('hcp/dashboard') }}
+                        {{ hiddenInput('patientId', patientId) }}
+                            {% set products = craft.products.order('title').all() %}
+                            <div class="row">
+                            {% for product in products %}
+                                <div class="col-sm-4 col-6 px-2">
+                                    <div class="form-check py-1">
+                                        <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}">
+                                        <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+
+                            <div class="mt-6">
+	                            <label for="recommendationNote">Add note to recommendation</label>
+	                            <textarea id="recommendationNote" name="recommendationNote">&nbsp;</textarea>
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+
+                     <div class="col-md-3 mx-auto text-center mt-5">
+                        <button class="shop-link btn small mr-0" id="btnSendRecommendation" type="button">Sendsss</button><br />
+                        <a href="{{ url('hcp/dashboard') }}">Cancel</a>
+                    </div>
+                </div>
+
+                <div class="all-product d-none">
+                    <div class="row">
+                        <div class="col-md-2 px-2 pb-4 pb-md-0">
+                            <div class="products text-center">
+                                <a class="rounded-full b-block js-symptom-link" href="#" data-click-target="product-recommendation-modal"><div>  <span>+</span> Product</div></a>
+                            </div>
+                        </div>
+                        <div class="col-md-7 px-2 pb-4 pb-md-0" id="htmlRecommededProducts">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-wrap" id="product-recommendation-modal">
+        <div class="modal">
+            <a class="modal__close" href="#" data-click-target="product-recommendation-modal">
+                <div>
+                    <p class="sr-only">Close Modal</p>
+                    <img src="../images/svgs/close.svg" width="16" />
+                </div>
+            </a>
+            <div class="modal__inner">
+                <div class="user-content js-modal-content">
+                    <h3 class="text-center">Select Products</h3>
+                    <div class="row mt-3">
+                    <form class="form" id="recommendedProductsForm" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+                        {{ csrfInput() }}
+                        {{ actionInput('neuroselect/hcp/save-recommendation') }}
+                        {{ redirectInput('hcp/dashboard') }}
+                        {{ hiddenInput('patientId', patientId) }}
+                            {% set products = craft.products.order('title').all() %}
+                            <div class="row">
+                            {% for product in products %}
+                                <div class="col-sm-4 col-6 px-2">
+                                    <div class="form-check py-1">
+                                        <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}">
+                                        <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+
+                            <div class="mt-6">
+	                            <label for="recommendationNote">Add note to recommendation</label>
+	                            <textarea id="recommendationNote" name="recommendationNote"></textarea>
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 mt-3 text-center"><a class="modal__close btn" href="#" data-click-target="product-recommendation-modal" id="productRecommendationDone" style="position: relative;">Done</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% js %}
+    $(document).ready(function(){
+        $(document).on("click", "a#productRecommendationDone", function() {
+            if( $("input[name='recommendedProducts[]']:checked").length )
+            {
+                var recProducts = $("input[name='recommendedProducts[]']:checked").serializeArray();
+                $.ajax({
+                    method: "POST",
+                    url: "/hcp/ajax/recommended-products",
+                    dataType: "html",
+                    data: {'recommendedProducts': recProducts},
+                    success: function(html){
+                        $("div#htmlRecommededProducts").html(html);
+                        $(".products a.js-symptom-link").html("<div><div><span>+</span> Another Product</div></div>");
+                    }
+                });
+            }
+        })
+        $(document).on("click", "button#btnSendRecommendation", function() {
+            $("form#recommendedProductsForm").submit();
+        })
+    })
+{% endjs %}
+
+{% do view.registerCssFile('//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css') %}
+{% do view.registerJsFile('//code.jquery.com/ui/1.13.1/jquery-ui.js') %}
+{% js %}
+    $(document).ready(function(){
+        $( "input[name='searchPatient']" ).val('');
+        $( "input[name='searchPatient']" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "/hcp/ajax/search-patients",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+                    success: function( data ) {
+                        response( data );
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                window.location.href = "{{ url('hcp/recommendation?patientId=') }}=" + ui.item.value;
+            }
+        })
+    })
+{% endjs %}

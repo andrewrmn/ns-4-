@@ -1,0 +1,73 @@
+fieldLayouts:
+  f84d96dc-f648-469a-ad9e-221bacfc402c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 57ec9101-664f-4658-a7b7-dfa7f120f024 # N0007 Content
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8c1e3cfa-a11e-49cd-be1d-71571172959e # N0007 Form
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c4bffc59-89a5-48fa-b339-4283a5f28af2 # N0011 Content
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a94acfe2-14f9-4830-a0cf-08f250c1c7d9 # N0011 Form
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: b64f83ff-c496-41da-9dae-376b26f213b5 # N0003 Content
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 7e4bb0c8-fee3-4856-9ddb-0912afe86208 # N0003 Form
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: dc21dd8f-5a86-4183-906e-142c04a68a6f # Filter by Symptom Legal Text
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: legalDocuments
+name: 'Legal Documents'
+sortOrder: 5

@@ -1,0 +1,55 @@
+// ----------------------------------------
+// Tables
+// ----------------------------------------
+
+table {
+    width: 100%;
+}
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 0;
+}
+
+table.full-borders {
+
+    thead,
+    tbody {
+        width: 100%;
+    }
+
+    thead tr {
+        border-top: none;
+        border-bottom: none;
+        font-weight: bold;
+        width: 100%;
+        color: $black;
+    }
+
+    tr {
+        //display: flex;
+        width: 100%;
+        border-top: 1px solid #E1E1E1;
+        border-bottom: 1px solid #E1E1E1;
+
+        + tr {
+            border-top: none;
+        }
+
+        td, th {
+            //flex-grow: 1;
+            //border: none !important;
+        }
+    }
+}

@@ -1,0 +1,58 @@
+{% switch cart.recurringOrderFrequency.value %}
+    {% case "15Days" %}
+        {% set paymentForm = '15Days' %}
+    {% case "45Days" %}
+        {% set paymentForm = '45Days' %}
+    {% case "60Days" %}
+        {% set paymentForm = '60Days' %}
+    {% case "90Days" %}
+        {% set paymentForm = '90Days' %}
+    {% default %}
+        {% set paymentForm = '30Days' %}
+{% endswitch %}
+
+
+
+{% if cart.cancelSubscriptionOrderId %}
+    {% set buttonText = 'Update Autoship Order' %}
+{% else %}
+    {% set buttonText = 'Pay with card' %}
+{% endif %}
+
+{% set options = {
+    amount: cart.totalPrice,
+    quantity: 1,
+    checkoutSuccessUrl: '/shop/customer/auto-ship-order?number={number}',
+    calculateFinalAmount: true,
+    customAmountStep: '0.01',
+    buttonText: buttonText
+} %}
+
+
+
+<div class="checkout-autoship-preview" style="background: #F4F5F7; padding: 24px; border-radius: 8px; margin-bottom: 36px;">
+	<div class="d-flex">
+		<svg class="mr-2"  viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/></svg>
+	<p class="h6 m-0" style="line-height: 16px">Autoship: <span class=" m-0">{{paymentForm|replace({'Days': " Days"})}}</span></p>
+	</div>
+</div>
+
+{% do craft.enupalStripe.addVariables({ cart: cart }) %}
+
+{{ craft.enupalstripe.paymentForm(paymentForm, options) }}
+
+
+{% js %}
+    $(document).ready(function(){
+        $("input[name='stripeElementEmail']").parents('.form-group').hide();
+        $("input[name='enupalStripe[customPlanAmount]']").parents('.form-group').hide();
+        $("input[name='enupalStripe[customPlanAmount]']").val({{ cart.totalPrice }});
+        $("div.cc-wrapper label").addClass('p text-bold text-dark');
+    })
+{% endjs %}
+
+{% css %}
+    div.StripeElement{
+        border: 1px solid rgba(179, 186, 197, 0.6);
+    }
+{% endcss %}

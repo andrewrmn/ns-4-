@@ -1,0 +1,341 @@
+{% set productIds = craft.app.request.getQueryParam('productIds') %}
+{% if productIds %}
+
+    {% set productThumb = {
+        mode: 'crop',
+        width: 400,
+        height: 400,
+        quality: 80,
+        position: 'center-center'
+    } %}
+
+    {% set productIdsArr = productIds|split(',') %}
+    {% set products = craft.products.id(productIdsArr).all() %}
+    {#% cache using key 'products-filter-' ~ productIds|replace(',', '-') %#}
+    <table class="table-scroll">
+        <thead>
+            <tr>
+                <th class="col--md--3"><div class="products-img"></div></th>
+                {% for product in products %}
+                    {% set productField = product.productFields.one() %}
+                    <th class="col--md--3">
+                        <div class="products-img text-center">
+                            <a href="{{ product.url }}" class="d-inline-block">
+                                {% if product.bottleSizeImage|length %}
+                                    <img src="{{ product.bottleSizeImage.one().getUrl() }}" alt="{{ product.title }}">
+                                {% else %}
+                                    {% if productField.productImages|length > 1 %}
+                                        <img src="{{ productField.productImages.one().getUrl() }}" alt="{{ product.title }}">
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+                            {% for category in craft.categories.group('productCategories').level(1).title('Occasional Symptoms') %}
+                                {% set children = category.getChildren().relatedTo(product) %}
+                                <ul class="product-clinical-list product-clinical-list--start flex-justify-center">
+                                    {% for child in children %}
+                                        <li class="mr-0">
+                                            <a class="js-symptom-link" href="{{ child.url }}" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
+                                                {% if child.icon|length %}
+                                                    <img width="30" src="{{ child.icon.one().url }}" alt="{{ child.icon.one().title }}"  />
+                                                {% else %}
+                                                    <img width="30" src="/images/ns-clynical-fallback.svg" alt="fallback icon"  />
+                                                {% endif %}
+                                                {% if child.body|length %}
+                                                    <div class="sr-only js-description">
+                                                        {% if child.featuredImage.one()|length %}
+                                                            <img class="img-full" src="{{  child.featuredImage.one().url }}" alt="{{  child.featuredImage.one().title }}"  />
+                                                        {% endif %}
+                                                        <div class="user-content section-x-short">
+                                                            {{ child.body }}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endfor %}
+                            <style type="text/css">
+	                            th {
+								    font-weight: inherit;
+								}
+								</style>
+                            <div class="rte text-center">{{ product.shortDescription ? product.shortDescription : productField.shortDescription }}</div>
+                        </div>
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tr>
+            <td>
+                <table class="bg-blue border-top-radius" id="attr-impactful-ingredients">
+                    <tr><td><h4>Impactful ingredients</h4></td></tr>
+                    <tr><td>Banaba leaf <i>Lagerstroemia speciosa</i> (18% corosolic acid)</td></tr>
+                    <tr><td>Phosphatidylserine</td></tr>
+                    <tr><td>Glycine</td></tr>
+                    <tr><td>Taurine</td></tr>
+                    <tr><td><i>Rhodiola rosea</i> (9-15% rosavins)</td></tr>
+                    <tr><td>Probiotics</td></tr>
+                    <tr><td>N-acetyl-L-cysteine</td></tr>
+                    <tr><td>L-theanine</td></tr>
+                    <tr><td>Alpha-lipoic acid</td></tr>
+                    <tr><td>CoQ10</td></tr>
+                    <tr><td>5-MTHF</td></tr>
+                    <tr><td>Resveratrol</td></tr>
+                    <tr><td>Astaxanthin</td></tr>
+                    <tr><td>Magnesium</td></tr>
+                    <tr><td>Zinc</td></tr>
+                    <tr><td>Selenium</td></tr>
+                    <tr><td>Melatonin</td></tr>
+                    <tr><td>Passion flower extract (<i>Passiflora incarnate</i>) (arial parts)</td></tr>
+                    <tr><td>Lemon balm (<i>Melissa officinalis</i>) root extract</td></tr>
+                    <tr><td>Vitamin B6</td></tr>
+                    <tr><td>Ashwagandha (<i>Withania somnifera</i>) root and leaf extract</td></tr>
+                    <tr><td>Valerian (<i>Valeriana officinalis</i>) root extract (Valerenic acids 0.8%)</td></tr>
+                    <tr><td>5-HTP</td></tr>
+                    <tr><td>Vitamin B</td></tr>
+                    <tr><td>Vitamin C</td></tr>
+                    <tr><td>L-tryptophan</td></tr>
+                    <tr><td>N-acetyl-L-tyrosine</td></tr>
+                    <tr><td><i>Mucuna cochinchinensis</i> (99% L-DOPA)</td></tr>
+                    <tr><td>L-phenylalanine</td></tr>
+                    <tr><td>Green tea leaf extract (65% EGCG)</td></tr>
+                    <tr><td><i>Coleus forskohlii</i> root extract (38% Forskolin)</td></tr>
+                    <tr><td><i>Huperzia serrata</i> aerial parts (1% Huperzine A)</td></tr>
+                    <tr><td>DL-phenylalanine</td></tr>
+                    <tr><td>L-methionine</td></tr>
+                    <tr><td><i>Rhodiola rosea</i> (5% rosavins)</td></tr>
+                    <tr><td>Glycyrrhizic acid (<i>from Licorice root</i>)</td></tr>
+                    <tr><td>L-histidine</td></tr>
+                    <tr><td>L-tyrosine</td></tr>
+                    <tr><td>SAMe</td></tr>
+                    <tr><td>Acetyl-L-carnitine</td></tr>
+                    <tr><td>Alpha-glycerylphosphorylcholine (50% alpha-GPC)</td></tr>
+                    <tr><td>L-cysteine</td></tr>
+                    
+                    <tr><td>Trimethylglycine</td></tr>
+										<tr><td>Folate</td></tr>
+										<tr><td>Niacin</td></tr>
+										<tr><td>Vitamin B2 (Riboflavin)</td></tr>
+										<tr><td>Vitamin B12</td></tr>
+										<tr><td>Elderberry</td></tr>
+										<tr><td>Ginkgo biloba extract</td></tr>
+										<tr><td>Vitamin D</td></tr>
+										<tr><td>Beta glucan</td></tr>
+										
+										
+                </table>
+            </td>
+            {% set keyIngredients = ['lagerstroemiaSpeciosaBanabaLeaf18CorosolicAcid', 
+                                        'phosphatidylserine',
+                                        'glycine',
+                                        'taurine',
+                                        'rhodiolaRosea915Rosavins',
+                                        'probiotics',
+                                        'nAcetylLCysteine',
+                                        'lTheanine',
+                                        'alphaLipoicAcid',
+                                        'coq10',
+                                        '5Mthf',
+                                        'resveratrol',
+                                        'astaxanthin',
+                                        'magnesium',
+                                        'zinc',
+                                        'selenium',
+                                        'melatonin',
+                                        'passionFlowerExtractPassifloraIncarnateArialParts',
+                                        'lemonBalmMelissaOfficinalisRootExtract',
+                                        'vitaminB6',
+                                        'ashwagandhaWithaniaSomniferaRootAndLeafExtract',
+                                        'valerianValerianaOfficinalisRootExtractValerenicAcids08',
+                                        '5Htp',
+                                        'vitaminB',
+                                        'vitaminC',
+                                        'lTryptophan',
+                                        'nAcetylLTyrosine',
+                                        'mucunaCochinchinensis99LDopa',
+                                        'lPhenylalanine',
+                                        'greenTeaLeafExtract65Egcg',
+                                        'coleusForskohliiRootExtract38Forskolin',
+                                        'huperziaSerrataAerialParts1HuperzineA',
+                                        'dlPhenylalanine',
+                                        'lMethionine',
+                                        'rhodiolaRosea5Rosavins',
+                                        'glycyrrhizicAcidFromLicoriceRoot',
+                                        'lHistidine',
+                                        'lTyrosine',
+                                        'same',
+                                        'acetylLCarnitine',
+                                        'alphaGlycerylphosphorylcholine50AlphaGpc',
+                                        'lCysteine',
+                                        'trimethylglycine',
+																				'folate',
+																				'niacin',
+																				'vitaminB2Riboflavin',
+																				'vitaminB12',
+																				'elderberry',
+																				'ginkgoBilobaExtract',
+																				'vitaminD',
+																				'betaGlucan'
+                                        
+                                    ] 
+                                %}
+            {% for product in products %}
+            <td>
+                <table class="compare-check-tab border-right border-right-0" id="val-impactful-ingredients-{{ loop.index }}">
+                    <tr class="bg-trans"><td></td></tr>
+                    {% for keyIngredient in keyIngredients %}
+                        <tr data-arrows="1"><td class="precursor-potential">{{ _self.attributeIcon(product, 'impactfulIngredients', keyIngredient)|trim|raw }}</td></tr>
+                    {% endfor %}
+                </table>
+            </td>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            <td>
+                <table class="bg-blue" id="attr-neurotransmitters">
+                    <tr><td><h4>Neurotransmitters</h4></td></tr>
+                    <tr><td>Serotonin</td></tr>
+                    <tr><td>GABA</td></tr>
+                    <tr><td>Taurine</td></tr>
+                    <tr><td>Glutamate</td></tr>
+                    <tr><td>PEA</td></tr>
+                    <tr><td>Dopamine</td></tr>
+                    <tr><td>Norepinephrine</td></tr>
+                    <tr><td>Epinephrine</td></tr>
+                    <tr><td>Acetylcholine</td></tr>
+                </table>
+            </td>
+            {% set keyIngredients = ['serotonin', 'gaba', 'taurine', 'glutamate', 'pea', 'dopamine', 'norepinephrine', 'epinephrine', 'acetylcholine'] %}
+            {% for product in products %}
+            <td>
+                <table class="compare-check-tab border-right border-right-0" id="val-neurotransmitters-{{ loop.index }}">
+                    <tr class="bg-trans"><td></td></tr>
+                    {% for keyIngredient in keyIngredients %}
+                        <tr data-arrows="1"><td class="precursor-potential">{{ _self.attributeIcon(product, 'neurotransmitters', keyIngredient)|trim|raw }}</td></tr>
+                    {% endfor %}
+                </table>
+            </td>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            <td>
+                <table class="bg-blue" id="attr-hormones">
+                    <tr><td><h4>Hormones</h4></td></tr>
+                    <tr><td>Cortisol</td></tr>
+                    <tr><td>Melatonin</td></tr>
+                </table>
+            </td>
+            {% set keyIngredients = ['cortisol', 'melatonin'] %}
+            {% for product in products %}
+            <td>
+                <table class="compare-check-tab border-right border-right-0" id="val-hormones-{{ loop.index }}">
+                    <tr class="bg-trans"><td></td></tr>
+                    {% for keyIngredient in keyIngredients %}
+                        <tr data-arrows="1"><td class="precursor-potential">{{ _self.attributeIcon(product, 'hormones', keyIngredient)|trim|raw }}</td></tr>
+                    {% endfor %}
+                </table>
+            </td>
+            {% endfor %}
+        </tr>
+        
+        <tr>
+            <td>
+                <table class="bg-blue" id="attr-methylationPathway">
+                    <tr><td><h4>Methylation pathway</h4></td></tr>
+					<tr><td>Methylation</td></tr>
+                </table>
+            </td>
+            
+            {% for product in products %}
+            <td>
+                <table class="compare-check-tab border-right border-right-0" id="val-methylationPathway-{{ loop.index }}">
+                    <tr class="bg-trans"><td></td></tr>                    
+                    <tr data-arrows="1"><td class="precursor-potential">{% if product.comparisonAttributes.type('methylationPathway').one().hasMethylationPathway %}<img src="../images/svgs/chart-checkmark.svg" />{% endif %}</td></tr>
+                    
+                </table>
+            </td>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            <td>
+                <table class="bg-blue" id="attr-other">
+                    <tr><td><h4>Other</h4></td></tr>
+                    <tr class="bg-grey"><td>Additional Information</td></tr>
+                </table>
+            </td>
+            {% for product in products %}
+            <td>
+                <table class="compare-check-tab border-right border-right-0" id="val-other-{{ loop.index }}">
+                    <tr class="bg-trans"><td></td></tr>
+                    <tr class="bg-grey"><td class="precursor-potential">{{ product.comparisonAttributes.type('other').one().additionalInformation|trim|raw }}</td></tr>
+                </table>
+            </td>
+            {% endfor %}
+        </tr>                
+
+
+        {#% for category in craft.categories.group('productCategories').hasDescendants().level(1).all() %}
+        {% set subCategories = craft.categories.descendantOf(category) %}
+        <tr>
+            <td>
+                <table class="bg-blue {% if loop.first %}border-top-radius{% endif %}">
+                    <tr><td><h4>{{ category.title }}</h4></td></tr>
+                    {% for subCategory in subCategories %}
+                        <tr><td>{{ subCategory.title }}</td></tr>
+                    {% endfor %}
+                </table>
+            </td>
+            {% for product in products %}
+            <td>                
+                <table class="compare-check-tab border-right border-right-0">
+                    <tr class="bg-trans"><td></td></tr>
+                    {% for subCategory in subCategories %}                  
+                        <tr><td>{% for cat in product.productCategories %}{% if cat.slug == subCategory.slug %}<img src="{{ craft.app.sites.primarySite.baseUrl ~ '/images/svgs/check-b.svg' }}" alt="checked" width="16" />{% endif %}{% endfor %}</td></tr>
+                    {% endfor %}
+                </table>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %#}
+    </table>
+
+    {#% endcache %#}
+{% endif %}
+
+{% macro attributeIcon(product, type, ingredient) %}
+    {% set keyIngredients = product.comparisonAttributes.type(type).one().keyIngredients.all() %}
+    {% set break = false %}
+    {% for row in keyIngredients if not break %}
+        {% if row.ingredients == ingredient %}
+            {% switch row.precursorPotential %}
+                {% case 'checked' %}
+                    <img src="../images/svgs/chart-checkmark.svg" />
+                {% case 'mildUp' %}
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                {% case 'moderateUp' %}
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                {% case 'strongUp' %}
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                {% case 'mildDown' %}
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                {% case 'moderateDown' %}
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                {% case 'strongDown' %}
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                {% default %}
+            {% endswitch %}
+            {% set break = true %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

@@ -1,0 +1,73 @@
+<div class="wrapper-full bg-light">
+    <div class="wrapper section">
+        <ul class="edu-list row">
+            {% for child in entry.children.all() %}
+            <li class="col--xs--12 col--sm--6 col--md--4" data-title="{{ child.title }}">
+                <a class="card" href="{{ child.url }}">
+                    <div class="icon-wrap">
+                        {% if child.featuredImage|length %}
+                        <img src="{{ child.featuredImage.one().url }}" alt="{{ child.title }} Icon">
+                        {% endif %}
+                        <h4 class="h3">{{ child.title }}</h4>
+                    </div>
+                    <div class="user-content">
+                        {{ child.body }}
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+
+            {% for row in entry.educationTiles.all() %}
+            <li class="col--xs--12 col--sm--6 col--md--4" data-title="{{ child.title }}">
+                <a class="card" href="{{ row.tileUrl }}">
+                    <div class="icon-wrap">
+                        {% if row.icon|length %}
+                        <img src="{{ row.icon.one().url }}" alt="{{ row.tileTitle }} icon">
+                        {% endif %}
+                        <h4 class="h3">{{ row.tileTitle }}</h4>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    {% for row in entry.educationMaterials.all() %}
+    <div class="col--md--12">
+        <section class="wrapper-full {% if loop.index0 is divisible by(2) %} {% else %} bg-light{% endif %} section">
+            <div class="wrapper wrapper--thin">
+                <div class="text-group-tall">
+                    <header>
+                        <h3 class="h2">{{ row.headline }}</h3>
+                        {% if row.body %}
+                        <div class="user-content">
+                            {{ row.body }}
+                        </div>
+                        {% endif %}
+                    </header>
+                    <ul class="file-list">
+                        {% for row in row.materials %}
+                        <li>
+                            <a href="{{ row.file.url }}" target="_blank">
+                                {% if row.iconType != 'none' %}
+                                <svg width="24" height="24"><use xlink:href="#shape-{{ row.iconType }}"></use></svg>
+                                {% endif %}
+                                <span>{{ row.file.text }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<script>
+document.body.classList.add('page-education');
+</script>

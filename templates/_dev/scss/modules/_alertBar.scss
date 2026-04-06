@@ -1,0 +1,91 @@
+// ---------------------------------------------------------------------
+//  Animate In
+// ---------------------------------------------------------------------
+
+.alert-bar {
+    overflow: hidden;
+    position: relative;
+    background: $purple-dark;
+    transition: max-height $trans;
+    max-height: 0;
+
+    &.is-active {
+        max-height: 200px;
+    }
+
+    .wrapper {
+        padding: 15px 0;
+    }
+
+    @include start-at($medium) {
+
+        &.is-active {
+            max-height: 80px;
+        }
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+
+        }
+    }
+}
+
+
+.alert-bar__content {
+    width: 100%;
+    margin-bottom: 15px;
+    padding-right: 50px;
+
+    p {
+        color: $white;
+        font-size: 1.3rem;
+    }
+
+    @include start-at($medium) {
+        width: calc(100% - 140px);
+        margin-bottom: 0;
+    }
+}
+
+.alert-bar__cta {
+    width: 100px;
+
+    .btn {
+        background: $orange;
+        font-size: 1.3rem;
+        width: 100px;
+        min-width: 100px;
+        padding: 4px 8px;
+        border-color: $orange;
+
+        &:hover {
+            color: $white;
+            background: darken($orange, 10%);
+            border-color: darken($orange, 10%);
+        }
+    }
+
+    @include start-at($medium) {
+
+    }
+}
+
+
+.alert-bar__close {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+
+    svg {
+        fill: $white;
+    }
+    @include stop-at($medium) {
+        position: absolute;
+        right: 10px;
+        top: 4px;
+    }
+}

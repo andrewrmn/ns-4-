@@ -1,0 +1,87 @@
+{% requireLogin %}
+
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+    {% set hcpNeurocashPercentage = globalObjects.hcpNeurocashPercentage ? globalObjects.hcpNeurocashPercentage : 0 %}
+    {% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().innerJoin('craft_commerce_customers', 'craft_commerce_customers.userId=users.id').select('craft_commerce_customers.id AS customerId').asArray().all() %}
+    {% set customerIds = [] %}
+    {% for hcpPatient in hcpPatients %}
+        {% set customerIds = customerIds|merge([hcpPatient.customerId]) %}
+    {% endfor %}
+
+    <div class="tabcontent patient-tabcontent">
+
+        <div class="patient-details py-4 px-md-6 px-4">
+          {% include 'hcp/_includes/top-search-patient' %}
+          <a class="d-block mb-4" href="{{ url('hcp/dashboard') }}">< Back</a>
+
+            <h3>All Patient History</h3>
+            <div class="patient-table pt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Contact</th>
+                            <th class="text-center" scope="col">Account Setup</th>
+                            <th class="text-center" scope="col">First Order</th>
+                            <th class="text-center" scope="col">Total Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% paginate craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(100).group('patients').orderBy('dateCreated DESC').anyStatus() as pageInfo, pageUsers %}
+                        {% if pageUsers|length %}
+                            {% for patientAccount in pageUsers %}
+                                {% set orderTotalPrice = craft.orders().isCompleted(true).user(patientAccount).sum('itemTotal') %}
+                                {% set totalPlacedOrders = craft.orders().isCompleted(true).user(patientAccount).count() %}
+                                <tr>
+                                    <td><span class="arrow-right"><img src="../../images/blue-arrow.png" width="12" /></span><a href="{{ url('hcp/patient?id=' ~ patientAccount.id) }}">{% if patientAccount.fullName %}{{ patientAccount.fullName }}{% else %}{{ patientAccount.username }}{% endif %}</a></td>
+                                    <td>{{ patientAccount.email }}</td>
+                                    <td class="text-center">
+
+                                        <span class="arrow-right">
+                                            {% if patientAccount.lastLoginDate > patientAccount.dateCreated %}
+                                                <img src="../../images/green-arrow.png" width="16" />
+                                            {% else %}
+                                                <img src="../../images/cross-arrow.png" width="16" />
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td class="text-center"><span class="arrow-right">{% if totalPlacedOrders %}<img src="../../images/green-arrow.png" width="16" />{% else %}<img src="../../images/cross-arrow.png" width="16" />{% endif %}</span></td>
+                                    <td class="text-center">{% if orderTotalPrice %}{{ orderTotalPrice|commerceCurrency }}{% else %}$0{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            {% if pageUsers|length > 100 %}
+                                <tr>
+                                    <td colspan="5">
+                                        <nav aria-label="..." class="d-block mt-3 text-center">
+                                            <ul class="pagination pagination-md">
+                                                {% for page, url in pageInfo.getPrevUrls(3) %}
+                                                    <li class="page-item d-inline p-2"><a class="text-blue" href="{{ url }}">{{ page }}</a></li>
+                                                {% endfor %}
+                                                <li class="page-item active d-inline p-2" aria-current="page">
+                                                    <span>{{ pageInfo.currentPage }}</span>
+                                                </li>
+                                                {% for page, url in pageInfo.getNextUrls(3) %}
+                                                    <li class="page-item d-inline p-2"><a class="text-blue" href="{{ url }}">{{ page }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </nav>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% else %}
+                            <tr><td colspan="5"><p class="text-center py-3">{{ "There is no new patient activity"|t }}</p></td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

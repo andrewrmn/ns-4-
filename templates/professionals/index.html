@@ -1,0 +1,20 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+    <nav class="sub-nav">
+        <ul class="ul-inline">
+            <li>
+                <a href="{{ siteUrl }}healthcare-professionals/">Overview</a>
+            </li>
+            {% for page in craft.entries.section('healthcareProfessionals').all() %}
+            <li>
+                <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    {% include 'partials/contentModules' %}
+
+{% endblock %}

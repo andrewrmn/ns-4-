@@ -1,0 +1,698 @@
+{% set hasData = false %}
+{% for submission in user.qrScanSubmissions %}
+    {% if craft.app.request.segments|last == submission.submissionId %}
+    	{% if submission.data|length %}
+    		{% set hasData = true %}
+    	{% endif %}
+
+        {% set data = submission.data | split(',') %}
+        {% set addInfo = '' %}
+        {# set variables to pull from submission data #}
+        {% set level = '' %}
+        {% set levelIndex = '' %}
+        {% set rangeLow = '' %}
+        {% set rangeHigh = '' %}
+
+        {% set serotonin = '' %}
+        {% set serotoninIndex = '' %}
+        {% set serotoninLevel = '' %}
+
+        {% set gaba = '' %}
+        {% set gabaIndex = '' %}
+        {% set gabaLevel = '' %}
+
+        {% set dopamine = '' %}
+        {% set dopamineIndex = '' %}
+        {% set dopamineLevel = '' %}
+
+        {% set norepinephrine = '' %}
+        {% set norepinephrineIndex = '' %}
+        {% set norepinephrineLevel = '' %}
+
+        {% set epinephrine = '' %}
+        {% set epinephrineIndex = '' %}
+        {% set epinephrineLevel = '' %}
+
+        {% set glutamate = '' %}
+        {% set glutamateIndex = '' %}
+        {% set glutamateLevel = '' %}
+
+        {% set glycine = '' %}
+        {% set glycineIndex = '' %}
+        {% set glycineLevel = '' %}
+
+        {% set histamine = '' %}
+        {% set histamineIndex = '' %}
+        {% set histamineLevel = '' %}
+
+        {% set pea = '' %}
+        {% set peaIndex = '' %}
+        {% set peaLevel = '' %}
+
+        {% set neRatioLow = '' %}
+        {% set neRatioLowIndex = '' %}
+
+        {% set neRatioHigh = '' %}
+        {% set neRatioHighIndex = '' %}
+
+        {% set creatinine = '' %}
+        {% set creatinineIndex = '' %}
+
+        {% set age = '' %}
+        {% set ageIndex = '' %}
+
+        {% set sex = '' %}
+        {% set sexIndex = '' %}
+
+        {# Create levels array to contain all level info #}
+        {% set array =
+            {
+                0:{'level':'placeholder','value':'placeholder'}
+            }
+         %}
+
+        {% set levelArray = {} %}
+
+        <div class="wrapper is-hidden no-print">
+
+        {% for item in data %}
+
+            {% if 'serotonin-creat' in item %}
+                {% set serotoninLevel = loop.index + 1 %}
+                {% set serotoninIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'Unitserotonin-creat' in item %}
+                {% set serotoninLevel = loop.index + 1 %}
+                {% set serotoninIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == serotoninLevel %}
+                {% set level = item %}
+                <p>serotonin Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == serotoninIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set serotonin = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set serotonin = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set serotonin = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set serotonin = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set serotonin = 'low' %}
+                {% endif %}
+                <p>serotonin range is {{ serotonin }}</p>
+                {% set levelArray = levelArray|merge({('serotonin'):(serotonin)}) %}
+
+            {% endif %}
+
+            {% if 'Creatininegaba-creat' in item %}
+                {% set gabaLevel = loop.index + 1 %}
+                {% set gabaIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'gaba-creat' in item %}
+                {% set gabaLevel = loop.index + 1 %}
+                {% set gabaIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == gabaLevel %}
+                {% set level = item %}
+                <p>gaba Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == gabaIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set gaba = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set gaba = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set gaba = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set gaba = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set gaba = 'low' %}
+                {% endif %}
+                <p>gaba range is {{ gaba }}</p>
+                {% set levelArray = levelArray|merge({('gaba'):(gaba)}) %}
+            {% endif %}
+
+
+            {% if 'Creatininedopamine-creat' in item %}
+                {% set dopamineLevel = loop.index + 1 %}
+                {% set dopamineIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'dopamine-creat' in item %}
+                {% set dopamineLevel = loop.index + 1 %}
+                {% set dopamineIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == dopamineLevel %}
+                {% set level = item %}
+                <p>dopamine Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == dopamineIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set dopamine = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set dopamine = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set dopamine = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set dopamine = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set dopamine = 'low' %}
+                {% endif %}
+                <p>dopamine Level is {{ dopamine }}</p>
+                {% set levelArray = levelArray|merge({('dopamine'):(dopamine)}) %}
+            {% endif %}
+
+            {% if 'Creatininenorepinephrine-creat' in item %}
+                {% set norepinephrineLevel = loop.index + 1 %}
+                {% set norepinephrineIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'norepinephrine-creat' in item %}
+                {% set norepinephrineLevel = loop.index + 1 %}
+                {% set norepinephrineIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == norepinephrineLevel %}
+                {% set level = item %}
+                <p>norepinephrine Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == norepinephrineIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set norepinephrine = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set norepinephrine = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set norepinephrine = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set norepinephrine = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set norepinephrine = 'low' %}
+                {% endif %}
+                <p>norepinephrine Level is {{ norepinephrine }}</p>
+                {% set levelArray = levelArray|merge({('norepinephrine'):(norepinephrine)}) %}
+            {% endif %}
+
+            {% if 'Creatinineepinephrine-creat' in item %}
+                {% set epinephrineLevel = loop.index + 1 %}
+                {% set epinephrineIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'epinephrine-creat' in item %}
+            	{% if 'norepinephrine-creat' in item %}
+            	{% else %}
+            		<p>epinephrine but NOT norepinephrine</p>
+                	{% set epinephrineLevel = loop.index + 1 %}
+					{% set epinephrineIndex = loop.index + 2 %}
+				{% endif %}
+            {% endif %}
+
+            {% if loop.index == epinephrineLevel %}
+                {% set level = item %}
+                <p>epinephrine Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == epinephrineIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set epinephrine = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set epinephrine = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set epinephrine = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set epinephrine = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set epinephrine = 'low' %}
+                {% endif %}
+                <p>epinephrine Level is {{ epinephrine }}</p>
+                {% set levelArray = levelArray|merge({('epinephrine'):(epinephrine)}) %}
+            {% endif %}
+
+
+            {% if 'Creatinineglutamate-creat' in item %}
+                {% set glutamateLevel = loop.index + 1 %}
+                {% set glutamateIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'glutamate-creat' in item %}
+                {% set glutamateLevel = loop.index + 1 %}
+                {% set glutamateIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == glutamateLevel %}
+                {% set level = item %}
+                <p>glutamate Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == glutamateIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set glutamate = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set glutamate = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set glutamate = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set glutamate = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set glutamate = 'low' %}
+                {% endif %}
+                <p>glutamate range is {{ glutamate }}</p>
+                {% set levelArray = levelArray|merge({('glutamate'):(glutamate)}) %}
+            {% endif %}
+
+
+            {% if 'Creatinineglycine-creat' in item %}
+                {% set glycineLevel = loop.index + 1 %}
+                {% set glycineIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'glycine-creat' in item %}
+                {% set glycineLevel = loop.index + 1 %}
+                {% set glycineIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == glycineLevel %}
+                {% set level = item %}
+                <p>glycine Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == glycineIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set glycine = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set glycine = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set glycine = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set glycine = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set glycine = 'low' %}
+                {% endif %}
+                <p>glycine range is {{ glycine }}</p>
+                {% set levelArray = levelArray|merge({('glycine'):(glycine)}) %}
+            {% endif %}
+
+
+            {% if 'Creatininehistamine-creat' in item %}
+                {% set histamineLevel = loop.index + 1 %}
+                {% set histamineIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if 'histamine-creat' in item %}
+                {% set histamineLevel = loop.index + 1 %}
+                {% set histamineIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == histamineLevel %}
+                {% set level = item %}
+                <p>histamine Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == histamineIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set histamine = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set histamine = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set histamine = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set histamine = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set histamine = 'low' %}
+                {% endif %}
+
+                {% set levelArray = levelArray|merge({('histamine'):(histamine)}) %}
+
+            {% endif %}
+
+
+            {% if 'Creatpea-creat' in item %}
+                {% set peaLevel = loop.index + 1 %}
+                {% set peaIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if 'pea-creat' in item %}
+                {% set peaLevel = loop.index + 1 %}
+                {% set peaIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == peaLevel %}
+                {% set level = item %}
+                <p>Pea Level is {{ item }}</p>
+            {% endif %}
+
+            {% if loop.index == peaIndex %}
+                {% set range = item|split('-')  %}
+
+                {% for num in range %}
+                    {% if loop.first %}
+                        {% set rangeLow = num %}
+                    {% else %}
+                        {% set rangeHigh = num %}
+                    {% endif %}
+                {% endfor %}
+
+                {% set mid = (rangeHigh + rangeLow) / 2 %}
+
+                {% if level < mid and level > rangeLow %}
+                    {% set pea = 'min' %}
+                {% endif %}
+                {% if level > mid and level < rangeHigh %}
+                    {% set pea = 'max' %}
+                {% endif %}
+                {% if level == mid %}
+                    {% set pea = 'mid' %}
+                {% endif %}
+                {% if level > rangeHigh %}
+                    {% set pea = 'high' %}
+                {% endif %}
+                {% if level < rangeLow %}
+                    {% set pea = 'low' %}
+                {% endif %}
+
+                <p>Pea range is {{ pea }}</p>
+                {% set levelArray = levelArray|merge({('pea'):(pea)}) %}
+            {% endif %}
+
+
+
+            {% if 'gne-ratio' in item %}
+                {% set neRatioLowIndex = loop.index + 1 %}
+                {% set neRatioHighIndex = loop.index + 2 %}
+            {% endif %}
+            {% if 'ne-ratio' in item %}
+                {% set neRatioLowIndex = loop.index + 1 %}
+                {% set neRatioHighIndex = loop.index + 2 %}
+            {% endif %}
+
+            {% if loop.index == neRatioLowIndex %}
+                <p>neRatioLow index is {{ item }}</p>
+                {% set neRatioLow = item %}
+            {% endif %}
+            {% if loop.index == neRatioHighIndex %}
+                <p>neRatioHigh index is {{ item }}</p>
+                {% set neRatioHigh = item %}
+            {% endif %}
+
+
+
+            {% if item == 'creatinine' %}
+                {% set creatinineIndex = loop.index + 1 %}
+            {% endif %}
+            {% if 'Creatcreatinine' in item %}
+                {% set creatinineIndex = loop.index + 1 %}
+            {% endif %}
+
+            {% if loop.index == creatinineIndex %}
+                <p>creatinine index is {{ item }}</p>
+                {% set creatinine = item %}
+            {% endif %}
+
+
+            {% if item == 'patient-age' %}
+                {% set ageIndex = loop.index + 1 %}
+            {% endif %}
+            {% if 'patient-age' in item %}
+                {% set ageIndex = loop.index + 1 %}
+            {% endif %}
+
+            {% if loop.index == ageIndex %}
+                <p>Age index is {{ item }}</p>
+                {% set age = item %}
+            {% endif %}
+
+            {% if item == 'patient-sex' %}
+                {% set sexIndex = loop.index + 1 %}
+            {% endif %}
+            {% if 'patient-sex' in item %}
+                {% set sexIndex = loop.index + 1 %}
+            {% endif %}
+
+            {% if loop.index == sexIndex %}
+                <p>sex index is {{ item }}</p>
+                {% set sex = item %}
+            {% endif %}
+        {% endfor %}
+
+
+
+
+        {% set recommendedProducts = [] %}
+        {% set productList = [] %}
+
+		{% if hasData %}
+            {% for row in qrScanTable.qrScanTable %}
+
+                {# Get the Neurotransmitter #}
+                {% set nt = '' %}
+                {% set submissionRange = '' %}
+                {% set addProduct = false %}
+
+                {% for item in row.neurotransmitters.limit(1) %}
+                    {% set nt = item|lower %}
+                {% endfor %}
+
+                {% for key,val in levelArray %}
+                    {% if key == nt %}
+                        {% set submissionRange = val %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if submissionRange in row.range|lower %}
+                    {% set addProduct = true %}
+                {% endif %}
+
+                {# Neurotransmitter & Range Match so continue #}
+                {% if addProduct %}
+
+                    {# Check for Age #}
+                    {% if row.ageCheck  %}
+                        {% set addProduct = false %}
+                        {% set addInfo = '' %}
+
+                        {% if row.age.value == 13 %}
+                            {% if age >= 13 and age != '' %}
+
+                                {% set addProduct = true %}
+
+                                {% set addInfo = '(13+)' %}
+
+                            {% endif %}
+                        {% endif %}
+                        {% if row.age.value == 12 %}
+                            {% if age <= 12 and age != '' %}
+                                {% set addProduct = true %}
+                                {% set addInfo = '(12-)' %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if row.age.value == 'notSpecified' and age == '' %}
+                            {% set addProduct = true %}
+                            {% set addInfo = '(no age)' %}
+                        {% endif %}
+                    {% endif %}
+
+
+                    {# Check for Immune or Adrenal #}
+                    {% if row.immuneAdrenal.value != 'notSpecified' %}
+                        {% set addProduct = false %}
+
+                        {% if row.immuneAdrenal.value == 'immune' %}
+                            {% if submission.category == 'Immune' %}
+                                {% set addProduct = true %}
+                                {% set addInfo = '(immune)' %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if row.immuneAdrenal.value == 'adrenal' %}
+                            {% if submission.category == 'Adrenal' %}
+                                {% set addProduct = true %}
+                                {% set addInfo = '(adrenal)' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                {% endif %}
+
+
+                {# Add product if all rules pass #}
+                {% if addProduct %}
+
+                    {# Get the associated product #}
+                    {% set product = row.associatedProduct.one() %}
+
+                    {# if a product is associated with results #}
+                    {% if product %}
+                        {#
+                            If there are conditional product checks
+                            loop through and see if there are already
+                            in the product array
+                        #}
+                        {% if row.productChecks|length > 0 %}
+
+                            {% for p in row.productChecks %}
+                                <p class="mt-4 ">becuase product is present: {{ p.title }} ///// {{ nt }}</p>
+
+                                {% if p.title in recommendedProducts %}
+                                    {% set addProduct = false %}
+                                    <p>{{ product.title }} NOT added</p>
+                                {% endif %}
+                            {% endfor %}
+
+                        {% endif %}
+
+                        {# Check if product has already been added #}
+                        {% if product.title not in recommendedProducts and recommendedProducts|length < 3 and addProduct %}
+
+                            {% set recommendedProducts = recommendedProducts|merge([product.title]) %}
+                            {% set productList = productList|merge([product]) %}
+
+                            {% if product %}
+                            <div>
+                                Add {{ product.title }} {{ addInfo }} via {{ nt }}
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+        </div>
+
+
+        {% include 'shop/customer/submissions/report' %}
+
+    {% endif %}
+{% endfor %}

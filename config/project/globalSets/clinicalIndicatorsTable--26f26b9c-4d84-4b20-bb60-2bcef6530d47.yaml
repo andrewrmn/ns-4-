@@ -1,0 +1,19 @@
+fieldLayouts:
+  45a1db3b-bbc0-4011-abaa-73a81b303cc6:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: e697251b-8d8c-4911-ba14-486479a207a9 # Clinical Indicators Table
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: clinicalIndicatorsTable
+name: 'Clinical Indicators Table'
+sortOrder: 2

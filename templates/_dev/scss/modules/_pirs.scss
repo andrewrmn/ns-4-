@@ -1,0 +1,402 @@
+// ---------------------------------------------------------------------
+//  PIR Styles
+// ---------------------------------------------------------------------
+
+
+main#content.pir-width {
+    overflow-x: scroll;
+}
+
+.pir {
+    width: 100%;
+    transition: opacity 0.4s ease;
+    overflow: hidden;
+
+
+    .pir-body {
+        width: 100%;
+        overflow: auto;
+
+        .pir-body__inner {
+            min-width: 760px;
+            overflow: auto;
+        }
+    }
+
+    header a:not(.btn) {
+        transition: color 0.4s ease;
+
+        &:hover {
+            color: $gray;
+        }
+    }
+
+}
+
+.pir-update-wrap {
+    transition: opacity 0.4s ease;
+}
+
+.pir-submission-tables {
+    td {
+        font-size: 12px;
+    }
+}
+
+.pir-tables-wrap {
+    overflow: hidden;
+}
+
+@include stop-at($medium) {
+    .pir-tables {
+        width: 100%;
+        overflow: auto;
+        display: block;
+    }
+}
+
+.pir-utilities {
+    a, button {
+        font-size: 14px;
+    }
+
+	@include stop-at($medium) {
+        a, button {
+            font-size: 12px;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  96% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+html.thinking {
+    &:after {
+        content: '';
+        width: 50px;
+        height: 50px;
+        display: block;
+        position: fixed;
+        top: calc(50% - 25px);
+        left: calc(50% - 25px);
+        background: url('../images/svgs/loading.svg') center / cover no-repeat;
+        transform: rotate();
+        transform-origin: center;
+        animation: rotating 1.6s ease infinite;
+        z-index: 2000;
+    }
+
+    .pir,
+    .pir-update-wrap {
+        opacity: 0.2;
+    }
+}
+
+html.generating,
+html.submission-successful,
+html.submission-generating {
+    &:before {
+        content: 'Generating PDF';
+        width: 200px;
+        height: 16px;
+        color: $brand;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: $sans-serif;
+        text-align: center;
+        display: block;
+        position: fixed;
+        top: calc(50% + 48px);
+        left: calc(50% - 100px);
+
+        z-index: 2000;
+    }
+}
+
+html.submission-successful {
+    &:before {
+        content: 'Submission Saved Successfully!';
+        width: 320px;
+        left: calc(50% - 160px);
+    }
+}
+html.submission-generating {
+    &:before {
+        content: 'Generating Report';
+    }
+}
+
+.alert-box {
+    display: none;
+    max-width: 80%;
+    width: 360px;
+    height: auto;
+    text-align: center;
+    padding: 36px 24px;
+    background: $white;
+    box-shadow: $shadow;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 20000;
+
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+    }
+
+    &.is-active {
+        display: block;
+    }
+}
+
+.recommended-product-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > * {
+        max-width: 300px;
+        border-left: 1px solid #eaeaea;
+        padding: 0 48px;
+    }
+}
+
+.print-a {
+    transition: opacity 0.4s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.note-line {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 300px;
+    height: 24px;
+    border-bottom: 1px solid lighten($gray, 30%);
+}
+
+// ----------------------------------------
+// Suggested Use
+// ----------------------------------------
+
+.suggested-use-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+        width: 20px;
+        height: 20px;
+        border: 1px solid $border;
+        border-radius: 50%;
+        background: $white;
+        margin-left: 4px;
+        display: block;
+        position: relative;
+
+        &.is-active {
+            background: $orange;
+            border-color: $orange;
+        }
+    }
+}
+
+
+.suggested-use-count {
+    .half {
+        display: none;
+        height: 18px;
+        width: 9px;
+        border-bottom-left-radius: 20px;
+        border-top-left-radius: 20px;
+        background: $orange;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .is-active + :not(is-active) .half {
+        display: block;
+    }
+}
+
+// ----------------------------------------
+// Ingredients
+// ----------------------------------------
+
+.ingredient-list {
+    padding: 0 12px;
+
+    li {
+        display: flex;
+        justify-content: flex-start;
+
+        &:before {
+            content: '';
+            width: 6px;
+            min-width: 6px;
+            height: 6px;
+            background: $purple;
+            display: block;
+            margin-right: 6px;
+            margin-top: 6px;
+        }
+    }
+
+    h4 {
+        font-size: 13px;
+        line-height: 1.4;
+        font-weight: bold;
+    }
+}
+
+.reference-list-content {
+    p {
+        font-size: 10px;
+        margin-bottom: 0;
+        line-height: 1.4;
+    }
+}
+
+
+.mobile-pir-hd {
+    font-size: 16px;
+}
+
+
+// ----------------------------------------
+// Disclaimer
+// ----------------------------------------
+
+.pir .disclaimer {
+
+}
+
+#pdf-gen-form,
+#pdf-email-form {
+    button {
+        appearance: none;
+        background: transparent !important;
+        padding: 0;
+        margin: 0;
+        color: $brand;
+        transition: color $trans;
+
+        &:hover {
+            cursor: pointer;
+            color: $gray;
+            outline: none;
+        }
+
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
+}
+
+
+// ----------------------------------------
+// 5 Products Styles
+// ----------------------------------------
+
+.pir-section-header {
+    display: none;
+    border-top: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+    padding: 6px 6px;
+    text-align: center;
+
+    .pir-section-title {
+        font-size: 16px;
+    }
+
+    display: none !important;
+}
+
+
+
+.print-size-small {
+
+    .pir-section-title {
+        font-size: 14px;
+    }
+
+    .suggested-use-count > * {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    .user-content.user-content--sm p {
+        font-size: 12px !important;
+    }
+}
+
+
+
+
+// ----------------------------------------
+// Edit Submission
+// ----------------------------------------
+
+#edit-pir-form {
+
+    .checkbox {
+        label {
+            font-weight: 400;
+            font-size: 13px;
+        }
+        label, input {
+            cursor: pointer;
+        }
+    }
+
+    .radio-inline > * + *, .checkbox > * + * {
+        margin-left: 6px;
+    }
+
+}
+
+
+// ----------------------------------------
+// PIR Search
+// ----------------------------------------
+
+.pir-search {
+    form {
+        max-width: 300px;
+        width: 100%;
+    }
+
+    input[type="text"] {
+    //    background: transparent;
+        height: 36px;
+        width: 100%;
+        font-size: 14px;
+        border-radius: 2px;
+    }
+}

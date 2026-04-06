@@ -1,0 +1,57 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
+handle: updatedPathwaysTable
+instructions: ''
+name: 'Updated Pathways Table'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - new1
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - new2
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - new3
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - new4
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - new5
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_updatedpathwaystable}}'
+  fieldLayout: table
+  maxRows: null
+  minRows: null
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a row'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

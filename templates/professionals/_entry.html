@@ -1,0 +1,171 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+    {% if craft.app.request.segments|last == 'resources' %}
+
+        {% include 'partials/contentModules' %}
+
+    {% endif %}
+
+    {% if craft.app.request.segments|last == 'education' %}
+
+        {% include 'partials/contentModules' %}
+
+        {% include 'professionals/education' %}
+
+    {% endif %}
+
+
+    {% if entry.parent ? entry.parent.id == '21' %}
+        {% include 'partials/contentModules' %}
+
+        {% include 'professionals/_eduEntry' %}
+    {% endif %}
+
+
+        {% if craft.app.request.segments|last == 'find-my-rep' %}
+        {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+            <div class="wrapper section">
+                <section>
+                    <div class="text-group">
+                        <h2 class="h1">Meet Your Rep</h2>
+                        <p>No matter your location, we have you covered. Search by zip code or state/county to meet your rep.</p>
+
+                        <form class="form filter-form js-filter-form-simple">
+                            <div>
+                                <label>My State</label>
+                                <div class="select-wrap filter-form__input">
+                                    <select class="filter-form__state">
+                                        <option value=""></option>
+                                        <option value="alabama">Alabama</option>
+                                    	<option value="alaska">Alaska</option>
+                                    	<option value="arizona">Arizona</option>
+                                    	<option value="arkansas">Arkansas</option>
+                                    	<option value="california">California</option>
+                                    	<option value="colorado">Colorado</option>
+                                    	<option value="connecticut">Connecticut</option>
+                                    	<option value="delaware">Delaware</option>
+                                    	<option value="florida">Florida</option>
+                                    	<option value="georgia">Georgia</option>
+                                    	<option value="hawaii">Hawaii</option>
+                                    	<option value="idaho">Idaho</option>
+                                    	<option value="illinois">Illinois</option>
+                                    	<option value="indiana">Indiana</option>
+                                    	<option value="iowa">Iowa</option>
+                                    	<option value="kansas">Kansas</option>
+                                    	<option value="kentucky">Kentucky</option>
+                                    	<option value="louisiana">Louisiana</option>
+                                    	<option value="maine">Maine</option>
+                                    	<option value="maryland">Maryland</option>
+                                    	<option value="massachusetts">Massachusetts</option>
+                                    	<option value="michigan">Michigan</option>
+                                    	<option value="minnesota">Minnesota</option>
+                                    	<option value="mississippi">Mississippi</option>
+                                    	<option value="missouri">Missouri</option>
+                                    	<option value="montana">Montana</option>
+                                    	<option value="nebraska">Nebraska</option>
+                                    	<option value="nevada">Nevada</option>
+                                    	<option value="new-hampshire">New Hampshire</option>
+                                    	<option value="new-jersey">New Jersey</option>
+                                    	<option value="new-mexico">New Mexico</option>
+                                    	<option value="new-york">New York</option>
+                                    	<option value="north-carolina">North Carolina</option>
+                                    	<option value="north-dakota">North Dakota</option>
+                                    	<option value="ohio">Ohio</option>
+                                    	<option value="oklahoma">Oklahoma</option>
+                                    	<option value="oregon">Oregon</option>
+                                    	<option value="pennsylvania">Pennsylvania</option>
+                                    	<option value="rhode-island">Rhode Island</option>
+                                    	<option value="south-carolina">South Carolina</option>
+                                    	<option value="south-dakota">South Dakota</option>
+                                    	<option value="tennessee">Tennessee</option>
+                                    	<option value="texas">Texas</option>
+                                    	<option value="utah">Utah</option>
+                                    	<option value="vermont">Vermont</option>
+                                    	<option value="virginia">Virginia</option>
+                                    	<option value="washington">Washington</option>
+                                    	<option value="west-virginia">West Virginia</option>
+                                    	<option value="wisconsin">Wisconsin</option>
+                                    	<option value="wyoming">Wyoming</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label>County</label>
+                                <input class="filter-form__county" type="text" placeholder="county" />
+                            </div>
+                            <div class="or">
+                                OR
+                            </div>
+                            <div>
+                                <label>Zip</label>
+                                <input class="filter-form__zip" type="text" placeholder="zip" />
+                            </div>
+                            <div>
+                                <input class="filter-form__submit" type="submit" value="search" />
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="section-short">
+                        <div class="js-filter-result-message"></div>
+                        <div class="js-filter-list rep-lists">
+                            <div class="js-filter-default section-short text-center text-group">
+                                <svg width="70" height="70" class="text-light"><use xlink:href="#shape-search"></use></svg>
+                                {{ generalTextNotifications.salesRepSearch }}
+                            </div>
+                            {% for rep in craft.categories.group('salesRep') %}
+                                <div class="filter-item
+                                    {% for option in rep.salesRepStates %}state-{{ option.col1|lower|replace(' ', '-') }} {% endfor %}
+                                    {% for option in rep.salesRepCounties %}county-{{ option.col1|lower|replace(' ', '-') }} {% endfor %}
+                                    {% for option in rep.salesRepZips %}zip-{{ option.col1|lower|replace(' ', '-') }} {% endfor %}
+                                "
+                                >
+                                {% for row in rep.salesReps %}
+                                    <div class="rep">
+
+                                        <figure class="hexagon-image">
+                                            <img class="holder" src="{{ siteUrl }}/images/hexagon.png" alt="hexagon shape" />
+                                            {% if row.headshot|length %}
+                                            <img class="hexagon-image__img" src="{{ row.headshot.one().url }}" alt="row.headshot.one().title" />
+                                            {% endif %}
+                                        </figure>
+
+                                        <div class="text-group">
+                                            <h4 class="h3 text-flush has-line">{{ rep.title }}</h4>
+                                            <p class="ul-pipe">
+                                                {% if row.phone|length %}<a class="text-bold" href="">{{ row.phone }}</a>{% endif %}
+                                                {% if row.email|length %}<a class="text-bold" href="">{{ row.email }}</a>{% endif %}
+                                            </p>
+                                            {% if row.about|length %}
+                                                <div>{{ row.about }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            {% endfor %}
+                            <div class="js-filter-empty section-short text-center text-group is-hidden">
+                                <svg width="70" height="70" class="text-light"><use xlink:href="#shape-search"></use></svg>
+                                {{ generalTextNotifications.salesRepSearchEmpty }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        {% else %}
+            <div class="wrapper wrapper--x-thin section-short text-center">
+                {% if currentUser and currentUser.isInGroup('neuroselectOnly') %}
+                    <p>You are not authorized to view this content with this account type.</p>
+                {% else %}
+                    {{ generalTextNotifications.mustBeRegistered }}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% include 'partials/contentModules' %}
+        {% endif %}
+
+
+{% endblock %}

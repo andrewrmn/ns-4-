@@ -1,0 +1,14 @@
+columnSuffix: null
+contentColumnType: boolean
+fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
+handle: canUseBillMe
+instructions: ''
+name: 'Can Use Bill Me'
+searchable: true
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

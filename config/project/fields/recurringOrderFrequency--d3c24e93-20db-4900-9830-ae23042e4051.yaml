@@ -1,0 +1,67 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
+handle: recurringOrderFrequency
+instructions: ''
+name: 'Recurring Order Frequency'
+searchable: false
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - '15 days'
+        -
+          - value
+          - 15Days
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '30 days'
+        -
+          - value
+          - 30Days
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '45 days'
+        -
+          - value
+          - 45Days
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '60 days'
+        -
+          - value
+          - 60Days
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - '90 Days'
+        -
+          - value
+          - 90Days
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\RadioButtons

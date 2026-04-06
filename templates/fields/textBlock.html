@@ -1,0 +1,18 @@
+{#
+ # Text Block
+ # -------------------
+ #}
+
+
+<div class="wrapper-full section">
+    <div class="wrapper wrapper--md">
+        <header class="section-x-short section--flush-top text-center">
+            {% if block.headline|length %}<h2 class="h2">{{ block.headline }}</h2>{% endif %}
+        </header>
+        {% if block.body|length %}
+            <div class="user-content">
+                {{ block.body }}
+            </div>
+        {% endif %}
+    </div>
+</div>

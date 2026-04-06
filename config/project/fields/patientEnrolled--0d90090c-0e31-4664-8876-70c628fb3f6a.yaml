@@ -1,0 +1,14 @@
+columnSuffix: dfxtmjva
+contentColumnType: boolean
+fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
+handle: patientEnrolled
+instructions: ''
+name: 'Patient Enrolled?'
+searchable: false
+settings:
+  default: false
+  offLabel: 'No'
+  onLabel: 'Yes'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

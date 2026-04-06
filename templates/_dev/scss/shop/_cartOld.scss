@@ -1,0 +1,183 @@
+// ---------------------------------------------------------------------
+//  Cart Styles
+// ---------------------------------------------------------------------
+
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.cart-coupon-code {
+
+}
+.cart-summary {
+
+    .btn {
+        margin-right: 0;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    .p-lg {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+}
+
+
+.item-overview {
+    text-align: center;
+    img {
+        max-width: 80px;
+        margin: 0 auto 5px;
+    }
+}
+
+.error {
+    color: $error;
+    font-style: italic;
+    font-size: 13px;
+}
+
+// ----------------------------------------
+// Alerts
+// ----------------------------------------
+.alert {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 0;
+    width: 100%;
+    margin-bottom: 20px;
+    z-index: 9;
+    position: sticky;
+    top: 0;
+
+    @include stop-at($header-breakpoint) {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+    }
+
+    p {
+        font-size: 1.3rem;
+        color: currentColor;
+    }
+
+    &.success {
+        color: $brand-alt-dark;
+        background: $brand-alt-light;
+    }
+
+    &.error {
+        color: $white;
+        background: lighten($error, 0%);
+
+        a {
+            //text-decoration: underline;
+            color: $white;
+        }
+    }
+
+    transition: height 0.8s ease;
+
+    &.flash {
+        margin-bottom: 0;
+    }
+
+    &.flash,
+    &.is-active {
+        height: 50px;
+    }
+}
+
+#cart input[type="submit"] {
+    text-decoration: none;
+}
+
+.isIE,
+.isEDGE {
+    .alert {
+        position: relative;
+
+        @include stop-at($header-breakpoint) {
+            position: fixed;
+        }
+    }
+}
+
+
+.discount-text,
+.adjustments-row__amount {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.adjustments-row {
+    //color: $success;
+    font-size: 14px;
+    font-style: italic;
+
+    &.adjustments-row--discount {
+        color: $success;
+    }
+
+    td:first-child {
+        font-weight: bold;
+    }
+}
+
+// ----------------------------------------
+//
+// ----------------------------------------
+#cart {
+
+    @include stop-at($medium) {
+        table {
+            overflow-x: scroll;
+            background: $white;
+            display: block;
+
+            tr, tbody, thead {
+                background: $white;
+                overflow-x: scroll;
+            }
+
+            thead tr > *:nth-child(2) {
+                min-width: 200px;
+            }
+        }
+    }
+
+    input:not([type="submit"]) {
+        border: 1px solid $gray-light;
+        border-radius: 2px;
+        box-shadow: none;
+        padding: 0 4px;
+        height: 36px;
+    }
+
+    input[type="number"] {
+        width: 50px;
+    }
+
+    input[type="submit"] {
+        background: transparent;
+        appearance: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.review-card {
+    li > * {
+        line-height: 1.6;
+    }
+}

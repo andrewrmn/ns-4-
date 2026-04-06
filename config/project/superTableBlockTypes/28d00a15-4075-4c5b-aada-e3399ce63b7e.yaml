@@ -1,0 +1,75 @@
+field: 05604439-6c5c-41e1-acac-f9f2e807fbbb # Accordion
+fieldLayouts:
+  50941910-a816-406b-b010-98c87cc56470:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 9f228eee-1e7f-4f4d-aaab-45ced2112783 # Headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8e6ec6f8-d9bb-4336-b939-97523357eeee # Drawer Content
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  8e6ec6f8-d9bb-4336-b939-97523357eeee: # Drawer Content
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: drawerContent
+    instructions: ''
+    name: 'Drawer Content'
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  9f228eee-1e7f-4f4d-aaab-45ced2112783: # Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headline
+    instructions: ''
+    name: Headline
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

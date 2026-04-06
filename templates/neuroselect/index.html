@@ -1,0 +1,408 @@
+{% set title = 'Product Information Requests' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+
+    {% set query = craft.app.request.getParam('search') %}
+
+    <div class="wrapper-wide pir-submission-tables">
+        <div class="mt-6">
+            <header class="d-lg-flex flex-justify-between mb-5">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                    <h2>NeuroSelect Dashboard</h2>
+                </div>
+                <div class="col-12 col-lg-6 pir-search d-md-flex flex-justify-end">
+                    <p class="sr-only">Search Reports by ID</p>
+                    <form method="GET" action="{{ url(craft.app.request.absoluteUrl) }}">
+                        <input type="text" name="search" placeholder="Search Reports by ID" id="search"{% if query | length %} value="{{ query }}"{% endif %}/>
+                    </form>
+                </div>
+            </header>
+            <div class="mt-4 mb-4">
+                <div class="text-group account-card">
+
+
+                    <div class="d-flex flex-wrap flex-items-stretch">
+	                    
+	                    		{% include 'neuroselect/neurocore/preview' %}
+
+                        {% include 'neuroselect/qrscans/preview' %}
+
+                        {% include 'neuroselect/pathway/preview' %}
+
+                        {% include 'neuroselect/sleep/preview' %}
+
+                        {% include 'neuroselect/clinicalIndications/preview' %}
+
+                        {% include 'neuroselect/manual/preview' %}
+                       
+
+
+
+                        {% if user.neuroselectOnlyLinkedAccount|length > 0 %}
+
+
+                        {% set nsUsers = user.neuroselectOnlyLinkedAccount.all() %}
+
+                        {% for nsUser in nsUsers %}
+                        <div class="col-12 mb-4 d-flex">
+                            <div class="card col-12">
+                                <div class="mb-3">
+                                    <h2 class="h4 text-black">Connected Account</h2>
+                                    <p>{{ nsUser.email }}</p>
+                                </div>
+
+                                <div class="mt-4">
+                                    <p class="p-sm text-bold">QR Scans</p>
+
+                                    {% set showScans = false %}
+                                    {% if query | length %}
+                                        {% for row in nsUser.qrScanSubmissions %}
+                                            {% if row.submissionId == query %}
+                                                {% set showScans = true %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                    {% set showScans = true %}
+                                    {% endif %}
+
+                                    {% if nsUser.qrScanSubmissions|length and showScans %}
+                                    <table class="u-full-width full-borders pir-tables">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th class="text-center">Category</th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for row in nsUser.qrScanSubmissions.all() %}
+                                        {% if query | length %}
+                                            {% if row.submissionId == query %}
+                                            <tr>
+                                                <td>
+                                                    {{ row.submissionId }}
+                                                </td>
+                                                <td>{{ row.date }}</td>
+                                                <td class="text-center">
+                                                    {{ row.category }}
+                                                </td>
+                                                <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/qrscan/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                            </tr>
+                                            {% endif %}
+                                        {% else %}
+                                            <tr>
+                                                <td>
+                                                    {{ row.submissionId }}
+                                                </td>
+                                                <td>{{ row.date }}</td>
+                                                <td class="text-center">
+                                                    {{ row.category }}
+                                                </td>
+                                                <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/qrscan/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="p-sm mt-2">No reports found</p>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="mt-6">
+                                    <p class="p-sm text-bold">Pathway</p>
+
+                                    {% set showScans = false %}
+                                    {% if query | length %}
+                                        {% for row in nsUser.pathwaySubmissions %}
+                                            {% if row.submissionId == query %}
+                                                {% set showScans = true %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                    {% set showScans = true %}
+                                    {% endif %}
+
+                                    {% if nsUser.pathwaySubmissions|length and showScans %}
+                                    <table class="u-full-width full-borders pir-tables">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th>Pathways</th>
+                                                <th class="text-center">Category</th>
+                                                <th class="text-center">Age</th>
+                                                <th class="text-center">Sex</th>
+                                                <th class="text-right"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in nsUser.pathwaySubmissions.all() %}
+                                            {% if query | length %}
+                                                {% if row.submissionId == query %}
+                                                <tr class="submission" data-submission-type="pathway">
+                                                    <td>{{ row.submissionId }}</td>
+                                                    <td>{{ row.date }}</td>
+                                                    <td class="submission__pathways col-lg-5">
+                                                        {{ row.pathways }}
+                                                    </td>
+                                                    <td class="submission__category text-center">
+                                                        {{ row.category }}
+                                                    </td>
+                                                    <td class="submission__age text-center">
+                                                        {{ row.age }}
+                                                    </td>
+                                                    <td class="submission__sex text-center">
+                                                        {{ row.gender }}
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <a class="edit-submission" href="{{ siteUrl }}account/neuroselect/edit?type=pathway&id={{ row.submissionId }}&q={{ nsUser.email }}">Edit</a>
+                                                    </td>
+                                                    <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/pathway/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                                </tr>
+                                                {% endif %}
+                                            {% else %}
+                                            <tr class="submission" data-submission-type="pathway">
+                                                <td>{{ row.submissionId }}</td>
+                                                <td>{{ row.date }}</td>
+                                                <td class="submission__pathways col-lg-5">
+                                                    {{ row.pathways }}
+                                                </td>
+                                                <td class="submission__category text-center">
+                                                    {{ row.category }}
+                                                </td>
+                                                <td class="submission__age text-center">
+                                                    {{ row.age }}
+                                                </td>
+                                                <td class="submission__sex text-center">
+                                                    {{ row.gender }}
+                                                </td>
+                                                <td class="text-right">
+                                                    <a class="edit-submission" href="{{ siteUrl }}account/neuroselect/edit?type=pathway&id={{ row.submissionId }}&q={{ nsUser.email }}">Edit</a>
+                                                </td>
+                                                <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/pathway/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="p-sm mt-2">No reports found</p>
+                                    {% endif %}
+                                </div>
+
+
+
+                                <div class="mt-6">
+                                    <p class="p-sm text-bold">Clinical Indications</p>
+
+                                    {% set showScans = false %}
+                                    {% if query | length %}
+                                        {% for row in nsUser.clinicalIndicationSubmission %}
+                                            {% if row.submissionId == query %}
+                                                {% set showScans = true %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                    {% set showScans = true %}
+                                    {% endif %}
+
+                                    {% if nsUser.clinicalIndicationSubmission|length and showScans %}
+                                    <table class="u-full-width full-borders pir-tables">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th>Clinical indication(s)</th>
+                                                <th class="text-center">Category</th>
+                                                <th class="text-center">Age</th>
+                                                <th class="text-center">Sex</th>
+                                                <th class="text-right"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in nsUser.clinicalIndicationSubmission.all() %}
+                                            {% if query | length %}
+                                                {% if row.submissionId == query %}
+                                                <tr>
+                                                    <td>{{ row.submissionId }}</td>
+                                                    <td>{{ row.date }}</td>
+                                                    <td class="col-lg-5">
+                                                        {{ row.clinicalindicators }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ row.category }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ row.age }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ row.gender }}
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <a href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication&id={{ row.submissionId }}&q={{ nsUser.email }}">Edit</a>
+                                                    </td>
+                                                    <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/clinicalindication/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                                </tr>
+                                                {% endif %}
+                                            {% else %}
+                                            <tr>
+                                                <td>{{ row.submissionId }}</td>
+                                                <td>{{ row.date }}</td>
+                                                <td class="col-lg-5">
+                                                    {{ row.clinicalindicators }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ row.category }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ row.age }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ row.gender }}
+                                                </td>
+                                                <td class="text-right">
+                                                    <a href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication&id={{ row.submissionId }}&q={{ nsUser.email }}">Edit</a>
+                                                </td>
+                                                <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/clinicalindication/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="p-sm mt-2">No reports found</p>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="mt-6">
+                                    <p class="p-sm text-bold">Build Your Own</p>
+
+                                    {% set showScans = false %}
+                                    {% if query | length %}
+                                        {% for row in nsUser.productSubmission %}
+                                            {% if row.submissionId == query %}
+                                                {% set showScans = true %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                    {% set showScans = true %}
+                                    {% endif %}
+
+                                    {% if nsUser.productSubmission|length and showScans %}
+                                    <table class="u-full-width full-borders pir-tables">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th>Products</th>
+                                                <th class="text-center">Age</th>
+                                                <th class="text-center">Sex</th>
+                                                <th class="text-right"></th>
+                                                <th class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in nsUser.productSubmission.all() %}
+                                            {% if query | length %}
+                                                {% if row.submissionId == query %}
+                                                <tr>
+                                                    <td>{{ row.submissionId }}</td>
+                                                    <td>{{ row.date }}</td>
+                                                    <td class="col-lg-6">
+
+                                                        {% set products = row.products| split(', ') %}
+
+                                                        {% for product in craft.products %}
+                                                            {% if product.id in products %}
+                                                                {{ product.title }}{% if not loop.last %}, {% endif %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ row.age }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ row.gender }}
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <a href="{{ siteUrl }}account/neuroselect/edit?type=products&id={{ row.submissionId }}&q={{ nsUser.email }}">Edit</a>
+                                                    </td>
+                                                    <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/products/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                                </tr>
+                                                {% endif %}
+                                            {% else %}
+                                            <tr>
+                                                <td>{{ row.submissionId }}</td>
+                                                <td>{{ row.date }}</td>
+                                                <td class="col-lg-6">
+
+                                                    {% set products = row.products| split(', ') %}
+
+                                                    {% for product in craft.products.all() %}
+                                                        {% if product.id in products %}
+                                                            {{ product.title }}{% if not loop.last %}, {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ row.age }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ row.gender }}
+                                                </td>
+                                                <td class="text-right">
+                                                    <a href="{{ siteUrl }}account/neuroselect/edit?type=products&id={{ row.submissionId }}&q={{ nsUser.email }}">Edit</a>
+                                                </td>
+                                                <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/products/{{ row.submissionId }}?q={{ nsUser.email }}">Generate Report</a></td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% else %}
+                                    <p class="p-sm mt-2">No reports found</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var $ = jQuery;
+        $('.js-additional-reports').each(function(){
+            $(this).hide(0);
+        });
+
+        $('.js-show-all-reports').click(function(){
+            el = $(this);
+            target = el.attr('data-group');
+
+            if( el.hasClass('is-active') ) {
+                $('.js-additional-reports[data-group=' + target + ']').hide();
+                el.removeClass('is-active').html('Show All Reports').removeClass('btn-alt').addClass('btn-alt');
+            } else {
+                $('.js-additional-reports[data-group=' + target + ']').show();
+                el.addClass('is-active').html('Hide Reports').removeClass('btn-alt').addClass('btn-alt');
+            }
+
+        });
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+/.env
+/.idea
+/vendor
+.DS_Store
+node_modules
+web/images
+web/cpresources
+web/pir-documents
+web/userphotos
+
+*.sql
+
+# Contains environment-specific secrets (AWS, Stripe); not tracked
+config/project/project.yaml

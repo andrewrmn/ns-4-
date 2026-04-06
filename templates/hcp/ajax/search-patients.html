@@ -1,0 +1,11 @@
+{% header "Content-Type: application/json; charset=utf-8" %}
+{%- spaceless -%}
+{% set searchQuery = craft.app.request.getParam('q') %}
+{% set patientEntries = craft.users().group('patients').relatedTo({targetElement: currentUser, field: 'relatedHcp'}).search(searchQuery).anyStatus().all() %}
+{% set patients = [] %}
+{% for patientEntry in patientEntries %}
+{% set name = patientEntry.firstName ? patientEntry.firstName ~ ' ' ~ patientEntry.lastName : patientEntry.username %}
+{% set patients = patients|merge([{'label':name, 'value':patientEntry.id}]) %}
+{% endfor %}
+{{ patients|json_encode|raw }}
+{%- endspaceless -%}

@@ -1,0 +1,51 @@
+{#
+ # 404 template
+ # ------------
+ #
+ # This template is loaded whenever Craft cannot figure out how to
+ # respond to an incoming request. No setup is involved to get your
+ # 404 page working; you just need to call it 404.html and put it
+ # at the root of your craft/templates/ folder.
+ #
+ # You can also create 400.html, 403.html, 500.html, and 503.html
+ # templates if you’d like. If Craft can’t find an error template
+ # to match the error code, it will just use the one in
+ # craft/app/templates/ instead.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set title = "404" %}
+
+{% block content %}
+
+<div class="banner neuro-shapes section-full colors-white banner--align-left">
+	<div class="banner__content d-flex flex-justify-center" data-animate="up">
+		<div class="text-center">
+			<h2 class="h4">404 Error</h2>
+			<h3 class="h2 mb-4 text-white">This page does not exist.</h3>
+			<p class="h3 mb-4 text-white">Use the navigation to get back to a working page. Please <a class="link" href="{{ siteUrl }}contact/">contact us</a> if you've reached this page due to an error by us.</p>
+
+			<a class="btn" href="{{ siteUrl }}">
+				Go to the homepage
+			</a>
+
+		</div>
+	</div>
+
+
+	<figure class="acids">
+		{% include '_dev/images/acids/Dopamine.svg' %}
+		{% include '_dev/images/acids/GABA.svg' %}
+		{% include '_dev/images/acids/Phenylalanine.svg' %}
+		{% include '_dev/images/acids/Cysteine-2.svg' %}
+		{% include '_dev/images/acids/Glycine.svg' %}
+		{% include '_dev/images/acids/Serotonin.svg' %}
+		{% include '_dev/images/acids/Tryptophan-2.svg' %}
+		{% include '_dev/images/acids/Tyrosine.svg' %}
+	</figure>
+
+</div>
+{% endblock %}

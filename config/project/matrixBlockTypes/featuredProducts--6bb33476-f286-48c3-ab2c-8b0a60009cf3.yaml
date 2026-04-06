@@ -1,0 +1,239 @@
+field: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
+fieldLayouts:
+  e6f6ee97-f496-4fd4-9208-c7c64bb8cfc2:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 5972a588-d00b-497a-8ea5-a946f6dfe0bc # Headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 652d6454-ff87-4bbd-9c22-24cdff93d91e # Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0ac89e22-05d8-4b7a-b65c-8b4e1ce06b6d # Display count
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: e872982e-d3f3-4d48-94c2-bc8911981ffe # Featured Products
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9f07b8e9-c917-4f53-a91c-06861b567852 # Button
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0ac89e22-05d8-4b7a-b65c-8b4e1ce06b6d: # Display count
+    columnSuffix: null
+    contentColumnType: smallint(1)
+    fieldGroup: null
+    handle: displayCount
+    instructions: ''
+    name: 'Display count'
+    searchable: true
+    settings:
+      decimals: 0
+      defaultValue: null
+      max: 7
+      min: 1
+      prefix: null
+      previewCurrency: null
+      previewFormat: decimal
+      size: null
+      suffix: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Number
+  9f07b8e9-c917-4f53-a91c-06861b567852: # Button
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: button
+    instructions: ''
+    name: Button
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: '1'
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Email
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Phone
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Url
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Entry
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+          -
+            - fruitstudios\linkit\models\Category
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select a category'
+          -
+            - fruitstudios\linkit\models\Asset
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an asset'
+          -
+            - fruitstudios\linkit\models\Product
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField
+  652d6454-ff87-4bbd-9c22-24cdff93d91e: # Body
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  5972a588-d00b-497a-8ea5-a946f6dfe0bc: # Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headline
+    instructions: ''
+    name: Headline
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  e872982e-d3f3-4d48-94c2-bc8911981ffe: # Featured Products
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: featuredProducts
+    instructions: ''
+    name: 'Featured Products'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      limit: ''
+      localizeRelations: false
+      selectionLabel: 'Add product'
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\commerce\fields\Products
+handle: featuredProducts
+name: 'Featured Products'
+sortOrder: 3

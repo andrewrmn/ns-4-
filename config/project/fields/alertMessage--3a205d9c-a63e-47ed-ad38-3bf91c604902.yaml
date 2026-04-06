@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
+handle: alertMessage
+instructions: ''
+name: 'Alert Message'
+searchable: true
+settings:
+  columns:
+    156:
+      __assoc__:
+        -
+          - width
+          - '60'
+    157:
+      __assoc__:
+        -
+          - width
+          - '30'
+    158:
+      __assoc__:
+        -
+          - width
+          - 10%
+  contentTable: '{{%stc_alertmessage}}'
+  fieldLayout: table
+  maxRows: '1'
+  minRows: '1'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add alert'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

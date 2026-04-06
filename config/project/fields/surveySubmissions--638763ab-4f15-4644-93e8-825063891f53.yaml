@@ -1,0 +1,253 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 9a98c4e1-a799-42f0-a4ce-ba07bd38df16 # Forms
+handle: surveySubmissions
+instructions: ''
+name: 'Survey Submissions'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 24dea907-4e6c-4fa8-b55c-f45f40c342dd # Submission Id
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 8b24c971-ec73-4e3e-b572-6b59f2f3d423 # Email
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 9ceb0270-c66d-4804-9650-ae8a91097e64 # Name
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 48fd2490-d669-4e83-a6f7-1ab299732bda # Age
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 045f6a39-db05-49e5-b50e-cc384ccb279a # Sex
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - a8e2a093-e380-449c-9b38-fd86acc6a4a8 # State
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 6465543d-2202-48fd-ac11-e36d289ec6c6 # Subject
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 9bc5d5d4-f9cd-4435-a09e-1b2c2c0b611a # Product 1
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - d6ec9223-6ba4-43e6-8261-f06a85381558 # Product 2
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 562da5b3-7919-4e00-8884-05fff31b9bd1 # Product 3
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - ef0af561-0b9e-426f-8156-1937db528b35 # Product 4
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 570b1f65-8747-4bc5-b940-e51221c6ae4f # Product 5
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - fc13f858-7614-484e-98ca-b87335f70ffe # Sleep Score
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 0d9d0b56-b20b-4f8b-b74b-45282c17507f # Stress Score
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 0290dbc6-cbef-4eff-b3a2-742e61bf86c8 # Wellness Score
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - e00e1c34-422f-42c9-aa8d-896a48551588 # Fruits & Vegetables
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 3ae87b3d-c1eb-4387-bb81-1a0526260920 # Fatty Acids
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - c1808167-7dac-449c-8d94-77285b1947ee # Fiber
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 3b5b2bc2-4fa9-4558-ad7e-b7b7ea33d62b # Protein
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 9268fe0c-c56d-4201-b31c-d5832d8c892d # Calcium
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - f63fcb6e-793b-49f1-9cc2-b370e5c945fd # Exercise
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 6b5fd535-fe4a-49ef-bdbb-3ee0d86b2c77 # Final Sleep Quality
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 514be461-4c94-4812-8051-6e2258892049 # Falling Asleep
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 0aabf73c-9d65-4d38-a3ba-7d4b6c3ca060 # Waking up
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - f1e1735a-0f04-4f8b-b031-4197bf01b9ee # Vasomotor Issues
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 211c1493-2c8b-4493-8188-0839ac71c135 # Pain
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 6da9b32e-30f7-4029-9dee-99b66ffab8b2 # Daytime Fatigue
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 18db3ce0-5a88-42fa-a393-065d54b69183 # Daytime Motivation
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - e734d65b-218b-4a48-aeba-61c02570ce05 # General Wellness
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - ee4987bc-9929-4d28-a358-de0b3c73e37a # Physical Wellness
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - a9db9000-68de-4c9a-8150-78fbf09b1cb1 # Activity Wellness
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 5b785230-d1a2-4b05-bc36-fa8de19943f7 # Motivation Wellness
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 4a6f611f-073b-491d-b906-cd43ed0ab764 # Mental Wellness
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_surveysubmissions}}'
+  fieldLayout: row
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

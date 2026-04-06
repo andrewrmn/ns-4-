@@ -1,0 +1,120 @@
+field: 1e3887a1-7daa-4ba7-898d-caa7ada6fd6f # Product Survey Details
+fieldLayouts:
+  bdab86ef-f836-4201-bf72-011daf696d20:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: c48523f4-650a-45fa-b015-6c0d09c1c94a # Sleep content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 989e8fee-a375-4704-b002-91f68bccec4e # Stress content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 381461cb-47ce-40ff-a867-938e0e94a64f # Fatigue content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  989e8fee-a375-4704-b002-91f68bccec4e: # Stress content
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: stressContent
+    instructions: ''
+    name: 'Stress content'
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: ''
+      redactorConfig: ''
+      removeEmptyTags: ''
+      removeInlineStyles: ''
+      removeNbsp: ''
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  381461cb-47ce-40ff-a867-938e0e94a64f: # Fatigue content
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: fatigueContent
+    instructions: ''
+    name: 'Fatigue content'
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: ''
+      redactorConfig: ''
+      removeEmptyTags: ''
+      removeInlineStyles: ''
+      removeNbsp: ''
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  c48523f4-650a-45fa-b015-6c0d09c1c94a: # Sleep content
+    columnSuffix: null
+    contentColumnType: mediumtext
+    fieldGroup: null
+    handle: sleepContent
+    instructions: ''
+    name: 'Sleep content'
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: mediumtext
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: ''
+      redactorConfig: Standard.json
+      removeEmptyTags: ''
+      removeInlineStyles: ''
+      removeNbsp: ''
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field

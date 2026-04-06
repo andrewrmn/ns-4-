@@ -1,0 +1,365 @@
+{% set title = 'Products' %}
+
+{% extends 'shop/_layouts/main' %}
+
+
+{% block main %}
+
+{% if currentUser and currentUser.isInGroup('patients') %}
+  {% redirect "/patients/dashboard#shop-product-store" %}
+{% endif %}
+<div class="wrapper">
+    {% include 'products/product-filters.html' %}
+</div>
+
+<div class="wrapper-fulls bg-light screen-wrap" id="product-listing">
+    <div class="alert js-cart-alert"></div>
+
+    {# Set product availability for patients. Only these products will be displayed to patients #}
+    {% set patientAvailableProducts = null %}
+    {% if currentUser and currentUser.isInGroup('patients') and currentUser.restrictedProducts|length %}
+        {% set patientAvailableProducts = currentUser.restrictedProducts.ids() %}
+    {% endif %}
+
+    {% set excludedProds = craft.products.search('productCategories:Bundle').ids() %}
+    {% set excludedProds = excludedProds|join(', not ') %}
+    
+    {% if not allowedGuest %}
+	    
+		{% endif %}
+
+    <div class="d-block text-center compare-products-wrap py-4"><a id="compare-products" class="btn">Compare Products</a></div>
+
+    <div class="wrapper section-x-short section--flush-top">
+        {% set query = craft.app.request.getParam('q') %}
+        {% if query | length %}
+            {% set productsOld = craft.products.search('title:*' ~ query ~ '*').id(patientAvailableProducts).orderBy('score').all() %}
+            {% set products = craft.products.guestCheckoutOnly(false).search('title:*' ~ query ~ '*').id('not ' ~ excludedProds).orderBy('score').all() %}
+						
+						{% if allowedGuest %}
+							{% set products = craft.products.search('title:*' ~ query ~ '*').id('not ' ~ excludedProds).orderBy('score').all() %}
+						{% endif %}
+						
+            <header>
+                {% set queryString = craft.app.request.queryStringWithoutPath %}
+                <h3 class="h3 text-flush section-x-short section--flush-top">Showing search results for "<span>{{queryString|replace('q=')}}</span>"</h3>
+            </header>
+            {% if products | length %}
+                <ul class="products hiteher">
+                    {% for product in products %}
+                        {% include 'products/productPreview.html' %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="wrapper section section--tall text-center text-group">
+                    <div class="text-group-tall">
+                        <img src="{{ siteUrl }}images/empty-bottle.svg" alt="empty bottle icon" />
+                        <p>
+                            <span class="text-bold text-black">No results found.</span><br />
+                            Check the spelling of your search term(s), or try another search.
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+        
+        		{% if allowedGuest %}
+        		
+							{% set productsGuest = craft.products.guestCheckoutOnly(true).orderBy('title asc').id('not ' ~ excludedProds).all() %}
+							{% if productsGuest %}
+							<div class="mb-4">
+<!-- 							<h3 class="h3 mb-2">Kits</h3> -->
+							<ul class="products cheer ">
+							{% for product in productsGuest %}
+                {% include 'products/productPreview.html' %}
+								{% endfor %}
+							</ul>
+							<hr />
+							</div>
+							{% endif %}
+						{% endif %}
+						
+            <ul class="products cheer">
+            {% set productsOld = craft.products.orderBy('title asc').id(patientAvailableProducts).all() %}
+            {% set productsNew = craft.products.guestCheckoutOnly(false).orderBy('title asc').id('not ' ~ excludedProds).all() %}
+
+            {% for product in productsNew %}
+                {% include 'products/productPreview.html' %}
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <span class="filter-mask"></span>
+</div>
+
+{% js %}
+    $( ".purchasableId" ).change(function(e) {
+        $(".purchasableInfo").hide();
+        $("#"+($(this).find(":selected").data('info'))).toggle();
+    });
+{% endjs %}
+
+
+
+<div class="modal-wrap" id="symptom-modal">
+    <div class="modal">
+        <a class="modal__close" href="#" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">
+            <div>
+                <p class="sr-only">Close Modal</p>
+                <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
+            </div>
+        </a>
+        <div class="modal__inner">
+            <div class="modal__inner-hd">
+                <div class="h2 text-flush js-modal-hd">
+
+                </div>
+                <div class="text-center">
+                    <a class="btn js-product-symptoms-link" href="" data-click-target="symptom-modal" data-click-bodyClass="terms-modal">Continue</a>
+                </div>
+            </div>
+            <div class="user-content js-modal-content">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/popUpProductCompare' %}
+
+{% js %}
+
+    var $ = jQuery;
+    $(document).ready(function(){
+
+        $('.js-symptom-link').click(function(){
+            var url = $(this).attr("href"),
+                modalContent = $(this).find('.js-description').html(),
+                modalTitle = $(this).find('.js-cat-title').text();
+
+            $('.js-product-symptoms-link').attr('href', url);
+            $('.js-modal-hd').text(modalTitle);
+            $('.js-modal-content').empty().append(modalContent);
+            $('#product-symptoms-link').prop('checked', false);
+        });
+        $("#compare-products").click(function(){
+            $('.compare-modal').toggleClass('d-block');
+            $('#overlay').show();
+        });
+        $("#overlay").click(function(){
+            $('.js-modal-close').click();
+        });
+
+        $(".close").click(function(){
+            $('.compare-modal').toggleClass('d-block');
+            $('#overlay').hide();
+        });
+        $("#compare-products").click(function(){
+            $('body').toggleClass('overlay');
+        });
+
+        $(document).on("click", '.product-tag-filter', function(event) {
+            if( $(this).hasClass('in-active') ){
+                var length = $('.product-tag-filter:not(.in-active)').length;
+                if( length > 2 ){
+                    $('.product-tag-filter:not(.in-active)').first().addClass('in-active');
+                }
+                $(this).removeClass('in-active');
+            }else{
+                $(this).addClass('in-active');
+            }
+            var productIdsArr = [];
+            $('.product-tag-filter:not(.in-active)').each(function(){
+                productId = $(this).attr('data-product-id');
+                productIdsArr.push(productId);
+            })
+
+            $.ajax({
+                type: 'get',
+                url: '/products/productComparedTable?productIds=' + productIdsArr.join(','),
+                data: '',
+                dataType: 'html',
+                beforeSend: function( xhr ) {
+                    $("div.products-table").addClass('text-center');
+                    $("div.products-table").html("<img src='../images/svgs/loading.svg' width='50' alt='loading' />");
+                },
+                success: function(response) {
+                    $("div.products-table").removeClass('text-center');
+                    $(".compare-modal div.number-direction").removeClass('d-none');
+                    $("div.products-table").html(response);
+                    if( $('.product-tag-filter:not(.in-active)').length == 0 ){
+                        $(".compare-modal div.number-direction").addClass('d-none');
+                    }
+
+                    var totalProducts = productIdsArr.length;
+
+                    if( $("table#val-impactful-ingredients-1").length ){
+                        $("table#val-impactful-ingredients-1 td.precursor-potential").each(function(){
+                            var index = $("table#val-impactful-ingredients-1 tr").index($(this).parent('tr'));
+                            if ($(this).is(':empty')){
+                                if( totalProducts == 1 ){
+                                    $("table#attr-impactful-ingredients tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 2 && $("table#val-impactful-ingredients-2 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-impactful-ingredients tr").eq(index).addClass('d-none');
+                                    $("table#val-impactful-ingredients-2 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 3 && $("table#val-impactful-ingredients-2 tr").eq(index).find('td.precursor-potential').is(':empty') && $("table#val-impactful-ingredients-3 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-impactful-ingredients tr").eq(index).addClass('d-none');
+                                    $("table#val-impactful-ingredients-2 tr").eq(index).addClass('d-none');
+                                    $("table#val-impactful-ingredients-3 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                            }
+                            var attrHt = $("table#attr-impactful-ingredients tr").eq(index).height();
+                            $("table#val-impactful-ingredients-1 tr").eq(index).height(attrHt);
+                            $("table#val-impactful-ingredients-2 tr").eq(index).height(attrHt);
+                            $("table#val-impactful-ingredients-3 tr").eq(index).height(attrHt);
+                        });
+
+                        var attrLength1 = $("table#attr-impactful-ingredients tr").length;
+                        var attrLength2 = $("table#attr-impactful-ingredients tr.d-none").length;
+                        if(attrLength1 == attrLength2 + 1){
+                            $("table#attr-impactful-ingredients").closest('tr').addClass('d-none');
+                        }
+
+                    }
+
+                    if( $("table#val-neurotransmitters-1").length ){
+                        $("table#val-neurotransmitters-1 td.precursor-potential").each(function(){
+                            var index = $("table#val-neurotransmitters-1 tr").index($(this).parent('tr'));
+                            if ($(this).is(':empty')){
+                                if( totalProducts == 1 ){
+                                    $("table#attr-neurotransmitters tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 2 && $("table#val-neurotransmitters-2 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-neurotransmitters tr").eq(index).addClass('d-none');
+                                    $("table#val-neurotransmitters-2 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 3 && $("table#val-neurotransmitters-2 tr").eq(index).find('td.precursor-potential').is(':empty') && $("table#val-neurotransmitters-3 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-neurotransmitters tr").eq(index).addClass('d-none');
+                                    $("table#val-neurotransmitters-2 tr").eq(index).addClass('d-none');
+                                    $("table#val-neurotransmitters-3 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                            }
+                            var attrHt = $("table#attr-neurotransmitters tr").eq(index).height();
+                            $("table#val-neurotransmitters-1 tr").eq(index).height(attrHt);
+                            $("table#val-neurotransmitters-2 tr").eq(index).height(attrHt);
+                            $("table#val-neurotransmitters-3 tr").eq(index).height(attrHt);
+                        });
+
+                        var attrLength1 = $("table#attr-neurotransmitters tr").length;
+                        var attrLength2 = $("table#attr-neurotransmitters tr.d-none").length;
+                        if(attrLength1 == attrLength2 + 1){
+                            $("table#attr-neurotransmitters").closest('tr').addClass('d-none');
+                        }
+
+                    }
+
+                    if( $("table#val-hormones-1").length ){
+                        $("table#val-hormones-1 td.precursor-potential").each(function(){
+                            var index = $("table#val-hormones-1 tr").index($(this).parent('tr'));
+                            if ($(this).is(':empty')){
+                                if( totalProducts == 1 ){
+                                    $("table#attr-hormones tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 2 && $("table#val-hormones-2 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-hormones tr").eq(index).addClass('d-none');
+                                    $("table#val-hormones-2 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 3 && $("table#val-hormones-2 tr").eq(index).find('td.precursor-potential').is(':empty') && $("table#val-hormones-3 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-hormones tr").eq(index).addClass('d-none');
+                                    $("table#val-hormones-2 tr").eq(index).addClass('d-none');
+                                    $("table#val-hormones-3 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                            }
+                            var attrHt = $("table#attr-hormones tr").eq(index).height();
+                            $("table#val-hormones-1 tr").eq(index).height(attrHt);
+                            $("table#val-hormones-2 tr").eq(index).height(attrHt);
+                            $("table#val-hormones-3 tr").eq(index).height(attrHt);
+                        });
+
+                        var attrLength1 = $("table#attr-hormones tr").length;
+                        var attrLength2 = $("table#attr-hormones tr.d-none").length;
+                        if(attrLength1 == attrLength2 + 1){
+                            $("table#attr-hormones").closest('tr').addClass('d-none');
+                        }
+                    }
+
+                    if( $("table#val-methylationPathway-1").length ){
+                        $("table#val-methylationPathway-1 td.precursor-potential").each(function(){
+                            var index = $("table#val-methylationPathway-1 tr").index($(this).parent('tr'));
+                            if ($(this).is(':empty')){
+                                if( totalProducts == 1 ){
+                                    $("table#attr-methylationPathway tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 2 && $("table#val-methylationPathway-2 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-methylationPathway tr").eq(index).addClass('d-none');
+                                    $("table#val-methylationPathway-2 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                                if( totalProducts == 3 && $("table#val-methylationPathway-2 tr").eq(index).find('td.precursor-potential').is(':empty') && $("table#val-methylationPathway-3 tr").eq(index).find('td.precursor-potential').is(':empty') ){
+                                    $("table#attr-methylationPathway tr").eq(index).addClass('d-none');
+                                    $("table#val-methylationPathway-2 tr").eq(index).addClass('d-none');
+                                    $("table#val-methylationPathway-3 tr").eq(index).addClass('d-none');
+                                    $(this).parent('tr').addClass('d-none');
+                                }
+                            }
+                            var attrHt = $("table#attr-methylationPathway tr").eq(index).height();
+                            $("table#val-methylationPathway-1 tr").eq(index).height(attrHt);
+                            $("table#val-methylationPathway-2 tr").eq(index).height(attrHt);
+                            $("table#val-methylationPathway-3 tr").eq(index).height(attrHt);
+                        });
+
+                        var attrLength1 = $("table#attr-methylationPathway tr").length;
+                        var attrLength2 = $("table#attr-methylationPathway tr.d-none").length;
+                        if(attrLength1 == attrLength2 + 1){
+                            $("table#attr-methylationPathway").closest('tr').addClass('d-none');
+                        }
+
+                    }
+
+                    $(".products-table table tbody tr td table:not('#attr-other, #val-other-1, #val-other-2, #val-other-3') tbody tr").removeClass('bg-grey');
+                    $("table#attr-impactful-ingredients tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#attr-neurotransmitters tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#attr-hormones tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#attr-methylationPathway tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-impactful-ingredients-1 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-impactful-ingredients-2 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-impactful-ingredients-3 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-neurotransmitters-1 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-neurotransmitters-2 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-neurotransmitters-3 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-hormones-1 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-hormones-2 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-hormones-3 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-methylationPathway-1 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-methylationPathway-2 tr:not(.d-none):odd").addClass('bg-grey');
+                    $("table#val-methylationPathway-3 tr:not(.d-none):odd").addClass('bg-grey');
+
+                    var maxHeight = 0;
+                    var otherElements = ['#attr-other tr:gt(1)', '#val-other-1 tr:gt(1)', '#val-other-2 tr:gt(1)', '#val-other-3 tr:gt(1)'];
+                    $("#attr-other tr:gt(0), #val-other-1 tr:gt(0), #val-other-2 tr:gt(0), #val-other-3 tr:gt(0)").each(function(){
+                        if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+                    });
+                    $("#attr-other tr:gt(0), #val-other-1 tr:gt(0), #val-other-2 tr:gt(0), #val-other-3 tr:gt(0)").height(maxHeight);
+
+                }
+            });
+        })
+
+    });
+
+{% endjs %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 92640468-c6de-4c2b-a35d-f8b0bf6b5b79 # Commerce Promotion Categories
+handle: promotionCategories
+instructions: 'Categories used for sales and discount promotions.'
+name: 'Promotion Categories'
+searchable: true
+settings:
+  allowLimit: false
+  allowMultipleSources: false
+  allowSelfRelations: false
+  branchLimit: ''
+  limit: null
+  localizeRelations: false
+  selectionLabel: 'Add a promotion category'
+  showSiteMenu: true
+  source: 'group:12'
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Categories

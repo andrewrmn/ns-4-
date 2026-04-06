@@ -1,0 +1,253 @@
+field: feb4ddf6-ba16-4bb5-ae92-ca6036472d64 # Sleep Table
+fieldLayouts:
+  e0bd4551-a279-4ce1-9cf1-965f50d302c6:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 097f1350-fa62-4731-bbda-d60badb1f8e6 # Product
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: aef462cd-6cad-4cc7-ad8d-d970d8388de8 # Clinical Indications
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 765269e8-d860-467d-9ece-67587ca09381 # Biomarkers
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3cfca319-230a-4aad-9666-ae724b0aba06 # Excluded Ingredients
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9580c913-8cbd-43a3-b47c-66492fc3d1c5 # Support type
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a286b4e2-771b-468f-bccb-a32fe3b00342 # Age
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  3cfca319-230a-4aad-9666-ae724b0aba06: # Excluded Ingredients
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: excludedIngredients
+    instructions: ''
+    name: 'Excluded Ingredients'
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: 'group:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  097f1350-fa62-4731-bbda-d60badb1f8e6: # Product
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: product
+    instructions: ''
+    name: Product
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\commerce\fields\Products
+  9580c913-8cbd-43a3-b47c-66492fc3d1c5: # Support type
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: supportType
+    instructions: ''
+    name: 'Support type'
+    searchable: true
+    settings:
+      multi: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Amino acid'
+            -
+              - value
+              - aminoAcid
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Comprehensive
+            -
+              - value
+              - comprehensive
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'As needed'
+            -
+              - value
+              - asNeeded
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Checkboxes
+  765269e8-d860-467d-9ece-67587ca09381: # Biomarkers
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: biomarkers
+    instructions: ''
+    name: Biomarkers
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: 'group:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  a286b4e2-771b-468f-bccb-a32fe3b00342: # Age
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: age
+    instructions: ''
+    name: Age
+    searchable: true
+    settings:
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - N/A
+            -
+              - value
+              - notSpecified
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 13+
+            -
+              - value
+              - '13'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 12-
+            -
+              - value
+              - '12'
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\RadioButtons
+  aef462cd-6cad-4cc7-ad8d-d970d8388de8: # Clinical Indications
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: clinicalIndications
+    instructions: ''
+    name: 'Clinical Indications'
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: 'group:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories

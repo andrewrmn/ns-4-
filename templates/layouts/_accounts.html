@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="home" href="{{ siteUrl }}" />
+	<meta name="robots" content="noindex">
+
+    <link rel="shortcut icon" type="image/ico" href="/images/favicons/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" />
+    <link rel="icon" href="/images/favicons/android-favicon.png">
+	<link rel="stylesheet" href="/css/main.css?v=31.0.0">
+	
+	{% if craft.app.request.segments|first == 'hcp' %}
+	<link rel="stylesheet" href="/css/hcp.css?v=15.0.0">
+	{% endif %}	
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117519601-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-117519601-1');
+	</script>
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-N46834T');</script>
+	<!-- End Google Tag Manager -->
+	
+	<!-- Start of HubSpot Embed Code -->
+	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/23208015.js"></script>
+	<!-- End of HubSpot Embed Code -->
+
+	<script src="/js/jquery.js"></script>
+</head>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N46834T"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<a href="#content" class="sr-only">Skip to content</a>
+
+	{% set cart = craft.commerce.carts.cart %}
+
+	{% if craft.app.request.segments|first == '' %}
+		{% include 'partials/alertBar' %}
+	{% endif %}
+
+	{% include 'header' %}
+
+	{% if currentUser %}
+	{%  set user = currentUser %}
+	<div class="account-page login-newpage">
+        <div class="account-page__sidebar">
+            {% include 'shop/customer/sidebar.html' %}
+        </div>
+        <div class="account-page__content right-sidebar">
+
+			<main id="content">
+				{% block content %}
+					<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+					<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+				{% endblock %}
+			</main>
+
+		</div>
+	</div>
+	{% else %}
+		{% redirect '/login/' %}
+	{% endif %}
+
+	{% include 'footer' %}
+
+
+	<script src="/js/main.js"></script>
+
+	<span class="menu-mask" data-click-target="" data-click-bodyClass="sub-nav-is-active"></span>
+	<div class="is-hidden">
+		{% include 'partials/svgs.svg' %}
+	</div>
+</body>
+</html>

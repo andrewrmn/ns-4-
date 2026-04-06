@@ -1,0 +1,104 @@
+{% set showScans = true %}
+{% set loopLimit = 5 %}
+{% set showAdditional = true %}
+
+{% if query | length %}
+    {% set showAdditional = false %}
+    {% set loopLimit = null %}
+    {% set showScans = false %}
+    {% for row in user.qrScanSubmissions %}
+        {% if row.submissionId == query %}
+            {% set showScans = true %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="col-12 mb-4 d-flex">
+    <div class="card col-12">
+        <h2 class="h4 mb-3 text-black">QR Scans</h2>
+
+        {% if showScans %}
+        <table class="u-full-width full-borders pir-tables">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in user.qrScanSubmissions.limit(loopLimit).all() %}
+                {% if query | length %}
+                    {% if row.submissionId == query %}
+                    <tr>
+                        <td>
+                            {{ row.submissionId }}
+                        </td>
+                        <td>{{ row.date }}</td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/qrscan/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td>
+                            {{ row.submissionId }}
+                        </td>
+                        <td>{{ row.date }}</td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/qrscan/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+
+
+            {% if showAdditional and user.qrScanSubmissions|length > 5 %}
+            <tbody class="js-additional-reports" data-group="qr-scan">
+            {% for row in user.qrScanSubmissions.offset(5) %}
+                {% if query | length %}
+                    {% if row.submissionId == query %}
+                    <tr>
+                        <td>
+                            {{ row.submissionId }}
+                        </td>
+                        <td>{{ row.date }}</td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/qrscan/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td>
+                            {{ row.submissionId }}
+                        </td>
+                        <td>{{ row.date }}</td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/qrscan/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+
+        {% if showAdditional and user.qrScanSubmissions|length > 5 %}
+        <div class="text-center mt-4">
+            <div class="btn-alt btn--sm js-show-all-reports" data-group="qr-scan">Show All Reports</div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <p class="p-sm mt-4">No reports found</p>
+        {% endif %}
+    </div>
+</div>

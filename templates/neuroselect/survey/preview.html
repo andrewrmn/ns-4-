@@ -1,0 +1,160 @@
+{% set showScans = true %}
+{% set loopLimit = 50 %}
+{% set showAdditional = true %}
+
+{% if query | length %}
+    {% set showAdditional = false %}
+    {% set loopLimit = null %}
+    {% set showScans = false %}
+    {% for row in user.surveySubmissions.all() %}
+        {% if row.submissionId == query %}
+            {% set showScans = true %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="col-12 text-center mb-4">
+  <a class="btn mx-auto" href="/neuro-q/">Take survey</a>
+</div>
+
+<div class="col-12 mb-4 d-flex">
+    <div class="card col-12">
+        <h2 class="h4 mb-3 text-black">Survey submissions</h2>
+
+        {% if showScans %}
+        <table class="u-full-width full-borders pir-tables">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th class="text-center">Subject</th>
+                    <th class="text-center">Score</th>
+                    <th class="text-center">ID</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in user.surveySubmissions.all() %}
+                {% if query | length %}
+                    {% if row.submissionId == query %}
+                    <tr>
+                      <td>{{ row.submissionId|date("M d, Y") }}</td>
+
+                        <td>
+                            {{ row.subName }}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.subject == 'wellness' %}fatigue{% else %}{{ row.subject }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.sleepScore %}{{ row.sleepScore }}{% endif %}
+                            {% if row.stressScore %}{{ row.stressScore }}{% endif %}
+                            {% if row.wellnessScore %}{{ row.wellnessScore }}{% endif %}
+
+                        </td>
+
+                        <td class="text-center">
+                            {{ row.submissionId }}
+                        </td>
+
+                        <td class="text-right"><a class="pir-generate-report" href="/neuro-q/report/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                      <td>{{ row.submissionId|date("M d, Y") }}</td>
+
+                        <td>
+                            {{ row.subName }}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.subject == 'wellness' %}fatigue{% else %}{{ row.subject }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.sleepScore %}{{ row.sleepScore }}{% endif %}
+                            {% if row.stressScore %}{{ row.stressScore }}{% endif %}
+                            {% if row.wellnessScore %}{{ row.wellnessScore }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {{ row.submissionId }}
+                        </td>
+
+                        <td class="text-right"><a class="pir-generate-report" href="/neuro-q/report/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+            {% for row in surveySubmissions.surveySubmissions %}
+                {% if query | length %}
+                    {% if row.submissionId == query %}
+                    <tr>
+                      <td>{{ row.submissionId|date("M d, Y") }}</td>
+
+                        <td>
+                            {{ row.subName }}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.subject == 'wellness' %}fatigue{% else %}{{ row.subject }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.sleepScore %}{{ row.sleepScore }}{% endif %}
+                            {% if row.stressScore %}{{ row.stressScore }}{% endif %}
+                            {% if row.wellnessScore %}{{ row.wellnessScore }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {{ row.submissionId }}
+                        </td>
+
+                        <td class="text-right"><a class="pir-generate-report" href="/neuro-q/report/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+
+                {% if row.email == currentUser.email %}
+                    <tr>
+                      <td>{{ row.submissionId|date("M d, Y") }}</td>
+
+                        <td>
+                            {{ row.subName }}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.subject == 'wellness' %}fatigue{% else %}{{ row.subject }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {% if row.sleepScore %}{{ row.sleepScore }}{% endif %}
+                            {% if row.stressScore %}{{ row.stressScore }}{% endif %}
+                            {% if row.wellnessScore %}{{ row.wellnessScore }}{% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {{ row.submissionId }}
+                        </td>
+
+                        <td class="text-right"><a class="pir-generate-report" href="/neuro-q/report/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+        <p class="p-sm mt-4">No reports found</p>
+        {% endif %}
+
+    </div>
+
+
+</div>

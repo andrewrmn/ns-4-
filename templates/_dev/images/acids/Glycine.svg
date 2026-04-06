@@ -1,0 +1,31 @@
+<svg width="161px" height="67px" viewBox="0 0 161 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="glycine">
+    <title>Glycine</title>
+    <defs></defs>
+    <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.300000012">
+        <g  transform="translate(-871.000000, -437.000000)">
+            <g  transform="translate(870.000000, 435.000000)">
+                <path d="M67.69,63.74 L31.64,42.93"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <polyline  stroke="#FFFFFF" stroke-linecap="round" points="138.56 63.74 102.51 42.93 66.47 63.74"></polyline>
+                <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="146.132" y="67.75">OH</tspan>
+                </text>
+                <g  transform="translate(0.000000, 31.000000)" font-family="Akkurat" fill="#FFFFFF" font-weight="normal">
+                    <text  font-size="12">
+                        <tspan x="0.126" y="11.37">N</tspan>
+                    </text>
+                    <text  font-size="12">
+                        <tspan x="16.222" y="11.37">H</tspan>
+                    </text>
+                    <text  font-size="10">
+                        <tspan x="9.88" y="14.46">2</tspan>
+                    </text>
+                </g>
+                <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="98.51" y="11.91">O</tspan>
+                </text>
+                <path d="M107.18,18.62 L107.18,44.59"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M98.23,18.62 L98.23,44.59"  stroke="#FFFFFF" stroke-linecap="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

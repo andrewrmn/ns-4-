@@ -1,0 +1,48 @@
+{% set productIds = craft.app.request.getBodyParam('recommendedProducts') %}
+{% set recommendationNote = craft.app.request.getBodyParam('recommendationNote') %}
+{% set recProductIds = [] %}
+{% for product in productIds %}
+    {% set recProductIds = recProductIds|merge([product['value']]) %}
+{% endfor %}
+{% set products = craft.products.id(recProductIds).orderBy('title').all() %}
+{% for product in products %}
+    <div class="row mb-6">
+        <div class="col-sm-5 px-2 pb-4 pb-md-0">
+            {% if product.bottleSizeImage|length %}
+            {% for img in product.bottleSizeImage %}
+            <div>
+                <img src="{{ img.getUrl({mode: 'crop', width: 200, height: 200, position: 'center-center'}) }}" alt="{{ img.title }}" class="img-fluid" />
+            </div>
+            {% endfor %}
+            {% else %}
+            {% for row in product.productFields %}
+            {% if row.productImages|length > 1 %}
+                <img src="{{ row.productImages.one().getUrl({mode: 'crop', width: 200, height: 200, position: 'center-center'}) }}" alt="{{ product.title }}" class="img-fluid" width="180" />
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-sm-7 px-2">
+            <div class="product-name">
+                <h3>{{ product.title }}</h3>
+                {% for row in product.productFields %}
+                {% if row.shortDescription %}
+                <div class="pt-15">
+                    <p class="theme-color">{{ row.shortDescription }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% if recommendationNote %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="recommendationNote">Recommendation Note</label>
+                <p>{{ recommendationNote }}</p>
+            </div>
+        </div>
+    </div>
+{% endif %}

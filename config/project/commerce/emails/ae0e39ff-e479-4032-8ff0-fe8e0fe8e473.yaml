@@ -1,0 +1,11 @@
+bcc: null
+cc: null
+enabled: true
+language: orderLanguage
+name: 'Order Received'
+plainTextTemplatePath: ''
+recipientType: custom
+replyTo: null
+subject: 'Order Received'
+templatePath: shop/emails/_orderReceivedAdmin
+to: customerservice@neurorelief.com

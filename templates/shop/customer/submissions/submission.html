@@ -1,0 +1,39 @@
+{% set title = 'PIR' %}
+{% extends "_layout" %}
+
+{% block content %}
+
+    {% set query = craft.app.request.getParam('q') %}
+
+    {% if query | length %}
+
+        {% set user = '' %}
+
+        {% for u in craft.users.email(query) %}
+            {% if u.email == query %}
+                {% set user = u %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% set submissionType = '' %}
+
+    {% if (craft.request.getSegment(3) == 'qrscan') %}
+        {% set submissionType = 'qrscan' %}
+        {% include 'shop/customer/submissions/qrscan' %}
+    {% endif %}
+
+    {% if (craft.request.getSegment(3) == 'pathway') %}
+        {% set submissionType = 'pathway' %}
+        {% include 'shop/customer/submissions/pathway' %}
+    {% endif %}
+    {% if (craft.request.getSegment(3) == 'clinicalindication') %}
+        {% set submissionType = 'clinicalindication' %}
+        {% include 'shop/customer/submissions/clinicalIndications' %}
+    {% endif %}
+    {% if (craft.request.getSegment(3) == 'products') %}
+        {% set submissionType = 'products' %}
+        {% include 'shop/customer/submissions/manual' %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,1582 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+{% redirect '/survey/' %}
+
+<div class="wrapper py-6 my-6">
+
+    <div class="d-flex flex-items-stretch flex-justify-between survey-wrap">
+        <div class="col-8 mx-auto">
+            <form class="survey-form bg-light p-4" id="survey-form">
+
+                <div id="first-questions">
+
+                    <fieldset class="my-4">
+                        <label>1. Are you?</label>
+
+                        <div class="d-flex">
+                            <div class="checkbox mb-3 mr-4">
+                                <input type="checkbox" id="gender-male" name="gender" value="male">
+                                <label for="gender-male">Male</label>
+                            </div>
+
+                            <div class="checkbox mb-3">
+                                <input type="checkbox" id="gender-female" name="gender" value="female">
+                                <label for="gender-female">Female</label>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>2. Age</label>
+                        <div class="checkbox mb-3">
+                            <input type="text" id="age" name="age" value="male">
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>3. Have you taken supplements in the past?</label>
+
+                        <div class="d-flex">
+                            <div class="checkbox mb-3 mr-4">
+                                <input type="checkbox" id="supplements-yes" name="taken-supplements" value="yes">
+                                <label for="supplements-yes">Yes</label>
+                            </div>
+
+                            <div class="checkbox mb-3">
+                                <input type="checkbox" id="supplementsno" name="taken-supplements" value="no">
+                                <label for="supplements-no">No</label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+
+                    <fieldset class="my-4">
+                        <label>4. State</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option>State</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" id="subject">
+                        <label>5. At the moment, what is your primary interest in taking supplements?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="sleep">Healthy Sleep</option>
+                                <option value="stress">Stress Management</option>
+                                <option value="wellness">General Wellness</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+                <hr />
+
+                <div class="question-group" id="sleep-questions">
+                    {# =================================== #}
+                    {# ============== SLEEP ============== #}
+                    {# =================================== #}
+
+                    <h2 class="h2">Sleep</h2>
+
+                    <!-- <fieldset class="my-4">
+                        <label>6. When have you usually gone to bed?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">before 6pm</option>
+                                <option value="1">6pm - 6:15pm</option>
+                                <option value="2">6:15pm - 6:30pm</option>
+                                <option value="3">After 6:30pm</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <fieldset class="my-4" data-descriptor="sol">
+                        <label>7. How long (in minutes) has it taken you to fall asleep each night?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">< 15</option>
+                                <option value="1">15-30</option>
+                                <option value="2">30-60</option>
+                                <option value="3">60</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>8. When have you usually gotten up in the morning?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Before 6:00am</option>
+                                <option value="1">6:00am — 6:30am</option>
+                                <option value="2">6:30am — 7:00am</option>
+                                <option value="1">7:00am — 7:30am</option>
+                                <option value="2">7:30am — 8:00am</option>
+                                <option value="1">8:00am — 8:30am</option>
+                                <option value="2">8:30am — 9:00am</option>
+                                <option value="2">After 9:00am</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+                    <!-- <fieldset class="my-4">
+                        <label>9. How many hours of actual sleep do you get at night? (this may be different than the number of hours you spend in bed)</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">1</option>
+                                <option value="1">1.5</option>
+                                <option value="1">2</option>
+                                <option value="1">2.5</option>
+                                <option value="1">3</option>
+                                <option value="1">3.5</option>
+                                <option value="1">4</option>
+                                <option value="1">4.5</option>
+                                <option value="1">5</option>
+                                <option value="1">5.5</option>
+                                <option value="1">6</option>
+                                <option value="1">6.5</option>
+                                <option value="1">7</option>
+                                <option value="1">7.5</option>
+                                <option value="1">8</option>
+                                <option value="1">8.5</option>
+                                <option value="1">9</option>
+                                <option value="1">9.5</option>
+                                <option value="1">10+</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <fieldset class="my-4" data-descriptor="sol">
+                        <label>10. During the past month, how often had you had trouble sleeping because you cannot fall asleep within 30 minutes</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+
+                    <fieldset class="my-4" data-descriptor="waso">
+                        <label>11. During the past month, how often had you had trouble sleeping because you wake up in the middle of the night or early in the morning</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>12. During the past month, how often had you had trouble sleeping because you have to get up to use the bathroom</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>13. During the past month, how often had you had trouble sleeping because you cannot breathe comfortably</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>14. During the past month, how often had you had trouble sleeping because you cough or snore loudly</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>15. During the past month, how often had you had trouble sleeping because you feel too cold</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <fieldset class="my-4" data-descriptor="vasomotor">
+                        <label>16. During the past month, how often had you had trouble sleeping because you feel too hot</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>17. During the past month, how often had you had trouble sleeping because you have bad dreams</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <fieldset class="my-4" data-descriptor="pain">
+                        <label>18. During the past month, how often had you had trouble sleeping because you have pain</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>19. During the past month, how often had you had trouble sleeping because of other reasons</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <!-- <fieldset class="my-4">
+                        <label>20. During the past month, how often have you taken medicine or supplements to help you fall asleep?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset> -->
+
+
+                    <fieldset class="my-4" data-descriptor="fatigue">
+                        <label>21. During the past month, how often have you had had trouble staying awake while driving, eating meals, or engaging in social activity?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4" data-descriptor="motivation">
+                        <label>22. During the past month, how often has it been difficult for you to keep up enthusiasm to get things done?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Not during the past month</option>
+                                <option value="1">Less than once per week</option>
+                                <option value="2">Once or twice a week</option>
+                                <option value="3">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="quality">
+                        <label>23. During the past month, how would you rate your overall sleep quality?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Very Good</option>
+                                <option value="1">Fairly Good</option>
+                                <option value="2">Fairly Bad</option>
+                                <option value="3">Very Bad</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="question-group" id="stress-questions">
+                    {# =================================== #}
+                    {# ============== STRESS ============= #}
+                    {# =================================== #}
+                    <h2 class="h2">Stress</h2>
+
+                    <fieldset class="my-4" data-descriptor="aggression">
+                        <label>6. In the last month, how often have you been upset because something happened to you unexpectedly?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4"data-descriptor="additionalStress">
+                        <label>7. In the last month, how often have you felt that you were unable to control the important things in your life?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="relax">
+                        <label>8. In the last month, how often have you felt nervous and stressed?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="resilience">
+                        <label>9. In the last month, how often have you felt confident in your ability to handle personal problems?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4"data-descriptor="additionalStress">
+                        <label>10. In the last month, how often have you felt that things were going your way?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="resilience">
+                        <label>11. In the last month, how often have you found that you could not cope with all of the things you had to do?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4"data-descriptor="additionalStress">
+                        <label>12. In the last month, how often have you been able to control the irritations in your life?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="resilience">
+                        <label>13. In the last month, how often have you felt that you were on top of things?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="aggression">
+                        <label>14. In the last month, how often have you been angered because of things that happened that were outside of your control?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="resilience">
+                        <label>15. In the last month, how often have you felt that difficulties were piling up so high that you could not overcome them?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="digestive">
+                        <label>16. On average, how often do you have abdominal discomfort poorly formed (loose) stool?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="no">Not during the past month</option>
+                                <option value="no">Less than once per week</option>
+                                <option value="no">Once or twice a week</option>
+                                <option value="yes">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="cognitive">
+                        <label>17. On average, how often does stress disrupt your ability to think or focus?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="no">Not during the past month</option>
+                                <option value="no">Less than once per week</option>
+                                <option value="no">Once or twice a week</option>
+                                <option value="yes">Three or more times a week</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+
+                    <fieldset class="my-4" data-descriptor="mag">
+                        <label>21. On average, how many servings of fresh fruit and vegetables do you eat in a day?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">Never</option>
+                                <option value="1">Almost Never</option>
+                                <option value="2">Sometimes</option>
+                                <option value="3">Fairly Often</option>
+                                <option value="4">Very Often</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="question-group" id="wellness-questions">
+                    {# =================================== #}
+                    {# ============== WELLNESS =========== #}
+                    {# =================================== #}
+                    <h2 class="h2">Wellness</h2>
+
+                    <fieldset class="my-4" data-descriptor="general">
+                        <label>6. I feel fit</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="physical">
+                        <label>7. Physically, I am only able to do a little</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="activity">
+                        <label>8. I feel very active</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="motivation">
+                        <label>9. I feel like doing all sorts of nice things</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="general">
+                        <label>10. I feel tired</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="activity">
+                        <label>11. I think I do a lot in a day</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="mental">
+                        <label>12. When I am doing something, I can keep my thoughts on it</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="physical">
+                        <label>13. Physically, I can take doing a lot</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4" data-descriptor="motivation">
+                        <label>14. I dread having to do things</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="activity">
+                        <label>15. I think I do very little in a day</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="mental">
+                        <label>16. I can concentrate well</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="general">
+                        <label>17. I am rested</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="mental">
+                        <label>18. It takes a lot of effort to concentrate on things</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="physical">
+                        <label>19. Physically, I am in bad condition</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="motivation">
+                        <label>20. I have a lot of plans</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="general">
+                        <label>21. I tire easily</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="activity">
+                        <label>22. I get little done</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="motivation">
+                        <label>23. I don't feel like doing anything</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="mental">
+                        <label>24. My thoughts easily wander</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="5">5 (Yes that is true)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4" data-descriptor="physical">
+                        <label>25. Physically, I feel that I am in excellent condition</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="1">5 (Yes that is true)</option>
+                                <option value="2">4</option>
+                                <option value="3">3</option>
+                                <option value="4">2</option>
+                                <option value="5">1 (No that is not true)</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <hr />
+
+                <div class="" id="final-questions">
+
+                    <fieldset class="my-4">
+                        <label>24. Do you follow any of the following special diets?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="None">None</option>
+                                <option value="Paleo">Paleo</option>
+                                <option value="Pescatarian">Pescatarian</option>
+                                <option value="Vegan">Vegan</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Ketogenic">Ketogenic</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>25. On average, how many servings of fresh fruit and vegetables do you eat in a day?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0-2">0-2</option>
+                                <option value="3-5">3-5</option>
+                                <option value="6+">6+</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4">
+                        <label>26. How many servings of fish (rich in omega-3 fatty acids) in a week? (e.g. salmon, tuna, sardines)</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0-1">0-1</option>
+                                <option value="2-3">2-3</option>
+                                <option value="4+">4+</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4">
+                        <label>27. On average, how many servings of high fiber food do you eat in a day? (e.g. whole grains, green vegetables, seeds, beans)</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0-1">0-1</option>
+                                <option value="2-3">2-3</option>
+                                <option value="4+">4+</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>28. On average, how many servings of protein do you eat in a day?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0-1">0-1</option>
+                                <option value="2-3">2-3</option>
+                                <option value="4+">4+</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4">
+                        <label>29. On average, how many servings of calcium-rich food do you eat in a day? (e.g. dairy products, beans, green vegetables)</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0-2">0-2</option>
+                                <option value="3-4">3-4</option>
+                                <option value="5+">5+</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4">
+                        <label>30. How would you describe your activity/fitness level?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="rarely">I am somewhat active and/or workout rarely</option>
+                                <option value="not very">I am not very active and/or do not workout</option>
+                                <option value="fairly">I am fairly active and/or workout occasionally</option>
+                                <option value="very">I am very active and/or workout almost daily</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>31. On average, how many alcoholic drinks do you consume on a weekly basis?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="0">0</option>
+                                <option value="1-3">1-3</option>
+                                <option value="3-6">3-6</option>
+                                <option value="6+">6+</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>32. Please select any food allergies/sensitivies among the following.</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="none">None</option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="my-4">
+                        <label>33. When it comes to vitamins and supplements, how would you describe yourself?</label>
+                        <div class="select-wrap">
+                            <select>
+                                <option value="Informed">Informed</option>
+                                <option value="Curious">Curious</option>
+                                <option value="Skeptical">Skeptical</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="my-4">
+                        <label>34. When it comes to swallowing tablets and capsules, you are…</label>
+                        <div class="select-wrap">
+                            <select id="tolerate-pills">
+                                <option value="true">Able and willing to take tablets or capsules</option>
+                                <option value="tolerate">Able, but would prefer a non-capsule delivery if available</option>
+                                <option value="false">Not able to swallow tablets or capsules</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset class="mt-6">
+                        <button class="btn" type="submit">Submit</button>
+                    </fieldset>
+
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-4 d-none">
+            <div class="form-results">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper section">
+    <div class="col-8 mx-auto">
+        <h2 class="h2">Recommendations:</h2>
+
+        <div id="results">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var $ = jQuery;
+
+    var submit = $('#survey-form-submit'),
+        form = $('#survey-form'),
+        products = [],
+        toleratePills = $('#tolerate-pills'),
+        results = $('#results'),
+        subject = $('#subject select');
+
+    function getScale(int, scaled) {
+        let scale = 0;
+        if(scaled) {
+            if( int == 0 ) {
+                scale = 'None';
+            } else if( int == 1 || int == 2 ) {
+                scale = 'Low';
+            } else if( int == 3 || int == 4 ) {
+                scale = 'Medium';
+            } else if( int >= 5 ) {
+                scale = 'High';
+            }
+        } else {
+            if( int == 0 ) {
+                scale = 'None';
+            } else if( int == 1 ) {
+                scale = 'Low';
+            } else if( int == 2 ) {
+                scale = 'Medium';
+            } else if( int >= 3 ) {
+                scale = 'High';
+            }
+        }
+        return scale;
+    }
+
+
+    // Sleep
+    var sleepQuestions = $('#sleep-questions'),
+        sol = $('*[data-descriptor="sol"] select'),
+        waso = $('*[data-descriptor="waso"] select'),
+        vasomotor = $('*[data-descriptor="vasomotor"] select'),
+        pain = $('*[data-descriptor="pain"] select'),
+        fatigue = $('*[data-descriptor="fatigue"] select'),
+        motivation = $('*[data-descriptor="motivation"] select'),
+        quality = $('*[data-descriptor="quality"] select');
+
+    function checkSol() {
+        let count = 0;
+        let scale;
+        sol.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, true);
+        //solOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkWaso() {
+        let count = 0;
+        let scale;
+        waso.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //wasoOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkVasomotor() {
+        let count = 0;
+        let scale;
+        vasomotor.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //vasomotorOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkPain() {
+        let count = 0;
+        let scale;
+        pain.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //painOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkFatigue() {
+        let count = 0;
+        let scale;
+        fatigue.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //fatigueOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkMotivation() {
+        let count = 0;
+        let scale;
+        motivation.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //motivationOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkQuality() {
+        let count = 0;
+        let scale;
+        quality.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //qualityOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+
+
+    // Stress
+    var stressQuestions = $('#stress-questions'),
+        aggression = $('*[data-descriptor="aggression"] select'),
+        relax = $('*[data-descriptor="relax"] select'),
+        resilience = $('*[data-descriptor="resilience"] select'),
+        digestive = $('*[data-descriptor="digestive"] select'),
+        cognitive = $('*[data-descriptor="cognitive"] select'),
+        mag = $('*[data-descriptor="mag"] select'),
+        stressCount = $('*[data-descriptor="additionalStress"] select');
+
+    function checkAggression() {
+        let count = 0;
+        aggression.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkRelax() {
+        let count = 0;
+        relax.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkResilience() {
+        let count = 0;
+        resilience.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkDigestive() {
+        let hasIssues = false;
+        digestive.each(function(){
+            if( $(this).val() == 'yes' ) {
+                hasIssues = true;
+            }
+        });
+        return hasIssues;
+    }
+    function checkCognitive() {
+        let hasIssues = false;
+        cognitive.each(function(){
+            if( $(this).val() == 'yes' ) {
+                hasIssues = true;
+            }
+        });
+        return hasIssues;
+    }
+    function checkMag() {
+        let count = 0;
+        mid = false;
+        mag.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, true);
+        if(count > 2) {
+            mid = true;
+        }
+        return mid;
+    }
+    function checkStressCount() {
+        let count = 0;
+        // stressCount.each(function(){
+        //     var v = parseInt($(this).val());
+        //     count = count + v;
+        // });
+        return count;
+    }
+
+
+
+    // Wellness
+    var wellnessQuestions = $('#wellness-questions'),
+        general = $('*[data-descriptor="general"] select'),
+        physical = $('*[data-descriptor="physical"] select'),
+        activity = $('*[data-descriptor="activity"] select'),
+        moti = $('*[data-descriptor="moti"] select'),
+        mental = $('*[data-descriptor="mental"] select');
+
+    function checkGeneral() {
+        let count = 0;
+        general.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkPhysical() {
+        let count = 0;
+        physical.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkActivity() {
+        let count = 0;
+        activity.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkMental() {
+        let count = 0;
+        mental.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkMoti() {
+        let count = 0;
+        moti.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+
+
+    function changeSubject() {
+        console.log( subject.val() );
+
+        if( subject.val() == 'sleep' ) {
+            $('.question-group').hide();
+            sleepQuestions.show();
+        }
+        if( subject.val() == 'stress' ) {
+            $('.question-group').hide();
+            stressQuestions.show();
+        }
+        if( subject.val() == 'wellness' ) {
+            $('.question-group').hide();
+            wellnessQuestions.show();
+        }
+    }
+
+    $(document).ready(function(){
+        changeSubject();
+    });
+
+    $(document).on('change', form, function(){
+        changeSubject();
+    });
+
+
+    function sleepAlgorithm() {
+        console.log('Checking Sleep');
+        var results = $('#results');
+        results.empty();
+
+        solLevel = checkSol();
+        wasoLevel = checkWaso();
+        vasomotorLevel = checkVasomotor();
+        painLevel = checkPain();
+        fatigueLevel = checkFatigue();
+        motoLevel = checkMotivation();
+        qualityLevel = checkQuality();
+
+        console.log('SOL = ' + solLevel);
+        console.log('WASO = ' + wasoLevel);
+        console.log('Vasomotor = ' + vasomotorLevel);
+        console.log('Pain = ' + painLevel);
+        console.log('Fatigue = ' + fatigueLevel);
+        console.log('Motivation = ' + motoLevel);
+        console.log('Quality = ' + qualityLevel);
+
+        if( solLevel == 'High' ) {
+            console.log('1st path');
+            if( canTakePills == 'false' ) {
+                console.log('Kaviance OS Emulsion');
+                results.append('<p>Kaviance OS Emulsion</p>');
+            } else {
+                console.log('Kaviance OS');
+                results.append('<p>Kaviance OS</p>');
+            }
+            if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                console.log('Calm CP');
+                results.append('<p>Calm CP</p>');
+            }
+            if( vasomotorLevel == 'High' ) {
+                console.log('Black Cohosh');
+                results.append('<p>Black Cohosh</p>');
+            }
+        }
+
+        if( solLevel != 'High' && qualityLevel == 'High' ) {
+            console.log('2nd path');
+            if( canTakePills == 'false' ) {
+                console.log('GABA Trex');
+                results.append('<p>GABA Trex</p>');
+            } else {
+                console.log('Alpha GABA PM');
+                results.append('<p>Alpha GABA PM</p>');
+            }
+            if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                console.log('Calm CP');
+                results.append('<p>Calm CP</p>');
+            }
+        }
+
+        if( solLevel == 'Medium' && qualityLevel != 'High' ) {
+            console.log('3rd path');
+            if( canTakePills == 'false' ) {
+                console.log('GABA Trex');
+                results.append('<p>GABA Trex</p>');
+            } else {
+                console.log('Alpha GABA');
+                results.append('<p>Alpha GABA</p>');
+            }
+            if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                console.log('Calm CP');
+                results.append('<p>Calm CP</p>');
+            }
+            if( vasomotorLevel == 'High' ) {
+                console.log('Black Cohosh');
+                results.append('<p>Black Cohosh</p>');
+            }
+        }
+
+        if( solLevel == 'Low' || solLevel == 'None' && qualityLevel != 'High' ) {
+            console.log('Last path');
+            if( canTakePills == 'false' ) {
+                console.log('GABA Trex');
+                results.append('<p>GABA Trex</p>');
+            } else {
+                if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                    console.log('TravaCor');
+                    results.append('<p>TravaCor</p>');
+                } else {
+                    console.log('Calm G');
+                }
+            }
+            if( vasomotorLevel == 'High' ) {
+                console.log('Black Cohosh');
+                results.append('<p>Black Cohosh</p>');
+            }
+        }
+
+        if( painLevel == 'High' ) {
+            console.log('CBD');
+            results.append('<p>CBD</p>');
+        }
+
+        if( fatigueLevel == 'High' || fatigueLevel == 'Medium' ) {
+            if( motoLevel == 'High' || motoLevel == 'Medium' ) {
+                console.log('Balance D');
+                results.append('<p>Balance D</p>');
+            } else {
+                console.log('AdreCor');
+                results.append('<p>AdreCor</p>');
+            }
+        }
+    }
+
+    function stressAlgorithm() {
+        console.log('Checking Stress');
+        var results = $('#results');
+        results.empty();
+        aggressionLevel = checkAggression();
+        relaxLevel = checkRelax();
+        resilienceLevel = checkResilience();
+        digestiveIssues = checkDigestive();
+        cognitiveIssues = checkCognitive();
+        magLevel = checkMag();
+        additionalStress = checkStressCount();
+        totalStress = aggressionLevel + relaxLevel + resilienceLevel + additionalStress;
+
+        console.log('');
+        console.log('aggression = ' + aggressionLevel);
+        console.log('relax = ' + relaxLevel);
+        console.log('resilience = ' + resilienceLevel);
+        console.log('digestive = ' + digestiveIssues);
+        console.log('cognitiv = ' + cognitiveIssues);
+        console.log('MAG = ' + magLevel);
+        console.log('Total Stress = ' + totalStress);
+        console.log('');
+
+        var pathFound = false;
+
+        if( aggressionLevel > 5 ) {
+            console.log('1st path');
+            pathFound = true;
+
+            if( canTakePills == 'false' ) {
+                console.log('SeroTrex');
+                results.append('<p>SeroTrex</p>');
+            } else {
+                console.log('TravaCor');
+                results.append('<p>TravaCor</p>');
+            }
+
+            if( totalStress > 26 ) {
+                console.log('Calm CP');
+                results.append('<p>Calm CP</p>');
+            }
+        }
+
+        if( aggressionLevel <= 5 && magLevel == false  ) {
+            pathFound = true;
+            console.log('2nd path');
+            if( canTakePills == 'false' ) {
+                console.log('GABA Trex');
+                results.append('<p>GABA Trex</p>');
+            } else {
+                console.log('Calm G');
+                results.append('<p>Calm G</p>');
+            }
+
+            if( totalStress > 26 ) {
+                console.log('Calm CP');
+                results.append('<p>Calm CP</p>');
+            }
+        }
+
+        if( aggressionLevel <= 5 && magLevel && relaxLevel > 2 ) {
+            pathFound = true;
+            console.log('3rd path');
+            if( canTakePills == 'false' ) {
+                console.log('GABA Trex');
+                results.append('<p>GABA Trex</p>');
+            } else {
+                console.log('Alpha GABA');
+                results.append('<p>Alpha GABA</p>');
+            }
+
+            if( totalStress > 26 ) {
+                console.log('Calm CP');
+                results.append('<p>Calm CP</p>');
+            }
+        }
+
+        if( !pathFound ) {
+            console.log('Last path');
+
+            console.log('Calm CP');
+            results.append('<p>Calm CP</p>');
+
+        }
+
+
+        if( digestiveIssues ) {
+            console.log('NeuroBiota');
+            results.append('<p>NeuroBiota</p>');
+        }
+
+        if( resilienceLevel > 11 ) {
+            if( cognitiveIssues ) {
+                console.log('ExcitaPlus');
+                results.append('<p>ExcitaPlus</p>');
+            } else {
+                console.log('AdreCor');
+                results.append('<p>AdreCor</p>');
+            }
+        }
+
+    }
+
+    function wellnessAlgorithm() {
+        console.log('Checking Wellness');
+        var results = $('#results');
+        results.empty();
+
+        generalLevel = checkGeneral();
+        physicalLevel = checkPhysical();
+        activityLevel = checkActivity();
+        motiLevel = checkMoti();
+        mentalLevel = checkMental();
+        generalHigh = false;
+        physicalHigh = false;
+        activityHigh = false;
+        motiHigh = false;
+        mentalHigh = false;
+        threeHighCheck = true;
+        highCount = 0;
+
+        if( generalLevel > 15 ) {
+            generalHigh = true;
+            highCount++;
+        }
+        if( physicalLevel > 15 ) {
+            physicalHigh = true;
+            highCount++;
+        }
+        if( activityLevel > 15 ) {
+            activityHigh = true;
+            highCount++;
+        }
+        if( motiLevel > 15 ) {
+            motiHigh = true;
+            highCount++;
+        }
+        if( mentalLevel > 15 ) {
+            mentalHigh = true;
+            highCount++;
+        }
+
+        console.log('');
+        console.log('General = ' + generalLevel);
+        console.log('Physical = ' + physicalLevel);
+        console.log('Activity = ' + activityLevel);
+        console.log('Motivation = ' + motiLevel);
+        console.log('Mental = ' + mentalLevel);
+        console.log('');
+
+        if( generalHigh ) {
+            if( motiHigh ) {
+                if( mentalHigh ) {
+                    console.log('ExcitaPlus');
+                    results.append('<p>ExcitaPlus</p>');
+                } else {
+                    console.log('Balance D');
+                    results.append('<p>Balance D</p>');
+                }
+            } else {
+                if( mentalHigh ) {
+                    console.log('AdreCor');
+                    results.append('<p>AdreCor</p>');
+                } else {
+                    console.log('Alpha GABA PM');
+                    results.append('<p>Alpha GABA PM</p>');
+                    threeHighCheck = false;
+                }
+            }
+        }
+
+
+        if( !generalHigh ) {
+            if( motiHigh ) {
+                console.log('Balance D');
+                results.append('<p>Balance D</p>');
+            } else {
+                if( mentalHigh ) {
+                    console.log('Focus DL');
+                    results.append('<p>Focus DL</p>');
+                } else {
+                    threeHighCheck = false;
+                }
+            }
+        }
+
+        if( physicalHigh ) {
+            console.log('NAD');
+            results.append('<p>NAD</p>');
+        }
+
+        if( threeHighCheck && highCount > 2 ) {
+            console.log('Alpha GABA PM');
+            results.append('<p>Alpha GABA PM</p>');
+        }
+
+        if( results.is(':empty') ) {
+            results.append('<p>No recommendations for you</p>');
+        }
+    }
+
+
+    form.submit(function(ev) {
+        ev.preventDefault();
+        canTakePills = toleratePills.val();
+
+
+        if( subject.val() == 'sleep' ) {
+            console.log('=======================');
+            sleepAlgorithm();
+            console.log('=======================');
+        }
+
+        if( subject.val() == 'stress' ) {
+            console.log('=======================');
+            stressAlgorithm();
+            console.log('=======================');
+        }
+
+        if( subject.val() == 'wellness' ) {
+            console.log('=======================');
+            wellnessAlgorithm();
+            console.log('=======================');
+        }
+
+    });
+
+
+</script>
+
+
+
+
+
+
+
+{% endblock %}

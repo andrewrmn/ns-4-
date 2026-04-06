@@ -1,0 +1,37 @@
+{% set title = 'Manage addresses' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+<div class="wrapper-full bg-light">
+    <div class="wrapper wrapper--thin section text-group">
+
+        <div class="flex flex--justify-between flex--align-base">
+            <h2>Manage Addresses</h2>
+            <p><a class="button button-primary right" href="{{ url('shop/customer/') }}">Go back to account</a></p>
+            <p><a class="button button-primary right" href="{{ url('shop/customer/addresses/edit') }}">Add New Address</a></p>
+        </div>
+        <div class="card">
+            <div class="row text-group-tall">
+            {% for address in craft.commerce.customers.customer.addresses %}
+                <div class="col--xs--12 col--sm--6">
+                    <div class="address-card">
+                        {% include 'shop/_includes/addresses/address' with {'address': address} %}
+
+                        <div class="address-controls">
+                            <a class="link text-brand" href="{{ url('shop/customer/addresses/edit') }}?addressId={{ address.id }}">Edit</a>
+                            <span> | </span>
+                            <form method="POST">
+                                {{ csrfInput() }}
+                                <input type="hidden" name="action" value="commerce/customer-addresses/delete">
+                                <input type="hidden" name="id" value="{{ address.id }}"/>
+                                <input type="submit" class="submit-plain link" value="delete"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

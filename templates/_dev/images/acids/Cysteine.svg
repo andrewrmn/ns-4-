@@ -1,0 +1,32 @@
+<svg width="195px" height="118px" viewBox="0 0 195 118" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="cysteine">
+    <title>Cysteine</title>
+    <defs></defs>
+    <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.300000012">
+        <g  transform="translate(-957.000000, -282.000000)">
+            <g  transform="translate(956.000000, 280.000000)">
+                <polyline  stroke="#FFFFFF" stroke-linecap="round" points="27.62 65.74 63.67 44.93 99.71 65.74 99.71 91.36"></polyline>
+                <polyline  stroke="#FFFFFF" stroke-linecap="round" points="170.58 65.74 135.53 44.93 99.49 65.74"></polyline>
+                <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="180.162" y="69.75">OH</tspan>
+                </text>
+                <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="0.382" y="69.75">HS</tspan>
+                </text>
+                <textfont-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="130.53" y="11.91">O</tspan>
+                </text>
+                <path d="M139.2,20.62 L139.2,46.59"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M130.25,20.62 L130.25,46.59"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <polygon  stroke="#FFFFFF" stroke-width="0.5" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" points="99.74 66.27 96.49 99.75 102.99 99.75"></polygon>
+                <g  transform="translate(88.000000, 106.000000)" font-family="Akkurat" fill="#FFFFFF" font-weight="normal">
+                    <text  font-size="12">
+                        <tspan x="0.288" y="11">NH</tspan>
+                    </text>
+                    <text  font-size="10">
+                        <tspan x="19" y="14">2</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

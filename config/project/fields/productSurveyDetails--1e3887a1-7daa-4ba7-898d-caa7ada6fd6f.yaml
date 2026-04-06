@@ -1,0 +1,43 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
+handle: productSurveyDetails
+instructions: ''
+name: 'Product Survey Details'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - c48523f4-650a-45fa-b015-6c0d09c1c94a # Sleep content
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 989e8fee-a375-4704-b002-91f68bccec4e # Stress content
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 381461cb-47ce-40ff-a867-938e0e94a64f # Fatigue content
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_productsurveydetails}}'
+  fieldLayout: row
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

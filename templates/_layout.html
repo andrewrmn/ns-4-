@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{% include 'partials/head' %}
+
+	{% set canBuy = false %}
+	{% set allowedGuest = false %}
+	{% set isGuest = craft.app.request.getParam('guestportal') %}
+	{% if isGuest == 'ordering' %}
+	    {{ craft.app.session.set('allowGuest', 'true') }}
+	{% endif %}
+
+	{% if craft.app.session.get('allowGuest') == 'true' %}
+	    {% set allowedGuest = true %}
+	{% endif %}
+
+	{% if allowedGuest or currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+	    {% set canBuy = true %}
+	{% endif %}
+</head>
+
+<body class="">
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N46834T"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	
+	<!-- Start of HubSpot Embed Code -->
+	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/23208015.js"></script>
+	<!-- End of HubSpot Embed Code -->
+
+	<script type="text/javascript">
+	var utag_data = {
+		sizmek_activity_id : "", //
+		sizmek_tag_id : "", // Sizmek Tag ID (TID)
+		page_name : "", // Contains a user-friendly name for the page.
+		page_section : "", // Contains a user-friendly page section, e.g. 'configuration section'.
+		page_category : "", // Contains a user-friendly page category, e.g. 'appliance page'.
+		page_subcategory : "", // Contains a user-friendly page subcategory, e.g. 'refrigerator page'.
+		page_type : "", // Contains a user-friendly page type, e.g. 'cart page'.
+		search_term : "", // Contains the search term or query submitted by a visitor.
+		search_results : "", // Contains the number of results returned with a search query.
+		search_type : "", // Contains the type of search conducted by the visitor.
+		parent_title : "", // Title of parent window
+		parent_domain : "", // Domain of parent window
+		parent_pathname : "", // Pathname of parent window
+		parent_url : "", // URL of parent window
+		parent_referrer : "", // Referrer of parent window
+		sizmek_cn : "", // Sizmek CN
+		sizmek_tag_type : "", // Sizmek Tag Type
+		sizmek_tval : "", // Sizmek TVAL
+		doubleclick_id : "", // Doubleclick Type
+		doubleclick_type : "", //
+		doubleclick_category : "", //
+		google_tracking_id : "", //
+		google_tracker_name : "" // Google Tracker Name
+	}
+	</script>
+	<!-- Loading script asynchronously -->
+	<script type="text/javascript">
+	(function(a,b,c,d){ a='//tags.tiqcdn.com/utag/advantagepublisherservices/aps/prod/utag.js'; b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true; a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a); })();
+	</script>
+
+	<a href="#content" class="sr-only">Skip to content</a>
+
+	{% set cart = craft.commerce.carts.cart %}
+
+	{% if craft.app.request.segments|first == '' %}
+		{% include 'partials/alertBar' %}
+	{% endif %}
+
+	{% include 'header' %}
+
+	<main id="content">
+		{% block content %}
+			<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+			<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+		{% endblock %}
+	</main>
+
+	{% include 'footer' %}
+
+	<script src="/js/TweenMax.min.js"></script>
+	<script src="/js/main.js"></script>
+	<span class="menu-mask" data-click-target="" data-click-bodyClass="sub-nav-is-active"></span>
+	<div class="is-hidden">
+		{% include 'partials/svgs.svg' %}
+	</div>
+	
+	
+	<!-- Use of this pixel is subject to the Amazon ad specs and policies at
+http://www.amazon.com/b/?&node=7253015011 --><script type='text/javascript'>var _pix =
+document.getElementById('_pix_id_7a98c45b-9f53-5e6e-a834-92a1b6b8f005');if (!_pix) { var protocol =
+'//'; var a = Math.random() * 1000000000000000000; _pix = document.createElement('iframe');
+_pix.style.display = 'none'; _pix.setAttribute('src', protocol +
+'s.amazon-adsystem.com/iu3?d=generic&ex-fargs=%3Fid%3D7a98c45b-9f53-5e6e-a834-92a1b6b8f005
+%26type%3DUNKNOWN%26m%3D1&ex-fch=416613&ex-src=https://www.neuroscienceinc.com/&ex-harg
+s=v%3D1.0%3Bc%3D1975113980101%3Bp%3D7A98C45B-9F53-5E6E-A834-92A1B6B8F005' + '&cb=' + a);
+_pix.setAttribute('id','_pix_id_7a98c45b-9f53-5e6e-a834-92a1b6b8f005');
+document.body.appendChild(_pix);}</script><noscript> <img height='1' width='1' border='0' alt=''
+src='https://s.amazon-adsystem.com/iui3?d=forester-did&ex-fargs=%3Fid%3D7a98c45b-9f53-5e6e-a834
+-92a1b6b8f005%26type%3DUNKNOWN%26m%3D1&ex-fch=416613&ex-src=https://www.neurosciencein
+c.com/&ex-hargs=v%3D1.0%3Bc%3D1975113980101%3Bp%3D7A98C45B-9F53-5E6E-A834-92A1B6B8F005'
+/></noscript>
+
+</body>
+</html>

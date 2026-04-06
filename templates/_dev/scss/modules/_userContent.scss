@@ -1,0 +1,265 @@
+// ---------------------------------------------------------------------
+//  User Content Styles. WYSIWYG
+// ---------------------------------------------------------------------
+
+.user-content {
+@include clearfix;
+font-weight: normal;
+font-style: normal;
+
+// ----------------------------------------
+// Type Styles
+// ----------------------------------------
+
+p {
+    @include para;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h1 {
+    @include h1;
+}
+
+h2 {
+    @include h2;
+}
+
+h3 {
+    @include h3;
+}
+
+h4 {
+    @include h4;
+}
+
+h5 {
+    @include h5;
+}
+
+h6 {
+    @include h6;
+}
+
+* + h1,
+* + h2,
+* + h3,
+* + h4,
+* + h5,
+* + h6 {
+    margin-top: ($padding / 2);
+}
+
+a:link {
+    color: $brand;
+    //text-decoration: underline;
+    transition: color $transition;
+}
+
+a:visited,
+a:active,
+a:focus,
+a:hover {
+    opacity: 0.6;
+}
+
+
+
+// ----------------------------------------
+// Sections
+// ----------------------------------------
+blockquote {
+    padding: ($padding / 4);
+    font-style: italic;
+    border-left: 2px solid $brand;
+    margin-bottom: ($padding / 2);
+}
+
+address {
+    margin: 0 0 ($padding / 4) 0;
+    font-style: italic;
+}
+
+// ----------------------------------------
+// HR
+// ----------------------------------------
+hr {
+    margin: ($padding / 2) 0;
+    background: $brand;
+    height: 1px;
+    border: none;
+    line-height: 1px;
+}
+
+// ----------------------------------------
+// Text
+// ----------------------------------------
+strong,
+b {
+    font-weight: 700;
+}
+
+em,
+i {
+    font-style: italic;
+}
+
+del,
+strike,
+s {
+    text-decoration: line-through;
+}
+
+u,
+ins {
+    text-decoration: underline;
+}
+
+sup {
+    vertical-align: super;
+    font-size: 8px;
+}
+
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
+big {
+    font-size: larger;
+}
+
+small {
+    font-size: smaller;
+}
+
+abbr,
+acronym {
+    border-bottom: dotted 1px;
+}
+
+cite,
+dfn {
+    font-style: italic;
+}
+
+q {
+    font-style: italic;
+}
+
+q::before {
+    content: open-quote;
+}
+
+q::after  {
+    content: close-quote;
+}
+
+q:lang(en) {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+bdo {
+    direction: rtl;
+}
+
+
+// ----------------------------------------
+// pre
+// ----------------------------------------
+pre {
+    margin: 0 0 12px 0;
+    font-family: "Lucida Console", Monaco, monospace;
+    white-space: normal;
+}
+
+code,
+samp,
+tt,
+kbd {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+var {
+    font-style: italic;
+}
+
+
+// ----------------------------------------
+// Media
+// ----------------------------------------
+img,
+video,
+audio {
+    max-width: 100% !important;
+}
+
+
+// ----------------------------------------
+// Tables
+// ----------------------------------------
+table {
+    margin: 0 0 ($padding / 2) 0;
+    width: 100% !important;
+    border-spacing: 2px;
+    border-collapse: separate;
+}
+
+caption {
+    font-size: smaller;
+}
+
+tr {
+    vertical-align: middle;
+}
+
+tbody {
+    vertical-align: middle;
+}
+
+thead {
+    vertical-align: middle;
+}
+
+tfoot {
+    vertical-align: middle;
+}
+
+td {
+    vertical-align: inherit;
+    text-align: inherit;
+    padding: 2px 4px;
+}
+
+th {
+    vertical-align: inherit;
+    text-align: inherit;
+    font-weight: bold;
+    padding: 2px 4px;
+    background-color: #666666;
+    color: #ffffff;
+}
+
+tr:nth-child(even) td {
+    background-color: #cccccc;
+}
+}
+
+.user-content--sm p {
+    @include p-sm;
+
+    + p {
+        margin-top: 12px;
+    }
+}

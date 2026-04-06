@@ -1,0 +1,28 @@
+
+
+<article class="post-preview {% for tag in entry.tags.all() %}post-tag post-tag--{{tag.slug}} {% endfor %}">
+    <figure class="post-preview__img bg-image">
+        {% if entry.featuredImage.one() != '' %}
+        <img src="{{ entry.featuredImage.one().url }}" alt="{{ entry.featuredImage.one().title }}" />
+        {% else %}
+        <img src="{{ siteUrl }}images/general/science-pattern.png" alt="" />
+        {% endif %}
+    </figure>
+    <div class="post-preview__content">
+        <div>
+            <p class="post-preview__date">{{ entry.postDate.format('F d, Y') }}</p>
+            <h3 class="h2 post-preview__title"><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+            {% if entry.excerpt %}
+                <div class="post-preview__excerpt">
+                    <p>{{ entry.excerpt }}</p>
+                </div>
+            {% endif %}
+            <p>
+                <a class="post-preview__url shape-inline shape-inline--animate" href="{{ entry.url }}">
+                    <span>Read More</span>
+                    <span><svg width="6" height="10"><use xlink:href="#shape-arrow-right"></use></svg></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</article>

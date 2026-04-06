@@ -1,0 +1,160 @@
+// ---------------------------------------------------------------------
+//  Video
+// ---------------------------------------------------------------------
+
+$vhbp: $small;
+
+.video-hero {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    @include start-at($vhbp) {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        min-height: 80vh;
+
+        &:before {
+            content: '';
+            height: 100%;
+            left: 0;
+            width: 20%;
+            position: absolute;
+            z-index: 1;
+            display: block;
+            top: 0;
+            background: $white;
+        }
+    }
+}
+
+.video-hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: stretch;
+    padding: 40px 0;
+
+
+    @include start-at($vhbp) {
+        padding: 0;
+    }
+
+    .hxl {
+        font-size: 36px;
+        color: $gray-dark;
+
+        @include start-at($large) {
+            font-size: 72px;
+        }
+
+        span {
+            font-weight: 700;
+        }
+    }
+
+    > * {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+
+        @include start-at($vhbp) {
+            &:after {
+                content: '';
+                height: 100%;
+                left: 0;
+                width: 100%;
+                position: absolute;
+                z-index: -1;
+                display: block;
+                top: 0;
+                background: transparent linear-gradient(90deg, rgba(255,255,255,1) 74%, rgba(255,255,255,0) 100%);
+            }
+
+        }
+    }
+}
+
+.video-hero__content__inner {
+    position: relative;
+    z-index: 4;
+    //display: flex;
+    //max-width: 680px;
+
+
+    .hxl {
+
+    }
+
+
+    @include start-at($vhbp) {
+        padding-right: 40px;
+    }
+    @include start-at($large) {
+        padding-right: 80px;
+    }
+
+}
+
+.video-hero__video {
+    position: relative;
+
+    video,
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    video {
+        display: none;
+    }
+
+    @include start-at($vhbp) {
+        @include cover-parent;
+        z-index: -1;
+
+
+        video {
+            display: block;
+            position: absolute;
+            height: 100%;
+            right: 0;
+            top: 0;
+            width: auto;
+            z-index: 1;
+            transform: translate3d(100px, 0, 0);
+        }
+
+        img {
+            z-index: -1;
+        }
+    }
+}
+
+
+// ----------------------------------------
+//
+// ----------------------------------------
+
+.video-hero__ft {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    z-index: 2;
+    width: 80px;
+    height: 48px;
+    text-align: center;
+
+    .h6 {
+        letter-spacing: .5px;
+    }
+
+    img {
+        width: 20px;
+        margin: 0 auto;
+    }
+}

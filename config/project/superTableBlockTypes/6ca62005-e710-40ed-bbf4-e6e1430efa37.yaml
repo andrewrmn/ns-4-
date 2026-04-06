@@ -1,0 +1,210 @@
+field: e697251b-8d8c-4911-ba14-486479a207a9 # Clinical Indicators Table
+fieldLayouts:
+  fd40e5c5-433f-44a3-ace2-ef3560049366:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 130b86fd-43ec-46b6-b161-fca9e3a1ebce # Clinical Symptoms
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 75be2701-eb22-4d93-8669-85d837ffa402 # Associated Product
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 089c96c7-150c-49e6-9e6e-cc5a82eef4e1 # Age
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cd620454-bac9-4cbb-946d-c91e533d2372 # Age Check
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: dbecde4e-9b37-4570-9322-33bdc3b18b9f # Immune/ Adrenal
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  75be2701-eb22-4d93-8669-85d837ffa402: # Associated Product
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: associatedProduct
+    instructions: ''
+    name: 'Associated Product'
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\commerce\fields\Products
+  089c96c7-150c-49e6-9e6e-cc5a82eef4e1: # Age
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: age
+    instructions: ''
+    name: Age
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Not specified'
+            -
+              - value
+              - notSpecified
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 13+
+            -
+              - value
+              - '13'
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 12-
+            -
+              - value
+              - '12'
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  130b86fd-43ec-46b6-b161-fca9e3a1ebce: # Clinical Symptoms
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: clinicalSymptoms
+    instructions: ''
+    name: 'Clinical Symptoms'
+    searchable: true
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: ''
+      showSiteMenu: true
+      source: 'group:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  cd620454-bac9-4cbb-946d-c91e533d2372: # Age Check
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: ageCheck
+    instructions: ''
+    name: 'Age Check'
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  dbecde4e-9b37-4570-9322-33bdc3b18b9f: # Immune/ Adrenal
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: immuneAdrenal
+    instructions: ''
+    name: 'Immune/ Adrenal'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Not specified'
+            -
+              - value
+              - notSpecified
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Immune
+            -
+              - value
+              - immune
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Adrenal
+            -
+              - value
+              - adrenal
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown

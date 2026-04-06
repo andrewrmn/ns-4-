@@ -1,0 +1,45 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
+handle: complimentaryBox
+instructions: ''
+name: 'Complimentary Box'
+searchable: false
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Customer Favorites Box'
+        -
+          - value
+          - customerFavoritesBox
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Formula Specific Data Box'
+        -
+          - value
+          - formulaSpecificDataBox
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Variety Box'
+        -
+          - value
+          - varietyBox
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\RadioButtons

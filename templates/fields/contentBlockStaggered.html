@@ -1,0 +1,72 @@
+{#
+ # Staggered Content Block
+ # -------------------
+ #}
+
+<div>
+
+    <div class="bg-brand acid-wrap">
+        <div class="wrapper section-tall colors-white">
+            <div class="wrapper--thin section-x-short section--flush-top">
+                <h2 class="hxl">{{ block.headline }}</h2>
+                <div class="user-content">
+                    {{ block.body }}
+                </div>
+            </div>
+        </div>
+
+
+        <figure class="acid acid-bl">
+            <img width="229" height="169" src="/images/acids/Dopamine.svg" alt="Dopamine"  />
+        </figure>
+
+    </div>
+
+    {% set image = block.image1.one() %}
+    {% set image2 = block.block2Image.one() %}
+
+    <div class="wrapper">
+        <div class="row row--align-bottom media-object-pull-top">
+            <div class="col--sm--6 col--md--4">
+                <figure class="hexagon-image">
+                    <img class="holder" src="{{ siteUrl }}/images/hexagon.png" alt="hexagon shape" />
+                    <img class="hexagon-image__img" src="{{ image.url }}" alt="{{ image.title }}" />
+                </figure>
+            </div>
+            <div class="col--sm--6 col--md--7 col--md--offset--1">
+                <div>
+                    {% if block.block1Headline|length %}<h3 class="h4">{{ block.block1Headline }}</h3>{% endif %}
+                    {% if block.block1SubHeadline|length %}<h4 class="h2">{{ block.block1SubHeadline }}</h4>{% endif %}
+                    {% if block.block1Body|length %}
+                        <div class="user-content">
+                            {{ block.block1Body }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="row row--align-center">
+                <div class="col--sm--6 col--md--7">
+                    <div>
+                        {% if block.block2Headline|length %}<h3 class="h4">{{ block.block2Headline }}</h3>{% endif %}
+                        {% if block.block2SubHeadline|length %}<h4 class="h2">{{ block.block2SubHeadline }}</h4>{% endif %}
+                        {% if block.block2Body|length %}
+                            <div class="user-content">
+                                {{ block.block2Body }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col--sm--6 col--md--4 col--md--offset--1">
+                    <figure class="hexagon-image">
+                        <img class="holder" src="{{ siteUrl }}/images/hexagon.png" alt="hexagon shape" />
+                        <img class="hexagon-image__img" src="{{ image2.url }}" alt="{{ image2.title }}" />
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

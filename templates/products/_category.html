@@ -1,0 +1,91 @@
+{% extends 'shop/_layouts/main' %}
+{% block main %}
+
+<div class="wrapper">
+  {% include 'products/product-filters.html' %}
+</div>
+
+<div class="wrapper-full bg-light section-x-short">
+  {% if category.body != '' %}
+  <div class="wrapper wrapper--thin section-short section--flush-top is-hidden">
+    <div class="user-content user-content--sm">
+      {{ category.body }}
+    </div>
+  </div>
+  {% endif %}
+  
+  <div class="wrapper">
+    {% set products = craft.products.relatedTo(category).all() %}
+    <ul class="products">
+      {% for product in products %}
+      {% if 'Bundle' not in product.productCategories %}
+      {% include 'products/productPreview.html' %}
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+{% js %}
+$( ".purchasableId" ).change(function(e) {
+  $(".purchasableInfo").hide();
+  $("#"+($(this).find(":selected").data('info'))).toggle();
+});
+{% endjs %}
+
+
+<div class="modal-wrap" id="symptom-modal">
+  <div class="modal">
+    
+    <div class="modal__inner">
+      <div class="user-content js-modal-content">
+        
+      </div>
+      
+      <div class="section-x-short">
+        
+        <div class="text-center text-group-tall">
+          <p class="btn js-product-symptoms-link continue-filters">Continue</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% js %}
+
+var $ = jQuery;
+
+$(document).ready(function(){
+  
+  $('.js-symptom-link').click(function(){
+    if($(this).hasClass('clicked')){
+      $('#symptom-modal').removeClass('is-active');
+      $('body').removeClass('terms-modal');
+      $(this).removeClass('clicked');
+    } else {
+      $('#symptom-modal').addClass('is-active');
+      $('body').addClass('terms-modal');
+      $(this).addClass('clicked');
+      
+      var url = $(this).attr("href"),
+      modalContent = $(this).find('.js-description').html();
+      
+      $('.js-product-symptoms-link').attr('href', url);
+      $('.js-modal-content').empty().append(modalContent);
+    }
+  });
+  
+  $('.continue-filters').click(function(){
+    $('#symptom-modal').removeClass('is-active');
+    $('body').removeClass('terms-modal');
+  });
+  
+});
+
+{% endjs %}
+
+
+{% endblock %}

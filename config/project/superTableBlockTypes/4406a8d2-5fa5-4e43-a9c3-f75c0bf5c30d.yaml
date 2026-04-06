@@ -1,0 +1,966 @@
+field: 638763ab-4f15-4644-93e8-825063891f53 # Survey Submissions
+fieldLayouts:
+  6921c374-cae4-495e-9377-65328c54c125:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 24dea907-4e6c-4fa8-b55c-f45f40c342dd # Submission Id
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8b24c971-ec73-4e3e-b572-6b59f2f3d423 # Email
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9ceb0270-c66d-4804-9650-ae8a91097e64 # Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 48fd2490-d669-4e83-a6f7-1ab299732bda # Age
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 045f6a39-db05-49e5-b50e-cc384ccb279a # Sex
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a8e2a093-e380-449c-9b38-fd86acc6a4a8 # State
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6465543d-2202-48fd-ac11-e36d289ec6c6 # Subject
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9bc5d5d4-f9cd-4435-a09e-1b2c2c0b611a # Product 1
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: d6ec9223-6ba4-43e6-8261-f06a85381558 # Product 2
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 562da5b3-7919-4e00-8884-05fff31b9bd1 # Product 3
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: ef0af561-0b9e-426f-8156-1937db528b35 # Product 4
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 570b1f65-8747-4bc5-b940-e51221c6ae4f # Product 5
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: fc13f858-7614-484e-98ca-b87335f70ffe # Sleep Score
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0d9d0b56-b20b-4f8b-b74b-45282c17507f # Stress Score
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0290dbc6-cbef-4eff-b3a2-742e61bf86c8 # Wellness Score
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: e00e1c34-422f-42c9-aa8d-896a48551588 # Fruits & Vegetables
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3ae87b3d-c1eb-4387-bb81-1a0526260920 # Fatty Acids
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c1808167-7dac-449c-8d94-77285b1947ee # Fiber
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3b5b2bc2-4fa9-4558-ad7e-b7b7ea33d62b # Protein
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9268fe0c-c56d-4201-b31c-d5832d8c892d # Calcium
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f63fcb6e-793b-49f1-9cc2-b370e5c945fd # Exercise
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6b5fd535-fe4a-49ef-bdbb-3ee0d86b2c77 # Final Sleep Quality
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 514be461-4c94-4812-8051-6e2258892049 # Falling Asleep
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0aabf73c-9d65-4d38-a3ba-7d4b6c3ca060 # Waking up
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f1e1735a-0f04-4f8b-b031-4197bf01b9ee # Vasomotor Issues
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 211c1493-2c8b-4493-8188-0839ac71c135 # Pain
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6da9b32e-30f7-4029-9dee-99b66ffab8b2 # Daytime Fatigue
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 18db3ce0-5a88-42fa-a393-065d54b69183 # Daytime Motivation
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: e734d65b-218b-4a48-aeba-61c02570ce05 # General Wellness
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: ee4987bc-9929-4d28-a358-de0b3c73e37a # Physical Wellness
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a9db9000-68de-4c9a-8150-78fbf09b1cb1 # Activity Wellness
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 5b785230-d1a2-4b05-bc36-fa8de19943f7 # Motivation Wellness
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4a6f611f-073b-491d-b906-cd43ed0ab764 # Mental Wellness
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0aabf73c-9d65-4d38-a3ba-7d4b6c3ca060: # Waking up
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: wakeUp
+    instructions: ''
+    name: 'Waking up'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  0d9d0b56-b20b-4f8b-b74b-45282c17507f: # Stress Score
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: stressScore
+    instructions: ''
+    name: 'Stress Score'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  3ae87b3d-c1eb-4387-bb81-1a0526260920: # Fatty Acids
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: fattyAcids
+    instructions: ''
+    name: 'Fatty Acids'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  3b5b2bc2-4fa9-4558-ad7e-b7b7ea33d62b: # Protein
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: protein
+    instructions: ''
+    name: Protein
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  4a6f611f-073b-491d-b906-cd43ed0ab764: # Mental Wellness
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: mentalWellness
+    instructions: ''
+    name: 'Mental Wellness'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  5b785230-d1a2-4b05-bc36-fa8de19943f7: # Motivation Wellness
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: motivationWellness
+    instructions: ''
+    name: 'Motivation Wellness'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  6b5fd535-fe4a-49ef-bdbb-3ee0d86b2c77: # Final Sleep Quality
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: finalQuality
+    instructions: ''
+    name: 'Final Sleep Quality'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  6da9b32e-30f7-4029-9dee-99b66ffab8b2: # Daytime Fatigue
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: daytimeFatigue
+    instructions: ''
+    name: 'Daytime Fatigue'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  8b24c971-ec73-4e3e-b572-6b59f2f3d423: # Email
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: email
+    instructions: ''
+    name: Email
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9bc5d5d4-f9cd-4435-a09e-1b2c2c0b611a: # Product 1
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: product1
+    instructions: ''
+    name: 'Product 1'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9ceb0270-c66d-4804-9650-ae8a91097e64: # Name
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: subName
+    instructions: ''
+    name: Name
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  18db3ce0-5a88-42fa-a393-065d54b69183: # Daytime Motivation
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: daytimeMotivation
+    instructions: ''
+    name: 'Daytime Motivation'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  24dea907-4e6c-4fa8-b55c-f45f40c342dd: # Submission Id
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: submissionId
+    instructions: ''
+    name: 'Submission Id'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  045f6a39-db05-49e5-b50e-cc384ccb279a: # Sex
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: sex
+    instructions: ''
+    name: Sex
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  48fd2490-d669-4e83-a6f7-1ab299732bda: # Age
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: age
+    instructions: ''
+    name: Age
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  211c1493-2c8b-4493-8188-0839ac71c135: # Pain
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: finalPain
+    instructions: ''
+    name: Pain
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  0290dbc6-cbef-4eff-b3a2-742e61bf86c8: # Wellness Score
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: wellnessScore
+    instructions: ''
+    name: 'Wellness Score'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  514be461-4c94-4812-8051-6e2258892049: # Falling Asleep
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: fallingAsleep
+    instructions: ''
+    name: 'Falling Asleep'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  562da5b3-7919-4e00-8884-05fff31b9bd1: # Product 3
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: product3
+    instructions: ''
+    name: 'Product 3'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  570b1f65-8747-4bc5-b940-e51221c6ae4f: # Product 5
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: product5
+    instructions: ''
+    name: 'Product 5'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9268fe0c-c56d-4201-b31c-d5832d8c892d: # Calcium
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: calcium
+    instructions: ''
+    name: Calcium
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  6465543d-2202-48fd-ac11-e36d289ec6c6: # Subject
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: subject
+    instructions: ''
+    name: Subject
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a8e2a093-e380-449c-9b38-fd86acc6a4a8: # State
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: state
+    instructions: ''
+    name: State
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a9db9000-68de-4c9a-8150-78fbf09b1cb1: # Activity Wellness
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: activityWellness
+    instructions: ''
+    name: 'Activity Wellness'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  c1808167-7dac-449c-8d94-77285b1947ee: # Fiber
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: fiber
+    instructions: ''
+    name: Fiber
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  d6ec9223-6ba4-43e6-8261-f06a85381558: # Product 2
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: product2
+    instructions: ''
+    name: 'Product 2'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  e00e1c34-422f-42c9-aa8d-896a48551588: # Fruits & Vegetables
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: fruitsVegies
+    instructions: ''
+    name: 'Fruits & Vegetables'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  e734d65b-218b-4a48-aeba-61c02570ce05: # General Wellness
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: generalWellness
+    instructions: ''
+    name: 'General Wellness'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  ee4987bc-9929-4d28-a358-de0b3c73e37a: # Physical Wellness
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: physicalWellness
+    instructions: ''
+    name: 'Physical Wellness'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  ef0af561-0b9e-426f-8156-1937db528b35: # Product 4
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: product4
+    instructions: ''
+    name: 'Product 4'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  f1e1735a-0f04-4f8b-b031-4197bf01b9ee: # Vasomotor Issues
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: vasomotorIssues
+    instructions: ''
+    name: 'Vasomotor Issues'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  f63fcb6e-793b-49f1-9cc2-b370e5c945fd: # Exercise
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: exercise
+    instructions: ''
+    name: Exercise
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  fc13f858-7614-484e-98ca-b87335f70ffe: # Sleep Score
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: sleepScore
+    instructions: ''
+    name: 'Sleep Score'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

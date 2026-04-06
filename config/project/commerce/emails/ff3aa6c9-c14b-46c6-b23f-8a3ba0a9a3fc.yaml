@@ -1,0 +1,11 @@
+bcc: null
+cc: null
+enabled: true
+language: orderLanguage
+name: 'Order Received - Customer'
+plainTextTemplatePath: ''
+recipientType: customer
+replyTo: null
+subject: 'Your order has been received'
+templatePath: shop/emails/_orderReceived
+to: null

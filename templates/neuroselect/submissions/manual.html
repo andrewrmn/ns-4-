@@ -1,0 +1,24 @@
+
+
+{% for submission in user.productSubmission %}
+    {% if craft.app.request.segments|last == submission.submissionId %}
+
+        {% set age = submission.age %}
+        {% set sex = submission.gender %}
+
+        {% set products = submission.products| split(', ') %}
+        {% set productList = [] %}
+
+        {% for product in craft.products %}
+            {% if product.id in products %}
+                {% if productList|length < 5 %}
+                    {% set productList = productList|merge([product]) %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+
+        {% include 'neuroselect/submissions/report' %}
+
+    {% endif %}
+{% endfor %}

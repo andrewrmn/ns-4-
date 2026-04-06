@@ -1,0 +1,32 @@
+fieldLayouts:
+  82ba3812-4184-47dc-8805-71fe75c069cb:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 37505fac-e260-4ddd-bf2f-62a14db605de # Survey Results Text
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Text
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 638763ab-4f15-4644-93e8-825063891f53 # Survey Submissions
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Submissions
+        sortOrder: 2
+handle: surveySubmissions
+name: 'Survey Submissions'
+sortOrder: 9

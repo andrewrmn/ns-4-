@@ -1,0 +1,64 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
+handle: productSubmission
+instructions: ''
+name: 'Product Submission'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 281
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 282
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 257
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 258
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 259
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - new1
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_productsubmission}}'
+  fieldLayout: table
+  maxRows: null
+  minRows: null
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add submission'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

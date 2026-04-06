@@ -1,0 +1,241 @@
+field: 29f04a5b-7cef-482b-94f3-66a0cdc010a8 # CTA Tiles
+fieldLayouts:
+  b66322e7-2414-4415-8ed5-026218929ba6:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 06cb98a9-fc79-4e72-9170-3609a6c7b347 # Icon
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cecc2765-1f52-4dc8-b85d-cc8a51ac6bdc # Headline
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: d69fddcb-416a-4178-abae-a4cb54913272 # Body
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4c7a2b70-0e27-4e2c-9b04-16efe8fc2edc # CTA
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 767fa68d-093e-46e4-b7ef-3bb453f5b04b # Tile?
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  4c7a2b70-0e27-4e2c-9b04-16efe8fc2edc: # CTA
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: cta
+    instructions: ''
+    name: CTA
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: '1'
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Email
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Phone
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Url
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+          -
+            - fruitstudios\linkit\models\Entry
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+          -
+            - fruitstudios\linkit\models\Category
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select a category'
+          -
+            - fruitstudios\linkit\models\Asset
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an asset'
+          -
+            - fruitstudios\linkit\models\Product
+            -
+              __assoc__:
+                0:
+                  - enabled
+                  - 1
+                2:
+                  - sources
+                  - '*'
+                3:
+                  - customSelectionLabel
+                  - 'Select an entry'
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField
+  06cb98a9-fc79-4e72-9170-3609a6c7b347: # Icon
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: icon
+    instructions: ''
+    name: Icon
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      defaultUploadLocationSubpath: ''
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: ''
+      selectionLabel: ''
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  767fa68d-093e-46e4-b7ef-3bb453f5b04b: # Tile?
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: tile
+    instructions: ''
+    name: 'Tile?'
+    searchable: true
+    settings:
+      default: true
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  cecc2765-1f52-4dc8-b85d-cc8a51ac6bdc: # Headline
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headline
+    instructions: ''
+    name: Headline
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  d69fddcb-416a-4178-abae-a4cb54913272: # Body
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: body
+    instructions: ''
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field

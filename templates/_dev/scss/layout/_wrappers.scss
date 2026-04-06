@@ -1,0 +1,59 @@
+
+// ---------------------------------------------------------------------
+//  Wrapper Styles (Horizontal Spacing)
+// ---------------------------------------------------------------------
+
+.wrapper {
+    @include wrapper;
+}
+
+.wrapper--thin {
+    max-width: 750px;
+}
+
+.wrapper--x-thin {
+    max-width: 560px;
+}
+
+.wrapper--md {
+    max-width: 800px;
+}
+
+
+.wrapper-wide {
+    @include wrapper;
+    max-width: $xlarge;
+}
+
+.wrapper-full {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.wrapper-full--brand {
+    background: $brand;
+}
+
+
+
+// ----------------------------------------
+// Cards
+// ----------------------------------------
+
+.card {
+    background: $white;
+    box-shadow: $shadow;
+    padding: 25px 15px;
+
+    header {
+        margin-bottom: 30px;
+    }
+
+    @include start-at($medium) {
+        padding: 45px 30px;
+    }
+
+    + .card {
+        margin-top: 30px;
+    }
+}

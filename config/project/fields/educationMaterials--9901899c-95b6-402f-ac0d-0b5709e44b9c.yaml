@@ -1,0 +1,64 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
+handle: educationMaterials
+instructions: ''
+name: 'Education Materials'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 0d914fff-b4b8-42a3-b98d-77caaba8781d # Restricted Access?
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - cabe8363-0383-4075-9726-56e6e2fe76af # Headline
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 9ab250b7-b056-45ef-91cd-52918b0599bd # Color
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - cbfc2c81-26c5-478c-a8a1-ad3429910c78 # Body
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - cf76daff-2c39-465f-8d83-9acd3b0d172b # Materials
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - ed70687a-ec3a-482b-aa3a-e6643ae25324 # Accordion Drawer
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_educationmaterials}}'
+  fieldLayout: row
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a section'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

@@ -1,0 +1,58 @@
+field: e36ca748-a185-4fc2-b8c0-b0d4213bf0c8 # Comparison Attributes
+fieldLayouts:
+  41057cb2-e4a1-4a60-afd9-e4593604d7ce:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 018dc23e-786f-4cd7-947c-cffd6a3a3409 # Key Ingredients
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  018dc23e-786f-4cd7-947c-cffd6a3a3409: # Key Ingredients
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: keyIngredients
+    instructions: ''
+    name: 'Key Ingredients'
+    searchable: false
+    settings:
+      columns:
+        __assoc__:
+          -
+            - c4d1187f-273c-4532-a72a-09801d5c80d1 # Ingredients
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+          -
+            - c0911def-59e3-4a6e-adac-c063e43a0cbf # Precursor Potential
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+      contentTable: '{{%stc_15_keyingredients}}'
+      fieldLayout: table
+      maxRows: '9'
+      minRows: ''
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add Ingredient'
+      staticField: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+handle: neurotransmitters
+name: Neurotransmitters
+sortOrder: 2

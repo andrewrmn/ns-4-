@@ -1,0 +1,183 @@
+{% if not currentUser or not currentUser.isInGroup('patients') %}
+    {% redirect "patients/login" %}
+{% endif %}
+{% set title = 'Patient Dashboard' %}
+{% extends 'layouts/_accounts-patient' %}
+{% block content %}
+    {% set patientName = currentUser.firstName ? currentUser.firstName ~ ' ' ~ currentUser.lastName : currentUser.username %}
+    {% set hcp = currentUser.relatedHcp.one() %}
+    {% set hcpName = currentUser.relatedHcp.one().firstName ? currentUser.relatedHcp.one().firstName ~ ' ' ~ currentUser.relatedHcp.one().lastName : currentUser.relatedHcp.one().username %}
+
+
+    <img class="patient-portal__bg" src="https://www.neuroscienceinc.com/images/general/accent.jpg" alt="">
+
+    <div class="patient-portal-content wrapper-before-lg">
+
+	    <div class="patient-portal-content__content">
+		    <div class=" mb-6">
+			     <a class="mb-4 d-inline-block" href="/patients/dashboard/">< Return to Dashboard</a>
+
+                {% if currentUser.relatedHcp|length %}
+                    <h2 class="h1">Hello <span class="text-bold">{{ patientName }}</span>!</h2>
+                    {#<p>{{ currentUser.relatedHcp.one().hpcStoreFrontText }}</p>#}
+                    <h3 class="h3">{% if hcp.hcpStorefrontName %}{{ hcp.hcpStorefrontName }}{% else %}Dr. {{ hcp.firstName }} {{ hcp.lastName }}{% endif %} has recommended these products for you.</h3>
+                {% endif %}
+                {% set recommendations = craft.entries().section('hcpRecommendations').relatedTo({targetElement: currentUser.relatedHcp.one(), field: 'relatedHcp'}).relatedTo({targetElement: currentUser, field: 'patientAccount'}).all() %}
+            </div>
+
+            <section>
+	            {% if recommendations | length %}
+                    {% for recommendation in recommendations %}
+                        <div class="product-recommendation {% if not recommendation.recommendationViewed %}product-recommendation--new{% endif %}" id="{{ recommendation.title }}">
+                            {% if not recommendation.recommendationViewed %}<div class="new-badge"><div>New!</div></div>{% endif %}
+                            <div class="mb-6 pt-4 product-rec-hd">
+	                            <div class="h4">
+                                <strong class="text-bold">Sent {{ recommendation.dateCreated|date('m/d/y') }} - </strong>
+                                includes {{ recommendation.recommendedProducts|length }} product{% if recommendation.recommendedProducts|length > 1 %}s{% endif %}
+                                </div>
+
+                                {% if recommendation.recommendationNote %}
+                                	<div class="rte mt-2">
+	                                	{{ recommendation.recommendationNote|nl2br|raw }}
+                                	</div>
+                                {% endif %}
+                            </div>
+                            {% for product in recommendation.recommendedProducts.orderBy('title asc').all() %}
+                            <div class="prod-rec">
+                                {% set variant = product.defaultVariant %}
+                                <figure>
+                                	{% if product.patientPortalImage|length %}
+
+                                    {% set img = product.patientPortalImage.one() %}
+                                    {% if img|length %}
+                                        <a href="{{ product.url }}"><img src="{{ img.url }}" alt="{{ img.title }}"  /></a>
+                                    {% else %}
+                                        <a href="{{ product.url }}"><img src="{{ url('images/products/product-fallback.svg') }}" alt="{{ img.title }}" /></a>
+                                    {% endif %}
+
+                                	{% else %}
+                                    {% for row in product.productFields.all() %}
+                                    {% set img = row.productImages.one() %}
+                                    {% if img|length %}
+                                        <a href="{{ product.url }}"><img src="{{ img.url }}" alt="{{ img.title }}"  /></a>
+                                    {% else %}
+                                        <a href="{{ product.url }}"><img src="{{ url('images/products/product-fallback.svg') }}" alt="{{ img.title }}" /></a>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </figure>
+                                <div class="prod-rec__content">
+                                    <div>
+                                    <h4>{{ variant.title }}</h4>
+                                    <ul>
+                                        <li>
+                                            <svg width="16" height="16" viewBox="0 0 16 16">
+												<circle fill="#0081B6" cx="8" cy="8" r="8"/>
+												<path fill="#FFFFFF" d="M5.9,11.8L9.8,8L5.9,4.2L7.1,3l5,5l-5,5L5.9,11.8z"/>
+											</svg>
+                                            <span>{{ variant.bottleSize }}</span>
+                                        </li>
+                                        {% if product.productFields.recommendedUse %}
+                                        <li>
+                                            <svg width="16" height="16" viewBox="0 0 16 16">
+												<circle fill="#0081B6" cx="8" cy="8" r="8"/>
+												<path fill="#FFFFFF" d="M5.9,11.8L9.8,8L5.9,4.2L7.1,3l5,5l-5,5L5.9,11.8z"/>
+											</svg>
+                                            <span>{{ product.productFields.recommendedUse }}</span>
+                                        </li>
+                                        {% endif %}
+                                        {% if product.productNote %}
+                                        <li>
+                                            <svg width="16" height="16" viewBox="0 0 16 16">
+												<circle fill="#0081B6" cx="8" cy="8" r="8"/>
+												<path fill="#FFFFFF" d="M5.9,11.8L9.8,8L5.9,4.2L7.1,3l5,5l-5,5L5.9,11.8z"/>
+											</svg>
+                                            <span>{{ product.productNote }}</span>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                    </div>
+                                </div>
+                                <div class="prod-rec__shop">
+                                    <form method="post">
+                                        {{ csrfInput() }}
+                                        {{ actionInput('commerce/cart/update-cart') }}
+                                        {{ hiddenInput('purchasableId', variant.id) }}
+                                        <select name="options[guest]" class="d-none">
+							              <option value="yes" selected>yes</option>
+							              <option value="no">no</option>
+							            </select>
+                                        <button type="submit" class="shop-link btn">Add to Cart</button>
+                                    </form>
+                                </div>
+                        	</div>
+                            {% endfor %}
+                        </div>
+
+                        {# Update recommendation entry view #}
+                        {% do recommendation.setAttributes({recommendationViewed: 1}, false) %}
+                        {% do craft.app.getElements().saveElement(recommendation) %}
+
+                    {% endfor %}
+
+                {% else %}
+                <p>No recommendations to view at this time.</p>
+                {% endif %}
+            </section>
+
+            {% set patientOrders = craft.orders().user(currentUser).limit(null).orderBy('dateCreated DESC').isCompleted(true).all() %}
+                        {% if patientOrders|length %}
+                            <section class="patientOrderHistory mt-3">
+                                <h4 class="h3 text-bold mb-3">View order history</h4>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12 px-3 pb-lg-0 pb-4 recent-order">
+                                        <div class="recent-wrapper">
+                                            <table width="100%" border="0">
+                                                <tr>
+                                                    <td width="20%"><strong>Ordered</strong></td>
+                                                    <td width="20%"><strong>Invoice #</strong></td>
+                                                    <td width="20%"><strong>Amount</strong></td>
+                                                    <td width="20%"><strong>Delivered</strong></td>
+                                                    <td width="20%">&nbsp;</td>
+                                                </tr>
+                                                {% for order in patientOrders %}
+                                                    <tr>
+                                                        <td><strong>{{ order.dateOrdered|date('m/d/y') }}</strong></td>
+                                                        <td><strong>{{ order.id }}</strong></td>
+                                                        <td><strong>${{ order.totalPrice }}</strong></td>
+                                                        <td><strong>{% for history in order.histories if history.newStatus == 'Completed' %}{{ history.dateCreated|date('m/d/y') }}{% endfor %}</strong></td>
+                                                        <td><a class="d-flex flex-items-center" href="{{ url('patients/order/invoice?number=' ~ order.number) }}">View Invoice <span class="ml-2 arrow-right"><img src="../../images/blue-arrow.png" width="12" /></span></a></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        {% endif %}
+
+	    </div>
+	    <div class="patient-portal-content__sidebar">
+			   	{% include 'patients/sidebar' %}
+	    </div>
+    </div>
+
+
+    <div class="tabcontent patient-tabcontent">
+        <div class="new-product bg-white py-md-5 py-4  px-xl-4">
+
+        </div>
+        <div class="new-product py-md-5 py-4  px-xl-4">
+            <div class="container">
+                <div class="all-product">
+                    <div class="wrapper section-x-short section--flush-top">
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

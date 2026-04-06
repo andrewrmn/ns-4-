@@ -1,0 +1,12 @@
+defaultPlacement: end
+enableVersioning: false
+handle: hcpRecommendations
+name: 'HCP Recommendations'
+propagationMethod: all
+siteSettings:
+  9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+type: channel

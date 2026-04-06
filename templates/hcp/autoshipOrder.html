@@ -1,0 +1,202 @@
+{% requireLogin %}
+
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+
+
+{% set number = craft.app.request.getQueryParam('number') %}
+{% set order = craft.enupalStripe.getOrderByNumber(number) %}
+
+{% set subscription = order.getSubscription() %}
+{% set frequency = order.getPaymentForm('description') %}
+{% set paymentForm = order.getPaymentForm() %}
+{% set formData = order.getFormFields() %}
+
+{% set craftOrderNumber = formData.orderNumber %}
+
+{% set myOrderQuery = craft.orders().number(craftOrderNumber) %}
+{% set craftOrder = myOrderQuery.one() %}
+{% set patientId = craft.app.request.getRequiredParam('patientId') %}
+
+{% set productsInOrder = [] %}
+
+{% set autoshipDuration = ['15 Days', '30 Days', '45 Days', '60 Days'] %}
+
+
+<img class="patient-portal__bg" src="https://www.neuroscienceinc.com/images/general/accent.jpg" alt="">
+
+<div class="wrapper-wide py-6">
+
+  <div class="customer-order-pdf mt-6 pb-4">
+
+    <a class="mb-4 d-inline-block" href="/hcp/patient?id={{ patientId }}">< Back to Patient</a>
+
+    <h1 class="mb-3">Order #{{ craftOrder.reference }}</h1>
+
+    {{ order.getShippingAddress()|raw }}
+
+    <section class="customer-order-pdf-autoship mb-5">
+      <table width="100%" border="0">
+        <thead>
+          <tr>
+            <th width="16%">Autoship Reference #</th>
+            <th width="16%">Original Order Date</th>
+            <th width="16%">Frequency</th>
+            <th width="16%">Next Shipment</th>
+            <th width="16%">Status</th>
+            <th width="16%">Order Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ order.number }}</td>
+            <td>{{ order.dateOrdered|date('M d, Y')}}</td>
+            <td>{{ frequency }}</td>
+            <td>{{ subscription.endDate|date('M d, Y') }}</td>
+            <td><span style="text-transform: capitalize">{{ subscription.status }}</span></td>
+            <td>{{ order.totalPrice|currency(order.currency) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section class="d-md-flex customer-order-pdf__lists">
+      <div class="pr-md-6 mb-5" style="flex-grow: 1;">
+        <h4>Order Details</h4>
+        <ul>
+          <li><strong>Order ID:</strong> {{ craftOrder.id }}</li>
+          <li><strong>{{ "Customer"|t }}:</strong> {{ craftOrder.customer.email }}</li>
+          <li><strong>{{ "Total"|t }}:</strong> {{ craftOrder.totalPrice|commerceCurrency(cart.currency) }}</li>
+          <li><strong>{{ "Amount Paid"|t }}:</strong> {{ craftOrder.totalPaid|commerceCurrency(cart.currency) }}</li>
+          <li><strong>{{ "Date"|t }}:</strong> {{ craftOrder.dateOrdered|date('M d, Y') }}<br></li>
+          {% if craftOrder.pdfUrl %}
+          <li><strong>Receipt:</strong> <a href="{{ craftOrder.getPdfUrl('receipt') }}">Download</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="pr-md-6 mb-4">
+        <h4>Shipping Address</h4>
+        {% if craftOrder.shippingAddress %}
+        {% include 'shop/_includes/addresses/address' with { address: craftOrder.shippingAddress } %}
+        {% endif %}
+      </div>
+      <div class="pr-md-4 mb-4">
+        <h4>Billing Address</h4>
+        {% if craftOrder.billingAddress %}
+        {% include 'shop/_includes/addresses/address' with { address: craftOrder.billingAddress } %}
+        {% endif %}
+      </div>
+    </section>
+
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th class="text-right">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in craftOrder.lineItems %}
+        <tr class="line-item">
+          <td>
+            <strong>{{ item.description }}</strong><br>
+            SKU: {{ item.sku }}
+          </td>
+          <td>
+            {% if item.onSale %}
+            <strike>{{ item.price|commerceCurrency(cart.currency) }}</strike>   {{ item.salePrice|commerceCurrency(cart.currency) }}
+            {% else %}
+            {{ item.price|commerceCurrency(cart.currency) }}
+            {% endif %}
+          </td>
+          <td>{{ item.qty }}</td>
+          <td class="text-right">{{ item.subtotal|commerceCurrency(cart.currency) }}</td>
+        </tr>
+
+        {% set productsInOrder = productsInOrder|merge([item.sku]) %}
+        {% endfor %}
+
+        {% for adjustment in craftOrder.adjustments %}
+        <tr class="adjustment">
+          <td class="adjustment__title">{{ adjustment.type }}</td>
+          <td colspan="2"><strong>{{ adjustment.name }}</strong>{% if adjustment.description %}<br>({{ adjustment.description }}){% endif %}</td>
+          <td class="text-right">{{ adjustment.amount|commerceCurrency(cart.currency) }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr class="totals">
+          <td colspan="4" class="text-right">
+            <span class="subtotal">Item Subtotal: {{ craftOrder.itemTotal|commerceCurrency(cart.currency) }}</span>
+            <span class="total">Total: {{ craftOrder.totalPrice|commerceCurrency(cart.currency) }}</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="customer-order-pdf mt-6 pb-4">
+    <h2 class="mb-3">Payment History</h2>
+    <table width="100%" border="0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Payment Amount</th>
+          <th>Invoice</th>
+        </tr>
+      </thead>
+
+      {% for invoice in subscription.getPaidInvoices() %}
+      {% if invoice.subscription == order.stripeTransactionId %}
+      <tbody>
+        <tr>
+          <td>{{ invoice.created|date('M d, Y') }}</td>
+          <td>{{ craft.enupalStripe.convertFromCents(invoice.amount_paid, invoice.currency) }}</td>
+          <td>
+            <a href="{{ invoice.hosted_invoice_url }}" target="_blank">View Invoice</a>
+          </td>
+        </tr>
+      </tbody>
+      {% endif %}
+      {% endfor %}
+
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% js %}
+$(document).ready(function(){
+  $(document).on("click", "a#btn-cancel-subscription", function() {
+    let subscriptionId = $(this).attr('data-subscriptionId');
+    let text = "Are you sure to cancel subscription?";
+    if (confirm(text) == true) {
+      $("form#frm-cancel-subscription input[name='subscriptionId']").val(subscriptionId);
+      $("form#frm-cancel-subscription").submit();
+    }else{
+      return false;
+    }
+  })
+
+  $(document).on("click", "a#btn-reactive-subscription", function() {
+    let subscriptionId = $(this).attr('data-subscriptionId');
+    let text = "Are you sure to reactivate subscription?";
+    if (confirm(text) == true) {
+      $("form#frm-reactivate-subscription input[name='subscriptionId']").val(subscriptionId);
+      $("form#frm-reactivate-subscription").submit();
+    }else{
+      return false;
+    }
+  })
+})
+{% endjs %}

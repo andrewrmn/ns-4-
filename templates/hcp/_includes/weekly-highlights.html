@@ -1,0 +1,74 @@
+
+
+
+<div class="weekly-highlight mt-6">
+  <h3>Your Weekly Highlights</h3>
+  <div class="weekly-circle pt-3">
+    {% if hasPatients %}
+
+    {% set orderTotalPrice = 0 %}
+    {% set lastWeek = date('1 week ago')|atom %}
+    {% set allNewAccounts = craft.users().dateCreated(">= #{lastWeek}").relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).anyStatus().all() %}
+
+    {#% set allNewAccounts = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).anyStatus().all() %#}
+    {% set weeklyOrders = craft.orders().dateOrdered(">= #{lastWeek}").customerId(customerIds).all() %}
+    {% set orderTotalPrice = craft.orders().dateOrdered(">= #{lastWeek}").customerId(customerIds).sum('itemTotal') %}
+    {% set neuroCash = orderTotalPrice * (hcpNeurocashPercentage / 100) %}
+
+    <a class="circle" href="/hcp/all-patient-history/">
+      <div>
+        <h2>{{ allNewAccounts|length }}</h2>
+        <p>New Accounts</p>
+      </div>
+    </a>
+    <a class="circle" href="/hcp/all-patient-orders/">
+      <div>
+        <h2>{{ weeklyOrders|length }}</h2>
+        <p>Orders Placed</p>
+      </div>
+    </a>
+    <div class="circle" data-click-target="total-sales-modal" data-click-bodyClass="modal-is-open">
+      <div>
+        <h2>{{ orderTotalPrice|commerceCurrency(convert=true, format=true) }}</h2>
+        <p>In Sales</p>
+      </div>
+    </div>
+    {% if not currentUser.disableProviderEarnings %}
+    <div class="circle" data-click-target="provider-earnings-modal" data-click-bodyClass="modal-is-open">
+      <div>
+        <h2>{{ neuroCash|commerceCurrency(convert=true, format=true) }}</h2>
+        <p>In Earnings</p>
+      </div>
+    </div>
+    {% endif %}
+    {% else %}
+      <a class="circle" href="/hcp/all-patient-history/">
+        <div>
+          <h2>0</h2>
+          <p>New Accounts</p>
+        </div>
+      </a>
+      <a class="circle" href="/hcp/all-patient-orders/">
+        <div>
+          <h2>0</h2>
+          <p>Orders Placed</p>
+        </div>
+      </a>
+      <div class="circle" data-click-target="total-sales-modal" data-click-bodyClass="modal-is-open">
+        <div>
+          <h2>$0</h2>
+          <p>In Sales</p>
+        </div>
+      </div>
+      {% if not currentUser.disableProviderEarnings %}
+      <div class="circle" data-click-target="provider-earnings-modal" data-click-bodyClass="modal-is-open">
+        <div>
+          <h2>$0</h2>
+          <p>In Earnings</p>
+        </div>
+      </div>
+      {% endif %}
+
+    {% endif %}
+  </div>
+</div>

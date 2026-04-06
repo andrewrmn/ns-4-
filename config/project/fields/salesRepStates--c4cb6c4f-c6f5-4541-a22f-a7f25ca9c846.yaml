@@ -1,0 +1,39 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: e3dd5964-8411-45ae-9571-c8789a0a32d9 # Sales Reps
+handle: salesRepStates
+instructions: ''
+name: 'Sales Rep States'
+searchable: true
+settings:
+  addRowLabel: 'Add a row'
+  columnType: text
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - ''
+            -
+              - handle
+              - ''
+            -
+              - width
+              - ''
+            -
+              - type
+              - singleline
+  defaults:
+    -
+      __assoc__:
+        -
+          - col1
+          - ''
+  maxRows: null
+  minRows: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

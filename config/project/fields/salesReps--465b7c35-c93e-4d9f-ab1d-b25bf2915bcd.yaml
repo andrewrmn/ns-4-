@@ -1,0 +1,50 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: e3dd5964-8411-45ae-9571-c8789a0a32d9 # Sales Reps
+handle: salesReps
+instructions: ''
+name: 'Sales Reps'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 8c554832-84e2-4539-aff9-2bb81dcdf9cb # Headshot
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 59c64a2c-277d-44ff-9353-009292105a82 # Phone #
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 6c31e057-1749-4bb2-9ee4-0ac2c38f7e0c # Email
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - e5391192-5b85-4f09-8f42-f11e09a52743 # About
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_salesreps}}'
+  fieldLayout: row
+  maxRows: '1'
+  minRows: '1'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: profile
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

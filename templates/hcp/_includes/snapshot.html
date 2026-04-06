@@ -1,0 +1,490 @@
+<section class="hcp-snapshot">
+  {% set curYear = now|date('Y') %}
+
+  <div class="wrapper-wide">
+    <h3 class="text-white">Storefront Snapshot</h3>
+
+    <div class="grid">
+
+      <article class="grid-item">
+        <header class="grid-item-hd">
+          <h4>Total Sales</h4>
+          <a href="#" class="link" data-click-target="total-sales-modal" data-click-bodyClass="modal-is-open">Monthly Breakdown</a>
+        </header>
+
+        <canvas id="totalSalesChart" class="w-100 w-full"></canvas>
+      </article>
+
+      <article class="grid-item">
+        <header class="grid-item-hd">
+          <h4>Provider Earnings</h4>
+          {% if not currentUser.disableProviderEarnings %}
+          <a href="#" class="link" data-click-target="provider-earnings-modal" data-click-bodyClass="modal-is-open">Monthly Breakdown</a>
+          {% endif %}
+        </header>
+
+        {% if currentUser.disableProviderEarnings %}
+        <p>You have disabled provider earnings</p>
+        {% endif %}
+        <canvas id="neuroCashChart" class="w-100 w-full {% if currentUser.disableProviderEarnings %}d-none{% endif %}"></canvas>
+      </article>
+
+
+
+      <article class="grid-item">
+        <header class="grid-item-hd">
+          <h4>Patient Orders Placed</h4>
+        </header>
+
+        {% if hasPatients %}
+        {% set newAccts = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).status(['active']).all() %}
+
+        <div class="recent-stats">
+          {% for i in 0..5 %}
+          {% set dte = now|date_modify("first day of -" ~ i ~ " month")|date('M y') %}
+          {% set start = date("first day of " ~ i ~ " month ago")|atom %}
+          {% set end = date("first day of " ~ (i - 1) ~ " month ago")|atom %}
+          {% set signUps = craft.orders().customerId(customerIds).isCompleted(true).dateOrdered(['and', ">= #{start}", "< #{end}"]).all() %}
+          <div>
+            <span>{{ signUps|length }}</span>
+            <div>{{ dte }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="recent-stats">
+          {% for i in 0..5 %}
+          {% set dte = now|date_modify("first day of -" ~ i ~ " month")|date('M y') %}
+          <div>
+            <span>0</span>
+            <div>{{ dte }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+
+
+      <article class="grid-item">
+        <header class="grid-item-hd">
+          <h4>Patient Portal Enrollments</h4>
+
+        </header>
+
+        {% if hasPatients %}
+        {% set newAcctsSetup = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).status(['active']) %}
+
+        <div class="recent-stats">
+          {% for i in 0..5 %}
+          {% set dte = now|date_modify("first day of -" ~ i ~ " month")|date('M y') %}
+          {% set start = date("first day of " ~ i ~ " month ago")|atom %}
+          {% set end = date('last day of' ~ i ~ ' month ago')|atom %}
+          {% set signUps = newAcctsSetup.dateCreated(['and', ">= #{start}", "< #{end}"]).all() %}
+          <div>
+            <span>{{ signUps|length }}</span>
+            <div>{{ dte }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="recent-stats">
+          {% for i in 0..5 %}
+          {% set dte = now|date_modify("first day of -" ~ i ~ " month")|date('M y') %}
+          <div>
+            <span>0</span>
+            <div>{{ dte }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+
+    </div>
+  </div>
+
+  <div class="hcp-snapshot__inner"></div>
+</section>
+
+
+{% set monthlyNeuroCashChart = [] %}
+{% set monthlySales = [] %}
+
+{% for i in 1..12 %}
+{% set monthlyNeuroCashChart = monthlyNeuroCashChart|merge([0]) %}
+{% set monthlySales = monthlySales|merge([0]) %}
+{% endfor %}
+
+{% if hasPatients %}
+
+{% set currentYear = now|date('Y') %}
+{% set nextyear = currentYear + 1 %}
+{% set yearbegins = '1 January ' ~ currentYear %}
+{% set yearends = '1 January' ~ nextyear %}
+{% set unixbegins = yearbegins|atom %}
+{% set unixends = yearends|atom %}
+{% set patientOrders = craft.orders().customerId(customerIds).isCompleted(true).limit('-1') %}
+
+<div class="modal-wrap" id="provider-earnings-modal">
+  <div class="modal">
+    <div class="modal__inner">
+      <a class="modal__close" href="#" data-click-target="provider-earnings-modal" data-click-bodyClass="modal-is-open">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+
+      <div class="table-monthly-breakdown">
+        <div class="all-parent-details" style="border-bottom: none;">
+          <div class="mb-4">
+            <h3 class="h4">Provider Earnings Monthly Breakdown</h3>
+            <p>Provider Earnings will be distributed monthly by the 15th of the following month.</p>
+          </div>
+          {% set hasMonthlyBkData = false %}
+
+
+          {% for year, ordersInYear in patientOrders|group("dateOrdered|date('Y')") %}
+          {% if year == curYear %}
+          {% for month, ordersInMonth in ordersInYear|group("dateOrdered|date('F')") %}
+
+          <div class="accordion-wrap">
+            {% set hasMonthlyBkData = true %}
+            <div class="accordion-header js-acc-hd" data-month="{{ month|lower }}">
+              <div class="d-flex flex-items-center">
+                <img class="d-block" width="8px" height="8px" style="min-width: 8px" src="../../images/blue-arrow.png" alt="">
+                <span class="h5 m-0">{{ month }}</span>
+              </div>
+              {# <span class="price" id="NeuroCash-{{ month|lower }}"><strong>${{ ordersInMonth.sum('itemTotal') }}</strong></span> #}
+              <span class="price" id="NeuroCash-{{ month|lower }}"></span>
+            </div>
+            <div class="accordion-body pt-3">
+              <div class="patient-table">
+                <table>
+                  <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Patient</th>
+                    <th>Total</th>
+                    <th>Provider Earnings</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% set monthNeuroCash = 0 %}
+                  {% set monthOrderItemTotal = 0 %}
+                  {% for order in ordersInMonth %}
+                  {% if order.user.patientNeurocashDiscount %}
+                  {% set neurocashPercentage = hcpNeurocashPercentage - order.user.patientNeurocashDiscount %}
+                  {% else %}
+                  {% set neurocashPercentage = hcpNeurocashPercentage %}
+                  {% endif %}
+
+                  {% set monthNeuroCash = monthNeuroCash + order.itemTotal * ( neurocashPercentage / 100) %}
+                  {% set monthOrderItemTotal = monthOrderItemTotal + order.itemTotal %}
+
+                  <tr {% if loop.last %}data-NeuroCash-{{ month|lower }}="{{ monthNeuroCash }}" id="ul-cash-{{ month|lower }}" {% endif %}>
+                    <td>{{ order.dateOrdered|date('m/d/y') }}</td>
+                    <td>{% if order.user.firstName %}{{ order.user.firstName }} {{ order.user.lastName }}{% else %}{{ order.user.username }}{% endif %}</td>
+                    <td>{{ order.itemTotal |commerceCurrency(convert=true, format=true)}}</td>
+                    {% set total = order.itemTotal * (hcpNeurocashPercentage / 100) %}
+                    <td>{{ total |commerceCurrency(convert=true, format=true) }}</td>
+                  </tr>
+
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% set target = month|date_modify("-1 month")|date('n') %}
+              {% set target = month|date('n') %}
+              {% set target = target - 1 %}
+
+              {% for key, value in monthlyNeuroCashChart %}
+              {% set cash = value %}
+              {% if key == target %}
+              {% set cash = monthNeuroCash %}
+              {% endif %}
+              {% set monthlyNeuroCashChart = {(key): cash} + monthlyNeuroCashChart %}
+              {% endfor %}
+
+              {% for k,v in monthlySales %}
+              {% set totalSales = v %}
+              {% if k == target %}
+              {% set totalSales = monthOrderItemTotal %}
+              {% endif %}
+              {% set monthlySales = {(k): totalSales} + monthlySales %}
+              {% endfor %}
+
+              <div class="mt-4">
+                <div class="h5 m-0">Total Earnings: {{ monthNeuroCash|commerceCurrency }}</div>
+              </div>
+
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+
+          {% if not hasMonthlyBkData %}
+          <hr class="mb-4" />
+          <p class="text-center">No data to show at this time.</p>
+          {% endif %}
+
+          {% set monthlyNeuroCashChart = monthlyNeuroCashChart|reverse %}
+          {% set monthlySales = monthlySales|reverse %}
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-wrap" id="total-sales-modal">
+  <div class="modal">
+    <div class="modal__inner">
+      <a class="modal__close" href="#" data-click-target="total-sales-modal" data-click-bodyClass="modal-is-open">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+
+      <div class="table-monthly-breakdown">
+        <div class="all-parent-details" style="border-bottom: none;">
+          <div class="mb-4">
+            <h3 class="h4">Total Patient Sales Monthly Breakdown</h3>
+          </div>
+
+          {% set hasMonthlyBkData = false %}
+          {% for year, ordersInYear in patientOrders|group("dateOrdered|date('Y')") %}
+          {% if year == curYear %}
+          {% for month, ordersInMonth in ordersInYear|group("dateOrdered|date('F')") %}
+          <div class="accordion-wrap">
+            {% set hasMonthlyBkData = true %}
+            <div class="accordion-header js-acc-hd" data-month="{{ month|lower }}">
+              <div class="d-flex flex-items-center">
+                <img class="d-block" width="8px" height="8px" style="min-width: 8px" src="../../images/blue-arrow.png" alt="">
+                <span class="h5 m-0">{{ month }}</span>
+              </div>
+              <span class="price" id="totalSales-{{ month|lower }}"></span>
+            </div>
+            <div class="accordion-body pt-3">
+              <div class="patient-table">
+                <table>
+                  <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th class="text-center">Order Date</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Invoice #</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% set monthNeuroCash = 0 %}
+                  {% set monthOrderItemTotal = 0 %}
+                  {% for order in ordersInMonth %}
+                  {% if order.user.patientNeurocashDiscount %}
+                  {% set neurocashPercentage = hcpNeurocashPercentage - order.user.patientNeurocashDiscount %}
+                  {% else %}
+                  {% set neurocashPercentage = hcpNeurocashPercentage %}
+                  {% endif %}
+
+                  {% set monthNeuroCash = monthNeuroCash + order.itemTotal * ( neurocashPercentage / 100) %}
+                  {% set monthOrderItemTotal = monthOrderItemTotal + order.itemTotal %}
+                  <tr {% if loop.last %}data-NeuroCash-{{ month|lower }}="{{ monthOrderItemTotal }}" id="ul-cash-{{ month|lower }}" {% endif %}>
+                    <td>{% if order.user.firstName %}{{ order.user.firstName }} {{ order.user.lastName }}{% else %}{{ order.user.username }}{% endif %}</td>
+                    <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
+                    <td class="text-center">{{ order.itemTotal |commerceCurrency(convert=true, format=true)}}</td>
+                    <td class="text-center"><a class="" href="{{ url('hcp/order?number=' ~ order.number) }}">#{{ order.id }}</a></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="mt-4">
+                <div class="h5 m-0">Total Sales: <span class="js-totals">{{ monthOrderItemTotal|commerceCurrency }}</span></div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+          {% if not hasMonthlyBkData %}
+          <hr class="mb-4" />
+          <p class="text-center">No data to show at this time.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script>
+  var $ = jQuery;
+  var accHd = $('.js-acc-hd');
+
+  $(document).ready(function(){
+    $('.accordion-body').hide();
+
+    accHd.click(function() {
+      var el = $(this);
+      var tar = el.next('.accordion-body');
+      if( el.hasClass('is-open') ) {
+        el.removeClass('is-open');
+        tar.slideUp();
+      } else {
+        el.addClass('is-open');
+        tar.slideDown();
+      }
+    });
+  });
+</script>
+
+{% do view.registerJsFile('//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js') %}
+
+
+
+
+<script>
+  var $ = jQuery;
+  $(document).ready(function(){
+    {% if monthlyNeuroCashChart|length %}
+    new Chart("neuroCashChart", {
+        type: "line",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: 'Earnings',
+            data: {{ monthlyNeuroCashChart|json_encode|raw }},
+      borderRadius: 'top',
+      borderColor: "#2aab57",
+      fill: "false",
+      pointBackgroundColor: "#2aab57",
+      callback: function(value, index, values) {
+      return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  }]
+  },
+    options: {
+      title: {
+        display: false,
+          text: "Monthly Breakdown"
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return '$' + tooltipItem.yLabel.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+          }
+        }
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            beginAtZero: true,
+            suggestedMin: 0,
+            mirror: false,
+          }
+        }],
+          yAxes: [{
+          gridLines: {
+            display: true
+          },
+          ticks: {
+            beginAtZero: true,
+            display: true,
+          }
+        }]
+      },
+      chartArea: {
+        backgroundColor: '#ecf6ee'
+      },
+      legend: {
+        display: false
+      }
+    }
+  });
+    {% endif %}
+
+    {% if monthlySales|length %}
+    new Chart("totalSalesChart", {
+        type: "bar",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: 'Total Sales',
+            fillColor: "#FC9775",
+            data: {{ monthlySales|json_encode|raw }},
+      borderRadius: 'top',
+      backgroundColor: "#2aab57"
+  }]
+  },
+    options: {
+      title: {
+        display: false,
+          text: "Monthly Breakdown"
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return '$' + tooltipItem.yLabel.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+          }
+        }
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            beginAtZero: true,
+            suggestedMin: 0,
+            mirror: false,
+          }
+        }],
+          yAxes: [{
+          gridLines: {
+            display: true
+          },
+          ticks: {
+            beginAtZero: true,
+            display: true,
+            callback: function(value, index, values) {
+              return '$' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        }]
+      },
+      chartArea: {
+        backgroundColor: '#ecf6ee'
+      },
+      legend: {
+        display: false
+      }
+    }
+  });
+    {% endif %}
+
+    $( "#provider-earnings-modal .accordion-header" ).each(function( index ) {
+      var month = $(this).attr('data-month');
+      var neuroCash = $("#ul-cash-" + month).attr('data-NeuroCash-' + month);
+      $("span#NeuroCash-" + month).html("<strong>$" + neuroCash + "</strong>");
+    });
+
+    $( "#total-sales-modal .accordion-header" ).each(function( index ) {
+      var el = $(this);
+      var month = el.attr('data-month');
+      var total = el.parent().find('.js-totals').text();
+      $("#totalSales-" + month).html("<strong>" + total + "</strong>");
+    })
+
+    var graphHt = $(".graaph #neuroCashChart").height();
+    $(".graaph .recent-wrapper").height(graphHt - 15);
+  })
+</script>

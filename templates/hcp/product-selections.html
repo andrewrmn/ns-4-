@@ -1,0 +1,164 @@
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+{% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+<div class="tabcontent patient-tabcontent">
+  <div class="dashboard grey-bgs px-md-6 px-4 py-md-5 py-4">
+    {% include 'hcp/_includes/top-search-patient' %}
+  </div>
+  <div class="wrapper pb-6">
+    <a class="d-block mb-4" href="/hcp/dashboard">
+      < Back</a>
+        <div class=" mb-6">
+          <h3 class="h3 mb-2">Current Product Selections</h3>
+          <p>As a default, all NeuroScience products will be available on your storefront for purchase. To remove
+            specific products, uncheck the appropriate boxes below.</p>
+        </div>
+
+        {% set productIds = [] %}
+        {% set hcpRecommendedProducts = currentUser.hcpProductsStore.all() %}
+        {% for hcpRecommendedProduct in hcpRecommendedProducts %}
+        {% set productIds = productIds|merge([hcpRecommendedProduct.id]) %}
+        {% endfor %}
+
+
+        {% if hcpRecommendedProducts|length > 0 %}
+
+        <form method="post">
+          {{ csrfInput() }}
+          {{ actionInput('users/save-user') }}
+          {{ hiddenInput('userId', currentUser.id) }}
+          {{ redirectInput('hcp/dashboard') }}
+          <div class="row mt-3 pl-2 pl-m-0">
+
+
+            {% set excludedProds = craft.products.search('productCategories:Bundle').ids() %}
+            {% set excludedProds = excludedProds|join(', not ') %}
+            {% set excludedProducts = craft.products.orderBy('title').id(excludedProds).all() %}
+
+            {% set excludedProducts = craft.products
+            .orderBy('title')
+            .id(excludedProds)
+            .disableInPf(false)
+            .all() %}
+
+
+            {% set products = craft.products.orderBy('title').id('not ' ~ excludedProds).all() %}
+
+            {% set products = craft.products
+            .orderBy('title')
+            .id('not ' ~ excludedProds)
+            .disableInPf(false)
+            .all() %}
+
+            {% for product in excludedProducts %}
+            <div class="col--xs--6 col--lg--4">
+              <div class="form-check py-1">
+                <input class="form-check-input" name="fields[hcpProductsStore][]" type="checkbox"
+                  value="{{ product.id }}" id="{{ product.slug }}" {% if product.id in productIds %} checked{% endif %}>
+                <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+              </div>
+            </div>
+            {% endfor %}
+
+            {% for product in products %}
+            <div class="col--xs--6 col--lg--4">
+              <div class="form-check py-1">
+                <input class="form-check-input" name="fields[hcpProductsStore][]" type="checkbox"
+                  value="{{ product.id }}" id="{{ product.slug }}" {% if product.id in productIds %} checked{% endif %}>
+                <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="mt-4 d-flex flex-items-center">
+
+            <a class="link mr-4 js-select-all-checks" href="">Select all</a>
+
+            <button type="submit" class="btn text-center">Update selections</button>
+
+          </div>
+        </form>
+        {% else %}
+
+        <form method="post">
+          {{ csrfInput() }}
+          {{ actionInput('users/save-user') }}
+          {{ hiddenInput('userId', currentUser.id) }}
+          {{ redirectInput('hcp/dashboard') }}
+          <div class="row mt-3">
+
+
+            {% set excludedProds = craft.products.search('productCategories:Bundle').ids() %}
+            {% set excludedProds = excludedProds|join(', not ') %}
+            {% set excludedProducts = craft.products.orderBy('title').id(excludedProds).all() %}
+
+            {% set excludedProducts = craft.products
+            .orderBy('title')
+            .id(excludedProds)
+            .disableInPf(false)
+            .all() %}
+
+
+            {% set products = craft.products.orderBy('title').id('not ' ~ excludedProds).all() %}
+
+
+            {% set products = craft.products
+            .orderBy('title')
+            .id('not ' ~ excludedProds)
+            .disableInPf(false)
+            .all() %}
+
+            {% for product in excludedProducts %}
+            <div class="col--xs--6 col--lg--4">
+              <div class="form-check py-1">
+                <input class="form-check-input" name="fields[hcpProductsStore][]" type="checkbox"
+                  value="{{ product.id }}" id="{{ product.slug }}" checked>
+                <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+              </div>
+            </div>
+            {% endfor %}
+
+            {% for product in products %}
+            <div class="col--xs--6 col--lg--4">
+              <div class="form-check py-1">
+                <input class="form-check-input" name="fields[hcpProductsStore][]" type="checkbox"
+                  value="{{ product.id }}" id="{{ product.slug }}" checked>
+                <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="mt-4 d-flex flex-items-center">
+
+            <a class="link mr-4 js-select-all-checks" href="">Select all</a>
+
+            <button type="submit" class="btn text-center">Update selections</button>
+
+          </div>
+
+        </form>
+        {% endif %}
+  </div>
+
+  <script>
+    var $ = jQuery;
+    var selectAllBtn = $('.js-select-all-checks');
+    var inputs = $('.form-check-input');
+
+    selectAllBtn.click(function (e) {
+
+      e.preventDefault();
+      inputs.each(function () {
+        $(this).prop("checked", true);
+      });
+    });
+  </script>
+
+</div>
+
+{% endblock %}

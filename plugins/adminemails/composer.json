@@ -1,0 +1,41 @@
+{
+    "name": "neuroscience/admin-emails",
+    "description": "Send emails for certain actions",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "admin emails"
+    ],
+    "support": {
+        "docs": "???",
+        "issues": "???"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Ross Co.",
+            "homepage": "andrewross.co"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "neuroscience\\adminemails\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Admin Emails",
+        "handle": "admin-emails",
+        "developer": "Andrew Ross Co.",
+        "developerUrl": "andrewross.co",
+        "documentationUrl": "???",
+        "changelogUrl": "???",
+        "class": "neuroscience\\adminemails\\AdminEmails"
+    }
+}

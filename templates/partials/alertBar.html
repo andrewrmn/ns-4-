@@ -1,0 +1,23 @@
+{% for block in globalObjects.alertMessage %}
+{% if block.showAlert %}
+    <aside class="alert-bar is-active" id="message">
+        <div class="wrapper">
+            <div class="alert-bar__content">
+                <div>
+                    {{ block.alertMessage }}
+                </div>
+            </div>
+
+            {% if block.alertCta|length %}
+                <div class="alert-bar__cta">
+                    <a href="{{ block.alertCta.url }}" {% if block.alertCta.target|length %}target="{{ block.alertCta.target }}"{% endif %} class="btn">{{ block.alertCta.text }}</a>
+                </div>
+            {% endif %}
+
+            <div class="alert-bar__close" data-click-target="message">
+                <svg width="10" height="10"><use xlink:href="#shape-close"></use></svg>
+            </div>
+        </div>
+    </aside>
+{% endif %}
+{% endfor %}

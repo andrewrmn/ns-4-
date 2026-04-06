@@ -1,0 +1,188 @@
+// ---------------------------------------------------------------------
+//  Acids Styles
+// ---------------------------------------------------------------------
+
+.neuro-shapes {
+	background: $brand;
+    position: relative;
+    overflow: hidden;
+
+	.banner__content > * {
+		position: relative;
+		z-index: 2;
+		max-width: 750px;
+	}
+}
+
+.neuro-shapes-light {
+	background: $white;
+
+    + .bg-white,
+	+ .neuro-shapes-light {
+        border-top: 1px solid $border;
+    }
+}
+
+.content-block {
+	position: relative;
+	z-index: 1;
+
+	.acid svg {
+		position: absolute;
+		opacity: 0.2;
+		transform-origin: center;
+		z-index: -1;
+
+		@include stop-at($medium){
+			max-width: 180px;
+			opacity: 0.1;
+		}
+
+		&:nth-child(1) {
+			top: 5%;
+			left: 0%;
+			transform: rotate(-30deg);
+		}
+		&:nth-child(2) {
+			bottom: 10%;
+			right: 0%;
+			transform: rotate(90deg);
+		}
+		&:nth-child(3) {
+			top: 70%;
+			left: 15%;
+		}
+	}
+}
+
+// ----------------------------------------
+// Acids
+// ----------------------------------------
+
+@keyframes movin {
+	0% {
+		transform-origin: center;
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(4deg);
+	}
+	75% {
+		transform: rotate(-4deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+.banner {
+	position: relative;
+	z-index: 1;
+}
+
+.banner .acids > * {
+	opacity: 0;
+	transition: opacity 1s ease;
+}
+
+.page-loaded {
+	.banner .acids > * {
+		opacity: 1;
+	}
+}
+
+.banner .acids > * {
+	position: absolute;
+	z-index: -1;
+	transform-origin: center;
+	animation: movin 20s ease infinite;
+
+	@include stop-at($small) {
+		max-width: 40%;
+	}
+
+	&:nth-child(1) {
+		top: 5%;
+		left: 5%;
+		@include stop-at($small) {
+			top: 0;
+			left: 10px;
+		}
+	}
+	&:nth-child(2) {
+		top: 5%;
+		left: 35%;
+		animation: movin 20s ease infinite reverse;
+
+		@include stop-at($medium) {
+			display: none;
+		}
+	}
+	&:nth-child(3) {
+		top: 5%;
+		left: 60%;
+	}
+	&:nth-child(4) {
+		top: 20%;
+		right: 5%;
+		animation: movin 20s ease infinite reverse;
+
+		@include stop-at($medium) {
+			display: none;
+		}
+	}
+	&:nth-child(5) {
+		top: 50%;
+		right: 20%;
+		@include stop-at($small) {
+			top: 60%;
+			right: 10px;
+		}
+	}
+	&:nth-child(6) {
+		bottom: 0;
+		right: 0;
+		animation: movin 20s ease infinite reverse;
+
+		@include stop-at($medium) {
+			display: none;
+		}
+	}
+	&:nth-child(7) {
+		bottom: 10%;
+		left: 50%;
+		@include stop-at($medium) {
+			display: none;
+		}
+	}
+	&:nth-child(8) {
+		bottom: 5%;
+		left: 20%;
+		animation: movin 20s ease infinite reverse;
+
+		@include stop-at($small) {
+			bottom: 0;
+			left: 10%;
+		}
+	}
+}
+
+
+.acid-wrap {
+	position: relative;
+}
+
+.acid-bl {
+	position: absolute;
+	right: -5%;
+	bottom: -1%;
+	transform: rotate(-45deg);
+	transform-origin: bottom left;
+
+	@include stop-at($medium){
+		max-width: 180px;
+		right: -15%;
+		bottom: 5%;
+		opacity: 0.4;
+	}
+}

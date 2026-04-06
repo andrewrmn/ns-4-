@@ -1,0 +1,58 @@
+// ---------------------------------------------------------------------
+//  Filter Styles
+// ---------------------------------------------------------------------
+
+.filter-form {
+	input, select {
+		min-width: 200px;
+	}
+}
+
+
+// ----------------------------------------
+//
+// ----------------------------------------
+
+.filter-list {
+	display: flex;
+	align-items: baseline;
+	margin-top: 80px;
+
+	position: relative;
+	transition: opacity $trans;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: calc(50% - 25px);
+		left: calc(50% - 25px);
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		display: block;
+		opacity: 0;
+		background: url('../images/svgs/loading.svg') center / cover no-repeat;
+		transition: transform 2.4s ease;
+	}
+
+	&.is-filtering {
+		opacity: 0.4;
+
+		&:after {
+			opacity: 1;
+			transform: rotate(720deg);
+		}
+	}
+
+	> * {
+		display: none;
+
+		&.is-active {
+			display: flex;
+		}
+
+		figure {
+			margin-right: 20px;
+		}
+	}
+}

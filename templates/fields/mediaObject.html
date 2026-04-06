@@ -1,0 +1,51 @@
+{#
+ # Media Object Field
+ # -------------------
+ #}
+{% set layout = block.layout %}
+
+<div class="wrapper-full bg-light">
+    <div class="wrapper section">
+        <div class="row">
+
+            {% if layout == 'left' %}
+            <div class="col--sm--6 col--md--4">
+                <figure class="is-hidden-xs">
+                    {% if block.image|length %}
+                        {% set img = block.image.one() %}
+                        <img src="{{ img.url }}" alt="{{ img.title }}" />
+                    {% endif %}
+                </figure>
+            </div>
+            {% endif %}
+
+            <div class="col--sm--6 col--md--7 {% if layout == 'left' %}col--md--offset--1{% endif %}">
+                {% if block.headline|length %}<h2 class="h4">{{ block.headline }}</h2>{% endif %}
+                {% if block.subHeadline|length %}<h3 class="h2">{{ block.subHeadline }}</h3>{% endif %}
+                {% if block.body|length %}
+                    <div class="user-content">
+                        {{ block.body }}
+                    </div>
+                {% endif %}
+
+                {% if block.button|length %}
+                    <a class="btn-alt" href="{{ block.button.url }}" {% if block.button.target|length %}target="{{ block.button.target }}"{% endif %}>
+                        {{ block.button.text }}
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if layout != 'left' %}
+            <div class="col--sm--6 col--md--4 col--md--offset--1">
+                <figure class="is-hidden-xs">
+                    {% if block.image|length %}
+                        {% set img = block.image.one() %}
+                        <img src="{{ img.url }}" alt="{{ img.title }}" />
+                    {% endif %}
+                </figure>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

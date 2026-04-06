@@ -1,0 +1,33 @@
+{#
+ # Featured Products
+ # -------------------
+ #}
+
+<section class="wrapper-full bg-light section">
+
+	<header class="wrapper wrapper--thin text-center mb-4" data-animate="up">
+		{% if block.headline|length %}<h3 class="h2">{{ block.headline }}</h3>{% endif %}
+        {% if block.body|length %}
+        <div class="user-content">
+            {{ block.body }}
+        </div>
+        {% endif %}
+	</header>
+
+
+	<div class="wrapper-wide">
+		<div class="carousel carousel-multiple" data-animate="up" {% if block.displayCount != 0 %}data-slide-count="{{ block.displayCount }}"{% endif %}>
+			{% for product in block.featuredProducts %}
+				{% include 'products/productPreview.html' %}
+			{% endfor %}
+		</div>
+
+		<footer class="text-center" data-animate="up">
+            {% if block.button|length %}
+                <a class="btn-alt" href="{{ block.button.url }}" {% if block.button.target|length %}target="{{ block.button.target }}"{% endif %}>
+                    {{ block.button.text }}
+                </a>
+            {% endif %}
+		</footer>
+	</div>
+</section>

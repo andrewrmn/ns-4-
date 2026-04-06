@@ -1,0 +1,14 @@
+columnSuffix: null
+contentColumnType: boolean
+fieldGroup: 6329f165-1216-4dee-8071-071c8c5cb854 # Comparison table
+handle: inComparisonTool
+instructions: ''
+name: 'In Comparison Tool?'
+searchable: false
+settings:
+  default: true
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

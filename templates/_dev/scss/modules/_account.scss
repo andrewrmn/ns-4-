@@ -1,0 +1,132 @@
+// ---------------------------------------------------------------------
+//  Account Styles
+// ---------------------------------------------------------------------
+
+// ----------------------------------------
+// Account Layout
+// ----------------------------------------
+
+.account-page {
+    width: 100%;
+    background: $gray-light;
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    @include start-at($large) {
+        flex-wrap: nowrap;
+    }
+}
+
+.account-page__sidebar {
+    background: #282828;
+    padding: 24px;
+    width: 100%;
+    order: 2;
+
+    a {
+        @include p-sm;
+        color: $white;
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    a.is-active  {
+        color: $brand;
+    }
+
+    a:hover {
+        color: $gray;
+    }
+
+    @include start-at($large) {
+        width: 240px;
+        min-width: 240px;
+        min-height: 500px;
+        order: 1;
+        padding-bottom: 72px;
+    }
+}
+
+.account-page__content {
+    flex-grow: 1;
+    order: 1;
+    max-width: 100%;
+
+    @include start-at($large) {
+        padding-bottom: 72px;
+    }
+}
+
+
+// ----------------------------------------
+// Cards
+// ----------------------------------------
+
+.account-card {
+    font-size: 1.3rem;
+    color: $gray;
+
+    p {
+        //font-size: 1.4rem;
+    }
+
+    .text-bold {
+        color: $black;
+    }
+}
+
+.account-status {
+    width: 100%;
+
+    &.approved {
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        color: $success;
+
+        > * {
+            display: flex;
+            align-items: center;
+        }
+
+        svg {
+            margin-right: 5px;
+            fill: currentColor;
+        }
+    }
+
+    &.not-approved {
+        max-width: 720px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+.address-data.p-sm {
+    line-height: 1.5;
+
+    strong {
+        font-size: 14px;
+    }
+
+
+    + .link {
+        margin-top: 10px;
+    }
+}
+
+.address-controls {
+    display: flex;
+    align-items: baseline;
+    font-size: 14px;
+
+    a {
+        font-size: 14px;
+    }
+
+    > * + * {
+        margin-left: 5px;
+        display: block;
+    }
+}

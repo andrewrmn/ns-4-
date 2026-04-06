@@ -1,0 +1,52 @@
+{% set title = 'Manage addresses' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+
+    <div class="wrapper-wide">
+        <div class="mt-6">
+            {% if currentUser %}<p class="mb-3"><a href="{{ url('account/addresses/') }}">< All addresses</a></p>{% endif %}
+            <header>
+                <h2>Add/ Edit Address</h2>
+            </header>
+            <div class="mt-4 mb-4">
+                <div class="card col-12">
+                    {% set addressId = craft.app.request.getParam('addressId') %}
+										{% set redirect = craft.app.request.getParam('redirect') %}
+
+                    {% if not address is defined and addressId %}
+                        {% set address = craft.commerce.customers.customer.getAddressById(addressId) %}
+                    {% endif %}
+
+                    <form class="form" method="post">
+                        {{ csrfInput() }}
+
+                        <input type="hidden" name="action" value="commerce/customer-addresses/save">
+
+                        {% if redirect %}
+                            {{ redirectInput(redirect) }}
+                        {% else %}
+                            {{ redirectInput('shop/customer/addresses') }}
+                        {% endif %}
+
+                        {% if addressId %}
+                            <input type="hidden" name="address[id]" value="{{ addressId }}">
+                        {% endif %}
+
+                        {% include 'shop/_includes/addresses/form' %}
+
+                        <input type="submit" value="Save Address">
+                    </form>
+
+                    <div class="section-short">
+                        {% if redirect %}
+                            <a class="link" href="/{{ redirect }}">Cancel</a>
+                        {% else %}
+                            <a class="link" href="{{ url('shop/customer/addresses') }}">Cancel</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+fieldLayouts:
+  b44029db-9cf9-4f26-a80b-03b0216f564f:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 49e27b51-26a7-47af-8456-308e7eb0c8c2 # No Doc Found...
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 2b06842e-ebb8-4fe8-a940-86e300bca536 # Success Message
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: patientSignUp
+name: 'Patient Sign Up'
+sortOrder: 11

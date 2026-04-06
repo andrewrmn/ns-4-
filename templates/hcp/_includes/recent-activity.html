@@ -1,0 +1,121 @@
+{% set recentActivityDuration = date('1 week ago')|atom %}
+{% set allNewAccounts = craft.users().dateCreated(">= #{recentActivityDuration}").relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).anyStatus().all() %}
+
+{% set latestAccounts = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').orderBy('dateCreated DESC').limit(5).anyStatus().all() %}
+
+{% set latestNewAccounts = craft.users().dateCreated(">= #{recentActivityDuration}").relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(5).anyStatus().all() %}
+
+<section class="patient-details wrapper-wide">
+
+  <div class="grid">
+    <div class="grid-item">
+      <header class="grid-item-hd">
+        <h4>New Patient Activity</h4>
+        <a href="{{ url('hcp/all-patient-history/') }}" class="float-right mb-1">All Patient History</a>
+      </header>
+
+      <div>
+        <div class="patient-table">
+          {% if latestNewAccounts|length and hasPatients %}
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="25%" scope="col">Patient</th>
+                <th width="25%" class="text-center" scope="col">Enrolled</th>
+                <th width="25%" class="text-center" scope="col">First Order</th>
+                <th width="25%" class="text-center" scope="col">Total Sales</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for newAccount in latestAccounts %}
+              {% if newAccount.email %}
+              {% set totalPlacedOrders = craft.orders().isCompleted(true).user(newAccount).count() %}
+              {% set orderTotalPrice = craft.orders().isCompleted(true).user(newAccount).sum('itemTotal') %}
+              <tr>
+                <td><a href="{{ url('hcp/patient?id=' ~ newAccount.id) }}">{% if newAccount.fullName %}{{ newAccount.fullName }}{% else %}{{ newAccount.username }}{% endif %}</a></td>
+                <td class="text-center">
+                  <span class="arrow-right">
+                    {% if newAccount.lastLoginDate > newAccount.dateCreated %}
+                    <img src="../../images/green-arrow.png" width="16" />
+                    {% else %}
+                    <img src="../../images/cross-arrow.png" width="16" />
+                    {% endif %}
+                  </span>
+                </td>
+                <td class="text-center"><span class="arrow-right">{% if totalPlacedOrders %}<img src="../../images/green-arrow.png" width="16" />{% else %}<img src="../../images/cross-arrow.png" width="16" />{% endif %}</span></td>
+                <td class="text-center">{% if orderTotalPrice %}{{ orderTotalPrice|commerceCurrency }}{% else %}$0{% endif %}</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <div class="text-center">
+            <hr class="mb-6"/>
+            <p>There is no new patient activity</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <header class="grid-item-hd">
+        <h4>Recent Orders</h4>
+        <a href="{{ url('hcp/all-patient-orders/') }}" class="float-right mb-1">All Order History</a>
+      </header>
+
+      <div>
+        <div class="patient-table">
+          {% set recentOrders = craft.orders().customerId(customerIds).isCompleted(true).limit(5).inReverse().all() %}
+         
+          {% if recentOrders|length and hasPatients %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Patient</th>
+                <th class="text-center" scope="col">Order Date</th>
+                <th class="text-center" scope="col">Autoship</th>
+                <th class="text-center" scope="col">Total</th>
+                <th class="text-center" scope="col">Invoice #</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in recentOrders %}
+              <tr>
+                <td><a href="{{ url('hcp/patient?id=' ~ order.user.id ) }}">{{ order.user.firstName }} {{ order.user.lastName }}</a></td>
+                <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
+                <td class="text-center">
+	                {% if order.autoship == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                      <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" fill="rgba(1,180,51,1)"/>
+                    </svg>
+                    {% else %}
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/>
+                       <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(179,186,197,1)"/>
+                     </svg>
+                    {% endif %}
+
+                </td>
+                <td class="text-center">{{ order.total|commerceCurrency }}</td>
+                <td class="text-center"><a class="" href="{{ url('hcp/order?number=' ~ order.number) }}">#{{ order.id }}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% else %}
+          <div class="text-center">
+            <hr class="mb-6"/>
+            <p>No Recent Orders</p>
+          </div>
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>

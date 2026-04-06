@@ -1,0 +1,63 @@
+@include stop-at($header-breakpoint) {
+    #userlike a#userlike-tab.userlike-button-big {
+        bottom: 48px !important;
+    }
+
+    #userlike.userlike-mobile a#userlike-tab.userlike-right,
+    #userlike-tab,
+    html body #userlike.userlike-mobile a#userlike-tab.userlike-right,
+    #userlike.userlike-mobile a#userlike-tab.userlike-slideup, #userlike a#userlike-tab.userlike-button-bubble.userlike-slideup {
+        bottom: 54px !important;
+    }
+
+    #userlike-eyecatcher.right {
+        bottom: 100px !important;
+    }
+}
+
+
+
+.agent-chat {
+    position: fixed;
+    bottom: 62px;
+    right: 12px;
+    width: 50px;
+    height: 50px;
+    z-index: 3;
+
+    @include start-at($medium) {
+        bottom: -4px;
+        width: 160px;
+        height: auto;
+        transition: bottom $trans;
+
+        &:hover {
+            bottom: 0;
+        }
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+    }
+
+    .agent-chat__text {
+        width: 100%;
+        padding: 8px;
+        border-radius: 2px 2px 0 0;
+        background: $brand;
+        color: $white;
+        text-align: center;
+        display: none;
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 12px;
+
+        @include start-at($medium) {
+            display: block;
+        }
+    }
+}

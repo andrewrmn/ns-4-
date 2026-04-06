@@ -1,0 +1,49 @@
+field: e36ca748-a185-4fc2-b8c0-b0d4213bf0c8 # Comparison Attributes
+fieldLayouts:
+  812e70ea-7cb9-43f6-a85f-9a2cdbf910cc:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 0e5103db-1b8c-4e6b-bdb0-ed490e0ede55 # Additional Information
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0e5103db-1b8c-4e6b-bdb0-ed490e0ede55: # Additional Information
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: additionalInformation
+    instructions: ''
+    name: 'Additional Information'
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Standard.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: other
+name: Other
+sortOrder: 5

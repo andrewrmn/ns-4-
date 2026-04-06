@@ -1,0 +1,19 @@
+fieldLayouts:
+  f2cce011-b7b2-41ea-aaad-d6953a666bcd:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 693887d6-503f-479e-b676-b2f548ab5367 # Pathways Table
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: pathwaysTable
+name: 'Pathways Table'
+sortOrder: 6

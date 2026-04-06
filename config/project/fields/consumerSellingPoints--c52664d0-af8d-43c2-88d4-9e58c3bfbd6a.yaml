@@ -1,0 +1,39 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
+handle: consumerSellingPoints
+instructions: ''
+name: 'Consumer Selling Points'
+searchable: true
+settings:
+  addRowLabel: 'Add a row'
+  columnType: text
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - ''
+            -
+              - handle
+              - text
+            -
+              - width
+              - ''
+            -
+              - type
+              - singleline
+  defaults:
+    -
+      __assoc__:
+        -
+          - col1
+          - ''
+  maxRows: null
+  minRows: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

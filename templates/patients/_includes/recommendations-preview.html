@@ -1,0 +1,46 @@
+<section class="my-6 pt-4 pb-6" id="recommendations">
+  <h4 class="h3 mb-2 text-bold">Let’s start with a recommendation just for you</h4>
+  {% set recommendations = craft.entries().section('hcpRecommendations').relatedTo({targetElement: currentUser.relatedHcp.one(), field: 'relatedHcp'}).relatedTo({targetElement: currentUser, field: 'patientAccount'}).limit(3).all() %}
+  {% if recommendations | length %}
+  <p>Click image to see full recommendation</p>
+  <div class="products d-md-flex flex-wrap mt-4 products-recs-list">
+    {% for recommendation in recommendations %}
+    {% for product in recommendation.recommendedProducts.limit(1).all() %}
+    <div class="col-12 col-md-4 rounded-image mb-4">
+      <a href="{{ url('patients/recommendations') }}">
+        {% if product.patientPortalImage|length %}
+
+        {% set img = product.patientPortalImage.one() %}
+        {% if img|length %}
+        <img src="{{ img.url }}" alt="{{ img.title }}"  />
+        {% else %}
+        <img src="{{ url('images/products/product-fallback.svg') }}" alt="{{ img.title }}" />
+        {% endif %}
+
+        {% else %}
+        {% for row in product.productFields.all() %}
+        {% set img = row.productImages.one() %}
+        {% if img|length %}
+        <img src="{{ img.url }}" alt="{{ img.title }}"  />
+        {% else %}
+        <img src="{{ url('images/products/product-fallback.svg') }}" alt="{{ img.title }}" />
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+      </a>
+      <h3 class="text-bold">Sent on {{ recommendation.dateCreated|date('m/d/Y') }}</h3>
+      <p>({{ recommendation.recommendedProducts|length }} product{% if recommendation.recommendedProducts|length > 1 %}s{% endif %})</p>
+    </div>
+    {% endfor %}
+    {% endfor %}
+  </div>
+
+  <div class="mt-4 text-center">
+    <a class="btn" href="/patients/recommendations/">View All Recommendations</a>
+  </div>
+
+  {% else %}
+  <p>No recommendations to view at this time.</p>
+  {% endif %}
+</section>

@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
+handle: accordion
+instructions: ''
+name: Accordion
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 9f228eee-1e7f-4f4d-aaab-45ced2112783 # Headline
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 8e6ec6f8-d9bb-4336-b939-97523357eeee # Drawer Content
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_accordion}}'
+  fieldLayout: row
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add item'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

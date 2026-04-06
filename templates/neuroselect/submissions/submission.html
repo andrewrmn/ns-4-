@@ -1,0 +1,45 @@
+{% set title = 'PIR' %}
+{% extends "_layout" %}
+
+{% block content %}
+
+    {% set query = craft.app.request.getParam('q') %}
+    {% set user = currentUser %}
+    {% if query | length %}
+
+        {% set user = '' %}
+
+        {% for u in craft.users.email(query) %}
+            {% if u.email == query %}
+                {% set user = u %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% set submissionType = '' %}
+
+    {% if (craft.app.request.getSegment(3) == 'qrscan') %}
+        {% set submissionType = 'qrscan' %}
+        {% include 'neuroselect/submissions/qrscan' %}
+    {% endif %}
+
+    {% if (craft.app.request.getSegment(3) == 'pathway') %}
+        {% set submissionType = 'pathway' %}
+        {% include 'neuroselect/submissions/pathway' %}
+    {% endif %}
+
+    {% if (craft.app.request.getSegment(3) == 'sleep') %}
+        {% set submissionType = 'sleep' %}
+        {% include 'neuroselect/submissions/sleep' %}
+    {% endif %}
+
+    {% if (craft.app.request.getSegment(3) == 'clinicalindication') %}
+        {% set submissionType = 'clinicalindication' %}
+        {% include 'neuroselect/submissions/clinicalIndications' %}
+    {% endif %}
+    {% if (craft.app.request.getSegment(3) == 'products') %}
+        {% set submissionType = 'products' %}
+        {% include 'neuroselect/submissions/manual' %}
+    {% endif %}
+
+{% endblock %}

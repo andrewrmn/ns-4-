@@ -1,0 +1,46 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
+handle: howWillYouBeOrdering
+instructions: ''
+name: 'How will you be ordering?'
+searchable: true
+settings:
+  multi: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Phone
+        -
+          - value
+          - phone
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Online
+        -
+          - value
+          - online
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Fax
+        -
+          - value
+          - fax
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Checkboxes

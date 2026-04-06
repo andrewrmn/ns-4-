@@ -1,0 +1,6 @@
+color: pink
+default: false
+description: ''
+handle: autoShip
+name: 'Auto Ship'
+sortOrder: 99

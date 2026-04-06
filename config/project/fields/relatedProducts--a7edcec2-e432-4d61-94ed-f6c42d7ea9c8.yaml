@@ -1,0 +1,21 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
+handle: relatedProducts
+instructions: ''
+name: 'Related Products'
+searchable: true
+settings:
+  allowSelfRelations: false
+  limit: '4'
+  localizeRelations: false
+  selectionLabel: ''
+  showSiteMenu: true
+  source: null
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\commerce\fields\Products

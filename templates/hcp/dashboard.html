@@ -1,0 +1,437 @@
+{% requireLogin %}
+
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+{% set hcpNeurocashPercentage = globalObjects.hcpNeurocashPercentage ? globalObjects.hcpNeurocashPercentage : 0 %}
+{% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().innerJoin('craft_commerce_customers', 'craft_commerce_customers.userId=users.id').select('craft_commerce_customers.id AS customerId').asArray().all() %}
+{% set customerIds = [] %}
+
+{% set hasPatients = false %}
+{% if hcpPatients|length %}
+  {% set hasPatients = true %}
+
+  {% for hcpPatient in hcpPatients %}
+  {% set customerIds = customerIds|merge([hcpPatient.customerId]) %}
+  {% endfor %}
+
+{% endif %}
+
+  <div class="tabcontent patient-tabcontent">
+    <div class="dashboard grey-bg px-md-6 px-4 py-md-5 py-4">
+      {% include 'hcp/_includes/top-search-patient' %}
+      <h2 class="d-inline"><span>Hello</span> {% if currentUser.fullName %}{{ currentUser.fullName }}{% else %}{{ currentUser.username }}{% endif %}.</h2>
+
+    <p>Welcome to your Patient Fulfillment Dashboard</p>
+
+    <div class="patient-options mt-4 mb-5">
+      <a href="{{ url('hcp/new-patient') }}" class="btn">+ New Patient</a>
+      <a href="{{ url('hcp/search-patient') }}" class="btn">+ Create Recommendation</a>
+      <a class="js-symptom-link edit-store mr-4" data-click-target="edit-store-modal" href="#"><img src="../../images/svgs/settings.svg" width="16" /><span>Edit Storefront</span></a>
+      <a class="edit-store mr-4" href="{{ url('hcp/product-selections') }}"><img src="../../images/svgs/settings.svg" width="16" /><span>Customize Product Selections</span></a>
+      {% if currentUser.patientNeurocashDiscount %}
+      <a class="js-symptom-link edit-store" data-click-target="share-discount-modal" href="#"><img src="../../images/svgs/settings.svg" width="16" /><span>Share Discount</span></a>
+      {% endif %}
+    </div>
+
+    {% set errorMessage = craft.app.session.getFlash('error', null, true) %}
+    <div class="errorMessage">
+    {% if errorMessage %}
+        <p class="text-red">{{ errorMessage }}</p>
+    {% endif %}
+    </div>
+
+    {% include 'hcp/_includes/weekly-highlights' %}
+  </div>
+
+  {% include 'hcp/_includes/recent-activity' %}
+
+  {% include 'hcp/_includes/snapshot' %}
+
+
+  <div class="wrapper-wide">
+    <h3>CUSTOMIZE YOUR STOREFRONT</h3>
+    <div class="my-3">
+      <a class="js-symptom-link edit-store" data-click-target="edit-store-modal" href="#"><img src="../../images/svgs/settings.svg" width="16" /><span>Edit Storefront</span></a>
+    </div>
+
+    <a class="current-product" href="{{ url('hcp/product-selections') }}">Customize Product Selections</a>
+    <form class="my-4">
+      <label class="toggle-button d-none">
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <span class="checkbox-content">Checked switch checkbox input</span>
+      </label>
+      <hr class="my-4">
+      <div class="terms-conditions">
+
+        <label class="toggle-button">
+          {% if not currentUser.accpetedTermsAndConditions %}
+          <label class="switch">
+            <input type="checkbox" {% if currentUser.accpetedTermsAndConditions %}checked {% endif %} disabled />
+            <span class="slider round"></span>
+          </label>
+          {% endif %}
+          <span class="checkbox-content" style="width: 100%;">I have read and agreed to NeuroScience's Terms and Conditions</span>
+        </label>
+
+        <a href="#" class="js-terms-conditions">Terms and Conditions ></a>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="modal-wrap" id="edit-store-modal">
+    <div class="modal">
+      <a class="modal__close" href="#" data-click-target="edit-store-modal">
+        <div>
+          <p class="sr-only">Close Modal</p>
+          <img src="../../images/svgs/close.svg" width="16" />
+        </div>
+      </a>
+      <div class="modal__inner">
+        <div class="user-content js-modal-content">
+
+          <div class="mb-5">
+            <h3 class="text-center mx-auto">Edit your NeuroScience Storefront</h3>
+            <form class="form" enctype="multipart/form-data" accept-charset="UTF-8" id="frm-edit-storefront" method="post">
+              {{ csrfInput() }}
+              {{ actionInput('users/save-user') }}
+              {{ hiddenInput('userId', currentUser.id) }}
+              {{ redirectInput('hcp/dashboard') }}
+
+              <div class="mb-3">
+                <input name="fields[hcpStorefrontName]" type="text" placeholder="Add storefront name visible to your patients." value="{{ currentUser.hcpStorefrontName }}" />
+              </div>
+              <div class="mb-3">
+                <textarea name="fields[hpcStoreFrontText]" cols="4" placeholder="Add a message that appears on the dashboard of all patient portals. Consider including helpful contact information in case your patients have questions.">{{ currentUser.hpcStoreFrontText }}</textarea>
+              </div>
+
+              <div>
+                <h3 class="h3 text-center mx-auto mb-2 mt-4">Manage Email Notifications</h3>
+                <div class="toggle-button">
+                  <label class="switch" for="hcpEmailNotifications">
+                    <input type="checkbox" name="fields[hcpEmailNotifications]" id="hcpEmailNotifications"
+                    {% if currentUser.hcpEmailNotifications %}checked{% endif %}
+                    value="1">
+                    <span class="slider round"></span>
+                  </label>
+                  <span class="checkbox-content">Receive email notifications for orders made in your storefront. Notifications show the product(s) your patient purchased and a link to full order details.</span>
+                </div>
+
+
+                {% if currentUser.hcpEmailNotifications %}
+                <div class="d-none">
+                  <input type="checkbox" name="fields[hcpEmailNotifications]" id="hcpEmailNotificationsHidden" value="0">
+                </div>
+                <script>
+                  var $ = jQuery;
+                  var toggle = $('#hcpEmailNotifications');
+                  var hiddenToggle = $('#hcpEmailNotificationsHidden');
+
+                  console.log(hiddenToggle.val());
+                  toggle.on('change', function(){
+                    var el = $(this);
+                    if ( !el.is(':checked') ) {
+                      console.log('activate disable');
+                      hiddenToggle.prop('checked', true);
+                    } else {
+                      console.log('leave on');
+                      hiddenToggle.prop('checked', false);
+                    }
+                  });
+                </script>
+                {% endif %}
+              </div>
+
+              <div class="text-center pt-4">
+                <button class="btn" type="submit">Save</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="mb-5 mt-6">
+            <h3 class="h3 text-center mx-auto">Set Storefront Discounting</h3>
+            <form class="discount-form" enctype="multipart/form-data" accept-charset="UTF-8" method="post" id="frm-edit-discount">
+              {{ csrfInput() }}
+              {{ actionInput('users/save-user') }}
+              {{ hiddenInput('userId', currentUser.id) }}
+              {{ redirectInput('hcp/dashboard') }}
+
+              {{ hiddenInput('fields[disableProviderEarnings]', currentUser.disableProviderEarnings) }}
+
+              <p>Pass along a portion of your own provider earnings as an automatic discount off the suggested retail price (SRP) to all patients. This discount applies to every available product and on all orders placed in your storefront.</p>
+
+              <div class="range-slider">
+                <div class="rs-wrap">
+                  <div class="length range__slider" data-min="0" data-max="15">
+                		<div class="length__title field-title" data-length='0'>length:</div>
+                		<input id="slider" type="range" name="fields[hcpStorefrontDiscount]" step="5" min="0" max="15" value="{{ currentUser.hcpStorefrontDiscount }}" />
+                	</div>
+
+                  <div class="range-slider-labels">
+                    <div data-range="0" class="is-active">No Discount</div>
+                    <div data-range="5">5% off SRP</div>
+                    <div data-range="10">10% off SRP</div>
+                    <div data-range="15">15% off SRP</div>
+                  </div>
+                </div>
+
+                <div class="checkbox checkbox-hcp flex-items-start mt-6">
+                  <input type="checkbox" name="disableProviderEarnings" id="disableProviderEarnings" value="1"{% if currentUser.disableProviderEarnings %}checked{% endif %} />
+
+                  <label for="disableProviderEarnings">
+                    <strong>Disable Provider Earnings</strong>
+                    Selecting Disable Provider Earnings means you will not receive earnings from product sales in your storefont
+                  </label>
+                </div>
+
+                <script>
+                  var $ = jQuery;
+                  var labels = $('.range-slider-labels > div');
+                  var range = $("input[name='fields[hcpStorefrontDiscount]']");
+
+                  labels.click(function(){
+                    labels.removeClass('is-active');
+                    $(this).addClass('is-active');
+                    let target = $(this).attr('data-range');
+                    range.val(target);
+
+                    applyFill(slider);
+                    applyFill(slider.querySelector("input"));
+                  });
+
+                  updateLabels();
+
+                  function updateLabels(){
+                    let value = range.val();
+                    labels.each(function(){
+                      if( $(this).attr('data-range') == value ) {
+                        labels.removeClass('is-active');
+                        $(this).addClass('is-active');
+                      }
+                    })
+                  }
+                  range.change (function () {
+                    updateLabels();
+                  });
+
+
+                  const sliderProps = {
+                  	fill: "#01B433",
+                  	background: "#0081B6",
+                  };
+
+                  // Selecting the Range Slider container which will effect the LENGTH property of the password.
+                  const slider = document.querySelector(".range__slider");
+                  slider.querySelector("input").addEventListener("input", event => {
+                  	applyFill(event.target);
+                  });
+                  applyFill(slider.querySelector("input"));
+                  // This function is responsible to create the trailing color and setting the fill.
+                  function applyFill(slider) {
+                  	const percentage = (100 * (slider.value - slider.min)) / (slider.max - slider.min);
+                  	const bg = `linear-gradient(90deg, ${sliderProps.fill} ${percentage}%, ${sliderProps.background} ${percentage +
+                  			0.1}%)`;
+                  	slider.style.background = bg;
+                  }
+                </script>
+              </div>
+
+              <div class="text-center mt-5">
+                <button class="btn" type="submit">Save</button>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-wrap{% if not currentUser.accpetedTermsAndConditions %} is-active{% endif %}" id="terms-and-conditions-modal">
+    <div class="modal">
+      <div class="modal__inner">
+        <a class="modal__close" href="#" data-click-target="terms-and-conditions-modal">
+          <div>
+            <p class="sr-only">Close Modal</p>
+            <img src="../../images/svgs/close.svg" width="16" />
+          </div>
+        </a>
+
+        <div class="user-content js-modal-content">
+          <h3>Get started with NeuroScience's Patient Fulfillment service by reading and acknowledging our Patient Fulfillment Terms and Conditions below.</h3>
+
+          <div class="rte rte--black mb-4">
+
+            {{ generalTextNotifications.termsConditions }}
+          </div>
+
+          {% if not currentUser.accpetedTermsAndConditions %}
+          <form enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+            {{ csrfInput() }}
+            {{ actionInput('neuroselect/hcp/accept-terms-conditions') }}
+            {{ redirectInput('hcp/dashboard') }}
+            <p>
+              <label class="toggle-button">
+                <label class="switch">
+                  <input type="checkbox" name="accpetedTermsAndConditions" value="1"  required />
+                  <span class="slider round"></span>
+                </label>
+                <span class="checkbox-content pt-2">I accept the NeuroScience patient fulfillment Terms and Conditions.</span>
+              </label>
+            </p>
+            <p class="text-center"><button class="btn" type="submit">Submit</button></p>
+          </form>
+          {% else %}
+          <div class="text-center">
+          <a class="btn btn-alt" href="#" data-click-target="terms-and-conditions-modal">
+	          Close
+          </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% if currentUser.patientNeurocashDiscount %}
+  <div class="modal-wrap" id="share-discount-modal">
+    <div class="modal">
+      <div class="modal__inner">
+        <a class="modal__close" href="#" data-click-target="share-discount-modal">
+          <div>
+            <p class="sr-only">Close Modal</p>
+            <img src="../../images/svgs/close.svg" width="16" />
+          </div>
+        </a>
+        <div class="user-content js-modal-content">
+          <form enctype="multipart/form-data" accept-charset="UTF-8" method="post">
+            {{ csrfInput() }}
+            {{ actionInput('neuroselect/hcp/save-discount-sharing') }}
+            {{ redirectInput('hcp/dashboard') }}
+            <div class="row">
+              <div class="col-lg-12 mb-3">
+                <input name="name" type="text" placeholder="Discount Name" value="" />
+              </div>
+              <div class="col-lg-12 mb-3">
+                <input name="description" type="text" placeholder="Discount Description" value="" />
+              </div>
+              <div class="col-lg-12 mb-3">
+                <input name="percentDiscount" type="number" placeholder="Per Item Percentage Off" value="" max="{{ currentUser.patientNeurocashDiscount }}" min="1" />%
+              </div>
+            </div>
+            <div class="row pt-5">
+              <div class="col-lg-12 text-center">
+                <button class="btn" type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+
+
+{% js %}
+$(document).ready(function(){
+  $(document).on("submit", "form#frm-edit-storefront", function(e) {
+    e.preventDefault();
+    $(this).find("button[type='submit']").attr('disabled', true);
+    var form = $(this);
+    $.ajax({
+        type: "post",
+        data: form.serialize(),
+        dataType: "json",
+        success: function (data) {
+          if(data.success){
+            alert("Storefront detail saved successfully.");
+          }else{
+            alert("Storefront detail saved successfully.");
+          }
+          window.location.href = '/hcp/dashboard';
+        },
+        error: function (data) {
+          alert("Storefront detail saved successfully.");
+          window.location.href = '/hcp/dashboard';
+        },
+    });
+  })
+
+  $(document).on("submit", "form#frm-edit-discount", function(e) {
+    e.preventDefault();
+    $(this).find("button[type='submit']").attr('disabled', true);
+    var form = $(this);
+    $.ajax({
+        type: "post",
+        data: form.serialize(),
+        dataType: "json",
+        success: function (data) {
+          if(data.success){
+            alert("Discount saved successfully.");
+          }else{
+            alert("These is some error in saving discount.");
+          }
+          window.location.href = '/hcp/dashboard';
+        },
+        error: function (data) {
+          alert("These is some error in saving discount.");
+          window.location.href = '/hcp/dashboard';
+        },
+    });
+  })
+
+  var discountVal = $("input[name='fields[hcpStorefrontDiscount]']").val();
+  $(document).on("change", "input[name='disableProviderEarnings']", function(e) {
+    var ischecked = $(this).is(':checked');
+    if( ischecked ){
+      $("input[name='fields[hcpStorefrontDiscount]']").val(0);
+      $("input[name='fields[disableProviderEarnings]']").val(1);
+      $('.range-slider').addClass('disabled');
+      $('.range-slider-labels div').removeClass('is-active');
+      $('#slider').val(0);
+      $('#slider').attr('style', '');
+    }else{
+      $("input[name='fields[hcpStorefrontDiscount]']").val(discountVal);
+      $('.range-slider').removeClass('disabled');
+      $("input[name='fields[disableProviderEarnings]']").val(0);
+      $('#slider').val(0);
+      $('#slider').attr('style', '');
+    }
+    updateLabels();
+  });
+
+  $(document).on("click", "#enableAutopayForPatients", function() {
+    if( $(this).is(":checked") ){
+      var enabled = 1;
+    }else{
+      var enabled = 0;
+    }
+    var data = {enabled: enabled};
+    $.get('../actions/neuroselect/hcp/enable-autopay',
+    data,
+    function(response) {
+    }
+    );
+  });
+
+  $(document).on("click", ".js-terms-conditions",function(e) {
+    e.preventDefault();
+    $('#terms-and-conditions-modal').addClass('is-active');
+  });
+});
+{% endjs %}
+
+{% endblock %}

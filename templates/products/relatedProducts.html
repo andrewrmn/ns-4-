@@ -1,0 +1,32 @@
+<div class="wrapper-full border-top sections py-6 py-md-8">
+
+    <header class="pb-4 text-center bsg-light">
+        <h4 class="h2 text-flush">Consider a Network Approach</h4>
+        <p></p>
+    </header>
+
+    <div class="wrapper my-4 d-none">
+		<img class="mx-auto col-sm-10 col-md-8 col-lg-7" src="/images/featured-products.png" alt="featured products" />
+	</div>
+    <div class="wrapper-wide">
+        {% if product.relatedProducts|length >= 1 %}
+
+            <ul class="products">
+                {% for product in product.relatedProducts %}
+                    {% include 'products/productPreview.html' %}
+                {% endfor %}
+            </ul>
+
+        {% else %}
+
+            {% set tags = craft.categories.relatedTo(product).level(2) %}
+            {% set products = craft.products.relatedTo(tags).limit(4) %}
+            <ul class="products">
+                {% for product in products %}
+                    {% include 'products/productPreview.html' %}
+                {% endfor %}
+            </ul>
+
+        {% endif %}
+    </div>
+</div>

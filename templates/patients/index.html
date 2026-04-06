@@ -1,0 +1,22 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+    <nav class="sub-nav">
+        <ul class="ul-inline">
+            <li>
+                <a href="{{ siteUrl }}patients/">Overview</a>
+            </li>
+            {% nav page in craft.entries.section('patients') %}
+            <li>
+                <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+            {% endnav %}
+        </ul>
+    </nav>
+
+
+    {% include 'partials/contentModules' %}
+
+
+{% endblock %}

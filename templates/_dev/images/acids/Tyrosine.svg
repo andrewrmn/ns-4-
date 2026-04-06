@@ -1,0 +1,39 @@
+<svg width="286px" height="131px" viewBox="0 0 286 131" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="tyrosine">
+    <title>Tyrosine</title>
+    <defs></defs>
+    <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.300000012">
+        <g  transform="translate(-522.000000, -538.000000)">
+            <g  transform="translate(521.000000, 536.000000)">
+                <g>
+                    <polygon  stroke="#FFFFFF" stroke-linecap="round" points="119.61 107.36 119.61 65.74 83.56 44.93 47.52 65.74 47.52 107.36 83.56 128.17"></polygon>
+                    <polyline  stroke="#FFFFFF" stroke-linecap="round" points="121.06 65.74 157.1 44.93 193.15 65.74 193.15 91.36"></polyline>
+                    <polyline  stroke="#FFFFFF" stroke-linecap="round" points="264.01 65.74 228.97 44.93 192.92 65.74"></polyline>
+                    <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="0.172" y="131.93">HO</tspan>
+                    </text>
+                    <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="271.592" y="72.75">OH</tspan>
+                    </text>
+                    <text font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="223.97" y="11.91">O</tspan>
+                    </text>
+                    <path d="M23.48,124.17 L47.52,107.36"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                    <path d="M110.14,71.62 L110.14,103.21"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                    <path d="M83.56,119.41 L56.2,103.61"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                    <path d="M81.45,55.33 L54.09,71.13"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                    <path d="M232.63,20.62 L232.63,46.59"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                    <path d="M223.69,20.62 L223.69,46.59"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                    <polygon  stroke="#FFFFFF" stroke-width="0.5" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" points="193.17 66.27 189.92 99.75 196.42 99.75"></polygon>
+                    <g transform="translate(181.000000, 107.000000)" font-family="Akkurat" fill="#FFFFFF" font-weight="normal">
+                        <text font-size="12">
+                            <tspan x="0.288" y="11">NH</tspan>
+                        </text>
+                        <textfont-size="10">
+                            <tspan x="19" y="14">2</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

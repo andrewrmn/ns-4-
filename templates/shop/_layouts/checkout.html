@@ -1,0 +1,35 @@
+{% set showNav = false %}
+
+{% extends 'shop/_layouts/main' %}
+
+
+
+{% block header %}
+
+    {% if craft.app.session.getFlash('error', null, false) %}
+        <div class="flash alert error">
+          {{ craft.app.session.getFlash('error') }}
+        </div>
+    {% endif %}
+
+    {% if cart.isEmpty %}
+        <div class="flash alert error">Your cart is empty.</div>
+    {% endif %}
+
+    {% if craft.app.session.getFlash('notice', null, false) %}
+        <div class="flash alert success">
+          {{ craft.app.session.getFlash('notice') }}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block main %}
+        {% include 'shop/_includes/meter' %}
+
+    {% block content %}
+
+    {% endblock %}
+    
+{% endblock %}

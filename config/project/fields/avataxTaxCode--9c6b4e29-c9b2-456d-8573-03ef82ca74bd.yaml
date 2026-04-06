@@ -1,0 +1,19 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: a8843661-a567-4e21-8928-2108d60edafe # Avatax
+handle: avataxTaxCode
+instructions: 'Specify an [Avalara Tax Code](https://taxcode.avatax.avalara.com) to use for this product.'
+name: 'AvaTax Tax Code'
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: null
+  initialRows: '4'
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

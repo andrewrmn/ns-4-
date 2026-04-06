@@ -1,0 +1,152 @@
+{% set showCI = true %}
+{% set loopLimit = 5 %}
+{% set showAdditional = true %}
+
+{% if query | length %}
+    {% set showCI = false %}
+    {% set showAdditional = false %}
+    {% set loopLimit = null %}
+
+    {% for row in user.clinicalIndicationSubmission %}
+        {% if row.submissionId == query %}
+            {% set showCI = true %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="col-12 mb-4 d-flex">
+    <div class="card col-12">
+        <div class="d-sm-flex flex-items-center flex-justify-between mb-3">
+            <h2 class="h4 text-black mr-3">Clinical Indications</h2>
+            <a class="btn btn--sm" href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication">Add New</a>
+        </div>
+
+        {% if showCI %}
+        <table class="u-full-width full-borders pir-tables">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Clinical indication(s)</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Age</th>
+                    <th class="text-center">Sex</th>
+                    <th class="text-right"></th>
+                    <th class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in user.clinicalIndicationSubmission.limit(loopLimit).all() %}
+                {% if query | length %}
+                    {% if row.submissionId == query %}
+                    <tr>
+                        <td>{{ row.submissionId }}</td>
+                        <td>{{ row.date }}</td>
+                        <td>
+                            {{ row.clinicalindicators }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.age }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.gender }}
+                        </td>
+                        <td class="text-right">
+                            <a href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication&id={{ row.submissionId }}">Edit</a>
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/clinicalindication/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td>{{ row.submissionId }}</td>
+                        <td>{{ row.date }}</td>
+                        <td>
+                            {{ row.clinicalindicators }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.age }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.gender }}
+                        </td>
+                        <td class="text-right">
+                            <a href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication&id={{ row.submissionId }}">Edit</a>
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/clinicalindication/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+
+
+            {% if showAdditional and user.clinicalIndicationSubmission|length > 5 %}
+            <tbody class="js-additional-reports" data-group="clinical">
+                {% for row in user.clinicalIndicationSubmission.offset(5).all() %}
+                {% if query | length %}
+                    {% if row.submissionId == query %}
+                    <tr>
+                        <td>{{ row.submissionId }}</td>
+                        <td>{{ row.date }}</td>
+                        <td>
+                            {{ row.clinicalindicators }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.age }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.gender }}
+                        </td>
+                        <td class="text-right">
+                            <a href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication&id={{ row.submissionId }}">Edit</a>
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/clinicalindication/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td>{{ row.submissionId }}</td>
+                        <td>{{ row.date }}</td>
+                        <td>
+                            {{ row.clinicalindicators }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.category }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.age }}
+                        </td>
+                        <td class="text-center">
+                            {{ row.gender }}
+                        </td>
+                        <td class="text-right">
+                            <a href="{{ siteUrl }}account/neuroselect/edit?type=clinicalindication&id={{ row.submissionId }}">Edit</a>
+                        </td>
+                        <td class="text-right"><a class="pir-generate-report" href="/account/neuroselect/clinicalindication/{{ row.submissionId }}">Generate Report</a></td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+
+
+            {% if showAdditional and user.clinicalIndicationSubmission|length > 5 %}
+            <div class="text-center mt-4">
+                <div class="btn-alt btn--sm js-show-all-reports" data-group="clinical">Show All Reports</div>
+            </div>
+            {% endif %}
+        {% else %}
+        <p class="p-sm mt-4">No reports found</p>
+        {% endif %}
+    </div>
+</div>

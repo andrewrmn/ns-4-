@@ -1,0 +1,192 @@
+{% set title = 'Shipping Method' %}
+{% extends 'shop/_layouts/checkout' %}
+
+{% block content %}
+
+<div class="wrapper-full bg-light">
+
+  <h3 class="sr-only">Shipping Method</h3>
+
+</div>
+
+<div class="wrapper-full bg-light">
+
+  <div class="wrapper wrapper--thin text-center section-x-short section--flush-top{% if currentUser and currentUser.isInGroup('patients') %} d-none{% endif %}">
+    {{ generalTextNotifications.shippingNotification }}
+  </div>
+
+  <div class="wrapper section section--flush-top">
+
+    <div class="card">
+      <div class="row">
+
+        <div class="col--xs--12 col--sm--4">
+          {#
+          Choosing a shipping method.
+          Now that we know the cart's address, we need to show all available shipping methods. Only those that match
+          a shipping method's rule are compatible with the shipping address. `craft.commerce.shippingMethods` only returns
+          methods available to the user. If you require shipping and no methods are avaialable, create a catch all rule
+          in a method that matches all addresses.
+          #}
+
+          {% if not cart.availableShippingMethodOptions|length %}
+          <p>No shipping methods available. <a class="button button-primary" href="{{ url('shop/checkout/payment') }}">Continue to payment</a></p>
+          {% endif %}
+
+          {% if cart.availableShippingMethodOptions|length %}
+          <form method="POST">
+            <input type="hidden" name="action" value="commerce/cart/update-cart">
+            {{ redirectInput('shop/checkout/payment') }}
+            {{ csrfInput() }}
+            <div class="text-group">
+              {% if currentUser and currentUser.isInGroup('patients') %}
+                {% if cart.totalQty == 1 and cart.itemSubtotal < 70 %}
+                <div class="radio-inline shipping-select">
+                  <input type="radio" name="shippingMethodHandle" id="shippingMethod-pt" value="patientShipping" checked />
+                  <label for="shippingMethod-pt">Flat rate shipping</strong>
+                    <span class="price">{{ '5.99'|commerceCurrency(cart.currency) }}</span>
+                  </label>
+                </div>
+                {% else %}
+                <div class="radio-inline shipping-select">
+                  <input type="radio" name="shippingMethodHandle" id="shippingMethod-pt" value="patientShipping" checked />
+                  <label for="shippingMethod-pt"><strong>Free shipping</strong>
+                    <span class="price">{{ '0.00'|commerceCurrency(cart.currency) }}</span>
+                  </label>
+                </div>
+                {% endif %}
+              {% else %}
+              {% for handle, method in cart.availableShippingMethodOptions %}
+              {% if handle != 'patientShipping' %}
+              <div class="radio-inline shipping-select">
+                <input type="radio" name="shippingMethodHandle" id="shippingMethod-{{loop.index}}" value="{{ handle }}"  {% if handle == cart.shippingMethodHandle %}checked{% endif %} {% if handle == 'freeShipping' %}checked{% endif %} />
+                <label for="shippingMethod-{{loop.index}}"><strong>{{ method.name }}</strong>
+                  <span class="price">{{ method.getPrice()|commerceCurrency(cart.currency) }}</span>
+                </label>
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </div>
+            <span class="flash">{{ cart.getErrors('shippingMethod')|join }}</span>
+
+            {% if currentUser and currentUser.isInGroup('patients') %}
+            <input type="hidden" name="fields[makeThisARecurringOrder]" value="{% if cart.makeThisARecurringOrder == 1 %}1{% else %}0{% endif %}" />
+            <hr class="mt-4 mb-3" />
+            <h5 class="h4 pb-2">Autoship</h5>
+            <div class="recurring-order-toggle">
+              <p class="h6 mb-4">Would you enable autoship for this order?</p>
+              <div class="checkbox">
+                <input type="checkbox" value="1" id="makeThisARecurringOrder" name="makeThisARecurringOrder"{% if cart.makeThisARecurringOrder == 1 %} checked{% endif %} />
+                <label for="makeThisARecurringOrder">Enable Autoship</label>
+              </div>
+
+              <input type="hidden" id="as-option" name="options[autoship]" value="no" />
+              <input type="hidden" id="as-field"  name="fields[autoship]" value="no" />
+
+              {% set hcpEmail = currentUser.relatedHcp.one().email %}
+              {% if hcpEmail  %}
+	            <input type="hidden" id="as-hcp-emil" name="fields[hcpEmail]" value="{{ hcpEmail }}"
+	            <input type="hidden" id="as-is-patient" name="fields[isPatient]" value="yes" />
+							{% endif %}
+							
+              <div class="recurring-order-frequency{% if cart.makeThisARecurringOrder != 1 %} d-none{% endif %}">
+                <div>
+                  <label class="h6 my-3" for="paymentMethod">Autoship Frequency:</label>
+                  <ul>
+                    {% set field = craft.app.fields.getFieldByHandle('recurringOrderFrequency') %}
+                    {% for option in field.options %}
+                      <li class="radio-inline">
+                        <input type="radio" name="fields[recurringOrderFrequency]" value="{{ option.value }}" id="{{ option.label }}_{{ loop.index }}"{% if cart.recurringOrderFrequency.value == option.value %} checked{% endif %} />
+                        <label for="{{ option.label }}_{{ loop.index }}">{{ option.label }}</label>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+
+            <div class="text-centerS section-short section--flush-bottom mt-5 pt-0">
+              <input type="submit" class="btn" value="Continue">
+            </div>
+
+          </form>
+          {% endif %}
+
+        </div>
+
+        <div class="col--xs--12 col--sm--4">
+          <div class="address-card">
+            <h5 class="h4 label">Shipping Address</h5>
+            {% if cart.shippingAddress %}
+            {% include 'shop/_includes/addresses/address' with {'address': cart.shippingAddress} %}
+            {% else %}
+            <p>No shipping address selected.</p>
+            {% endif %}
+            {% if currentUser %}<a class="edit" href="{{ url('shop/customer/addresses/edit') }}?addressId={{ cart.shippingAddressId }}&redirect={{ craft.app.request.pathInfo }}">Edit</a>{% endif %}
+          </div>
+        </div>
+
+        <div class="col--xs--12 col--sm--4">
+          <div class="address-card">
+            <h5 class="h4 label">Billing Address</h5>
+            {% if cart.billingAddress %}
+            {% include 'shop/_includes/addresses/address' with {'address': cart.billingAddress} %}
+            {% if currentUser %}<a class="edit" href="{{ url('shop/customer/addresses/edit') }}?addressId={{ cart.billingAddressId }}&redirect={{ craft.app.request.pathInfo }}">Edit</a>{% endif %}
+            {% else %}
+            <p>No billing address selected.</p>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% js %}
+$(document).ready(function() {
+
+
+
+  $(document).on("change", "input#makeThisARecurringOrder", function() {
+    if($(this).is(":checked")) {
+      $("div.recurring-order-frequency").removeClass('d-none');
+      $("input[name='fields[makeThisARecurringOrder]']").val(1);
+      $('#as-option').val('yes');
+      $('#as-field').val('yes');
+
+    }else{
+      $("div.recurring-order-frequency").addClass('d-none');
+      $("input[name='fields[makeThisARecurringOrder]']").val(0);
+      $('#as-option').val('no');
+      $('#as-field').val('no');
+
+    }
+  });
+
+  if($('#makeThisARecurringOrder').is(":checked")) {
+    $("div.recurring-order-frequency").removeClass('d-none');
+    $("input[name='fields[makeThisARecurringOrder]']").val(1);
+    $('#as-option').val('yes');
+    $('#as-field').val('yes');
+
+  } else {
+    $("div.recurring-order-frequency").addClass('d-none');
+    $("input[name='fields[makeThisARecurringOrder]']").val(0);
+    $('#as-option').val('no');
+    $('#as-field').val('no');
+
+  }
+
+  var ssChecked = $('.shipping-select input:checked');
+  if(ssChecked.length < 1) {
+    $(".shipping-select input:first").attr('checked', true);
+  }
+});
+{% endjs %}
+
+{% endblock %}

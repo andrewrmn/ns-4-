@@ -1,0 +1,107 @@
+<div class="pf" id="product-filters">
+    <div class="pf__hd">
+        <span>All Filters(<span class="filter-count">0</span>)</span>
+    </div>
+
+    <div class="pf-level-1">
+        <ul class="pf-level-1__cats">
+            <li {% if craft.app.request.segments|last == 'products' %}class="is-active"{% endif %}>
+                <a href="{{ siteUrl }}products/">All <span class="is-hidden-xs">Products</span></a>
+            </li>
+            <li class="calming {% if craft.app.request.segments|last == 'calming' %}is-active{% endif %}">
+                <a href="{{ siteUrl }}products/calming/">
+                    <svg width="11" height="14"><use xlink:href="#shape-moon"></use></svg>
+                    <span>Calming Products</span>
+                </a>
+            </li>
+            <li class="stimulating {% if craft.app.request.segments|last == 'stimulating' %}is-active{% endif %}">
+                <a href="{{ siteUrl }}products/stimulating/">
+                    <svg width="14" height="14"><use xlink:href="#shape-sun"></use></svg>
+                    <span>Stimulating Products</span>
+                </a>
+            </li>
+        </ul>
+        <div class="pf-level-1__search">
+            <form method="GET" action="{{ url('/products') }}">
+                <label for="search">
+                    <span class="sr-only">Search Products</span>
+                    <span><svg width="14" height="14"><use xlink:href="#shape-search"></use></svg></span>
+                </label>
+                <input type="text" name="q" placeholder="search products" id="search" />
+            </form>
+        </div>
+    </div>
+
+    <div class="pf-level-2">
+        <ul class="pf-level-2__cats">
+        {% set excludes = [] %}
+       
+
+        {% for category in craft.categories.group('productCategories').level(1).offset(2).title('and, not Sale, not Bundle').all() %}
+
+            <li class="has-sub-nav" id="{{ category.slug }}-nav">
+                <span class="js-product-cat-nav">
+                    {{ category.title }}
+                    <span class="cat-count is-hidden"></span>
+                    <span class="arrow-wrap"><svg width="12" height="7"><use xlink:href="#shape-arrow-down"></use></svg></span>
+                </span>
+
+                {% set children = category.getChildren() %}
+                <ul class="sub-nav">
+
+                    {% for child in children.all() %}
+                        <li class="tag-filter in-active {% if child.body|length %}js-symptom-link has-modal-content{% endif %}" data-tag-filter="{{ child.slug }}">
+                            <span class="js-cat-title">{{ child.title }}{% if child.body|length %}{% endif %}</span>
+
+                            {% if child.body|length %}
+                            <div class="is-hidden js-description">
+                                {% if child.featuredImage.one() %}
+                                    <img class="img-full" src="{{  child.featuredImage.one().url }}" alt="{{  child.featuredImage.one().title }}"  />
+                                {% endif %}
+                                <div class="user-content section-x-short wrapper wrapper--thin">
+                                    {{ child.body }}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+        {% endfor %}
+        </ul>
+
+        <div class="pf__apply">
+            <div class="btn">Apply Filters</div>
+        </div>
+
+        <div class="pf-level-2__reset">
+            <div class="js-reset-filters">
+                <span class="icon"><svg width="12" height="8"><use xlink:href="#shape-check"></use></svg></span>
+                <span>clear all</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="pf__close js-filter-toggle">
+        <svg width="14" height="14"><use xlink:href="#shape-close"></use></svg>
+    </div>
+
+</div>
+
+<div class="pf-mobile-panel">
+    <div class="pf-mobile-panel__search">
+        <form method="GET" action="{{ url('/products') }}">
+            <label for="search">
+                <span class="sr-only">Search Products</span>
+                <span><svg width="14" height="14"><use xlink:href="#shape-search"></use></svg></span>
+            </label>
+            <input type="text" name="q" placeholder="search products" id="search" />
+        </form>
+    </div>
+    <a href="#product-filter" class="pf-mobile-panel__toggle js-filter-toggle">
+        <span><svg width="15" height="10"><use xlink:href="#shape-filter"></use></svg></span>
+        <span>Filters</span>
+    </a>
+</div>

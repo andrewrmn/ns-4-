@@ -1,0 +1,120 @@
+
+
+
+    {% for submission in user.pathwaySubmissions %}
+        {% if craft.app.request.segments|last == submission.submissionId %}
+
+            {% set age = submission.age %}
+            {% set sex = submission.gender %}
+
+            {% set pathways = submission.pathways| split(', ') %}
+            {% set myNeurotransmitters = submission.pathways | split(', ') %}
+
+            {% set newPathways = false %}
+            {% for pathway in pathways %}
+                {% if pathway in craft.categories.group('updatedPathways') %}
+                    {% set newPathways = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% set recommendedProducts = [] %}
+            {% set productList = [] %}
+            {% set pathwaysUsed = [] %}
+
+
+            {% if newPathways %}
+                {% set allPathways = updatedPathwaysTable.updatedPathwaysTable %}
+                {% set allPathways = allPathways|merge(updatedPathwaysTable.updatedPathwaysTable) %}
+            {% else %}
+                {% set allPathways = pathwaysTable.pathwaysTable %}
+                {% set allPathways = allPathways|merge(pathwaysTable.pathwaysTable) %}
+            {% endif %}
+
+            {% if currentUser.admin %}
+
+            {% else %}
+
+            {% endif %}
+
+
+            {% for row in allPathways %}
+
+                {% set continue = true %}
+
+                {% for nt in row.neurotransmitters %}
+                    {% if nt.title not in pathways %}
+                        {% set continue = false %}
+                    {% endif %}
+
+                    {% if nt.title in pathwaysUsed %}
+                        {% set continue = false %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if continue %}
+
+                    {% set addProduct = true %}
+                    {% set addInfo = '' %}
+                    {% set product = row.associatedProduct.one() %}
+
+                    {% if row.ageCheck  %}
+                        {% set addProduct = false %}
+                            {% if row.age.value == 13 %}
+                                {% if submission.age >= 13 and submission.age != '' %}
+                                    {% set addProduct = true %}
+                                    {% set addInfo = '(13+)' %}
+                                {% endif %}
+                            {% endif %}
+                            {% if row.age.value == 12 %}
+                                {% if submission.age <= 12 and submission.age != '' %}
+                                    {% set addProduct = true %}
+                                    {% set addInfo = '(12-)' %}
+                                {% endif %}
+                            {% endif %}
+                            {% if row.age.value == 'notSpecified' and submission.age == '' %}
+                                {% set addProduct = true %}
+                                {% set addInfo = '(no age)' %}
+                            {% endif %}
+                    {% endif %}
+
+                    {% if row.immuneAdrenal.value != 'notSpecified' %}
+                        {% set addProduct = false %}
+
+                        {% if row.immuneAdrenal.value == 'immune' %}
+                            {% if submission.category == 'Immune' %}
+
+                                {% set addProduct = true %}
+                                {% set addInfo = '(immune)' %}
+
+                            {% endif %}
+                        {% endif %}
+
+                        {% if row.immuneAdrenal.value == 'adrenal' %}
+                            {% if submission.category == 'Adrenal' %}
+
+                                {% set addProduct = true %}
+                                {% set addInfo = '(adrenal)' %}
+
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+
+                    {% if addProduct == true %}
+                        {% if product.title not in recommendedProducts and recommendedProducts|length < 3 %}
+                            {% set recommendedProducts = recommendedProducts|merge([product.title]) %}
+                            {% set productList = productList|merge([product]) %}
+
+                            {% for nt in row.neurotransmitters %}
+                                {% if nt.title in pathways %}
+                                    {% set pathwaysUsed = pathwaysUsed|merge([nt.title]) %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% include 'shop/customer/submissions/report' %}
+
+        {% endif %}
+    {% endfor %}

@@ -1,0 +1,31 @@
+{% if order.customer.user.isInGroup('patients') %}
+{% include 'shop/emails/_orderReceivedPatient' %}
+{% else %}
+Thank you, {{ order.customer.user.firstName }}.
+
+<p>Your order has been received and is being processed.</p>
+
+<h3>Order Information</h3>
+<p><b>Date Received:</b> {{ order.dateOrdered|date('D jS M Y') }}</p>
+<p><b>Order Number:</b> {{ order.shortNumber }}</p>
+<p><b>Total Quantity:</b> {{ order.totalQty }}</p>
+<p><b>Total Price:</b> ${{ order.totalPrice }}</p>
+
+<h3>Your Information</h3>
+{% if order.customer.user.firstName and order.customer.user.lastName %}
+<p><b>Name: </b>{{ order.customer.user.firstName }} {{ order.customer.user.lastName }}</p>
+{% else %}
+<p><b>Name: </b>{{ order.customer.user.fullName }}</p>
+{% endif %}
+<p><b>Email: </b>{{ order.customer.user.email }}</p>
+
+{% if order.shippingAddress %}
+<h3>Shipping Address</h3>
+{% include 'shop/_includes/addresses/address' with { address: order.shippingAddress } %}
+{% endif %}
+
+{% if order.billingAddress %}
+<h3>Billing Address</h3>
+{% include 'shop/_includes/addresses/address' with { address: order.billingAddress } %}
+{% endif %}
+{% endif %}

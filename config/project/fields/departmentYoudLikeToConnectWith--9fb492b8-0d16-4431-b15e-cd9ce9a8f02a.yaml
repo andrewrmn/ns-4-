@@ -1,0 +1,112 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 9a98c4e1-a799-42f0-a4ce-ba07bd38df16 # Forms
+handle: departmentYoudLikeToConnectWith
+instructions: ''
+name: 'Topic you would like to discuss'
+searchable: true
+settings:
+  optgroups: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Select one...'
+        -
+          - value
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Products
+        -
+          - value
+          - products
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Sales
+        -
+          - value
+          - sales
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Returns
+        -
+          - value
+          - returns
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Website Questions'
+        -
+          - value
+          - websiteQuestions
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Find a Provider'
+        -
+          - value
+          - findAProvider
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Order Status'
+        -
+          - value
+          - orderStatus
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Feedback
+        -
+          - value
+          - feedback
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Other
+        -
+          - value
+          - other
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

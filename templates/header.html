@@ -1,0 +1,205 @@
+<header class="site-header" id="header">
+    <h1 class="logo" itemscope itemtype="http://schema.org/Organization">
+        <a href="{{ siteUrl }}" itemprop="url">
+            <span class="sr-only" itemprop="name">{{ siteName }}</span>
+            <img src="{{ siteUrl }}/images/NeuroScience-logo.svg" alt="NeuroScience logo" />
+        </a>
+    </h1>
+
+    <a class="tel before-bp-only" href="tel:+18883427272">(888) 342-7272</a>
+
+    <div class="site-header-panel">
+        <nav class="site-navigation">
+            <ul class="site-navigation-list" style="justify-content: flex-end !important; grid-gap: 24px;">
+                <li>
+                    <a href="{{ siteUrl }}">Home</a>
+                </li>
+                {% if currentUser is not null and currentUser.isInGroup('patients')  %}
+                    <li {% if craft.app.request.segments|last == 'education' %}class="is-active"{% endif %}>
+                        <a href="{{ url('healthcare-providers/education') }}">Education</a>
+                    </li>
+                {% else %}
+                    <li class="has-sub-nav" id="hp-nav">
+                        <span class="js-header-item" data-click-target="hp-nav" data-screen="full" data-click-bodyClass="sub-nav-is-active">
+                            Healthcare Providers
+                            <span class="arrow-wrap"><svg width="12" height="7"><use xlink:href="#shape-arrow-down"></use></svg></span>
+                        </span>
+                        <ul class="sub-nav">
+                            <li {% if craft.app.request.segments|last == 'healthcare-providers' %}class="is-active"{% endif %}>
+                                <a href="{{ siteUrl }}healthcare-providers/">Overview</a>
+                            </li>
+                            {% for page in craft.entries.section('healthcareProfessionals').level(1).all() %}
+                            <li {% if craft.app.request.segments|last == page.slug %}class="is-active"{% endif %}>
+                                <a href="{{ page.url }}">{{ page.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <li {% if craft.app.request.segments|last == 'patients' %}class="is-active"{% endif %}>
+                        <a href="{{ siteUrl }}patients/">Patients</a>
+                    </li>
+                {% endif %}
+                <li {% if craft.app.request.segments|last == 'about' %}class="is-active"{% endif %}>
+                    <a href="{{ siteUrl }}about/">About</a>
+                </li>
+                
+                <li {% if craft.app.request.segments|last == 'contact' %}class="is-active"{% endif %}>
+                    <a href="{{ siteUrl }}contact/">Contact</a>
+                </li>
+                {% if currentUser is not null and currentUser.isInGroup('patients')  %}
+                <li class="after-bp-only">
+                    <a class="shop-link btn" href="{{ url('patients/dashboard#shop-product-store') }}">Shop</a>
+                </li>
+                <li class="before-bp-only">
+                    <a href="{{ siteUrl }}patients/dashboard/" rel="nofollow">Shop</a>
+                </li>
+                {% else %}
+                <li class="after-bp-only">
+                    <a class="shop-link btn" href="{{ siteUrl }}products/">Shop</a>
+                </li>
+                <li class="before-bp-only">
+                    <a href="{{ siteUrl }}products/" rel="nofollow">Shop</a>
+                </li>
+
+                {% endif %}
+                <li class="before-bp-only">
+                    <a href="{{ siteUrl }}shop/cart">
+                        <span>Cart (<span class="js-cart-qty-hd">{{cart.totalQty}}</span>)</span>
+                    </a>
+                </li>
+                
+                <li class="before-bp-only">
+                    <a href="{{ siteUrl }}faq/" rel="nofollow">FAQ</a>
+                </li>
+                {% if not currentUser %}
+                <li class="before-bp-only">
+                    <a href="{{ siteUrl }}login/" rel="nofollow">Login</a>
+                </li>
+                <li class="before-bp-only">
+                    <a href="{{ siteUrl }}register/" rel="nofollow">Create An Account</a>
+                </li>
+                {% endif %}
+            </ul>
+
+
+            <div class="utility-navigation after-bp-only">
+
+
+                <a  class="un-one {% if cart.totalQty > 0 %} un-one--active {% endif %}" href="{{ siteUrl }}shop/cart">
+                    <svg width="18" height="15"><use xlink:href="#shape-cart"></use></svg>
+                    <span>Cart (<span class="js-cart-qty">{{cart.totalQty}}</span>)</span>
+                </a>
+
+
+                {% if currentUser %}
+                    <div class="account-link has-sub-nav" id="account-nav">
+                        <svg width="14" height="14"><use xlink:href="#shape-person-circle"></use></svg>
+                        <span data-click-target="account-nav" data-click-bodyClass="sub-nav-is-active">{{ currentUser.friendlyName|capitalize }}</span>
+                        <span class="arrow-wrap"><svg width="12" height="7"><use xlink:href="#shape-arrow-down"></use></svg></span>
+
+                        <ul class="sub-nav">
+	                        {% if currentUser.isInGroup('patients')  %}
+                            <li>
+                                <a href="{{ siteUrl }}patients/dashboard">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="{{ siteUrl }}patients/recommendations/">Recommendations</a>
+                            </li>
+                            <li>
+                                <a href="{{ siteUrl }}patients/autoship/">Autoship Orders</a>
+                            </li>
+                            <li>
+                                <a href="{{ siteUrl }}patients/orders/">Order History</a>
+                            </li>
+                            {% endif %}
+                            
+                            {% if not currentUser.isInGroup('neuroselectOnly') and not currentUser.isInGroup('patients') %}
+                            <li>
+                                <a href="{{ siteUrl }}account/">Account</a>
+                            </li>
+                            <li>
+                                <a href="{{ siteUrl }}account/orders/">Order History</a>
+                            </li>
+                            {% endif %}
+                            
+                            {% if not currentUser.isInGroup('patients') %}
+                            <li>
+                                <a href="{{ siteUrl }}account/neuroselect">NeuroSelect</a>
+                            </li>
+                            <li>
+                                <a href="{{ siteUrl }}account/neuro-q/">Neuro-Q</a>
+                            </li>
+                            {% endif %}
+                            
+                            {% if currentUser.isInGroup('physicians') or currentUser.admin %}
+                            <li>
+                                <a href="{{ siteUrl }}hcp/dashboard/">Patient Fulfillment</a>
+                            </li>
+                            {% endif %}
+          
+                            <li>
+                                <a href="{{ siteUrl }}logout/">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                <a class="account-link has-sub-nav" href="{{ siteUrl }}login/">
+                    <svg width="14" height="14"><use xlink:href="#shape-person"></use></svg>
+                    <span>Login</span>
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+
+    <ul class="mobile-nav-bar no-print">
+        <li>
+            <a href="{{ siteUrl }}shop/cart/">
+                <span class="flex flex--align-center">
+                    <span class="sr-only">Cart</span>
+                    <svg width="21" height="17"><use xlink:href="#shape-cart"></use></svg>
+                    ({{cart.totalQty}})
+                </span>
+            </a>
+        </li>
+        {% if currentUser %}
+        <li>
+            <a href="{{ siteUrl }}shop/customer/">
+                <span class="sr-only">Account</span>
+                <svg width="16" height="16"><use xlink:href="#shape-person"></use></svg>
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{{ siteUrl }}login/">
+                <span class="sr-only">Login</span>
+                <svg width="16" height="16"><use xlink:href="#shape-person"></use></svg>
+            </a>
+        </li>
+        {% endif %}
+        {% if currentUser is not null and currentUser.isInGroup('patients')  %}
+        <li>
+            <a href="{{ siteUrl }}patients/dashboard/">
+                <span class="sr-only">Shop</span>
+                <svg width="11" height="16"><use xlink:href="#shape-bottle"></use></svg>
+            </a>
+        </li>
+        {% else %}
+
+        <li>
+            <a href="{{ siteUrl }}products/">
+                <span class="sr-only">Shop</span>
+                <svg width="11" height="16"><use xlink:href="#shape-bottle"></use></svg>
+            </a>
+        </li>
+        {% endif %}
+        <li class="burger" data-click-target="header" data-click-bodyClass="mobile-menu-is-open">
+            <div class="burger-inner">
+                <span class="burger-top"></span>
+                <span class="burger-middle"></span>
+                <span class="burger-bottom"></span>
+            </div>
+        </li>
+    </ul>
+</header>

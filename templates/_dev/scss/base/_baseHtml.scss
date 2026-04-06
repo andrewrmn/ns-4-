@@ -1,0 +1,88 @@
+// ---------------------------------------------------------------------
+//  Base Global Styles
+// ---------------------------------------------------------------------
+
+html,
+body {
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body,
+input,
+button,
+select,
+textarea {
+    font-family: $main-font;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+
+    @include stop-at($small) {
+        font-size: 1.4rem;
+    }
+}
+
+main#content,
+#main.container {
+    overflow: hidden;
+    min-height: 500px;
+}
+
+a,
+.a {
+    color: $brand;
+    text-decoration: none;
+    transition: all $transition;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+a[href^="tel:"] {
+
+    &:hover {
+        cursor: default;
+    }
+}
+
+[data-scroll-to],
+[data-click-target] {
+    cursor: pointer;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    display: block;
+}
+
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+picture > * {
+    width: 100%;
+    height: auto;
+}
+
+hr {
+    border-top: 1px solid $border;
+}
+
+@mixin selection {
+    color: $white;
+    background: rgba($brand, 1);
+}
+
+::selection {
+    @include selection;
+}
+::-moz-selection {
+    @include selection;
+}

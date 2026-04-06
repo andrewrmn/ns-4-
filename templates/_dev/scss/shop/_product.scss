@@ -1,0 +1,346 @@
+// ---------------------------------------------------------------------
+//  Product Single
+// ---------------------------------------------------------------------
+
+.product-banner {
+	padding: 10px 0;
+
+	@include start-at($small) {
+		.wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			.breadcrumbs {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.breadcrumbs {
+		font-size: 12px;
+		color: $gray;
+		margin-bottom: 10px;
+
+		> * {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		a {
+			//color: $gray;
+
+			&:after {
+				content: ' /';
+			}
+		}
+
+		p {
+			font-size: 12px;
+			color: $black;
+			font-weight: bold;
+		}
+	}
+}
+
+// ----------------------------------------
+// Content
+// ----------------------------------------
+
+.product__images {
+	max-width: 480px;
+	margin: 0 auto;
+}
+
+.product-hd {
+	border-bottom: 1px solid $border;
+}
+
+.product-details {
+	margin-bottom: 50px;
+}
+
+.product-title {
+	margin-bottom: 0;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
+@include stop-at($small) {
+	.product-count {
+		margin-top: 10px;
+	}
+}
+
+@include stop-at(799px) {
+	.img-zoom:hover {
+	    cursor: default !important;
+	}
+}
+
+
+
+
+
+// ----------------------------------------
+// Add to cart form
+// ----------------------------------------
+
+.add-to-cart-form {
+	display: flex;
+	align-items: flex-start;
+	padding: 30px 0 0;
+	flex-wrap: wrap;
+	margin-bottom: 0;
+
+	@include stop-at($small) {
+		flex-wrap: wrap;
+		padding: 15px 0 0;
+
+		.product-price,
+		.product__qty {
+			width: 100%;
+			margin: 0 0 10px;
+		}
+
+		input[type=submit].submit-sm {
+			width: 180px;
+			padding: 11px 15px;
+			margin: 20px 0;
+			height: 50px;
+		}
+
+		> * {
+			margin-bottom: 20px;
+		}
+	}
+
+	> * {
+		margin-right: 20px;
+	}
+
+	.product-price {
+		width: 100%;
+		margin-bottom: 15px;
+
+		.h2 {
+			color: $brand-alt;
+		}
+	}
+
+	.product__qty {
+		display: flex;
+		align-items: center;
+		margin-bottom: 15px;
+
+		label {
+			margin-right: 10px;
+			margin-bottom: 0;
+		}
+
+		input {
+			height: 42px;
+			width: 64px;
+		}
+	}
+
+	.product__variant {
+		width: 100%;
+	//	margin: 0;
+	flex-grow: 1;
+
+		select {
+			height: 42px;
+			font-size: 14px;
+		}
+
+		@include start-at($small) {
+			width: 50%;
+		//	margin-right: 20px;
+		}
+	}
+}
+
+
+// ----------------------------------------
+// Features
+// ----------------------------------------
+
+.product-features {
+	border-bottom: 1px solid $border;
+}
+
+
+// ----------------------------------------
+// Tags
+// ----------------------------------------
+
+.product-tags {
+
+	> * {
+		margin-bottom: 20px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	b {
+		font-size: 15px;
+	}
+
+	ul p,
+	ul li > * {
+		font-size: 14px;
+	}
+
+	@include start-at($small) {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+
+		> * {
+			width: 50%;
+		}
+	}
+
+	@include start-at($large) {
+
+
+		> * {
+			width: 33%;
+		}
+	}
+
+}
+
+
+.product-resources {
+	padding: 20px 30px;
+	font-size: 1.3rem;
+	color: $gray;
+	background: $gray-light;
+	border: 1px solid #B3BAC5;
+
+	p {
+		font-size: 1.3rem;
+	}
+}
+
+
+// ----------------------------------------
+// Clinical Icons
+// ----------------------------------------
+
+.product-clinical-list {
+	display: flex;
+	text-align: center;
+	flex-wrap: wrap;
+
+	li {
+		min-width: 70px;
+	}
+
+	a {
+		color: $gray;
+	}
+
+	> * {
+		color: $gray;
+		font-size: 12px;
+		padding: 10px 5px;
+		margin-right: 10px;
+		//width: 90px;
+		flex-basis: 0;
+		flex: 1 1 0;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	img {
+		max-width: 50px;
+    	margin: 0 auto 4px;
+	}
+
+	&.product-clinical-list--start {
+		justify-content: flex-start;
+
+		> * {
+			flex-grow: 0;
+		}
+	}
+}
+
+
+.product__callouts {
+
+	@include start-at($small) {
+		display: flex;
+		align-items: center;
+	}
+
+	.product__network {
+	    background: #01B433;
+	    padding: 6px 12px;
+	    border-radius: 0 30px 30px 0;
+	    margin: 0 0 10px;
+		color: $white;
+
+		@include start-at($small) {
+			width: 48%;
+			min-width: 48%;
+			margin-right: 2%;
+		}
+
+		@include start-at($large) {
+			width: 35%;
+			min-width: 35%;
+			margin-right: 15%;
+		}
+	}
+}
+
+
+.prooduct-deets {
+
+
+}
+
+
+.lot-number-detail {
+	background: $gray-light;
+	border-radius: 4px;
+	padding: 12px;
+
+	@include start-at($small) {
+		padding: 32px 24px;
+	}
+
+	.h3,
+	.h4 {
+		font-weight: 700;
+		color: $gray-dark;
+
+		span {
+			text-decoration: underline;
+		}
+	}
+
+	.h4 {
+
+	}
+
+	.user-content {
+		ul, ol, p {
+			font-size: 14px;
+			line-height: 1.5;
+
+			@include start-at($small) {
+				font-size: 14px;
+			}
+		}
+	}
+}

@@ -1,0 +1,30 @@
+{#
+# Triple Hex Images Field
+# -------------------
+#}
+
+<div class="triple-hex">
+    <div class="wrapper">
+
+        <div class="triple-hex-images">
+            {% for image in block.images.all() %}
+            
+            <figure class="hexagon-image">
+                <img class="holder" src="{{ siteUrl }}images/hexagon.png" alt="hexagon shape">
+                <img class="hexagon-image__img" src="{{ image.url }}" alt="{{ image.title }}">
+            </figure>
+            {% endfor %}
+        </div>
+
+        <div class="triple-hex__content">
+            {% if block.headline|length %}<h2 class="h4">{{ block.headline }}</h2>{% endif %}
+            {% if block.subHeadline|length %}<h3 class="h2">{{ block.subHeadline }}</h3>{% endif %}
+            {% if block.body|length %}
+            <div class="user-content">
+                {{ block.body }}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>

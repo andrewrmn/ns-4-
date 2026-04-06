@@ -1,0 +1,43 @@
+{% set allowedPlans = ['15Days', '30Days', '45Days', '60Days', '90Days'] %}
+{% set paymentForm = cart.recurringOrderFrequency.value in allowedPlans
+  ? cart.recurringOrderFrequency.value
+  : '30Days' %}
+
+
+
+{% if cart.cancelSubscriptionOrderId %}
+    {% set buttonText = 'Update Autoship Order' %}
+{% else %}
+    {% set buttonText = 'Pay with card' %}
+{% endif %}
+
+{% set options = {
+    amount: cart.totalPrice,
+    quantity: 1,
+    checkoutSuccessUrl: '/shop/customer/auto-ship-order?number={number}',
+    calculateFinalAmount: true,
+    customAmountStep: '0.01',
+    buttonText: buttonText
+} %}
+
+{{ paymentForm }}
+
+{% do craft.enupalStripe.addVariables({ cart: cart }) %}
+
+{{ craft.enupalstripe.paymentForm(paymentForm, options) }}
+
+
+{% js %}
+    $(document).ready(function(){
+        $("input[name='stripeElementEmail']").parents('.form-group').hide();
+        $("input[name='enupalStripe[customPlanAmount]']").parents('.form-group').hide();
+        $("input[name='enupalStripe[customPlanAmount]']").val({{ cart.totalPrice }});
+        $("div.cc-wrapper label").addClass('p text-bold text-dark');
+    })
+{% endjs %}
+
+{% css %}
+    div.StripeElement{
+        border: 1px solid rgba(179, 186, 197, 0.6);
+    }
+{% endcss %}

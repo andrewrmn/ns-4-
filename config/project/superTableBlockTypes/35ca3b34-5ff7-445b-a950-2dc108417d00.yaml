@@ -1,0 +1,207 @@
+field: 31a4061d-db93-4c5c-b19a-6a7928b1d651 # Pathway Submissions
+fieldLayouts:
+  6d45abef-bdb5-4565-be79-4456b788d0c6:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 9cf08c4a-ab8b-49df-a1ab-d16f32c47e9f # ID
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 07542c0e-b846-407e-8f83-9598f87ff744 # Date
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: e8a4d915-66e4-4ed1-af72-242680f21cee # Pathways
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: d19a0ee3-27ad-4e02-8903-0a654328b6b1 # Category
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 2361ece1-05e4-418b-9d55-2014216a6c86 # Age
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: dd963577-fbc5-4135-a055-5eefd3198304 # Gender
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 302777e4-1fa9-4d2e-bbd1-08243166d73b # PDF Generated
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  9cf08c4a-ab8b-49df-a1ab-d16f32c47e9f: # ID
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: submissionId
+    instructions: ''
+    name: ID
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  2361ece1-05e4-418b-9d55-2014216a6c86: # Age
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: age
+    instructions: ''
+    name: Age
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  07542c0e-b846-407e-8f83-9598f87ff744: # Date
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: date
+    instructions: ''
+    name: Date
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  302777e4-1fa9-4d2e-bbd1-08243166d73b: # PDF Generated
+    columnSuffix: null
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: pdfGenerated
+    instructions: ''
+    name: 'PDF Generated'
+    searchable: true
+    settings:
+      default: false
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  d19a0ee3-27ad-4e02-8903-0a654328b6b1: # Category
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: category
+    instructions: ''
+    name: Category
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  dd963577-fbc5-4135-a055-5eefd3198304: # Gender
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: gender
+    instructions: ''
+    name: Gender
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  e8a4d915-66e4-4ed1-af72-242680f21cee: # Pathways
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: pathways
+    instructions: ''
+    name: Pathways
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

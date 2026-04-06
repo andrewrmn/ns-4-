@@ -1,0 +1,9 @@
+description: ''
+enabled: true
+fileNameFormat: 'Invoice-{number}'
+handle: invoice
+isDefault: true
+language: orderLanguage
+name: Invoice
+sortOrder: 9999
+templatePath: shop/receipt

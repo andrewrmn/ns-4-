@@ -1,0 +1,511 @@
+{% extends "shop/_layouts/main" %}
+
+{% block main %}
+
+	{% if craft.app.session.get('allowGuest') == 'true' %}
+	    {% set allowedGuest = true %}
+	{% endif %}
+
+
+
+{% set allowQTY = 0 %}
+{% set isPUP = false %}
+<div class="wrapper-full bg-light section-short" id="cart">
+    <div class="wrapper">
+
+        {% if cart.lineItems %}
+
+        {% set productsOrdersThisMonth = [] %}
+        {% set purchaseError = false %}
+        {% set pupCounter = 0 %}
+
+        {% if currentUser and currentUser.isInGroup('personal') %}
+            {% set isPUP = true %}
+            {% set end = now|date_modify('-1 month')|atom %}
+
+            {% set orders = craft.orders.dateOrdered(">= #{end}").isCompleted().customer(craft.commerce.customers.customer).all() %}
+
+
+            {% for order in orders %}
+                {% set pupCounter = ( pupCounter | default(0) ) + order.totalQty %}
+                {% for item in order.lineItems %}
+                    {% if item.qty > 2 %}
+                        {% set maxedProd = item.sku %}
+                        {% set productsOrdersThisMonth = productsOrdersThisMonth|merge([maxedProd]) %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        
+
+
+        <form id="commerce-cart" method="post">
+            <input type="hidden" name="action" value="commerce/cart/update-cart">
+            {% if cart.makeThisARecurringOrder %}
+                <input type="hidden" name="cartUpdatedNotice" value="The autoship was updated.">
+            {% else %}
+                <input type="hidden" name="cartUpdatedNotice" value="The cart was updated.">
+            {% endif %}
+            {{ redirectInput('shop/cart') }}
+            {{ csrfInput() }}
+            {% if currentUser and currentUser.isInGroup('patients') %}
+                <input type="hidden" name="shippingMethodHandle" value="patientShipping" />
+            {% endif %}
+            
+            {% set hcpEmail = '' %}
+            {% set isPatient = 'no' %}
+            
+						{% if currentUser and currentUser.isInGroup('patients') %}
+            {% set isPatient = 'yes' %}
+            
+        
+            
+          {% endif %}
+          <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
+          <input type="hidden" name="fields[isPatient]" value="{{isPatient}}" />
+          
+
+					{% if hcpEmail %}
+          <input type="hidden" name="fields[relatedHcp]" value="{{hcpEmail}}" />
+            {% endif %}    
+                  
+            <div class="cart d-md-flex flex-justify-between">
+                <div class="col-12 col-md-7 col-lg-8">
+                    <div class="card">
+                        <div>
+                            {% set counter = '0' %}
+                            {% for item in cart.lineItems %}
+                                {% if item.purchasable.sku != '20039' and item.purchasable.sku != '20043' and item.purchasable.sku != '20048' and item.purchasable.sku != '20047' and item.purchasable.sku != '20044S'  and item.purchasable.sku != '20045S'  and item.purchasable.sku != '20041S' %}
+                                {% set counter = counter + item.qty %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+                            {% if counter < 11 %}
+                            {% if currentUser and not currentUser.isInGroup('patients') %}
+                            <div class="wrapper text-center section-x-short section--flush-top">
+                                <p class="text-black p-sm px-lg-3"><b>NeuroRewards Program:</b> Receive 1 free bottle for every 11 bottles purchased (excludes Calm PRT).</p>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            {% if counter >= 11 %}{% if currentUser and not currentUser.isInGroup('patients') %}
+                            <div class="wrapper text-center section-x-short section--flush-top">
+                                <p class="text-black p-sm px-lg-3"><b>NeuroRewards Program:</b> Your cart qualifies! Receive 1 free bottle for every 11 bottles purchased (excludes Calm PRT).</p>
+                            </div>
+                            {% endif %}{% endif %}
+                            {% endif %}
+
+                            {% if isPUP %}
+                            <div class="wrapper text-center section-x-short section--flush-top pup-notes d-none">
+                                <p class="p-sm px-lg-3 text-error">Due to restrictions on Personal Purchasing Accounts, you are not able to purchase more than 5 bottles in a calendar month.</p>
+                            </div>
+                            {% endif %}
+                            
+                            {% if counter < 2 and currentUser and currentUser.isInGroup('patients') %}
+                            <div class="wrapper text-center section-x-short section--flush-top">
+                                {% if cart.total > 70 %}
+                                  <p class="text-black p-sm px-lg-3">Congratulations, your cart qualifies for free shipping!</p>
+                                {% else %}
+                                <p class="text-black p-sm px-lg-3">Add 1 more bottle of any product to receive free 2 day shipping!</p>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {% if counter >= 2 and currentUser and currentUser.isInGroup('patients') %}
+                            <div class="wrapper text-center section-x-short section--flush-top">
+                                <p class="text-black p-sm px-lg-3">Congratulations, your cart qualifies for free shipping!</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="cart-products">
+                            {% set lineItemHasErrors = false %}
+
+
+                            {% for item in cart.lineItems %}
+                            {% set purchaseError = false %}
+                            {% set allowQTY = 10000 %}
+
+                            {# PUP account #}
+                            {# Check if product has been purchased 3 or more times in the past month #}
+                            {% if item.sku in productsOrdersThisMonth %}
+                                {% set purchaseError = true %}
+                            {% endif %}
+                            {% if isPUP %}
+                            {% set allowQTY = 5 - pupCounter %}
+                            {% endif %}
+
+
+
+                            {% if item.hasErrors() %}
+                            {# if the line item has errors lets record it so we can hide totals later (since they wont make sense) #}
+                            {% set lineItemHasErrors = true %}
+                            {% endif %}
+
+                            <div class="cart-product">
+
+                                <div class="cart-product__image">
+                                    {% for row in item.purchasable.product.productFields.all() %}
+                                        {% if row.productImages|length > 0 %}
+                                            {% set img = row.productImages.one() %}
+                                            <img src="{{ img.url }}" alt="{{ img.title }}"  />
+                                        {% else %}
+                                            <img src="{{ siteUrl }}images/products/no-image.png" alt="no image available" />
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="cart-product__details">
+                                    <div>
+                                        <strong class="h5"><a href="{{ item.purchasable.product.url }}">{{ item.description }}</a></strong>
+
+                                        {% if item.onSale %}
+                                        <span class="price">
+                                            <span title="{{ item.price}}"><s>{{ item.price|commerceCurrency(cart.currency) }}</s></span>
+                                            <span title="{{ item.salePrice}}">{{ item.salePrice|commerceCurrency(cart.currency) }}</span>
+                                        </span>
+                                        {% else %}
+                                        <span class="price">
+                                            <span title="{{ item.price}}">{{ item.price|commerceCurrency(cart.currency) }}</span>
+                                        </span>
+                                        {% endif %}
+
+                                        {% if item.purchasable.sku == '20039' or item.purchasable.sku == '20043' or item.purchasable.sku == '20048' or item.purchasable.sku == '20047' or item.purchasable.sku == '20044S' or item.purchasable.sku == '20045S' or item.purchasable.sku == '20041S' or item.purchasable.sku == '20054S' %}
+                                            <small class="text-italic" style="font-size:11px;">This item does not count towards NeuroRewards, however it can be redeemed as the free product</small>
+                                        {% endif %}
+                                        
+                                        
+                                        {% if item.purchasable.maxQty|length %}
+																				<small class="text-error text-italic">
+                                            Limit of {{ item.purchasable.maxQty }} per order
+                                        </small>
+																				{% endif %}
+																				
+                                        {% if item.purchasable.product.productNote %}
+                                        <small class="text-error text-italic">
+                                            {{ item.purchasable.product.productNote }}
+                                        </small>
+                                        {% endif %}
+                                        {% if purchaseError %}
+                                        <small class="text-error">You cannot purchase this product more than 3 times in a month</small>
+                                        {% endif %}
+                                    </div>
+
+                                    <input type="text" class="input-auto d-none" placeholder="My Note"
+                                        name="lineItems[{{ item.id }}][note]"
+                                        value="{{ item.note }}">
+                                </div>
+
+                                <div class="quanity-field">
+                                    <button type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                                    -
+                                    </button>
+                                    <span {% if item.getFirstError('qty') %}class="has-error"{% endif %}>
+                                        <input class="qty-field" type="number" name="lineItems[{{ item.id }}][qty]" min="0" {% if purchaseError
+									%}max="0" {% elseif isPUP %}max="3" {% else %}max="{{ item.purchasable.maxQty }}" {% endif %}
+									value="{% if purchaseError %}0{% else %}{{ item.qty }}{% endif %}">                                    </span>
+                                    <button type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                                    +
+                                    </button>
+                                </div>
+
+                                <div class="cart-product__price">
+                                    {% if not lineItemHasErrors %}
+
+                                    {% endif %}
+                                        <span class="price">
+                                      <span title="{{ item.subtotal}}"><span class="t">Subtotal:</span> {{ item.subtotal|commerceCurrency(cart.currency) }}</span>
+                                      </span>
+                                </div>
+                            </div>
+
+                            {% if not lineItemHasErrors %}
+                                {% for adjustment in item.adjustments %}
+                                      <div class="adjustment">
+                                        <div class="adjustment__details">
+
+                                          <p class="adjustment__title h6 mb-0">{{ adjustment.name|title }}</p>
+
+                                          {% if adjustment.isEstimated %}<i class="p-sm text-light m-0">{{ 'Estimated'|t('commerce') }}</i>{% endif %}
+                                          <p class="p-sm mt-0">{{ adjustment.description }}</p>
+                                        </div>
+                                        <div class="adjustment__price">
+                                          <span title="{{ adjustment.amount }}">{{ adjustment.amount|commerceCurrency(cart.currency) }}</span>
+                                        </div>
+                                      </div>
+                                {% endfor %}
+
+                            {% endif %}
+
+
+                            {% endfor %}
+                            {# End product loop #}
+
+                        </div>
+                        
+                      
+                        
+                  
+                        <div class="mt-6">
+                            
+                            
+                            <div class="cart-update-wrap">
+                                <div>
+                                    <button class="btn-alt" type="submit">Update Cart</button>
+                                </div>
+                                
+                                {% if not allowedGuest %}
+                                
+                                {% if not cart.makeThisARecurringOrder %}
+                                <div class="coupon-wrap-wrap">
+                                    <div class="coupon-wrap">
+                                        <span class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}">
+                                            <input type="text" name="couponCode" width="11"
+                                            class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
+                                            value="{{ cart.couponCode }}"
+                                            placeholder="{{ "Code"|t }}">
+                                        </span>
+                                    </div>
+                                    {% if cart.getFirstError('couponCode') %}
+                                    <span class="flash">{{ cart.getFirstError('couponCode') }}</span>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                            
+                            
+
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-4 pl-md-3 pl-lg-6">
+
+                    {% if not lineItemHasErrors %}
+                    {% for adjustment in cart.orderAdjustments %}
+                    <div class="adjustment">
+
+                        <div class="h6">{{ adjustment.type }}</div>
+                        <hr />
+
+                        <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                            <strong>{{ adjustment.name }}</strong>
+                            <span title="{{ adjustment.amount }}">{{ adjustment.amount|commerceCurrency(cart.currency) }}</span>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
+
+                    <div class="mt-4">
+                        <div class="h6">Order details</div>
+                        <hr />
+
+                        <div class="text-right align-text-top">
+                            {% if not lineItemHasErrors %}
+                            <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                                <span class="p-sm">Cart Subtotal:</span>
+                                <span title="{{ cart.itemSubTotal }}">{{ cart.itemSubTotal|commerceCurrency(cart.currency) }}</span>
+                            </div>
+
+                            <hr />
+
+                            <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                                <span class="p-sm">Discount Total:</span>
+                                <span title="{{cart.getTotalDiscount()}}">{{ cart.getTotalDiscount()|commerceCurrency(cart.currency) }}</span>
+                            </div>
+
+                            <hr />
+
+                            <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                                <span class="p-sm">Shipping Total:</span>
+                                <span title="{{cart.getTotalShippingCost()}}">{{ cart.getTotalShippingCost()|commerceCurrency(cart.currency) }}</span>
+                            </div>
+
+                            <hr />
+
+                            <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                                <span class="p-sm">Tax Total:</span>
+                                <span title="{{cart.getTotalTax()}}">{{ cart.getTotalTax()|commerceCurrency(cart.currency) }}</span>
+                            </div>
+
+                            <div class="d-none">
+                            <hr />
+
+                            <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                                <span class="p-sm">Order Total (tax inc):</span>
+                                <span title="{{cart.getTotalTaxIncluded()}}">{{ cart.getTotalTaxIncluded()|commerceCurrency(cart.currency) }}</span>
+                            </div>
+                            </div>
+                            <hr />
+
+                            <div class="d-flex flex-items-baseline flex-justify-between py-2">
+                                <span class="p-sm text-bold">Order Total:</span>
+                                <strong><span title="{{ cart.totalPrice }}">{{ cart.totalPrice|commerceCurrency(cart.currency) }}</span></strong>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="mt-4">
+                        {% if not lineItemHasErrors %}
+                        <a class="checkout-button btn mr-0" href="{{ url('shop/checkout') }}">{% if cart.makeThisARecurringOrder %}Continue Editing{% else %}Checkout{% endif %}</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+        {% endif %}
+
+
+
+        {% if not cart.lineItems|length %}
+        <div class="section text-center">
+	        {% if currentUser and currentUser.isInGroup('patients') %}
+	        <p>You have no items in your cart, add some on the <a href="https://www.neuroscienceinc.com/patients/dashboard/">products page</a>.</p>
+	        {% else %}
+            <p>You have no items in your cart, add some on the <a href="{{ url('/products') }}">products page</a>.</p>
+            {% endif %}
+        </div>
+        
+        	{% if currentUser and currentUser.isInGroup('patients') %}
+        		{% do cart.setFieldValues({"cancelSubscriptionOrderId": '', "recurringOrderFrequency": '', "makeThisARecurringOrder": 0}) %}
+				{% do craft.app.elements.saveElement(cart) %}
+			{% endif %}
+		{% endif %}
+    </div>
+</div>
+
+<div class="wrapper-full bg-light section py-6"></div>
+{% js %}
+var states = {{ craft.commerce.states.allEnabledStatesAsListGroupedByCountryId|json_encode|raw }};
+{% endjs %}
+{% js %}
+var $estimateShippingMethodsContainer = $('.js-estimate-shipping-methods');
+var $estimateFieldsContainer = $('.js-estimate-fields');
+var $estimateShowFieldsButton = $('.js-estimate-show-fields');
+var $estimateBilling = $('.js-estimate-billing');
+var $estimateBillingSameAsShipping = $('input[name="estimatedBillingAddressSameAsShipping"]');
+var $estimateCountrySelects = $('select.estimate-country');
+
+// Setup "same as" checkbox
+if ($estimateBillingSameAsShipping.prop('checked')) {
+    $estimateBilling.addClass('hidden').find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+}
+
+// Handle the change event for the "same as" checkbox
+$estimateBillingSameAsShipping.change(function(ev) {
+    var $this = $(this);
+    if ($this.prop('checked')) {
+        $estimateBilling.addClass('hidden').find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+    } else {
+        $estimateBilling.removeClass('hidden').find('input,select').attr('disabled', '').prop('disabled', '');
+    }
+});
+
+// Setup initial state Showing/hiding of the shipping method selection
+if ($estimateShippingMethodsContainer.find('.js-shipping-select').length) {
+    $estimateFieldsContainer.addClass('hidden');
+    $estimateFieldsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+} else {
+    $estimateShippingMethodsContainer.addClass('hidden');
+    $estimateShippingMethodsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');;
+}
+
+// Handle click event for returning to the estimate fields
+$estimateShowFieldsButton.click(function(ev) {
+    ev.preventDefault();
+
+    if ($estimateFieldsContainer.hasClass('hidden')) {
+        $estimateFieldsContainer.removeClass('hidden');
+        $estimateFieldsContainer.find('input,select').attr('disabled', '').prop('disabled', '');
+        $estimateShippingMethodsContainer.addClass('hidden');
+        $estimateShippingMethodsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+    } else {
+        $estimateFieldsContainer.addClass('hidden');
+        $estimateFieldsContainer.find('input,select').attr('disabled', 'disabled').prop('disabled', 'disabled');
+        $estimateShippingMethodsContainer.removeClass('hidden');
+        $estimateShippingMethodsContainer.find('input,select').attr('disabled', '').prop('disabled', '');
+    }
+});
+
+// Handle change event for country selection for both shipping and billing
+$estimateCountrySelects.change(function () {
+    // get the value of the selected country.
+    var cid = $(this).val();
+    var $box = $('.js-estimate-state-box[data-modelname="'+$(this).data('modelname')+'"]');
+    var $states = $box.find('select.js-address-stateId');
+    var $stateName = $box.find('input.js-address-stateName');
+    $states.find('option').remove();
+
+    if (states.hasOwnProperty(cid))
+    {
+        // We have states for this country, show the states drop down.
+        $states.removeClass('hidden');
+        $states.attr('name', $states.data('modelname')+'[stateValue]');
+
+        // We have states for this country, hide the stateName input.
+        $stateName.removeAttr('name');
+        $stateName.addClass('hidden');
+        $stateName.val('');
+
+        // Add all states as options to drop down.
+        for (var id in states[cid])
+        {
+            var state = states[cid][id];
+            var $option = $('<option/>');
+            $option.attr('value', id).text(state);
+            $states.append($option);
+        }
+
+    } else {
+        // hide the states dropdown, since this country has none.
+        $states.addClass('hidden');
+        $states.removeAttr('name');
+
+        // show the stateName
+        $stateName.removeClass('hidden');
+        $stateName.attr('name', $stateName.data('modelname')+'[stateValue]');
+    }
+
+});
+
+{% endjs %}
+{% if isPUP %}
+<script>
+var qty = $('.qty-field'),
+    form = $('#commerce-cart'),
+    qtyBtn = $('.quanity-field button'),
+    allowedQTY = {{ allowQTY }};
+
+    allowedQTY =  parseInt(allowedQTY);
+
+function checkQTY() {
+    totalQty = 0;
+    qty.each(function(){
+        v = parseInt($(this).val());
+
+        totalQty = totalQty + v;
+    });
+
+    if(totalQty > allowedQTY) {
+        $('.checkout-button').addClass('disabled');
+        $('.pup-notes').removeClass('d-none');
+    }
+}
+$(document).ready(function(){
+    checkQTY();
+});
+
+qtyBtn.click(function(){
+    checkQTY();
+});
+
+</script>
+{% endif %}
+
+{% endblock %}

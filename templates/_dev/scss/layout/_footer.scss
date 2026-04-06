@@ -1,0 +1,84 @@
+// ---------------------------------------------------------------------
+//  Site Footer Styles
+// ---------------------------------------------------------------------
+$footer-bp: $medium;
+
+.site-footer {
+    background: $brand;
+    padding: 40px 0 88px;
+    width: 100%;
+    color: $white;
+    position: relative;
+    z-index: 1;
+
+    a {
+        color: $white;
+    }
+
+    .modal {
+        color: $black;
+    }
+
+    @include start-at($footer-bp) {
+        padding: 40px 0;
+        .wrapper-wide {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            > *:first-child {
+                max-width: 540px;
+            }
+        }
+    }
+}
+
+.footer-nav {
+    margin-bottom: 15px;
+
+    > * {
+        margin-bottom: 10px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    @include start-at($footer-bp) {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 5px;
+
+        > * {
+            margin-right: 15px;
+
+            *:last-child {
+                margin-right: 0;
+            }
+        }
+
+    }
+}
+
+.footer__contact {
+    margin-top: 40px;
+    min-width: 200px;
+
+    p + p {
+        margin-top: 5px;
+    }
+
+    @include start-at($footer-bp) {
+        margin-top: 0;
+        text-align: right;
+        color: $white;
+    }
+}
+
+.footer__address {
+    margin-top: 10px;
+    p {
+        font-size: 14px;
+
+    }
+}

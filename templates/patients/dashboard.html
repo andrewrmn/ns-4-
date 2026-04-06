@@ -1,0 +1,42 @@
+{% if not currentUser or not currentUser.isInGroup('patients') %}
+{% redirect "patients/login" %}
+{% endif %}
+{% set title = 'Patient Dashboard' %}
+{% extends 'layouts/_accounts-patient' %}
+{% block content %}
+
+{% set patientName = currentUser.firstName ? currentUser.firstName ~ ' ' ~ currentUser.lastName : currentUser.username %}
+{% set hcpName = currentUser.relatedHcp.one().firstName ? currentUser.relatedHcp.one().firstName ~ ' ' ~ currentUser.relatedHcp.one().lastName : currentUser.relatedHcp.one().username %}
+
+{% if currentUser.relatedHcp.one().hcpStorefrontName %}
+{% set hcpName = currentUser.relatedHcp.one().hcpStorefrontName %}
+{% endif %}
+
+<img class="patient-portal__bg" src="https://www.neuroscienceinc.com/images/general/accent.jpg" alt="">
+
+<div class="patient-portal-content wrapper-before-lg">
+
+  <div class="patient-portal-content__content">
+
+    {% include 'patients/_includes/welcome' %}
+
+
+
+    {% include 'patients/_includes/recommendations-preview' %}
+
+    {% include 'patients/_includes/shop' %}
+
+    {% include 'patients/_includes/order-history' %}
+
+    {% include 'patients/_includes/active-autoship' %}
+
+
+  </div>
+
+  <div class="patient-portal-content__sidebar">
+    {% include 'patients/sidebar' %}
+    <img src="https://www.neuroscienceinc.com/images/general/how-it-works.png" alt="how it works">
+  </div>
+</div>
+
+{% endblock %}

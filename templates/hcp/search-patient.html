@@ -1,0 +1,61 @@
+{% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
+  {% redirect "login" %}
+{% endif %}
+
+{% set title = 'HCP Dashboard' %}
+{% extends 'layouts/_accounts' %}
+{% block content %}
+    <div class="tabcontent patient-tabcontent grey-bg py-5">
+
+
+        <div class="container">
+	        <a class="d-block mb-4" href="/hcp/dashboard">&lt; Back</a>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="searchPatient w-50">
+                        <input type="text" name="searchPatient" placeholder="Type patients name to start a recommendation" />
+                    </div>
+                    <p class="p-sm text-italic">Type patients name to start a recommendation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="new-product bg-white py-5 px-xl-4">
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-8 col-12 m-auto">
+                     <div class="text-center">
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+{% endblock %}
+{% do view.registerCssFile('//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css') %}
+{% do view.registerJsFile('//code.jquery.com/ui/1.13.1/jquery-ui.js') %}
+{% js %}
+    $(document).ready(function(){
+        $( "input[name='searchPatient']" ).val('');
+        $( "input[name='searchPatient']" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "/hcp/ajax/search-patients",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+                    success: function( data ) {
+                        response( data );
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                window.location.href = "{{ url('hcp/recommendation?patientId=') }}=" + ui.item.value;
+                ui.item.value = ui.item.label;
+            }
+        })
+    })
+{% endjs %}

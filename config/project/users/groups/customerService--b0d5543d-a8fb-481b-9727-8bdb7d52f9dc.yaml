@@ -1,0 +1,32 @@
+description: ''
+handle: customerService
+name: 'Customer Service'
+permissions:
+  - accesscp
+  - accesscpwhensystemisoff
+  - accessplugin-commerce
+  - accessplugin-enupal-stripe
+  - accesssitewhensystemisoff
+  - administrateusers
+  - 'assignusergroup:51e7da1c-9888-4197-a25e-c456eebf2312' # Health Care Professionals
+  - 'assignusergroup:b0d5543d-a8fb-481b-9727-8bdb7d52f9dc' # Customer Service
+  - 'assignusergroup:e0e6611c-ec20-44b8-96ce-23e0fa0d253b' # Personal (PUP)
+  - assignusergroups
+  - assignuserpermissions
+  - commerce-capturepayment
+  - commerce-deleteorders
+  - commerce-editorders
+  - commerce-managecustomers
+  - commerce-manageorders
+  - commerce-manageproducts
+  - 'commerce-manageproducttype:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
+  - commerce-managepromotions
+  - commerce-manageshipping
+  - commerce-managestoresettings
+  - commerce-managesubscriptions
+  - commerce-managetaxes
+  - commerce-refundpayment
+  - deleteusers
+  - editusers
+  - moderateusers
+  - registerusers

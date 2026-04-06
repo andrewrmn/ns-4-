@@ -1,0 +1,40 @@
+fieldLayouts:
+  02ff320e-7b7a-40ed-bbe9-ce6b9bf8652f:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\AssetTitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: pirPdfs
+hasUrls: true
+name: 'PIR PDFs'
+settings:
+  path: pir-documents
+sortOrder: 6
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+type: craft\volumes\Local
+url: '@baseUrl/pir-documents'

@@ -1,0 +1,17 @@
+{% set title = 'Order'  %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+    {% set number = craft.app.request.getRequiredParam('number') %}
+    <form method="POST" id="frm-complete-checkout">
+        {{ csrfInput() }}
+        <input type="hidden" name="action" value="commerce/cart/complete">
+        {{ redirectInput('/shop/customer/order?number=' ~ cart.number ~ '&subscriptionId=' ~ number) }}
+    </form>
+{% endblock %}
+
+{% js %}
+    $(document).ready(function(){
+        $("form#frm-complete-checkout").submit();
+    })
+{% endjs %}

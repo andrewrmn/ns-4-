@@ -1,0 +1,46 @@
+{#
+# Content Modules
+# -------------------
+#}
+
+{% for block in entry.contentModules.all() %}
+
+    {% if block.type == "banner" %}
+
+        {% include 'fields/banner' %}
+
+    {% elseif block.type == "featuredProducts" %}
+
+        {% include 'fields/featuredProducts' %}
+
+    {% elseif block.type == "contentBlock" %}
+
+        {% include 'fields/contentBlock' %}
+
+    {% elseif block.type == "doubleCta" %}
+
+        {% include 'fields/doubleCta' %}
+
+    {% elseif block.type == "cta" %}
+
+        {% include 'fields/cta' %}
+
+    {% elseif block.type == "tripleHexImages" %}
+
+        {% include 'fields/tripleHexImages' %}
+
+    {% elseif block.type == 'contentBlockStaggered' %}
+
+        {% include 'fields/contentBlockStaggered' %}
+
+    {% elseif block.type == 'mediaObject' %}
+
+        {% include 'fields/mediaObject' %}
+
+    {% elseif block.type == 'textBlock' %}
+
+        {% include 'fields/textBlock' %}
+
+    {% endif %}
+
+{% endfor %}

@@ -1,0 +1,32 @@
+<svg width="252px" height="97px" viewBox="0 0 252 97" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dopamine">
+    <title>Dopamine</title>
+    <defs></defs>
+    <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.300000012">
+        <g  transform="translate(-71.000000, -213.000000)">
+            <g  transform="translate(70.000000, 211.000000)">
+                <polygon  stroke="#FFFFFF" stroke-linecap="round" points="124.61 71.6 124.61 29.98 88.56 9.16 52.52 29.98 52.52 71.6 88.56 92.41"></polygon>
+                <polyline  stroke="#FFFFFF" stroke-linecap="round" points="126.06 29.98 162.1 9.16 198.15 29.98"></polyline>
+                <path d="M221.12,16.58 L197.92,29.98"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <g  transform="translate(229.000000, 7.000000)" font-family="Akkurat" fill="#FFFFFF" font-weight="normal">
+                    <text font-size="12">
+                        <tspan x="0.288" y="11">NH</tspan>
+                    </text>
+                    <text  font-size="10">
+                        <tspan x="19" y="14">2</tspan>
+                    </text>
+                </g>
+                <text  font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="0" y="97.17">HO</tspan>
+                </text>
+                <path d="M28.48,88.41 L52.52,71.6"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <text font-family="Akkurat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="0" y="11.91">HO</tspan>
+                </text>
+                <path d="M28.48,12.3 L52.52,29.11"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M115.14,35.86 L115.14,67.45"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M88.56,83.65 L61.2,67.85"  stroke="#FFFFFF" stroke-linecap="round"></path>
+                <path d="M86.45,19.57 L59.09,35.37"  stroke="#FFFFFF" stroke-linecap="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

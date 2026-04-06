@@ -1,0 +1,9 @@
+color: orange
+default: true
+description: null
+emails:
+  ae0e39ff-e479-4032-8ff0-fe8e0fe8e473: ae0e39ff-e479-4032-8ff0-fe8e0fe8e473 # Order Received
+  ff3aa6c9-c14b-46c6-b23f-8a3ba0a9a3fc: ff3aa6c9-c14b-46c6-b23f-8a3ba0a9a3fc # Order Received - Customer
+handle: processing
+name: Processing
+sortOrder: 999

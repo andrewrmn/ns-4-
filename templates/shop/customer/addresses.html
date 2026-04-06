@@ -1,0 +1,48 @@
+{% set title = 'Your addresses' %}
+{% extends 'layouts/_accounts' %}
+
+{% block content %}
+    <div class="wrapper-wide">
+        <div class="mt-6">
+            <header>
+                <h2>Shipping Addresses</h2>
+            </header>
+            <div class="mt-4 mb-4">
+                <div class=" text-group account-card">
+                    <div class="d-flex flex-wrap flex-items-stretch">
+                        <div class="col-12 mb-4 mb-md-6 pr-md-4 d-flex">
+
+                            <div class="card col-12">
+
+                                <div class="row">
+                                {% for address in craft.commerce.customers.customer.addresses %}
+                                    <div class="address-card col--xs--12 col--sm--6 col--md--4 mb-4">
+                                        {% include 'shop/_includes/addresses/address' with {'address': address} %}
+                                        <div class="address-controls">
+                                            <a class="link text-brand" href="{{ url('shop/customer/addresses/edit') }}?addressId={{ address.id }}">Edit</a>
+                                            <span> | </span>
+                                            <form method="POST">
+                                                {{ csrfInput() }}
+                                                <input type="hidden" name="action" value="commerce/customer-addresses/delete">
+                                                <input type="hidden" name="id" value="{{ address.id }}"/>
+                                                <input type="submit" class="link p-sm submit-plain" value="delete"/>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                                </div>
+
+
+                                <div class="mt-3"><a class="btn" href="{{ url('shop/customer/addresses/edit') }}">Add New Address</a></div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+// ---------------------------------------------------------------------
+//  Tool Tips
+// ---------------------------------------------------------------------
+
+.has-tool-tip {
+    position: relative;
+
+
+    &:hover {
+        .tool-tip {
+            display: block;
+        }
+    }
+}
+
+.tool-tip {
+    padding: 10px 0 15px;
+    background: $white;
+    border-radius: 2px;
+    z-index: 10;
+
+    p {
+        font-size: 1.3rem;
+    }
+
+    ul {
+        margin-left: 0;
+        font-size: 1.1rem;
+        margin-top: 5px;
+    }
+}
+
+.noTouch .tool-tip {
+
+    @include start-at($small) {
+        display: none;
+        position: absolute;
+        right: 0;
+        bottom: 100%;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+        width: 213px;
+        padding: 25px 20px;
+
+        &:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: $white;
+            z-index: -1;
+            transform: rotate(45deg);
+            box-shadow: 2px 2px 3px 0px rgba(0,0,0,.1);
+            position: absolute;
+            top: calc(100% - 5px);
+            right: calc(100% - 15px);
+        }
+    }
+
+    @include start-at($large) {
+        left: calc(100% + 10px);
+        top: 15px;
+        bottom: auto;
+        right: auto;
+
+        &:before {
+            right: calc(100% - 5px);
+            top: 5px;
+            box-shadow: -2px 2px 3px 0px rgba(0,0,0,.1);
+        }
+    }
+}

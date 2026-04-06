@@ -1,0 +1,14 @@
+columnSuffix: null
+contentColumnType: boolean
+fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
+handle: pupAccount
+instructions: 'If this box is selected, please switch the user type to a PUP account.'
+name: 'PUP Account?'
+searchable: true
+settings:
+  default: false
+  offLabel: null
+  onLabel: null
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

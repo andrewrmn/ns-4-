@@ -1,0 +1,75 @@
+<footer class="site-footer no-print" id="footer">
+    <div class="wrapper-wide">
+        <div>
+            <ul class="social-list">
+                {% for row in globalObjects.socialLinks.all() %}
+                {% if row.facebookUrl|length %}
+                <li>
+                    <a href="{{ row.facebookUrl }}" target="_blank" title="Visit NeuroScience's Facebook page">
+                        <img src="{{ siteUrl }}/images/social/facebook.svg" alt="facebook logo" />
+                    </a>
+                </li>
+                {% endif %}
+                {% if row.linkedinUrl|length %}
+                <li>
+                    <a href="{{ row.linkedinUrl }}" target="_blank" title="Visit NeuroScience's LinkedIn page">
+                        <img src="{{ siteUrl }}/images/social/linkedin.svg" alt="LinkedIn logo" />
+                    </a>
+                </li>
+                {% endif %}
+                {% if row.twitterUrl|length %}
+                <li>
+                    <a href="{{ row.twitterUrl }}" target="_blank" title="Visit NeuroScience's Twitter page">
+                        <img src="{{ siteUrl }}/images/social/twitter.svg" alt="Twitter logo" />
+                    </a>
+                </li>
+                {% endif %}
+                {% if row.youtubeUrl|length %}
+                <li>
+                    <a href="{{ row.youtubeUrl }}" target="_blank" title="Visit NeuroScience's YouTube page">
+                        <img src="{{ siteUrl }}/images/social/youtube.svg" alt="YouTube logo" />
+                    </a>
+                </li>
+                {% endif %}
+                {% if row.instagramUrl|length %}
+                <li>
+                    <a href="{{ row.instagramUrl }}" target="_blank" title="Visit NeuroScience's YouTube page">
+                        <img src="{{ siteUrl }}/images/social/instagram.svg" alt="Instagram logo" />
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+            <ul class="footer-nav">
+                <li>
+                    <span>©{{ "now"|date("Y") }} NeuroScience</span>
+                </li>
+                <li>
+                    <a href="{{ siteUrl }}faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <small class="text-white">{{ globalObjects.body | raw |striptags }}</small>
+
+        </div>
+
+
+        {% if globalObjects.phoneLinks|length %}
+        <div class="footer__contact text-white">
+            {% for row in globalObjects.phoneLinks.all() %}
+            {% endfor %}
+
+            <div class="footer__address">
+                {{ globalObjects.footerAddress }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</footer>
+
+{% if currentUser and currentUser.isInGroup('patients') %}
+<script>
+    document.body.classList.add('user-is-patient');
+</script>
+{% endif %}

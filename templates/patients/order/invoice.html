@@ -1,0 +1,202 @@
+{% if not currentUser or not currentUser.isInGroup('patients') %}
+    {% redirect "patients/login" %}
+{% endif %}
+{% set title = 'Patient Dashboard' %}
+{% extends 'layouts/_accounts-patient' %}
+
+{% set number = craft.app.request.getRequiredParam('number') %}
+{% set order = craft.orders.number(number).user(currentUser).one() %}
+
+{#% if not order or order.isCompleted == false %}
+    {% redirect 'shop/customer' %}
+{% endif %#}
+
+{% block content %}
+    <div class="wrapper-wide">
+        <div class="mt-6 pb-4">
+
+            {% if currentUser %}<p class="mb-3"><a href="{{ url('patients/dashboard') }}">< Dashboard</a></p>{% endif %}
+            <h1>Order #{{ order.id }}</h1>
+       
+            <div class="d-md-flex section-short">
+                <div class="col-12 col-md-4 pr-md-4">
+                    <h4>Details</h4>
+
+                    <ul>
+                        <li><strong>Order ID:</strong> {{ order.id }}</li>
+                        <li><strong>{{ "Customer"|t }}:</strong> {{ order.customer.email }}</li>
+                        <li><strong>{{ "Total"|t }}:</strong> {{ order.totalPrice|commerceCurrency(order.currency) }}</li>
+                        <li><strong>{{ "Amount Paid"|t }}:</strong> {{ order.totalPaid|commerceCurrency(order.currency) }}</li>
+                        <li><strong>{{ "Date"|t }}:</strong> {{ order.dateOrdered|date('D jS M Y') }}<br></li>
+                    </ul>
+
+                </div>
+                <div class="col-12 col-md-4 pr-md-4">
+                    <h4>Shipping Address</h4>
+
+                    {% if order.shippingAddress %}
+                    {% include 'shop/_includes/addresses/address' with { address: order.shippingAddress } %}
+                    {% endif %}
+                </div>
+                <div class="col-12 col-md-4 pr-md-4">
+                    <h4>Billing Address</h4>
+                    {% if order.billingAddress %}
+                    {% include 'shop/_includes/addresses/address' with { address: order.billingAddress } %}
+                    {% endif %}
+                </div>
+            </div>
+
+
+            {% if order.pdfUrl %}
+            <h4>Receipt (<a href="{{ order.getPdfUrl('receipt') }}">Download</a>)</h4>
+            {% endif %}
+
+            <table class="u-full-width">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in order.lineItems %}
+                    <tr>
+                        <td>
+                            <strong>{{ item.description }}</strong><br>
+                            SKU: {{ item.sku }}
+                        </td>
+                        <td>
+                            {% if item.onSale %}
+                                <strike>{{ item.price|commerceCurrency(order.currency) }}</strike>   {{ item.salePrice|commerceCurrency(order.currency) }}
+                            {% else %}
+                                {{ item.price|commerceCurrency(order.currency) }}
+                            {% endif %}
+                        </td>
+                        <td>{{ item.qty }}</td>
+                        <td class="text-right">{{ item.subtotal|commerceCurrency(order.currency) }}</td>
+                    </tr>
+                {% endfor %}
+
+                {% for adjustment in order.adjustments %}
+                    <tr>
+                        <td>{{ adjustment.type }}</td>
+                        <td colspan="2"><strong>{{ adjustment.name }}</strong>{% if adjustment.description %}<br>({{ adjustment.description }}){% endif %}</td>
+                        <td class="text-right">{{ adjustment.amount|commerceCurrency(order.currency) }}</td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+                    <td colspan="4" class="text-right">
+                        Item Total: {{ order.itemTotal|commerceCurrency(order.currency) }}<br>
+                        <h4>Total: {{ order.totalPrice|commerceCurrency(order.currency) }}</h4>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <form id="verifyForm" action="" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="/paya/verify/verifyResponse">
+        {{ csrfInput() }}
+        <div class="compare">
+            <input type="hidden" class="form-control disabled" id="paymentResponse" name="response" style="font-family: monospace; width:48%;" placeholder="">
+        </div>
+    </form>
+
+{% endblock %}
+
+{% do view.registerJsFile('https://www.sagepayments.net/pay/1.0.2/js/pay.min.js') %}
+{% js %}
+    {% set key = craft.paya.vars.dev.KEY %}
+    {% set req = craft.paya.vars.req %}
+    {% set nonce = craft.paya.getNonces() %}
+    {% set salt = nonce.salt %}
+    {% set iv = nonce.iv %}
+    {% set amount = order.totalPrice|number_format(2,'.',',') %}
+
+    {% set data =
+        {
+            'merchantId' : req.merchantId,
+            'merchantKey' : req.merchantKey,
+            'requestType' : req.requestType,
+            'orderNumber' : req.orderNumber,
+            'amount' : amount,
+            'salt' : salt,
+            'preAuth' : 'false'
+        }
+    %}
+
+    {% set reqjson = data|json_encode %}
+    {% set hash = craft.paya.getAuthKey(reqjson, key, salt, iv) %}
+
+    var $ = jQuery;
+    PayJS(['PayJS/UI', 'PayJS/Core', 'jquery'],
+    function($UI, $CORE, $) {
+        $UI.Initialize({
+            clientId: "{{ craft.paya.vars.dev.ID }}",
+            merchantId: "{{ req.merchantId }}",
+            authKey: "{{ hash }}",
+            salt: "{{ salt }}",
+            requestType: "{{ req.requestType }}",
+            orderNumber: "{{ order.id }}",
+            amount: "{{ amount }}",
+            preAuth: "false",
+            elementId: "paymentButton",
+            debug: false,
+            addFakeData: true,
+            environment: "prod"
+        });
+
+        $CORE.setCustomer({
+            email: "{{ currentUser.email }}"
+        });
+
+        $CORE.setIsRecurring(true);
+
+        $CORE.setRecurringSchedule({
+            "amount": {{ amount }},
+            "interval": 1,
+            "frequency": "Monthly",
+            "totalCount": 4,
+            "nonBusinessDaysHandling": "After",
+            "startDate": "{{ now|date_modify('first day of next month')|atom }}"
+        });
+
+        var myCallback = function(RESP){
+            //SendResultToServer(RESP.getResponse({ json: true }))
+            var wasApproved = RESP.getTransactionSuccess();
+            //RedirectUser(wasApproved ? "approved.html" : "declined.html");
+            if(wasApproved == true) {
+                console.log('approved');
+                $('#paymentForm').submit();
+            } else {
+                console.log('declined');
+            }
+
+            $("#paymentResponse").val('{"response":' + RESP.getApiResponse() + ', "hash":"' + RESP.getResponseHash().hash + '"}');
+            var data = $('#verifyForm').serialize();
+
+            $.ajax({
+                type: 'post',
+                cache: false,
+                data: data,
+                url: '/paya/verifyResponse',
+                dataType: 'json',
+                timeout: 50000
+            }).done(function (data) {
+                // Hash Match
+                console.log('success', data);
+            }).fail(function (error) {
+               // No Match
+               console.log('error');
+            });
+        }
+
+        $UI.setCallback(myCallback);
+    });
+
+{% endjs %}

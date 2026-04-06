@@ -1,0 +1,888 @@
+<script>
+    var $ = jQuery;
+
+    var submit = $('#survey-form-submit'),
+        form = $('#survey-form'),
+        products = [],
+        toleratePills = $('#tolerate-pills'),
+        results = $('#results'),
+        subject = $('#subject select');
+
+    function getScale(int, scaled) {
+        let scale = 0;
+        if(scaled) {
+            if( int == 0 ) {
+                scale = 'None';
+            } else if( int == 1 || int == 2 ) {
+                scale = 'Low';
+            } else if( int == 3 || int == 4 ) {
+                scale = 'Medium';
+            } else if( int >= 5 ) {
+                scale = 'High';
+            }
+        } else {
+            if( int == 0 ) {
+                scale = 'None';
+            } else if( int == 1 ) {
+                scale = 'Low';
+            } else if( int == 2 ) {
+                scale = 'Medium';
+            } else if( int >= 3 ) {
+                scale = 'High';
+            }
+        }
+        return scale;
+    }
+
+
+    // Sleep
+    var sleepQuestions = $('#sleep-questions'),
+        sol = $('*[data-descriptor="sol"] select'),
+        waso = $('*[data-descriptor="waso"] select'),
+        vasomotor = $('*[data-descriptor="vasomotor"] select'),
+        pain = $('*[data-descriptor="pain"] select'),
+        fatigue = $('*[data-descriptor="fatigue"] select'),
+        motivation = $('*[data-descriptor="motivation"] select'),
+        quality = $('*[data-descriptor="quality"] select');
+
+    function checkSol() {
+        let count = 0;
+        let scale;
+        sol.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, true);
+        //solOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkWaso() {
+        let count = 0;
+        let scale;
+        waso.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //wasoOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkVasomotor() {
+        let count = 0;
+        let scale;
+        vasomotor.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //vasomotorOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkPain() {
+        let count = 0;
+        let scale;
+        pain.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //painOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkFatigue() {
+        let count = 0;
+        let scale;
+        fatigue.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //fatigueOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkMotivation() {
+        let count = 0;
+        let scale;
+        motivation.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        scale = getScale(count, false);
+        //motivationOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+    function checkQuality() {
+        let count = 0;
+        let scale;
+        quality.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+
+        scale = getScale(count, false);
+        //qualityOutput.html('Total = ' + count + ', Scale = ' + scale);
+        return scale;
+    }
+
+    function checkSleepQuality() {
+        let count = 0;
+        sol.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('sol ' + v);
+            count = count + v;
+        });
+        waso.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('waso ' + v);
+            count = count + v;
+        });
+        vasomotor.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('vasomotor ' + v);
+            count = count + v;
+        });
+        pain.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('pain ' + v);
+            count = count + v;
+        });
+        fatigue.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('fatigue ' + v);
+            count = count + v;
+        });
+        motivation.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('motivation ' + v);
+            count = count + v;
+        });
+        quality.each(function(){
+            let v = parseInt($(this).val());
+            ////console.log('quality ' + v);
+            count = count + v;
+        });
+
+        return count;
+    }
+
+
+    // Stress
+    var stressQuestions = $('#stress-questions'),
+        aggression = $('*[data-descriptor="aggression"] select'),
+        relax = $('*[data-descriptor="relax"] select'),
+        resilience = $('*[data-descriptor="resilience"] select'),
+        digestive = $('*[data-descriptor="digestive"] select'),
+        cognitive = $('*[data-descriptor="cognitive"] select'),
+        mag = $('*[data-descriptor="mag"] select'),
+        stressCount = $('*[data-descriptor="additionalStress"] select');
+
+    function checkAggression() {
+        let count = 0;
+        aggression.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkRelax() {
+        let count = 0;
+        relax.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkResilience() {
+        let count = 0;
+        resilience.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkDigestive() {
+        let hasIssues = false;
+        digestive.each(function(){
+            if( $(this).val() == 'yes' ) {
+                hasIssues = true;
+            }
+        });
+        return hasIssues;
+    }
+    function checkCognitive() {
+        let hasIssues = false;
+        cognitive.each(function(){
+            if( $(this).val() == 'yes' ) {
+                hasIssues = true;
+            }
+        });
+        return hasIssues;
+    }
+    function checkMag() {
+        let mid = true;
+        let fruitCount = $('#data-fruits').val();
+        if( fruitCount == 'Poor' ) {
+            mid = false;
+        }
+        return mid;
+    }
+    function checkStressCount() {
+        let count = 0;
+        stressCount.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        //console.log('stress count = ' + count);
+        return count;
+    }
+
+
+
+    // Wellness
+    var wellnessQuestions = $('#wellness-questions'),
+        general = $('*[data-descriptor="general"] select'),
+        physical = $('*[data-descriptor="physical"] select'),
+        activity = $('*[data-descriptor="activity"] select'),
+        moti = $('*[data-descriptor="moti"] select'),
+        mental = $('*[data-descriptor="mental"] select'),
+        product1 = $('#product1'),
+        product2 = $('#product2'),
+        product3 = $('#product3'),
+        product4 = $('#product4'),
+        product5 = $('#product5');
+
+    function checkGeneral() {
+        let count = 0;
+        general.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkPhysical() {
+        let count = 0;
+        physical.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkActivity() {
+        let count = 0;
+        activity.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkMental() {
+        let count = 0;
+        mental.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+    function checkMoti() {
+        let count = 0;
+        moti.each(function(){
+            var v = parseInt($(this).val());
+            count = count + v;
+        });
+        return count;
+    }
+
+
+
+    function changeSubject() {
+        //console.log( subject.val() );
+        var ph = $('#placeholder-section');
+        sleepQuestions.hide();
+        stressQuestions.hide();
+        wellnessQuestions.hide();
+
+        if( subject.val() == 'sleep' ) {
+            $('.question-group').hide();
+            sleepQuestions.show();
+            ph.hide();
+        }
+        if( subject.val() == 'stress' ) {
+            $('.question-group').hide();
+            stressQuestions.show();
+            ph.hide();
+        }
+        if( subject.val() == 'wellness' ) {
+            $('.question-group').hide();
+            wellnessQuestions.show();
+            ph.hide();
+        }
+    }
+
+    $(document).ready(function(){
+        changeSubject();
+    });
+
+    $(document).on('change', form, function(){
+        changeSubject();
+    });
+
+    function getSleepRatings() {
+
+      // final quality
+      finalQuality = $('[data-descriptor="quality"] select').val();
+      if( finalQuality == 0 ) {
+          finalQuality = 'Great';
+      } else if( finalQuality == 1 ) {
+          finalQuality = 'Fair';
+      } else if( finalQuality == 2 ) {
+          finalQuality = 'Poor';
+      } else if( finalQuality >= 3 ) {
+          finalQuality = 'Very Poor';
+      }
+      //console.log('final sleep quality = ' + finalQuality);
+      $('#finalQuality').val(finalQuality);
+
+      // Falling asleep
+      fallingAsleep = 0;
+      $('[data-score="fallingAsleep"] select').each(function(){
+        num = $(this).val();
+        fallingAsleep = fallingAsleep + num;
+      });
+      if( fallingAsleep == 0 ) {
+          fallingAsleep = 'Great';
+      } else if( fallingAsleep == 1 ) {
+          fallingAsleep = 'Fair';
+      } else if( fallingAsleep == 2 ) {
+          fallingAsleep = 'Poor';
+      } else if( fallingAsleep >= 3 ) {
+          fallingAsleep = 'Very Poor';
+      }
+      //console.log('falling asleep score = ' + fallingAsleep);
+      $('#fallingAsleep').val(fallingAsleep);
+
+      // wake up score
+      wakeUp = $('[data-score="wakeUp"] select').val();
+      if( wakeUp == 0 ) {
+          wakeUp = 'Great';
+      } else if( wakeUp == 1 ) {
+          wakeUp = 'Fair';
+      } else if( wakeUp == 2 ) {
+          wakeUp = 'Poor';
+      } else if( wakeUp >= 3 ) {
+          wakeUp = 'Very Poor';
+      }
+      //console.log('wake up after sleep = ' + wakeUp);
+      $('#wakeUp').val(wakeUp);
+
+      // vasomotor
+      vasomotorLevel = 0;
+      vasomotor.each(function(){
+          var v = parseInt($(this).val());
+          vasomotorLevel = vasomotorLevel + v;
+      });
+      if( vasomotorLevel == 0 ) {
+          vasomotorLevel = 'Great';
+      } else if( vasomotorLevel == 1 ) {
+          vasomotorLevel = 'Fair';
+      } else if( vasomotorLevel == 2 ) {
+          vasomotorLevel = 'Poor';
+      } else if( vasomotorLevel >= 3 ) {
+          vasomotorLevel = 'Very Poor';
+      }
+      //console.log('vasomotor issues = ' + vasomotorLevel);
+      $('#vasomotorLevel').val(vasomotorLevel);
+
+
+      // finalPain score
+      finalPain = $('[data-descriptor="pain"] select').val();
+      if( finalPain == 0 ) {
+          finalPain = 'Great';
+      } else if( finalPain == 1 ) {
+          finalPain = 'Fair';
+      } else if( finalPain == 2 ) {
+          finalPain = 'Poor';
+      } else if( finalPain >= 3 ) {
+          finalPain = 'Very Poor';
+      }
+      //console.log('finalPain = ' + finalPain);
+      $('#finalPain').val(finalPain);
+
+      // daytimeFatigue score
+      daytimeFatigue = $('[data-descriptor="fatigue"] select').val();
+      if( daytimeFatigue == 0 ) {
+          daytimeFatigue = 'Great';
+      } else if( daytimeFatigue == 1 ) {
+          daytimeFatigue = 'Fair';
+      } else if( daytimeFatigue == 2 ) {
+          daytimeFatigue = 'Poor';
+      } else if( daytimeFatigue >= 3 ) {
+          daytimeFatigue = 'Very Poor';
+      }
+      //console.log('daytimeFatigue = ' + daytimeFatigue);
+      $('#daytimeFatigue').val(daytimeFatigue);
+
+      // daytimeMotivation score
+      daytimeMotivation = $('[data-descriptor="motivation"] select').val();
+      if( daytimeMotivation == 0 ) {
+          daytimeMotivation = 'Great';
+      } else if( daytimeMotivation == 1 ) {
+          daytimeMotivation = 'Fair';
+      } else if( daytimeMotivation == 2 ) {
+          daytimeMotivation = 'Poor';
+      } else if( daytimeMotivation >= 3 ) {
+          daytimeMotivation = 'Very Poor';
+      }
+      //console.log('daytimeMotivation = ' + daytimeMotivation);
+      $('#daytimeMotivation').val(daytimeMotivation);
+    }
+
+    function sleepAlgorithm() {
+        //console.log('Checking Sleep');
+        var results = $('#results');
+        results.empty();
+
+        solLevel = checkSol();
+        wasoLevel = checkWaso();
+        vasomotorLevel = checkVasomotor();
+        painLevel = checkPain();
+        fatigueLevel = checkFatigue();
+        motoLevel = checkMotivation();
+        qualityLevel = checkQuality();
+        totalSleep = checkSleepQuality();
+
+        getSleepRatings();
+
+
+        $('#sleep-score').val(totalSleep);
+
+
+        // console.log('SOL = ' + solLevel);
+        // console.log('WASO = ' + wasoLevel);
+        // console.log('Vasomotor = ' + vasomotorLevel);
+        // console.log('Pain = ' + painLevel);
+        // console.log('Fatigue = ' + fatigueLevel);
+        // console.log('Motivation = ' + motoLevel);
+        // console.log('Quality = ' + qualityLevel);
+        // console.log('Sleep score = ' + totalSleep);
+
+        if( solLevel == 'High' ) {
+            //console.log('1st path');
+            if( canTakePills == 'false' ) {
+                //console.log('Kaviance OS Emulsion');
+                //results.append('<p>Kaviance OS Emulsion</p>');
+                product1.val('20054');
+            } else {
+                //console.log('Kaviance OS');
+                //results.append('<p>Kaviance OS</p>');
+                product1.val('20053');
+            }
+            if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                //console.log('Calm CP');
+                //results.append('<p>Calm CP</p>');
+                product2.val('2099');
+            }
+            if( vasomotorLevel == 'Very Poor' ) {
+                //console.log('Black Cohosh');
+                //results.append('<p>Black Cohosh</p>');
+                product3.val('Black Cohosh');
+            }
+        }
+
+        if( solLevel != 'High' && qualityLevel == 'High' ) {
+            //console.log('2nd path');
+            if( canTakePills == 'false' ) {
+                //console.log('GABA Trex');
+                //results.append('<p>GABA Trex</p>');
+                product1.val('20025');
+            } else {
+                //console.log('Alpha GABA PM');
+                //results.append('<p>Alpha GABA PM</p>');
+                product1.val('20042');
+            }
+            if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                //console.log('Calm CP');
+                //results.append('<p>Calm CP</p>');
+                product2.val('2099');
+            }
+        }
+
+        if( solLevel == 'Medium' && qualityLevel != 'High' ) {
+            //console.log('3rd path');
+            if( canTakePills == 'false' ) {
+              //console.log('GABA Trex');
+                //results.append('<p>GABA Trex</p>');
+                product1.val('20025');
+            } else {
+                //console.log('Alpha GABA');
+                //results.append('<p>Alpha GABA</p>');
+                product1.val('20057');
+            }
+            if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                //console.log('Calm CP');
+                //results.append('<p>Calm CP</p>');
+                product2.val('2099');
+            }
+            if( vasomotorLevel == 'High' ) {
+                //console.log('Black Cohosh');
+                //results.append('<p>Black Cohosh</p>');
+                product3.val('Black Cohosh');
+            }
+        }
+
+        if( solLevel == 'Low' || solLevel == 'None' && qualityLevel != 'High' ) {
+            //console.log('Last path');
+            if( canTakePills == 'false' ) {
+                //console.log('GABA Trex');
+                //results.append('<p>GABA Trex</p>');
+                product1.val('20025');
+            } else {
+                if( wasoLevel == 'High' || wasoLevel == 'Medium' ) {
+                    //console.log('TravaCor');
+                    //results.append('<p>TravaCor</p>');
+                    product1.val('20014');
+                } else {
+                    //console.log('Calm G');
+                    //results.append('<p>Calm G</p>');
+                    product1.val('20004');
+                }
+            }
+            if( vasomotorLevel == 'High' ) {
+                //console.log('Black Cohosh');
+                //results.append('<p>Black Cohosh</p>');
+                product3.val('Black Cohosh');
+            }
+        }
+
+        if( painLevel == 'High' ) {
+            //console.log('CBD');
+            //results.append('<p>CBD</p>');
+            product4.val('CBD');
+        }
+
+        if( fatigueLevel == 'High' || fatigueLevel == 'Medium' ) {
+            if( motoLevel == 'High' || motoLevel == 'Medium' ) {
+                //console.log('Balance D');
+                //results.append('<p>Balance D</p>');
+                product5.val('2067');
+            } else {
+                //console.log('AdreCor');
+                //results.append('<p>AdreCor</p>');
+                product5.val('2096');
+            }
+        }
+    }
+
+    function stressAlgorithm() {
+        //console.log('Checking Stress');
+        var results = $('#results');
+        results.empty();
+        aggressionLevel = checkAggression();
+        relaxLevel = checkRelax();
+        resilienceLevel = checkResilience();
+        digestiveIssues = checkDigestive();
+        cognitiveIssues = checkCognitive();
+        magLevel = checkMag();
+        additionalStress = checkStressCount();
+        totalStress = aggressionLevel + relaxLevel + resilienceLevel + additionalStress;
+
+        $('#stress-score').val(totalStress);
+
+        //console.log('');
+        //console.log('aggression = ' + aggressionLevel);
+        //console.log('relax = ' + relaxLevel);
+        //console.log('resilience = ' + resilienceLevel);
+        //console.log('digestive = ' + digestiveIssues);
+        //console.log('cognitiv = ' + cognitiveIssues);
+        //console.log('MAG = ' + magLevel);
+        //console.log('Total Stress = ' + totalStress);
+        //console.log('');
+
+        var pathFound = false;
+
+        if( aggressionLevel > 5 ) {
+            //console.log('1st path');
+            pathFound = true;
+
+            if( canTakePills == 'false' ) {
+                //console.log('SeroTrex');
+                //results.append('<p>SeroTrex</p>');
+                product1.val('20026');
+
+            } else {
+                //console.log('TravaCor');
+                //results.append('<p>TravaCor</p>');
+                product1.val('20014');
+            }
+
+            if( totalStress > 26 ) {
+                //console.log('Calm CP');
+                //results.append('<p>Calm CP</p>');
+                product2.val('2099');
+            }
+        }
+
+        if( aggressionLevel <= 5 && magLevel == false  ) {
+            pathFound = true;
+            //console.log('2nd path');
+            if( canTakePills == 'false' ) {
+                //console.log('GABA Trex');
+                //results.append('<p>GABA Trex</p>');
+                product1.val('20025');
+            } else {
+                //console.log('Calm G');
+                //results.append('<p>Calm G</p>');
+                product1.val('20004');
+            }
+
+            if( totalStress > 30 ) {
+                //console.log('Calm CP');
+                //results.append('<p>Calm CP</p>');
+                product2.val('2099');
+            }
+        }
+
+        if( aggressionLevel <= 5 && magLevel && relaxLevel > 2 ) {
+            pathFound = true;
+            //console.log('3rd path');
+            if( canTakePills == 'false' ) {
+                //console.log('GABA Trex');
+                //results.append('<p>GABA Trex</p>');
+                product1.val('20025');
+            } else {
+                //console.log('Alpha GABA');
+                //results.append('<p>Alpha GABA</p>');
+                product1.val('20057');
+            }
+
+            if( totalStress > 26 ) {
+                //console.log('Calm CP');
+                //results.append('<p>Calm CP</p>');
+                product2.val('20057');
+            }
+        }
+
+        if( !pathFound ) {
+            //console.log('Last path');
+
+            //console.log('Calm CP');
+            //results.append('<p>Calm CP</p>');
+            product1.val('2099');
+
+        }
+
+
+        if( digestiveIssues ) {
+            //console.log('NeuroBiota');
+            //results.append('<p>NeuroBiota</p>');
+            product3.val('20049');
+        }
+
+        if( resilienceLevel > 11 ) {
+            if( cognitiveIssues ) {
+                //console.log('ExcitaPlus');
+                //results.append('<p>ExcitaPlus</p>');
+                product5.val('2069');
+            } else {
+                //console.log('AdreCor');
+                //results.append('<p>AdreCor</p>');
+                product5.val('2096');
+            }
+        }
+
+
+        if( totalStress <= 16 ) {
+            //console.log('Stress level = Healthy');
+        }
+        if( totalStress > 16 && totalStress < 30 ) {
+            //console.log('Stress level = Elevated');
+        }
+        if( totalStress >= 30 && totalStress < 37 ) {
+            //console.log('Stress level = High');
+        }
+        if( totalStress >= 37 ) {
+            //console.log('Stress level = Very High');
+        }
+
+    }
+
+    function wellnessAlgorithm() {
+        //console.log('Checking Wellness');
+        var results = $('#results');
+        results.empty();
+
+        generalLevel = checkGeneral();
+        physicalLevel = checkPhysical();
+        activityLevel = checkActivity();
+        motiLevel = checkMoti();
+        mentalLevel = checkMental();
+        generalHigh = false;
+        physicalHigh = false;
+        activityHigh = false;
+        motiHigh = false;
+        mentalHigh = false;
+        threeHighCheck = true;
+        highCount = 0;
+
+        $('#generalWellness').val(generalLevel);
+        $('#physicalWellness').val(physicalLevel);
+        $('#activityWellness').val(activityLevel);
+        $('#motivationWellness').val(motiLevel);
+        $('#mentalWellness').val(mentalLevel);
+
+
+        $('#wellness-score').val(generalLevel + physicalLevel + activityLevel + motiLevel + mentalLevel);
+
+        if( generalLevel > 7 ) {
+            generalHigh = true;
+            highCount++;
+        }
+        if( physicalLevel > 7 ) {
+            physicalHigh = true;
+            highCount++;
+        }
+        if( activityLevel > 6 ) {
+            activityHigh = true;
+            highCount++;
+        }
+        if( motiLevel > 6 ) {
+            motiHigh = true;
+            highCount++;
+        }
+        if( mentalLevel > 6 ) {
+            mentalHigh = true;
+            highCount++;
+        }
+
+        //console.log('');
+        //console.log('General = ' + generalLevel);
+        //console.log('Physical = ' + physicalLevel);
+        //console.log('Activity = ' + activityLevel);
+        //console.log('Motivation = ' + motiLevel);
+        //console.log('Mental = ' + mentalLevel);
+        //console.log('');
+
+        if( generalHigh ) {
+            if( motiHigh ) {
+                if( mentalHigh ) {
+                    //console.log('ExcitaPlus');
+                    //results.append('<p>ExcitaPlus</p>');
+                    product1.val('2069');
+                } else {
+                    //console.log('Balance D');
+                    //results.append('<p>Balance D</p>');
+                    product1.val('2067');
+                }
+            } else {
+                if( mentalHigh ) {
+                    //console.log('AdreCor');
+                    //results.append('<p>AdreCor</p>');
+                    product1.val('2096');
+                } else {
+                    //console.log('Alpha GABA PM');
+                    //results.append('<p>Alpha GABA PM</p>');
+                    threeHighCheck = false;
+                    product1.val('20042');
+                }
+            }
+        }
+
+
+        if( !generalHigh ) {
+            if( motiHigh ) {
+                //console.log('Balance D');
+                //results.append('<p>Balance D</p>');
+                product1.val('2067');
+            } else {
+                if( mentalHigh ) {
+                    //console.log('Focus DL');
+                    //results.append('<p>Focus DL</p>');
+                    //product1.val('20003');
+                    
+                    // AttenTrex
+                    product1.val('20060');
+                } else {
+                    threeHighCheck = false;
+                }
+            }
+        }
+
+        if( physicalHigh ) {
+            //console.log('NAD');
+            //results.append('<p>NAD</p>');
+            product2.val('NAD');
+        }
+
+        if( threeHighCheck && highCount > 2 ) {
+            //console.log('Alpha GABA PM');
+            //results.append('<p>Alpha GABA PM</p>');
+            product3.val('20042');
+        }
+
+        if( results.is(':empty') ) {
+            //results.append('<p>No recommendations for you</p>');
+        }
+    }
+
+    function generalAlgorithm() {
+        let fruits = $('#data-fruits').val(),
+            fattyAcids = $('#data-fattyAcids').val(),
+            fiber = $('#data-fiber').val(),
+            protein = $('#data-protein').val(),
+            calcium = $('#data-calcium').val(),
+            exercise = $('#data-exercise').val();
+
+        $('#fruitsVegies').val(fruits);
+        $('#fattyAcids').val(fattyAcids);
+        $('#fiber').val(fiber);
+        $('#protein').val(protein);
+        $('#calcium').val(calcium);
+        $('#exercise').val(exercise);
+    }
+
+
+
+    form.submit(function(ev) {
+        ev.preventDefault();
+        canTakePills = toleratePills.val();
+
+        var email = $('#email').val();
+
+        if( subject.val() == 'sleep' ) {
+            //console.log('=======================');
+            sleepAlgorithm();
+            //console.log('=======================');
+        }
+
+        if( subject.val() == 'stress' ) {
+            //console.log('=======================');
+            stressAlgorithm();
+            //console.log('=======================');
+        }
+
+        if( subject.val() == 'wellness' ) {
+            //console.log('=======================');
+            wellnessAlgorithm();
+            //console.log('=======================');
+        }
+
+        generalAlgorithm();
+
+      //form.submit();
+      $.ajax({
+          type: 'post',
+          cache: false,
+          data: form.serialize(),
+          url: '/neuroselect/survey-submission',
+          dataType: 'json'
+      }).done(function (data) {
+          var redirectUrl = document.location.origin + '/Neuro-Q/report/' + data.submissionId + '?account='+email;
+          console.log(data);
+          console.log(data.submissionId);
+          window.location.replace(redirectUrl);
+      }).fail(function (data) {
+        console.log(data);
+      });
+
+    });
+
+</script>
