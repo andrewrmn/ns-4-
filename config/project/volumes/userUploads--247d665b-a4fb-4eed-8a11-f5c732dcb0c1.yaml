@@ -23,18 +23,16 @@ fieldLayouts:
             step: null
             tip: null
             title: null
-            type: craft\fieldlayoutelements\AssetTitleField
+            type: craft\fieldlayoutelements\assets\AssetTitleField
             warning: null
             width: 100
         name: Content
         sortOrder: 1
+fs: userUploads
 handle: userUploads
 hasUrls: false
 name: 'User Uploads'
-settings:
-  path: images/userUploads
 sortOrder: 5
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-type: craft\volumes\Local
 url: null

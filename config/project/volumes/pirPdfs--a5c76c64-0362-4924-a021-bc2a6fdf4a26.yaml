@@ -23,18 +23,16 @@ fieldLayouts:
             step: null
             tip: null
             title: null
-            type: craft\fieldlayoutelements\AssetTitleField
+            type: craft\fieldlayoutelements\assets\AssetTitleField
             warning: null
             width: 100
         name: Content
         sortOrder: 1
+fs: pirPdfs
 handle: pirPdfs
 hasUrls: true
 name: 'PIR PDFs'
-settings:
-  path: pir-documents
 sortOrder: 6
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-type: craft\volumes\Local
 url: '@baseUrl/pir-documents'

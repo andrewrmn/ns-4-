@@ -12,15 +12,25 @@ permissions:
   - 'assignusergroup:7bb97651-ed90-45bb-b144-6bcac199bfa8' # NeuroSelect Only
   - 'assignusergroup:b0d5543d-a8fb-481b-9727-8bdb7d52f9dc' # Customer Service
   - 'assignusergroup:e0e6611c-ec20-44b8-96ce-23e0fa0d253b' # Personal (PUP)
-  - assignusergroups
+  - 'assignusergroup:f2fdbe8d-04b7-4733-88ff-6959b652e789' # Super Admin
   - assignuserpermissions
+  - 'changeauthorforpeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'changeauthorforpeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'changeauthorforpeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'changeauthorforpeerentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
   - commerce-capturepayment
+  - commerce-creatediscounts
+  - 'commerce-createproducts:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
+  - commerce-createsales
+  - commerce-deletediscounts
   - commerce-deleteorders
+  - 'commerce-deleteproducts:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
+  - commerce-deletesales
+  - commerce-editdiscounts
   - commerce-editorders
-  - commerce-managecustomers
+  - 'commerce-editproducttype:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
+  - commerce-editsales
   - commerce-manageorders
-  - commerce-manageproducts
-  - 'commerce-manageproducttype:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
   - commerce-managepromotions
   - commerce-manageshipping
   - commerce-managestoresettings
@@ -31,25 +41,53 @@ permissions:
   - 'createentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
   - 'createentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
   - 'createentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'createfoldersinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'createfoldersinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'createfoldersinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'createfoldersinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'createfoldersinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'createfoldersinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'createfoldersinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
-  - customizesources
+  - 'createfolders:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'createfolders:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'createfolders:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'createfolders:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'createfolders:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'createfolders:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'createfolders:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'deleteassets:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'deleteassets:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'deleteassets:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'deleteassets:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'deleteassets:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'deleteassets:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'deleteassets:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'deletecategories:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
+  - 'deletecategories:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+  - 'deletecategories:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+  - 'deletecategories:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
+  - 'deletecategories:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+  - 'deletecategories:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
+  - 'deletecategories:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
+  - 'deletecategories:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+  - 'deletecategories:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+  - 'deletecategories:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+  - 'deletecategories:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
   - 'deleteentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
   - 'deleteentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
   - 'deleteentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
   - 'deleteentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'deletefilesandfoldersinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'deletefilesandfoldersinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'deletefilesandfoldersinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'deletefilesandfoldersinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'deletefilesandfoldersinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'deletefilesandfoldersinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'deletefilesandfoldersinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'deletepeerassets:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'deletepeerassets:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'deletepeerassets:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'deletepeerassets:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'deletepeerassets:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'deletepeerassets:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'deletepeerassets:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'deletepeercategorydrafts:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
+  - 'deletepeercategorydrafts:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+  - 'deletepeercategorydrafts:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+  - 'deletepeercategorydrafts:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
+  - 'deletepeercategorydrafts:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+  - 'deletepeercategorydrafts:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
+  - 'deletepeercategorydrafts:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
+  - 'deletepeercategorydrafts:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+  - 'deletepeercategorydrafts:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+  - 'deletepeercategorydrafts:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+  - 'deletepeercategorydrafts:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
   - 'deletepeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
   - 'deletepeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
   - 'deletepeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
@@ -70,41 +108,7 @@ permissions:
   - 'deletepeerentrydrafts:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
   - 'deletepeerentrydrafts:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
   - 'deletepeerentrydrafts:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
-  - 'deletepeerfilesinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'deletepeerfilesinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'deletepeerfilesinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'deletepeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'deletepeerfilesinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'deletepeerfilesinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'deletepeerfilesinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
   - deleteusers
-  - 'editcategories:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
-  - 'editcategories:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
-  - 'editcategories:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
-  - 'editcategories:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
-  - 'editcategories:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
-  - 'editcategories:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
-  - 'editcategories:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
-  - 'editcategories:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
-  - 'editcategories:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
-  - 'editcategories:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
-  - 'editcategories:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
-  - 'editentries:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
-  - 'editentries:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
-  - 'editentries:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
-  - 'editentries:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
-  - 'editentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
-  - 'editentries:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
-  - 'editentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
-  - 'editentries:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
-  - 'editentries:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
-  - 'editentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
-  - 'editentries:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
-  - 'editentries:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
-  - 'editentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'editentries:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
-  - 'editentries:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
-  - 'editentries:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
   - 'editglobalset:03ce674d-8ec5-4ca5-9416-ada9c81df133' # Pathways Table
   - 'editglobalset:14aa199d-d6e5-4452-bcaf-883d2715be11' # Legal Documents
   - 'editglobalset:243467cc-4483-401c-abd4-a704876f5960' # Global Objects
@@ -113,102 +117,104 @@ permissions:
   - 'editglobalset:8df44416-3efd-4db4-ab88-7d436d62d9bf' # General Text Notifications
   - 'editglobalset:ba3ec8b7-7ff0-4aff-9c1b-bccc3843068a' # Updated Pathways Table
   - 'editglobalset:f634c74c-ffa3-443c-9eda-bd18b55092b8' # QR Scan Table
-  - 'editimagesinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'editimagesinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'editimagesinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'editimagesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'editimagesinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'editimagesinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'editimagesinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
-  - 'editpeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
-  - 'editpeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
-  - 'editpeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
-  - 'editpeerentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'editpeerentrydrafts:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
-  - 'editpeerentrydrafts:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
-  - 'editpeerentrydrafts:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
-  - 'editpeerentrydrafts:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
-  - 'editpeerentrydrafts:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
-  - 'editpeerentrydrafts:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
-  - 'editpeerentrydrafts:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
-  - 'editpeerentrydrafts:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
-  - 'editpeerentrydrafts:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
-  - 'editpeerentrydrafts:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
-  - 'editpeerentrydrafts:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
-  - 'editpeerentrydrafts:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
-  - 'editpeerentrydrafts:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'editpeerentrydrafts:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
-  - 'editpeerentrydrafts:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
-  - 'editpeerentrydrafts:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
-  - 'editpeerfilesinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'editpeerfilesinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'editpeerfilesinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'editpeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'editpeerfilesinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'editpeerfilesinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'editpeerfilesinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
-  - 'editpeerimagesinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'editpeerimagesinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'editpeerimagesinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'editpeerimagesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'editpeerimagesinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'editpeerimagesinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'editpeerimagesinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'editimages:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'editimages:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'editimages:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'editimages:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'editimages:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'editimages:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'editimages:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'editpeerimages:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'editpeerimages:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'editpeerimages:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'editpeerimages:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'editpeerimages:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'editpeerimages:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'editpeerimages:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
   - editusers
   - impersonateusers
   - moderateusers
   - performupdates
-  - 'publishentries:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
-  - 'publishentries:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
-  - 'publishentries:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
-  - 'publishentries:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
-  - 'publishentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
-  - 'publishentries:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
-  - 'publishentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
-  - 'publishentries:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
-  - 'publishentries:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
-  - 'publishentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
-  - 'publishentries:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
-  - 'publishentries:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
-  - 'publishentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'publishentries:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
-  - 'publishentries:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
-  - 'publishentries:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
-  - 'publishpeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
-  - 'publishpeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
-  - 'publishpeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
-  - 'publishpeerentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'publishpeerentrydrafts:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
-  - 'publishpeerentrydrafts:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
-  - 'publishpeerentrydrafts:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
-  - 'publishpeerentrydrafts:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
-  - 'publishpeerentrydrafts:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
-  - 'publishpeerentrydrafts:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
-  - 'publishpeerentrydrafts:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
-  - 'publishpeerentrydrafts:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
-  - 'publishpeerentrydrafts:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
-  - 'publishpeerentrydrafts:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
-  - 'publishpeerentrydrafts:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
-  - 'publishpeerentrydrafts:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
-  - 'publishpeerentrydrafts:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
-  - 'publishpeerentrydrafts:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
-  - 'publishpeerentrydrafts:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
-  - 'publishpeerentrydrafts:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
   - registerusers
-  - 'replacepeerfilesinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'replacepeerfilesinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'replacepeerfilesinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'replacepeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'replacepeerfilesinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'replacepeerfilesinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'replacepeerfilesinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
-  - 'saveassetinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'saveassetinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'saveassetinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'saveassetinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'saveassetinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'saveassetinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'saveassetinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'replacepeerfiles:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'replacepeerfiles:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'replacepeerfiles:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'replacepeerfiles:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'replacepeerfiles:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'replacepeerfiles:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'replacepeerfiles:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'saveassets:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'saveassets:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'saveassets:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'saveassets:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'saveassets:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'saveassets:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'saveassets:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'savecategories:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
+  - 'savecategories:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+  - 'savecategories:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+  - 'savecategories:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
+  - 'savecategories:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+  - 'savecategories:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
+  - 'savecategories:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
+  - 'savecategories:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+  - 'savecategories:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+  - 'savecategories:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+  - 'savecategories:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
+  - 'saveentries:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
+  - 'saveentries:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
+  - 'saveentries:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
+  - 'saveentries:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
+  - 'saveentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'saveentries:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
+  - 'saveentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'saveentries:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
+  - 'saveentries:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
+  - 'saveentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'saveentries:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
+  - 'saveentries:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
+  - 'saveentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'saveentries:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
+  - 'saveentries:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
+  - 'saveentries:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
+  - 'savepeerassets:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'savepeerassets:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'savepeerassets:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'savepeerassets:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'savepeerassets:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'savepeerassets:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'savepeerassets:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'savepeercategorydrafts:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
+  - 'savepeercategorydrafts:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+  - 'savepeercategorydrafts:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+  - 'savepeercategorydrafts:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
+  - 'savepeercategorydrafts:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+  - 'savepeercategorydrafts:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
+  - 'savepeercategorydrafts:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
+  - 'savepeercategorydrafts:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+  - 'savepeercategorydrafts:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+  - 'savepeercategorydrafts:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+  - 'savepeercategorydrafts:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
+  - 'savepeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'savepeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'savepeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'savepeerentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'savepeerentrydrafts:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
+  - 'savepeerentrydrafts:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
+  - 'savepeerentrydrafts:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
+  - 'savepeerentrydrafts:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
+  - 'savepeerentrydrafts:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'savepeerentrydrafts:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
+  - 'savepeerentrydrafts:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'savepeerentrydrafts:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
+  - 'savepeerentrydrafts:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
+  - 'savepeerentrydrafts:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'savepeerentrydrafts:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
+  - 'savepeerentrydrafts:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
+  - 'savepeerentrydrafts:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'savepeerentrydrafts:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
+  - 'savepeerentrydrafts:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
+  - 'savepeerentrydrafts:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
   - 'seomatic:content-meta'
   - 'seomatic:content-meta:facebook'
   - 'seomatic:content-meta:general'
@@ -247,17 +253,75 @@ permissions:
   - 'utility:system-messages'
   - 'utility:system-report'
   - 'utility:updates'
-  - 'viewpeerfilesinvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'viewpeerfilesinvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'viewpeerfilesinvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'viewpeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'viewpeerfilesinvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'viewpeerfilesinvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'viewpeerfilesinvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
-  - 'viewvolume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  - 'viewvolume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-  - 'viewvolume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  - 'viewvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
-  - 'viewvolume:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
-  - 'viewvolume:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
-  - 'viewvolume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'viewassets:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'viewassets:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'viewassets:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'viewassets:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'viewassets:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'viewassets:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'viewassets:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'viewcategories:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
+  - 'viewcategories:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+  - 'viewcategories:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+  - 'viewcategories:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
+  - 'viewcategories:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+  - 'viewcategories:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
+  - 'viewcategories:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
+  - 'viewcategories:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+  - 'viewcategories:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+  - 'viewcategories:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+  - 'viewcategories:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
+  - 'viewentries:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
+  - 'viewentries:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
+  - 'viewentries:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
+  - 'viewentries:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
+  - 'viewentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'viewentries:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
+  - 'viewentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'viewentries:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
+  - 'viewentries:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
+  - 'viewentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'viewentries:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
+  - 'viewentries:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
+  - 'viewentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'viewentries:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
+  - 'viewentries:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
+  - 'viewentries:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
+  - 'viewpeerassets:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  - 'viewpeerassets:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
+  - 'viewpeerassets:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  - 'viewpeerassets:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd' # User Photos
+  - 'viewpeerassets:a2ea3e3f-97b8-4daf-9166-ebb4176fcf16' # Sales Reps
+  - 'viewpeerassets:a5c76c64-0362-4924-a021-bc2a6fdf4a26' # PIR PDFs
+  - 'viewpeerassets:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
+  - 'viewpeercategorydrafts:221aee7e-8e2d-40b1-80a3-76c2ab8fd9fa' # Sales Rep
+  - 'viewpeercategorydrafts:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+  - 'viewpeercategorydrafts:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+  - 'viewpeercategorydrafts:762751a1-28d7-478b-afbe-7aaca5346ea7' # Lot Numbers
+  - 'viewpeercategorydrafts:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+  - 'viewpeercategorydrafts:83d25eae-03b2-427e-bdc9-394c8e762515' # Promotions
+  - 'viewpeercategorydrafts:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
+  - 'viewpeercategorydrafts:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
+  - 'viewpeercategorydrafts:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
+  - 'viewpeercategorydrafts:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+  - 'viewpeercategorydrafts:faaab815-8b6c-43a6-95f8-8ffa5ef38538' # Sleep Biomarkers
+  - 'viewpeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'viewpeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'viewpeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'viewpeerentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'viewpeerentrydrafts:073663c2-4a85-4e07-b664-2b220dc71ad5' # Register
+  - 'viewpeerentrydrafts:1c9dfb1e-4bf8-4adc-9a57-3dc824575af5' # FAQ
+  - 'viewpeerentrydrafts:51f315e9-0e39-4e97-a846-073605f7e9bf' # Healthcare Providers Overview
+  - 'viewpeerentrydrafts:63dbe529-4121-4b5c-861e-eb57f018bbf7' # Contact
+  - 'viewpeerentrydrafts:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
+  - 'viewpeerentrydrafts:84f8f7cb-8c2a-4fe3-9ea8-f946141a4483' # Patients Overview
+  - 'viewpeerentrydrafts:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'viewpeerentrydrafts:b5b15287-8bfd-4df9-b271-06ed382fb53d' # Login
+  - 'viewpeerentrydrafts:b5b225c2-9b91-44ab-95f4-c9ec2af5ed6e' # About
+  - 'viewpeerentrydrafts:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
+  - 'viewpeerentrydrafts:cb37c8c8-928f-4175-946a-5cbecc60c2f2' # Products Landing
+  - 'viewpeerentrydrafts:cc788334-996f-492a-948f-c70687deaeb2' # Reset Password
+  - 'viewpeerentrydrafts:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'viewpeerentrydrafts:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
+  - 'viewpeerentrydrafts:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
+  - 'viewpeerentrydrafts:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
