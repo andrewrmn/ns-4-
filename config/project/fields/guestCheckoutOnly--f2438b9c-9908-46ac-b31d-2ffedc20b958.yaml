@@ -2,7 +2,7 @@ columnSuffix: jddqiduf
 contentColumnType: boolean
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: guestCheckoutOnly
-instructions: null
+instructions: ''
 name: 'Guest Checkout Only'
 searchable: false
 settings:

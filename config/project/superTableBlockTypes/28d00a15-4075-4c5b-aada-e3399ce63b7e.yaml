@@ -1,45 +1,36 @@
-changedFieldIndicator: null
 field: 05604439-6c5c-41e1-acac-f9f2e807fbbb # Accordion
 fieldLayouts:
   50941910-a816-406b-b010-98c87cc56470:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 9f228eee-1e7f-4f4d-aaab-45ced2112783 # Headline
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a4e0b814-c328-4f29-ad0d-c10f6ccdd19d
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 8e6ec6f8-d9bb-4336-b939-97523357eeee # Drawer Content
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 1db4ce36-2024-45d1-bf59-87efb297ce2a
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: d34292a3-ac17-4d23-9bf6-9694c6f90a02
-        userCondition: null
+        sortOrder: 1
 fields:
   8e6ec6f8-d9bb-4336-b939-97523357eeee: # Drawer Content
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: drawerContent
-    instructions: null
+    instructions: ''
     name: 'Drawer Content'
     searchable: true
     settings:
@@ -49,13 +40,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: null
-      purifyHtml: true
-      redactorConfig: null
-      removeEmptyTags: true
-      removeInlineStyles: true
-      removeNbsp: true
-      showHtmlButtonForNonAdmins: true
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -67,16 +58,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: null
+    instructions: ''
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

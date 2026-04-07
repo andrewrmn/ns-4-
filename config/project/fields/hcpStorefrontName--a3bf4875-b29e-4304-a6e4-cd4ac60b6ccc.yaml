@@ -2,16 +2,16 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: hcpStorefrontName
-instructions: null
+instructions: ''
 name: 'HCP Storefront Name'
 searchable: false
 settings:
   byteLimit: null
   charLimit: null
-  code: false
+  code: ''
   columnType: null
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

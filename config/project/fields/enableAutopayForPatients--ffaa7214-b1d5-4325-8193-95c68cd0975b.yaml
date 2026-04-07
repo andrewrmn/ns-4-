@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: boolean
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: enableAutopayForPatients
-instructions: null
+instructions: ''
 name: 'Enable Autopay for Patients'
 searchable: false
 settings:

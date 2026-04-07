@@ -1,90 +1,72 @@
-changedFieldIndicator: null
 field: 1d92021f-7efc-43f4-ab26-b72c64f0fbb8 # Neuro Core Submissions
 fieldLayouts:
   d53f042c-dd49-421a-8cd5-859a6dbdc99c:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: de22c2aa-368f-4397-ad6b-83302764a060 # Activation Code
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: f15624f3-cef6-44b6-853d-5ddd08af8d13
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 7a5c6e36-9eb8-49ff-98df-45ed7ca4bbf7 # Date
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c09f8abf-dc18-4031-8fe1-45e064c5adb0
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: e5e26333-eeb2-42e6-b9f4-ef4e4a3ef600 # Products
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: df273a9f-5cbb-4525-8343-1af532a830fd
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 4d735f1f-648f-40a2-94f2-226c55539003 # Report URL
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 737d791a-84bf-4729-84a9-b3beb892d3cc
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: e5ab4171-1bff-4512-b790-ccadb0f66228 # Lab Kit ID
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 781aecac-7ff2-496e-9d77-ba0540e1b4db
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 98f9d930-fb66-458b-93be-cf6469a5b810
-        userCondition: null
+        sortOrder: 1
 fields:
   4d735f1f-648f-40a2-94f2-226c55539003: # Report URL
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: reportUrl
-    instructions: null
+    instructions: ''
     name: 'Report URL'
     searchable: false
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -95,13 +77,13 @@ fields:
     contentColumnType: datetime
     fieldGroup: null
     handle: date
-    instructions: null
+    instructions: ''
     name: Date
     searchable: false
     settings:
       max: null
       min: null
-      minuteIncrement: 30
+      minuteIncrement: '30'
       showDate: true
       showTime: false
       showTimeZone: false
@@ -113,16 +95,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: activationCode
-    instructions: null
+    instructions: ''
     name: 'Activation Code'
     searchable: false
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -133,16 +115,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: labKitId
-    instructions: null
+    instructions: ''
     name: 'Lab Kit ID'
     searchable: false
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -153,18 +135,16 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: products
-    instructions: null
+    instructions: ''
     name: Products
     searchable: false
     settings:
       allowSelfRelations: false
-      branchLimit: null
+      limit: ''
       localizeRelations: false
-      maintainHierarchy: false
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
+      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false

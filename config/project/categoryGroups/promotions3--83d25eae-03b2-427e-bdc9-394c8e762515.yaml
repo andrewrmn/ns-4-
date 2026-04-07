@@ -1,9 +1,8 @@
 defaultPlacement: end
 fieldLayouts:
-  5418b9b5-fa9a-456d-913a-a516a97241db:
+  fe5319a0-7add-4928-b9cc-cab3e791c2b3:
     tabs:
       -
-        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -11,9 +10,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
-            elementCondition: null
             id: null
-            inputType: null
             instructions: null
             label: null
             max: null
@@ -28,13 +25,10 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: 5a03b034-f5f7-4dbc-a627-714ba4df2833
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 47fed24d-3042-4cef-a451-2572d0be8b41
-        userCondition: null
+        sortOrder: 1
 handle: promotions3
 name: Promotions
 siteSettings:

@@ -1,4 +1,4 @@
-baseUrl: 'http://local.neuroscience'
+baseUrl: 'http://local.neuroscience/'
 enabled: true
 handle: en_us
 hasUrls: true

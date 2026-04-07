@@ -1,78 +1,63 @@
-changedFieldIndicator: null
 field: 465b7c35-c93e-4d9f-ab1d-b25bf2915bcd # Sales Reps
 fieldLayouts:
   d25cbe7f-d6f0-4a4b-b9b1-a111a808b08a:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 8c554832-84e2-4539-aff9-2bb81dcdf9cb # Headshot
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 61c2e447-47b6-428a-ac93-ca4f443cdc99
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 59c64a2c-277d-44ff-9353-009292105a82 # Phone #
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 8dd5aaac-8ab3-4794-89a9-e0fde524233c
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 6c31e057-1749-4bb2-9ee4-0ac2c38f7e0c # Email
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 9a8e0dc2-f2f5-42ed-9d18-4f5e8d3806ca
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: e5391192-5b85-4f09-8f42-f11e09a52743 # About
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 6c3b2c33-4d14-4c8f-9d9c-a4d76fc9c9d9
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 2d1053e2-8565-4f65-b079-5ad4f3acda6b
-        userCondition: null
+        sortOrder: 1
 fields:
   6c31e057-1749-4bb2-9ee4-0ac2c38f7e0c: # Email
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: email
-    instructions: null
+    instructions: ''
     name: Email
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -83,33 +68,29 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: headshot
-    instructions: null
+    instructions: ''
     name: Headshot
     searchable: true
     settings:
       allowSelfRelations: false
-      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
-      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: null
+      defaultUploadLocationSubpath: ''
+      limit: ''
       localizeRelations: false
-      maintainHierarchy: false
-      maxRelations: null
-      minRelations: null
       previewMode: full
-      restrictFiles: false
-      restrictLocation: false
-      restrictedDefaultUploadSubpath: null
-      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      restrictedLocationSubpath: null
-      selectionLabel: null
+      restrictFiles: ''
+      selectionLabel: ''
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
+      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      singleUploadLocationSubpath: ''
+      source: null
       sources: '*'
       targetSiteId: null
+      useSingleFolder: false
       validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
@@ -120,16 +101,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: phone
-    instructions: null
+    instructions: ''
     name: 'Phone #'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -140,7 +121,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: about
-    instructions: null
+    instructions: ''
     name: About
     searchable: true
     settings:
@@ -150,13 +131,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: null
-      purifyHtml: true
-      redactorConfig: null
-      removeEmptyTags: true
-      removeInlineStyles: true
-      removeNbsp: true
-      showHtmlButtonForNonAdmins: true
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: ''
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged

@@ -2,16 +2,16 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: phone
-instructions: null
+instructions: ''
 name: Phone
 searchable: true
 settings:
   byteLimit: null
   charLimit: null
-  code: false
+  code: ''
   columnType: null
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

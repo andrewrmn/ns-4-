@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: c229c28f-e6ca-4957-b7c5-b52c4d483452 # Text
 handle: heading
-instructions: null
+instructions: ''
 name: Heading
 searchable: true
 settings:
@@ -10,8 +10,8 @@ settings:
   charLimit: null
   code: false
   columnType: text
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

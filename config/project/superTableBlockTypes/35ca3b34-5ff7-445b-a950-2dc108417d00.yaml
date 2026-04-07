@@ -1,105 +1,81 @@
-changedFieldIndicator: null
 field: 31a4061d-db93-4c5c-b19a-6a7928b1d651 # Pathway Submissions
 fieldLayouts:
   6d45abef-bdb5-4565-be79-4456b788d0c6:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 9cf08c4a-ab8b-49df-a1ab-d16f32c47e9f # ID
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: f5542287-57b0-45bf-a029-edec42737392
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 07542c0e-b846-407e-8f83-9598f87ff744 # Date
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 637b6e4f-12ca-421b-a916-c0e9da5a21d3
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: e8a4d915-66e4-4ed1-af72-242680f21cee # Pathways
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5a076092-930d-4ac0-95ec-6198fbf98d6d
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: d19a0ee3-27ad-4e02-8903-0a654328b6b1 # Category
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 0c233167-bc04-44a4-80b3-ae7e0724a8b8
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 2361ece1-05e4-418b-9d55-2014216a6c86 # Age
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 7a60cf23-59b9-4350-9fc8-4e7997e37bfd
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: dd963577-fbc5-4135-a055-5eefd3198304 # Gender
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 8c88c012-3a6b-43e1-bc59-070214964371
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 302777e4-1fa9-4d2e-bbd1-08243166d73b # PDF Generated
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: dfb6863f-8696-436e-a559-af8d9a96f3de
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 7f665b69-cb58-4bd7-a179-ccb4af387ad4
-        userCondition: null
+        sortOrder: 1
 fields:
   9cf08c4a-ab8b-49df-a1ab-d16f32c47e9f: # ID
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: submissionId
-    instructions: null
+    instructions: ''
     name: ID
     searchable: true
     settings:
@@ -107,8 +83,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -119,7 +95,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: age
-    instructions: null
+    instructions: ''
     name: Age
     searchable: true
     settings:
@@ -127,8 +103,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -139,7 +115,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: date
-    instructions: null
+    instructions: ''
     name: Date
     searchable: true
     settings:
@@ -147,8 +123,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -159,7 +135,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: pdfGenerated
-    instructions: null
+    instructions: ''
     name: 'PDF Generated'
     searchable: true
     settings:
@@ -174,7 +150,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: category
-    instructions: null
+    instructions: ''
     name: Category
     searchable: true
     settings:
@@ -182,8 +158,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -194,7 +170,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: gender
-    instructions: null
+    instructions: ''
     name: Gender
     searchable: true
     settings:
@@ -202,8 +178,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -214,7 +190,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: pathways
-    instructions: null
+    instructions: ''
     name: Pathways
     searchable: true
     settings:
@@ -222,8 +198,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

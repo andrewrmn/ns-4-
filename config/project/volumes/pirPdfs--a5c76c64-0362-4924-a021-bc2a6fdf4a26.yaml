@@ -2,7 +2,6 @@ fieldLayouts:
   02ff320e-7b7a-40ed-bbe9-ce6b9bf8652f:
     tabs:
       -
-        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,9 +9,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
-            elementCondition: null
             id: null
-            inputType: null
             instructions: null
             label: null
             max: null
@@ -27,18 +24,15 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\assets\AssetTitleField
-            uid: a1ae8fc5-1134-4efd-9579-a8b0ee5c4420
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 43c448c0-20df-4712-97db-a9fcfc6e52b4
-        userCondition: null
+        sortOrder: 1
 fs: pirPdfs
 handle: pirPdfs
+hasUrls: true
 name: 'PIR PDFs'
 sortOrder: 6
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-transformFs: null
-transformSubpath: ''
+url: '@baseUrl/pir-documents'

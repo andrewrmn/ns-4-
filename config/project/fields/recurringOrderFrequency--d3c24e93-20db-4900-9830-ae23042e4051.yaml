@@ -2,11 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: recurringOrderFrequency
-instructions: null
+instructions: ''
 name: 'Recurring Order Frequency'
 searchable: false
 settings:
-  columnType: string
   options:
     -
       __assoc__:

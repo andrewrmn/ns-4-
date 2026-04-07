@@ -1,8 +1,8 @@
 columnSuffix: null
-contentColumnType: char(7)
+contentColumnType: string(7)
 fieldGroup: 96355652-fd03-4961-9979-624730faaa91 # Categories
 handle: color
-instructions: null
+instructions: ''
 name: Color
 searchable: true
 settings:

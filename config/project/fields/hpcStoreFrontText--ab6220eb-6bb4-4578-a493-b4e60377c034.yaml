@@ -2,16 +2,16 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: hpcStoreFrontText
-instructions: null
+instructions: ''
 name: 'HPC Store Front Text'
 searchable: false
 settings:
   byteLimit: null
   charLimit: null
-  code: false
+  code: ''
   columnType: null
-  initialRows: 2
-  multiline: true
+  initialRows: '2'
+  multiline: '1'
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

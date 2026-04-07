@@ -1,57 +1,45 @@
-changedFieldIndicator: null
 field: 4ee14c7e-9bf2-4692-a2ee-5887f40566de # PIR Key Ingredients
 fieldLayouts:
   7958943d-6926-4aba-a849-ba844c185d67:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: b372ea6c-d2a2-4e45-9c7a-3b12f1cbd4d1 # Ingredient
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: b0ae1ffb-e564-483b-a863-b2fdb8e1802d
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 6d46cc52-8b50-4cfb-99bc-14782782d963 # Description
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 452184ce-abe6-4a1f-bff2-bd485620d2b9
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: f872f3fa-1f1b-49c6-92cd-4b7ed39ef576 # References
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 86c329ec-0f7d-44aa-91c5-d4f783a6d747
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 8310a390-a080-441b-824b-53c28b5d01de
-        userCondition: null
+        sortOrder: 1
 fields:
   6d46cc52-8b50-4cfb-99bc-14782782d963: # Description
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: description
-    instructions: null
+    instructions: ''
     name: Description
     searchable: true
     settings:
@@ -61,8 +49,8 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: null
-      purifyHtml: false
+      purifierConfig: ''
+      purifyHtml: ''
       redactorConfig: Standard.json
       removeEmptyTags: true
       removeInlineStyles: true
@@ -79,7 +67,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: ingredient
-    instructions: null
+    instructions: ''
     name: Ingredient
     searchable: true
     settings:
@@ -87,8 +75,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -99,7 +87,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: references
-    instructions: null
+    instructions: ''
     name: References
     searchable: true
     settings:
@@ -109,8 +97,8 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: null
-      purifyHtml: false
+      purifierConfig: ''
+      purifyHtml: ''
       redactorConfig: Standard.json
       removeEmptyTags: true
       removeInlineStyles: true

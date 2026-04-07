@@ -1,0 +1,704 @@
+field: c0016ea1-20c0-4590-8cc7-1359f3dadac0 # Key Ingredients
+fieldLayouts:
+  c5b6c935-038f-4f3c-bf67-f2a67e405fb4:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: aba94e3f-0f87-4c20-a5fb-27aa0dc5ab3a # Ingredients
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 69300f6d-e971-4ea3-ae30-550b3f2449f7 # Precursor Potential
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  69300f6d-e971-4ea3-ae30-550b3f2449f7: # Precursor Potential
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: precursorPotential
+    instructions: ''
+    name: 'Precursor Potential'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - None
+            -
+              - value
+              - ''
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Checked
+            -
+              - value
+              - checked
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Mild - UP'
+            -
+              - value
+              - mildUp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Moderate - UP'
+            -
+              - value
+              - moderateUp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Strong - UP'
+            -
+              - value
+              - strongUp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Mild - Down'
+            -
+              - value
+              - mildDown
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Moderate - Down'
+            -
+              - value
+              - moderateDown
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Strong - Down'
+            -
+              - value
+              - strongDown
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  aba94e3f-0f87-4c20-a5fb-27aa0dc5ab3a: # Ingredients
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: ingredients
+    instructions: ''
+    name: Ingredients
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Banaba leaf (Lagerstroemia speciosa (18% corosolic acid)'
+            -
+              - value
+              - lagerstroemiaSpeciosaBanabaLeaf18CorosolicAcid
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Phosphatidylserine
+            -
+              - value
+              - phosphatidylserine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Glycine
+            -
+              - value
+              - glycine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Taurine
+            -
+              - value
+              - taurine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Rhodiola rosea (9-15% rosavins)'
+            -
+              - value
+              - rhodiolaRosea915Rosavins
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Probiotics
+            -
+              - value
+              - probiotics
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - N-acetyl-L-cysteine
+            -
+              - value
+              - nAcetylLCysteine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-theanine
+            -
+              - value
+              - lTheanine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Alpha-lipoic acid'
+            -
+              - value
+              - alphaLipoicAcid
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - CoQ10
+            -
+              - value
+              - coq10
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 5-MTHF
+            -
+              - value
+              - 5Mthf
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Resveratrol
+            -
+              - value
+              - resveratrol
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Astaxanthin
+            -
+              - value
+              - astaxanthin
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Magnesium
+            -
+              - value
+              - magnesium
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Zinc
+            -
+              - value
+              - zinc
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Selenium
+            -
+              - value
+              - selenium
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Melatonin
+            -
+              - value
+              - melatonin
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Passion flower extract (Passiflora incarnate) (arial parts)'
+            -
+              - value
+              - passionFlowerExtractPassifloraIncarnateArialParts
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Lemon balm (Melissa officinalis) root extract'
+            -
+              - value
+              - lemonBalmMelissaOfficinalisRootExtract
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Vitamin B6'
+            -
+              - value
+              - vitaminB6
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Ashwagandha (Withania somnifera) root and leaf extract'
+            -
+              - value
+              - ashwagandhaWithaniaSomniferaRootAndLeafExtract
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Valerian (Valeriana officinalis) root extract (Valerenic acids 0.8%)'
+            -
+              - value
+              - valerianValerianaOfficinalisRootExtractValerenicAcids08
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 5-HTP
+            -
+              - value
+              - 5Htp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Vitamin B'
+            -
+              - value
+              - vitaminB
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Vitamin C'
+            -
+              - value
+              - vitaminC
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-tryptophan
+            -
+              - value
+              - lTryptophan
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - N-acetyl-L-tyrosine
+            -
+              - value
+              - nAcetylLTyrosine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Mucuna cochinchinensis (99% L-DOPA)'
+            -
+              - value
+              - mucunaCochinchinensis99LDopa
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-phenylalanine
+            -
+              - value
+              - lPhenylalanine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Green tea leaf extract (65% EGCG)'
+            -
+              - value
+              - greenTeaLeafExtract65Egcg
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Coleus forskohlii root extract (38% Forskolin)'
+            -
+              - value
+              - coleusForskohliiRootExtract38Forskolin
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Huperzia serrata aerial parts (1% Huperzine A)'
+            -
+              - value
+              - huperziaSerrataAerialParts1HuperzineA
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - DL-phenylalanine
+            -
+              - value
+              - dlPhenylalanine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-methionine
+            -
+              - value
+              - lMethionine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Rhodiola rosea (5% rosavins)'
+            -
+              - value
+              - rhodiolaRosea5Rosavins
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Glycyrrhizic acid (from Licorice root)'
+            -
+              - value
+              - glycyrrhizicAcidFromLicoriceRoot
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-histidine
+            -
+              - value
+              - lHistidine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-tyrosine
+            -
+              - value
+              - lTyrosine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - SAMe
+            -
+              - value
+              - same
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Acetyl-L-carnitine
+            -
+              - value
+              - acetylLCarnitine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Alpha-glycerylphosphorylcholine (50% alpha-GPC)'
+            -
+              - value
+              - alphaGlycerylphosphorylcholine50AlphaGpc
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - L-cysteine
+            -
+              - value
+              - lCysteine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Trimethylglycine
+            -
+              - value
+              - trimethylglycine
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Folate
+            -
+              - value
+              - folate
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Niacin
+            -
+              - value
+              - niacin
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Vitamin B2 (Riboflavin)'
+            -
+              - value
+              - vitaminB2Riboflavin
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Vitamin B12'
+            -
+              - value
+              - vitaminB12
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Elderberry
+            -
+              - value
+              - elderberry
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Ginkgo biloba extract'
+            -
+              - value
+              - ginkgoBilobaExtract
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Vitamin D'
+            -
+              - value
+              - vitaminD
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Beta glucan'
+            -
+              - value
+              - betaGlucan
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown

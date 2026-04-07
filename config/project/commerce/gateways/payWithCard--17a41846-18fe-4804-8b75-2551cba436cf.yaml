@@ -1,8 +1,9 @@
 handle: payWithCard
+isArchived: false
 isFrontendEnabled: true
 name: 'Pay with card'
 paymentType: authorize
 settings:
-  onlyAllowForZeroPriceOrders: '0'
+  onlyAllowForZeroPriceOrders: ''
 sortOrder: 1
 type: craft\commerce\gateways\Manual

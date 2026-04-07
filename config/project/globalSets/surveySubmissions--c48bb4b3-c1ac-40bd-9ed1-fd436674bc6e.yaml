@@ -2,41 +2,31 @@ fieldLayouts:
   82ba3812-4184-47dc-8805-71fe75c069cb:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 37505fac-e260-4ddd-bf2f-62a14db605de # Survey Results Text
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ea5adcd8-253e-49bb-840b-1416b1a9ad2c
-            userCondition: null
             warning: null
             width: 100
         name: Text
-        uid: 145f6e32-72b7-419c-910e-82b63cc9654e
-        userCondition: null
+        sortOrder: 1
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 638763ab-4f15-4644-93e8-825063891f53 # Survey Submissions
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2df42133-4e5b-4398-a7e9-c2d0b873a754
-            userCondition: null
             warning: null
             width: 100
         name: Submissions
-        uid: ccc072ce-2857-46fd-ae23-b75f0eb50578
-        userCondition: null
+        sortOrder: 2
 handle: surveySubmissions
 name: 'Survey Submissions'
 sortOrder: 9

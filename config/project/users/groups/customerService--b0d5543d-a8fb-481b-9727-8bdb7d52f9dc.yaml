@@ -1,4 +1,4 @@
-description: null
+description: ''
 handle: customerService
 name: 'Customer Service'
 permissions:
@@ -13,18 +13,10 @@ permissions:
   - 'assignusergroup:e0e6611c-ec20-44b8-96ce-23e0fa0d253b' # Personal (PUP)
   - assignuserpermissions
   - commerce-capturepayment
-  - commerce-creatediscounts
-  - 'commerce-createproducts:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
-  - commerce-createsales
-  - commerce-deletediscounts
   - commerce-deleteorders
-  - 'commerce-deleteproducts:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
-  - commerce-deletesales
-  - commerce-editdiscounts
   - commerce-editorders
-  - 'commerce-editproducttype:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
-  - commerce-editsales
   - commerce-manageorders
+  - 'commerce-editproducttype:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
   - commerce-managepromotions
   - commerce-manageshipping
   - commerce-managestoresettings
@@ -35,3 +27,11 @@ permissions:
   - editusers
   - moderateusers
   - registerusers
+  - commerce-editsales
+  - commerce-createsales
+  - commerce-deletesales
+  - commerce-editdiscounts
+  - commerce-creatediscounts
+  - commerce-deletediscounts
+  - 'commerce-createproducts:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard
+  - 'commerce-deleteproducts:3593d06b-3003-4322-809a-7cfbf14d11eb' # Standard

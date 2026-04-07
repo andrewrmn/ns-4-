@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: integer(10)
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: pin
-instructions: null
+instructions: ''
 name: 'PIN#'
 searchable: true
 settings:

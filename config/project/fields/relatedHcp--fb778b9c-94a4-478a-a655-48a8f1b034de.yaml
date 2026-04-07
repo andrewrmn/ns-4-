@@ -2,18 +2,16 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: relatedHcp
-instructions: null
+instructions: ''
 name: 'Related HCP'
 searchable: false
 settings:
   allowSelfRelations: false
-  branchLimit: null
+  limit: '1'
   localizeRelations: false
-  maintainHierarchy: false
-  maxRelations: 1
-  minRelations: null
-  selectionLabel: null
+  selectionLabel: ''
   showSiteMenu: true
+  source: null
   sources:
     - admins
     - 'group:51e7da1c-9888-4197-a25e-c456eebf2312' # Health Care Professionals

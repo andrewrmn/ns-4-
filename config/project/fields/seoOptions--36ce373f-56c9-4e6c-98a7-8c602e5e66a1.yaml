@@ -1,45 +1,29 @@
 columnSuffix: yqqconrt
-contentColumnType: string
+contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: seoOptions
-instructions: null
+instructions: ''
 name: 'SEO Options'
 searchable: false
 settings:
-  errorMessage: 'Unable to find component class ''nystudio107\seomatic\fields\SeoSettings''.'
-  expectedType: nystudio107\seomatic\fields\SeoSettings
-  settings:
-    __assoc__:
-      -
-        - elementDisplayPreviewType
-        - google
-      -
-        - facebookTabEnabled
-        - ''
-      -
-        - generalEnabledFields
-        -
-          - seoPreview
-          - mainEntityOfPage
-          - seoTitle
-          - siteNamePosition
-          - seoDescription
-          - seoKeywords
-          - seoImage
-          - seoImageTransform
-          - seoImageTransformMode
-          - seoImageDescription
-          - robots
-          - canonicalUrl
-      -
-        - generalTabEnabled
-        - '1'
-      -
-        - sitemapTabEnabled
-        - ''
-      -
-        - twitterTabEnabled
-        - ''
+  elementDisplayPreviewType: google
+  facebookTabEnabled: ''
+  generalEnabledFields:
+    - seoPreview
+    - mainEntityOfPage
+    - seoTitle
+    - siteNamePosition
+    - seoDescription
+    - seoKeywords
+    - seoImage
+    - seoImageTransform
+    - seoImageTransformMode
+    - seoImageDescription
+    - robots
+    - canonicalUrl
+  generalTabEnabled: '1'
+  sitemapTabEnabled: ''
+  twitterTabEnabled: ''
 translationKeyFormat: null
 translationMethod: none
-type: craft\fields\MissingField
+type: nystudio107\seomatic\fields\SeoSettings

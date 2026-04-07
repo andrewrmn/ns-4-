@@ -2,16 +2,16 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: providerAsA
-instructions: null
+instructions: ''
 name: 'Customer is a health care provider as a '
 searchable: true
 settings:
   byteLimit: null
-  charLimit: 100
+  charLimit: '100'
   code: false
   columnType: string
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

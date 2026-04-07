@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: recommendationNote
-instructions: null
+instructions: ''
 name: 'Recommendation note'
 searchable: false
 settings:
@@ -12,13 +12,13 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: null
-  purifyHtml: false
-  redactorConfig: null
-  removeEmptyTags: false
-  removeInlineStyles: false
-  removeNbsp: false
-  showHtmlButtonForNonAdmins: false
+  purifierConfig: ''
+  purifyHtml: ''
+  redactorConfig: ''
+  removeEmptyTags: ''
+  removeInlineStyles: ''
+  removeNbsp: ''
+  showHtmlButtonForNonAdmins: ''
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
   uiMode: enlarged

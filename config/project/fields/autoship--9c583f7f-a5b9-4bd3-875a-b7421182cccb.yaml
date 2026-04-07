@@ -2,16 +2,16 @@ columnSuffix: aqrngtfe
 contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: autoship
-instructions: null
+instructions: ''
 name: Autoship
 searchable: false
 settings:
   byteLimit: null
   charLimit: null
-  code: false
+  code: ''
   columnType: null
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

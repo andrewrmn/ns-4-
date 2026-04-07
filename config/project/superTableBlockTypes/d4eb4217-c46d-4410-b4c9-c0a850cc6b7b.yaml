@@ -1,121 +1,93 @@
-changedFieldIndicator: null
 field: 5aef1b3e-1992-4101-961b-27ed5fa34a5b # QR Scan Table
 fieldLayouts:
   61fd81df-aa3e-4f74-9a68-e4f062750e6f:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: b9cbf7cc-8594-4e02-abbe-0c17c35ef005 # Neurotransmitters
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 400ecbf7-2211-4225-a27c-cff91922a740
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 8b1dd37a-41df-402f-af40-ccbc41273def # Range
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 95fcac15-cdec-4733-ac67-ca2d9e9b52b1
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: cd95af5f-59e3-44f1-ab1a-0c66d740d9b9 # Associated Product
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 13af59f1-4536-46ce-bdb6-31a25bb7ba93
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 564c5e54-0206-4672-a25f-a9d52fce7d72 # Age
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 17c20286-ccfd-4c61-a0ca-10eaeccce81e
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 0615a5a7-ecbf-4023-ad4f-602c6b1815b2 # Age Check
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 82aebb3e-341f-49cc-b50c-6475497bb5d2
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 84ff1395-1a14-4763-9cc7-5ee23a880dcd # Immune/ Adrenal
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 72b684cb-09e7-4d74-9caf-4ca2876bb329
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 1443ab41-a4dc-40a3-9de7-9b8a6e4d395c # Product Checks
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: bb30655e-901c-4ee9-82bb-0392e0caa408
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 352f6db0-4f86-4e06-bae7-63d61504e1a1 # end
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 51d642b1-4f63-413f-98be-37c2d6feaeb1
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 6701064a-c98f-475c-a542-ef71caf1516f
-        userCondition: null
+        sortOrder: 1
 fields:
   8b1dd37a-41df-402f-af40-ccbc41273def: # Range
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: range
-    instructions: null
+    instructions: ''
     name: Range
     searchable: true
     settings:
-      columnType: string
       options:
         -
           __assoc__:
@@ -191,11 +163,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: immuneAdrenal
-    instructions: null
+    instructions: ''
     name: 'Immune/ Adrenal'
     searchable: true
     settings:
-      columnType: string
+      optgroups: true
       options:
         -
           __assoc__:
@@ -238,17 +210,13 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: end
-    instructions: null
+    instructions: ''
     name: end
     searchable: true
     settings:
       errorMessage: 'Unable to find component class ''SuperTable_Label''.'
       expectedType: SuperTable_Label
-      settings:
-        __assoc__:
-          -
-            - value
-            - ''
+      settings: '{"value":""}'
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\MissingField
@@ -257,11 +225,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: age
-    instructions: null
+    instructions: ''
     name: Age
     searchable: true
     settings:
-      columnType: string
+      optgroups: true
       options:
         -
           __assoc__:
@@ -304,7 +272,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: ageCheck
-    instructions: null
+    instructions: ''
     name: 'Age Check'
     searchable: true
     settings:
@@ -324,13 +292,11 @@ fields:
     searchable: true
     settings:
       allowSelfRelations: false
-      branchLimit: null
+      limit: ''
       localizeRelations: false
-      maintainHierarchy: false
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
+      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false
@@ -343,19 +309,20 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: neurotransmitters
-    instructions: null
+    instructions: ''
     name: Neurotransmitters
     searchable: true
     settings:
+      allowLimit: false
+      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: null
+      branchLimit: ''
+      limit: null
       localizeRelations: false
-      maintainHierarchy: true
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
       source: 'group:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
@@ -367,18 +334,16 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: associatedProduct
-    instructions: null
+    instructions: ''
     name: 'Associated Product'
     searchable: true
     settings:
       allowSelfRelations: false
-      branchLimit: null
+      limit: '1'
       localizeRelations: false
-      maintainHierarchy: false
-      maxRelations: 1
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
+      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false

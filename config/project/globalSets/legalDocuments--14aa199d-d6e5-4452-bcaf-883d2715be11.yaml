@@ -2,95 +2,72 @@ fieldLayouts:
   f84d96dc-f648-469a-ad9e-221bacfc402c:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 57ec9101-664f-4658-a7b7-dfa7f120f024 # N0007 Content
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 13921b9d-5ad8-41c5-8a64-aa436942a810
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 8c1e3cfa-a11e-49cd-be1d-71571172959e # N0007 Form
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 13420763-90d6-4b17-858a-9838de841606
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: c4bffc59-89a5-48fa-b339-4283a5f28af2 # N0011 Content
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 973d8ab3-f33a-4ce3-91d6-3b611efa19ca
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: a94acfe2-14f9-4830-a0cf-08f250c1c7d9 # N0011 Form
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 1be77599-7ba1-422f-aa66-d87cfdaae74c
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: b64f83ff-c496-41da-9dae-376b26f213b5 # N0003 Content
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 26196193-fc11-404d-9b5d-6100d07f44f7
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 7e4bb0c8-fee3-4856-9ddb-0912afe86208 # N0003 Form
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: eacea3f3-75b3-48a4-a769-2f01f3c6eef7
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: dc21dd8f-5a86-4183-906e-142c04a68a6f # Filter by Symptom Legal Text
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a312211b-cee2-48fa-a09e-9d61a98c3185
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 054cb64c-3f11-4dac-8457-e4035a588d46
-        userCondition: null
+        sortOrder: 1
 handle: legalDocuments
 name: 'Legal Documents'
 sortOrder: 5

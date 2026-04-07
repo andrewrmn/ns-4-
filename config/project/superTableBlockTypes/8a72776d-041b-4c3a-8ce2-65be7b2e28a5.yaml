@@ -1,85 +1,67 @@
-changedFieldIndicator: null
 field: 693887d6-503f-479e-b676-b2f548ab5367 # Pathways Table
 fieldLayouts:
   4d05b114-a39b-4b11-b7ac-9a7c3a8fb66a:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 8dce5136-1481-4d42-aadf-1fb0e7c92b01 # Neurotransmitters
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 36a53be5-38db-41c2-b5f2-04772ebc6689
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 7585d33d-c39f-4bc6-b4d2-3ef21a2ae3c2 # Associated Product
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 70cacadf-be80-44d4-9bff-4b2ba8351af1
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: cdf57f41-5c12-4ece-9c09-c2b317af2b39 # Age
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d4a00cee-9f15-4ac2-a42f-0974cd7398c9
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 961d042b-759e-43e9-a6f9-1f088df64420 # Age Check
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d77cf022-391f-4139-8bb3-a8d7dec42825
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 5b02b6d5-d94f-49ce-80e2-74421665799e # Immune/ Adrenal
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: b65a9d99-9109-4891-98cf-78477eba666f
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: f53c8f6e-07dc-4950-993f-39642dadc8aa
-        userCondition: null
+        sortOrder: 1
 fields:
   5b02b6d5-d94f-49ce-80e2-74421665799e: # Immune/ Adrenal
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: immuneAdrenal
-    instructions: null
+    instructions: ''
     name: 'Immune/ Adrenal'
     searchable: true
     settings:
-      columnType: string
+      optgroups: true
       options:
         -
           __assoc__:
@@ -122,19 +104,20 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: neurotransmitters
-    instructions: null
+    instructions: ''
     name: Neurotransmitters
     searchable: true
     settings:
+      allowLimit: false
+      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: null
+      branchLimit: ''
+      limit: null
       localizeRelations: false
-      maintainHierarchy: true
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
       source: 'group:f7a04aca-b458-463e-ac40-4e70fe38fe09' # QR Scan Pathways
+      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
@@ -146,7 +129,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: ageCheck
-    instructions: null
+    instructions: ''
     name: 'Age Check'
     searchable: true
     settings:
@@ -161,18 +144,16 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: associatedProduct
-    instructions: null
+    instructions: ''
     name: 'Associated Product'
     searchable: true
     settings:
       allowSelfRelations: false
-      branchLimit: null
+      limit: ''
       localizeRelations: false
-      maintainHierarchy: false
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
+      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false
@@ -185,11 +166,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: age
-    instructions: null
+    instructions: ''
     name: Age
     searchable: true
     settings:
-      columnType: string
+      optgroups: true
       options:
         -
           __assoc__:

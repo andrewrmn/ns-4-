@@ -2,11 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: howOftenWillYouBeOrdering
-instructions: null
+instructions: ''
 name: 'How often will you be ordering?'
 searchable: true
 settings:
-  columnType: string
   options:
     -
       __assoc__:

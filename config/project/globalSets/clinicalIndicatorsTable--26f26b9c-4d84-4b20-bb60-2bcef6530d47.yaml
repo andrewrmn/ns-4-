@@ -2,23 +2,18 @@ fieldLayouts:
   45a1db3b-bbc0-4011-abaa-73a81b303cc6:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: e697251b-8d8c-4911-ba14-486479a207a9 # Clinical Indicators Table
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a782bcab-1d8f-4bbc-a150-57ca2a2a9ad4
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: c828329c-d474-49da-8f6b-51449dbe1b41
-        userCondition: null
+        sortOrder: 1
 handle: clinicalIndicatorsTable
 name: 'Clinical Indicators Table'
 sortOrder: 2

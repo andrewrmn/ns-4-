@@ -1,901 +1,669 @@
 tabs:
   -
-    elementCondition: null
     elements:
       -
-        elementCondition: null
         fieldUid: 40928b73-c18d-4dec-bb51-f9bdebc1e492 # Approved Account
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: f44de451-a6fa-45a4-9e76-7631c309853d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: f73b9e42-01ca-4fac-884c-57448cb6e8a6 # Account Notes
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 1a6a5d5b-3d9c-4f45-9a76-d193ace9fa9d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: c69a6ae7-9ea9-4fab-a1bc-50a613be59da # Name
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 27f6d9a5-4372-48bf-9a28-d973c6310481
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: d745f96f-2d43-4ca8-a687-de15c0f3b565 # MAS ID
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 3af45fa0-3aee-4d68-abab-ffb10ae6fecd
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 77b1c576-6b47-4bdd-95b5-a9f15368aa12 # MAS Term Code
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 1bb728bd-f3d6-4d39-bca7-dc7160707dd3
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 1fe8477a-5ec0-4e2b-a341-0163c359acff # Business Name
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 16633d4d-7213-4971-b0fb-8eaa6c791dea
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 28c78d0a-e594-4a6c-92d3-587e6b30d6fb # Address
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 44ad5ca9-a435-46f6-803f-300a1917dd23
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 7a1cd083-330d-40a2-b92f-bbd2384f288c # Address Line 2
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: c96b46b8-5a37-4dfa-bd6e-fdb862dc059d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 33810b7c-d1a2-4fc5-9e5d-5cf4011c5be5 # Address Line 3
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 6bca1191-b6ea-4e53-b958-cdd6fa655543
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 83b7e084-8904-4d51-aa66-1ae5251a1045 # City
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 70af44f6-9c31-4a50-9078-71927f89e7ed
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 787ec645-e078-48e3-91bb-0c34fc9983c7 # State
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: a346443f-59fc-44c3-9927-981992883c3b
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: cb0aa75f-e10b-4332-851d-00707f2eda73 # Zip
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: a91c0f9a-8959-4669-b4e5-146f56415a00
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 474b9264-45b6-46f4-8f67-f2b019ab9132 # Country
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: b47e190b-35f5-4e87-a609-78392134b08d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 5480f507-2628-48f6-903e-ce6f59e830cd # Phone
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: cb565438-b41a-4c32-b16b-ae36184380fc
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 0cf74128-8f40-4bb2-8575-55b562a9b995 # Fax
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: bb51c013-2860-41bf-82f9-64d244ec854b
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: aba241af-c600-4e3d-a47f-f5e7478d3fe8 # Website
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: dcbfed1a-b3d7-4c42-9385-525fe4bea3d0
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 99447a1e-5e09-4f35-9d35-8fba196f33e6 # Receive Updates
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: d7d85b9c-2263-459b-8963-5963ed010f2a
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 18759021-40fd-4c81-b811-63e764893149 # Add Shipping
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 6f311ec3-93ff-45ea-95f2-2431747d2e20
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 0b34c246-ab73-4138-a856-4c48ba4c8422 # Can Use Bill Me
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 0a4a9940-3ac5-43e0-91fd-359a2f4ca872
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 30005fe6-b9d0-44f2-ac88-416a747b130d # Credentials
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 2fbadcdd-d6c6-451b-a451-e774710bb7da
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 444c8b11-370c-4b16-9d85-817073c687c9 # Discount
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: ff2d3f00-22f8-45af-907a-bfb4864ab117
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 16a48267-4f55-4297-af2c-b5e01dc6f8ec # DocuSign Completed
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 43b600cc-bdb2-454f-9b0f-500bbf776362
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 2530285f-7bcd-44f2-9baf-38799ce5d04b # Sales Tax Exempt
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: fb39c3b6-0ffb-4e92-8e04-5f5b0a353e22
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: aceb8c02-7008-4dfb-9097-078880a8846d # AvaTax Customer Usage Type
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 8432fcb5-3f55-4115-8f95-82102cffd7a7
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 6e8cde69-32eb-47b1-bea5-0262973d32ef # Tax Acknowledgement
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 4fe3cad1-1584-4364-8f9b-f368df2fbf04
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: cf066345-4041-4fdd-811b-a3494dce059e # Imported Account
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 4a5aca70-91e7-4ecb-ab0b-e37cd0f376c2
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: bbd916d7-3d2e-44f7-96ea-97924d4da149 # How did you hear about NeuroScience?
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 929ae929-ec48-4592-918d-d29c4f4f14b7
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 6af02f3b-09cc-487a-805c-999988caf2d5 # What is the specialty/scope of your practice?
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 76118f19-f72f-4262-a8bf-7be16aa46f16
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: aa76bdda-c77b-4ce9-b85c-adb966ad59c4 # How many years have you been in business?
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 8a50a6d1-1b23-4cfc-8210-956272d6a806
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 2fe6d5f4-b503-4e77-a57d-b39914f1d6b3 # How will you be ordering?
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: ab88a591-3b87-48ad-81b0-6b0cd77765e9
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 1686afb0-8e4e-4134-8058-ec4556fa6b9a # How often will you be ordering?
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 69b0338d-ab43-486a-88d0-7778358b9a9c
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: ee4c306d-ff72-4a97-b5b7-f23cbed0bb43 # Complimentary Box
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: cddada2e-1b3e-49ad-8fc3-8a44f1a71df1
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: ac93a5fd-0abd-42e8-852a-10e6a0d468d3 # Event Registration
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: cfbc6055-b172-452f-bc28-e43b94cd700c
-        userCondition: null
         warning: null
         width: 100
     name: Profile
-    uid: 5f3e18c4-4c77-452a-999a-8b155af3b68d
-    userCondition: null
+    sortOrder: 1
   -
-    elementCondition: null
     elements:
       -
-        elementCondition: null
         fieldUid: 7064adf6-dd39-495f-8e0a-3f1b3fe2d508 # PUP Account?
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: c46fda94-96c9-49e5-887b-5f7cf3bc22df
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: adc2543b-d7d3-467e-bd9b-e73057d90147 # NPI Number
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 31d36d78-ae1c-42a3-a284-4c4dc52f2d53
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: ab709962-8e8a-48e7-b72b-2a1e529dc11f # License Photo Upload
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: f6ccfef5-8bdd-486a-b1b9-1700d36c3f60
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: aa9a52ab-b4c6-4e96-b010-7244fbf479bd # Customer is a health care provider as a 
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 689ffc93-b489-44e5-aac0-872f464f8b91
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: bc7b83a8-900d-44f9-91dc-6213789d8359 # Under the laws of the state of
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 08966db4-58cd-43f1-aac9-3d2f7545e323
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 64b9ec33-730c-4215-845d-05d70c2ed649 # Registration, Certification, License #
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 392c801d-d99b-4ca2-afc6-a383daf5119d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: c741b7ae-7aaa-4445-94e5-3e7e5803086d # N0011 Product Resale Agreement
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: e0063ed7-9747-4a4a-80ef-94a2ac2c8837
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 746c572c-a1de-4461-ab44-6ef470a15bf6 # N0011 Product Resale Agreement E-Sign Name
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 10b4981c-0f8e-4eee-98af-176c4d6f6852
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: c453a0ba-f283-4c2d-933c-00c586262cd4 # N0011 Product Resale Agreement E-Sign Date
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: b558685e-c136-4277-aab7-9b79d2e2158f
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 1858ce22-9353-4a5e-bac0-70fd24bbdb7f # N0007 Terms and Conditions
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 466e2083-d60d-4e06-8caf-319356613fa2
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: a86901a6-36b3-43e0-a44d-40c931a31f4c # N0007 Terms and Conditions E-Sign Name
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: ab00db40-fb66-4324-b800-fda9157c15eb
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 7c236315-d887-4c5f-8e6a-cae3d3ac4cf6 # N0007 Terms and Conditions E-Sign Date
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 4b4917d8-735c-4951-862b-536bfd681dde
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: a4386024-0b46-432f-b6e6-5a358d9f27a2 # N0003 MAP Policy
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 2e6bf1a0-20c9-423e-9428-4573199b6202
-        userCondition: null
         warning: null
         width: 100
     name: Legal
-    uid: f2ab0b9b-f514-42e4-b118-cf6e26806a07
-    userCondition: null
+    sortOrder: 2
   -
-    elementCondition: null
     elements:
       -
-        elementCondition: null
         fieldUid: 1d92021f-7efc-43f4-ab26-b72c64f0fbb8 # Neuro Core Submissions
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: c14b68b7-11ad-4062-87b0-41b3f10d2f9e
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 334b094b-e2f3-4ede-a38f-667378ae3d9c # QR Scan Submissions
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 58eb0e22-76ee-44d6-be53-4e9c2028ea28
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 31a4061d-db93-4c5c-b19a-6a7928b1d651 # Pathway Submissions
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 02fdf5fa-dc5b-439d-bca1-c6db1feaaed9
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 913b6a3c-8469-4974-bf89-f32df7541a75 # Clinical Indication Submission
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: eed9738f-e556-4ec1-a68b-0d7095488717
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: cfbe0147-1cfa-4cbd-a0a2-42dfb7278536 # Product Submission
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 8798a5ff-b982-40da-bf81-62e0e3c3fbd8
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 474577a8-c85d-45d9-88b1-6078fbe89a4c # Sleep Submission
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: fcf5a841-8f6c-4383-b1ff-17b4c22f1b2f
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: de994b2c-c4ec-44bb-a1d8-1912ce9bfdd1 # App Token
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: d4881695-86ed-4c8b-9250-8ec6c8595daa
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: a02fc092-e0f1-4ca8-9234-cf619015f6d1 # NeuroSelect Only Linked Account
         instructions: null
         label: null
-        required: false
+        required: '0'
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: dc18d706-9c6f-49ca-af6e-dfde89225639
-        userCondition: null
         warning: null
         width: 100
     name: NeuroSelect
-    uid: 72099241-43f9-45b2-be37-cbc95f5c485d
-    userCondition: null
+    sortOrder: 3
   -
-    elementCondition: null
     elements:
       -
-        elementCondition: null
         fieldUid: 638763ab-4f15-4644-93e8-825063891f53 # Survey Submissions
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: d4b536f4-c67e-4f2c-a034-3aaf79e089c5
-        userCondition: null
         warning: null
         width: 100
     name: 'Neuro Q'
-    uid: d77ddead-bc8c-455e-921f-4ba712740f87
-    userCondition: null
+    sortOrder: 4
   -
-    elementCondition: null
     elements:
       -
-        elementCondition: null
         heading: 'For Patients Only'
         type: craft\fieldlayoutelements\Heading
-        uid: 42eba22b-63b9-42aa-94b7-4e3d552ef458
-        userCondition: null
       -
-        elementCondition: null
         fieldUid: fb778b9c-94a4-478a-a655-48a8f1b034de # Related HCP
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 9f7b9277-2313-4217-8e73-8da9da87c0aa
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 7584dc8b-8355-47ba-b214-c911561fe851 # Patient NeuroCash Discount
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: d96f9a74-7635-4180-847e-67f73f79be8d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 2da5cf48-9d3e-4d76-8023-c698c3e680b0 # Restricted Products
         instructions: 'This is to set product availability for patient i.e only these products will be shown to patient.'
-        label: null
-        required: false
+        label: ''
+        required: ''
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: e66e3602-5d83-489d-b96a-eaf8e0db93c0
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: b819aa79-fd25-4bdf-8b33-69a89a96fd8d # Patient Notes
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: bac41307-071b-4d88-8fa9-78e324d1ad9c
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 0d90090c-0e31-4664-8876-70c628fb3f6a # Patient Enrolled?
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 650f10d6-d78a-4a5c-b16d-8ea2a065aa3e
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         heading: 'For HCP Only'
         type: craft\fieldlayoutelements\Heading
-        uid: 61b6be89-df31-4be6-90c8-58cdec778e55
-        userCondition: null
       -
-        elementCondition: null
         fieldUid: a3bf4875-b29e-4304-a6e4-cd4ac60b6ccc # HCP Storefront Name
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 9ea5a372-2441-4028-8746-e1dff3fd9228
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: ab6220eb-6bb4-4578-a493-b4e60377c034 # HPC Store Front Text
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 40b50f5d-9a75-4c13-8132-b3c58688ce29
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: c8933946-5b36-4a59-a838-287a112153a5 # HCP Email Notifications
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 2f428373-9ddf-4bdc-931c-71228fb2f9ae
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 21fa0be7-035c-4f66-9051-5f4367869310 # HCP Disclaimer
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: eaa28550-ef78-4c6f-85ab-9e9856a2a706
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: e9ea244b-d178-4a0a-af8d-cb70ce73f6e1 # Product Selection
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: d4934a0b-ea55-4fcb-b36d-0f9eab0dd3a7
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 1f6ffe5f-4a93-4490-8928-d69b733b0bcb # Recommended Products
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 033bed1a-e52a-4f89-a55d-524a1df9bc68
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: ffaa7214-b1d5-4325-8193-95c68cd0975b # Enable Autopay for Patients
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: dcff7461-4ac7-4190-b2bd-be23712238de
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 61249a29-d3c1-483d-bdb4-b646183614fc # Accepted Terms and Conditions
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: f6301c8a-c6fd-43a1-8df9-09d89e711c66
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         fieldUid: 37076289-5388-494c-ab16-50f8f15ef55d # HCP NeuroCash Percentage
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 7bf71ceb-cb31-4da0-a743-9728505a1b1d
-        userCondition: null
         warning: null
         width: 100
       -
-        elementCondition: null
         heading: 'HCP Sharing Discount'
         type: craft\fieldlayoutelements\Heading
-        uid: 8715f32c-e50a-4850-82a4-8c66a427fc7d
-        userCondition: null
       -
-        elementCondition: null
         fieldUid: ed9a4e7e-b9ad-452f-b494-d569ca610f04 # Disable Provider Earnings
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 9e6f397f-5a6b-4b6c-aa7c-df895a193344
-        userCondition: null
         warning: null
         width: 50
       -
-        elementCondition: null
         fieldUid: bf1b9d90-ebd8-493e-9c4a-378ba2ff98ea # HCP Storefront Discount
-        instructions: null
+        instructions: ''
         label: 'HCP Sharing Discount Percentage'
-        required: false
+        required: ''
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 8d4eabbe-0147-4c09-8059-2d339f0d4701
-        userCondition: null
         warning: null
         width: 50
     name: Patients
-    uid: 71f21ce4-edf9-46f5-8667-249bc1b74645
-    userCondition: null
+    sortOrder: 5

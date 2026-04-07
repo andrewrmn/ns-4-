@@ -1,105 +1,85 @@
-changedFieldIndicator: null
 field: feb4ddf6-ba16-4bb5-ae92-ca6036472d64 # Sleep Table
 fieldLayouts:
   e0bd4551-a279-4ce1-9cf1-965f50d302c6:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 097f1350-fa62-4731-bbda-d60badb1f8e6 # Product
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: b3a3194a-94e9-4c01-8ba5-876638ef22fa
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: aef462cd-6cad-4cc7-ad8d-d970d8388de8 # Clinical Indications
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 35942518-698f-4e0a-8b85-a18517202c44
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 765269e8-d860-467d-9ece-67587ca09381 # Biomarkers
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 02519ab5-80bc-4f23-a954-65ab9ebbae04
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 3cfca319-230a-4aad-9666-ae724b0aba06 # Excluded Ingredients
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: bdfc7302-dddf-41f6-9440-445fb4cba945
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 9580c913-8cbd-43a3-b47c-66492fc3d1c5 # Support type
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: bee63850-a2fa-4831-ac78-e310fe026dd5
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: a286b4e2-771b-468f-bccb-a32fe3b00342 # Age
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ef8de2b0-11ef-4560-b848-f465b75ce504
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 883d8199-1f23-4a2a-9b8c-91a28609fd5b
-        userCondition: null
+        sortOrder: 1
 fields:
   3cfca319-230a-4aad-9666-ae724b0aba06: # Excluded Ingredients
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: excludedIngredients
-    instructions: null
+    instructions: ''
     name: 'Excluded Ingredients'
     searchable: true
     settings:
+      allowLimit: false
+      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: null
+      branchLimit: ''
+      limit: null
       localizeRelations: false
-      maintainHierarchy: true
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
       source: 'group:2d3041d4-c5ca-4993-8e62-a1d59f2528cc' # Ingredients
+      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
@@ -111,18 +91,16 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: product
-    instructions: null
+    instructions: ''
     name: Product
     searchable: true
     settings:
       allowSelfRelations: false
-      branchLimit: null
+      limit: '1'
       localizeRelations: false
-      maintainHierarchy: false
-      maxRelations: 1
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
+      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false
@@ -135,10 +113,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: supportType
-    instructions: null
+    instructions: ''
     name: 'Support type'
     searchable: true
     settings:
+      multi: true
       options:
         -
           __assoc__:
@@ -181,19 +160,20 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: biomarkers
-    instructions: null
+    instructions: ''
     name: Biomarkers
     searchable: true
     settings:
+      allowLimit: false
+      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: null
+      branchLimit: ''
+      limit: null
       localizeRelations: false
-      maintainHierarchy: true
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
       source: 'group:76b9abdc-9b7c-4e42-a025-81d06bea03af' # Updated Pathways
+      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
@@ -205,11 +185,10 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: age
-    instructions: null
+    instructions: ''
     name: Age
     searchable: true
     settings:
-      columnType: string
       options:
         -
           __assoc__:
@@ -252,19 +231,20 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: clinicalIndications
-    instructions: null
+    instructions: ''
     name: 'Clinical Indications'
     searchable: true
     settings:
+      allowLimit: false
+      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: null
+      branchLimit: ''
+      limit: null
       localizeRelations: false
-      maintainHierarchy: true
-      maxRelations: null
-      minRelations: null
-      selectionLabel: null
+      selectionLabel: ''
       showSiteMenu: true
       source: 'group:37a78cbd-e405-445a-9775-d1a3e4c677a0' # Sleep Symptoms
+      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null

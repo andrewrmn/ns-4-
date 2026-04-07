@@ -2,12 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: a8843661-a567-4e21-8928-2108d60edafe # Avatax
 handle: lotNumbers
-instructions: null
+instructions: ''
 name: 'Lot numbers'
 searchable: false
 settings:
-  blockTypeFields: 0
-  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -26,12 +24,13 @@ settings:
               - ''
   contentTable: '{{%stc_lotnumbers}}'
   fieldLayout: row
-  maxRows: null
-  minRows: null
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
-  selectionLabel: null
-  staticField: null
+  selectionLabel: ''
+  staticField: ''
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

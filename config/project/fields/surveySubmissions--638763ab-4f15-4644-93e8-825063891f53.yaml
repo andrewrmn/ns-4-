@@ -2,12 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9a98c4e1-a799-42f0-a4ce-ba07bd38df16 # Forms
 handle: surveySubmissions
-instructions: null
+instructions: ''
 name: 'Survey Submissions'
 searchable: true
 settings:
-  blockTypeFields: 0
-  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -243,12 +241,13 @@ settings:
               - ''
   contentTable: '{{%stc_surveysubmissions}}'
   fieldLayout: row
-  maxRows: null
-  minRows: null
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
-  selectionLabel: null
-  staticField: null
+  selectionLabel: ''
+  staticField: ''
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

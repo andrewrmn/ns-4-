@@ -1,105 +1,81 @@
-changedFieldIndicator: null
 field: 913b6a3c-8469-4974-bf89-f32df7541a75 # Clinical Indication Submission
 fieldLayouts:
   0699e575-da8a-4170-be54-935d8b366802:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: b3efe8d7-ee54-4ac8-a3bd-a2c20b0bd63e # ID
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d0a1b8e9-555b-4313-9250-04147f98e427
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: fd5f45be-0453-4608-b9d1-24de4f1c4a25 # Date
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: e76967d8-dda3-4efc-b4e0-1d9a7e949205
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 2f08d814-a695-4dfa-bec4-e3c7454d337d # Clinical Indicators
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 0291bd17-94f0-4265-b53f-52441a843501
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 149ee959-b169-4ec3-9751-ebef74678f35 # Category
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3c032895-018c-446c-93c6-9d6f56ef2ddf
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 0e1cc5ca-e027-4cab-8509-b20ccdf56493 # Age
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5ab3527f-415e-44b4-b19e-641c3cd02f03
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 98d51a26-0b21-40a5-9997-8d6f86773a52 # Gender
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 26e93238-4d09-4fea-aec6-e65cead67a9b
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 7aec2441-a928-4ca5-9115-b26ca863bac0 # PDF Generated
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 40d30630-243f-4f72-843e-13c1fc5ac433
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 5d450226-53b9-4caa-b0d6-c8d821242056
-        userCondition: null
+        sortOrder: 1
 fields:
   0e1cc5ca-e027-4cab-8509-b20ccdf56493: # Age
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: age
-    instructions: null
+    instructions: ''
     name: Age
     searchable: true
     settings:
@@ -107,8 +83,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -119,7 +95,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: clinicalindicators
-    instructions: null
+    instructions: ''
     name: 'Clinical Indicators'
     searchable: true
     settings:
@@ -127,8 +103,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -139,7 +115,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: pdfGenerated
-    instructions: null
+    instructions: ''
     name: 'PDF Generated'
     searchable: true
     settings:
@@ -154,7 +130,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: gender
-    instructions: null
+    instructions: ''
     name: Gender
     searchable: true
     settings:
@@ -162,8 +138,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -174,7 +150,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: category
-    instructions: null
+    instructions: ''
     name: Category
     searchable: true
     settings:
@@ -182,8 +158,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -194,7 +170,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: submissionId
-    instructions: null
+    instructions: ''
     name: ID
     searchable: true
     settings:
@@ -202,8 +178,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -214,7 +190,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: date
-    instructions: null
+    instructions: ''
     name: Date
     searchable: true
     settings:
@@ -222,8 +198,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

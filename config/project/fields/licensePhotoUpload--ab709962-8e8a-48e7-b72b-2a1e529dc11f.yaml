@@ -2,33 +2,29 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: licensePhotoUpload
-instructions: null
+instructions: ''
 name: 'License Photo Upload'
 searchable: true
 settings:
   allowSelfRelations: false
-  allowSubfolders: false
   allowUploads: true
   allowedKinds: null
-  branchLimit: null
   defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  defaultUploadLocationSubpath: null
+  defaultUploadLocationSubpath: ''
+  limit: ''
   localizeRelations: false
-  maintainHierarchy: false
-  maxRelations: null
-  minRelations: null
   previewMode: full
-  restrictFiles: false
-  restrictLocation: true
-  restrictedDefaultUploadSubpath: null
-  restrictedLocationSource: 'volume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
-  restrictedLocationSubpath: null
-  selectionLabel: null
+  restrictFiles: ''
+  selectionLabel: ''
   showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true
+  singleUploadLocationSource: 'volume:247d665b-a4fb-4eed-8a11-f5c732dcb0c1' # User Uploads
+  singleUploadLocationSubpath: ''
+  source: null
   sources: '*'
   targetSiteId: null
+  useSingleFolder: true
   validateRelatedElements: false
   viewMode: large
 translationKeyFormat: null

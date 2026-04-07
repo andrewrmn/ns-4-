@@ -2,18 +2,16 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: a8843661-a567-4e21-8928-2108d60edafe # Avatax
 handle: hcpProductsStore
-instructions: null
+instructions: ''
 name: 'Product Selection'
 searchable: false
 settings:
   allowSelfRelations: false
-  branchLimit: null
+  limit: ''
   localizeRelations: false
-  maintainHierarchy: false
-  maxRelations: null
-  minRelations: null
-  selectionLabel: null
+  selectionLabel: ''
   showSiteMenu: true
+  source: null
   sources: '*'
   targetSiteId: null
   validateRelatedElements: false

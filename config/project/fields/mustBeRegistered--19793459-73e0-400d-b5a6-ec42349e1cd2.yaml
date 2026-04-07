@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: c229c28f-e6ca-4957-b7c5-b52c4d483452 # Text
 handle: mustBeRegistered
-instructions: null
+instructions: ''
 name: 'Must Be Registered'
 searchable: true
 settings:
@@ -12,12 +12,12 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: null
-  purifyHtml: true
+  purifierConfig: ''
+  purifyHtml: '1'
   redactorConfig: Standard.json
-  removeEmptyTags: false
-  removeInlineStyles: false
-  removeNbsp: false
+  removeEmptyTags: true
+  removeInlineStyles: true
+  removeNbsp: true
   showHtmlButtonForNonAdmins: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true

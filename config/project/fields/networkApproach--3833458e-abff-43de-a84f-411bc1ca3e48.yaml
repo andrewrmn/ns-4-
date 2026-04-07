@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: networkApproach
-instructions: null
+instructions: ''
 name: 'Network Approach'
 searchable: true
 settings:
@@ -10,8 +10,8 @@ settings:
   charLimit: null
   code: false
   columnType: text
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

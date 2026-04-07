@@ -1,0 +1,72 @@
+field: fa19d720-9a33-4fb2-9371-3ca8cabc3cb9 # Phone Links
+fieldLayouts:
+  8e2032d0-e99c-49ac-9d62-318594ef353c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 31e17892-d11f-4668-b77a-d1c5f554b623 # Phone title
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 73f5344f-421b-4541-8df5-eceab6dcb840 # Phone link
+            instructions: null
+            label: null
+            required: '0'
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  31e17892-d11f-4668-b77a-d1c5f554b623: # Phone title
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: phoneTitle
+    instructions: ''
+    name: 'Phone title'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  73f5344f-421b-4541-8df5-eceab6dcb840: # Phone link
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: phoneLink
+    instructions: ''
+    name: 'Phone link'
+    searchable: true
+    settings:
+      allowCustomText: '1'
+      allowTarget: ''
+      defaultText: ''
+      selectLinkText: ''
+      types:
+        __assoc__:
+          -
+            - fruitstudios\linkit\models\Phone
+            -
+              __assoc__:
+                -
+                  - enabled
+                  - 1
+    translationKeyFormat: null
+    translationMethod: none
+    type: fruitstudios\linkit\fields\LinkitField

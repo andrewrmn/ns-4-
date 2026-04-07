@@ -2,23 +2,18 @@ fieldLayouts:
   942bf09f-4533-4bdc-afdd-da04b53994a2:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: feb4ddf6-ba16-4bb5-ae92-ca6036472d64 # Sleep Table
             instructions: null
             label: null
-            required: false
+            required: '0'
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 87099a2f-5913-42e9-91b3-6477f8453379
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 54fc0c13-6ace-4220-b1f7-64680da1fc8a
-        userCondition: null
+        sortOrder: 1
 handle: sleepTable
 name: 'Sleep Table'
 sortOrder: 8

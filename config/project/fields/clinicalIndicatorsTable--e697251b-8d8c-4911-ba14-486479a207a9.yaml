@@ -2,12 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
 handle: clinicalIndicatorsTable
-instructions: null
+instructions: ''
 name: 'Clinical Indicators Table'
 searchable: true
 settings:
-  blockTypeFields: 0
-  changedFieldIndicator: null
   columns:
     268:
       __assoc__:
@@ -38,6 +36,7 @@ settings:
   fieldLayout: table
   maxRows: null
   minRows: null
+  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a row'

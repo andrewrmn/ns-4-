@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: boolean
 fieldGroup: 6329f165-1216-4dee-8071-071c8c5cb854 # Comparison table
 handle: inComparisonTool
-instructions: null
+instructions: ''
 name: 'In Comparison Tool?'
 searchable: false
 settings:

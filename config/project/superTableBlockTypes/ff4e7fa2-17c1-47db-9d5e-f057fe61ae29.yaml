@@ -1,93 +1,72 @@
-changedFieldIndicator: null
 field: 9901899c-95b6-402f-ac0d-0b5709e44b9c # Education Materials
 fieldLayouts:
   c16d8ef2-c6de-4ef1-b2d1-6b5bc686af4b:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 0d914fff-b4b8-42a3-b98d-77caaba8781d # Restricted Access?
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: cb5312aa-9651-4747-bca1-b4977c22d32f
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: cabe8363-0383-4075-9726-56e6e2fe76af # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 6d3131b9-d8e3-4271-bd68-442d0428970a
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 9ab250b7-b056-45ef-91cd-52918b0599bd # Color
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 4c2bdce3-e11e-470d-8f3a-875c1d38151e
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: cbfc2c81-26c5-478c-a8a1-ad3429910c78 # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3606d5e0-4307-48fe-b0f8-475c5d56da8f
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: cf76daff-2c39-465f-8d83-9acd3b0d172b # Materials
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 9a1f69e9-8c93-44eb-8dfa-f6cc5c7b9628
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: ed70687a-ec3a-482b-aa3a-e6643ae25324 # Accordion Drawer
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 96cafa32-610e-4a9d-8d13-2cfb52423d3d
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 013ab673-d959-4ffc-bf7f-fe10f8fda191
-        userCondition: null
+        sortOrder: 1
 fields:
   0d914fff-b4b8-42a3-b98d-77caaba8781d: # Restricted Access?
     columnSuffix: null
     contentColumnType: boolean
     fieldGroup: null
     handle: restrictedAccess
-    instructions: null
+    instructions: ''
     name: 'Restricted Access?'
     searchable: true
     settings:
@@ -99,14 +78,14 @@ fields:
     type: craft\fields\Lightswitch
   9ab250b7-b056-45ef-91cd-52918b0599bd: # Color
     columnSuffix: null
-    contentColumnType: char(7)
+    contentColumnType: string(7)
     fieldGroup: null
     handle: color
-    instructions: null
+    instructions: ''
     name: Color
     searchable: true
     settings:
-      defaultColor: null
+      defaultColor: ''
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Color
@@ -115,16 +94,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: null
+    instructions: ''
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: text
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -135,7 +114,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: null
+    instructions: ''
     name: Body
     searchable: true
     settings:
@@ -145,13 +124,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: null
-      purifyHtml: true
+      purifierConfig: ''
+      purifyHtml: '1'
       redactorConfig: Standard.json
-      removeEmptyTags: true
-      removeInlineStyles: true
-      removeNbsp: true
-      showHtmlButtonForNonAdmins: true
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: '1'
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -163,13 +142,13 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: materials
-    instructions: null
+    instructions: ''
     name: Materials
     searchable: true
     settings:
       contentTable: '{{%matrixcontent_materials}}'
-      maxBlocks: null
-      minBlocks: null
+      maxBlocks: ''
+      minBlocks: ''
       propagationKeyFormat: null
       propagationMethod: all
     translationKeyFormat: null
@@ -180,13 +159,13 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: accordionDrawer
-    instructions: null
+    instructions: ''
     name: 'Accordion Drawer'
     searchable: true
     settings:
       contentTable: '{{%matrixcontent_accordiondrawer}}'
-      maxBlocks: null
-      minBlocks: null
+      maxBlocks: ''
+      minBlocks: ''
       propagationKeyFormat: null
       propagationMethod: all
     translationKeyFormat: null

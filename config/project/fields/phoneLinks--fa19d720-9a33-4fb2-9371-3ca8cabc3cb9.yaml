@@ -2,12 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: phoneLinks
-instructions: null
+instructions: ''
 name: 'Phone Links'
 searchable: true
 settings:
-  blockTypeFields: 0
-  changedFieldIndicator: null
   columns:
     162:
       __assoc__:
@@ -23,6 +21,7 @@ settings:
   fieldLayout: row
   maxRows: null
   minRows: null
+  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a row'

@@ -6,15 +6,16 @@ instructions: 'Categories used for sales and discount promotions.'
 name: 'Promotion Categories'
 searchable: true
 settings:
+  allowLimit: false
+  allowMultipleSources: false
   allowSelfRelations: false
-  branchLimit: null
+  branchLimit: ''
+  limit: null
   localizeRelations: false
-  maintainHierarchy: true
-  maxRelations: null
-  minRelations: null
   selectionLabel: 'Add a promotion category'
   showSiteMenu: true
   source: 'group:12'
+  sources: '*'
   targetSiteId: null
   validateRelatedElements: false
   viewMode: null

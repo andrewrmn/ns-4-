@@ -10,8 +10,8 @@ settings:
   charLimit: null
   code: false
   columnType: text
-  initialRows: 4
-  multiline: false
+  initialRows: '4'
+  multiline: ''
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

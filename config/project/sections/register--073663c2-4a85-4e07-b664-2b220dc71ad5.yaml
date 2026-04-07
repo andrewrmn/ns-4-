@@ -4,8 +4,13 @@ handle: register
 name: Register
 previewTargets:
   -
-    label: 'Primary entry page'
-    urlFormat: '{url}'
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
 propagationMethod: all
 siteSettings:
   9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience

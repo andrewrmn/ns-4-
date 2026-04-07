@@ -1,426 +1,324 @@
-changedFieldIndicator: null
 field: 638763ab-4f15-4644-93e8-825063891f53 # Survey Submissions
 fieldLayouts:
   6921c374-cae4-495e-9377-65328c54c125:
     tabs:
       -
-        elementCondition: null
         elements:
           -
-            elementCondition: null
             fieldUid: 24dea907-4e6c-4fa8-b55c-f45f40c342dd # Submission Id
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2be27bcc-3e94-43d6-aacc-c60a66f86e76
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 8b24c971-ec73-4e3e-b572-6b59f2f3d423 # Email
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 164acf6d-3246-4b41-bc4d-07bee2a7a336
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 9ceb0270-c66d-4804-9650-ae8a91097e64 # Name
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 4c851879-2df8-428d-b503-186d1a22cc58
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 48fd2490-d669-4e83-a6f7-1ab299732bda # Age
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2f5db7ab-4db9-477e-b332-4011fb669c15
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 045f6a39-db05-49e5-b50e-cc384ccb279a # Sex
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d77ec13c-324a-4cd3-b636-d699529516d4
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: a8e2a093-e380-449c-9b38-fd86acc6a4a8 # State
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 0a5582c4-49c8-4ed1-9ab8-eaf4b25af348
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 6465543d-2202-48fd-ac11-e36d289ec6c6 # Subject
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ab729a09-f8f7-465f-bc69-16033ce28048
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 9bc5d5d4-f9cd-4435-a09e-1b2c2c0b611a # Product 1
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 9a91471d-e4ef-4d99-b28c-276984c97510
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: d6ec9223-6ba4-43e6-8261-f06a85381558 # Product 2
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 032599f6-d1d6-4460-bd81-61c6bf69273f
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 562da5b3-7919-4e00-8884-05fff31b9bd1 # Product 3
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: f5eb35fd-4940-419d-a574-9cc9490d5aa7
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: ef0af561-0b9e-426f-8156-1937db528b35 # Product 4
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 1eb63745-16a6-4432-841b-be0026baa456
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 570b1f65-8747-4bc5-b940-e51221c6ae4f # Product 5
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5edbb60d-d80a-445e-a521-3fae971461ab
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: fc13f858-7614-484e-98ca-b87335f70ffe # Sleep Score
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a7d1351d-af60-4420-adcd-6ef92ed7d1f4
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 0d9d0b56-b20b-4f8b-b74b-45282c17507f # Stress Score
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d89ff878-9429-420d-b422-99169dcae276
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 0290dbc6-cbef-4eff-b3a2-742e61bf86c8 # Wellness Score
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: af409553-7e29-4c56-8562-ac06f61e633e
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: e00e1c34-422f-42c9-aa8d-896a48551588 # Fruits & Vegetables
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 42bbca2a-30fb-4a6d-b6ab-f4b002959d73
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 3ae87b3d-c1eb-4387-bb81-1a0526260920 # Fatty Acids
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 14af9e0b-959c-4604-9e97-d3f597a371cf
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: c1808167-7dac-449c-8d94-77285b1947ee # Fiber
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ad2f7929-06bd-4253-a68c-88492966f92a
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 3b5b2bc2-4fa9-4558-ad7e-b7b7ea33d62b # Protein
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 4552d1a2-3640-4913-ba84-542b135aa68f
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 9268fe0c-c56d-4201-b31c-d5832d8c892d # Calcium
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 69560728-b018-4a42-a7c4-e13e8110f3d0
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: f63fcb6e-793b-49f1-9cc2-b370e5c945fd # Exercise
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: f11f1323-e2e2-44d4-8fe1-127eb67c01c6
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 6b5fd535-fe4a-49ef-bdbb-3ee0d86b2c77 # Final Sleep Quality
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 54ad8399-c2ff-4562-bfee-70e239273c94
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 514be461-4c94-4812-8051-6e2258892049 # Falling Asleep
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: e00718f5-5ee7-4cb6-b0a1-f707da21a7be
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 0aabf73c-9d65-4d38-a3ba-7d4b6c3ca060 # Waking up
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: e97d613d-1935-407a-a130-f70f1e1143ba
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: f1e1735a-0f04-4f8b-b031-4197bf01b9ee # Vasomotor Issues
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 12ecb01e-8d76-411b-9642-8379062b5bcd
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 211c1493-2c8b-4493-8188-0839ac71c135 # Pain
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5689dc97-8bf0-418d-bad1-82e919bb14de
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 6da9b32e-30f7-4029-9dee-99b66ffab8b2 # Daytime Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2cbac6fa-2875-48ce-8cb3-c2d02e24c827
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 18db3ce0-5a88-42fa-a393-065d54b69183 # Daytime Motivation
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 15305b32-79ff-4c26-b908-3f43107ac50c
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: e734d65b-218b-4a48-aeba-61c02570ce05 # General Wellness
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 6cf58bf6-aafe-4f40-b9a8-f83423721a92
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: ee4987bc-9929-4d28-a358-de0b3c73e37a # Physical Wellness
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: af91c356-8eea-490a-9aec-a0586717523d
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: a9db9000-68de-4c9a-8150-78fbf09b1cb1 # Activity Wellness
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 805ca3ac-a40a-483f-8583-3bafcc5f69f0
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 5b785230-d1a2-4b05-bc36-fa8de19943f7 # Motivation Wellness
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 66cd5d2a-2faf-4d32-aace-f3320429126a
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 4a6f611f-073b-491d-b906-cd43ed0ab764 # Mental Wellness
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 71fb95c6-09d2-4057-ae48-f718f0a064dc
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: df7d151c-9cd3-43d0-8575-5312b4a7978d
-        userCondition: null
+        sortOrder: 1
 fields:
   0aabf73c-9d65-4d38-a3ba-7d4b6c3ca060: # Waking up
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: wakeUp
-    instructions: null
+    instructions: ''
     name: 'Waking up'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -431,16 +329,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: stressScore
-    instructions: null
+    instructions: ''
     name: 'Stress Score'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -451,16 +349,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fattyAcids
-    instructions: null
+    instructions: ''
     name: 'Fatty Acids'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -471,16 +369,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: protein
-    instructions: null
+    instructions: ''
     name: Protein
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -491,16 +389,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: mentalWellness
-    instructions: null
+    instructions: ''
     name: 'Mental Wellness'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -511,16 +409,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: motivationWellness
-    instructions: null
+    instructions: ''
     name: 'Motivation Wellness'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -531,16 +429,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: finalQuality
-    instructions: null
+    instructions: ''
     name: 'Final Sleep Quality'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -551,16 +449,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: daytimeFatigue
-    instructions: null
+    instructions: ''
     name: 'Daytime Fatigue'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -571,16 +469,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: email
-    instructions: null
+    instructions: ''
     name: Email
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -591,16 +489,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: product1
-    instructions: null
+    instructions: ''
     name: 'Product 1'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -611,16 +509,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: subName
-    instructions: null
+    instructions: ''
     name: Name
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -631,16 +529,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: daytimeMotivation
-    instructions: null
+    instructions: ''
     name: 'Daytime Motivation'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -651,16 +549,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: submissionId
-    instructions: null
+    instructions: ''
     name: 'Submission Id'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -671,16 +569,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: sex
-    instructions: null
+    instructions: ''
     name: Sex
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -691,16 +589,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: age
-    instructions: null
+    instructions: ''
     name: Age
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -711,16 +609,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: finalPain
-    instructions: null
+    instructions: ''
     name: Pain
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -731,16 +629,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: wellnessScore
-    instructions: null
+    instructions: ''
     name: 'Wellness Score'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -751,16 +649,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fallingAsleep
-    instructions: null
+    instructions: ''
     name: 'Falling Asleep'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -771,16 +669,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: product3
-    instructions: null
+    instructions: ''
     name: 'Product 3'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -791,16 +689,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: product5
-    instructions: null
+    instructions: ''
     name: 'Product 5'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -811,16 +709,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: calcium
-    instructions: null
+    instructions: ''
     name: Calcium
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -831,16 +729,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: subject
-    instructions: null
+    instructions: ''
     name: Subject
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -851,16 +749,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: state
-    instructions: null
+    instructions: ''
     name: State
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -871,16 +769,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: activityWellness
-    instructions: null
+    instructions: ''
     name: 'Activity Wellness'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -891,16 +789,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fiber
-    instructions: null
+    instructions: ''
     name: Fiber
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -911,16 +809,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: product2
-    instructions: null
+    instructions: ''
     name: 'Product 2'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -931,16 +829,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fruitsVegies
-    instructions: null
+    instructions: ''
     name: 'Fruits & Vegetables'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -951,16 +849,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: generalWellness
-    instructions: null
+    instructions: ''
     name: 'General Wellness'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -971,16 +869,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: physicalWellness
-    instructions: null
+    instructions: ''
     name: 'Physical Wellness'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -991,16 +889,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: product4
-    instructions: null
+    instructions: ''
     name: 'Product 4'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -1011,16 +909,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: vasomotorIssues
-    instructions: null
+    instructions: ''
     name: 'Vasomotor Issues'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -1031,16 +929,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: exercise
-    instructions: null
+    instructions: ''
     name: Exercise
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -1051,16 +949,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: sleepScore
-    instructions: null
+    instructions: ''
     name: 'Sleep Score'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: false
+      code: ''
       columnType: null
-      initialRows: 4
-      multiline: false
+      initialRows: '4'
+      multiline: ''
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

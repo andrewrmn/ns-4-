@@ -2,7 +2,7 @@ columnSuffix: sjthxtqe
 contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: bioLink
-instructions: null
+instructions: ''
 name: 'Bio Link'
 searchable: false
 settings:
@@ -12,13 +12,13 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: null
-  purifyHtml: true
-  redactorConfig: null
-  removeEmptyTags: true
-  removeInlineStyles: true
-  removeNbsp: true
-  showHtmlButtonForNonAdmins: false
+  purifierConfig: ''
+  purifyHtml: '1'
+  redactorConfig: ''
+  removeEmptyTags: '1'
+  removeInlineStyles: '1'
+  removeNbsp: '1'
+  showHtmlButtonForNonAdmins: ''
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
   uiMode: enlarged

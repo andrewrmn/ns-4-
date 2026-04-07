@@ -2,7 +2,7 @@ columnSuffix: wpimkcgx
 contentColumnType: boolean
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: disableInPf
-instructions: null
+instructions: ''
 name: 'Disable in PF?'
 searchable: false
 settings:

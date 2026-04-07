@@ -2,11 +2,11 @@ columnSuffix: etshmbdd
 contentColumnType: string
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: hcpStorefrontDiscount
-instructions: null
+instructions: ''
 name: 'HCP Storefront Discount'
 searchable: false
 settings:
-  columnType: string
+  optgroups: true
   options:
     -
       __assoc__:

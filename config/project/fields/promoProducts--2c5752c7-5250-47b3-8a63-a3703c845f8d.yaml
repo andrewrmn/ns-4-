@@ -2,18 +2,16 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: promoProducts
-instructions: null
+instructions: ''
 name: 'Promo Products'
 searchable: true
 settings:
   allowSelfRelations: false
-  branchLimit: null
+  limit: ''
   localizeRelations: false
-  maintainHierarchy: false
-  maxRelations: null
-  minRelations: null
-  selectionLabel: null
+  selectionLabel: ''
   showSiteMenu: true
+  source: null
   sources: '*'
   targetSiteId: null
   validateRelatedElements: false

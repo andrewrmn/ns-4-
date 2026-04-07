@@ -2,12 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
 handle: qrScanTable
-instructions: null
+instructions: ''
 name: 'QR Scan Table'
 searchable: true
 settings:
-  blockTypeFields: 0
-  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -70,10 +68,11 @@ settings:
   fieldLayout: row
   maxRows: null
   minRows: null
+  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a row'
   staticField: null
 translationKeyFormat: null
-translationMethod: none
+translationMethod: site
 type: verbb\supertable\fields\SuperTableField

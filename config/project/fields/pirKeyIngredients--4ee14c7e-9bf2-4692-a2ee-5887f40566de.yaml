@@ -2,12 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: pirKeyIngredients
-instructions: null
+instructions: ''
 name: 'PIR Key Ingredients'
 searchable: true
 settings:
-  blockTypeFields: 0
-  changedFieldIndicator: null
   columns:
     297:
       __assoc__:
@@ -28,6 +26,7 @@ settings:
   fieldLayout: row
   maxRows: null
   minRows: null
+  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a row'

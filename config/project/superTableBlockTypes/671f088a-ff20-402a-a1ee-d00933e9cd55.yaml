@@ -1,0 +1,165 @@
+field: c6a86332-cec0-423e-a200-4b3de8509a95 # Key Ingredients
+fieldLayouts:
+  1ec76e07-17df-4882-81ad-f3999af82377:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 32faaac3-a839-4748-aa11-945c9ee98336 # Ingredients
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8a9a811a-3a61-4edf-b448-213fd07541d0 # Precursor Potential
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  8a9a811a-3a61-4edf-b448-213fd07541d0: # Precursor Potential
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: precursorPotential
+    instructions: ''
+    name: 'Precursor Potential'
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - None
+            -
+              - value
+              - ''
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Checked
+            -
+              - value
+              - checked
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Mild - UP'
+            -
+              - value
+              - mildUp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Moderate - UP'
+            -
+              - value
+              - moderateUp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Strong - UP'
+            -
+              - value
+              - strongUp
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Mild - Down'
+            -
+              - value
+              - mildDown
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Moderate - Down'
+            -
+              - value
+              - moderateDown
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Strong - Down'
+            -
+              - value
+              - strongDown
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+  32faaac3-a839-4748-aa11-945c9ee98336: # Ingredients
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: ingredients
+    instructions: ''
+    name: Ingredients
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Cortisol
+            -
+              - value
+              - cortisol
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Melatonin
+            -
+              - value
+              - melatonin
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown

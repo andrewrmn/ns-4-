@@ -2,11 +2,10 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: howDidYouHearAboutNeuroscience
-instructions: null
+instructions: ''
 name: 'How did you hear about NeuroScience?'
 searchable: true
 settings:
-  columnType: string
   options:
     -
       __assoc__:

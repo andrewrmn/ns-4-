@@ -8,10 +8,10 @@ searchable: true
 settings:
   byteLimit: null
   charLimit: null
-  code: false
+  code: ''
   columnType: null
-  initialRows: 4
-  multiline: true
+  initialRows: '4'
+  multiline: '1'
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

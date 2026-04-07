@@ -2,16 +2,16 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 9a98c4e1-a799-42f0-a4ce-ba07bd38df16 # Forms
 handle: message
-instructions: null
+instructions: ''
 name: Message
 searchable: true
 settings:
   byteLimit: null
-  charLimit: 500
+  charLimit: '500'
   code: false
   columnType: text
-  initialRows: 8
-  multiline: true
+  initialRows: '8'
+  multiline: '1'
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

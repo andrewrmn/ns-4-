@@ -2,18 +2,16 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
 handle: neuroselectOnlyLinkedAccount
-instructions: null
+instructions: ''
 name: 'NeuroSelect Only Linked Account'
 searchable: true
 settings:
   allowSelfRelations: false
-  branchLimit: null
+  limit: ''
   localizeRelations: false
-  maintainHierarchy: false
-  maxRelations: null
-  minRelations: null
   selectionLabel: 'Select Connected Account'
   showSiteMenu: true
+  source: null
   sources:
     - 'group:7bb97651-ed90-45bb-b144-6bcac199bfa8' # NeuroSelect Only
   targetSiteId: null

@@ -2,7 +2,6 @@ fieldLayouts:
   4f78f05d-56e9-4cce-9c7a-b0105c149ca2:
     tabs:
       -
-        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,9 +9,7 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
-            elementCondition: null
             id: null
-            inputType: null
             instructions: null
             label: null
             max: null
@@ -27,80 +24,59 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: f06adef9-4282-4e2a-a48f-bc7fb21d1ee7
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: c37bc853-3a6b-47cd-9ff5-f84b8d3999b0 # Recommendation note
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 811fb1fa-c80e-4e84-918d-703422d66a68
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 1f6ffe5f-4a93-4490-8928-d69b733b0bcb # Recommended Products
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 0a6be8bd-90d2-4e7c-a827-0f832e0a8686
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 8a60c116-faf9-4372-bdb3-f855a32206f8 # Patient Account
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: def87b4e-b87c-4f19-8090-a7907d439221
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: fb778b9c-94a4-478a-a655-48a8f1b034de # Related HCP
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 35be025a-1aa1-4406-9bac-78a1da1052c9
-            userCondition: null
             warning: null
             width: 100
           -
-            elementCondition: null
             fieldUid: 2e1cd198-3dc7-49b2-986f-bd84d8ec4f0e # Recommendation Viewed?
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 8eed3530-089b-4b0a-bdbb-3bf3d7df4a0b
-            userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: bc389311-8ec9-42cf-a1d7-ade5322903f7
-        userCondition: null
+        sortOrder: 1
 handle: hcpRecommendations
 hasTitleField: true
 name: 'HCP Recommendations'
 section: d5038d99-7e50-41b6-929d-f6758a226fbe # HCP Recommendations
-showStatusField: true
-slugTranslationKeyFormat: null
-slugTranslationMethod: site
 sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null

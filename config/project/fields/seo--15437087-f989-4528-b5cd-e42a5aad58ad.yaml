@@ -1,80 +1,58 @@
 columnSuffix: null
-contentColumnType: string
+contentColumnType: text
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: seo
-instructions: null
+instructions: ''
 name: SEO
 searchable: true
 settings:
-  errorMessage: 'Unable to find component class ''nystudio107\seomatic\fields\SeoSettings''.'
-  expectedType: nystudio107\seomatic\fields\SeoSettings
-  settings:
-    __assoc__:
-      -
-        - elementDisplayPreviewType
-        - none
-      -
-        - facebookEnabledFields
-        -
-          - seoPreview
-          - ogType
-          - ogTitle
-          - ogSiteNamePosition
-          - ogDescription
-          - ogImage
-          - ogImageTransform
-          - ogImageTransformMode
-          - ogImageDescription
-      -
-        - facebookTabEnabled
-        - '1'
-      -
-        - generalEnabledFields
-        -
-          - seoPreview
-          - mainEntityOfPage
-          - seoTitle
-          - siteNamePosition
-          - seoDescription
-          - seoKeywords
-          - seoImage
-          - seoImageTransform
-          - seoImageTransformMode
-          - seoImageDescription
-          - robots
-          - canonicalUrl
-      -
-        - generalTabEnabled
-        - '1'
-      -
-        - sitemapEnabledFields
-        -
-          - sitemapUrls
-          - sitemapAssets
-          - sitemapFiles
-          - sitemapAltLinks
-          - sitemapChangeFreq
-          - sitemapPriority
-          - sitemapLimit
-      -
-        - sitemapTabEnabled
-        - '1'
-      -
-        - twitterEnabledFields
-        -
-          - seoPreview
-          - twitterCardType
-          - twitterCreator
-          - twitterTitle
-          - twitterSiteNamePosition
-          - twitterDescription
-          - twitterImage
-          - transformTwitterImage
-          - twitterImageTransformMode
-          - twitterImageDescription
-      -
-        - twitterTabEnabled
-        - '1'
+  elementDisplayPreviewType: none
+  facebookEnabledFields:
+    - seoPreview
+    - ogType
+    - ogTitle
+    - ogSiteNamePosition
+    - ogDescription
+    - ogImage
+    - ogImageTransform
+    - ogImageTransformMode
+    - ogImageDescription
+  facebookTabEnabled: '1'
+  generalEnabledFields:
+    - seoPreview
+    - mainEntityOfPage
+    - seoTitle
+    - siteNamePosition
+    - seoDescription
+    - seoKeywords
+    - seoImage
+    - seoImageTransform
+    - seoImageTransformMode
+    - seoImageDescription
+    - robots
+    - canonicalUrl
+  generalTabEnabled: '1'
+  sitemapEnabledFields:
+    - sitemapUrls
+    - sitemapAssets
+    - sitemapFiles
+    - sitemapAltLinks
+    - sitemapChangeFreq
+    - sitemapPriority
+    - sitemapLimit
+  sitemapTabEnabled: '1'
+  twitterEnabledFields:
+    - seoPreview
+    - twitterCardType
+    - twitterCreator
+    - twitterTitle
+    - twitterSiteNamePosition
+    - twitterDescription
+    - twitterImage
+    - transformTwitterImage
+    - twitterImageTransformMode
+    - twitterImageDescription
+  twitterTabEnabled: '1'
 translationKeyFormat: null
 translationMethod: none
-type: craft\fields\MissingField
+type: nystudio107\seomatic\fields\SeoSettings

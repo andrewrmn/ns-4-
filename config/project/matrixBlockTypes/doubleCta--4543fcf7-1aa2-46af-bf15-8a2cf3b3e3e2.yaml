@@ -215,7 +215,7 @@ fields:
       types:
         __assoc__:
           -
-            - presseddigital\linkit\models\Email
+            - fruitstudios\linkit\models\Email
             -
               __assoc__:
                 -
@@ -228,7 +228,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Phone
+            - fruitstudios\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -241,7 +241,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Url
+            - fruitstudios\linkit\models\Url
             -
               __assoc__:
                 -
@@ -266,7 +266,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - presseddigital\linkit\models\Twitter
+            - fruitstudios\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -279,7 +279,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Facebook
+            - fruitstudios\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -292,7 +292,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Instagram
+            - fruitstudios\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -305,7 +305,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\LinkedIn
+            - fruitstudios\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -318,7 +318,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Entry
+            - fruitstudios\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -334,7 +334,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - presseddigital\linkit\models\Category
+            - fruitstudios\linkit\models\Category
             -
               __assoc__:
                 -
@@ -350,7 +350,7 @@ fields:
                   - customSelectionLabel
                   - 'Select a category'
           -
-            - presseddigital\linkit\models\Asset
+            - fruitstudios\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -366,7 +366,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an asset'
           -
-            - presseddigital\linkit\models\User
+            - fruitstudios\linkit\models\User
             -
               __assoc__:
                 -
@@ -385,7 +385,7 @@ fields:
                   - userPath
                   - ''
           -
-            - presseddigital\linkit\models\Product
+            - fruitstudios\linkit\models\Product
             -
               __assoc__:
                 -
@@ -402,7 +402,7 @@ fields:
                   - 'Select an entry'
     translationKeyFormat: null
     translationMethod: none
-    type: presseddigital\linkit\fields\LinkitField
+    type: fruitstudios\linkit\fields\LinkitField
   03728d78-c381-4018-ac8e-5aff2d8b873f: # Headline
     columnSuffix: null
     contentColumnType: text
@@ -485,7 +485,7 @@ fields:
       types:
         __assoc__:
           -
-            - presseddigital\linkit\models\Email
+            - fruitstudios\linkit\models\Email
             -
               __assoc__:
                 -
@@ -498,7 +498,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Phone
+            - fruitstudios\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -511,7 +511,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Url
+            - fruitstudios\linkit\models\Url
             -
               __assoc__:
                 -
@@ -536,7 +536,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - presseddigital\linkit\models\Twitter
+            - fruitstudios\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -549,7 +549,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Facebook
+            - fruitstudios\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -562,7 +562,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Instagram
+            - fruitstudios\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -575,7 +575,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\LinkedIn
+            - fruitstudios\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -588,7 +588,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - presseddigital\linkit\models\Entry
+            - fruitstudios\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -604,7 +604,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - presseddigital\linkit\models\Category
+            - fruitstudios\linkit\models\Category
             -
               __assoc__:
                 -
@@ -620,7 +620,7 @@ fields:
                   - customSelectionLabel
                   - 'Select a category'
           -
-            - presseddigital\linkit\models\Asset
+            - fruitstudios\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -636,7 +636,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an asset'
           -
-            - presseddigital\linkit\models\User
+            - fruitstudios\linkit\models\User
             -
               __assoc__:
                 -
@@ -655,7 +655,7 @@ fields:
                   - userPath
                   - ''
           -
-            - presseddigital\linkit\models\Product
+            - fruitstudios\linkit\models\Product
             -
               __assoc__:
                 -
@@ -672,7 +672,7 @@ fields:
                   - 'Select an entry'
     translationKeyFormat: null
     translationMethod: none
-    type: presseddigital\linkit\fields\LinkitField
+    type: fruitstudios\linkit\fields\LinkitField
   f7a8289f-e018-449a-9605-77399b92d5b9: # Headline
     columnSuffix: null
     contentColumnType: text

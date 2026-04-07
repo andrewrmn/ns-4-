@@ -2,89 +2,89 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: cta
-instructions: null
+instructions: ''
 name: CTA
 searchable: true
 settings:
-  allowCustomText: true
-  allowTarget: true
-  defaultText: null
+  allowCustomText: '1'
+  allowTarget: '1'
+  defaultText: ''
   selectLinkText: ''
   types:
     __assoc__:
       -
-        - presseddigital\linkit\models\Email
+        - fruitstudios\linkit\models\Email
         -
           __assoc__:
             -
               - enabled
               - 1
       -
-        - presseddigital\linkit\models\Phone
+        - fruitstudios\linkit\models\Phone
         -
           __assoc__:
             -
               - enabled
               - 1
       -
-        - presseddigital\linkit\models\Url
+        - fruitstudios\linkit\models\Url
         -
           __assoc__:
             -
               - enabled
               - 1
       -
-        - presseddigital\linkit\models\Entry
+        - fruitstudios\linkit\models\Entry
         -
           __assoc__:
-            -
+            0:
               - enabled
               - 1
-            -
+            2:
               - sources
               - '*'
-            -
+            3:
               - customSelectionLabel
               - 'Select an entry'
       -
-        - presseddigital\linkit\models\Category
+        - fruitstudios\linkit\models\Category
         -
           __assoc__:
-            -
+            0:
               - enabled
               - 1
-            -
+            2:
               - sources
               - '*'
-            -
+            3:
               - customSelectionLabel
               - 'Select a category'
       -
-        - presseddigital\linkit\models\Asset
+        - fruitstudios\linkit\models\Asset
         -
           __assoc__:
-            -
+            0:
               - enabled
               - 1
-            -
+            2:
               - sources
               - '*'
-            -
+            3:
               - customSelectionLabel
               - 'Select an asset'
       -
-        - presseddigital\linkit\models\Product
+        - fruitstudios\linkit\models\Product
         -
           __assoc__:
-            -
+            0:
               - enabled
               - 1
-            -
+            2:
               - sources
               - '*'
-            -
+            3:
               - customSelectionLabel
               - 'Select an entry'
 translationKeyFormat: null
 translationMethod: none
-type: presseddigital\linkit\fields\LinkitField
+type: fruitstudios\linkit\fields\LinkitField

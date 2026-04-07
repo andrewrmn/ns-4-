@@ -2,16 +2,16 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: excerpt
-instructions: null
+instructions: ''
 name: Excerpt
 searchable: true
 settings:
   byteLimit: null
-  charLimit: 500
+  charLimit: '500'
   code: false
   columnType: text
-  initialRows: 4
-  multiline: true
+  initialRows: '4'
+  multiline: '1'
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

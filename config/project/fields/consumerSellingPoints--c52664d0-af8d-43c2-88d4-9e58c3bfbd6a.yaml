@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: consumerSellingPoints
-instructions: null
+instructions: ''
 name: 'Consumer Selling Points'
 searchable: true
 settings:
@@ -34,7 +34,6 @@ settings:
           - ''
   maxRows: null
   minRows: null
-  staticRows: false
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Table
