@@ -1,72 +1,93 @@
+changedFieldIndicator: null
 field: cfbe0147-1cfa-4cbd-a0a2-42dfb7278536 # Product Submission
 fieldLayouts:
   10b5ccef-ed59-489b-8483-ac44c2a8d688:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: d2f95df2-89ea-43b8-b84d-0e937ee47715 # ID
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: db2ae4a8-83ab-41a7-92ce-fa96fe23bd19
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c90899ec-f418-4c3a-88c4-ab2d5ad78a9c # Date
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ab4205a8-eea4-4a60-940d-c906ef974742
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 13a41bcb-8067-42ec-b258-9b6704d154f5 # Products
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a2b23170-8424-42ae-b348-0b56597bd65d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8e5f4c47-beb0-4ec2-b5ad-56803a4cadec # Age
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9eb0ecb6-2192-4acc-8064-eecf6c10380d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 213d7db1-82b4-4083-8c16-e9c869c87f1c # Gender
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 21ab58d6-6058-44ea-9b9c-f6e2591ba4c9
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c0157df9-eb24-42fb-b900-cbbe439d951e # PDF Generated
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: bc5731f2-97d7-43dc-927f-d297789ba480
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 21d0a1de-2272-4365-9312-429872179b29
+        userCondition: null
 fields:
   8e5f4c47-beb0-4ec2-b5ad-56803a4cadec: # Age
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: age
-    instructions: ''
+    instructions: null
     name: Age
     searchable: true
     settings:
@@ -74,8 +95,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -86,7 +107,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: products
-    instructions: ''
+    instructions: null
     name: Products
     searchable: true
     settings:
@@ -94,8 +115,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -106,7 +127,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: gender
-    instructions: ''
+    instructions: null
     name: Gender
     searchable: true
     settings:
@@ -114,8 +135,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -126,7 +147,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: pdfGenerated
-    instructions: ''
+    instructions: null
     name: 'PDF Generated'
     searchable: true
     settings:
@@ -141,7 +162,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: date
-    instructions: ''
+    instructions: null
     name: Date
     searchable: true
     settings:
@@ -149,8 +170,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -161,7 +182,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: submissionId
-    instructions: ''
+    instructions: null
     name: ID
     searchable: true
     settings:
@@ -169,8 +190,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

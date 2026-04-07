@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all()|reverse %}
+    {% set orders = craft.orders.customer(currentUser).isCompleted(true).all()|reverse %}
 
         <div class="wrapper-wide">
             <div class="mt-6">

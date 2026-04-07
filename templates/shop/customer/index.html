@@ -76,7 +76,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for order in craft.commerce.orders.customer(craft.commerce.customer).find() %}
+                            {% for order in craft.orders.customer(currentUser).isCompleted(true).orderBy('dateOrdered desc').all() %}
                             <tr>
                                 <td><a href="{{ url('shop/customer/order', { number: order.number }) }}">Order #{{
                                         order.shortNumber }}</a></td>
@@ -103,7 +103,7 @@
                 <div class="card">
                     <div class="row">
 
-                        {% for address in craft.commerce.customer.addresses %}
+                        {% for address in currentUser.getAddresses() %}
 
                         <div class="address-card col--xs--12 col--sm--6">
                             {% include 'shop/_includes/addresses/address' with {'address': address} %}
@@ -113,8 +113,9 @@
                                 <span> | </span>
                                 <form method="POST">
                                     {{ csrfInput() }}
-                                    <input type="hidden" name="action" value="commerce/customerAddresses/delete">
-                                    <input type="hidden" name="id" value="{{ address.id }}" />
+                                    {{ actionInput('users/delete-address') }}
+                                    {{ hiddenInput('addressId', address.id) }}
+                                    {{ redirectInput(craft.app.request.pathInfo) }}
                                     <input type="submit" class="link p-sm submit-plain" value="delete" />
                                 </form>
                             </div>

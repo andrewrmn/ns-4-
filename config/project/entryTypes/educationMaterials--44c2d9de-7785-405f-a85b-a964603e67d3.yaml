@@ -2,6 +2,7 @@ fieldLayouts:
   11aa4999-98e7-4086-b0ca-3defc95e1ef9:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,72 +27,98 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 0c79310d-30c9-40b3-b579-967b3e1bb797
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e91746b9-71f0-4bd2-85e8-5e472ca29df7 # Featured Image
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a77460f9-dd1a-4c07-bfef-16e2f8d1dd41
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4f5a97f7-34f5-4b71-8ccc-e7a53f72315d # Body
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: dd45dc37-8fea-4cb8-a1be-c7c644776384
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f01b5691-2b5b-4fd1-98bf-520abb5fdeae
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9901899c-95b6-402f-ac0d-0b5709e44b9c # Education Materials
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b477b39e-05b5-4ed1-b96d-c893bcc70443
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 75530993-acef-4034-81f3-9919fbe2decc # Education Tiles
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9791badd-ea8e-4d79-bc40-a1c42f9dfa26
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: a310ab01-188d-45a0-afdf-8f943e7f57c2
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 15437087-f989-4528-b5cd-e42a5aad58ad # SEO
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f74e0997-ad2a-4669-b057-5f785d7e67c9
+            userCondition: null
             warning: null
             width: 100
         name: SEO
-        sortOrder: 2
+        uid: a158b42a-71be-44ef-b627-03b8e34442f0
+        userCondition: null
 handle: educationMaterials
 hasTitleField: true
 name: 'Education Materials'
 section: a7d38fe9-86e0-495c-9bca-a8567b4a1159 # Healthcare Providers
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 2
 titleFormat: null
 titleTranslationKeyFormat: null

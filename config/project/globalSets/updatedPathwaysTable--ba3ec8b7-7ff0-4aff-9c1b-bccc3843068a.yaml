@@ -2,18 +2,23 @@ fieldLayouts:
   1c1f61b8-d436-426c-abe8-ea6f797552f9:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: f62131d2-f0cf-4654-8dbf-4aa73cd62619 # Updated Pathways Table
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: fdfc23d7-a599-41b4-8958-67d6ed1c908f
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 79d6ffe7-ba43-498a-9312-2882af034fde
+        userCondition: null
 handle: updatedPathwaysTable
 name: 'Updated Pathways Table'
 sortOrder: 10

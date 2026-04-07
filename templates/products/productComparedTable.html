@@ -309,33 +309,30 @@
 
 {% macro attributeIcon(product, type, ingredient) %}
     {% set keyIngredients = product.comparisonAttributes.type(type).one().keyIngredients.all() %}
-    {% set break = false %}
-    {% for row in keyIngredients if not break %}
-        {% if row.ingredients == ingredient %}
-            {% switch row.precursorPotential %}
-                {% case 'checked' %}
-                    <img src="../images/svgs/chart-checkmark.svg" />
-                {% case 'mildUp' %}
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
-                {% case 'moderateUp' %}
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
-                {% case 'strongUp' %}
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
-                {% case 'mildDown' %}
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
-                {% case 'moderateDown' %}
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
-                {% case 'strongDown' %}
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
-                    <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
-                {% default %}
-            {% endswitch %}
-            {% set break = true %}
-        {% endif %}
-    {% endfor %}
+    {% set match = keyIngredients|filter(row => row.ingredients == ingredient)|first %}
+    {% if match %}
+        {% switch match.precursorPotential %}
+            {% case 'checked' %}
+                <img src="../images/svgs/chart-checkmark.svg" />
+            {% case 'mildUp' %}
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+            {% case 'moderateUp' %}
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+            {% case 'strongUp' %}
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-up" />
+            {% case 'mildDown' %}
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+            {% case 'moderateDown' %}
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+            {% case 'strongDown' %}
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+                <img src="../images/svgs/chart-arrow.svg" class="arrow-down" />
+            {% default %}
+        {% endswitch %}
+    {% endif %}
 {% endmacro %}

@@ -1,68 +1,91 @@
 tabs:
   -
+    elementCondition: null
     elements:
       -
+        elementCondition: null
         fieldUid: b54253b5-0c89-41eb-9805-c21109cdbe9f # HCP Email
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: 5fa01330-433b-4fb3-9ebd-8cc050170acd
+        userCondition: null
         warning: null
         width: 50
       -
+        elementCondition: null
         fieldUid: 2b050d78-a129-4319-9c2c-8591311c7c52 # Is Patient
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: 5f0441b9-8f29-4d4d-a139-8706cc3467c6
+        userCondition: null
         warning: null
         width: 25
       -
+        elementCondition: null
         fieldUid: 9c583f7f-a5b9-4bd3-875a-b7421182cccb # Autoship
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: b7f1e471-d2dd-45f3-a0b7-a7da044700fc
+        userCondition: null
         warning: null
         width: 25
       -
+        elementCondition: null
         fieldUid: d745f96f-2d43-4ca8-a687-de15c0f3b565 # MAS ID
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: 102956b2-4517-45c3-863d-7ed12fd05456
+        userCondition: null
         warning: null
         width: 100
       -
+        elementCondition: null
         fieldUid: 6c063a5d-b93a-4c1f-9619-08db1ebf8dac # Make this a recurring order?
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: 29ca4525-0c25-4097-8df3-2ca59de132ba
+        userCondition: null
         warning: null
         width: 50
       -
+        elementCondition: null
         fieldUid: d3c24e93-20db-4900-9830-ae23042e4051 # Recurring Order Frequency
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: d2da2257-454a-45c4-ba55-0f35259d0882
+        userCondition: null
         warning: null
         width: 50
       -
+        elementCondition: null
         fieldUid: 9b5c02d9-ff4d-4dd6-9507-1df13772e0b8 # Cancel Subscription Order Id
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
+        uid: 8f7bd8cf-941a-41e6-a5c8-8593f4dc7814
+        userCondition: null
         warning: null
         width: 100
     name: Customer
-    sortOrder: 1
+    uid: b8425441-2b25-4db7-adfa-63e43e488ee5
+    userCondition: null

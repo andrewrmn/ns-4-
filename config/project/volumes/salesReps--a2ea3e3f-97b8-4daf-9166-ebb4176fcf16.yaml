@@ -2,6 +2,7 @@ fieldLayouts:
   c6391e57-17cd-49a5-a7b1-7be757c0dff2:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,15 +27,18 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\assets\AssetTitleField
+            uid: f5b69734-e4f2-431e-930d-d390e5631a6f
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 39c80d1b-deb9-4780-9289-ed14fa997305
+        userCondition: null
 fs: salesReps
 handle: salesReps
-hasUrls: true
 name: 'Sales Reps'
 sortOrder: 3
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-url: '@baseUrl/images/sales-reps'
+transformFs: null
+transformSubpath: ''

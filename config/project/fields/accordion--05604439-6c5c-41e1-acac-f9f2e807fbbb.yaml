@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: accordion
-instructions: ''
+instructions: null
 name: Accordion
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -24,13 +26,12 @@ settings:
               - ''
   contentTable: '{{%stc_accordion}}'
   fieldLayout: row
-  maxRows: ''
-  minRows: ''
-  placeholderKey: null
+  maxRows: null
+  minRows: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add item'
-  staticField: ''
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

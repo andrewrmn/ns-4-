@@ -4,16 +4,9 @@ handle: productsLanding
 name: 'Products Landing'
 previewTargets:
   -
-    __assoc__:
-      -
-        - label
-        - Primary
-      -
-        - urlFormat
-        - '{url}'
-      -
-        - refresh
-        - '1'
+    label: Primary
+    refresh: '1'
+    urlFormat: '{url}'
 propagationMethod: all
 siteSettings:
   9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience

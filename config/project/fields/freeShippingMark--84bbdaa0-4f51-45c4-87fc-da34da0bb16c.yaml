@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: integer(10)
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: freeShippingMark
-instructions: ''
+instructions: null
 name: 'Free Shipping Mark'
 searchable: true
 settings:

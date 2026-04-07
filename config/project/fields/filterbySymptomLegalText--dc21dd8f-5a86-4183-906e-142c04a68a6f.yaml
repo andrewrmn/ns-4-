@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: filterbySymptomLegalText
-instructions: ''
+instructions: null
 name: 'Filter by Symptom Legal Text'
 searchable: true
 settings:
@@ -12,12 +12,12 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: ''
+  purifierConfig: null
+  purifyHtml: false
   redactorConfig: Standard.json
-  removeEmptyTags: true
-  removeInlineStyles: true
-  removeNbsp: true
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
   showHtmlButtonForNonAdmins: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true

@@ -12,7 +12,7 @@
         </div>
         <div class="card">
             <div class="row text-group-tall">
-            {% for address in craft.commerce.customers.customer.addresses %}
+            {% for address in currentUser.getAddresses() %}
                 <div class="col--xs--12 col--sm--6">
                     <div class="address-card">
                         {% include 'shop/_includes/addresses/address' with {'address': address} %}
@@ -22,8 +22,9 @@
                             <span> | </span>
                             <form method="POST">
                                 {{ csrfInput() }}
-                                <input type="hidden" name="action" value="commerce/customer-addresses/delete">
-                                <input type="hidden" name="id" value="{{ address.id }}"/>
+                                {{ actionInput('users/delete-address') }}
+                                {{ hiddenInput('addressId', address.id) }}
+                                {{ redirectInput('shop/customer/addresses') }}
                                 <input type="submit" class="submit-plain link" value="delete"/>
                             </form>
                         </div>

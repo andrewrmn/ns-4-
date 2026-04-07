@@ -182,7 +182,7 @@
                 dataType: 'html',
                 beforeSend: function( xhr ) {
                     $("div.products-table").addClass('text-center');
-                    $("div.products-table").html("<img src='../images/svgs/loading.svg' width='50' alt='loading' />");
+                    $("div.products-table").html("<img class=\"compare-products-loading\" src=\"{{ siteUrl }}images/svgs/loading.svg\" width=\"50\" height=\"50\" alt=\"loading\" />");
                 },
                 success: function(response) {
                     $("div.products-table").removeClass('text-center');

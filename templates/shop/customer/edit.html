@@ -193,9 +193,13 @@
                                     <div class="select-wrap">
                                         <select id="state-select" name="fields[state]">
                                             <option>State*</option>
-                                            {% for state in craft.commerce.states.allEnabledStates %}
-                                            <option value="{{ state.name }}" {% if state.name==currentUser.state %}
-                                                selected{% endif %}>{{ state.name }}</option>
+                                            {% set states =
+                                            craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode() %}
+                                            {% set usStates = states['US'] ?? {} %}
+                                            {% for stateCode, stateLabel in usStates %}
+                                            <option value="{{ stateLabel }}" {% if stateLabel==currentUser.state %}
+                                                selected{% endif %}>{{
+                                                stateLabel }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -221,15 +225,8 @@
                                     {{ errorList(account.getErrors('country')) }}
                                     {% endif %}
                                     <div class="select-wrap">
-                                        <select id="country-select" name="fields[country]">
-                                            {% for country in craft.commerce.countries.allCountries %}
-                                            {% if country.name != 'Canada' %}
-                                            <option value="{{ country.name }}" {% if country.name==currentUser.country
-                                                %}selected{% elseif country.name=='United States' %}selected{% endif %}>
-                                                {{ country.name }}</option>
-                                            {% endif %}
-                                            {% endfor %}
-                                        </select>
+                                        <input type="text" id="country-select" name="fields[country]"
+                                            value="United States" readonly>
                                     </div>
 
                                 </div>

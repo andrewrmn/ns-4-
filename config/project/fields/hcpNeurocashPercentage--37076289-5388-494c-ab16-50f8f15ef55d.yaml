@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: integer(10)
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: hcpNeurocashPercentage
-instructions: ''
+instructions: null
 name: 'HCP NeuroCash Percentage'
 searchable: false
 settings:
@@ -11,7 +11,7 @@ settings:
   max: null
   min: 0
   prefix: null
-  previewCurrency: ''
+  previewCurrency: null
   previewFormat: decimal
   size: null
   suffix: '%'

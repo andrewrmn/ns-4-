@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: boolean
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: receiveUpdates
-instructions: ''
+instructions: null
 name: 'Receive Updates'
 searchable: true
 settings:

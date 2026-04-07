@@ -2,18 +2,23 @@ fieldLayouts:
   436a3384-5b58-4fc4-adcf-fccae046c97c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 5aef1b3e-1992-4101-961b-27ed5fa34a5b # QR Scan Table
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 8827cf92-3a87-4480-914c-d7db21bfa98d
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 21e1cdcd-67df-4050-a307-692b2674c5b0
+        userCondition: null
 handle: qrScanTable
 name: 'QR Scan Table'
 sortOrder: 7

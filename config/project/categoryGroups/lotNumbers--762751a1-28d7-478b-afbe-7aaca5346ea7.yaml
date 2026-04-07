@@ -3,6 +3,7 @@ fieldLayouts:
   28acc836-7370-459a-bd47-dfe7e02f8f1c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,19 +28,25 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: 66a2a0b8-4a25-41ae-9d7e-53a3b6816483
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4f5a97f7-34f5-4b71-8ccc-e7a53f72315d # Body
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 58c84e78-0323-4193-909b-512b4ae74176
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: f19e786d-b323-47bb-b6ca-51459f2d2e69
+        userCondition: null
 handle: lotNumbers
 name: 'Lot Numbers'
 siteSettings:

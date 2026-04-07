@@ -35,18 +35,6 @@ function requireLogin()
   }
 }
 
-$myArray = [''];
-
-$productsCriteria = Product::find()->all();
-
-$products = $productsCriteria;
-foreach($products as $product) {
-  if(!$product->disableInNueroselect){
-    $myArray[] = $product->id;
-  }
-}
-$myProds = implode(", ",$myArray);
-
 return [
 
   'endpoints' => [

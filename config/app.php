@@ -26,6 +26,18 @@ return [
         'stripe-webhook-module' => [
             'class' => \modules\StripeWebhookModule::class,
         ],
+        'admin-emails-module' => [
+            'class' => \modules\AdminEmailsModule::class,
+        ],
+        'neuro-rewards-module' => [
+            'class' => \modules\NeuroRewardsModule::class,
+        ],
+        'paya' => [
+            'class' => \modules\PayaModule::class,
+        ],
+        'guest-pricing' => [
+            'class' => \modules\GuestPricingModule::class,
+        ],
     ],
-    'bootstrap' => ['pending-user-module', 'stripe-webhook-module'],
+    'bootstrap' => ['pending-user-module', 'stripe-webhook-module', 'admin-emails-module', 'neuro-rewards-module', 'paya', 'guest-pricing'],
 ];

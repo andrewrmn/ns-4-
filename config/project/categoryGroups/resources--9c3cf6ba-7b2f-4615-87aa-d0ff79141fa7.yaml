@@ -3,6 +3,7 @@ fieldLayouts:
   626c10f1-8407-4605-bd7a-5e7a499136cd:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,19 +28,25 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: fb02ce71-292c-41b0-8eaa-3c6fb35ba683
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4f5a97f7-34f5-4b71-8ccc-e7a53f72315d # Body
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 32876142-87de-4129-ae76-e05fd7c48e60
+            userCondition: null
             warning: null
             width: 100
         name: Citation
-        sortOrder: 1
+        uid: 3b812623-ce6c-4115-b234-35a64fd45ff7
+        userCondition: null
 handle: resources
 name: Resources
 siteSettings:

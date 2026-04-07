@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: alertMessage
-instructions: ''
+instructions: null
 name: 'Alert Message'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     156:
       __assoc__:
@@ -24,9 +26,8 @@ settings:
           - 10%
   contentTable: '{{%stc_alertmessage}}'
   fieldLayout: table
-  maxRows: '1'
-  minRows: '1'
-  placeholderKey: null
+  maxRows: 1
+  minRows: 1
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add alert'

@@ -2,27 +2,35 @@ fieldLayouts:
   b44029db-9cf9-4f26-a80b-03b0216f564f:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 49e27b51-26a7-47af-8456-308e7eb0c8c2 # No Doc Found...
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2e0053fd-ea6c-429c-abca-7f4f8e8e8276
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 2b06842e-ebb8-4fe8-a940-86e300bca536 # Success Message
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 21e0236d-b587-4036-b966-726834973f46
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 12830b0d-749e-45ab-b122-992b21b736e6
+        userCondition: null
 handle: patientSignUp
 name: 'Patient Sign Up'
 sortOrder: 11

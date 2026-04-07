@@ -15,7 +15,7 @@
                             <div class="card col-12">
 
                                 <div class="row">
-                                {% for address in craft.commerce.customers.customer.addresses %}
+                                {% for address in currentUser.getAddresses() %}
                                     <div class="address-card col--xs--12 col--sm--6 col--md--4 mb-4">
                                         {% include 'shop/_includes/addresses/address' with {'address': address} %}
                                         <div class="address-controls">
@@ -23,8 +23,9 @@
                                             <span> | </span>
                                             <form method="POST">
                                                 {{ csrfInput() }}
-                                                <input type="hidden" name="action" value="commerce/customer-addresses/delete">
-                                                <input type="hidden" name="id" value="{{ address.id }}"/>
+                                                {{ actionInput('users/delete-address') }}
+                                                {{ hiddenInput('addressId', address.id) }}
+                                                {{ redirectInput('shop/customer/addresses') }}
                                                 <input type="submit" class="link p-sm submit-plain" value="delete"/>
                                             </form>
                                         </div>

@@ -1,45 +1,57 @@
+changedFieldIndicator: null
 field: 1e3887a1-7daa-4ba7-898d-caa7ada6fd6f # Product Survey Details
 fieldLayouts:
   bdab86ef-f836-4201-bf72-011daf696d20:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: c48523f4-650a-45fa-b015-6c0d09c1c94a # Sleep content
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2fdbddcb-5ffe-40ef-8a3b-b32fdca528f7
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 989e8fee-a375-4704-b002-91f68bccec4e # Stress content
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 40e09e42-ecc6-4495-80aa-ad29aee6dc9d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 381461cb-47ce-40ff-a867-938e0e94a64f # Fatigue content
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9af38d98-f29a-42ab-98ad-73eb80203a34
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 4da602a0-79fc-4841-927b-222b17bbc865
+        userCondition: null
 fields:
   989e8fee-a375-4704-b002-91f68bccec4e: # Stress content
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: stressContent
-    instructions: ''
+    instructions: null
     name: 'Stress content'
     searchable: true
     settings:
@@ -49,13 +61,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -67,7 +79,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fatigueContent
-    instructions: ''
+    instructions: null
     name: 'Fatigue content'
     searchable: true
     settings:
@@ -77,13 +89,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -95,7 +107,7 @@ fields:
     contentColumnType: mediumtext
     fieldGroup: null
     handle: sleepContent
-    instructions: ''
+    instructions: null
     name: 'Sleep content'
     searchable: true
     settings:
@@ -105,13 +117,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged

@@ -2,20 +2,19 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: productCategories
-instructions: ''
+instructions: null
 name: 'Product Categories'
 searchable: true
 settings:
-  allowLimit: false
-  allowMultipleSources: false
   allowSelfRelations: false
-  branchLimit: ''
-  limit: null
+  branchLimit: null
   localizeRelations: false
-  selectionLabel: ''
+  maintainHierarchy: true
+  maxRelations: null
+  minRelations: null
+  selectionLabel: null
   showSiteMenu: true
   source: 'group:a9b3f724-99fe-466a-9391-c21064874354' # Product Categories
-  sources: '*'
   targetSiteId: null
   validateRelatedElements: false
   viewMode: null

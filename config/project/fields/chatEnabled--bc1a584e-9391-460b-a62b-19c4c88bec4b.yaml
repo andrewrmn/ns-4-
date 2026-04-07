@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: boolean
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: chatEnabled
-instructions: ''
+instructions: null
 name: 'Chat Enabled'
 searchable: true
 settings:

@@ -13,8 +13,8 @@
 
 		<div class="card mb-6">
 			{% set shipError = false %}
-			{% set shipCity = cart.shippingAddress.city %}
-			{% set shipState = cart.shippingAddress.stateText %}
+			{% set shipCity = cart.shippingAddress ? (cart.shippingAddress.locality ?? attribute(cart.shippingAddress, 'city') ?? null) : null %}
+			{% set shipState = cart.shippingAddress ? (cart.shippingAddress.administrativeArea ?? attribute(cart.shippingAddress, 'stateText') ?? null) : null %}
 			{% if shipCity == 'Vincent' %}
 			{% if shipState == 'AL' or shipState == 'Alabama' %}
 			{% set shipError = true %}
@@ -388,6 +388,19 @@
 					{% set reqjson = data|json_encode %}
 					{% set hash = craft.paya.getAuthKey(reqjson, key, salt, iv) %}
 
+					{# Craft 4 Address elements: postalCode, addressLine1, locality, administrativeArea, countryCode (not zipCode/address1/city/countryText). #}
+					{% set ba = cart.billingAddress %}
+					{% set sa = cart.shippingAddress %}
+					{% set payaBaLine1 = ba ? (ba.addressLine1 ?? attribute(ba, 'address1') ?? '')|trim : '' %}
+					{% set payaBaCity = ba ? (ba.locality ?? attribute(ba, 'city') ?? '')|trim : '' %}
+					{% set payaBaZip = ba ? (ba.postalCode ?? attribute(ba, 'zipCode') ?? '')|trim : '' %}
+					{% set payaBaState = ba ? (ba.administrativeArea ?? attribute(ba, 'stateText') ?? '')|trim : '' %}
+					{% set payaBaCountry = ba ? (ba.countryCode ?? 'US')|trim : 'US' %}
+					{% set payaSaLine1 = sa ? (sa.addressLine1 ?? attribute(sa, 'address1') ?? '')|trim : '' %}
+					{% set payaSaCity = sa ? (sa.locality ?? attribute(sa, 'city') ?? '')|trim : '' %}
+					{% set payaSaZip = sa ? (sa.postalCode ?? attribute(sa, 'zipCode') ?? '')|trim : '' %}
+					{% set payaSaState = sa ? (sa.administrativeArea ?? attribute(sa, 'stateText') ?? '')|trim : '' %}
+					{% set payaSaCountry = sa ? (sa.countryCode ?? 'US')|trim : 'US' %}
 
 					<script type="text/javascript">
 						var $ = jQuery;
@@ -413,20 +426,20 @@
 
 
 								$CORE.setBilling({
-									name: "{{ cart.billingAddress.firstName }} {{ cart.billingAddress.lastName }}",
-									address: "{{ cart.billingAddress.address1 }}",
-									city: "{{ cart.billingAddress.city }}",
-									state: "{{ cart.billingAddress.stateText }}",
-									postalCode: "{{ cart.billingAddress.zipCode }}",
-									country: "{{ cart.billingAddress.countryText }}"
+									name: "{{ ba ? ((ba.firstName ~ ' ' ~ ba.lastName)|trim)|e('js') : '' }}",
+									address: "{{ payaBaLine1|e('js') }}",
+									city: "{{ payaBaCity|e('js') }}",
+									state: "{{ payaBaState|e('js') }}",
+									postalCode: "{{ payaBaZip|e('js') }}",
+									country: "{{ payaBaCountry|e('js') }}"
 								});
 								$CORE.setShipping({
-									name: "{{ cart.shippingAddress.firstName }} {{ cart.shippingAddress.lastName }}",
-									address: "{{ cart.shippingAddress.address1 }}",
-									city: "{{ cart.shippingAddress.city }}",
-									state: "{{ cart.shippingAddress.stateText }}",
-									postalCode: "{{ cart.shippingAddress.zipCode }}",
-									country: "{{ cart.shippingAddress.countryText }}"
+									name: "{{ sa ? ((sa.firstName ~ ' ' ~ sa.lastName)|trim)|e('js') : '' }}",
+									address: "{{ payaSaLine1|e('js') }}",
+									city: "{{ payaSaCity|e('js') }}",
+									state: "{{ payaSaState|e('js') }}",
+									postalCode: "{{ payaSaZip|e('js') }}",
+									country: "{{ payaSaCountry|e('js') }}"
 								});
 								$CORE.setCustomer({
 									email: "{{ cart.email }}"

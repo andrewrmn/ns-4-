@@ -31,7 +31,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% set orders = craft.orders.customer(craft.commerce.customers.customer).isCompleted(true).all()|reverse %}
+                {% set orders = craft.orders.customer(currentUser).isCompleted(true).all()|reverse %}
 
                 {% for order in orders %}
                 <tr>

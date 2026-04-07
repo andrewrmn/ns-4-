@@ -1,0 +1,19 @@
+columnSuffix: ecwlgvuo
+contentColumnType: string
+fieldGroup: a8843661-a567-4e21-8928-2108d60edafe # Avatax
+handle: addressAttention
+instructions: null
+name: Attention
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: string
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

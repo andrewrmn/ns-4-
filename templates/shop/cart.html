@@ -23,8 +23,7 @@
         {% set isPUP = true %}
         {% set end = now|date_modify('-1 month')|atom %}
 
-        {% set orders = craft.orders.dateOrdered(">=
-        #{end}").isCompleted().customer(craft.commerce.customers.customer).all() %}
+        {% set orders = craft.orders.dateOrdered('>= ' ~ end).isCompleted().customer(currentUser).all() %}
 
 
         {% for order in orders %}

@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: body
-instructions: ''
+instructions: null
 name: Body
 searchable: true
 settings:
@@ -12,12 +12,12 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: ''
+  purifierConfig: null
+  purifyHtml: false
   redactorConfig: Standard.json
-  removeEmptyTags: true
-  removeInlineStyles: true
-  removeNbsp: true
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
   showHtmlButtonForNonAdmins: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true

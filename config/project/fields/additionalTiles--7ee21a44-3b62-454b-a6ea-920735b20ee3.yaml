@@ -2,35 +2,37 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: additionalTiles
-instructions: ''
+instructions: null
 name: 'Additional Tiles'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
-        - f09d786a-e956-46a1-bab2-e17e8bffec63 # Icon
+        - f09d786a-e956-46a1-bab2-e17e8bffec63
         -
           __assoc__:
             -
               - width
               - ''
       -
-        - bb1ecfc9-053e-4250-be95-e4e8315a3d58 # Headline
+        - bb1ecfc9-053e-4250-be95-e4e8315a3d58
         -
           __assoc__:
             -
               - width
               - ''
       -
-        - 322252f2-9500-4211-a3e5-71abdb9f8811 # Content
+        - 322252f2-9500-4211-a3e5-71abdb9f8811
         -
           __assoc__:
             -
               - width
               - ''
       -
-        - a84f30b0-7cd0-4eb1-a2ca-dd9b5215f66b # Link
+        - a84f30b0-7cd0-4eb1-a2ca-dd9b5215f66b
         -
           __assoc__:
             -
@@ -38,13 +40,12 @@ settings:
               - ''
   contentTable: '{{%stc_additionaltiles}}'
   fieldLayout: row
-  maxRows: ''
-  minRows: ''
-  placeholderKey: null
+  maxRows: null
+  minRows: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a tile'
-  staticField: ''
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

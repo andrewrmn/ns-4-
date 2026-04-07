@@ -2,13 +2,13 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: cta
-instructions: ''
+instructions: null
 name: CTA
 searchable: true
 settings:
-  allowCustomText: '1'
-  allowTarget: '1'
-  defaultText: ''
+  allowCustomText: true
+  allowTarget: true
+  defaultText: null
   selectLinkText: ''
   types:
     __assoc__:
@@ -37,52 +37,52 @@ settings:
         - presseddigital\linkit\models\Entry
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select an entry'
       -
         - presseddigital\linkit\models\Category
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select a category'
       -
         - presseddigital\linkit\models\Asset
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select an asset'
       -
         - presseddigital\linkit\models\Product
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select an entry'
 translationKeyFormat: null

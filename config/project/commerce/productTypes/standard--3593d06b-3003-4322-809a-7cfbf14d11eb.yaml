@@ -9,6 +9,7 @@ productFieldLayouts:
   9ea961d2-c4a7-4179-8827-f655a0ba8ce6:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -16,7 +17,9 @@ productFieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -31,332 +34,449 @@ productFieldLayouts:
             tip: null
             title: null
             type: craft\commerce\fieldlayoutelements\ProductTitleField
+            uid: 21df441f-dad3-44fb-af4a-146a6ac68918
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: d44f519c-1425-43b6-81fc-fd806660b655 # Disable in NeuroSelect?
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 308bbd46-e353-4293-8704-32de61d15996
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c0e28378-eec8-4cc3-bea9-f3c2d96817b3 # Disable in PF?
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 96f36d1e-f662-463e-8fa4-db22ec6e85cd
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f2438b9c-9908-46ac-b31d-2ffedc20b958 # Guest Checkout Only
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5f210bec-acc8-4192-b8cd-dfb9cf63d953
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c6c6411e-063b-4674-8ea7-9fd98cee10e3 # Product note
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: fbdfec51-8a96-49d8-b601-a269eddad861
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 943aee6c-7de2-4f9c-a4a2-8f6519040bf0 # Product Fields
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5de5a040-ef69-42dd-9dbc-36b6db11db1e
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 3833458e-abff-43de-a84f-411bc1ca3e48 # Network Approach
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 22930ba5-96fe-4937-a09f-59041bfbcc96
+            userCondition: null
             warning: null
             width: 100
         name: 'Product Content'
-        sortOrder: 1
+        uid: 495bc406-2e88-4d52-a79f-987f6f29523e
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 286cc62e-c8ab-4fa4-a98c-60622b6aeaaa # Circle Count
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 150d2cbb-36e5-4c5e-be8d-a21ff96c9092
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9b3b2ea4-6f15-496b-a088-31f0aa2c4cc3 # Suggested Use (PIR)
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 64da7064-dfaa-42e5-abba-6a1bfa0bec04
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 26dddbf0-7261-46e2-be2d-11b79861dd4a # Additional Information
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4bdc3e78-d83b-4bbb-b09e-5f55e65f5769
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4ee14c7e-9bf2-4692-a2ee-5887f40566de # PIR Key Ingredients
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 79ca3ba2-6f17-4dc0-b548-7cc2ac1eeb20
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6598fa0e-a56b-4350-a55e-a01a7ea631bd # Reference Disclaimers
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9da55b27-5b98-437e-adb1-365b601e1362
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1e3887a1-7daa-4ba7-898d-caa7ada6fd6f # Product Survey Details
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5ea003a5-37ca-4ae7-a413-fb51d74de59e
+            userCondition: null
             warning: null
             width: 100
         name: 'PIR Content'
-        sortOrder: 2
+        uid: 1f2678f2-7aba-42e0-9965-20ddb7ddf793
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: bb37393d-7459-4b7c-932a-bd3f1aa80196 # Tags
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 7eda916c-6156-4e66-a416-c2d1ddc9ce25
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: db42c9a3-1934-4f0c-a5de-3ab14a627c32 # Product Categories
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 164580d3-22ff-49a1-859d-2684a0d74707
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a8e97692-97a8-431c-910e-8652b73eba26 # Biomarker note
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 52f83b1d-682e-41a4-981f-dca76a93f51b
+            userCondition: null
             warning: null
             width: 100
         name: Categories
-        sortOrder: 3
+        uid: 7183b031-5343-4480-bb6b-8073c190f4aa
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 527a445d-fcd6-4676-9763-27311a92a055 # In Comparison Tool?
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 49f1507c-67bc-4123-8bff-b2e6319b28ea
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 3cbb062d-f9ec-4bc6-9e62-7d0d01241fcc # Short Description
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 86c46cbe-f59c-441b-9129-1d3f0df11bd8
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e36ca748-a185-4fc2-b8c0-b0d4213bf0c8 # Comparison Attributes
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3db21876-38a0-449c-8c5e-ee900b5beb2f
+            userCondition: null
             warning: null
             width: 100
         name: 'Comparison table'
-        sortOrder: 4
+        uid: 55d4c3ca-9f93-4288-909c-b67ebd3e2620
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 60130b13-eb7c-4c6a-8935-9a521060fc65 # Patient Portal Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 25218ba9-2887-44c6-b3d0-2e48045e2039
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a9b32bc5-613c-4761-9f3f-0d6ef4eb4f30 # Bottle Size Image
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 25a63851-7828-42a0-af89-1e68609f98ab
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c52664d0-af8d-43c2-88d4-9e58c3bfbd6a # Consumer Selling Points
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a766187c-8b71-4ddb-8256-5e398bce66dd
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 47ffe3c2-9099-44a2-bb8c-c64aa9063c78 # Disclaimers
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 65e7a59c-e5db-41fd-b86b-f95897c56d84
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 7ee21a44-3b62-454b-a6ea-920735b20ee3 # Additional Tiles
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9cfd95ca-af2f-4110-9507-8bccde9b0af3
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 75d58be8-b5df-409d-ae5d-bf87f057bccb # Bio Link
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f158e9c1-c1cf-4766-9993-b59b454f6a7b
+            userCondition: null
             warning: null
             width: 100
         name: 'Additional Details'
-        sortOrder: 5
+        uid: 8b6d3425-8a3f-4b11-b93f-489e0b5a5d6e
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 39b8289d-8951-4273-b8ee-ea9e3598a114 # Promotion Categories
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2be5cbd3-04f9-477a-a9d5-eadd9965f1cf
+            userCondition: null
             warning: null
             width: 100
         name: Promotions
-        sortOrder: 6
+        uid: 1b9067df-3bea-469e-8db5-a37be81bf978
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: a78e36ff-abe0-4b1f-bc1b-1bdee754cf4c # Hide bottle count?
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f356c949-791f-4c64-9851-c9324fe106dd
+            userCondition: null
             warning: null
             width: 50
           -
+            elementCondition: null
             fieldUid: 210c5417-1eb7-45b5-9355-523a5d9c6bf9 # Hide SRP?
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4da11af4-530a-4f31-9d6b-3d38b4d01a42
+            userCondition: null
             warning: null
             width: 50
           -
+            elementCondition: null
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\commerce\fieldlayoutelements\VariantsField
+            uid: 78f86943-f1b8-4605-9c44-a9a4b3df693c
+            userCondition: null
             warning: null
         name: Variants
-        sortOrder: 7
+        uid: 3780adca-adab-4bd9-a055-0baac890d374
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: a7edcec2-e432-4d61-94ed-f6c42d7ea9c8 # Related Products
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 149e0156-75c8-40ae-a436-661a1ec3eb8e
+            userCondition: null
             warning: null
             width: 100
         name: 'Related Products'
-        sortOrder: 8
+        uid: 377b0dfc-2175-4b70-a197-d332d653618e
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 0ff0c9d9-e670-425c-b768-c0026a5cd4c1 # Lot numbers
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c979468c-c74b-4ffc-b7e9-301b5772f619
+            userCondition: null
             warning: null
             width: 100
         name: 'Lot Numbers'
-        sortOrder: 9
+        uid: 410baa40-ba8d-4bad-a50f-aa1bad70409a
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 36ce373f-56c9-4e6c-98a7-8c602e5e66a1 # SEO Options
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 8c842cdc-3f2f-421e-b2e8-3ad70e61a8ab
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4b5c8149-cc36-4695-8eaf-e97cc80e0a8b # Pixel Tracking
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 1fc493eb-1585-4602-8787-a398f39dc6b5
+            userCondition: null
             warning: null
             width: 100
         name: SEO
-        sortOrder: 10
+        uid: 16536d55-c8b9-432c-a465-c35d5d013b31
+        userCondition: null
 productTitleFormat: ''
 siteSettings:
   9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
@@ -364,11 +484,11 @@ siteSettings:
     template: products/_product
     uriFormat: 'products/{slug}'
 skuFormat: ''
-titleFormat: '{product.title}'
 variantFieldLayouts:
   c909dc12-37b1-4289-9685-cb94aec7832f:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -376,7 +496,9 @@ variantFieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -391,25 +513,35 @@ variantFieldLayouts:
             tip: null
             title: null
             type: craft\commerce\fieldlayoutelements\VariantTitleField
+            uid: 3257c76b-3d31-4407-9929-1c1fd50cd7b4
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 73f73bac-58f3-4d6e-bc3c-627a0889e8a8 # Bottle Size
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a15a9b31-8be8-4812-97dd-89adc08c7e54
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f2261c3e-4145-4584-94b3-f020ada61ef8 # Suggested Retail Price
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e52aed0e-4ee8-440f-a363-62b58764efd8
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 2b3b6d69-08c1-4b71-b7f6-bac00550ed35
+        userCondition: null
+variantTitleFormat: '{product.title}'

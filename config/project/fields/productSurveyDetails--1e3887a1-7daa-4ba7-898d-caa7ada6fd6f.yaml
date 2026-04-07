@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: productSurveyDetails
-instructions: ''
+instructions: null
 name: 'Product Survey Details'
 searchable: false
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -31,13 +33,12 @@ settings:
               - ''
   contentTable: '{{%stc_productsurveydetails}}'
   fieldLayout: row
-  maxRows: ''
-  minRows: ''
-  placeholderKey: null
+  maxRows: null
+  minRows: null
   propagationKeyFormat: null
   propagationMethod: all
-  selectionLabel: ''
-  staticField: ''
+  selectionLabel: null
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

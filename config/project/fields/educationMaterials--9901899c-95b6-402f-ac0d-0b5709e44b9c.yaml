@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: educationMaterials
-instructions: ''
+instructions: null
 name: 'Education Materials'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -52,13 +54,12 @@ settings:
               - ''
   contentTable: '{{%stc_educationmaterials}}'
   fieldLayout: row
-  maxRows: ''
-  minRows: ''
-  placeholderKey: null
+  maxRows: null
+  minRows: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a section'
-  staticField: ''
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

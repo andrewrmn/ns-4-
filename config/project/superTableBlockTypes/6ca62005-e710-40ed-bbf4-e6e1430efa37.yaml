@@ -1,72 +1,92 @@
+changedFieldIndicator: null
 field: e697251b-8d8c-4911-ba14-486479a207a9 # Clinical Indicators Table
 fieldLayouts:
   fd40e5c5-433f-44a3-ace2-ef3560049366:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 130b86fd-43ec-46b6-b161-fca9e3a1ebce # Clinical Symptoms
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2f5c825c-c0ad-4220-981e-ad2d23406375
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 75be2701-eb22-4d93-8669-85d837ffa402 # Associated Product
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 69deee2b-5d24-4547-b398-014baa88774f
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 089c96c7-150c-49e6-9e6e-cc5a82eef4e1 # Age
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: de5863bb-ad7c-4685-a934-82fa8ff3d4fc
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: cd620454-bac9-4cbb-946d-c91e533d2372 # Age Check
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 8769f77e-10bd-4f94-bcd3-e8766cdd33f0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: dbecde4e-9b37-4570-9322-33bdc3b18b9f # Immune/ Adrenal
             instructions: null
             label: null
-            required: 0
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3041bb19-bdbd-4735-a7b9-a00fc77ebd89
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 1e48e454-26ad-43ee-8d7d-13de378a5c17
+        userCondition: null
 fields:
   75be2701-eb22-4d93-8669-85d837ffa402: # Associated Product
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: associatedProduct
-    instructions: ''
+    instructions: null
     name: 'Associated Product'
     searchable: true
     settings:
       allowSelfRelations: false
-      limit: '1'
+      branchLimit: null
       localizeRelations: false
-      selectionLabel: ''
+      maintainHierarchy: false
+      maxRelations: 1
+      minRelations: null
+      selectionLabel: null
       showSiteMenu: true
-      source: null
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false
@@ -79,11 +99,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: age
-    instructions: ''
+    instructions: null
     name: Age
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -126,20 +146,19 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: clinicalSymptoms
-    instructions: ''
+    instructions: null
     name: 'Clinical Symptoms'
     searchable: true
     settings:
-      allowLimit: false
-      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: ''
-      limit: null
+      branchLimit: null
       localizeRelations: false
-      selectionLabel: ''
+      maintainHierarchy: true
+      maxRelations: null
+      minRelations: null
+      selectionLabel: null
       showSiteMenu: true
       source: 'group:f5844837-8d59-43fe-9cb8-765af3f4ff51' # Clinical Symptoms
-      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
@@ -151,7 +170,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: ageCheck
-    instructions: ''
+    instructions: null
     name: 'Age Check'
     searchable: true
     settings:
@@ -166,11 +185,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: immuneAdrenal
-    instructions: ''
+    instructions: null
     name: 'Immune/ Adrenal'
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:

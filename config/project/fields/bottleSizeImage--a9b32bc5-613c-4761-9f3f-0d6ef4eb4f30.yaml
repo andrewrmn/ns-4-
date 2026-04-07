@@ -2,31 +2,35 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: bottleSizeImage
-instructions: ''
+instructions: null
 name: 'Bottle Size Image'
 searchable: true
 settings:
   allowSelfRelations: false
+  allowSubfolders: false
   allowUploads: true
   allowedKinds: null
+  branchLimit: null
   defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  defaultUploadLocationSubpath: ''
-  limit: ''
+  defaultUploadLocationSubpath: null
   localizeRelations: false
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
   previewMode: full
-  restrictFiles: ''
-  selectionLabel: ''
+  restrictFiles: false
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  restrictedLocationSubpath: null
+  selectionLabel: null
   showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true
-  singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  singleUploadLocationSubpath: ''
-  source: null
   sources:
     - 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
     - 'volume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
   targetSiteId: null
-  useSingleFolder: false
   validateRelatedElements: false
   viewMode: list
 translationKeyFormat: null

@@ -6,7 +6,7 @@ instructions: 'Select an [Entity/Use Code](https://help.avalara.com/000_Avalara_
 name: 'AvaTax Customer Usage Type'
 searchable: true
 settings:
-  optgroups: true
+  columnType: string
   options:
     -
       __assoc__:

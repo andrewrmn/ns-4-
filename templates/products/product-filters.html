@@ -37,7 +37,7 @@
         {% set excludes = [] %}
        
 
-        {% for category in craft.categories.group('productCategories').level(1).offset(2).title('and, not Sale, not Bundle').all() %}
+        {% for category in craft.categories.group('productCategories').level(1).offset(2).all()|filter(c => c.slug not in ['sale', 'bundle']) %}
 
             <li class="has-sub-nav" id="{{ category.slug }}-nav">
                 <span class="js-product-cat-nav">

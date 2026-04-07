@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: productFields
-instructions: ''
+instructions: null
 name: 'Product Fields'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -52,13 +54,12 @@ settings:
               - ''
   contentTable: '{{%stc_productfields}}'
   fieldLayout: row
-  maxRows: '1'
-  minRows: '1'
-  placeholderKey: null
+  maxRows: 1
+  minRows: 1
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: content
-  staticField: ''
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

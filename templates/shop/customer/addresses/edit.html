@@ -12,16 +12,18 @@
             <div class="mt-4 mb-4">
                 <div class="card col-12">
                     {% set addressId = craft.app.request.getParam('addressId') %}
-										{% set redirect = craft.app.request.getParam('redirect') %}
+                    {% set redirect = craft.app.request.getParam('redirect') %}
 
                     {% if not address is defined and addressId %}
-                        {% set address = craft.commerce.customers.customer.getAddressById(addressId) %}
+                        {% set address = craft.addresses()
+                            .ownerId(currentUser.id)
+                            .id(addressId)
+                            .one() %}
                     {% endif %}
 
                     <form class="form" method="post">
                         {{ csrfInput() }}
-
-                        <input type="hidden" name="action" value="commerce/customer-addresses/save">
+                        {{ actionInput('users/save-address') }}
 
                         {% if redirect %}
                             {{ redirectInput(redirect) }}
@@ -30,7 +32,7 @@
                         {% endif %}
 
                         {% if addressId %}
-                            <input type="hidden" name="address[id]" value="{{ addressId }}">
+                            {{ hiddenInput('addressId', addressId) }}
                         {% endif %}
 
                         {% include 'shop/_includes/addresses/form' %}

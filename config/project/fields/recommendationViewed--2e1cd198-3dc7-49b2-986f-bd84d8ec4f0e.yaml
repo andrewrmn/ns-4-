@@ -2,7 +2,7 @@ columnSuffix: yrwocylf
 contentColumnType: boolean
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: recommendationViewed
-instructions: ''
+instructions: null
 name: 'Recommendation Viewed?'
 searchable: false
 settings:

@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    {% set addresses = craft.commerce.customers.customer.addresses %}
+    {% set addresses = currentUser ? currentUser.getAddresses() : [] %}
 
     {# UI when at least one address exists #}
     <div class="wrapper-full bg-light">

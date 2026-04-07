@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f00acdf8ac8c6643c89e9b9321f402d0",
+    "content-hash": "5fc92ca5549ae85e8e9565725c177783",
     "packages": [
         {
             "name": "avalara/avataxclient",
@@ -669,11 +669,11 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "4.17.12",
+            "version": "4.17.13",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/250aa0add8d0ea0bed537e5a85ad519309f2db6b",
-                "reference": "250aa0add8d0ea0bed537e5a85ad519309f2db6b",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/964fb384199ffb9ef2a0106176b20183fbffa318",
+                "reference": "964fb384199ffb9ef2a0106176b20183fbffa318",
                 "shasum": ""
             },
             "require": {
@@ -758,7 +758,7 @@
                 "docs": "https://craftcms.com/docs/4.x/",
                 "rss": "https://github.com/craftcms/cms/releases.atom"
             },
-            "time": "2026-03-26T22:16:15+00:00"
+            "time": "2026-04-07T17:49:29+00:00"
         },
         {
             "name": "craftcms/commerce",
@@ -2892,162 +2892,6 @@
             "time": "2025-01-14T11:49:03+00:00"
         },
         {
-            "name": "neuroscience/admin-emails",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/adminemails",
-                "reference": "1eea1b8c0604a12ffb09bb660ae9c43e39f9c36c"
-            },
-            "require": {
-                "craftcms/cms": "^4.0.0"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "Admin Emails",
-                "handle": "admin-emails",
-                "developer": "Andrew Ross Co.",
-                "developerUrl": "andrewross.co",
-                "documentationUrl": "???",
-                "changelogUrl": "???",
-                "class": "neuroscience\\adminemails\\AdminEmails"
-            },
-            "autoload": {
-                "psr-4": {
-                    "neuroscience\\adminemails\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Ross Co.",
-                    "homepage": "andrewross.co"
-                }
-            ],
-            "description": "Send emails for certain actions",
-            "keywords": [
-                "admin emails",
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms"
-            ],
-            "support": {
-                "docs": "???",
-                "issues": "???"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "neuroscience/guest-pricing",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/guestpricing",
-                "reference": "fdff07feefc817bca1ee39c6cc150f3f848f75d0"
-            },
-            "require": {
-                "craftcms/cms": "^4.0.0"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "Guest Pricing",
-                "handle": "guest-pricing",
-                "developer": "Andrew Ross Co.",
-                "developerUrl": "andrewross.co",
-                "documentationUrl": "https://github.com/andrewrmn/guest-pricing/blob/master/README.md",
-                "changelogUrl": "https://raw.githubusercontent.com/andrewrmn/guest-pricing/master/CHANGELOG.md",
-                "class": "neuroscience\\guestpricing\\GuestPricing"
-            },
-            "autoload": {
-                "psr-4": {
-                    "neuroscience\\guestpricing\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Ross Co.",
-                    "homepage": "andrewross.co"
-                }
-            ],
-            "description": "Use suggested retail pricing for guests",
-            "keywords": [
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms",
-                "guest pricing"
-            ],
-            "support": {
-                "docs": "https://github.com/andrewrmn/guest-pricing/blob/master/README.md",
-                "issues": "https://github.com/andrewrmn/guest-pricing/issues"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "neuroscience/neuro-rewards",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/neurorewards",
-                "reference": "d49c997cd6dd3684d21d570c1ff6fac28bbb5651"
-            },
-            "require": {
-                "craftcms/cms": "^4.0.0"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "NeuroRewards",
-                "handle": "neuro-rewards",
-                "developer": "Andrew Ross Co.",
-                "developerUrl": "andrewross.co",
-                "documentationUrl": "???",
-                "changelogUrl": "???",
-                "class": "neuroscience\\neurorewards\\NeuroRewards"
-            },
-            "autoload": {
-                "psr-4": {
-                    "neuroscience\\neurorewards\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Ross Co.",
-                    "homepage": "andrewross.co"
-                }
-            ],
-            "description": "Buy 11, get 1 free",
-            "keywords": [
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms",
-                "neurorewards"
-            ],
-            "support": {
-                "docs": "???",
-                "issues": "???"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "neuroscience/neuroselect",
             "version": "1.1.1",
             "dist": {
@@ -3094,58 +2938,6 @@
                 "craft-plugin",
                 "craftcms",
                 "neuroselect"
-            ],
-            "support": {
-                "docs": "???",
-                "issues": "???"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "neuroscience/paya",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/paya",
-                "reference": "694e63a27bcb62bbf254fae444e61d4b453568d9"
-            },
-            "require": {
-                "craftcms/cms": "^4.0.0"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "Paya",
-                "handle": "paya",
-                "developer": "Andrew Ross Co.",
-                "developerUrl": "andrewross.co",
-                "documentationUrl": "???",
-                "changelogUrl": "???",
-                "class": "neuroscience\\paya\\Paya"
-            },
-            "autoload": {
-                "psr-4": {
-                    "neuroscience\\paya\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Ross Co.",
-                    "homepage": "andrewross.co"
-                }
-            ],
-            "description": "Checkout with Paya via Payments JS",
-            "keywords": [
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms",
-                "paya"
             ],
             "support": {
                 "docs": "???",
