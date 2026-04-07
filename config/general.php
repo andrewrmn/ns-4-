@@ -15,8 +15,6 @@ return [
         'omitScriptNameInUrls' => true,
         'cpTrigger' => 'admin',
         'securityKey' => getenv('SECURITY_KEY'),
-        'useProjectConfigFile' => false,
-        //'phpMaxMemoryLimit' => '1800M',
         'backupOnUpdate' => false,
         'extraAllowedFileExtensions' => 'csv',
         'tokenParam' => 'craftToken',
@@ -31,19 +29,12 @@ return [
         'extraAllowedFileExtensions' => ['htm', 'html'],
         'enableCsrfProtection' => false,
         'enableCsrfProtection' => (!isset($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] != '/patients/autoship/create-cart'),
-        'allowCheckoutWithoutPayment' => true,
-        'pdfAllowRemoteImages' => true,
     ],
 
     // Dev environment settings
     'dev' => [
         // Dev Mode (see https://craftcms.com/guides/what-dev-mode-does)
-        'devMode' => true,
         'enableCsrfProtection' => false,
-        'useProjectConfigFile' => false,
-        'backupOnUpdate' => false,
-        'useProjectConfigFile' => false,
-        'allowCheckoutWithoutPayment' => true
         //'isSystemLive' => true
         //'allowAdminChanges' => true,
     ],
@@ -51,13 +42,12 @@ return [
     // Staging environment settings
     'staging' => [
         // Set this to `false` to prevent administrative changes from being made on staging
-        'allowAdminChanges' => true,
+        'allowAdminChanges' => false,
     ],
 
     // Production environment settings
     'production' => [
         // Set this to `false` to prevent administrative changes from being made on production
-        'allowAdminChanges' => true,
-        'allowCheckoutWithoutPayment' => true
+        'allowAdminChanges' => false,
     ],
 ];

@@ -1,24 +1,21 @@
 {
     "require": {
-        "craftcms/cms": "3.9.15",
-        "craftcms/commerce": "3.4.25",
-        "craftcms/commerce-paypal": "3.0.0",
-        "craftcms/commerce-paypal-checkout": "1.3.5",
-        "craftcms/contact-form": "2.5.3",
-        "craftcms/element-api": "2.8.6.1",
-        "craftcms/redactor": "2.10.12",
-        "enupal/snapshot": "1.2.9",
-        "enupal/stripe": "4.3.2",
-        "neuroscience/admin-emails": "1.0.0",
-        "neuroscience/guest-pricing": "1.0.0",
-        "neuroscience/neuro-rewards": "1.0.0",
-        "neuroscience/neuroselect": "1.1.1",
-        "neuroscience/paya": "1.0.0",
-        "presseddigital/linkit": "3.0.4.1",
-        "superbig/craft-reports": "1.0.7",
-        "surprisehighway/craft-avatax": "2.2.0",
-        "verbb/field-manager": "2.2.5",
-        "verbb/super-table": "2.7.5.1",
+        "craftcms/cms": "^4",
+        "craftcms/commerce": "^4",
+        "craftcms/commerce-paypal-checkout": "^2",
+        "craftcms/element-api": "^4.2.0",
+        "craftcms/redactor": "^3",
+        "enupal/snapshot": "^2",
+        "enupal/stripe": "^5",
+        "neuroscience/admin-emails": "^1.0",
+        "neuroscience/guest-pricing": "^1.0",
+        "neuroscience/neuro-rewards": "^1.0",
+        "neuroscience/neuroselect": "^1.0",
+        "neuroscience/paya": "^1.0",
+        "presseddigital/linkit": "^4",
+        "surprisehighway/craft-avatax": "^3",
+        "verbb/field-manager": "^3",
+        "verbb/super-table": "^3",
         "vlucas/phpdotenv": "^3.4.0"
     },
     "require-dev": {
@@ -34,7 +31,7 @@
         "sort-packages": true,
         "optimize-autoloader": true,
         "platform": {
-            "php": "7.4.21"
+            "php": "8.0.2"
         },
         "allow-plugins": {
             "yiisoft/yii2-composer": true,
