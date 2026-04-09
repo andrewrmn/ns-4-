@@ -1,405 +1,534 @@
+changedFieldIndicator: null
 field: 37505fac-e260-4ddd-bf2f-62a14db605de # Survey Results Text
 fieldLayouts:
   70e94f14-13c6-4c26-8920-b8dd5adb831a:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 0b2d8108-0c9a-48eb-976e-a301852b84b5 # Survey Title
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 417d9cc8-7924-4b59-a489-bc009f2ba737
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: add58706-8181-472f-bf9c-158571235ae7 # Survey Description
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b654e11c-f559-40d0-a590-a6723e425838
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 3cccd268-e6ae-4855-b1d0-b7d37861a9b2 # Overall Sleep Quality
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b0399703-ea0e-4e76-a1fb-b47c21264774
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 587dda2c-bb91-41a4-929d-d527daaadb75 # Falling Asleep
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c4a3ff58-7a71-4639-82c7-db1ac5d148c6
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 45fa6f11-4543-4150-810c-3bc5f2675894 # Waking Up After Asleep
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 70103a1e-37fa-45df-9436-1c2eff4f7429
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 16e68aea-f83c-49aa-add1-8a929ccb0904 # Vasomotor Issues
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f4496c07-e911-446a-86e3-eae5824226a2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9ea19a33-1af6-459c-9277-4cae54870708 # Pain
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e65bd571-2b26-4f42-80b5-7258ae584cc1
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 2329fc2b-3fb4-4479-b805-cce3d17613f6 # Daytime Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5ac0612d-f488-4b99-bc47-29484cd2361f
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e66f574f-8d1d-4c8b-bfba-c160404c9e60 # Daytime Motivation
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 319987f5-4e3d-4968-9d7a-eb3facb768a1
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: eb2b1266-b7ff-47e9-ac9a-6e82d7e3fe03 # General Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: d626e5e8-307e-4ab3-b58a-cd7efeb5c10a
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 7a84028f-32bb-409d-a54b-8347e0f90eae # Physical Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e8ab4d9c-3bf5-4eb9-8c1c-09cce89ca35b
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: ef3c84ba-12b5-479c-a9aa-1bee115669b6 # Activity Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 62ca951c-d7c0-432c-ac9a-b276178933ef
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6d56d654-e3b2-4819-b37d-33963b575a79 # Motivation Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a61df94d-3c75-4f0c-b384-5d57478a1ae1
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6d2357a2-7abe-4a40-8b6f-3a76a55c8f48 # Mental Fatigue
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5ead6d63-98d4-4164-80c3-6d55f6278004
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 89f1ab22-ac34-4d16-8eac-a4016714925c # Multivitamin - General
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2588abbb-58a5-4516-826c-a8c1c859ef39
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8fddf577-46f2-4f58-b66a-bdf26a936bcf # Multivitamin - Great
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b37e75cc-901e-49bc-ba84-d2dfd66a2393
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 7ba06441-e46d-40cd-a653-5ca2b1fad93c # Multivitamin - Fair
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4522f57e-5348-4bd4-9936-aa940b07cac6
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: d394e38d-360a-4f12-b01a-604a9db9032f # Multivitamin -  Very poor
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f19baa94-f939-4ee3-ba03-dfcb331ae3da
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8f9fec11-6a41-482c-987f-2210150ca136 # Fish Oil - General
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2139a394-f26f-4423-888e-f5d3281bc3a3
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 187fbd35-9caa-48a0-bf32-c2b56c34642f # Fish Oil - Great
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 6dc4b948-8098-46a3-8d06-6f3d2c263a94
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1fef854e-ac22-4f6e-b608-67d95f81c6fc # Fish Oil - Fair
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: da46acc2-6909-4baa-9d96-e621947a4e48
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 691d655f-f0ee-46d2-a928-368bc8385889 # Fish Oil - Very poor
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4f632a6b-5b98-4745-8a2a-95171e990578
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: ea14d796-99e3-4090-856d-097148178a0f # Fiber - general
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 47d784d5-ae71-46b8-8436-4bd6b3efd430
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f76337dd-038b-4b5f-ad13-2b38f52c6b7b # Fiber - Great
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 45d856ea-2d6b-4035-a6f1-352b50d57b80
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: ff0ca70c-504e-45c5-b2b9-9b75a230f2b5 # Fiber - Fair
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 39b6696c-f652-4859-9952-1b21253e5f62
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0e3e8ecb-0ad4-4477-8c0d-aadfdbe9fb1a # Fiber - Very poor
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5f74bec7-9f74-4463-ba13-1454321cff13
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 634b20e3-c74a-4321-9575-763d942f8990 # Protein - general
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 95170919-cc43-4071-b528-c56a1a778470
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: dc276658-9546-436f-be1b-38ff94033812 # Protein - Great
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b9e8e646-bb57-4ca9-ac7b-47cfd4f71fe3
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 2fe46f38-9e89-4009-8ed8-83e15c9b8c2b # Protein - Fair
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5ec685bc-2eb5-4e9a-98bc-8902407de845
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: abf4a113-0e88-4997-9b62-367114b34b89 # Protein - Very poor
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 14539f47-a337-4c17-aef2-aa1698030603
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 01c3b065-a8ca-41ae-ae96-3bf6189d16a1 # Calcium - General
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5ee91565-4612-42a2-bb0c-5842ac81186d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 2080e0ee-4843-4632-8fc3-bf5f6a32235b # Calcium - Great
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 17df7a8a-70fb-4162-b31e-6cb0c047fb32
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: d792cd31-fb8d-49ae-a49a-25ecceaf8783 # Calcium - Fair
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 400bbe7d-324d-4196-8887-55959d0e2e31
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9cae65af-b962-44bd-b866-ab3da1294904 # Calcium - Very Poor
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 51b18b67-a505-4c4a-84f9-c5d5c6c8d59e
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6fb08dd8-17d7-49f4-a080-751b0a8c426b # Exercise - General
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: bee310a3-a3d5-4914-b481-0fb6ee9207a4
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: edeab392-ab22-4465-bf69-480cc4e39416 # Sleep Hygiene
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9eb0092d-6aba-4d15-84d8-e4e2d7aecf2c
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 2af329d4-59b1-40dc-84e9-e6086f1cf655 # Stress Hygiene
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 82079fcb-ea5f-4aa2-a569-963f09d4a98a
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: cd7ae213-3306-4477-af0e-a55631da11b5 # Fatigue Hygiene
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: af829580-0549-4dc8-9e50-89e469ee83c5
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e84e55d4-b35f-4dff-b287-422946b8fb2b # References
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2bdb69ad-0cc9-4e04-b8a0-f1511ccf4a68
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0b9c75bf-d5c8-413d-bdaa-bd355d74bebb # Black Cohosh
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 52a398a1-3f6e-42d9-9474-3e58c84fccf2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 920c8406-f6e3-4474-9aab-d624a42ff071 # CBD
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 14aa84e7-a1ed-4673-a1cf-4c934825248e
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 51ceb754-3ece-4891-be81-aed34c5433ec # NAD
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 44eb5182-fb86-476d-bc69-50f8127dfd40
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: e01ac018-4090-446a-ad51-c740ce79abe0
+        userCondition: null
 fields:
   0b2d8108-0c9a-48eb-976e-a301852b84b5: # Survey Title
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: surveyTitle
-    instructions: ''
+    instructions: null
     name: 'Survey Title'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -410,7 +539,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: blackCohosh
-    instructions: ''
+    instructions: null
     name: 'Black Cohosh'
     searchable: true
     settings:
@@ -420,13 +549,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -438,7 +567,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fiberVeryPoor
-    instructions: ''
+    instructions: null
     name: 'Fiber - Very poor'
     searchable: true
     settings:
@@ -448,13 +577,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -466,7 +595,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: calcium
-    instructions: ''
+    instructions: null
     name: 'Calcium - General'
     searchable: true
     settings:
@@ -476,13 +605,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -494,7 +623,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fishOilPoor
-    instructions: ''
+    instructions: null
     name: 'Fish Oil - Fair'
     searchable: true
     settings:
@@ -504,13 +633,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -522,7 +651,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: stressHygiene
-    instructions: ''
+    instructions: null
     name: 'Stress Hygiene'
     searchable: true
     settings:
@@ -532,13 +661,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -550,7 +679,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: proteinPoor
-    instructions: ''
+    instructions: null
     name: 'Protein - Fair'
     searchable: true
     settings:
@@ -560,13 +689,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -578,7 +707,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: overallSleepQuality
-    instructions: ''
+    instructions: null
     name: 'Overall Sleep Quality'
     searchable: true
     settings:
@@ -588,13 +717,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
+      purifierConfig: null
+      purifyHtml: true
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -606,7 +735,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: motivationFatigue
-    instructions: ''
+    instructions: null
     name: 'Motivation Fatigue'
     searchable: true
     settings:
@@ -616,13 +745,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -634,7 +763,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: mentalFatigue
-    instructions: ''
+    instructions: null
     name: 'Mental Fatigue'
     searchable: true
     settings:
@@ -644,13 +773,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -662,7 +791,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: exercise
-    instructions: ''
+    instructions: null
     name: 'Exercise - General'
     searchable: true
     settings:
@@ -672,13 +801,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -690,7 +819,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: physicalFatigue
-    instructions: ''
+    instructions: null
     name: 'Physical Fatigue'
     searchable: true
     settings:
@@ -700,13 +829,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -718,7 +847,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: multivitaminPoor
-    instructions: ''
+    instructions: null
     name: 'Multivitamin - Fair'
     searchable: true
     settings:
@@ -728,13 +857,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -746,7 +875,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fishOil
-    instructions: ''
+    instructions: null
     name: 'Fish Oil - General'
     searchable: true
     settings:
@@ -756,13 +885,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -774,7 +903,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: multivitaminGreat
-    instructions: ''
+    instructions: null
     name: 'Multivitamin - Great'
     searchable: true
     settings:
@@ -784,13 +913,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -802,7 +931,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: calciumVeryPoor
-    instructions: ''
+    instructions: null
     name: 'Calcium - Very Poor'
     searchable: true
     settings:
@@ -812,13 +941,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -830,7 +959,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: pain
-    instructions: ''
+    instructions: null
     name: Pain
     searchable: true
     settings:
@@ -840,13 +969,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -858,7 +987,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: vasomotorIssues
-    instructions: ''
+    instructions: null
     name: 'Vasomotor Issues'
     searchable: true
     settings:
@@ -868,13 +997,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -886,7 +1015,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: wakingUpAfterAsleep
-    instructions: ''
+    instructions: null
     name: 'Waking Up After Asleep'
     searchable: true
     settings:
@@ -896,13 +1025,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -914,7 +1043,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: nad
-    instructions: ''
+    instructions: null
     name: NAD
     searchable: true
     settings:
@@ -924,13 +1053,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -942,7 +1071,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: multivitamin
-    instructions: ''
+    instructions: null
     name: 'Multivitamin - General'
     searchable: true
     settings:
@@ -952,13 +1081,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -970,7 +1099,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fishOilGreat
-    instructions: ''
+    instructions: null
     name: 'Fish Oil - Great'
     searchable: true
     settings:
@@ -980,13 +1109,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -998,7 +1127,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fallingAsleep
-    instructions: ''
+    instructions: null
     name: 'Falling Asleep'
     searchable: true
     settings:
@@ -1008,13 +1137,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1026,7 +1155,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: protein
-    instructions: ''
+    instructions: null
     name: 'Protein - general'
     searchable: true
     settings:
@@ -1036,13 +1165,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1054,7 +1183,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fishOilVeryPoor
-    instructions: ''
+    instructions: null
     name: 'Fish Oil - Very poor'
     searchable: true
     settings:
@@ -1064,13 +1193,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1082,7 +1211,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: cbd
-    instructions: ''
+    instructions: null
     name: CBD
     searchable: true
     settings:
@@ -1092,13 +1221,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1110,7 +1239,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: calciumGreat
-    instructions: ''
+    instructions: null
     name: 'Calcium - Great'
     searchable: true
     settings:
@@ -1120,13 +1249,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1138,7 +1267,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: daytimeFatigue
-    instructions: ''
+    instructions: null
     name: 'Daytime Fatigue'
     searchable: true
     settings:
@@ -1148,13 +1277,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1166,7 +1295,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: proteinVeryPoor
-    instructions: ''
+    instructions: null
     name: 'Protein - Very poor'
     searchable: true
     settings:
@@ -1176,13 +1305,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1194,7 +1323,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: surveyDescription
-    instructions: ''
+    instructions: null
     name: 'Survey Description'
     searchable: true
     settings:
@@ -1204,13 +1333,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
+      purifierConfig: null
+      purifyHtml: true
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1222,7 +1351,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fatigueHygiene
-    instructions: ''
+    instructions: null
     name: 'Fatigue Hygiene'
     searchable: true
     settings:
@@ -1232,13 +1361,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1250,7 +1379,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: multivitaminVeryPoor
-    instructions: ''
+    instructions: null
     name: 'Multivitamin -  Very poor'
     searchable: true
     settings:
@@ -1260,13 +1389,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1278,7 +1407,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: calciumPoor
-    instructions: ''
+    instructions: null
     name: 'Calcium - Fair'
     searchable: true
     settings:
@@ -1288,13 +1417,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1306,7 +1435,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: proteinGreat
-    instructions: ''
+    instructions: null
     name: 'Protein - Great'
     searchable: true
     settings:
@@ -1316,13 +1445,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1334,7 +1463,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: daytimeMotivation
-    instructions: ''
+    instructions: null
     name: 'Daytime Motivation'
     searchable: true
     settings:
@@ -1344,13 +1473,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1362,7 +1491,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: references
-    instructions: ''
+    instructions: null
     name: References
     searchable: true
     settings:
@@ -1402,8 +1531,9 @@ fields:
                 -
                   - type
                   - multiline
-      maxRows: ''
-      minRows: ''
+      maxRows: null
+      minRows: null
+      staticRows: false
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Table
@@ -1412,7 +1542,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fiber
-    instructions: ''
+    instructions: null
     name: 'Fiber - general'
     searchable: true
     settings:
@@ -1422,13 +1552,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1440,7 +1570,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: generalFatigue
-    instructions: ''
+    instructions: null
     name: 'General Fatigue'
     searchable: true
     settings:
@@ -1450,13 +1580,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1468,7 +1598,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: sleepHygiene
-    instructions: ''
+    instructions: null
     name: 'Sleep Hygiene'
     searchable: true
     settings:
@@ -1478,13 +1608,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1496,7 +1626,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: activityFatigue
-    instructions: ''
+    instructions: null
     name: 'Activity Fatigue'
     searchable: true
     settings:
@@ -1506,13 +1636,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1524,7 +1654,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fiberGreat
-    instructions: ''
+    instructions: null
     name: 'Fiber - Great'
     searchable: true
     settings:
@@ -1534,13 +1664,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged
@@ -1552,7 +1682,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fiberPoor
-    instructions: ''
+    instructions: null
     name: 'Fiber - Fair'
     searchable: true
     settings:
@@ -1562,13 +1692,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
-      redactorConfig: ''
-      removeEmptyTags: ''
-      removeInlineStyles: ''
-      removeNbsp: ''
-      showHtmlButtonForNonAdmins: ''
+      purifierConfig: null
+      purifyHtml: false
+      redactorConfig: null
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
       uiMode: enlarged

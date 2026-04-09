@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: boolean
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: accpetedTermsAndConditions
-instructions: ''
+instructions: null
 name: 'Accepted Terms and Conditions'
 searchable: false
 settings:

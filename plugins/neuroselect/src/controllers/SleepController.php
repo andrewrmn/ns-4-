@@ -30,7 +30,7 @@ class SleepController extends Controller
 {
 
 
-    protected $allowAnonymous = true;
+    protected bool|int|array $allowAnonymous = true;
 
     public function actionSleepPir()
     {

@@ -3,6 +3,7 @@ fieldLayouts:
   df68cb0d-af3b-4eaa-8269-fc0b6ee5c9bf:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,13 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: adc7734b-7f18-4b0c-bbc3-fb44648e0aa9
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 6c92a0fe-fb52-40fe-9ea3-a3c091a1403b
+        userCondition: null
 handle: sleepSymptoms
 name: 'Sleep Symptoms'
 siteSettings:

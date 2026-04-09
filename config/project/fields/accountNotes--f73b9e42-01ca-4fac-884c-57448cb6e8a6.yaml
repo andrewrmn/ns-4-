@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: accountNotes
-instructions: ''
+instructions: null
 name: 'Account Notes'
 searchable: true
 settings:
@@ -10,8 +10,8 @@ settings:
   charLimit: null
   code: false
   columnType: text
-  initialRows: '4'
-  multiline: '1'
+  initialRows: 4
+  multiline: true
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

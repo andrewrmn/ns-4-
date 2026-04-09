@@ -1,36 +1,45 @@
+changedFieldIndicator: null
 field: fa19d720-9a33-4fb2-9371-3ca8cabc3cb9 # Phone Links
 fieldLayouts:
   8e2032d0-e99c-49ac-9d62-318594ef353c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 31e17892-d11f-4668-b77a-d1c5f554b623 # Phone title
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 1ff54693-e8c1-4fcc-b8f7-ebf22ee8dd83
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 73f5344f-421b-4541-8df5-eceab6dcb840 # Phone link
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c2d1250c-b341-4b9e-8324-c8aafdbf20fb
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: b7e163e9-86e3-4837-84e6-1ffa87ff8293
+        userCondition: null
 fields:
   31e17892-d11f-4668-b77a-d1c5f554b623: # Phone title
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: phoneTitle
-    instructions: ''
+    instructions: null
     name: 'Phone title'
     searchable: true
     settings:
@@ -38,8 +47,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -50,18 +59,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: phoneLink
-    instructions: ''
+    instructions: null
     name: 'Phone link'
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: ''
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: false
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -69,4 +78,4 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField

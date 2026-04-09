@@ -1,54 +1,66 @@
+changedFieldIndicator: null
 field: 75530993-acef-4034-81f3-9919fbe2decc # Education Tiles
 fieldLayouts:
   2a3baf1a-6a6e-4367-9e78-61aab125595f:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: b59301e5-6591-4faa-b898-e3cf66b98f13 # Icon
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a559273c-f1b4-4680-9603-ad24c443a5ce
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e74c556b-8b21-47ab-bcc6-68a570fd85da # Title
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f4354d45-a386-4992-8d91-b115083015d0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 38c73914-fbc8-48af-9aa8-342a11249be6 # URL
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 24ae7c74-9b50-439d-8282-f14686d78f66
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 4fb7fbdd-c911-4cd2-b7ee-c4408466342c
+        userCondition: null
 fields:
   38c73914-fbc8-48af-9aa8-342a11249be6: # URL
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: tileUrl
-    instructions: ''
+    instructions: null
     name: URL
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -59,29 +71,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: icon
-    instructions: ''
+    instructions: null
     name: Icon
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
@@ -92,16 +108,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: tileTitle
-    instructions: ''
+    instructions: null
     name: Title
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: null
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

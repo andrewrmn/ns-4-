@@ -1,4 +1,9 @@
-.no-print {
+.no-print,
+.site-navigation,
+.site-header-panel,
+.mobile-nav-bar,
+.utility-navigation,
+.site-footer {
 	display: none !important;
 }
 
@@ -127,13 +132,13 @@
 /* Product Count Adjustment */
 
 .print-size-small .pir-section-header {
-    display: block;
-    border-top: 1px solid #F4F5F7;
-    border-bottom: 1px solid #F4F5F7;
-    padding: 6px 6px;
-    text-align: center;
-    
-    display: none !important;
+	display: block;
+	border-top: 1px solid #F4F5F7;
+	border-bottom: 1px solid #F4F5F7;
+	padding: 6px 6px;
+	text-align: center;
+
+	display: none !important;
 }
 
 /*
@@ -141,7 +146,7 @@
 	font-size: 16px;
 }
 */
-    
+
 
 .print-size-small .col-12.col-md-2 {
 	display: flex !important;
@@ -155,17 +160,17 @@
 }
 
 .print-size-small .pir-section-title {
-    font-size: 9px !important;
-    color: #000000;
+	font-size: 9px !important;
+	color: #000000;
 }
 
-.print-size-small .suggested-use-count > * {
-    width: 14px !important;
-    height: 14px !important;
+.print-size-small .suggested-use-count>* {
+	width: 14px !important;
+	height: 14px !important;
 }
 
 .col-12.col-md-2 {
-	max-width: 16.6% !important;	
+	max-width: 16.6% !important;
 }
 
 .print-size-md .pir-section-header {
@@ -180,19 +185,19 @@
 }
 
 .print-size-md .pir-section-title {
-    font-size: 11px !important;
+	font-size: 11px !important;
 }
 
-.print-size-md .suggested-use-count > * {
-    width: 14px !important;
-    height: 14px !important;
+.print-size-md .suggested-use-count>* {
+	width: 14px !important;
+	height: 14px !important;
 }
 
 .print-size-md .user-content.user-content--sm p,
 .print-size-small .user-content.user-content--sm p,
 .print-size-md .p-sm,
 .print-size-small .p-sm {
-    font-size: 10px !important;
+	font-size: 10px !important;
 }
 
 .print-size-small h2.h3,
@@ -202,12 +207,13 @@
 
 
 .print-size-single.pir .col-12.col-md-2 {
-    display: flex !important;
-    width: 33% !important;
+	display: flex !important;
+	width: 33% !important;
 }
+
 .print-size-single.pir .col-12.col-md-6 {
-    display: flex !important;
-    width: 33% !important;
+	display: flex !important;
+	width: 33% !important;
 }
 
 

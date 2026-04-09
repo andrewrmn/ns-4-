@@ -725,9 +725,10 @@ function getPatients($user){
 }
 
 function getTotalSales($user){
-  $sql = "SELECT SUM(`co`.`itemTotal`) AS totalSales FROM `craft_commerce_orders` AS `co` JOIN `craft_commerce_customers` AS `cc` ON `co`.`customerId` = `cc`.`id` WHERE `cc`.`userId` = {$user->id}";
-  $query = Craft::$app->db->createCommand($sql)->queryOne();
-  return $query['totalSales'];
+  return (new \craft\db\Query())
+    ->from([\craft\commerce\db\Table::ORDERS])
+    ->where(['customerId' => (int)$user->id])
+    ->sum('itemTotal');
 }
 
 function getHcpProducts($user){
@@ -747,12 +748,10 @@ function getHcpProducts($user){
 }
 
 function getAddress($user){
-  $addresses = [];
-  $customer = craft\commerce\Plugin::getInstance()->getCustomers()->getCustomerByUserId($user->id);
-  if( $customer ){
-    $addresses = $customer->getAddresses();
+  if (!$user instanceof \craft\elements\User) {
+    return [];
   }
-  return $addresses;
+  return $user->getAddresses()->all();
 }
 
 function getOrders($user, $autoShip = false){

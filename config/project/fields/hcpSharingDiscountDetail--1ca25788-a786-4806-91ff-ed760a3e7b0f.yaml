@@ -2,16 +2,16 @@ columnSuffix: ccwbrttg
 contentColumnType: text
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: hcpSharingDiscountDetail
-instructions: ''
+instructions: null
 name: 'HCP Sharing Discount Detail'
 searchable: false
 settings:
   byteLimit: null
   charLimit: null
-  code: ''
+  code: false
   columnType: null
-  initialRows: '2'
-  multiline: '1'
+  initialRows: 2
+  multiline: true
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

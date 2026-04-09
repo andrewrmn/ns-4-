@@ -6,14 +6,22 @@
   <div class="weekly-circle pt-3">
     {% if hasPatients %}
 
-    {% set orderTotalPrice = 0 %}
     {% set lastWeek = date('1 week ago')|atom %}
     {% set allNewAccounts = craft.users().dateCreated(">= #{lastWeek}").relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).anyStatus().all() %}
 
     {#% set allNewAccounts = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).group('patients').limit(null).anyStatus().all() %#}
-    {% set weeklyOrders = craft.orders().dateOrdered(">= #{lastWeek}").customerId(customerIds).all() %}
-    {% set orderTotalPrice = craft.orders().dateOrdered(">= #{lastWeek}").customerId(customerIds).sum('itemTotal') %}
-    {% set neuroCash = orderTotalPrice * (hcpNeurocashPercentage / 100) %}
+    {% set weeklyOrders = craft.orders().dateOrdered(">= #{lastWeek}").customerId(customerIds).isCompleted(true).all() %}
+    {% set orderTotalPrice = 0 %}
+    {% set neuroCash = 0 %}
+    {% for order in weeklyOrders %}
+      {% if order.user.patientNeurocashDiscount %}
+        {% set wPct = hcpNeurocashPercentage - order.user.patientNeurocashDiscount %}
+      {% else %}
+        {% set wPct = hcpNeurocashPercentage %}
+      {% endif %}
+      {% set orderTotalPrice = orderTotalPrice + order.itemTotal %}
+      {% set neuroCash = neuroCash + order.itemTotal * (wPct / 100) %}
+    {% endfor %}
 
     <a class="circle" href="/hcp/all-patient-history/">
       <div>

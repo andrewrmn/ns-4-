@@ -2,6 +2,7 @@ fieldLayouts:
   6fedfa45-996d-4163-93eb-57ae2cb2cc73:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,14 +27,20 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 1f5bdcca-bc8d-4c5f-9ed5-ea073bb3ed1a
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 07279bdd-fddb-4133-b5cc-27c40e37308e
+        userCondition: null
 handle: patients
 hasTitleField: true
 name: Patients
 section: cf21ce66-449e-4403-a1c7-77f684812ccb # Patients
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null

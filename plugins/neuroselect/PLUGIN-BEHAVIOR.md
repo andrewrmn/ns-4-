@@ -10,13 +10,11 @@ This document describes **what the NeuroSelect plugin implements** in this codeb
 
 | Item | Detail |
 |------|--------|
-| **Composer entry** | `"class": "neuroscience\\neuroselect\\Neuroselect"` → PSR‑4 maps to **`src/Neuroselect.php`**. |
-| **`plugins/neuroselect/Neuroselect.php` (repo root)** | **Alternate copy** of the plugin class (version **1.1.1**, different `init()`): registers **`NeurocashPatientDiscount`** adjuster only, **no** order/login/Stripe hooks. **Not** the autoloaded class if `composer.json` points at `src/`. Treat as **stale duplicate** unless your `composer.json` `class` is changed to load it. |
-| **`src/variables/NeuroselectVariable.php`** | File content is a **duplicate `Plugin` class** (`class Neuroselect extends Plugin` in the `variables` namespace), **not** a Twig variable class. `src/Neuroselect.php` still registers `NeuroselectVariable::class` → **class does not match file** → **critical**: fix or confirm runtime (OPcache/old deploy) before assuming `craft.neuroselect` works. |
-| **`adjusters/NeurocashPatientDiscount.php` (under `plugins/neuroselect/adjusters/`, outside `src/`)** | **Not** in Composer PSR‑4 `src/` tree; logic references **`$item` undefined**, positive **`amount`** for a “discount”, likely **broken**. Only the **root** `Neuroselect.php` references it; **`src/Neuroselect.php`** uses **`NeuroselectDiscountSharing`** via **`EVENT_REGISTER_DISCOUNT_ADJUSTERS`**. |
-| **`src/controllers/GlobalOldSurveyController.php`** | Filename implies `GlobalOldSurveyController`, but the file declares **`class SurveyController`** again (duplicate of `SurveyController.php`). **Invalid PSR‑4** and **duplicate class risk** if both files load. Treat as **accidental copy** — do not rely on it; remove or rename after verifying nothing references it. |
+| **Composer entry** | `"class": "neuroscience\\neuroselect\\Neuroselect"` → PSR‑4 maps to **`src/Neuroselect.php`** only. |
+| **Cleanup (2026-04)** | Removed stale **`plugins/neuroselect/Neuroselect.php`** (root duplicate plugin class), **`src/variables/NeuroselectVariable.php`** (broken; **`craft.neuroselect`** not registered), and **`adjusters/NeurocashPatientDiscount.php`** (orphan; storefront % discount is **`HcpWorkspaceDiscountAdjuster`** in **`hcp-workspace`**). |
+| **`src/controllers/GlobalOldSurveyController.php`** | **Removed (2026-04):** was a misnamed duplicate of **`SurveyController`**. |
 
-**Authoritative behavior for a normal install** is assumed to be **`src/Neuroselect.php` + controllers under `src/controllers/`** matching Composer autoload.
+**Authoritative behavior for a normal install** is **`src/Neuroselect.php`** (routes + install hook) **+** `src/controllers/*` for PIR/survey/API, **plus** **`hcp-workspace` / `patient-shop` / `autoship-schedule`** modules for HCP storefront, patient order/login, and autoship console/schedule.
 
 ---
 
@@ -27,28 +25,31 @@ This document describes **what the NeuroSelect plugin implements** in this codeb
 | **Craft CMS** | Plugin base, users, elements, mail, DB, routing, Twig registration. |
 | **Craft Commerce** | Orders, discounts (`craft\commerce\models\Discount`), `Order::EVENT_AFTER_COMPLETE_ORDER`, Commerce order queries in console. **Not** listed in plugin `composer.json`; project supplies it. |
 | **Verbb Super Table** | All “submission” storage on users: block types resolved by field handle, `setFieldValues` with stacked row data. |
-| **Enupal Stripe** | `Orders::EVENT_AFTER_ORDER_COMPLETE`, `StripePlugin`, `enupal\stripe\elements\Order`, subscription APIs, `ORDER_AFTER_COMPLETE` recurring logic in `Neuroselect.php`; **delay autoship** in `HcpController`; **upcoming autoship email** in console. |
-| **Stripe PHP SDK** | `Stripe\Subscription::update`, `Subscription::search` in `HcpController` / console. |
-| **PDFShift** | HTTP Basic auth to `https://api.pdfshift.io/v2/convert/` in `PdfController` and `SurveyController` (API key in source — **Risk**). |
+| **Enupal Stripe** | `Orders::EVENT_AFTER_ORDER_COMPLETE` in **`autoship-schedule`**; `StripePlugin`, `enupal\stripe\elements\Order`, subscription APIs; Commerce recurring + cancel in **`patient-shop`**; **delay autoship** in **`hcp-workspace` `HcpController`**; **upcoming autoship email** in **`autoship-schedule`** console. |
+| **Stripe PHP SDK** | `Stripe\Subscription::update`, `Subscription::search` in **`HcpController`** / **`autoship-schedule`** console. |
+| **Dompdf** | `composer require` via plugin: `HtmlToPdfRenderer` loads report HTML (Guzzle) and renders PDF in `PdfController` / `SurveyController`. Optional **`PIR_PDF_ENGINE=wkhtmltopdf`** for layout closer to browser print. |
 | **External lab API** | `https://core.neurorelief.com/api/v1/labkits/getlabkitresultbyactivitationcode` with `x-api-key` header (**hardcoded** — **Risk**). |
 
 ---
 
 ## 3. `src/Neuroselect.php` — global hooks
 
-### 3.1 Console
+**Split (2026-04):** Most former hooks now live in project modules (see `config/app.php`): **`patient-shop`** (§3.4–3.5), **`autoship-schedule`** (§3.1, §3.6, §11), **`hcp-workspace`** (§3.2, §5, storefront URL alias `neuroselect/hcp/*`). **`src/Neuroselect.php`** keeps only URL rules (§3.3), post-install event, and the plugin loaded log. **`craft.neuroselect`** Twig registration was **removed** (variable class was broken — see §1).
 
-- If `Craft::$app instanceof ConsoleApplication`, `controllerNamespace` = `neuroscience\neuroselect\console\controllers` (e.g. **`./craft neuroselect/auto-ship`**).
+### 3.1 Console (autoship)
 
-### 3.2 Commerce discount adjuster registration
+- **`autoship-schedule`** module: `controllerNamespace` = `modules\autoshipschedule\console\controllers` on console.
+- **Cron / CLI:** **`./craft autoship-schedule/auto-ship/renew-auto-ship`**, **`./craft autoship-schedule/auto-ship/upcoming-autoship-email`**, etc. (**`./craft neuroselect/auto-ship`** is no longer registered.)
+
+### 3.2 Commerce discount adjuster registration (hcp-workspace)
 
 ```php
 OrderAdjustments::EVENT_REGISTER_DISCOUNT_ADJUSTERS
 ```
 
-Appends **`NeuroselectDiscountSharing`** (`src/adjusters/NeuroselectDiscountSharing.php`).
+**`hcp-workspace`** appends **`HcpWorkspaceDiscountAdjuster`** (`modules/hcpworkspace/adjusters/HcpWorkspaceDiscountAdjuster.php`) — same behavior as the former **`NeuroselectDiscountSharing`**.
 
-**Behavior (`NeuroselectDiscountSharing::adjust`):**
+**Behavior (`HcpWorkspaceDiscountAdjuster::adjust`):**
 
 - If logged-in user is in **`patients`** group:
   - Resolve **`relatedHcp`** (relation) on the user.
@@ -63,12 +64,12 @@ Appends **`NeuroselectDiscountSharing`** (`src/adjusters/NeuroselectDiscountShar
 
 Same pattern as other legacy plugins:
 
-- Site: `siteActionTrigger1` → `neuroselect/api`, `2` → `pdf`, `3` → `sleep`, `4` → `update` **and** `4` **again** → `survey` (second assignment **overwrites**; **only `survey` remains** for key `siteActionTrigger4`).
-- CP: duplicate `cpActionTrigger4` overwrite to `neuroselect/survey/do-something`.
+- Site: `siteActionTrigger1` → `neuroselect/api`, `2` → `pdf`, `3` → `sleep`, `4` → `update`, `5` → `survey` ( **`4`/`5` split fixed 2026-04** — previously `4` was overwritten).
+- CP: `cpActionTrigger4` → `update/do-something`, `cpActionTrigger5` → `survey/do-something`.
 
 **Real routes** used by the site are largely in **`config/routes.php`** (e.g. `appConnector/*`) and shorthand paths like **`/neuroselect/...`** in templates (see §8). **Do not assume** `siteActionTrigger*` URLs are meaningful.
 
-### 3.4 `Order::EVENT_AFTER_COMPLETE_ORDER`
+### 3.4 `Order::EVENT_AFTER_COMPLETE_ORDER` (`patient-shop` module)
 
 When a Commerce order completes:
 
@@ -83,7 +84,7 @@ When a Commerce order completes:
      - Render **`shop/emails/_hcpPatientPlacedOrder`** with `order`, `hcp`.
      - Send from **`info@neuroscienceinc.com`** / **NeuroScience** to **`$hcp->email`**, subject **“New order on your NeuroScience storefront”**.
 
-### 3.5 `WebUser::EVENT_AFTER_LOGIN`
+### 3.5 `WebUser::EVENT_AFTER_LOGIN` (`patient-shop` module)
 
 If user is in **`patients`** group:
 
@@ -92,24 +93,18 @@ If user is in **`patients`** group:
   - On mail success: set user field **`patientEnrolled`** to **1**, save user.
 - **Always** (for patients): **`redirect`** to **`patients/dashboard`** ( **`send()`** on response — **note**: runs after login; ensure Craft 4 still allows this pattern).
 
-### 3.6 `enupal\stripe\services\Orders::EVENT_AFTER_ORDER_COMPLETE`
+### 3.6 `enupal\stripe\services\Orders::EVENT_AFTER_ORDER_COMPLETE` (`autoship-schedule` module)
 
 - Reads **Stripe subscription** from completed Enupal order; **`current_period_start` / `current_period_end`** dates.
-- **`orderNumber`** from form fields vs **`number`** — used with raw SQL on **`craft_autoship_schedule`**:
-  - **SELECT** by `orderId` (Enupal order number),
-  - **UPDATE** or **INSERT** `comOrderId`, `currentPeriodStart`, `currentPeriodEnd`.
-
-**Risk:** String interpolation in SQL (**injection** if values ever user-controlled). Table name **`craft_`** prefix is environment-specific.
+- **`orderNumber`** from form fields vs **`number`** — updates **`{db.tablePrefix}autoship_schedule`** via parameterized **INSERT** / **UPDATE** (logical table **`craft_autoship_schedule`** when prefix is `craft_`).
 
 ### 3.7 Twig variable registration
 
-- **`craft.neuroselect`** → **`NeuroselectVariable::class`** (see §1 — **file currently broken**).
+- **None.** Former **`NeuroselectVariable`** file was **deleted** (was not a real variable class). Add a new class under **`src/variables/`** and register in **`src/Neuroselect.php`** only if **`craft.neuroselect`** is needed again.
 
 ### 3.8 Misc
 
 - Empty post-install handler; info log **`{name} plugin loaded`** (`neuroselect` category).
-
-**Unused imports in `src/Neuroselect.php`:** `SaveController`, `SaveEvent`, `guestentries` — **not** used (**Cleanup**).
 
 ---
 
@@ -117,13 +112,15 @@ If user is in **`patients`** group:
 
 | Mechanism | Location | Behavior |
 |-----------|----------|----------|
-| **Provider storefront discount** | `NeuroselectDiscountSharing` | % of **item total** off order for **patients** tied to HCP with **`hcpStorefrontDiscount`**, unless **`disableProviderEarnings`**. |
-| **Per-patient Commerce discount** | `HcpController::_saveHcpDiscount` | Creates/updates Commerce **`Discount`**: `orderConditionFormula` like `order.email in ['a@b.com', ...]`, **user group 6** (patients), **`percentDiscount`** set from form as `(float)$percent / -100`, **`appliedTo`** matching line items, **`ignoreSales`**, etc. |
-| **“Remove” old patient discounts** | `actionSavePatientDiscount` | **`LIKE`** query on **`craft_commerce_discounts.orderConditionFormula`** for patient email; replaces email with **`customerservice@neurorelief.com`** in formula. |
+| **Provider storefront discount** | **`HcpWorkspaceDiscountAdjuster`** (`hcp-workspace`) | % of **item total** off order for **patients** tied to HCP with **`hcpStorefrontDiscount`**, unless **`disableProviderEarnings`**. |
+| **Per-patient Commerce discount** | **`HcpController::_saveHcpDiscount`** (`modules/hcpworkspace/controllers/HcpController.php`) | Creates/updates Commerce **`Discount`**: `orderConditionFormula` like `order.email in ['a@b.com', ...]`, **user group 6** (patients), **`percentDiscount`** set from form as `(float)$percent / -100`, **`appliedTo`** matching line items, **`ignoreSales`**, etc. |
+| **“Remove” old patient discounts** | **`actionSavePatientDiscount`** (same HCP controller) | **`LIKE`** on **`{tablePrefix}commerce_discounts.orderConditionFormula`** for patient email; replaces email with **`customerservice@neurorelief.com`** in formula. |
 
 ---
 
 ## 5. `HcpController` — HCP-facing actions
+
+**Location:** `modules/hcpworkspace/controllers/HcpController.php` (**`hcp-workspace`** module). Site URL rule maps **`neuroselect/hcp/<action>`** → this controller so existing forms/JS keep working.
 
 **`$allowAnonymous = true`** on the whole controller (**very broad** — **Risk**: every action is theoretically reachable without login; some actions assume logged-in HCP).
 
@@ -206,16 +203,16 @@ If user is in **`patients`** group:
 
 ---
 
-## 11. Console — `console/controllers/AutoShipController.php`
+## 11. Console — `modules/autoshipschedule/console/controllers/AutoShipController.php`
 
 | Action | Command | Behavior |
 |--------|---------|----------|
-| **`actionIndex`** | `neuroselect/auto-ship` | Stub welcome message. |
-| **`actionRenewAutoShip`** | `neuroselect/auto-ship/renew-auto-ship` | Finds **completed** Enupal **Orders** with **`makeThisARecurringOrder(1)`**; if **`recurringOrderFrequency`** value **1 / 2 / 3**, uses **`daysDiff`** from **`dateOrdered`** with **`% 17` / `% 60` / `% 90`** to set **`orderStatusId = 5`** and update **`dateUpdated`**. |
+| **`actionIndex`** | `autoship-schedule/auto-ship` | Stub welcome message. |
+| **`actionRenewAutoShip`** | `autoship-schedule/auto-ship/renew-auto-ship` | Finds **completed** Enupal **Orders** with **`makeThisARecurringOrder(1)`**; if **`recurringOrderFrequency`** value **1 / 2 / 3**, uses **`daysDiff`** from **`dateOrdered`** with **`% 17` / `% 60` / `% 90`** to set **`orderStatusId = 5`** and update **`dateUpdated`**. |
 | **`actionReactivateAutoShip`** | | Body **commented out**. |
-| **`actionUpcomingAutoshipEmail`** | | **`Subscription::search`** active subs; **3 days** before period end → load Enupal + Commerce order by **`metadata orderNumber`**, email **`shop/emails/_patientAutoshipComingUp`**. |
+| **`actionUpcomingAutoshipEmail`** | `autoship-schedule/auto-ship/upcoming-autoship-email` | **`Subscription::search`** active subs; **3 days** before period end → load Enupal + Commerce order by **`metadata orderNumber`**, email **`shop/emails/_patientAutoshipComingUp`**. |
 
-**Note:** `use neuroscience\neuroselect\AutoShip` is **imported** but **no such class** in repo — **harmless if unused**, remove if lint fails.
+**Cron:** use **`./craft autoship-schedule/auto-ship/...`** (not **`neuroselect/auto-ship`**).
 
 ---
 
@@ -247,9 +244,9 @@ Default **From** is commonly **`info@neuroscienceinc.com`** (some use system ema
 ## 14. Security & operational risks (prioritize during upgrade)
 
 1. **Controllers with `$allowAnonymous = true`** for HCP, API, PDF, survey, sleep, update — **must** be intentional; consider **per-action** allow lists + auth.
-2. **Raw SQL** in `Neuroselect` (autoship schedule) and **Craft DB table names** with **`craft_`** prefix.
+2. **Raw SQL** elsewhere (e.g. webhook module, legacy paths) and **Craft DB table names** with **`craft_`** prefix; autoship schedule rows use parameterized queries in **`autoship-schedule`**.
 3. **Hardcoded API keys**: PDFShift Basic auth, neurorelief **x-api-key**.
-4. **Duplicate / broken PHP files**: variables file, `GlobalOldSurveyController.php`, root `Neuroselect.php`, `adjusters/NeurocashPatientDiscount.php`.
+4. **Stale duplicates** (root plugin copy, broken variable file, orphan adjuster) **removed 2026-04**; watch for new duplicate files on merge.
 5. **`actionGeneratePdf` `actionEmailPdf`**: writes under **`./pir-documents/`**, **`./surveys/`** relative to CWD — ensure path is correct in worker/queue context.
 6. **Order status ID `5`**, user group **`6`**, global set id **`436182`**, section/type **`21`/`22`** — **environment-specific**.
 
@@ -257,7 +254,7 @@ Default **From** is commonly **`info@neuroscienceinc.com`** (some use system ema
 
 ## 15. Migration / regression checklist
 
-- [ ] Confirm **single** authoritative **`Neuroselect` class** and **`NeuroselectVariable`** implementation; delete or fix duplicates.
+- [x] **Single `Neuroselect` class** in **`src/Neuroselect.php`**; stale root copy and **`NeuroselectVariable`** removed (2026-04).
 - [ ] **`EVENT_REGISTER_DISCOUNT_ADJUSTERS`** vs Commerce 4 adjuster API; retest **patient + HCP storefront %** orders.
 - [ ] **`Order::EVENT_AFTER_COMPLETE_ORDER`**: recurring flag, status **5**, Stripe cancel, HCP email, guest skip.
 - [ ] **Enupal Stripe** `Orders::EVENT_AFTER_ORDER_COMPLETE` + **`craft_autoship_schedule`** schema.
@@ -266,7 +263,7 @@ Default **From** is commonly **`info@neuroscienceinc.com`** (some use system ema
 - [ ] **HCP** save patient, recommendation, discount CRUD, product availability, delay autoship.
 - [ ] **PDFShift + lab API** still valid; rotate credentials to env.
 - [ ] **Neuro‑Q** survey + PDF + guest email path.
-- [ ] **Console** autoship renew + upcoming email cron.
+- [ ] **Console** autoship renew + upcoming email cron (**`./craft autoship-schedule/auto-ship/...`** on servers).
 - [ ] **Super Table** + field handles unchanged or migrated with content migrations.
 
 ---
@@ -276,3 +273,4 @@ Default **From** is commonly **`info@neuroscienceinc.com`** (some use system ema
 | Date | Notes |
 |------|--------|
 | 2026-04-07 | Spec from `src/Neuroselect.php`, all `src/controllers/*`, adjusters, console, `config/routes.php`, and template action references. |
+| 2026-04-07 | Doc update: removed root `Neuroselect.php`, `NeuroselectVariable.php`, `NeurocashPatientDiscount.php`; modules split documented in §1 / §3. |

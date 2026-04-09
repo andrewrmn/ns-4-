@@ -1,63 +1,81 @@
+changedFieldIndicator: null
 field: 6155050f-240b-4ccc-9afc-095f7b936e55 # Social Links
 fieldLayouts:
   1b28d3ff-3086-4448-924b-486396734f1e:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 3c1e103a-5e56-4e37-994e-6ae6a7e4101f # Facebook Url
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3eb592e5-eb4e-4a63-ab27-cfe9383dbd6c
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4328bdab-17ae-4784-afa2-f6a596c482d2 # LinkedIn Url
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a1dce256-eed4-4f90-ac43-174efb7f7f50
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 543dfba1-a252-4ba2-abad-cd4c1af0409d # Twitter Url
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 74273d87-bb76-403c-9a0a-ede6ee89c061
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f88b8399-a224-4f0b-8fc0-d59df2d28f1a # Youtube Url
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4454c8f8-6f05-4a5d-a20b-07f48db8f843
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4d3c3f6a-36ab-4da9-9e37-4a58fbce22a7 # Instagram URL
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b1d986f3-ffe0-4978-b09a-554d0714db22
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 6bbb756d-2efe-482a-8d64-4c95c9150e17
+        userCondition: null
 fields:
   3c1e103a-5e56-4e37-994e-6ae6a7e4101f: # Facebook Url
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: facebookUrl
-    instructions: ''
+    instructions: null
     name: 'Facebook Url'
     searchable: true
     settings:
@@ -65,8 +83,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -77,7 +95,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: instagramUrl
-    instructions: ''
+    instructions: null
     name: 'Instagram URL'
     searchable: true
     settings:
@@ -85,8 +103,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -97,7 +115,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: twitterUrl
-    instructions: ''
+    instructions: null
     name: 'Twitter Url'
     searchable: true
     settings:
@@ -105,8 +123,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -117,7 +135,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: linkedinUrl
-    instructions: ''
+    instructions: null
     name: 'LinkedIn Url'
     searchable: true
     settings:
@@ -125,8 +143,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -137,7 +155,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: youtubeUrl
-    instructions: ''
+    instructions: null
     name: 'Youtube Url'
     searchable: true
     settings:
@@ -145,8 +163,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

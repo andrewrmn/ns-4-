@@ -1,40 +1,49 @@
+changedFieldIndicator: null
 field: c0016ea1-20c0-4590-8cc7-1359f3dadac0 # Key Ingredients
 fieldLayouts:
   c5b6c935-038f-4f3c-bf67-f2a67e405fb4:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: aba94e3f-0f87-4c20-a5fb-27aa0dc5ab3a # Ingredients
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 6f1f66ed-5dcc-4add-a794-667071f36ce9
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 69300f6d-e971-4ea3-ae30-550b3f2449f7 # Precursor Potential
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 62631911-b3a0-4d20-9b0d-a5ead5ba2ac5
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 2fbef6e2-d09b-4ded-a6a6-340d72310810
+        userCondition: null
 fields:
   69300f6d-e971-4ea3-ae30-550b3f2449f7: # Precursor Potential
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: precursorPotential
-    instructions: ''
+    instructions: null
     name: 'Precursor Potential'
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -132,11 +141,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: ingredients
-    instructions: ''
+    instructions: null
     name: Ingredients
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:

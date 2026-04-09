@@ -2,16 +2,18 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: relatedProducts
-instructions: ''
+instructions: null
 name: 'Related Products'
 searchable: true
 settings:
   allowSelfRelations: false
-  limit: '4'
+  branchLimit: null
   localizeRelations: false
-  selectionLabel: ''
+  maintainHierarchy: false
+  maxRelations: 4
+  minRelations: null
+  selectionLabel: null
   showSiteMenu: true
-  source: null
   sources: '*'
   targetSiteId: null
   validateRelatedElements: false

@@ -3,61 +3,75 @@ fieldLayouts:
   87a6cd5e-7ff2-4974-a1b9-ada96668c420:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 28e0666d-9435-4ecc-a982-159f66e10a7a # Label
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 65b03c84-0a19-4f8b-bfba-3cc7581dc339
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1bc04a61-5ea5-418a-9625-fa2762b6fc12 # Handle
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: eea338d2-3956-4c98-870c-c4f51cc8f1f2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a690e150-8755-4a1a-b7ff-02574430df1f # Options
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 50370423-0b98-4165-8a81-0a666af4df71
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: fc8eb0ae-eff2-4677-b3f0-c5af3d8d2a35 # Required
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 61254f3e-c779-4edf-aae9-14bcb521ad1a
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 24a5a6bf-4c8f-4cfb-a005-e208fe609145
+        userCondition: null
 fields:
   1bc04a61-5ea5-418a-9625-fa2762b6fc12: # Handle
     columnSuffix: qtwmaggg
     contentColumnType: text
     fieldGroup: null
     handle: fieldHandle
-    instructions: ''
+    instructions: null
     name: Handle
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -68,16 +82,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: label
-    instructions: ''
+    instructions: null
     name: Label
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -88,7 +102,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: options
-    instructions: ''
+    instructions: null
     name: Options
     searchable: true
     settings:
@@ -137,8 +151,9 @@ fields:
             -
               - col2
               - ''
-      maxRows: ''
-      minRows: '1'
+      maxRows: null
+      minRows: 1
+      staticRows: false
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Table

@@ -3,27 +3,35 @@ fieldLayouts:
   030725cd-b195-483b-80c7-6b841de35221:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: ae9d1eda-6207-4b13-bb10-b6e78dc707e7 # Handle
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b28414bc-d888-4240-863a-04d9fe8e0600
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e5b6c451-dc88-4044-a610-cc328915b6ee # Hidden Value
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3b8310d4-610e-46aa-941c-75f5d7a4b584
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: faadd356-7b61-4b85-a17a-72fba437c852
+        userCondition: null
 fields:
   ae9d1eda-6207-4b13-bb10-b6e78dc707e7: # Handle
     columnSuffix: ngckpfks
@@ -36,10 +44,10 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -56,10 +64,10 @@ fields:
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: '{{ craft.request.path }}'
       uiMode: normal
     translationKeyFormat: null

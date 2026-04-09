@@ -2,6 +2,7 @@ fieldLayouts:
   3607f14e-974e-4ec3-a729-f7319f7b3299:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,15 +27,18 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\assets\AssetTitleField
+            uid: d459ab33-8fe8-47a8-8dff-5e081b3bd4c5
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 4cbd1aae-2564-4dbc-86b9-4bf8890813aa
+        userCondition: null
 fs: surveys
 handle: surveys
-hasUrls: true
 name: Surveys
 sortOrder: 8
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-url: '@baseUrl/surveys'
+transformFs: null
+transformSubpath: ''

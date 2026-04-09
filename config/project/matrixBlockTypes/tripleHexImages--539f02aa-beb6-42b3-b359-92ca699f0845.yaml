@@ -3,61 +3,75 @@ fieldLayouts:
   7f7a2569-1d30-45d3-aa00-5b24c099bba7:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 68eb6761-3d16-4751-bf00-7ffcd1a9e9c5 # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c0fabf56-a89e-4eb4-9c69-d2c3472accc3
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 49dd0d57-4764-4caf-8a8c-f87ef11abd67 # Sub Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f88d5c6d-d9ce-4ebe-a663-5a1b3cd066ab
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: ef61a3ac-f5b5-474e-8fc1-e841bfa9888a # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: d4a96ddd-af67-43a2-8bb4-17a99b2396b6
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6563dd0a-6677-4b08-ad19-63c543482a9f # Images
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2c1b8edb-68a1-4910-bbc2-334f02872357
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: cb0f1ae2-6935-4ab9-bf28-050682609a78
+        userCondition: null
 fields:
   49dd0d57-4764-4caf-8a8c-f87ef11abd67: # Sub Headline
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: subHeadline
-    instructions: ''
+    instructions: null
     name: 'Sub Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -68,16 +82,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -88,29 +102,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: images
-    instructions: ''
+    instructions: null
     name: Images
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: '3'
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: 3
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null
@@ -121,7 +139,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: ''
+    instructions: null
     name: Body
     searchable: true
     settings:
@@ -131,13 +149,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged

@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 6329f165-1216-4dee-8071-071c8c5cb854 # Comparison table
 handle: ct_references
-instructions: ''
+instructions: null
 name: References
 searchable: false
 settings:
@@ -12,13 +12,13 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: '1'
+  purifierConfig: null
+  purifyHtml: true
   redactorConfig: Standard.json
-  removeEmptyTags: '1'
-  removeInlineStyles: '1'
-  removeNbsp: '1'
-  showHtmlButtonForNonAdmins: ''
+  removeEmptyTags: true
+  removeInlineStyles: true
+  removeNbsp: true
+  showHtmlButtonForNonAdmins: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
   uiMode: enlarged

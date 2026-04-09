@@ -1,5 +1,4 @@
 handle: payWithPayPal
-isArchived: false
 isFrontendEnabled: true
 name: 'Pay with PayPal'
 paymentType: purchase

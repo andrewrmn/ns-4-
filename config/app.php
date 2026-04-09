@@ -38,6 +38,25 @@ return [
         'guest-pricing' => [
             'class' => \modules\GuestPricingModule::class,
         ],
+        'hcp-workspace' => [
+            'class' => \modules\HcpWorkspaceModule::class,
+        ],
+        'patient-shop' => [
+            'class' => \modules\PatientShopModule::class,
+        ],
+        'autoship-schedule' => [
+            'class' => \modules\AutoshipScheduleModule::class,
+        ],
     ],
-    'bootstrap' => ['pending-user-module', 'stripe-webhook-module', 'admin-emails-module', 'neuro-rewards-module', 'paya', 'guest-pricing'],
+    'bootstrap' => [
+        'pending-user-module',
+        'stripe-webhook-module',
+        // 'admin-emails-module', // disabled — re-add to enable
+        'neuro-rewards-module',
+        'paya',
+        'guest-pricing',
+        'hcp-workspace',
+        'patient-shop',
+        'autoship-schedule',
+    ],
 ];

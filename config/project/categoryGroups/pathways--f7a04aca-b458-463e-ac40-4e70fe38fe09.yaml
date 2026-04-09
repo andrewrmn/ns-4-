@@ -3,6 +3,7 @@ fieldLayouts:
   07c2f9e2-e636-406f-957c-3dfd769fa49e:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,13 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: 2892f311-f655-4991-8fbc-ea1d14d3612b
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: a786214b-e7d5-45ad-b0ff-9ae21a21c440
+        userCondition: null
 handle: pathways
 name: 'QR Scan Pathways'
 siteSettings:

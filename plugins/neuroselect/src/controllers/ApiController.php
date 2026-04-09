@@ -51,8 +51,8 @@ class ApiController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    //protected $allowAnonymous = ['index', 'login'];
-    protected $allowAnonymous = true;
+    //protected array|int|bool $allowAnonymous = ['index', 'login'];
+    protected bool|int|array $allowAnonymous = true;
 
     // Public Methods
     // =========================================================================

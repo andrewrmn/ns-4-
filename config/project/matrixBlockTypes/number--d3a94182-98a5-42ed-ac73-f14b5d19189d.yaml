@@ -3,61 +3,78 @@ fieldLayouts:
   86611fde-8c31-46f4-8213-82892b864fbf:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 78c42241-16b2-4825-a5ea-e800a6e97c69 # Label
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e1547916-3563-44e4-9f59-f69da91c4d5d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 74efe855-3742-4205-94cb-8dff29e16b1c # Handle
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 936aab20-5108-43ac-b86a-c3ac5d37cceb
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 10bff420-040b-47e9-ba9a-96f6ddb29222 # Min Value
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b10bed33-bb36-4b27-902b-e33a76e79fea
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 473a6363-f9c2-4ecb-94fd-66c7a8182290 # Max Value
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 62845d3b-4b51-4941-b260-a9f5d9b7c718
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: d588ea23-d6d3-4831-bedb-9f4487d4c69d # Required
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 56aec58b-6a8d-43b3-8007-9dc31420be9c
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 7d568a62-e9b0-495f-86b8-e0a443b7f9e7
+        userCondition: null
 fields:
   10bff420-040b-47e9-ba9a-96f6ddb29222: # Min Value
     columnSuffix: cofwhoiq
     contentColumnType: integer(10)
     fieldGroup: null
     handle: minValue
-    instructions: ''
+    instructions: null
     name: 'Min Value'
     searchable: true
     settings:
@@ -78,16 +95,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fieldHandle
-    instructions: ''
+    instructions: null
     name: Handle
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -98,16 +115,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: label
-    instructions: ''
+    instructions: null
     name: Label
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -118,7 +135,7 @@ fields:
     contentColumnType: integer(10)
     fieldGroup: null
     handle: maxValue
-    instructions: ''
+    instructions: null
     name: 'Max Value'
     searchable: true
     settings:

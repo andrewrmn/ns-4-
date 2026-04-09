@@ -1,54 +1,69 @@
+changedFieldIndicator: null
 field: 7ee21a44-3b62-454b-a6ea-920735b20ee3 # Additional Tiles
 fieldLayouts:
   4c3a1f5c-ef2a-485e-81db-535ca798d431:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: f09d786a-e956-46a1-bab2-e17e8bffec63 # Icon
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 1ae239bb-8cdd-487a-8b5f-0813eafd3c4d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: bb1ecfc9-053e-4250-be95-e4e8315a3d58 # Headline
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a310c06f-9708-4c57-9da5-f66e159e908a
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 322252f2-9500-4211-a3e5-71abdb9f8811 # Content
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 567ba1b7-169f-4b59-ae43-bd283be5154f
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a84f30b0-7cd0-4eb1-a2ca-dd9b5215f66b # Link
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a4f73d42-f01a-4c47-af47-f5f288137b2e
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 9b0b7cda-feab-4e21-b16b-727bd1b04756
+        userCondition: null
 fields:
   322252f2-9500-4211-a3e5-71abdb9f8811: # Content
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: ''
+    instructions: null
     name: Content
     searchable: true
     settings:
@@ -58,13 +73,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -76,18 +91,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: tile_link
-    instructions: ''
+    instructions: null
     name: Link
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -100,7 +115,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -113,7 +128,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Url
+            - presseddigital\linkit\models\Url
             -
               __assoc__:
                 -
@@ -138,7 +153,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - fruitstudios\linkit\models\Twitter
+            - presseddigital\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -151,7 +166,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Facebook
+            - presseddigital\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -164,7 +179,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Instagram
+            - presseddigital\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -177,7 +192,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\LinkedIn
+            - presseddigital\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -190,7 +205,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Entry
+            - presseddigital\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -206,7 +221,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - fruitstudios\linkit\models\Category
+            - presseddigital\linkit\models\Category
             -
               __assoc__:
                 -
@@ -222,7 +237,7 @@ fields:
                   - customSelectionLabel
                   - 'Select a category'
           -
-            - fruitstudios\linkit\models\Asset
+            - presseddigital\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -238,7 +253,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an asset'
           -
-            - fruitstudios\linkit\models\User
+            - presseddigital\linkit\models\User
             -
               __assoc__:
                 -
@@ -257,7 +272,7 @@ fields:
                   - userPath
                   - ''
           -
-            - fruitstudios\linkit\models\Product
+            - presseddigital\linkit\models\Product
             -
               __assoc__:
                 -
@@ -274,22 +289,22 @@ fields:
                   - 'Select an entry'
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   bb1ecfc9-053e-4250-be95-e4e8315a3d58: # Headline
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -300,30 +315,34 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: icon
-    instructions: ''
+    instructions: null
     name: Icon
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: '1'
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: 1
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources:
         - 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null

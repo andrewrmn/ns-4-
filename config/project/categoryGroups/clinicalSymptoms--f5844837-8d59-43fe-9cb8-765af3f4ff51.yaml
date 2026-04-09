@@ -3,6 +3,7 @@ fieldLayouts:
   7f02e5bd-c8fe-48f7-a16a-1d18034b1ad4:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,13 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: 41a662b0-620a-46bd-9ab6-b9a64b7bba98
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: fd039bd4-2f05-4277-a5a6-2ea24b072d10
+        userCondition: null
 handle: clinicalSymptoms
 name: 'Clinical Symptoms'
 siteSettings:

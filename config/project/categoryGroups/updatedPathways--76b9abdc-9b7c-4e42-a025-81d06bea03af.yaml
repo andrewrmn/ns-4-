@@ -3,6 +3,7 @@ fieldLayouts:
   06b50a35-631b-4753-a2e1-99cf4c917886:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,13 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: 265f78e0-d467-47f8-a26e-c98947d372f7
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 3002c0a0-8dad-4f9b-b476-8456ad53d0a9
+        userCondition: null
 handle: updatedPathways
 name: 'Updated Pathways'
 siteSettings:

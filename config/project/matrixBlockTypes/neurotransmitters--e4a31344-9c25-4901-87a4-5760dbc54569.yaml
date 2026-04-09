@@ -3,28 +3,35 @@ fieldLayouts:
   41057cb2-e4a1-4a60-afd9-e4593604d7ce:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 018dc23e-786f-4cd7-947c-cffd6a3a3409 # Key Ingredients
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ff1540ee-c9f4-482e-a240-a76c95176e19
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: d8be3cf0-d910-4de2-bc67-d12ec007057b
+        userCondition: null
 fields:
   018dc23e-786f-4cd7-947c-cffd6a3a3409: # Key Ingredients
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: keyIngredients
-    instructions: ''
+    instructions: null
     name: 'Key Ingredients'
     searchable: false
     settings:
+      blockTypeFields: 0
+      changedFieldIndicator: null
       columns:
         __assoc__:
           -
@@ -43,13 +50,12 @@ fields:
                   - ''
       contentTable: '{{%stc_15_keyingredients}}'
       fieldLayout: table
-      maxRows: '9'
-      minRows: ''
-      placeholderKey: null
+      maxRows: 9
+      minRows: null
       propagationKeyFormat: null
       propagationMethod: all
       selectionLabel: 'Add Ingredient'
-      staticField: ''
+      staticField: null
     translationKeyFormat: null
     translationMethod: site
     type: verbb\supertable\fields\SuperTableField

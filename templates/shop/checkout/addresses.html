@@ -3,88 +3,89 @@
 
 {% block content %}
 
-    {% set addresses = currentUser ? currentUser.getAddresses() : [] %}
+{% set addresses = currentUser ? currentUser.getAddresses() : [] %}
 
-    {# UI when at least one address exists #}
-    <div class="wrapper-full bg-light">
-        <div class="wrapper section section--flush-top">
-            <div class="card">
-                <div class="row">
-                    <div class="col--xs--12">
-                        <form method="post"action="">
-                            <input type="hidden" name="action" value="commerce/cart/update-cart">
-                            {{ redirectInput('shop/checkout/shipping') }}
-                            {{ csrfInput() }}
+{# UI when at least one address exists #}
+<div class="wrapper-full bg-light">
+    <div class="wrapper section section--flush-top">
+        <div class="card">
+            <div class="row">
+                <div class="col--xs--12">
+                    <form method="post" action="">
+                        <input type="hidden" name="action" value="commerce/cart/update-cart">
+                        {{ redirectInput('shop/checkout/shipping') }}
+                        {{ csrfInput() }}
 
-                            {% if not cart.email %}
-                            <label for="">Email</label>
-                            <input class="u-full-width" type="text" value="{{ cart.email }}" name="email"
-                                   placeholder="email@site.com"/>
+                        {% if not cart.email %}
+                        <label for="">Email</label>
+                        <input class="u-full-width" type="text" value="{{ cart.email }}" name="email"
+                            placeholder="email@site.com" />
 
-                            <span class="flash">{{ cart.getErrors('email')|join }}</span><br>
-                            {% endif %}
+                        <span class="flash">{{ cart.getErrors('email')|join }}</span><br>
+                        {% endif %}
 
-                            <div class="addresses-shipping">
-                                <div>
-                                    {% include 'shop/_includes/addresses/fieldset' with {
-                                        title: "Shipping Address"|t,
-                                        class: 'ShippingAddress',
-                                        name: 'shippingAddress'
-                                    } %}
-                                </div>
+                        <div class="addresses-shipping">
+                            <div>
+                                {% include 'shop/_includes/addresses/fieldset' with {
+                                title: "Shipping Address"|t,
+                                class: 'ShippingAddress',
+                                name: 'shippingAddress'
+                                } %}
                             </div>
+                        </div>
 
-                            <div class="addresses-billing">
-                                <div>
-                                    <input type="hidden" name="billingAddressSameAsShipping" value="0">
+                        <div class="addresses-billing">
+                            <div>
+                                <input type="hidden" name="billingAddressSameAsShipping" value="0">
 
-                                    <label for="billingAddressSameAsShipping">
-                                        <input id="billingAddressSameAsShipping" name="billingAddressSameAsShipping" type="checkbox" checked="checked"  />
-                                        <span class="ml-2 label-body">Use same address for billing</span>
-                                    </label>
+                                <label for="billingAddressSameAsShipping">
+                                    <input id="billingAddressSameAsShipping" name="billingAddressSameAsShipping"
+                                        type="checkbox" checked="checked" />
+                                    <span class="ml-2 label-body">Use same address for billing</span>
+                                </label>
 
-                                    <br>
+                                <br>
 
-                                    {% include 'shop/_includes/addresses/fieldset' with {
-                                        title: "Billing Address"|t,
-                                        class: 'BillingAddress is-hidden',
-                                        name: 'billingAddress'
-                                    } %}
-                                </div>
+                                {% include 'shop/_includes/addresses/fieldset' with {
+                                title: "Billing Address"|t,
+                                class: 'BillingAddress is-hidden',
+                                name: 'billingAddress'
+                                } %}
                             </div>
+                        </div>
 
-                            <input type="submit" class="button button-primary" value="Confirm addresses">
+                        <input type="submit" class="button button-primary" value="Confirm addresses">
 
-                        </form>
+                    </form>
 
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
 
-      var $fieldsets = document.querySelectorAll('.js-address-fieldset');
+    var $fieldsets = document.querySelectorAll('.js-address-fieldset');
 
-      if ($fieldsets && $fieldsets.length) {
+    if ($fieldsets && $fieldsets.length) {
         $fieldsets.forEach(function (el) {
             var $addressSelects = el.querySelectorAll('.js-address-select');
 
             if ($addressSelects && $addressSelects.length) {
-                $addressSelects.forEach(function(el) {
+                $addressSelects.forEach(function (el) {
                     var $radio = el.querySelector('.js-radio input');
                     var $body = el.querySelector('.js-body');
 
                     if ($radio) {
                         if ($body) {
                             // Creating new address
-                            $radio.addEventListener('change', function(ev) {
+                            $radio.addEventListener('change', function (ev) {
                                 if (ev.target.checked) {
-                                  $body.classList.remove('is-hidden');
+                                    $body.classList.remove('is-hidden');
                                 } else {
-                                  $body.classList.add('is-hidden');
+                                    $body.classList.add('is-hidden');
                                 }
                             });
 
@@ -93,7 +94,7 @@
                             }
                         } else {
                             // Selecting existing address
-                            $radio.addEventListener('change', function(ev) {
+                            $radio.addEventListener('change', function (ev) {
                                 if (ev.target.checked) {
                                     var $newBox = document.querySelector('.js-address-select[data-model-name="' + ev.target.dataset.modelName + '"]');
                                     if ($newBox) {
@@ -106,19 +107,19 @@
                 });
             }
         });
-      }
+    }
 
-      var $billingSameAs = document.querySelector('#billingAddressSameAsShipping');
-      if ($billingSameAs) {
-          $billingSameAs.addEventListener('change', function(ev) {
-              var $billingFieldSet = document.querySelector('.js-address-fieldset.BillingAddress');
-              $billingFieldSet.classList.toggle('is-hidden');
-          });
+    var $billingSameAs = document.querySelector('#billingAddressSameAsShipping');
+    if ($billingSameAs) {
+        $billingSameAs.addEventListener('change', function (ev) {
+            var $billingFieldSet = document.querySelector('.js-address-fieldset.BillingAddress');
+            $billingFieldSet.classList.toggle('is-hidden');
+        });
 
-          {% if (cart.billingAddressId and cart.billingAddress.hasErrors()) or (cart.billingAddressId != cart.shippingAddressId) %}
-          $billingSameAs.click();
-          {% endif %}
-      }
-    </script>
+        {% if cart.billingAddressId and cart.billingAddress.hasErrors() %}
+        $billingSameAs.click();
+        {% endif %}
+    }
+</script>
 
 {% endblock %}

@@ -2,7 +2,7 @@ columnSuffix: uyifctyy
 contentColumnType: text
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: successMessage
-instructions: ''
+instructions: null
 name: 'Success Message'
 searchable: false
 settings:
@@ -12,13 +12,13 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: '1'
-  redactorConfig: ''
-  removeEmptyTags: '1'
-  removeInlineStyles: '1'
-  removeNbsp: '1'
-  showHtmlButtonForNonAdmins: ''
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: true
+  removeInlineStyles: true
+  removeNbsp: true
+  showHtmlButtonForNonAdmins: false
   showUnpermittedFiles: false
   showUnpermittedVolumes: false
   uiMode: enlarged

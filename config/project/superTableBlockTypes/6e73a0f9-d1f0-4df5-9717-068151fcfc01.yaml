@@ -1,63 +1,81 @@
+changedFieldIndicator: null
 field: 334b094b-e2f3-4ede-a38f-667378ae3d9c # QR Scan Submissions
 fieldLayouts:
   95738e61-f603-4e3e-a2d3-4b845b75abec:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 1494120d-5382-4a39-ab20-eda95189eb8b # ID
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c98dc5e1-8dab-4b28-a813-68afd645c0da
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 36a53fab-5ce1-4a7d-bee3-72939426ff8d # Date
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 7e57bdd1-3074-44ec-b821-563a490b352e
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 68ed3805-7765-40d4-91ed-14adbf0c9f24 # Data
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 0e6870cf-ca6b-4e63-8c19-ed90dee851dd
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1065e241-1779-49e7-984b-5604c0355f65 # Category
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ee25af03-da18-4d7c-b58d-611ace91b63b
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f8b329e7-2c51-419c-b1d4-58afb77f0b95 # PDF Generated
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5cabdb96-fb41-4adb-88e2-4ac9d33ce38d
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 1bf18fd5-e735-4124-990e-0db232b07a95
+        userCondition: null
 fields:
   36a53fab-5ce1-4a7d-bee3-72939426ff8d: # Date
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: date
-    instructions: ''
+    instructions: null
     name: Date
     searchable: true
     settings:
@@ -65,8 +83,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -77,7 +95,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: data
-    instructions: ''
+    instructions: null
     name: Data
     searchable: true
     settings:
@@ -85,8 +103,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -97,7 +115,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: category
-    instructions: ''
+    instructions: null
     name: Category
     searchable: true
     settings:
@@ -105,8 +123,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -117,7 +135,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: submissionId
-    instructions: ''
+    instructions: null
     name: ID
     searchable: true
     settings:
@@ -125,8 +143,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -137,7 +155,7 @@ fields:
     contentColumnType: boolean
     fieldGroup: null
     handle: pdfGenerated
-    instructions: ''
+    instructions: null
     name: 'PDF Generated'
     searchable: true
     settings:

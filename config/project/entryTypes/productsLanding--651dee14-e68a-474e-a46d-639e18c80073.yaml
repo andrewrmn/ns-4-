@@ -2,6 +2,7 @@ fieldLayouts:
   88c83f68-40e5-4995-b070-506dfe0adec0:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,27 +27,38 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 1402b3db-e23d-4524-b624-c65ef37b532c
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: d0cdeae7-30fa-46b0-919b-c29303b44e97
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 15437087-f989-4528-b5cd-e42a5aad58ad # SEO
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f8728af6-ea5b-4171-8076-094501b2a997
+            userCondition: null
             warning: null
             width: 100
         name: SEO
-        sortOrder: 2
+        uid: 40628080-c55c-4303-9755-3d2df4a7056c
+        userCondition: null
 handle: productsLanding
 hasTitleField: false
 name: 'Products Landing'
 section: cb37c8c8-928f-4175-946a-5cbecc60c2f2 # Products Landing
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9a98c4e1-a799-42f0-a4ce-ba07bd38df16 # Forms
 handle: surveyResultsText
-instructions: ''
+instructions: null
 name: 'Survey Results Text'
 searchable: false
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -304,13 +306,12 @@ settings:
               - ''
   contentTable: '{{%stc_surveyresultstext}}'
   fieldLayout: row
-  maxRows: ''
-  minRows: ''
-  placeholderKey: null
+  maxRows: null
+  minRows: null
   propagationKeyFormat: null
   propagationMethod: all
-  selectionLabel: ''
-  staticField: '1'
+  selectionLabel: null
+  staticField: true
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

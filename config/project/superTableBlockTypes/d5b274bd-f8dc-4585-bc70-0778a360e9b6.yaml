@@ -1,85 +1,105 @@
+changedFieldIndicator: null
 field: 943aee6c-7de2-4f9c-a4a2-8f6519040bf0 # Product Fields
 fieldLayouts:
   8e07c909-cad1-4621-b7a2-8c56569035b0:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 467ded05-6258-4805-a2b0-32cda632ca17 # Short Description
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e96921ce-57fe-4e00-b83b-7bd57e196a7e
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: b23b05ab-da4c-47d2-9828-40d2e30d3e75 # Product Images
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ae716d03-66c8-4c42-b174-e5b3e83c90ad
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c79d5e59-4ec0-43e9-afd4-04e3a7baeb55 # Recommended Use
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 12e95384-41be-4cfc-b272-2c6368b33d74
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 081ffeb6-8979-47aa-b26a-2e7838fe63f3 # Additional Information
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3e19be5b-e8a4-478d-8695-8f93ed57aab0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 71a8b34f-03e0-4728-a681-0262c3f3d678 # Resources
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 71d5b5c2-0aae-4406-9c6a-fafbe5ee25df
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 500a7cec-b4df-4fd4-a121-e4b16f760689 # Spec Sheet
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9a609522-c6e4-453b-872c-d47b48ac77c3
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: cc24ed87-6db9-473c-bb2e-f30e92504eff
+        userCondition: null
 fields:
   71a8b34f-03e0-4728-a681-0262c3f3d678: # Resources
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: resources
-    instructions: ''
+    instructions: null
     name: Resources
     searchable: true
     settings:
-      allowLimit: false
-      allowMultipleSources: false
       allowSelfRelations: false
-      branchLimit: ''
-      limit: null
+      branchLimit: null
       localizeRelations: false
+      maintainHierarchy: true
+      maxRelations: null
+      minRelations: null
       selectionLabel: 'Add resource'
       showSiteMenu: true
       source: 'group:9c3cf6ba-7b2f-4615-87aa-d0ff79141fa7' # Resources
-      sources: '*'
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
@@ -91,7 +111,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: ingredients
-    instructions: ''
+    instructions: null
     name: 'Additional Information'
     searchable: true
     settings:
@@ -101,13 +121,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -119,16 +139,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: shortDescription
-    instructions: ''
+    instructions: null
     name: 'Short Description'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: '1'
+      initialRows: 4
+      multiline: true
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -139,29 +159,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: specSheet
-    instructions: ''
+    instructions: null
     name: 'Spec Sheet'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: '1'
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: 1
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
       selectionLabel: 'Add spec sheet'
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
@@ -172,29 +196,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: productImages
-    instructions: ''
+    instructions: null
     name: 'Product Images'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:3fa9badd-a717-4f8a-975b-c7ea8a0eb7b5' # Product Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
       selectionLabel: 'Add image'
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null
@@ -205,7 +233,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: recommendedUse
-    instructions: ''
+    instructions: null
     name: 'Recommended Use'
     searchable: true
     settings:
@@ -215,13 +243,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: '1'
-      redactorConfig: ''
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: null
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged

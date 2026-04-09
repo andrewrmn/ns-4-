@@ -13,7 +13,12 @@ namespace neuroscience\neuroselect\controllers;
 use neuroscience\neuroselect\Neuroselect;
 
 use Craft;
+use craft\helpers\FileHelper;
 use craft\web\Controller;
+use neuroscience\neuroselect\ChromiumPdfRenderer;
+use neuroscience\neuroselect\HtmlToPdfRenderer;
+use neuroscience\neuroselect\PdfGenerationEngine;
+use neuroscience\neuroselect\WkhtmlPdfRenderer;
 use craft\elements\GlobalSet;
 use verbb\supertable\SuperTable;
 use craft\helpers\DateTimeHelper;
@@ -31,7 +36,7 @@ use craft\mail\Message;
 */
 class SurveyController extends Controller
 {
-  protected $allowAnonymous = true;
+  protected bool|int|array $allowAnonymous = true;
 
   public function actionSurveySubmission()
   {
@@ -287,34 +292,24 @@ class SurveyController extends Controller
       //$source = 'http://local.neuroscience/neuro-q/report/'.$submissionId.'?account='.$email;
       $toEmail = $_POST['email'];
 
-      $header = array(
-        "source" => "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>",
-        "spacing" => '80px'
-      );
+      $headerHtml = "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>";
 
-      $footer = array(
-        "source" => "<div style=\"border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; \"><div style=\"font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; \">*These statements have not been evaluated by the Food and Drug Administration.</div><div style=\"font-size: 4pt; font-family: sans-serif;\">Recommendations and product information provided was requested by the user and is not intended to diagnose, treat, cure or prevent any disease.</div></div>",
-        "spacing" => '80px'
-      );
+      $footerHtml = "<div style=\"border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; \"><div style=\"font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; \">*These statements have not been evaluated by the Food and Drug Administration.</div><div style=\"font-size: 4pt; font-family: sans-serif;\">Recommendations and product information provided was requested by the user and is not intended to diagnose, treat, cure or prevent any disease.</div></div>";
 
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.pdfshift.io/v2/convert/",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(array("source" => $source, "css" => 'https://www.neuroscienceinc.com/css/pdf-survey.css', "sandbox" => false, "use_print" => false, "header" => $header, "footer" => $footer )),
-        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
-        CURLOPT_USERPWD => 'e53c829dce5f4013a28cf3eee62b731c'
-      ));
-
-      $emailResponse = curl_exec($curl);
+      $pdfErr = null;
+      $emailResponse = $this->renderSurveyPdfBody($source, $headerHtml, $footerHtml, $pdfErr);
 
       // Create the filename
       $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
-      // Save to correct folder
-      $saveTo = './surveys/' . $filename;
+      $surveysDir = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'surveys';
+      FileHelper::createDirectory($surveysDir);
+      $saveTo = $surveysDir . DIRECTORY_SEPARATOR . $filename;
 
-      file_put_contents($saveTo, $emailResponse);
+      if (is_string($emailResponse) && $emailResponse !== '' && strncmp($emailResponse, '%PDF', 4) === 0) {
+        file_put_contents($saveTo, $emailResponse);
+      } else {
+        Craft::warning('Guest survey PDF generation failed: ' . ($pdfErr ?? 'invalid output'), __METHOD__);
+      }
 
       $name = '';
       if( isset($_POST['name']) && !empty($_POST['name']) ) {
@@ -322,7 +317,7 @@ class SurveyController extends Controller
       }
 
       $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
-      $filePath = './surveys/' . $filename;
+      $filePath = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'surveys' . DIRECTORY_SEPARATOR . $filename;
 
       $settings = Craft::$app->systemSettings->getSettings('email');
       $message = new Message();
@@ -349,8 +344,9 @@ class SurveyController extends Controller
       $message->setTo($mail);
       $message->setSubject($subject);
       $message->setHtmlBody($html);
-      $message->attach($filePath, []);
-
+      if (is_file($filePath)) {
+        $message->attach($filePath, []);
+      }
 
       Craft::$app->mailer->send($message);
 
@@ -379,39 +375,24 @@ class SurveyController extends Controller
       $source = $_POST['source'];
       $submissionId = $_POST['submissionId'];
 
-      $header = array(
-        "source" => "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>",
-        "spacing" => '80px'
-      );
+      $headerHtml = "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>";
 
-      $footer = array(
-        "source" => "<div style=\"border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; \"><div style=\"font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; \">*These statements have not been evaluated by the Food and Drug Administration.</div><div style=\"font-size: 4pt; font-family: sans-serif;\">Recommendations and product information provided was requested by the user and is not intended to diagnose, treat, cure or prevent any disease.</div></div>",
-        "spacing" => '80px'
-      );
+      $footerHtml = "<div style=\"border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; \"><div style=\"font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; \">*These statements have not been evaluated by the Food and Drug Administration.</div><div style=\"font-size: 4pt; font-family: sans-serif;\">Recommendations and product information provided was requested by the user and is not intended to diagnose, treat, cure or prevent any disease.</div></div>";
 
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.pdfshift.io/v2/convert/",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode(array("source" => $source, "css" => 'https://www.neuroscienceinc.com/css/pdf-survey.css', "sandbox" => false, "use_print" => false, "header" => $header, "footer" => $footer )),
-        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
-        CURLOPT_USERPWD => 'e53c829dce5f4013a28cf3eee62b731c'
-      ));
-
-      $response = curl_exec($curl);
+      $pdfErr = null;
+      $response = $this->renderSurveyPdfBody($source, $headerHtml, $footerHtml, $pdfErr);
 
       // Create the filename
       $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
-      // Save to correct folder
-      $saveTo = './surveys/' . $filename;
+      $surveysDir = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'surveys';
+      FileHelper::createDirectory($surveysDir);
+      $saveTo = $surveysDir . DIRECTORY_SEPARATOR . $filename;
 
-
-      file_put_contents($saveTo, $response);
-
-      if ($response) {
+      if (is_string($response) && $response !== '' && strncmp($response, '%PDF', 4) === 0) {
+        file_put_contents($saveTo, $response);
         $status = 'success';
       } else {
+        Craft::warning('Survey PDF generation failed: ' . ($pdfErr ?? 'invalid output'), __METHOD__);
         $status = 'error';
       }
 
@@ -440,7 +421,7 @@ class SurveyController extends Controller
 	    }
 
       $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
-      $filePath = './surveys/' . $filename;
+      $filePath = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'surveys' . DIRECTORY_SEPARATOR . $filename;
 
       $settings = Craft::$app->systemSettings->getSettings('email');
       $message = new Message();
@@ -468,24 +449,57 @@ class SurveyController extends Controller
       $message->setTo($mail);
       $message->setSubject($subject);
       $message->setHtmlBody($html);
-      $message->attach($filePath, []);
+      if (is_file($filePath)) {
+        $message->attach($filePath, []);
+      }
 
-      return Craft::$app->mailer->send($message);
+      Craft::$app->mailer->send($message);
 
-      $response = [
-        'Status ' => 'Email Sent'
-      ];
-
-      return $this->asJson($response);
-
-    } else {
-
-	    $response = [
-	        'Status ' => 'missing info'
-	      ];
-
-	      return $this->asJson($response);
-
+      return $this->asJson([
+        'Status ' => 'Email Sent',
+      ]);
     }
+
+    return $this->asJson([
+      'Status ' => 'missing info',
+    ]);
   }
+
+    /**
+     * Neuro Q survey PDF: same PIR_PDF_ENGINE as PIR (chromium ≈ browser, wkhtml header/footer, dompdf fallback).
+     *
+     * @param string|null $errorDetail
+     * @return string|false raw PDF bytes
+     */
+    private function renderSurveyPdfBody(string $source, string $headerHtml, string $footerHtml, ?string &$errorDetail = null): string|false
+    {
+        $errorDetail = null;
+        $engine = PdfGenerationEngine::engineId();
+        $surveyCss = $this->resolveSurveyStylesheetPathOrUrl();
+
+        if ($engine === PdfGenerationEngine::CHROMIUM) {
+            return ChromiumPdfRenderer::renderUrlToPdf($source, $errorDetail);
+        }
+
+        if ($engine === PdfGenerationEngine::WKHTML) {
+            return WkhtmlPdfRenderer::render($source, $footerHtml, $surveyCss, $errorDetail, $headerHtml);
+        }
+
+        return HtmlToPdfRenderer::fromUrl($source, $surveyCss, $headerHtml, $footerHtml, null, $errorDetail);
+    }
+
+    private function resolveSurveyStylesheetPathOrUrl(): string
+    {
+        $env = getenv('NEUROQ_PDF_STYLESHEET_URL');
+        if (is_string($env) && $env !== '') {
+            return $env;
+        }
+
+        $local = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf-survey.css';
+        if (is_file($local)) {
+            return $local;
+        }
+
+        return 'https://www.neuroscienceinc.com/css/pdf-survey.css';
+    }
 }

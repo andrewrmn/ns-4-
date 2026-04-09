@@ -27,7 +27,7 @@ use verbb\supertable\SuperTable;
 class UpdateController extends Controller
 {
 
-    protected $allowAnonymous = true;
+    protected bool|int|array $allowAnonymous = true;
 
 
     public function actionUpdatePir()

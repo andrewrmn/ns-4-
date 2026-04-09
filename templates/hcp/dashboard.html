@@ -10,7 +10,7 @@
 {% extends 'layouts/_accounts' %}
 {% block content %}
 {% set hcpNeurocashPercentage = globalObjects.hcpNeurocashPercentage ? globalObjects.hcpNeurocashPercentage : 0 %}
-{% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().innerJoin('craft_commerce_customers', 'craft_commerce_customers.userId=users.id').select('craft_commerce_customers.id AS customerId').asArray().all() %}
+{% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().all() %}
 {% set customerIds = [] %}
 
 {% set hasPatients = false %}
@@ -18,7 +18,7 @@
   {% set hasPatients = true %}
 
   {% for hcpPatient in hcpPatients %}
-  {% set customerIds = customerIds|merge([hcpPatient.customerId]) %}
+  {% set customerIds = customerIds|merge([hcpPatient.id]) %}
   {% endfor %}
 
 {% endif %}
@@ -41,9 +41,13 @@
     </div>
 
     {% set errorMessage = craft.app.session.getFlash('error', null, true) %}
+    {% set noticeMessage = craft.app.session.getFlash('notice', null, true) %}
     <div class="errorMessage">
     {% if errorMessage %}
         <p class="text-red">{{ errorMessage }}</p>
+    {% endif %}
+    {% if noticeMessage %}
+        <p class="text-green">{{ noticeMessage }}</p>
     {% endif %}
     </div>
 
@@ -347,52 +351,6 @@
 
 {% js %}
 $(document).ready(function(){
-  $(document).on("submit", "form#frm-edit-storefront", function(e) {
-    e.preventDefault();
-    $(this).find("button[type='submit']").attr('disabled', true);
-    var form = $(this);
-    $.ajax({
-        type: "post",
-        data: form.serialize(),
-        dataType: "json",
-        success: function (data) {
-          if(data.success){
-            alert("Storefront detail saved successfully.");
-          }else{
-            alert("Storefront detail saved successfully.");
-          }
-          window.location.href = '/hcp/dashboard';
-        },
-        error: function (data) {
-          alert("Storefront detail saved successfully.");
-          window.location.href = '/hcp/dashboard';
-        },
-    });
-  })
-
-  $(document).on("submit", "form#frm-edit-discount", function(e) {
-    e.preventDefault();
-    $(this).find("button[type='submit']").attr('disabled', true);
-    var form = $(this);
-    $.ajax({
-        type: "post",
-        data: form.serialize(),
-        dataType: "json",
-        success: function (data) {
-          if(data.success){
-            alert("Discount saved successfully.");
-          }else{
-            alert("These is some error in saving discount.");
-          }
-          window.location.href = '/hcp/dashboard';
-        },
-        error: function (data) {
-          alert("These is some error in saving discount.");
-          window.location.href = '/hcp/dashboard';
-        },
-    });
-  })
-
   var discountVal = $("input[name='fields[hcpStorefrontDiscount]']").val();
   $(document).on("change", "input[name='disableProviderEarnings']", function(e) {
     var ischecked = $(this).is(':checked');

@@ -10,10 +10,10 @@
 {% extends 'layouts/_accounts' %}
 {% block content %}
     {% set hcpNeurocashPercentage = globalObjects.hcpNeurocashPercentage ? globalObjects.hcpNeurocashPercentage : 0 %}
-    {% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().innerJoin('craft_commerce_customers', 'craft_commerce_customers.userId=users.id').select('craft_commerce_customers.id AS customerId').asArray().all() %}
+    {% set hcpPatients = craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(null).anyStatus().all() %}
     {% set customerIds = [] %}
     {% for hcpPatient in hcpPatients %}
-        {% set customerIds = customerIds|merge([hcpPatient.customerId]) %}
+        {% set customerIds = customerIds|merge([hcpPatient.id]) %}
     {% endfor %}
 
     <div class="tabcontent patient-tabcontent">

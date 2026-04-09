@@ -1,4 +1,4 @@
-{% set allowedPlans = ['15Days', '30Days', '45Days', '60Days', '90Days'] %}
+{% set allowedPlans = ['2Days', '15Days', '30Days', '45Days', '60Days', '90Days'] %}
 {% set paymentForm = cart.recurringOrderFrequency.value in allowedPlans
   ? cart.recurringOrderFrequency.value
   : '30Days' %}
@@ -19,8 +19,6 @@
     customAmountStep: '0.01',
     buttonText: buttonText
 } %}
-
-{{ paymentForm }}
 
 {% do craft.enupalStripe.addVariables({ cart: cart }) %}
 

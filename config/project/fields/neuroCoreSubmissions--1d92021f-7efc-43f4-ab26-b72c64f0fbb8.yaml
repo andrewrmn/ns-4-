@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
 handle: neuroCoreSubmissions
-instructions: ''
+instructions: null
 name: 'Neuro Core Submissions'
 searchable: false
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -45,13 +47,12 @@ settings:
               - ''
   contentTable: '{{%stc_neurocoresubmissions}}'
   fieldLayout: table
-  maxRows: ''
-  minRows: ''
-  placeholderKey: null
+  maxRows: null
+  minRows: null
   propagationKeyFormat: null
   propagationMethod: all
-  selectionLabel: ''
-  staticField: ''
+  selectionLabel: null
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

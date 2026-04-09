@@ -2,30 +2,34 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: c2f1cc8b-c74b-46fa-a18a-d11848cc3965 # Global Fields
 handle: n0011Form
-instructions: ''
+instructions: null
 name: 'N0011 Form'
 searchable: true
 settings:
   allowSelfRelations: false
+  allowSubfolders: false
   allowUploads: true
   allowedKinds: null
+  branchLimit: null
   defaultUploadLocationSource: 'volume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
-  defaultUploadLocationSubpath: ''
-  limit: '1'
+  defaultUploadLocationSubpath: null
   localizeRelations: false
+  maintainHierarchy: false
+  maxRelations: 1
+  minRelations: null
   previewMode: full
-  restrictFiles: ''
+  restrictFiles: false
+  restrictLocation: false
+  restrictedDefaultUploadSubpath: null
+  restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+  restrictedLocationSubpath: null
   selectionLabel: 'Add documents'
   showSiteMenu: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true
-  singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-  singleUploadLocationSubpath: ''
-  source: null
   sources:
     - 'volume:b24cc19c-4033-41c8-b027-c8bde6ddb4c9' # Documents
   targetSiteId: null
-  useSingleFolder: false
   validateRelatedElements: false
   viewMode: list
 translationKeyFormat: null

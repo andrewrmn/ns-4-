@@ -2,7 +2,7 @@ columnSuffix: wbpfzvfk
 contentColumnType: boolean
 fieldGroup: 228fdc9a-5d24-44f0-89d9-fd7ddaf7524f # Patients
 handle: disableProviderEarnings
-instructions: ''
+instructions: null
 name: 'Disable Provider Earnings'
 searchable: false
 settings:

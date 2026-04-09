@@ -2,90 +2,119 @@ fieldLayouts:
   50cd1481-b935-4994-b3cf-9eca0a1e125e:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 37076289-5388-494c-ab16-50f8f15ef55d # HCP NeuroCash Percentage
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9cc1c44c-4a72-49a3-aef7-0beb78448cec
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 84bbdaa0-4f51-45c4-87fc-da34da0bb16c # Free Shipping Mark
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 33cac1ad-3c01-4eea-b1b8-00e7196b8631
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: bc1a584e-9391-460b-a62b-19c4c88bec4b # Chat Enabled
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: db25f3d7-6e33-44ec-8d93-6be677c7c3ce
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 3a205d9c-a63e-47ed-ad38-3bf91c604902 # Alert Message
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: df76ecb9-9125-4404-9ffa-7a927a7f450f
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: fa19d720-9a33-4fb2-9371-3ca8cabc3cb9 # Phone Links
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: d7348c1c-0776-49ab-8cc2-dc82469b18e2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: c600ba22-fc96-435d-9dee-28bea2237969 # Address
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 73834508-2f23-441f-95b5-aeca7e7dff07
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6155050f-240b-4ccc-9afc-095f7b936e55 # Social Links
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f32a68fd-4d4f-4701-8c72-93a1ecef4ce1
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4f5a97f7-34f5-4b71-8ccc-e7a53f72315d # Body
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 67d9be6f-3b99-49ec-a91e-41cc55322ea1
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f5e28e8c-7385-4979-9781-4073154127ad # References
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 525cb1a1-aa10-42d6-9c30-6bfd3f2c2966
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 4b922f32-6d51-42bf-b523-3cd43bd3b029
+        userCondition: null
 handle: globalObjects
 name: 'Global Objects'
 sortOrder: 4

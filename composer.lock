@@ -2897,10 +2897,11 @@
             "dist": {
                 "type": "path",
                 "url": "./plugins/neuroselect",
-                "reference": "392edbcdaa373476a33b8cf326a0513d5b8ba52e"
+                "reference": "78ad47741d5367bbf7fac4dca231b914daa243d4"
             },
             "require": {
-                "craftcms/cms": "^4.0.0"
+                "craftcms/cms": "^4.0.0",
+                "dompdf/dompdf": "^2.0"
             },
             "require-dev": {
                 "codeception/codeception": "^3.0",

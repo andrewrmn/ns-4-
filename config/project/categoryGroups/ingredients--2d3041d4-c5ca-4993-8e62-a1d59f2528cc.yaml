@@ -3,6 +3,7 @@ fieldLayouts:
   bdf47f17-c308-4d90-9b6c-43f3802dbc06:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,13 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: 03118dec-d70c-4680-964e-36bdf66b9155
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: e6321d75-72f3-4f23-9563-e9335aaaafb7
+        userCondition: null
 handle: ingredients
 name: Ingredients
 siteSettings:

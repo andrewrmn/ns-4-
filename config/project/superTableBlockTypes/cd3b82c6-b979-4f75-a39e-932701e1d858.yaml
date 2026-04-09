@@ -1,99 +1,129 @@
+changedFieldIndicator: null
 field: 474577a8-c85d-45d9-88b1-6078fbe89a4c # Sleep Submission
 fieldLayouts:
   48215b4b-1e60-43c2-a1d4-2733d94cafd8:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 77c96813-c888-4f32-9389-7adaa4c60c08 # ID
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: cdd3a0cc-5bb2-4f02-8a67-2041d95c3c7d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a546818e-ea6e-498f-917b-1051858d588a # Date
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 661a95bc-1a94-45f8-8541-e5410ac79f2a
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a191927a-b8ff-47fa-ac71-d2084abb3538 # Concerns
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 51cfa3c5-a5c3-449f-a94d-71b8f0f881d0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 37b5cda2-9e71-498a-abda-51ed1bf25db9 # Relevant Pathways
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 7de1c8d7-a203-4627-8c7a-91aa420fd462
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f7b661c1-0613-4ac7-91d8-fb0b26478dd6 # Excluded ingredients
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9ac99188-af37-4e33-951f-13e52c8c2ca7
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 539dbc05-009f-419c-a40c-53272f8a2263 # Preferred Phase
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f391035f-a62f-4120-b196-ec7f963a05d9
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 99498dc7-ec84-4c07-b83b-f2170b8b9aeb # Age
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5405bed7-fafb-419a-8772-869083668903
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: d3a87941-2208-4ecf-88ca-11e07da23fdc # Gender
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f5e52d3f-7b41-4ad1-9aca-9c85be34bff0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 371ccaf7-286b-4dd7-9322-4b6ad5dd7387 # PDF Generated
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 49b4a1b7-2a29-415f-9c97-0c09e71481e4
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 4638d81b-084f-4108-930c-f92c3eba56f3
+        userCondition: null
 fields:
   37b5cda2-9e71-498a-abda-51ed1bf25db9: # Relevant Pathways
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: relevantPathways
-    instructions: ''
+    instructions: null
     name: 'Relevant Pathways'
     searchable: true
     settings:
@@ -101,8 +131,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -113,7 +143,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: submissionId
-    instructions: ''
+    instructions: null
     name: ID
     searchable: true
     settings:
@@ -121,8 +151,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -133,7 +163,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: pdfGenerated
-    instructions: ''
+    instructions: null
     name: 'PDF Generated'
     searchable: true
     settings:
@@ -141,8 +171,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -153,7 +183,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: preferredPhase
-    instructions: ''
+    instructions: null
     name: 'Preferred Phase'
     searchable: true
     settings:
@@ -161,8 +191,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -173,7 +203,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: age
-    instructions: ''
+    instructions: null
     name: Age
     searchable: true
     settings:
@@ -181,8 +211,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -193,7 +223,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: concerns
-    instructions: ''
+    instructions: null
     name: Concerns
     searchable: true
     settings:
@@ -201,8 +231,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -213,7 +243,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: date
-    instructions: ''
+    instructions: null
     name: Date
     searchable: true
     settings:
@@ -221,8 +251,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -233,7 +263,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: gender
-    instructions: ''
+    instructions: null
     name: Gender
     searchable: true
     settings:
@@ -241,8 +271,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -253,7 +283,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: excludedIngredients
-    instructions: ''
+    instructions: null
     name: 'Excluded ingredients'
     searchable: true
     settings:
@@ -261,8 +291,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

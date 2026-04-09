@@ -3,6 +3,7 @@ fieldLayouts:
   ec0286e3-c27d-4a44-9945-0195fc625c7a:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,50 +28,67 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: cedd7c38-1ff8-49d1-94f8-c11264e8a75e
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 465b7c35-c93e-4d9f-ab1d-b25bf2915bcd # Sales Reps
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 8c06098e-df1a-4aa6-bf5c-a434d0b6795c
+            userCondition: null
             warning: null
             width: 100
         name: Profile
-        sortOrder: 1
+        uid: 45037d86-878f-4c89-8075-8c8dc39fe649
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: c4cb6c4f-c6f5-4541-a22f-a7f25ca9c846 # Sales Rep States
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b9915283-46fd-4190-bd55-5a1483d5d8c0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 107c7d86-7c10-442b-a404-cf9af017954b # Sales Rep Counties
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: aebb840b-f036-401b-a58d-bd7b99eb4d93
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8962ff6b-4893-4cea-80d0-d7e5bff9400c # Sales Rep Zips
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9570f2fd-5c8d-41c6-b19d-742049298735
+            userCondition: null
             warning: null
             width: 100
         name: Locations
-        sortOrder: 2
+        uid: 33bc1156-4fe7-4b3c-9127-e2ab3b9f55ff
+        userCondition: null
 handle: salesRep
 name: 'Sales Rep'
 siteSettings:

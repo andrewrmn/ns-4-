@@ -1,7 +1,11 @@
-{% if order.customer.user.isInGroup('patients') %}
-{% include 'shop/emails/_orderReceivedPatient' %}
+{# Link Stripe/Enupal checkouts often have order.customer without userId — resolve User by email for group check. #}
+{% set orderCustomerUser = order.customer ? order.customer.user : null %}
+{% set resolvedCommerceUser = orderCustomerUser ?: (order.email|default('')|trim != '' ? craft.users().email(order.email|trim).one() : null) %}
+
+{% if resolvedCommerceUser and resolvedCommerceUser.isInGroup('patients') %}
+{% include 'shop/emails/_orderReceivedPatient' with { order: order, orderGreetingUser: resolvedCommerceUser } %}
 {% else %}
-Thank you, {{ order.customer.user.firstName }}.
+Thank you, {{ resolvedCommerceUser ? resolvedCommerceUser.firstName : order.email }}.
 
 <p>Your order has been received and is being processed.</p>
 
@@ -12,12 +16,16 @@ Thank you, {{ order.customer.user.firstName }}.
 <p><b>Total Price:</b> ${{ order.totalPrice }}</p>
 
 <h3>Your Information</h3>
-{% if order.customer.user.firstName and order.customer.user.lastName %}
-<p><b>Name: </b>{{ order.customer.user.firstName }} {{ order.customer.user.lastName }}</p>
+{% if resolvedCommerceUser %}
+{% if resolvedCommerceUser.firstName and resolvedCommerceUser.lastName %}
+<p><b>Name: </b>{{ resolvedCommerceUser.firstName }} {{ resolvedCommerceUser.lastName }}</p>
 {% else %}
-<p><b>Name: </b>{{ order.customer.user.fullName }}</p>
+<p><b>Name: </b>{{ resolvedCommerceUser.fullName }}</p>
 {% endif %}
-<p><b>Email: </b>{{ order.customer.user.email }}</p>
+<p><b>Email: </b>{{ resolvedCommerceUser.email }}</p>
+{% else %}
+<p><b>Email: </b>{{ order.email }}</p>
+{% endif %}
 
 {% if order.shippingAddress %}
 <h3>Shipping Address</h3>

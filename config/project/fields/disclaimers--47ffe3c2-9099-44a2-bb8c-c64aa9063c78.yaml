@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: disclaimers
-instructions: ''
+instructions: null
 name: Disclaimers
 searchable: true
 settings:
@@ -12,12 +12,12 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: ''
+  purifierConfig: null
+  purifyHtml: false
   redactorConfig: Standard.json
-  removeEmptyTags: true
-  removeInlineStyles: true
-  removeNbsp: true
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
   showHtmlButtonForNonAdmins: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true

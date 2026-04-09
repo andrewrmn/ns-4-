@@ -3,79 +3,99 @@ fieldLayouts:
   1302e41b-e3f2-4312-95d9-b8d96c9ee879:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 1a7dbb25-bb4f-4039-9a1a-49a727ed8a9b # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 09fc7465-2cb9-45c4-ae39-d732f4edf163
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0c30c94f-3304-4354-8d31-58ceeb9f0f9a # Sub Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 8329ed48-5f26-4f9b-b571-e227d03cdaa0
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: ea628848-2ee7-4dee-8d16-12284700d5d6 # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4959ee8f-d88e-46a9-96d8-baafe2da6367
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1f85f594-bab5-499f-85b9-c9f89ca211e9 # Button
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 6d75ecce-cc6a-41d0-ad0d-9b654a069e88
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 65256469-cb0a-466f-b0f6-1622df1cf8d8 # Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 0e2b391d-7689-46ae-a1b3-3de7fc76780c
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 7e4d0918-e3e2-44b8-996f-f35030e5dcc5 # Layout
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 7f751e2d-004f-4c53-b23c-ca03261f7490
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: aacdbcf4-ac7f-4100-9648-cebca517d851
+        userCondition: null
 fields:
   0c30c94f-3304-4354-8d31-58ceeb9f0f9a: # Sub Headline
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: subHeadline
-    instructions: ''
+    instructions: null
     name: 'Sub Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -86,16 +106,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -106,18 +126,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: button
-    instructions: ''
+    instructions: null
     name: Button
     searchable: true
     settings:
-      allowCustomText: ''
-      allowTarget: ''
-      defaultText: ''
+      allowCustomText: false
+      allowTarget: false
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -130,7 +150,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -143,7 +163,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Url
+            - presseddigital\linkit\models\Url
             -
               __assoc__:
                 -
@@ -168,7 +188,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - fruitstudios\linkit\models\Twitter
+            - presseddigital\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -181,7 +201,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Facebook
+            - presseddigital\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -194,7 +214,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Instagram
+            - presseddigital\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -207,7 +227,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\LinkedIn
+            - presseddigital\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -220,7 +240,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Entry
+            - presseddigital\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -236,7 +256,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - fruitstudios\linkit\models\Category
+            - presseddigital\linkit\models\Category
             -
               __assoc__:
                 -
@@ -252,7 +272,7 @@ fields:
                   - customSelectionLabel
                   - 'Select a category'
           -
-            - fruitstudios\linkit\models\Asset
+            - presseddigital\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -268,7 +288,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an asset'
           -
-            - fruitstudios\linkit\models\User
+            - presseddigital\linkit\models\User
             -
               __assoc__:
                 -
@@ -287,7 +307,7 @@ fields:
                   - userPath
                   - ''
           -
-            - fruitstudios\linkit\models\Product
+            - presseddigital\linkit\models\Product
             -
               __assoc__:
                 -
@@ -304,17 +324,17 @@ fields:
                   - 'Select an entry'
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   7e4d0918-e3e2-44b8-996f-f35030e5dcc5: # Layout
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: layout
-    instructions: ''
+    instructions: null
     name: Layout
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -346,29 +366,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: image
-    instructions: ''
+    instructions: null
     name: Image
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
@@ -379,7 +403,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: ''
+    instructions: null
     name: Body
     searchable: true
     settings:
@@ -389,13 +413,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged

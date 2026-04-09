@@ -54,7 +54,7 @@
           <div class="d-flex flex-justify-end">
             {% set hasPDF = true %}
             <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
-              <input type="hidden" name="action" value="/neuroselect/pdf/email-pdf">
+              <input type="hidden" name="action" value="neuroselect/pdf/email-pdf">
               {{ csrfInput() }}
               <input type="hidden" name="submissionId" value="{{ submission.activationCode }}">
               <input type="hidden" name="userId" value="{{ user.id }}">
@@ -541,12 +541,16 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '/neuroselect/generate-pdf',
+      url: '/actions/neuroselect/pdf/generate-pdf',
       dataType: 'json'
     }).done(function (data) {
       $('html').removeClass('thinking').removeClass('generating');
       $('#download-pdf').removeClass('d-none');
       form.addClass('d-none');
+
+      if (data && data.csrfParam && data.csrfTokenValue) {
+        $('input[name="' + data.csrfParam + '"]').val(data.csrfTokenValue);
+      }
 
       if ($('html').hasClass('email-queue')) {
         $('#pdf-email-form-submit')[0].click();
@@ -555,8 +559,13 @@
       }
 
 
-    }).fail(function (error) {
+    }).fail(function (xhr) {
       $('html').removeClass('thinking').removeClass('generating');
+      var msg = 'Could not generate PDF.';
+      if (xhr.responseJSON && xhr.responseJSON.message) {
+        msg = xhr.responseJSON.message;
+      }
+      window.alert(msg);
     });
   });
 
@@ -579,18 +588,19 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '/neuroselect/email-pdf',
+      url: '/actions/neuroselect/pdf/email-pdf',
       dataType: 'json'
     }).done(function (data) {
-
-      $('html').removeClass('email-queue thinking')
-      $('#email-sent').addClass('is-active');
-
-      setTimeout(function () {
-        $('#email-sent').removeClass('is-active');
-      }, 5000);
-
-    }).fail(function (error) {
+      $('html').removeClass('email-queue thinking');
+      if (data && data.success) {
+        $('#email-sent').addClass('is-active');
+        setTimeout(function () {
+          $('#email-sent').removeClass('is-active');
+        }, 5000);
+      } else {
+        $('#email-fail').addClass('is-active');
+      }
+    }).fail(function (xhr) {
       $('html').removeClass('email-queue thinking');
       $('#email-fail').addClass('is-active');
     });

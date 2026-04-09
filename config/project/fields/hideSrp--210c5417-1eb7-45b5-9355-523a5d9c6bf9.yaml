@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: boolean
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: hideSrp
-instructions: ''
+instructions: null
 name: 'Hide SRP?'
 searchable: false
 settings:

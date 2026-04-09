@@ -185,7 +185,7 @@
                     <td>{{ order.dateOrdered|date('m/d/y') }}</td>
                     <td>{% if order.user.firstName %}{{ order.user.firstName }} {{ order.user.lastName }}{% else %}{{ order.user.username }}{% endif %}</td>
                     <td>{{ order.itemTotal |commerceCurrency(convert=true, format=true)}}</td>
-                    {% set total = order.itemTotal * (hcpNeurocashPercentage / 100) %}
+                    {% set total = order.itemTotal * (neurocashPercentage / 100) %}
                     <td>{{ total |commerceCurrency(convert=true, format=true) }}</td>
                   </tr>
 

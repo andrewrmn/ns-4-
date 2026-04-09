@@ -2,10 +2,11 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
 handle: complimentaryBox
-instructions: ''
+instructions: null
 name: 'Complimentary Box'
 searchable: false
 settings:
+  columnType: string
   options:
     -
       __assoc__:

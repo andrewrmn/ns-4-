@@ -145,7 +145,7 @@
                                                         <td><strong>{{ order.dateOrdered|date('m/d/y') }}</strong></td>
                                                         <td><strong>{{ order.id }}</strong></td>
                                                         <td><strong>${{ order.totalPrice }}</strong></td>
-                                                        <td><strong>{% for history in order.histories if history.newStatus == 'Completed' %}{{ history.dateCreated|date('m/d/y') }}{% endfor %}</strong></td>
+                                                        <td><strong>{% for history in order.histories %}{% if history.newStatus == 'Completed' %}{{ history.dateCreated|date('m/d/y') }}{% endif %}{% endfor %}</strong></td>
                                                         <td><a class="d-flex flex-items-center" href="{{ url('patients/order/invoice?number=' ~ order.number) }}">View Invoice <span class="ml-2 arrow-right"><img src="../../images/blue-arrow.png" width="12" /></span></a></td>
                                                     </tr>
                                                 {% endfor %}

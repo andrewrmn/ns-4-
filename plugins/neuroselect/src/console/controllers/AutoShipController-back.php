@@ -41,7 +41,7 @@ use enupal\stripe\Stripe;
  *
  * The actionIndex() method is what is executed if no sub-commands are supplied, e.g.:
  *
- * ./craft neuroselect/auto-ship
+ * ./craft autoship-schedule/auto-ship (superseded path: neuroselect/auto-ship)
  *
  * Actions must be in 'kebab-case' so actionDoSomething() maps to 'do-something',
  * and would be invoked via:
@@ -53,7 +53,7 @@ class AutoShipController extends Controller
     // =========================================================================
 
     /**
-     * Handle neuroselect/auto-ship console commands
+     * Handle autoship-schedule/auto-ship console commands
      *
      * The first line of this method docblock is displayed as the description
      * of the Console Command in ./craft help
@@ -70,7 +70,7 @@ class AutoShipController extends Controller
     }
 
     /**
-     * Handle neuroselect/auto-ship/renew-auto-ship console commands
+     * Handle autoship-schedule/auto-ship/renew-auto-ship console commands
      *
      * The first line of this method docblock is displayed as the description
      * of the Console Command in ./craft help

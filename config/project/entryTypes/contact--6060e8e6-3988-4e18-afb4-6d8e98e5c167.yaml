@@ -2,6 +2,7 @@ fieldLayouts:
   310afecb-f089-428d-b5ef-3fbf4a6b0d02:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,45 +27,62 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: fcf57d6c-8c51-46cb-9adb-24864f6d85d2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: d18f0e41-c287-4e21-89b5-4b593c3f9534
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: b0b0037d-3e09-47c0-a685-339635407c57 # Contact Tiles
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 25d99fb2-d2c1-4c4b-be39-165f25fbe053
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 55eb48df-c8d5-42eb-b11d-f3add7571456
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 15437087-f989-4528-b5cd-e42a5aad58ad # SEO
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: cfda296b-cc67-4d47-bc11-96ed7de6cc43
+            userCondition: null
             warning: null
             width: 100
         name: SEO
-        sortOrder: 2
+        uid: fae76b7b-f0cf-4400-9335-a9099ac717b2
+        userCondition: null
 handle: contact
 hasTitleField: false
 name: Contact
 section: 63dbe529-4121-4b5c-861e-eb57f018bbf7 # Contact
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

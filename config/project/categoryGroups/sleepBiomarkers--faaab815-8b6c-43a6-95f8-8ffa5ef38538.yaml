@@ -3,6 +3,7 @@ fieldLayouts:
   728f6f7c-83f5-45af-acfc-2868b31190fb:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -10,7 +11,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,13 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: ca649b20-aad0-44aa-9bfd-24a0e24add18
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 26ebe286-cadd-4458-9985-4290937781e5
+        userCondition: null
 handle: sleepBiomarkers
 name: 'Sleep Biomarkers'
 siteSettings:

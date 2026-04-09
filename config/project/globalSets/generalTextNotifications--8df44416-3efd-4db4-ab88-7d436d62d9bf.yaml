@@ -2,63 +2,83 @@ fieldLayouts:
   ef414f8e-c22a-431f-be16-1ce4ecf96852:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 5367bd89-34e8-4536-9dc6-4bfe8cbb6fe7 # Shipping Notification
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b6c7c2a4-7764-4e4d-a141-2f8363832177
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 04a9ca8f-1f1b-4fe4-a0c6-071c4f1dc17b # New Account Note
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 59404af2-3dfa-4fdc-abf4-b1ebf49e6961
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: af986110-9f12-431d-b653-7cf1ddcdd3a7 # Sales Rep Search
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: d9bac60e-5bfa-4368-bfc8-cb2166d31d7b
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6d4cd5f1-16c3-42c3-a54e-64aac047d864 # Sales Rep Search Empty
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 25fb855f-2a0d-4433-9c46-158f1f605092
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 19793459-73e0-400d-b5a6-ec42349e1cd2 # Must Be Registered
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5710b0da-759e-4843-a857-7b809103d079
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 63776c34-9e85-4c72-8f64-10a455c2ae68 # Patient fulfillment: Terms & Conditions
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c923517c-cbce-4e86-9313-3685a5ee3d33
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 84644c79-d095-41ea-ad87-f8a63d2a9f12
+        userCondition: null
 handle: generalTextNotifications
 name: 'General Text Notifications'
 sortOrder: 3

@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 81b70b61-6757-484e-ace4-d9f92781c701 # Commerce
 handle: additionalInformation
-instructions: ''
+instructions: null
 name: 'Additional Information'
 searchable: true
 settings:
@@ -12,12 +12,12 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: '1'
-  redactorConfig: ''
-  removeEmptyTags: true
-  removeInlineStyles: true
-  removeNbsp: true
+  purifierConfig: null
+  purifyHtml: true
+  redactorConfig: null
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
   showHtmlButtonForNonAdmins: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true

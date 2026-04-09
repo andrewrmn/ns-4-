@@ -2,6 +2,7 @@ fieldLayouts:
   1e45f2ee-0f37-4180-a88f-591730975a65:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,14 +27,20 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 54d5760c-b8fc-4e45-97c8-ca32ec41c3be
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: b29228f4-676c-4d70-bb3a-5e6fdda8d6cc
+        userCondition: null
 handle: login
 hasTitleField: false
 name: Login
 section: b5b15287-8bfd-4df9-b271-06ed382fb53d # Login
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

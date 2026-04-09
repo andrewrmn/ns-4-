@@ -3,61 +3,78 @@ fieldLayouts:
   eab418a2-a39b-4653-bc07-44c735f7e856:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: ec73f3f2-7c8a-48eb-a096-c95f8c6f90ff # Label
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 44bd4a6b-420a-4ac2-be3a-544a688dcaa6
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 29be2be4-fba9-43c0-8186-7f7b51087d55 # Handle
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 7729e22a-a531-4b2b-94ee-89d1a62d04fe
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 74f9c2ae-2b69-4fc3-8897-3544cdcf6130 # Placeholder
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 764ae978-032b-4b6c-b70c-45d6878b626b
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8ce28b8f-8420-4ff3-9592-7038280ede1b # Initial Rows
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 87d7b9ad-2d2a-4ad7-923b-234bee6b8412
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: e3c2c8c1-4418-49b4-bf0f-ebe7e4b78874 # Required
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c6598cd2-6f4a-41c4-ab55-6f1cc276cc6f
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 149dd90e-85f5-4a49-9b3f-908e04aa22de
+        userCondition: null
 fields:
   8ce28b8f-8420-4ff3-9592-7038280ede1b: # Initial Rows
     columnSuffix: nkxjhasq
     contentColumnType: integer(10)
     fieldGroup: null
     handle: initialRows
-    instructions: ''
+    instructions: null
     name: 'Initial Rows'
     searchable: true
     settings:
@@ -78,16 +95,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fieldHandle
-    instructions: ''
+    instructions: null
     name: Handle
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -98,16 +115,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: placeholder
-    instructions: ''
+    instructions: null
     name: Placeholder
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -133,16 +150,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: label
-    instructions: ''
+    instructions: null
     name: Label
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

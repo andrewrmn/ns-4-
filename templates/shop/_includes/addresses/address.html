@@ -6,71 +6,62 @@
     {% set zip = address.postalCode ?? attribute(address, 'zipCode') ?? null %}
     {% set stateLabel = null %}
     {% if address.administrativeArea is defined and address.administrativeArea %}
-        {% set subdivisions = craft.app.addresses.getSubdivisionRepository().getList([address.countryCode ?? 'US']) %}
-        {% set stateLabel = subdivisions[address.administrativeArea] ?? address.administrativeArea %}
+    {% set subdivisions = craft.app.addresses.getSubdivisionRepository().getList([address.countryCode ?? 'US']) %}
+    {% set stateLabel = subdivisions[address.administrativeArea] ?? address.administrativeArea %}
     {% elseif address.stateText is defined %}
-        {% set stateLabel = address.stateText %}
+    {% set stateLabel = address.stateText %}
     {% endif %}
     {% set phone = address.addressPhone ?? attribute(address, 'phone') ?? null %}
 
     {% if address.firstName is not empty or address.lastName is not empty %}
-        <span>
-            <strong class="text-black">
-                {% if address.addressAttention is not empty %}
-                    Att: {{ address.addressAttention }}<br />
-                {% elseif address.attention is defined and address.attention is not empty %}
-                    Att: {{ address.attention }}<br />
-                {% endif %}
+    <span>
+        <strong class="text-black">
+            {% if address.addressAttention is not empty %}
+            Att: {{ address.addressAttention }}<br />
+            {% elseif address.attention is defined and address.attention is not empty %}
+            Att: {{ address.attention }}<br />
+            {% endif %}
 
-                {% if address.title is not empty %}
-                    {{ address.title }}<br />
-                {% endif %}
+            {% if address.firstName is not empty %}
+            {{ address.firstName }}
+            {% endif %}
 
-                {% if address.firstName is not empty %}
-                    {{ address.firstName }}
-                {% endif %}
-
-                {% if address.lastName is not empty %}
-                    {{ address.lastName }}
-                {% endif %}
-                <br>
-                {% if org is not empty %}
-                    {{ org }}
-                {% endif %}
-            </strong>
-        </span>
+            {% if address.lastName is not empty %}
+            {{ address.lastName }}
+            {% endif %}
+            <br>
+            {% if org is not empty %}
+            {{ org }}
+            {% endif %}
+        </strong>
+    </span>
     {% endif %}
 
 
     {% if line1 is not empty %}
-        <div>{{ line1 }}</div>
+    <div>{{ line1 }}</div>
     {% endif %}
 
     {% if line2 is not empty %}
-        <div>{{ line2 }}</div>
+    <div>{{ line2 }}</div>
     {% endif %}
 
     <div>
-        {% if city is not empty %}
-            <span>{{ city }}</span>
-        {% endif %}
-
-        {% if stateLabel is not empty %}
-            <span>, {{ stateLabel }}</span>
-        {% endif %}
+        {% if city is not empty %}<span>{{ city }}</span>{% endif %}{% if stateLabel is not empty %}<span>, {{
+            stateLabel }}</span>{% endif %}
 
         {% if zip is not empty %}
-            <span> {{ zip }}</span>
+        <span> {{ zip }}</span>
         {% endif %}
     </div>
 
     {% if address.countryCode is defined and address.countryCode %}
-        <div>{{ address.getCountry().getName() }}</div>
+    <div>{{ address.getCountry().getName() }}</div>
     {% elseif address.countryText is defined %}
-        <div>{{ address.countryText }}</div>
+    <div>{{ address.countryText }}</div>
     {% endif %}
 
     {% if phone is not empty %}
-        <div>p: {{ phone }}</div>
+    <div>p: {{ phone }}</div>
     {% endif %}
 </div>

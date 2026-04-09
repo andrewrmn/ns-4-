@@ -11,7 +11,7 @@ settings:
   max: null
   min: 0
   prefix: null
-  previewCurrency: ''
+  previewCurrency: null
   previewFormat: decimal
   size: null
   suffix: '%'

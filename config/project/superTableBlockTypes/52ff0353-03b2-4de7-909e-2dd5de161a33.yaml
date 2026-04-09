@@ -1,92 +1,116 @@
+changedFieldIndicator: null
 field: b0b0037d-3e09-47c0-a685-339635407c57 # Contact Tiles
 fieldLayouts:
   8b677aee-7256-4daa-9d2d-18ba06ab5f90:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 7024b210-f463-4600-9ac7-05625e3883f6 # Icon
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 62342810-2568-4ac2-bec7-53ed29a77762
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 7528b442-be60-430f-b0cc-020db103633a # Headline
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a8375cae-daec-44db-894a-2913af0dfbc4
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: b59e4497-6d6b-4c2b-a77e-11c197e02a07 # Hours of Operation
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: ee6ff526-9021-4032-ac16-7dcac22803d9
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6edadbad-87ae-4215-9fc3-f66a52c1182b # Phone Number
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: dca3e1a7-d755-46ae-8a3c-6f4f9dd039c4
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 175237b9-6eeb-4dbf-9db8-90e23c0f1eeb # Email Address
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3ac0169b-a557-4a1d-8ce9-f7eeed7f0d28
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 84930ff9-6399-4255-96ec-c812788e899d # Fax
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 59d41bea-cc3d-414b-b798-780678ca88a2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8187a7e0-4154-4f90-8e1c-f1a9f19291f0 # Address
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4defb41f-4b91-4145-8c8e-93110df43067
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 9d1e9530-d8b5-46b8-957b-b41bbcf4bcba
+        userCondition: null
 fields:
   6edadbad-87ae-4215-9fc3-f66a52c1182b: # Phone Number
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: phoneNumber
-    instructions: ''
+    instructions: null
     name: 'Phone Number'
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -94,35 +118,39 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   7024b210-f463-4600-9ac7-05625e3883f6: # Icon
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: icon
-    instructions: ''
+    instructions: null
     name: Icon
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: '1'
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: 1
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null
@@ -133,7 +161,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
@@ -141,8 +169,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -153,7 +181,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: address
-    instructions: ''
+    instructions: null
     name: Address
     searchable: true
     settings:
@@ -163,8 +191,8 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
       removeEmptyTags: true
       removeInlineStyles: true
@@ -181,18 +209,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fax
-    instructions: ''
+    instructions: null
     name: Fax
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -200,24 +228,24 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   175237b9-6eeb-4dbf-9db8-90e23c0f1eeb: # Email Address
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: emailAddress
-    instructions: ''
+    instructions: null
     name: 'Email Address'
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -225,13 +253,13 @@ fields:
                   - 1
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   b59e4497-6d6b-4c2b-a77e-11c197e02a07: # Hours of Operation
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: hoursOfOperation
-    instructions: ''
+    instructions: null
     name: 'Hours of Operation'
     searchable: true
     settings:
@@ -239,8 +267,8 @@ fields:
       charLimit: null
       code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

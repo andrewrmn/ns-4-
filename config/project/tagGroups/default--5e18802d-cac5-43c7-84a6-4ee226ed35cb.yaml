@@ -2,6 +2,7 @@ fieldLayouts:
   055e2b23-412e-4bd0-8c07-a41ac1c0876a:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,9 +27,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
+            uid: a4d93011-3831-4ea2-abaa-6964ebe8695a
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 2ee7b84c-96ec-4a63-88cd-56bc9795419f
+        userCondition: null
 handle: default
 name: Default

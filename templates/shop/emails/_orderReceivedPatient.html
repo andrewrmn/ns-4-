@@ -1,3 +1,8 @@
+{# Commerce + Stripe: customer record may exist without userId; fall back to order email → User. #}
+{% set _orderEmailUser = orderGreetingUser ?? (order.customer ? order.customer.user : null) %}
+{% if not _orderEmailUser and order.email|default('')|trim != '' %}
+	{% set _orderEmailUser = craft.users().email(order.email|trim).one() %}
+{% endif %}
 
 <!DOCTYPE html>
 
@@ -135,7 +140,7 @@
 <td class="pad" style="padding-left:10px;padding-right:10px;">
 <div style="font-family: sans-serif">
 <div class="" style="font-size: 12px; mso-line-height-alt: 14.399999999999999px; color: #555555; line-height: 1.2; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif;">
-<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:24px;">Thanks {{ order.customer.user.firstName }}</span></p>
+<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:24px;">Thanks {{ _orderEmailUser ? _orderEmailUser.firstName|default(_orderEmailUser.name|default('')) : 'there' }}</span></p>
 </div>
 </div>
 </td>

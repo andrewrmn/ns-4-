@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: e3dd5964-8411-45ae-9571-c8789a0a32d9 # Sales Reps
 handle: salesRepZips
-instructions: ''
+instructions: null
 name: 'Sales Rep Zips'
 searchable: true
 settings:
@@ -34,6 +34,7 @@ settings:
           - ''
   maxRows: null
   minRows: null
+  staticRows: false
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Table

@@ -1,5 +1,4 @@
 allowPublicRegistration: true
-deactivateByDefault: false
 defaultGroup: 51e7da1c-9888-4197-a25e-c456eebf2312 # Health Care Professionals
 photoSubpath: ''
 photoVolumeUid: 4dfe4bea-c93a-4f15-be8b-20bd2693323e # Images

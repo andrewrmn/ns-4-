@@ -3,106 +3,138 @@ fieldLayouts:
   14c9275a-9d3e-4060-83a4-f559e3a644d0:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 154618b9-8cee-4472-9df5-c41fb2548a3b # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 690aeb65-6efb-4d3f-9478-54b8b286f762
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 58226406-eba8-48e4-b665-a507ed627ac3 # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 1526a955-af2e-4654-a33e-91503572c626
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: aa333c04-32dc-4d7e-966a-729d825ad640 # Image 1
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 59517e8c-e858-42a9-9bc4-d4097957d176
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: faf84839-506f-4b4c-8a0d-0b2aaf333c88 # Block 1 Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 206df246-7bad-420c-af70-9f12da0b0d72
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 8c23fe86-2db3-4d5c-9342-377a091be1ad # Block 1 Sub Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 99592a19-38b6-4b44-8752-0594353d3942
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1b273cdc-d0a3-45b7-92cf-b15a5aa7a53b # Block 1 Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 6490a2bf-2fb8-4ccc-8207-701b87a560bc
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 144726a0-ccad-4a4a-86e1-f0c40ec5ad1a # Block 2 Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: c4e4a722-008b-4aab-9be3-8827e628dd4f
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: edd3e836-88f6-4046-b55d-3385ee411c83 # Block 2 Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 4c3b8abb-0def-4298-bb21-8fc5b972a5de
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 4442c1d6-016d-439c-9cbb-c07f02431e2f # Block 2 Sub Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 7564117a-a73a-482f-9cb4-fea53d445d92
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f991768d-cef9-44ff-a740-21129a517739 # Block 2 Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 057f9444-b9de-4848-aea2-c69d8e23eb0e
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 06ccf641-af39-4377-8d63-b5d7c92f4f0a
+        userCondition: null
 fields:
   1b273cdc-d0a3-45b7-92cf-b15a5aa7a53b: # Block 1 Body
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: block1Body
-    instructions: ''
+    instructions: null
     name: 'Block 1 Body'
     searchable: true
     settings:
@@ -112,13 +144,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -130,16 +162,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block1SubHeadline
-    instructions: ''
+    instructions: null
     name: 'Block 1 Sub Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -150,16 +182,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block2SubHeadline
-    instructions: ''
+    instructions: null
     name: 'Block 2 Sub Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -170,29 +202,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: block2Image
-    instructions: ''
+    instructions: null
     name: 'Block 2 Image'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
@@ -203,16 +239,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -223,7 +259,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: ''
+    instructions: null
     name: Body
     searchable: true
     settings:
@@ -233,13 +269,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -251,29 +287,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: image1
-    instructions: ''
+    instructions: null
     name: 'Image 1'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: list
     translationKeyFormat: null
@@ -284,16 +324,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block2Headline
-    instructions: ''
+    instructions: null
     name: 'Block 2 Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -304,7 +344,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block2Body
-    instructions: ''
+    instructions: null
     name: 'Block 2 Body'
     searchable: true
     settings:
@@ -314,13 +354,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -332,16 +372,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block1Headline
-    instructions: ''
+    instructions: null
     name: 'Block 1 Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

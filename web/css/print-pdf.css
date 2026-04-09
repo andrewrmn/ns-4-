@@ -1,0 +1,8 @@
+/**
+ * Loaded with media="print" from partials/head — applies to browser print and
+ * headless Chromium (--print-to-PDF), not to normal screen layout.
+ * (pdf9.css is still used by Dompdf/wkhtmltopdf; this covers .no-print for real Chrome.)
+ */
+.no-print {
+	display: none !important;
+}

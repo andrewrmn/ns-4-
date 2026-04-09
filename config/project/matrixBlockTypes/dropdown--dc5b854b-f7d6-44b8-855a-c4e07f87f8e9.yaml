@@ -3,45 +3,59 @@ fieldLayouts:
   df808df8-2e6c-465b-ad06-a97a398af092:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 45d7a531-d9d3-4444-8ba1-3ec91cf8b6ac # Label
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 227d531d-3f33-40cd-bf25-8d1fb2dedad1
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: dd7f88ee-c166-4f12-b4fa-b0e59f0ac85a # Handle
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: f817ae8a-13ae-4164-8107-82402b8549f4
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 802e6b2e-1fa3-49bd-a1f5-7242fa2b10ec # Options
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 54a2547e-92e2-4b53-9bba-881aa88f447d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0f10e286-6da3-4f9e-b4ab-2c29faf6bc77 # Required
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b8dbb1c5-1ba6-4b27-8945-f53c3736f1eb
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 4a4e6013-adf9-4738-af0f-762f181e21e1
+        userCondition: null
 fields:
   0f10e286-6da3-4f9e-b4ab-2c29faf6bc77: # Required
     columnSuffix: ikskfzgd
@@ -63,16 +77,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: label
-    instructions: ''
+    instructions: null
     name: Label
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -83,7 +97,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: options
-    instructions: ''
+    instructions: null
     name: Options
     searchable: true
     settings:
@@ -132,8 +146,9 @@ fields:
             -
               - col2
               - ''
-      maxRows: ''
-      minRows: '1'
+      maxRows: null
+      minRows: 1
+      staticRows: false
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Table
@@ -142,16 +157,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: fieldHandle
-    instructions: ''
+    instructions: null
     name: Handle
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

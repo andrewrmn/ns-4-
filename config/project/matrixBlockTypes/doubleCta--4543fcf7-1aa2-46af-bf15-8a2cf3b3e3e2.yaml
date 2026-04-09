@@ -3,106 +3,138 @@ fieldLayouts:
   80d987f1-a8b9-484b-86e5-21a00db4ae91:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 7531473a-5454-4ad2-8800-c55e9ac6675c # Block 1 Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 17684f76-ac84-4f74-ab71-a489abd4b2cb
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 03728d78-c381-4018-ac8e-5aff2d8b873f # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 9ed60f12-d6f6-477c-bb05-5eef5ec213d3
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0008d7da-9e97-4c33-b760-17a1d8e0c024 # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e058bf0d-a7b6-422c-875a-3dd59f5394e6
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 755f3e9f-d4d9-4376-af51-fcd63c5344e5 # Button
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 86011af3-9db6-4093-a299-898f06910d97
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: cce2e1ed-7e08-49be-9c32-cc4edadbd8f1 # Block 1 BG Color
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 858840df-8a26-40e2-9848-69454b519f59
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 90b0550c-f986-4d82-88cb-9fcc2560ceaf # Block 2 Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: dc653c6e-a8eb-44aa-a045-08c39a626eba
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: f7a8289f-e018-449a-9605-77399b92d5b9 # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 07328858-683b-4f58-bb21-e485be7c9d5d
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 73a35c6c-2f2d-4147-8502-e427c0979fb2 # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 532bf910-fb93-458f-a848-dc73f9b7ea89
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: eaab0929-d90b-4e5a-a181-b4c6c0c774fa # Button
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: b8b8776b-8dc8-422f-9ab3-5a5a922316f8
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 116b6bce-8ec6-4074-9747-927e46bf5f36 # Block 2 BG Color
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 14a9ecc9-3d8d-46c0-af9a-d1c328d768cc
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: d6caea1a-c7c5-4074-b3f9-e7120148772e
+        userCondition: null
 fields:
   0008d7da-9e97-4c33-b760-17a1d8e0c024: # Body
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: ''
+    instructions: null
     name: Body
     searchable: true
     settings:
@@ -112,13 +144,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -130,7 +162,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block2Body
-    instructions: ''
+    instructions: null
     name: Body
     searchable: true
     settings:
@@ -140,13 +172,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -158,29 +190,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: block2Image
-    instructions: ''
+    instructions: null
     name: 'Block 2 Image'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null
@@ -188,14 +224,14 @@ fields:
     type: craft\fields\Assets
   116b6bce-8ec6-4074-9747-927e46bf5f36: # Block 2 BG Color
     columnSuffix: null
-    contentColumnType: string(7)
+    contentColumnType: char(7)
     fieldGroup: null
     handle: block2BgColor
-    instructions: ''
+    instructions: null
     name: 'Block 2 BG Color'
     searchable: true
     settings:
-      defaultColor: ''
+      defaultColor: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Color
@@ -204,18 +240,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: button
-    instructions: ''
+    instructions: null
     name: Button
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -228,7 +264,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -241,7 +277,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Url
+            - presseddigital\linkit\models\Url
             -
               __assoc__:
                 -
@@ -266,7 +302,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - fruitstudios\linkit\models\Twitter
+            - presseddigital\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -279,7 +315,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Facebook
+            - presseddigital\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -292,7 +328,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Instagram
+            - presseddigital\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -305,7 +341,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\LinkedIn
+            - presseddigital\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -318,7 +354,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Entry
+            - presseddigital\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -334,7 +370,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - fruitstudios\linkit\models\Category
+            - presseddigital\linkit\models\Category
             -
               __assoc__:
                 -
@@ -350,7 +386,7 @@ fields:
                   - customSelectionLabel
                   - 'Select a category'
           -
-            - fruitstudios\linkit\models\Asset
+            - presseddigital\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -366,7 +402,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an asset'
           -
-            - fruitstudios\linkit\models\User
+            - presseddigital\linkit\models\User
             -
               __assoc__:
                 -
@@ -385,7 +421,7 @@ fields:
                   - userPath
                   - ''
           -
-            - fruitstudios\linkit\models\Product
+            - presseddigital\linkit\models\Product
             -
               __assoc__:
                 -
@@ -402,22 +438,22 @@ fields:
                   - 'Select an entry'
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   03728d78-c381-4018-ac8e-5aff2d8b873f: # Headline
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '2'
-      multiline: '1'
+      initialRows: 2
+      multiline: true
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -428,29 +464,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: block1Image
-    instructions: ''
+    instructions: null
     name: 'Block 1 Image'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null
@@ -458,14 +498,14 @@ fields:
     type: craft\fields\Assets
   cce2e1ed-7e08-49be-9c32-cc4edadbd8f1: # Block 1 BG Color
     columnSuffix: null
-    contentColumnType: string(7)
+    contentColumnType: char(7)
     fieldGroup: null
     handle: block1BgColor
-    instructions: ''
+    instructions: null
     name: 'Block 1 BG Color'
     searchable: true
     settings:
-      defaultColor: ''
+      defaultColor: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\Color
@@ -474,18 +514,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: block2Button
-    instructions: ''
+    instructions: null
     name: Button
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -498,7 +538,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -511,7 +551,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Url
+            - presseddigital\linkit\models\Url
             -
               __assoc__:
                 -
@@ -536,7 +576,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - fruitstudios\linkit\models\Twitter
+            - presseddigital\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -549,7 +589,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Facebook
+            - presseddigital\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -562,7 +602,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Instagram
+            - presseddigital\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -575,7 +615,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\LinkedIn
+            - presseddigital\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -588,7 +628,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Entry
+            - presseddigital\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -604,7 +644,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - fruitstudios\linkit\models\Category
+            - presseddigital\linkit\models\Category
             -
               __assoc__:
                 -
@@ -620,7 +660,7 @@ fields:
                   - customSelectionLabel
                   - 'Select a category'
           -
-            - fruitstudios\linkit\models\Asset
+            - presseddigital\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -636,7 +676,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an asset'
           -
-            - fruitstudios\linkit\models\User
+            - presseddigital\linkit\models\User
             -
               __assoc__:
                 -
@@ -655,7 +695,7 @@ fields:
                   - userPath
                   - ''
           -
-            - fruitstudios\linkit\models\Product
+            - presseddigital\linkit\models\Product
             -
               __assoc__:
                 -
@@ -672,22 +712,22 @@ fields:
                   - 'Select an entry'
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   f7a8289f-e018-449a-9605-77399b92d5b9: # Headline
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: block2Headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '2'
-      multiline: '1'
+      initialRows: 2
+      multiline: true
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

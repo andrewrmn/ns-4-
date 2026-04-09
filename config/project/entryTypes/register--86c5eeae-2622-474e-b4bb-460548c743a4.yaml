@@ -2,6 +2,7 @@ fieldLayouts:
   244b349c-c165-4095-93e8-ece97af1d8c1:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -24,54 +27,74 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: df73245e-6c46-402c-b35b-dac36af1bad2
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: a9aeaad5-0a9e-4e5f-90c6-be37560cc464 # Content Modules
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 58348252-548f-40e7-9528-725a006a2bbe
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: 02ae6462-8178-4873-97d4-3bfca4bde98e
+        userCondition: null
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 2fe6d5f4-b503-4e77-a57d-b39914f1d6b3 # How will you be ordering?
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 579888ba-7020-421a-b158-14122118e347
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1686afb0-8e4e-4134-8058-ec4556fa6b9a # How often will you be ordering?
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: dbf9fcf8-d8e6-485d-b671-e9f4b661d4f6
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: bbd916d7-3d2e-44f7-96ea-97924d4da149 # How did you hear about NeuroScience?
             instructions: null
             label: null
-            required: '0'
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 335f67ba-8a69-4766-a9e4-5ac713b5bd25
+            userCondition: null
             warning: null
             width: 100
         name: 'Tab 2'
-        sortOrder: 2
+        uid: 4df8fe44-b21d-42f4-86d7-4d57c6041b92
+        userCondition: null
 handle: register
 hasTitleField: false
 name: Register
 section: 073663c2-4a85-4e07-b664-2b220dc71ad5 # Register
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
 sortOrder: 1
 titleFormat: '{section.name|raw}'
 titleTranslationKeyFormat: null

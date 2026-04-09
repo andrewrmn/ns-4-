@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: c229c28f-e6ca-4957-b7c5-b52c4d483452 # Text
 handle: salesRepSearchEmpty
-instructions: ''
+instructions: null
 name: 'Sales Rep Search Empty'
 searchable: true
 settings:
@@ -12,12 +12,12 @@ settings:
   configSelectionMode: choose
   defaultTransform: ''
   manualConfig: ''
-  purifierConfig: ''
-  purifyHtml: '1'
+  purifierConfig: null
+  purifyHtml: true
   redactorConfig: Standard.json
-  removeEmptyTags: true
-  removeInlineStyles: true
-  removeNbsp: true
+  removeEmptyTags: false
+  removeInlineStyles: false
+  removeNbsp: false
   showHtmlButtonForNonAdmins: true
   showUnpermittedFiles: false
   showUnpermittedVolumes: true

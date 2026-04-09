@@ -3,135 +3,173 @@ fieldLayouts:
   7a956c89-1608-4dd6-8bdb-f84e8d907a0c:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: a12aab03-6629-46b6-ab5b-a47bc4cd4fec # Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: cd572623-d152-47f4-82a5-4accc7ef5804
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9f98b43e-1f86-4335-bb84-a299bf6817c0 # Sub Headline
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3551c1d9-e477-422b-850f-877fbcb5bee8
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 58ba51e8-f8a3-4ccc-85fd-b89c5b3e930f # Body
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e78a4aca-e772-4dfb-8529-7be4da5bab5f
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0c5cf0e8-3681-4b2c-8d27-cc0e0a81abe8 # Button
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 068c9127-c635-4bb3-80c4-1c5d0807fe98
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 94a0c1a1-5d4d-43c3-8459-09aeba74b114 # Button Color
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5c485370-dc28-4077-8c7c-0d207d707214
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 15fb17e6-59b9-49c6-845c-e8f374b93306 # Button 2
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 5c876acc-b812-435c-b5a1-59d356199e38
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9e88b5e2-b277-4519-91a7-e1921ad2209d # Button 2 Color
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 96291391-37ef-4cb4-8b86-f756c5c06126
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: df5bb03d-741e-499b-89e6-3597953a9c87 # Background Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: e4104cdd-0be0-45b3-a89d-19f700c522ee
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 1d3c8d26-b6af-4b75-a54b-9128142ff890 # Text align
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 68b1195c-e5a3-44ae-86ba-f5968d545e90
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: fffc0f1a-393b-4bd2-944f-11ae1770fb26 # BG - Brand Color with shapes
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 461f5e49-84a9-43f7-9c45-62ea85bfea44
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 446f4ecc-bfa8-49a2-a77f-08c419261d74 # Height
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 3c54bd29-e8d0-4cce-9f12-739a5b268166
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 6e49a478-3f89-4b69-b078-7718a7b59fa9 # Color Scheme
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 38d7a374-e1ed-4131-9d2b-d139f4e2eaf0
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: da4bcdde-5fef-4406-95f5-4f384d00ea01
+        userCondition: null
 fields:
   0c5cf0e8-3681-4b2c-8d27-cc0e0a81abe8: # Button
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: button
-    instructions: ''
+    instructions: null
     name: Button
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -144,7 +182,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -157,7 +195,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Url
+            - presseddigital\linkit\models\Url
             -
               __assoc__:
                 -
@@ -182,7 +220,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - fruitstudios\linkit\models\Twitter
+            - presseddigital\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -195,7 +233,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Facebook
+            - presseddigital\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -208,7 +246,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Instagram
+            - presseddigital\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -221,7 +259,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\LinkedIn
+            - presseddigital\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -234,7 +272,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Entry
+            - presseddigital\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -250,7 +288,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - fruitstudios\linkit\models\Category
+            - presseddigital\linkit\models\Category
             -
               __assoc__:
                 -
@@ -266,7 +304,7 @@ fields:
                   - customSelectionLabel
                   - ''
           -
-            - fruitstudios\linkit\models\Asset
+            - presseddigital\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -282,7 +320,7 @@ fields:
                   - customSelectionLabel
                   - ''
           -
-            - fruitstudios\linkit\models\User
+            - presseddigital\linkit\models\User
             -
               __assoc__:
                 -
@@ -301,7 +339,7 @@ fields:
                   - userPath
                   - ''
           -
-            - fruitstudios\linkit\models\Product
+            - presseddigital\linkit\models\Product
             -
               __assoc__:
                 -
@@ -318,17 +356,17 @@ fields:
                   - ''
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   1d3c8d26-b6af-4b75-a54b-9128142ff890: # Text align
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: textAlign
-    instructions: ''
+    instructions: null
     name: 'Text align'
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -382,10 +420,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: colorScheme
-    instructions: ''
+    instructions: null
     name: 'Color Scheme'
     searchable: true
     settings:
+      columnType: string
       options:
         -
           __assoc__:
@@ -417,11 +456,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: button2Color
-    instructions: ''
+    instructions: null
     name: 'Button 2 Color'
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -464,16 +503,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: subHeadline
-    instructions: ''
+    instructions: null
     name: 'Sub Headline'
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -484,18 +523,18 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: button2
-    instructions: ''
+    instructions: null
     name: 'Button 2'
     searchable: true
     settings:
-      allowCustomText: '1'
-      allowTarget: '1'
-      defaultText: ''
+      allowCustomText: true
+      allowTarget: true
+      defaultText: null
       selectLinkText: ''
       types:
         __assoc__:
           -
-            - fruitstudios\linkit\models\Email
+            - presseddigital\linkit\models\Email
             -
               __assoc__:
                 -
@@ -508,7 +547,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Phone
+            - presseddigital\linkit\models\Phone
             -
               __assoc__:
                 -
@@ -521,7 +560,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Url
+            - presseddigital\linkit\models\Url
             -
               __assoc__:
                 -
@@ -546,7 +585,7 @@ fields:
                   - allowPaths
                   - '1'
           -
-            - fruitstudios\linkit\models\Twitter
+            - presseddigital\linkit\models\Twitter
             -
               __assoc__:
                 -
@@ -559,7 +598,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Facebook
+            - presseddigital\linkit\models\Facebook
             -
               __assoc__:
                 -
@@ -572,7 +611,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Instagram
+            - presseddigital\linkit\models\Instagram
             -
               __assoc__:
                 -
@@ -585,7 +624,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\LinkedIn
+            - presseddigital\linkit\models\LinkedIn
             -
               __assoc__:
                 -
@@ -598,7 +637,7 @@ fields:
                   - customPlaceholder
                   - ''
           -
-            - fruitstudios\linkit\models\Entry
+            - presseddigital\linkit\models\Entry
             -
               __assoc__:
                 -
@@ -614,7 +653,7 @@ fields:
                   - customSelectionLabel
                   - 'Select an entry'
           -
-            - fruitstudios\linkit\models\Category
+            - presseddigital\linkit\models\Category
             -
               __assoc__:
                 -
@@ -630,7 +669,7 @@ fields:
                   - customSelectionLabel
                   - ''
           -
-            - fruitstudios\linkit\models\Asset
+            - presseddigital\linkit\models\Asset
             -
               __assoc__:
                 -
@@ -646,7 +685,7 @@ fields:
                   - customSelectionLabel
                   - ''
           -
-            - fruitstudios\linkit\models\User
+            - presseddigital\linkit\models\User
             -
               __assoc__:
                 -
@@ -665,7 +704,7 @@ fields:
                   - userPath
                   - ''
           -
-            - fruitstudios\linkit\models\Product
+            - presseddigital\linkit\models\Product
             -
               __assoc__:
                 -
@@ -682,13 +721,13 @@ fields:
                   - ''
     translationKeyFormat: null
     translationMethod: none
-    type: fruitstudios\linkit\fields\LinkitField
+    type: presseddigital\linkit\fields\LinkitField
   58ba51e8-f8a3-4ccc-85fd-b89c5b3e930f: # Body
     columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: ''
+    instructions: null
     name: Body
     searchable: true
     settings:
@@ -698,13 +737,13 @@ fields:
       configSelectionMode: choose
       defaultTransform: ''
       manualConfig: ''
-      purifierConfig: ''
-      purifyHtml: ''
+      purifierConfig: null
+      purifyHtml: false
       redactorConfig: Standard.json
-      removeEmptyTags: '1'
-      removeInlineStyles: '1'
-      removeNbsp: '1'
-      showHtmlButtonForNonAdmins: '1'
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
       uiMode: enlarged
@@ -716,11 +755,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: buttonColor
-    instructions: ''
+    instructions: null
     name: 'Button Color'
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -763,11 +802,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: height
-    instructions: ''
+    instructions: null
     name: Height
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:
@@ -799,16 +838,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: headline
-    instructions: ''
+    instructions: null
     name: Headline
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -819,29 +858,33 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: backgroundImage
-    instructions: ''
+    instructions: null
     name: 'Background Image'
     searchable: true
     settings:
       allowSelfRelations: false
+      allowSubfolders: false
       allowUploads: true
       allowedKinds: null
+      branchLimit: null
       defaultUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      defaultUploadLocationSubpath: ''
-      limit: ''
+      defaultUploadLocationSubpath: null
       localizeRelations: false
+      maintainHierarchy: false
+      maxRelations: null
+      minRelations: null
       previewMode: full
-      restrictFiles: ''
-      selectionLabel: ''
+      restrictFiles: false
+      restrictLocation: false
+      restrictedDefaultUploadSubpath: null
+      restrictedLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
+      restrictedLocationSubpath: null
+      selectionLabel: null
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
-      singleUploadLocationSource: 'volume:4dfe4bea-c93a-4f15-be8b-20bd2693323e' # Images
-      singleUploadLocationSubpath: ''
-      source: null
       sources: '*'
       targetSiteId: null
-      useSingleFolder: false
       validateRelatedElements: false
       viewMode: large
     translationKeyFormat: null
@@ -852,11 +895,11 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: background
-    instructions: ''
+    instructions: null
     name: 'BG - Brand Color with shapes'
     searchable: true
     settings:
-      optgroups: true
+      columnType: string
       options:
         -
           __assoc__:

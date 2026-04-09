@@ -3,61 +3,75 @@ fieldLayouts:
   1729826e-7300-4657-980f-ebd98c038af3:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: 1254ba87-3766-4034-a45f-47babecaf618 # Label
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 2ffe2dd5-9ec7-45fc-97a6-38857f31cf4b
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 0ae84908-a5d0-4016-a0d1-9db23664723f # Handle
             instructions: null
             label: null
             required: true
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: a2a74deb-decd-4186-8298-6d30cfc7c8a3
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 5b13d1bf-e083-45cb-9eb8-f36892437118 # Placeholder
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 69d04591-2de1-46fa-9c5d-d923cecc4cdc
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 30d585b0-ed19-42a7-ba41-552405a2dfac # Required
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: cbc176c5-8de6-4f0b-838e-32369ac00d51
+            userCondition: null
             warning: null
             width: 100
         name: Content
-        sortOrder: 1
+        uid: aae8b4e7-a4af-4cb8-b546-443d5c60c8fc
+        userCondition: null
 fields:
   0ae84908-a5d0-4016-a0d1-9db23664723f: # Handle
     columnSuffix: irkdlubz
     contentColumnType: text
     fieldGroup: null
     handle: fieldHandle
-    instructions: ''
+    instructions: null
     name: Handle
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -68,16 +82,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: placeholder
-    instructions: ''
+    instructions: null
     name: Placeholder
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null
@@ -103,16 +117,16 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: label
-    instructions: ''
+    instructions: null
     name: Label
     searchable: true
     settings:
       byteLimit: null
       charLimit: null
-      code: ''
+      code: false
       columnType: text
-      initialRows: '4'
-      multiline: ''
+      initialRows: 4
+      multiline: false
       placeholder: null
       uiMode: normal
     translationKeyFormat: null

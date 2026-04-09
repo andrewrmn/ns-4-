@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 4a7f50ea-95ad-4b62-a380-10a458ee6d34 # Mobile Application
 handle: updatedPathwaysTable
-instructions: ''
+instructions: null
 name: 'Updated Pathways Table'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -47,7 +49,6 @@ settings:
   fieldLayout: table
   maxRows: null
   minRows: null
-  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a row'

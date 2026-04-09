@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: e3dd5964-8411-45ae-9571-c8789a0a32d9 # Sales Reps
 handle: salesReps
-instructions: ''
+instructions: null
 name: 'Sales Reps'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     __assoc__:
       -
@@ -38,13 +40,12 @@ settings:
               - ''
   contentTable: '{{%stc_salesreps}}'
   fieldLayout: row
-  maxRows: '1'
-  minRows: '1'
-  placeholderKey: null
+  maxRows: 1
+  minRows: 1
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: profile
-  staticField: ''
+  staticField: null
 translationKeyFormat: null
 translationMethod: site
 type: verbb\supertable\fields\SuperTableField

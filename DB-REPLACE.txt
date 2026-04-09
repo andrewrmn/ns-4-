@@ -1,7 +1,7 @@
 1: Download Live DB
 2: Delete local DB & Import Live
-3: Run php craft migrate/all
-4: Run php craft commerce/upgrade
+3: Run: php craft migrate/all
+4: Run: php craft commerce/upgrade
 5: add fields (addressAttention and addressPhone)
 6: Wait for migration to complete
 7: Go to Admin > Settings > Sites > Update URL

@@ -2,10 +2,12 @@ columnSuffix: null
 contentColumnType: string
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: contactTiles
-instructions: ''
+instructions: null
 name: 'Contact Tiles'
 searchable: true
 settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
   columns:
     98:
       __assoc__:
@@ -46,7 +48,6 @@ settings:
   fieldLayout: row
   maxRows: null
   minRows: null
-  placeholderKey: null
   propagationKeyFormat: null
   propagationMethod: all
   selectionLabel: 'Add a row'

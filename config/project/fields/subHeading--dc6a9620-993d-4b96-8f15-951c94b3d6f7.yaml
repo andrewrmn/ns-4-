@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 9fd48f5f-c27d-4d13-b181-47a720fb98c6 # Default
 handle: subHeading
-instructions: ''
+instructions: null
 name: Sub-heading
 searchable: true
 settings:
@@ -10,8 +10,8 @@ settings:
   charLimit: null
   code: false
   columnType: text
-  initialRows: '4'
-  multiline: ''
+  initialRows: 4
+  multiline: false
   placeholder: null
   uiMode: normal
 translationKeyFormat: null

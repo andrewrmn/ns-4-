@@ -1,5 +1,5 @@
 {% if not currentUser.isInGroup('physicians') and not currentUser.admin %}
-  {% redirect "login" %}
+{% redirect "login" %}
 {% endif %}
 
 {% set title = 'HCP Dashboard' %}
@@ -8,12 +8,13 @@
 
 {% set patientId = craft.app.request.getQueryParam('patientId') %}
 {% if patientId is null %}
-    {% redirect "hcp/dashboard" %}
+{% redirect "hcp/dashboard" %}
 {% else %}
-  {% set patient = craft.users().group('patients').id(patientId).relatedTo({targetElement: currentUser, field: 'relatedHcp'}).anyStatus().one() %}
-  {% if patient is null %}
-    {% redirect "hcp/dashboard" %}
-  {% endif %}
+{% set patient = craft.users().group('patients').id(patientId).relatedTo({targetElement: currentUser, field:
+'relatedHcp'}).anyStatus().one() %}
+{% if patient is null %}
+{% redirect "hcp/dashboard" %}
+{% endif %}
 {% endif %}
 
 
@@ -22,196 +23,208 @@
   <div class="dashboard grey-bg px-4 py-md-5 py-4">
 
     {% include 'hcp/_includes/top-search-patient' %}
-    <a class="d-block mb-4 w-100" href="{{ url('hcp/dashboard') }}">< Back</a>
+    <a class="d-block mb-4 w-100" href="{{ url('hcp/dashboard') }}">
+      < Back</a>
+        <div class="container">
+          <div class="newpatient jennifer-test pt-4">
+            <h2><strong>{{ patient.firstName }}</strong> {{ patient.lastName }}</h2>
+            <p><strong>{{ patient.email }}</strong></h2>
+          </div>
+        </div>
+  </div>
+  <div class="new-product bg-white py-md-5 py-4  px-xl-4">
     <div class="container">
-      <div class="newpatient jennifer-test pt-4">
-        <h2><strong>{{ patient.firstName }}</strong> {{ patient.lastName }}</h2>
-        <p><strong>{{ patient.email }}</strong></h2>
-        </div>
-      </div>
-    </div>
-    <div class="new-product bg-white py-md-5 py-4  px-xl-4">
-      <div class="container">
-        <h3>New Product Recommendation</h3>
-        <div class="all-product">
-          <div class="row">
-            <div class="col-md-2 px-2 pb-4 pb-md-0">
-              <div class="products text-center">
-                <a class="rounded-full b-block js-symptom-link" href="#" data-click-target="product-recommendation-modal">
-                  <div>
-                    <span>+</span>
-                    <div class="d-block">Products</div>
-                  </div>
-                </a>
-              </div>
+      <h3>New Product Recommendation</h3>
+      <div class="all-product">
+        <div class="row">
+          <div class="col-md-2 px-2 pb-4 pb-md-0">
+            <div class="products text-center">
+              <a class="rounded-full b-block js-symptom-link" href="#" data-click-target="product-recommendation-modal">
+                <div>
+                  <span>+</span>
+                  <div class="d-block">Products</div>
+                </div>
+              </a>
             </div>
-            <div class="col-md-7 px-2 pb-4 pb-md-0" id="htmlRecommededProducts">
-            </div>
-            <div class="col-md-3 text-center px-2 hidden" id="divSendRecommendation">
-              <button class="shop-link btn small mr-0" id="btnSendRecommendation" type="button">Send</button><br />
-              <a href="{{ url('hcp/dashboard') }}">Cancel</a>
-            </div>
+          </div>
+          <div class="col-md-7 px-2 pb-4 pb-md-0" id="htmlRecommededProducts">
+          </div>
+          <div class="col-md-3 text-center px-2 hidden" id="divSendRecommendation">
+            <button class="shop-link btn small mr-0" id="btnSendRecommendation" type="button">Send</button><br />
+            <a href="{{ url('hcp/dashboard') }}">Cancel</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal-wrap" id="product-recommendation-modal">
-    <div class="modal">
-      <a class="modal__close" href="#" data-click-target="product-recommendation-modal">
-        <div>
-          <p class="sr-only">Close Modal</p>
-          <img src="../images/svgs/close.svg" width="16" />
-        </div>
-      </a>
-      <div class="modal__inner">
-        <div class="user-content js-modal-content">
-          <h3 class="text-center">Select Products</h3>
-          <div class="row mt-3">
-            {% if currentUser.hcpProductsStore|length %}
-            {% set hcpProductIds = currentUser.hcpProductsStore.ids() %}
-            {% else %}
-            {% set hcpProductIds = null %}
-            {% endif %}
-            <form class="form" id="recommendedProductsForm" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
-              {{ csrfInput() }}
-              {{ actionInput('neuroselect/hcp/save-recommendation') }}
-              {{ redirectInput('hcp/dashboard') }}
-              {{ hiddenInput('patientId', patientId) }}
+<div class="modal-wrap" id="product-recommendation-modal">
+  <div class="modal">
+    <a class="modal__close" href="#" data-click-target="product-recommendation-modal">
+      <div>
+        <p class="sr-only">Close Modal</p>
+        <img src="../images/svgs/close.svg" width="16" />
+      </div>
+    </a>
+    <div class="modal__inner">
+      <div class="user-content js-modal-content">
+        <h3 class="text-center">Select Products</h3>
+        <div class="row mt-3">
+          {% if currentUser.hcpProductsStore|length %}
+          {% set hcpProductIds = currentUser.hcpProductsStore.ids() %}
+          {% else %}
+          {% set hcpProductIds = null %}
+          {% endif %}
+          <form class="form" id="recommendedProductsForm" enctype="multipart/form-data" accept-charset="UTF-8"
+            method="post">
+            {{ csrfInput() }}
+            {{ actionInput('neuroselect/hcp/save-recommendation') }}
+            {{ redirectInput('hcp/dashboard') }}
+            {{ hiddenInput('patientId', patientId) }}
 
-              {% set excludedProds = craft.products.search('productCategories:Bundle').ids() %}
-              {% set excludedProds = excludedProds|join(', not ') %}
-              {% set excludedProducts = craft.products.orderBy('title').id(excludedProds).all() %}
+            {% set excludedProds = craft.products.search('productCategories:Bundle').ids() %}
+            {% set excludedProds = excludedProds|join(', not ') %}
+            {% set excludedProducts = craft.products.orderBy('title').id(excludedProds).all() %}
 
-              {% set products = craft.products.id(hcpProductIds).orderBy('title asc').all() %}
-              {% set products = craft.products.orderBy('title asc').id('not ' ~ excludedProds).all() %}
+            {% set products = craft.products.id(hcpProductIds).orderBy('title asc').all() %}
+            {% set products = craft.products.orderBy('title asc').id('not ' ~ excludedProds).disableInPf(false).all() %}
 
 
-              <div class="row pl-2 pl-m-0">
+            <div class="row pl-2 pl-m-0">
               {% for product in excludedProducts %}
-                <div class="col-sm-4 col-6 px-2">
-                  <div class="form-check py-1">
-                    <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}">
-                    <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
-                  </div>
-                </div>
-                {% endfor %}
-                {% for product in products %}
-                <div class="col-sm-4 col-6 px-2">
-                  <div class="form-check py-1">
-                    <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}">
-                    <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-12">
-                  <div class="form-group rec-note">
-                    <label for="recommendationNote">Recommendation Note</label>
-                    <small class="mb-3">If note is product specific, mention which product it applies to.</small>
-                    <textarea name="recommendationNote" id="recommendationNote" rows="3" class="form-control" style="white-space: pre-wrap !important;"></textarea>
-                  </div>
+              <div class="col-sm-4 col-6 px-2">
+                <div class="form-check py-1">
+                  <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}"
+                    id="{{ product.slug }}">
+                  <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
                 </div>
               </div>
-            </form>
-            <div class="clearfix"></div>
-            <div class="col-lg-12 mt-3 text-center"><a class="modal__close btn" href="#" data-click-target="product-recommendation-modal" id="productRecommendationDone" style="position: relative;">Done</a></div>
-          </div>
+              {% endfor %}
+              {% for product in products %}
+              <div class="col-sm-4 col-6 px-2">
+                <div class="form-check py-1">
+                  <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}"
+                    id="{{ product.slug }}">
+                  <label class="form-check-label d-inline" for="{{ product.slug }}">{{ product.title }}</label>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="row mt-4">
+              <div class="col-lg-12">
+                <div class="form-group rec-note">
+                  <label for="recommendationNote">Recommendation Note</label>
+                  <small class="mb-3">If note is product specific, mention which product it applies to.</small>
+                  <textarea name="recommendationNote" id="recommendationNote" rows="3" class="form-control"
+                    style="white-space: pre-wrap !important;"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="clearfix"></div>
+          <div class="col-lg-12 mt-3 text-center"><a class="modal__close btn" href="#"
+              data-click-target="product-recommendation-modal" id="productRecommendationDone"
+              style="position: relative;">Done</a></div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal-wrap" id="save-recommendation-modal">
-    <div class="modal" style="height: auto;">
-      <div class="modal__inner">
-        <div class="user-content js-modal-content">
-          <p>Recommendation has been sent to your patient. They will receive an email notification to visit their portal for the full recommendation.</p>
-        </div>
-        <div class="d-flex flex-items-center flex-justify-start mt-4">
-          <a class="mr-4" href="{{ url('hcp/dashboard') }}">Return to Dashboard ></a></p>
-          <a href="{{ siteUrl }}hcp/patient?id={{patientId}}">View Patient ></a></p>
-        </div>
+<div class="modal-wrap" id="save-recommendation-modal">
+  <div class="modal" style="height: auto;">
+    <div class="modal__inner">
+      <div class="user-content js-modal-content">
+        <p>Recommendation has been sent to your patient. They will receive an email notification to visit their portal
+          for the full recommendation.</p>
       </div>
-
-      <a class="modal__close" href="#" data-click-target="save-recommendation-modal">
-        <div>
-          <p class="sr-only">Close Modal</p>
-          <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <div class="modal-wrap" id="error-recommendation-modal">
-    <div class="modal" style="height: auto;">
-      <div class="modal__inner">
-        <div class="user-content js-modal-content">
-          <h6>Error</h6>
-          <p>Your recommendation has not been sent. Please try again or contact us if the issue persists.</p>
-        </div>
-        <div class="d-flex flex-items-center flex-justify-start mt-4">
-          <a class="btn btn--sm" href="#" data-click-target="error-recommendation-modal">Close</a></p>
-        </div>
+      <div class="d-flex flex-items-center flex-justify-start mt-4">
+        <a class="mr-4" href="{{ url('hcp/dashboard') }}">Return to Dashboard ></a></p>
+        <a href="{{ siteUrl }}hcp/patient?id={{patientId}}">View Patient ></a></p>
       </div>
-
-      <a class="modal__close" href="#" data-click-target="error-recommendation-modal">
-        <div>
-          <p class="sr-only">Close Modal</p>
-          <svg width="18" height="18"><use xlink:href="#shape-close"></use></svg>
-        </div>
-      </a>
     </div>
+
+    <a class="modal__close" href="#" data-click-target="save-recommendation-modal">
+      <div>
+        <p class="sr-only">Close Modal</p>
+        <svg width="18" height="18">
+          <use xlink:href="#shape-close"></use>
+        </svg>
+      </div>
+    </a>
   </div>
+</div>
 
-  <script>
-    var $ = jQuery;
-    var recForm = $('#recommendedProductsForm');
-    $(document).on("click", "#divSendRecommendation", function(e) {
-      e.preventDefault();
-      //$('#recommendedProductsForm').submit();
-      $.ajax({
-        type: 'post',
-        cache: false,
-        data: recForm.serialize(),
-        url: '/neuroselect/hcp/save-recommendation',
-        dataType: 'json'
-      }).done(function (data) {
-        console.log(data);
-        $('#save-recommendation-modal').addClass('is-active');
+<div class="modal-wrap" id="error-recommendation-modal">
+  <div class="modal" style="height: auto;">
+    <div class="modal__inner">
+      <div class="user-content js-modal-content">
+        <h6>Error</h6>
+        <p>Your recommendation has not been sent. Please try again or contact us if the issue persists.</p>
+      </div>
+      <div class="d-flex flex-items-center flex-justify-start mt-4">
+        <a class="btn btn--sm" href="#" data-click-target="error-recommendation-modal">Close</a></p>
+      </div>
+    </div>
 
-      }).fail(function (data) {
-        console.log("Took an L" + data.status);
-        $('#error-recommendation-modal').addClass('is-active');
-      });
-    });
-  </script>
+    <a class="modal__close" href="#" data-click-target="error-recommendation-modal">
+      <div>
+        <p class="sr-only">Close Modal</p>
+        <svg width="18" height="18">
+          <use xlink:href="#shape-close"></use>
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>
 
-  {% endblock %}
+<script>
+  var $ = jQuery;
+  var recForm = $('#recommendedProductsForm');
+  $(document).on("click", "#divSendRecommendation", function (e) {
+    e.preventDefault();
+    //$('#recommendedProductsForm').submit();
+    $.ajax({
+      type: 'post',
+      cache: false,
+      data: recForm.serialize(),
+      url: '/neuroselect/hcp/save-recommendation',
+      dataType: 'json'
+    }).done(function (data) {
+      console.log(data);
+      $('#save-recommendation-modal').addClass('is-active');
 
-  {% js %}
-
-  $(document).ready(function(){
-    $(document).on("click", "a#productRecommendationDone", function(e) {
-      e.preventDefault();
-      if( $("input[name='recommendedProducts[]']:checked").length )
-      {
-        var recProducts = $("input[name='recommendedProducts[]']:checked").serializeArray();
-        var recommendationNote = $("textarea[name='recommendationNote']").val();
-        $.ajax({
-          method: "POST",
-          url: "/hcp/ajax/recommended-products",
-          dataType: "html",
-          data: {'recommendedProducts': recProducts, 'recommendationNote': recommendationNote},
-          success: function(html, data){
-            $("div#htmlRecommededProducts").html(html);
-            $("#divSendRecommendation").removeClass('hidden');
-            $(".products a.js-symptom-link").html("<div><span>+</span> Another Product</div>");
-          }
-        });
-      }
+    }).fail(function (data) {
+      console.log("Took an L" + data.status);
+      $('#error-recommendation-modal').addClass('is-active');
     });
   });
+</script>
+
+{% endblock %}
+
+{% js %}
+
+$(document).ready(function(){
+$(document).on("click", "a#productRecommendationDone", function(e) {
+e.preventDefault();
+if( $("input[name='recommendedProducts[]']:checked").length )
+{
+var recProducts = $("input[name='recommendedProducts[]']:checked").serializeArray();
+var recommendationNote = $("textarea[name='recommendationNote']").val();
+$.ajax({
+method: "POST",
+url: "/hcp/ajax/recommended-products",
+dataType: "html",
+data: {'recommendedProducts': recProducts, 'recommendationNote': recommendationNote},
+success: function(html, data){
+$("div#htmlRecommededProducts").html(html);
+$("#divSendRecommendation").removeClass('hidden');
+$(".products a.js-symptom-link").html("<div><span>+</span> Another Product</div>");
+}
+});
+}
+});
+});
 {% endjs %}
