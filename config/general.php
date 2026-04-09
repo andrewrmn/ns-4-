@@ -13,7 +13,7 @@ return [
         'defaultWeekStartDay' => 0,
         'omitScriptNameInUrls' => true,
         'cpTrigger' => 'admin',
-        'securityKey' => getenv('SECURITY_KEY'),
+        'securityKey' => getenv('CRAFT_SECURITY_KEY'),
         'backupOnUpdate' => false,
         'extraAllowedFileExtensions' => 'csv',
         'tokenParam' => 'craftToken',
@@ -30,13 +30,14 @@ return [
 
     'dev' => [
         'enableCsrfProtection' => false,
+		'allowAdminChanges' => true,
     ],
 
     'staging' => [
-        'allowAdminChanges' => false,
+        'allowAdminChanges' => true,
     ],
 
     'production' => [
-        'allowAdminChanges' => false,
+        'allowAdminChanges' => true,
     ],
 ];
