@@ -310,6 +310,8 @@
 					</form>
 
 					{% set server = craft.app.request.serverName %}
+					{# Sandbox: local hostnames, or any host when .env ENVIRONMENT=dev (see CRAFT_ENVIRONMENT in web/index.php). #}
+					{% set payaUseSandbox = (server == 'local.ns' or server == 'local.neuroscience' or constant('CRAFT_ENVIRONMENT') == 'dev') %}
 					{% set key = craft.paya.vars.dev.KEY %}
 					{% set req = craft.paya.vars.req %}
 					{% set merchantID = req.merchantId %}
@@ -323,7 +325,7 @@
 					{% set liveKeys = craft.paya.vars.dev %}
 					{% set testKeys = craft.paya.vars.sandbox %}
 
-					{% if server == 'local.ns' or server == 'local.neuroscience' %}
+					{% if payaUseSandbox %}
 					{% set key = testKeys.KEY %}
 					{% set data =
 					{
@@ -369,7 +371,7 @@
 					%}
 					{% endif %}
 
-					{% if server == 'local.ns' or server == 'local.neuroscience' %}
+					{% if payaUseSandbox %}
 					key: {{ key }}<br />
 					clientId: {{ data.clientId }}<br />
 					merchantId: {{ data.merchantId }}<br />

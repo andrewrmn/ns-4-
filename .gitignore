@@ -8,6 +8,8 @@ web/cpresources
 web/pir-documents
 web/userphotos
 web/surveys
+web/surveys/*.pdf
+web/surveys/*
 live-logs
 
 *.sql
