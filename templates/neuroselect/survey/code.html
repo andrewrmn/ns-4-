@@ -872,7 +872,7 @@
           type: 'post',
           cache: false,
           data: form.serialize(),
-          url: '/neuroselect/survey-submission',
+          url: '/neuroselect-module/survey/survey-submission',
           dataType: 'json'
       }).done(function (data) {
           var redirectUrl = document.location.origin + '/Neuro-Q/report/' + data.submissionId + '?account='+email;

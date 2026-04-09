@@ -24,9 +24,11 @@
   </div>
 </div>
 {% if user != '' %}
+{% set surveyStore = craft.commerce.getStore().getStore() %}
+{% set surveyUsStates = surveyStore.getAdministrativeAreasListByCountryCode()['US'] ?? {} %}
 <div class="wrapper wrapper--thin py-4 survey-wrap">
   <form method="post" class="survey-form" id="survey-form" validate>
-    <input type="hidden" name="action" value="/neuroselect/survey/survey-submission">
+    <input type="hidden" name="action" value="/neuroselect-module/survey/survey-submission">
     {{ csrfInput() }}
 
     {% if user %}
@@ -140,10 +142,10 @@
         <div class="select-wrap">
 
           <select name="state" required>
-            <option>State</option>
+            <option value="">State</option>
 
-            {% for state in craft.commerce.states.allEnabledStates %}
-            <option value="{{ state.name }}"{% if currentUser and state.name == currentUser.state %} selected{% endif %}>{{ state.name }}</option>
+            {% for stateCode, stateLabel in surveyUsStates %}
+            <option value="{{ stateLabel }}"{% if currentUser and stateLabel == currentUser.state %} selected{% endif %}>{{ stateLabel }}</option>
             {% endfor %}
           </select>
         </div>

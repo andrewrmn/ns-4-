@@ -1,5 +1,7 @@
 {% extends "_layout" %}
 
+{% block mainClass %}pir-width{% endblock %}
+
 {% block content %}
 
 {% set report = craft.app.request.segments|last %}
@@ -121,7 +123,7 @@ submission.product4 is empty and submission.product5 is empty %}
 
                 {% if submission.email %}
                 <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
-                  <input type="hidden" name="action" value="/neuroselect/survey/email-survey">
+                  <input type="hidden" name="action" value="/neuroselect-module/survey/email-survey">
                   {{ csrfInput() }}
                   <input type="hidden" name="submissionId" value="{{ report }}">
                   <input type="hidden" name="email" value="{{ submission.email }}">
@@ -152,7 +154,7 @@ submission.product4 is empty and submission.product5 is empty %}
 
                 <form id="pdf-gen-form" method="post" accept-charset="UTF-8"
                   class="ml-4{% if pdfGenerated %} d-none{% endif %}">
-                  <input type="hidden" name="action" value="/neuroselect/survey/survey-pdf">
+                  <input type="hidden" name="action" value="/neuroselect-module/survey/survey-pdf">
                   {{ csrfInput() }}
 
                   <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ report }}">
@@ -1125,7 +1127,6 @@ submission.product4 is empty and submission.product5 is empty %}
 
 <script>
   var $ = jQuery;
-  $('main#content').addClass('pir-width');
 
   $('#pdf-gen-form').submit(function (e) {
     //console.log('generating...');
@@ -1136,7 +1137,7 @@ submission.product4 is empty and submission.product5 is empty %}
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '/neuroselect/survey-pdf',
+      url: '/neuroselect-module/survey/survey-pdf',
       dataType: 'json'
     }).done(function (data) {
       //console.log(data);

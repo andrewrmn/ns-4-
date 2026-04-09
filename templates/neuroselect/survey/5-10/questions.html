@@ -8,7 +8,7 @@
 
 <div class="wrapper wrapper--thin py-4 survey-wrap">
   <form method="post" class="survey-form" id="survey-form" validate>
-    <input type="hidden" name="action" value="/neuroselect/survey/survey-submission">
+    <input type="hidden" name="action" value="/neuroselect-module/survey/survey-submission">
     {{ csrfInput() }}
     <input type="hidden" id="submissionId" name="submissionId" value="{{ date().timestamp }}">
     <input type="hidden" id="product1" name="product1" value="">

@@ -101,7 +101,7 @@
                         </div>
 
                         <form id="edit-pir-form" class="col-lg-10" action="" method="post" accept-charset="UTF-8" class="">
-                            <input type="hidden" name="action" value="/neuroselect/update/update-pir">
+                            <input type="hidden" name="action" value="/neuroselect-module/update/update-pir">
                             {{ csrfInput() }}
 
                             <input type="hidden" id="submissionId" name="submissionId" value="{{ submissionId }}">
@@ -426,7 +426,7 @@
                 cache: false,
                 data: form.serialize(),
                 //url: '/appConnector/updatePir',
-                url: '/neuroselect/update-pir',
+                url: '/neuroselect-module/update/update-pir',
                 dataType: 'json'
             }).done(function (data) {
 

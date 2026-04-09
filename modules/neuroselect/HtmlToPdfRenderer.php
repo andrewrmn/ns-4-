@@ -1,6 +1,6 @@
 <?php
 
-namespace neuroscience\neuroselect;
+namespace modules\neuroselect;
 
 use Craft;
 use Dompdf\Dompdf;

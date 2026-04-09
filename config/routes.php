@@ -19,13 +19,13 @@
  */
 
  return [
-     'appConnector/authentication' => 'neuroselect/api/login',
-     'appConnector/updateUsers' => 'neuroselect/api/update-users',
-     'appConnector/qrscan' => 'neuroselect/api/qr-scan',
-     'appConnector/pathway' => 'neuroselect/api/pathway',
-     'appConnector/clinicalindication' => 'neuroselect/api/clinical-indication',
-     'appConnector/products' => 'neuroselect/api/products',
-     'appConnector/sleep' => 'neuroselect/api/sleep',
+     'appConnector/authentication' => 'neuroselect-module/api/login',
+     'appConnector/updateUsers' => 'neuroselect-module/api/update-users',
+     'appConnector/qrscan' => 'neuroselect-module/api/qr-scan',
+     'appConnector/pathway' => 'neuroselect-module/api/pathway',
+     'appConnector/clinicalindication' => 'neuroselect-module/api/clinical-indication',
+     'appConnector/products' => 'neuroselect-module/api/products',
+     'appConnector/sleep' => 'neuroselect-module/api/sleep',
      'account/orders' => ['template' => '/shop/customer/orders.html'],
      'account/product-information-requests' => ['template' => 'shop/customer/pir.html'],
      'account' => ['template' => 'shop/customer/profile.html'],
@@ -49,6 +49,6 @@
      'survey' => ['template' => 'neuroselect/survey/questions.html'],
      'survey/report/<number>' => ['template' => 'neuroselect/survey/report.html'],
      'neuro-q/report/<number>' => ['template' => 'neuroselect/survey/report.html'],
-     'appConnector/survey' => 'neuroselect/survey/survey-submission',
+     'appConnector/survey' => 'neuroselect-module/survey/survey-submission',
       'apply-coupon' => 'commerce/cart/applyCoupon',
  ];

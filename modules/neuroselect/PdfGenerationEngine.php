@@ -1,6 +1,6 @@
 <?php
 
-namespace neuroscience\neuroselect;
+namespace modules\neuroselect;
 
 /**
  * Which backend generates HTML→PDF for PIR and Neuro Q survey flows.

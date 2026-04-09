@@ -111,7 +111,7 @@
 
 
     <form id="form" class="d-none">
-      <input type="hidden" name="action" value="/neuroselect/pdf/generate-lab">
+      <input type="hidden" name="action" value="/neuroselect-module/pdf/generate-lab">
       <input type="hidden" name="userId" value="{{ user.id }}">
       {{ csrfInput() }}
       <input type="hidden" name="activationCode" id="activationCode" value="">
@@ -141,7 +141,7 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '/neuroselect/generate-lab',
+      url: '/neuroselect-module/pdf/generate-lab',
       dataType: 'json',
     }).done(function (data) {
       //var str = JSON.parse(data);

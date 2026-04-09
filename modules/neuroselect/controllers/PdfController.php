@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2020 Andrew Ross
  */
 
-namespace neuroscience\neuroselect\controllers;
+namespace modules\neuroselect\controllers;
 
-use neuroscience\neuroselect\ChromiumPdfRenderer;
-use neuroscience\neuroselect\HtmlToPdfRenderer;
-use neuroscience\neuroselect\PdfGenerationEngine;
-use neuroscience\neuroselect\WkhtmlPdfRenderer;
+use modules\neuroselect\ChromiumPdfRenderer;
+use modules\neuroselect\HtmlToPdfRenderer;
+use modules\neuroselect\PdfGenerationEngine;
+use modules\neuroselect\WkhtmlPdfRenderer;
 
 use Craft;
 use craft\web\Controller;

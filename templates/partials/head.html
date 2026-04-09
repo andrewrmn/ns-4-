@@ -4,6 +4,11 @@
 <link rel="home" href="{{ siteUrl }}" />
 <link rel="stylesheet" href="/css/main.css?v=23.0.3">
 <link rel="stylesheet" href="/css/print-pdf.css?v=1" media="print">
+{% set _seg1 = craft.app.request.getSegment(1) %}
+{% set _seg2 = craft.app.request.getSegment(2) %}
+{% if _seg2 == 'report' and _seg1 and _seg1|lower in ['neuro-q', 'survey'] %}
+<link rel="stylesheet" href="/css/survey-print.css?v=2" media="print">
+{% endif %}
 {% if craft.app.request.getSegment(1) == 'products' %}
 	<link rel="stylesheet" href="/css/custom.css" />
 {% endif %}

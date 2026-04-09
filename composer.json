@@ -1,13 +1,13 @@
 {
     "require": {
         "craftcms/cms": "^4",
+        "dompdf/dompdf": "^2.0",
         "craftcms/commerce": "^4",
         "craftcms/commerce-paypal-checkout": "^2",
         "craftcms/element-api": "^4.2.0",
         "craftcms/redactor": "^3",
         "enupal/snapshot": "^2",
         "enupal/stripe": "^5",
-        "neuroscience/neuroselect": "^1.0",
         "presseddigital/linkit": "^4",
         "surprisehighway/craft-avatax": "^3",
         "verbb/field-manager": "^3",

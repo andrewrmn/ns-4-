@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fc92ca5549ae85e8e9565725c177783",
+    "content-hash": "9d5fc7b7c6bdd103a69c502be85d51b6",
     "packages": [
         {
             "name": "avalara/avataxclient",
@@ -2890,64 +2890,6 @@
                 "enum"
             ],
             "time": "2025-01-14T11:49:03+00:00"
-        },
-        {
-            "name": "neuroscience/neuroselect",
-            "version": "1.1.1",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/neuroselect",
-                "reference": "78ad47741d5367bbf7fac4dca231b914daa243d4"
-            },
-            "require": {
-                "craftcms/cms": "^4.0.0",
-                "dompdf/dompdf": "^2.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "^3.0",
-                "craftcms/cms": "^4.0.0",
-                "vlucas/phpdotenv": "^3.0"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "neuroselect",
-                "handle": "neuroselect",
-                "developer": "Andrew Ross",
-                "developerUrl": "andrewross.co",
-                "documentationUrl": "???",
-                "changelogUrl": "???",
-                "class": "neuroscience\\neuroselect\\Neuroselect"
-            },
-            "autoload": {
-                "psr-4": {
-                    "neuroscience\\neuroselect\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Ross",
-                    "homepage": "andrewross.co"
-                }
-            ],
-            "description": "Pull Data from the NeuroScience app and display in User Profiles",
-            "keywords": [
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms",
-                "neuroselect"
-            ],
-            "support": {
-                "docs": "???",
-                "issues": "???"
-            },
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
         },
         {
             "name": "paragonie/random_compat",

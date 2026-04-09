@@ -47,6 +47,9 @@ return [
         'autoship-schedule' => [
             'class' => \modules\AutoshipScheduleModule::class,
         ],
+        'neuroselect-module' => [
+            'class' => \modules\NeuroSelectModule::class,
+        ],
     ],
     'bootstrap' => [
         'pending-user-module',
@@ -58,5 +61,6 @@ return [
         'hcp-workspace',
         'patient-shop',
         'autoship-schedule',
+        'neuroselect-module',
     ],
 ];

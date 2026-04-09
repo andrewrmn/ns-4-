@@ -54,7 +54,7 @@
           <div class="d-flex flex-justify-end">
             {% set hasPDF = true %}
             <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
-              <input type="hidden" name="action" value="neuroselect/pdf/email-pdf">
+              <input type="hidden" name="action" value="neuroselect-module/pdf/email-pdf">
               {{ csrfInput() }}
               <input type="hidden" name="submissionId" value="{{ submission.activationCode }}">
               <input type="hidden" name="userId" value="{{ user.id }}">
@@ -541,7 +541,7 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '/actions/neuroselect/pdf/generate-pdf',
+      url: '/actions/neuroselect-module/pdf/generate-pdf',
       dataType: 'json'
     }).done(function (data) {
       $('html').removeClass('thinking').removeClass('generating');
@@ -588,7 +588,7 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '/actions/neuroselect/pdf/email-pdf',
+      url: '/actions/neuroselect-module/pdf/email-pdf',
       dataType: 'json'
     }).done(function (data) {
       $('html').removeClass('email-queue thinking');

@@ -72,7 +72,7 @@
                         </div>
 
                         <form id="edit-pir-form" class="col-lg-10" action="" method="post" accept-charset="UTF-8" class="">
-                            <input type="hidden" name="action" value="/neuroselect/sleep/sleep-pir">
+                            <input type="hidden" name="action" value="/neuroselect-module/sleep/sleep-pir">
                             {{ csrfInput() }}
 
                             <input type="hidden" id="submissionId" name="submissionId" value="{{ submissionId }}">
@@ -354,7 +354,7 @@
                 type: 'post',
                 cache: false,
                 data: form.serialize(),
-                url: '/neuroselect/sleep-pir',
+                url: '/neuroselect-module/sleep/sleep-pir',
                 dataType: 'json'
             }).done(function (data) {
 

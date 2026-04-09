@@ -8,9 +8,8 @@
  * @copyright Copyright (c) 2020 Andrew Ross
  */
 
-namespace neuroscience\neuroselect\controllers;
+namespace modules\neuroselect\controllers;
 
-use neuroscience\neuroselect\Neuroselect;
 
 use Craft;
 use craft\web\Controller;
