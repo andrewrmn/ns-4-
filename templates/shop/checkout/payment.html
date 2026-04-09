@@ -309,8 +309,8 @@
 						</div>
 					</form>
 
-					{# Sandbox / test creds when .env ENVIRONMENT=dev (CRAFT_ENVIRONMENT in web/index.php). #}
-					{% set payaUseSandbox = constant('CRAFT_ENVIRONMENT') == 'dev' %}
+					{# Sandbox / test creds when Craft env is dev (.env ENVIRONMENT or CRAFT_ENVIRONMENT). #}
+					{% set payaUseSandbox = craft.app.config.env == 'dev' %}
 					{% set key = craft.paya.vars.dev.KEY %}
 					{% set req = craft.paya.vars.req %}
 					{% set merchantID = req.merchantId %}

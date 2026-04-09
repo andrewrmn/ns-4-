@@ -17,7 +17,13 @@ if (class_exists('Dotenv\Dotenv') && file_exists(CRAFT_BASE_PATH.'/.env')) {
 }
 
 // Load and run Craft
-define('CRAFT_ENVIRONMENT', getenv('ENVIRONMENT') ?: 'production');
+// Use App::env (not getenv alone): PHP-FPM often clears getenv(); Dotenv still populates $_SERVER.
+define(
+    'CRAFT_ENVIRONMENT',
+    craft\helpers\App::env('CRAFT_ENVIRONMENT')
+        ?? craft\helpers\App::env('ENVIRONMENT')
+        ?? 'production'
+);
 $app = require CRAFT_VENDOR_PATH.'/craftcms/cms/bootstrap/console.php';
 $exitCode = $app->run();
 exit($exitCode);
