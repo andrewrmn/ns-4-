@@ -223,11 +223,16 @@
                           type: 'post',
                           cache: false,
                           data: $('#recommendedProductsForm-{{ loop.index }}').serialize(),
-                          url: '/neuroselect/hcp/save-recommendation',
-                          dataType: 'json'
+                          url: '{{ url("neuroselect/hcp/save-recommendation") }}',
+                          dataType: 'json',
+                          headers: { 'X-Requested-With': 'XMLHttpRequest' }
                         }).done(function (data) {
-                          $('#save-recommendation-modal').addClass('is-active');
-                          $('#product-recommendation-modal-{{ loop.index }}').removeClass('is-active');
+                          if (data && data.success) {
+                            $('#save-recommendation-modal').addClass('is-active');
+                            $('#product-recommendation-modal-{{ loop.index }}').removeClass('is-active');
+                          } else {
+                            $('#error-recommendation-modal').addClass('is-active');
+                          }
                         }).fail(function (data) {
                           $('#error-recommendation-modal').addClass('is-active');
 

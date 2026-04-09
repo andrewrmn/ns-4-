@@ -182,19 +182,21 @@
 <script>
   var $ = jQuery;
   var recForm = $('#recommendedProductsForm');
-  $(document).on("click", "#divSendRecommendation", function (e) {
+  $(document).on("click", "#btnSendRecommendation", function (e) {
     e.preventDefault();
-    //$('#recommendedProductsForm').submit();
     $.ajax({
       type: 'post',
       cache: false,
       data: recForm.serialize(),
-      url: '/neuroselect/hcp/save-recommendation',
-      dataType: 'json'
+      url: '{{ url("neuroselect/hcp/save-recommendation") }}',
+      dataType: 'json',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
     }).done(function (data) {
-      console.log(data);
-      $('#save-recommendation-modal').addClass('is-active');
-
+      if (data && data.success) {
+        $('#save-recommendation-modal').addClass('is-active');
+      } else {
+        $('#error-recommendation-modal').addClass('is-active');
+      }
     }).fail(function (data) {
       console.log("Took an L" + data.status);
       $('#error-recommendation-modal').addClass('is-active');

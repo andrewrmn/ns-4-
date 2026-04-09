@@ -5,12 +5,15 @@ namespace modules;
 use Craft;
 use craft\commerce\elements\Order;
 use craft\helpers\UrlHelper;
+use craft\mail\Mailer;
 use craft\mail\Message;
 use craft\web\User as WebUser;
 use craft\web\View;
 use enupal\stripe\Stripe;
 use yii\base\Event;
 use yii\base\Module;
+use yii\mail\BaseMailer;
+use yii\mail\MailEvent;
 use yii\web\UserEvent;
 
 class PatientShopModule extends Module
@@ -18,6 +21,20 @@ class PatientShopModule extends Module
     public function init(): void
     {
         parent::init();
+
+        // #region agent log
+        Event::on(Mailer::class, BaseMailer::EVENT_BEFORE_SEND, function (MailEvent $event): void {
+            $message = $event->message;
+            if (!$message instanceof Message) {
+                return;
+            }
+            $html = $message->getHtmlBody();
+            if (!is_string($html) || $html === '' || strpos($html, '<img') === false) {
+                return;
+            }
+            EmailDebugLogger::logRenderedEmail('PatientShopModule:Mailer::EVENT_BEFORE_SEND', 'html-email-with-images', $html);
+        });
+        // #endregion
 
         Event::on(Order::class, Order::EVENT_AFTER_COMPLETE_ORDER, function (Event $e): void {
             $order = $e->sender;

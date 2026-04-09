@@ -121,34 +121,68 @@ class HcpController extends Controller
     public function actionSaveRecommendation()
     {
         $this->requirePostRequest();
+        $request = Craft::$app->getRequest();
+        // jQuery dataType:'json' sets Accept: application/json but some stacks strip X-Requested-With; without JSON
+        // response the client parses redirected HTML and shows a false "email failed" error.
+        $wantsJson = $request->getIsAjax() || $request->getAcceptsJson();
+
         $hcpUser = Craft::$app->getUser()->getIdentity();
-        $recommendedProducts = Craft::$app->request->getBodyParam('recommendedProducts');
-        $patientId = Craft::$app->request->getBodyParam('patientId');
-        $recommendationNote = Craft::$app->request->getBodyParam('recommendationNote');
+        $recommendedProducts = $request->getBodyParam('recommendedProducts');
+        $patientId = $request->getBodyParam('patientId');
+        $recommendationNote = $request->getBodyParam('recommendationNote');
 
-        $isAjax = Craft::$app->request->isAjax;
-
-        if (isset($recommendedProducts) && count($recommendedProducts) > 0) {
-            $entry = new Entry();
-            $entry->sectionId = 21;
-            $entry->typeId = 22;
-            $entry->authorId = $hcpUser->id;
-            $entry->enabled = true;
-            $entry->title = time();
-            $entry->setFieldValues([
-                'patientAccount' => [$patientId],
-                'recommendedProducts' => $recommendedProducts,
-                'relatedHcp' => [$hcpUser->id],
-                'recommendationNote' => $recommendationNote,
-            ]);
-            $success = Craft::$app->elements->saveElement($entry);
-            if (!$success) {
-                Craft::error('Couldn’t save the entry "' . $entry->title . '"', __METHOD__);
+        if (!$hcpUser) {
+            if ($wantsJson) {
+                return $this->asJson(['success' => 0, 'message' => 'Not authenticated.']);
             }
 
-            $patientUser = Craft::$app->users->getUserById($patientId);
-            $products = \craft\commerce\elements\Product::find()->id($recommendedProducts)->orderBy('title ASC')->all();
-            Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
+            return $this->redirectToPostedUrl();
+        }
+
+        if (!isset($recommendedProducts) || count($recommendedProducts) === 0) {
+            if ($wantsJson) {
+                return $this->asJson(['success' => 0, 'message' => 'Select at least one product.']);
+            }
+
+            return $this->redirectToPostedUrl();
+        }
+
+        $patientUser = Craft::$app->users->getUserById($patientId);
+        if (!$patientUser || !$patientUser->email) {
+            Craft::error('save-recommendation: missing patient or email for patientId ' . (string) $patientId, __METHOD__);
+            if ($wantsJson) {
+                return $this->asJson(['success' => 0, 'message' => 'Patient not found.']);
+            }
+
+            return $this->redirectToPostedUrl();
+        }
+
+        $entry = new Entry();
+        $entry->sectionId = 21;
+        $entry->typeId = 22;
+        $entry->authorId = $hcpUser->id;
+        $entry->enabled = true;
+        $entry->title = time();
+        $entry->setFieldValues([
+            'patientAccount' => [$patientId],
+            'recommendedProducts' => $recommendedProducts,
+            'relatedHcp' => [$hcpUser->id],
+            'recommendationNote' => $recommendationNote,
+        ]);
+        $success = Craft::$app->elements->saveElement($entry);
+        if (!$success) {
+            Craft::error('Couldn’t save the entry "' . $entry->title . '"', __METHOD__);
+            if ($wantsJson) {
+                return $this->asJson(['success' => 0, 'message' => 'Could not save recommendation.']);
+            }
+
+            return $this->redirectToPostedUrl();
+        }
+
+        $products = \craft\commerce\elements\Product::find()->id($recommendedProducts)->orderBy('title ASC')->all();
+        Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
+
+        try {
             $body = Craft::$app->getView()->renderTemplate(
                 'hcp/_emails/recommendations',
                 ['products' => $products, 'patient' => $patientUser, 'hcp' => $hcpUser, 'recommendationNote' => $recommendationNote]
@@ -162,14 +196,29 @@ class HcpController extends Controller
             $message->setTo($patientUser->email);
             $message->setSubject($subject);
             $message->setHtmlBody($body);
-            $mailer->send($message);
+            $sent = $mailer->send($message);
+            if (!$sent) {
+                Craft::error('save-recommendation: mailer->send returned false for patient ' . $patientUser->email, __METHOD__);
+                if ($wantsJson) {
+                    return $this->asJson(['success' => 0, 'message' => 'Email could not be sent.']);
+                }
 
-            if ($isAjax) {
-                return $this->asJson([
-                    'success' => 1,
-                    'message' => '',
-                ]);
+                return $this->redirectToPostedUrl();
             }
+        } catch (\Throwable $e) {
+            Craft::error('save-recommendation: ' . $e->getMessage(), __METHOD__);
+            if ($wantsJson) {
+                return $this->asJson(['success' => 0, 'message' => 'Email could not be sent.']);
+            }
+
+            return $this->redirectToPostedUrl();
+        }
+
+        if ($wantsJson) {
+            return $this->asJson([
+                'success' => 1,
+                'message' => '',
+            ]);
         }
 
         return $this->redirectToPostedUrl();
