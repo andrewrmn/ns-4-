@@ -7,6 +7,7 @@ web/images
 web/cpresources
 web/pir-documents
 web/userphotos
+web/surveys
 live-logs
 
 *.sql

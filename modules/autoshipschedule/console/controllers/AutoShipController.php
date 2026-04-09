@@ -72,7 +72,7 @@ class AutoShipController extends Controller
         $subscriptions = Subscription::search(['query' => 'status:"' . Subscription::STATUS_ACTIVE . '"']);
         foreach ($subscriptions->data as $subscription) {
             $daysUntilDue = floor(($subscription['current_period_end'] - time()) / (60 * 60 * 24));
-            if ($daysUntilDue == 3 && !$subscription['cancel_at_period_end']) {
+            if ($daysUntilDue == 1 && !$subscription['cancel_at_period_end']) {
                 $orderNumber = $subscription['metadata']->orderNumber;
                 $order = Order::find()->where(['variants' => '{"orderNumber":"' . $orderNumber . '"}'])->one();
                 $commerceOrder = CommerceOrder::find()->where(['number' => $orderNumber])->orderBy(['id' => 'DESC'])->one();
