@@ -1,0 +1,111 @@
+/*
+ * PIR NeuroSelect — Dompdf-only supplements (appended after pdf9.css in PHP).
+ * Dompdf’s flexbox implementation is incomplete vs Chrome; these rules approximate
+ * the multi-column product layout with floats so widths from pdf9.css apply.
+ */
+
+/* Main horizontal product rows */
+#pir .wrapper-wide > .d-flex,
+#pir .wrapper-wide .d-flex.flex-wrap {
+	display: block !important;
+	width: 100% !important;
+}
+
+#pir .wrapper-wide > .d-flex::after,
+#pir .wrapper-wide .d-flex.flex-wrap::after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#pir .wrapper-wide > .d-flex > .col-12,
+#pir .wrapper-wide > .d-flex > [class*="col-"],
+#pir .wrapper-wide .d-flex.flex-wrap > .col-12,
+#pir .wrapper-wide .d-flex.flex-wrap > [class*="col-"] {
+	float: left !important;
+}
+
+/* Stack nested flex columns inside each cell (pathways, suggested use, etc.) */
+#pir .wrapper-wide .d-flex [class*="col-"] .d-flex,
+#pir .wrapper-wide .d-flex.flex-wrap [class*="col-"] .d-flex {
+	display: block !important;
+}
+
+/* Header block: provider + patient meta */
+#pir #pir-header .wrapper.d-flex.flex-wrap,
+#pir #pir-header .d-md-flex,
+#pir #pir-header .col-12.d-flex {
+	display: block !important;
+}
+
+#pir #pir-header .col-12.d-flex > .pr-8,
+#pir #pir-header .col-12.d-flex > div:not(.pr-8) {
+	float: left !important;
+	width: 46% !important;
+	margin-right: 2% !important;
+	vertical-align: top !important;
+}
+
+#pir #pir-header .wrapper.d-flex.flex-wrap::after,
+#pir #pir-header .d-md-flex::after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+/* Serving-size / suggested-use circle widgets */
+#pir .suggested-use-count {
+	display: block !important;
+	text-align: center !important;
+}
+
+#pir .suggested-use-count > span {
+	display: inline-block !important;
+	vertical-align: middle !important;
+}
+
+/* Reference list tri-column */
+#pir .reference-list-content {
+	display: block !important;
+}
+
+#pir .reference-list-content::after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#pir .reference-list-content > * {
+	float: left !important;
+	display: block !important;
+}
+
+/* Sleep / survey-style rows */
+#pir .sleep-table__hd,
+#pir .sleep-area,
+#pir .survey-product,
+#pir .foundation {
+	display: block !important;
+}
+
+#pir .sleep-table__hd > *,
+#pir .sleep-area > * {
+	float: left !important;
+	display: block !important;
+}
+
+#pir .sleep-table__hd::after,
+#pir .sleep-area::after {
+	content: "";
+	display: block;
+	clear: both;
+}

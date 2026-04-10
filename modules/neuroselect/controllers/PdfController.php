@@ -262,6 +262,14 @@ class PdfController extends Controller
         if (is_file($path)) {
             $css = file_get_contents($path);
             if ($css !== false && $css !== '') {
+                $dompdfExtra = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9-dompdf.css';
+                if (is_file($dompdfExtra)) {
+                    $extra = file_get_contents($dompdfExtra);
+                    if (is_string($extra) && $extra !== '') {
+                        $css .= "\n" . $extra;
+                    }
+                }
+
                 return [
                     'dompdfUrl' => null,
                     'dompdfInline' => $css,

@@ -18,6 +18,12 @@ final class WkhtmlPdfRenderer
     ): string|false {
         $errorDetail = null;
 
+        if (!\function_exists('exec')) {
+            $errorDetail = 'PHP exec() is disabled on this server. Use PIR_PDF_ENGINE=dompdf or ask the host to allow exec.';
+
+            return false;
+        }
+
         $bin = getenv('WKHTMLTOPDF_BIN') ?: 'wkhtmltopdf';
         if (!is_string($bin) || $bin === '') {
             Craft::error('WKHTMLTOPDF_BIN is empty.', __METHOD__);
@@ -80,7 +86,7 @@ final class WkhtmlPdfRenderer
 
         $output = [];
         $exitCode = 1;
-        exec($cmd . ' 2>&1', $output, $exitCode);
+        \exec($cmd . ' 2>&1', $output, $exitCode);
 
         @unlink($footerPath);
         if ($headerPath !== null) {

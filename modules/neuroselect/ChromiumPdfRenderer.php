@@ -34,10 +34,13 @@ final class ChromiumPdfRenderer
             }
         }
 
-        foreach (['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser'] as $name) {
-            $which = trim((string) @shell_exec('command -v ' . escapeshellarg($name) . ' 2>/dev/null'));
-            if ($which !== '' && @is_executable($which)) {
-                return $which;
+        // Many hosts (e.g. Cloudways) disable shell_exec; skip PATH lookup instead of fatalling.
+        if (\function_exists('shell_exec')) {
+            foreach (['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser'] as $name) {
+                $which = trim((string) @\shell_exec('command -v ' . \escapeshellarg($name) . ' 2>/dev/null'));
+                if ($which !== '' && @\is_executable($which)) {
+                    return $which;
+                }
             }
         }
 
@@ -50,6 +53,12 @@ final class ChromiumPdfRenderer
     public static function renderUrlToPdf(string $url, ?string &$errorDetail = null): string|false
     {
         $errorDetail = null;
+
+        if (!\function_exists('exec')) {
+            $errorDetail = 'PHP exec() is disabled on this server. Set PIR_PDF_ENGINE=dompdf or ask the host to allow exec for headless Chrome.';
+
+            return false;
+        }
 
         $bin = self::binaryPath();
         if ($bin === null) {
@@ -86,7 +95,7 @@ final class ChromiumPdfRenderer
 
         $output = [];
         $exitCode = 1;
-        exec($cmd . ' 2>&1', $output, $exitCode);
+        \exec($cmd . ' 2>&1', $output, $exitCode);
 
         if ($exitCode !== 0 || !is_file($outPath)) {
             $tail = trim(implode("\n", array_slice($output, -8)));
