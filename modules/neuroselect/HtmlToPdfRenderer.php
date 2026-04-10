@@ -57,12 +57,31 @@ final class HtmlToPdfRenderer
             return false;
         }
 
+        // #region agent log
+        $up = parse_url($url);
+        PdfDebugSessionLog::write('H3', 'HtmlToPdfRenderer::fromUrl', 'report_html_fetched', [
+            'http_status' => $code,
+            'html_len' => strlen($html),
+            'url_host' => $up['host'] ?? '',
+            'url_path' => $up['path'] ?? '',
+        ]);
+        // #endregion
+
         $resolvedCss = self::resolvePrintStylesheet($stylesheetUrl, $stylesheetInline);
         if ($appendStylesheetInline !== null && $appendStylesheetInline !== '') {
             $resolvedCss = $resolvedCss === ''
                 ? $appendStylesheetInline
                 : $resolvedCss . "\n" . $appendStylesheetInline;
         }
+        // #region agent log
+        PdfDebugSessionLog::write('H2,H4', 'HtmlToPdfRenderer::fromUrl', 'dompdf_css_merged', [
+            'resolved_css_len' => strlen($resolvedCss),
+            'append_passed_len' => strlen($appendStylesheetInline ?? ''),
+            'had_inline_sheet' => ($stylesheetInline ?? '') !== '',
+            'had_url_or_path_sheet' => ($stylesheetUrl ?? '') !== '',
+            'url_sheet_is_http' => is_string($stylesheetUrl) && preg_match('#^https?://#i', $stylesheetUrl) === 1,
+        ]);
+        // #endregion
         if ($resolvedCss === '' && ($stylesheetUrl !== null && $stylesheetUrl !== '')) {
             Craft::warning(
                 'Dompdf print stylesheet could not be loaded (empty after fetch): ' . $stylesheetUrl,

@@ -12,6 +12,7 @@ namespace modules\neuroselect\controllers;
 
 use modules\neuroselect\ChromiumPdfRenderer;
 use modules\neuroselect\HtmlToPdfRenderer;
+use modules\neuroselect\PdfDebugSessionLog;
 use modules\neuroselect\PdfGenerationEngine;
 use modules\neuroselect\WkhtmlPdfRenderer;
 
@@ -67,6 +68,29 @@ class PdfController extends Controller
         $engine = PdfGenerationEngine::engineId();
         $pdfEngineDetail = null;
         $pirSheet = $this->resolvePirPdfStylesheet();
+
+        // #region agent log
+        $pu = parse_url($source);
+        $sheetBranch = 'fallback_url';
+        if (is_string(getenv('PIR_PDF_STYLESHEET_URL')) && getenv('PIR_PDF_STYLESHEET_URL') !== '') {
+            $sheetBranch = 'env_url';
+        } else {
+            $p9 = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9.css';
+            if (is_file($p9) && (int) @filesize($p9) > 0) {
+                $sheetBranch = 'webroot_pdf9';
+            }
+        }
+        PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::actionGeneratePdf', 'pre_render', [
+            'engine' => $engine,
+            'fetch_base_set' => is_string(getenv('PIR_PDF_FETCH_BASE_URL')) && getenv('PIR_PDF_FETCH_BASE_URL') !== '',
+            'source_host' => $pu['host'] ?? '',
+            'source_path' => $pu['path'] ?? '',
+            'sheet_branch' => $sheetBranch,
+            'dompdf_inline_len' => strlen($pirSheet['dompdfInline'] ?? ''),
+            'dompdf_url_set' => ($pirSheet['dompdfUrl'] ?? '') !== '',
+            'dompdf_append_len' => strlen($pirSheet['dompdfAppend'] ?? ''),
+        ]);
+        // #endregion
 
         if ($engine === PdfGenerationEngine::CHROMIUM) {
             $pdfBody = ChromiumPdfRenderer::renderUrlToPdf($source, $pdfEngineDetail);
