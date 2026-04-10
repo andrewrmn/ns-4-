@@ -484,7 +484,7 @@ class SurveyController extends Controller
             return WkhtmlPdfRenderer::render($source, $footerHtml, $surveyCss, $errorDetail, $headerHtml);
         }
 
-        return HtmlToPdfRenderer::fromUrl($source, $surveyCss, $headerHtml, $footerHtml, null, $errorDetail);
+        return HtmlToPdfRenderer::fromUrl($source, $surveyCss, $headerHtml, $footerHtml, null, null, $errorDetail);
     }
 
     private function resolveSurveyStylesheetPathOrUrl(): string

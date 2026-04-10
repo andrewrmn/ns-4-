@@ -14,8 +14,9 @@ use GuzzleHttp\Exception\GuzzleException;
 final class HtmlToPdfRenderer
 {
     /**
-     * @param string|null $stylesheetUrl external stylesheet URL (&lt;link&gt;); ignored if $stylesheetInline is non-empty
-     * @param string|null $stylesheetInline raw CSS injected in &lt;style&gt; (e.g. read from @webroot/css/pdf9.css)
+     * @param string|null $stylesheetUrl HTTP(S) URL or absolute filesystem path to CSS (fetched/read and inlined for Dompdf)
+     * @param string|null $stylesheetInline raw CSS injected in &lt;style&gt; (takes precedence over URL when non-empty)
+     * @param string|null $appendStylesheetInline extra CSS appended after resolved sheet (e.g. pdf9-dompdf.css)
      * @param string|null $errorDetail set on failure for JSON / logs
      */
     public static function fromUrl(
@@ -24,6 +25,7 @@ final class HtmlToPdfRenderer
         ?string $headerInnerHtml,
         ?string $footerInnerHtml,
         ?string $stylesheetInline = null,
+        ?string $appendStylesheetInline = null,
         ?string &$errorDetail = null
     ): string|false {
         $errorDetail = null;
@@ -55,12 +57,25 @@ final class HtmlToPdfRenderer
             return false;
         }
 
+        $resolvedCss = self::resolvePrintStylesheet($stylesheetUrl, $stylesheetInline);
+        if ($appendStylesheetInline !== null && $appendStylesheetInline !== '') {
+            $resolvedCss = $resolvedCss === ''
+                ? $appendStylesheetInline
+                : $resolvedCss . "\n" . $appendStylesheetInline;
+        }
+        if ($resolvedCss === '' && ($stylesheetUrl !== null && $stylesheetUrl !== '')) {
+            Craft::warning(
+                'Dompdf print stylesheet could not be loaded (empty after fetch): ' . $stylesheetUrl,
+                __METHOD__
+            );
+        }
+
         $baseHref = self::baseHrefFromUrl($url);
         $html = self::injectHeadAndBodyWrappers(
             $html,
             $baseHref,
-            $stylesheetUrl,
-            $stylesheetInline,
+            null,
+            $resolvedCss !== '' ? $resolvedCss : null,
             $headerInnerHtml,
             $footerInnerHtml
         );
@@ -192,5 +207,57 @@ final class HtmlToPdfRenderer
         }
 
         return $html;
+    }
+
+    /**
+     * Dompdf often fails to load &lt;link rel="stylesheet"&gt; from remote URLs on locked-down hosts.
+     * Always inline: prefer $inline, else fetch/read $urlOrPath via Guzzle (http(s)) or filesystem.
+     */
+    private static function resolvePrintStylesheet(?string $urlOrPath, ?string $inline): string
+    {
+        if ($inline !== null && $inline !== '') {
+            return $inline;
+        }
+        if ($urlOrPath === null || $urlOrPath === '') {
+            return '';
+        }
+
+        $body = self::fetchStylesheet($urlOrPath);
+        if ($body === '') {
+            Craft::warning('Could not load stylesheet for Dompdf: ' . $urlOrPath, __METHOD__);
+        }
+
+        return $body;
+    }
+
+    private static function fetchStylesheet(string $urlOrPath): string
+    {
+        if (preg_match('#^https?://#i', $urlOrPath)) {
+            try {
+                $client = Craft::createGuzzleClient([
+                    'timeout' => 60,
+                    'connect_timeout' => 20,
+                    'http_errors' => false,
+                ]);
+                $response = $client->get($urlOrPath);
+                $code = $response->getStatusCode();
+                if ($code >= 200 && $code < 300) {
+                    return (string)$response->getBody();
+                }
+                Craft::warning("Stylesheet HTTP {$code}: {$urlOrPath}", __METHOD__);
+            } catch (GuzzleException $e) {
+                Craft::warning('Stylesheet fetch: ' . $e->getMessage(), __METHOD__);
+            }
+
+            return '';
+        }
+
+        if (is_file($urlOrPath)) {
+            $c = @file_get_contents($urlOrPath);
+
+            return is_string($c) ? $c : '';
+        }
+
+        return '';
     }
 }

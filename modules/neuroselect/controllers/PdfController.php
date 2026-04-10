@@ -85,6 +85,7 @@ class PdfController extends Controller
                 null,
                 $footer['source'],
                 $pirSheet['dompdfInline'],
+                $pirSheet['dompdfAppend'] ?? null,
                 $pdfEngineDetail
             );
         }
@@ -244,16 +245,27 @@ class PdfController extends Controller
 
     /**
      * PIR print CSS: optional PIR_PDF_STYLESHEET_URL, else web/css/pdf9.css under @webroot, else production URL.
+     * Dompdf: HtmlToPdfRenderer fetches HTTP(S) URLs with Guzzle and inlines CSS (Dompdf often skips remote &lt;link&gt; on hosts).
      *
-     * @return array{dompdfUrl: ?string, dompdfInline: ?string, wkhtmlArg: string}
+     * @return array{dompdfUrl: ?string, dompdfInline: ?string, dompdfAppend: ?string, wkhtmlArg: string}
      */
     private function resolvePirPdfStylesheet(): array
     {
+        $appendPath = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9-dompdf.css';
+        $dompdfAppend = null;
+        if (is_file($appendPath)) {
+            $appendCss = file_get_contents($appendPath);
+            if (is_string($appendCss) && $appendCss !== '') {
+                $dompdfAppend = $appendCss;
+            }
+        }
+
         $env = getenv('PIR_PDF_STYLESHEET_URL');
         if (is_string($env) && $env !== '') {
             return [
                 'dompdfUrl' => $env,
                 'dompdfInline' => null,
+                'dompdfAppend' => $dompdfAppend,
                 'wkhtmlArg' => $env,
             ];
         }
@@ -262,17 +274,10 @@ class PdfController extends Controller
         if (is_file($path)) {
             $css = file_get_contents($path);
             if ($css !== false && $css !== '') {
-                $dompdfExtra = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9-dompdf.css';
-                if (is_file($dompdfExtra)) {
-                    $extra = file_get_contents($dompdfExtra);
-                    if (is_string($extra) && $extra !== '') {
-                        $css .= "\n" . $extra;
-                    }
-                }
-
                 return [
                     'dompdfUrl' => null,
                     'dompdfInline' => $css,
+                    'dompdfAppend' => $dompdfAppend,
                     'wkhtmlArg' => $path,
                 ];
             }
@@ -283,6 +288,7 @@ class PdfController extends Controller
         return [
             'dompdfUrl' => $fallback,
             'dompdfInline' => null,
+            'dompdfAppend' => $dompdfAppend,
             'wkhtmlArg' => $fallback,
         ];
     }
