@@ -91,12 +91,12 @@
 
                 <div class="d-flex flex-justify-end">
                   <div class="col-12">
-                    <a href="{{ url('actions/neuroselect/hcp/re-send-recommendation?recId=' ~ recommendation.id) }}">Resend</a>
+                    <a href="{{ url('actions/hcp-workspace/hcp/re-send-recommendation?recId=' ~ recommendation.id) }}">Resend</a>
                   </div>
 
                   <a href="#" class="js-symptom-link" data-click-target="product-recommendation-modal-{{ loop.index }}">Update</a>
 
-                  <a href="{{ url('actions/neuroselect/hcp/remove-recommendation?recId=' ~ recommendation.id ~ '&patientId=' ~ patientId) }}" onclick="return confirm('Are you sure you want to remove this recommendation?');">Remove</a>
+                  <a href="{{ url('actions/hcp-workspace/hcp/remove-recommendation?recId=' ~ recommendation.id ~ '&patientId=' ~ patientId) }}" onclick="return confirm('Are you sure you want to remove this recommendation?');">Remove</a>
                 </div>
               </div>
 
@@ -184,7 +184,7 @@
                     <div class="mt-3">
                       <form class="form" id="recommendedProductsForm-{{ loop.index }}" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
                         {{ csrfInput() }}
-                        {{ actionInput('neuroselect/hcp/save-recommendation') }}
+                        {{ actionInput('hcp-workspace/hcp/save-recommendation') }}
                         {{ redirectInput('hcp/dashboard') }}
                         {{ hiddenInput('patientId', patientId) }}
 
@@ -223,7 +223,6 @@
                           type: 'post',
                           cache: false,
                           data: $('#recommendedProductsForm-{{ loop.index }}').serialize(),
-                          url: '{{ url("neuroselect/hcp/save-recommendation") }}',
                           dataType: 'json',
                           headers: { 'X-Requested-With': 'XMLHttpRequest' }
                         }).done(function (data) {
@@ -372,7 +371,7 @@
           <h3 class="text-center">NeuroCash Discount Percentage for {% if patientUser.fullName %}{{ patientUser.fullName }}{% else %}{{ patientUser.username }}{% endif %}</h3>
           <form class="form" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
             {{ csrfInput() }}
-            {{ actionInput('neuroselect/hcp/save-patient-discount') }}
+            {{ actionInput('hcp-workspace/hcp/save-patient-discount') }}
             {{ hiddenInput('patientId', patientUser.id) }}
             {{ redirectInput('hcp/patient?id=' ~ patientUser.id) }}
             <div class="row">
@@ -412,7 +411,7 @@
           {% endif %}
           <form method="post" id="form-set-products-availability">
             {{ csrfInput() }}
-            {{ actionInput('neuroselect/hcp/set-products-availability') }}
+            {{ actionInput('hcp-workspace/hcp/set-products-availability') }}
             {{ hiddenInput('patientId', patientUser.id) }}
             {{ redirectInput('hcp/patient?id=' ~ patientId) }}
             {{ hiddenInput('hiddenAvailableProducts', '') }}

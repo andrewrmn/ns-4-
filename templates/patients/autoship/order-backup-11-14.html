@@ -274,7 +274,7 @@
     </a>
     <div class="modal__inner">
       <form method="post">
-        {{ actionInput('neuroselect/hcp/delay-autoship') }}
+        {{ actionInput('hcp-workspace/hcp/delay-autoship') }}
         <input type="hidden" name="subscriptionId" value="{{ order.stripeTransactionId }}">
         {{ redirectInput('patients/autoship/order?number=' ~ number) }}
         {{ csrfInput() }}

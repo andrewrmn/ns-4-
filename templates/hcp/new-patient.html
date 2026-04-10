@@ -21,7 +21,7 @@
                 </div>
                 <form class="form newPatientForm" id="newPatientForm" enctype="multipart/form-data" accept-charset="UTF-8" method="post">
                     {{ csrfInput() }}
-                    {{ actionInput('neuroselect/hcp/save-patient') }}
+                    {{ actionInput('hcp-workspace/hcp/save-patient') }}
                     {{ redirectInput('hcp/dashboard') }}
                     {{ hiddenInput('sendRecommendation', 0) }}
                     <div class="row newPatientdetails">

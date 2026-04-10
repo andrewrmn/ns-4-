@@ -11,7 +11,7 @@
         <form class="form newPatientForm contact-form-main" id="newPatientForm" validate=""
           enctype="multipart/form-data" accept-charset="UTF-8" method="post">
           {{ csrfInput() }}
-          {{ actionInput('neuroselect/hcp/save-patient') }}
+          {{ actionInput('hcp-workspace/hcp/save-patient') }}
 
           {{ hiddenInput('sendRecommendation', 0) }}
 

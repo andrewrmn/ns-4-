@@ -283,7 +283,7 @@
           {% if not currentUser.accpetedTermsAndConditions %}
           <form enctype="multipart/form-data" accept-charset="UTF-8" method="post">
             {{ csrfInput() }}
-            {{ actionInput('neuroselect/hcp/accept-terms-conditions') }}
+            {{ actionInput('hcp-workspace/hcp/accept-terms-conditions') }}
             {{ redirectInput('hcp/dashboard') }}
             <p>
               <label class="toggle-button">
@@ -322,7 +322,7 @@
         <div class="user-content js-modal-content">
           <form enctype="multipart/form-data" accept-charset="UTF-8" method="post">
             {{ csrfInput() }}
-            {{ actionInput('neuroselect/hcp/save-discount-sharing') }}
+            {{ actionInput('hcp-workspace/hcp/save-discount-sharing') }}
             {{ redirectInput('hcp/dashboard') }}
             <div class="row">
               <div class="col-lg-12 mb-3">
@@ -378,7 +378,7 @@ $(document).ready(function(){
       var enabled = 0;
     }
     var data = {enabled: enabled};
-    $.get('../actions/neuroselect/hcp/enable-autopay',
+    $.get('../actions/hcp-workspace/hcp/enable-autopay',
     data,
     function(response) {
     }

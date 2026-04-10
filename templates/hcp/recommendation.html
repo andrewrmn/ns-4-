@@ -79,7 +79,7 @@
           <form class="form" id="recommendedProductsForm" enctype="multipart/form-data" accept-charset="UTF-8"
             method="post">
             {{ csrfInput() }}
-            {{ actionInput('neuroselect/hcp/save-recommendation') }}
+            {{ actionInput('hcp-workspace/hcp/save-recommendation') }}
             {{ redirectInput('hcp/dashboard') }}
             {{ hiddenInput('patientId', patientId) }}
 
@@ -188,7 +188,6 @@
       type: 'post',
       cache: false,
       data: recForm.serialize(),
-      url: '{{ url("neuroselect/hcp/save-recommendation") }}',
       dataType: 'json',
       headers: { 'X-Requested-With': 'XMLHttpRequest' }
     }).done(function (data) {
@@ -197,8 +196,7 @@
       } else {
         $('#error-recommendation-modal').addClass('is-active');
       }
-    }).fail(function (data) {
-      console.log("Took an L" + data.status);
+    }).fail(function () {
       $('#error-recommendation-modal').addClass('is-active');
     });
   });
