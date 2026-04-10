@@ -67,6 +67,11 @@ final class HtmlToPdfRenderer
         ]);
         // #endregion
 
+        [$html, $linkedStats] = self::inlineLinkedStylesheetsForDompdf($html, $url, $client);
+        // #region agent log
+        PdfDebugSessionLog::write('H6', 'HtmlToPdfRenderer::fromUrl', 'dompdf_linked_stylesheets', $linkedStats);
+        // #endregion
+
         $resolvedCss = self::resolvePrintStylesheet($stylesheetUrl, $stylesheetInline);
         if ($appendStylesheetInline !== null && $appendStylesheetInline !== '') {
             $resolvedCss = $resolvedCss === ''
@@ -119,6 +124,135 @@ final class HtmlToPdfRenderer
 
             return false;
         }
+    }
+
+    /**
+     * Dompdf often skips remote &lt;link rel="stylesheet"&gt;; Chromium does not. Fetch each sheet with Guzzle
+     * and inject as &lt;style&gt; so layout CSS (e.g. main.css) matches browser PDFs.
+     *
+     * @return array{0: string, 1: array<string, int>}
+     */
+    private static function inlineLinkedStylesheetsForDompdf(string $html, string $pageUrl, \GuzzleHttp\Client $client): array
+    {
+        $inlinedBytes = 0;
+        $removedLinks = 0;
+        $fetchOk = 0;
+        $fetchFail = 0;
+        $skippedCap = 0;
+        $maxLinks = 30;
+        $maxBytes = 4 * 1024 * 1024;
+        $seen = [];
+
+        $html = preg_replace_callback(
+            '#<link\b[^>]*>#i',
+            function (array $m) use (
+                $pageUrl,
+                $client,
+                &$inlinedBytes,
+                &$removedLinks,
+                &$fetchOk,
+                &$fetchFail,
+                &$skippedCap,
+                $maxLinks,
+                $maxBytes,
+                &$seen
+            ): string {
+                $tag = $m[0];
+                if (!preg_match('#\brel\s*=\s*["\']stylesheet["\']#i', $tag)) {
+                    return $tag;
+                }
+                if (!preg_match('#\bhref\s*=\s*["\']([^"\']+)["\']#i', $tag, $hm)) {
+                    return $tag;
+                }
+                if ($removedLinks >= $maxLinks || $inlinedBytes >= $maxBytes) {
+                    ++$skippedCap;
+
+                    return $tag;
+                }
+
+                $abs = self::absoluteUrlForCss($hm[1], $pageUrl);
+                if ($abs === '') {
+                    ++$fetchFail;
+
+                    return $tag;
+                }
+                if (isset($seen[$abs])) {
+                    ++$removedLinks;
+
+                    return '';
+                }
+                $seen[$abs] = true;
+
+                try {
+                    $response = $client->get($abs, ['http_errors' => false]);
+                    $c = $response->getStatusCode();
+                    if ($c < 200 || $c >= 300) {
+                        ++$fetchFail;
+                        Craft::warning("Dompdf inline CSS HTTP {$c}: {$abs}", __METHOD__);
+
+                        return $tag;
+                    }
+                    $body = (string) $response->getBody();
+                    if ($body === '') {
+                        ++$fetchFail;
+
+                        return $tag;
+                    }
+                    $chunk = str_ireplace('</style>', '', $body);
+                    $inlinedBytes += strlen($chunk);
+                    ++$fetchOk;
+                    ++$removedLinks;
+
+                    return '<style type="text/css">/* inlined ' . htmlspecialchars(basename(parse_url($abs, PHP_URL_PATH) ?: ''), ENT_QUOTES | ENT_HTML5, 'UTF-8') . " */\n"
+                        . $chunk . '</style>';
+                } catch (\Throwable $e) {
+                    ++$fetchFail;
+                    Craft::warning('Dompdf inline CSS: ' . $e->getMessage(), __METHOD__);
+
+                    return $tag;
+                }
+            },
+            $html
+        );
+
+        return [
+            $html,
+            [
+                'linked_stylesheet_tags_replaced' => $removedLinks,
+                'linked_css_fetch_ok' => $fetchOk,
+                'linked_css_fetch_fail' => $fetchFail,
+                'linked_css_inlined_bytes' => $inlinedBytes,
+                'linked_css_skipped_cap' => $skippedCap,
+            ],
+        ];
+    }
+
+    private static function absoluteUrlForCss(string $href, string $pageUrl): string
+    {
+        $href = trim($href);
+        if ($href === '' || preg_match('#^data:#i', $href)) {
+            return '';
+        }
+        if (preg_match('#^https?://#i', $href)) {
+            return $href;
+        }
+        $p = parse_url($pageUrl);
+        if ($p === false || empty($p['scheme']) || empty($p['host'])) {
+            return '';
+        }
+        $origin = $p['scheme'] . '://' . $p['host'] . (isset($p['port']) ? ':' . $p['port'] : '');
+        if (str_starts_with($href, '//')) {
+            return $p['scheme'] . ':' . $href;
+        }
+        if ($href[0] === '/') {
+            return $origin . $href;
+        }
+        $base = self::baseHrefFromUrl($pageUrl);
+        if ($base === '') {
+            return $origin . '/' . ltrim($href, '/');
+        }
+
+        return rtrim($base, '/') . '/' . ltrim($href, '/');
     }
 
     private static function baseHrefFromUrl(string $url): string

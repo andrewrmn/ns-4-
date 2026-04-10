@@ -3,6 +3,7 @@
 namespace modules\neuroselect;
 
 use Craft;
+use craft\helpers\App;
 
 /**
  * Headless Chrome/Chromium — same rendering pipeline as Chrome “Print → Save as PDF”.
@@ -15,18 +16,22 @@ final class ChromiumPdfRenderer
      */
     public static function binaryPath(): ?string
     {
-        $fromEnv = getenv('CHROMIUM_BIN') ?: getenv('CHROME_BIN');
-        if (is_string($fromEnv) && $fromEnv !== '' && @is_executable($fromEnv)) {
+        $fromEnv = self::envString('CHROMIUM_BIN') ?: self::envString('CHROME_BIN');
+        if ($fromEnv !== '' && @is_executable($fromEnv)) {
             return $fromEnv;
         }
 
         $candidates = [
             '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
             '/Applications/Chromium.app/Contents/MacOS/Chromium',
+            '/opt/google/chrome/chrome',
             '/usr/bin/google-chrome',
             '/usr/bin/google-chrome-stable',
+            '/usr/local/bin/google-chrome',
+            '/usr/local/bin/google-chrome-stable',
             '/usr/bin/chromium',
             '/usr/bin/chromium-browser',
+            '/snap/bin/chromium',
         ];
         foreach ($candidates as $path) {
             if (@is_executable($path)) {
@@ -34,12 +39,23 @@ final class ChromiumPdfRenderer
             }
         }
 
-        // Many hosts (e.g. Cloudways) disable shell_exec; skip PATH lookup instead of fatalling.
+        // PATH lookup: shell_exec when allowed; else proc_open + /bin/sh (Cloudways often disables shell_exec only).
         if (\function_exists('shell_exec')) {
             foreach (['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser'] as $name) {
                 $which = trim((string) @\shell_exec('command -v ' . \escapeshellarg($name) . ' 2>/dev/null'));
                 if ($which !== '' && @\is_executable($which)) {
                     return $which;
+                }
+            }
+        } elseif (SafeProcess::canRunSubprocess()) {
+            $sh = 'for n in google-chrome-stable google-chrome chromium chromium-browser; do '
+                . 'p=$(command -v "$n" 2>/dev/null); [ -n "$p" ] && [ -x "$p" ] && echo "$p" && exit 0; '
+                . 'done; exit 0';
+            [$lines, ] = SafeProcess::run('/bin/sh -c ' . \escapeshellarg($sh));
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if ($line !== '' && $line[0] === '/' && @\is_executable($line)) {
+                    return $line;
                 }
             }
         }
@@ -76,12 +92,13 @@ final class ChromiumPdfRenderer
             '--no-pdf-header-footer',
         ];
 
-        if (getenv('PIR_CHROMIUM_NO_SANDBOX')) {
+        if (filter_var(App::env('PIR_CHROMIUM_NO_SANDBOX') ?? false, FILTER_VALIDATE_BOOLEAN)) {
             $flags[] = '--no-sandbox';
             $flags[] = '--disable-setuid-sandbox';
         }
 
-        $budget = (int)(getenv('CHROMIUM_VIRTUAL_TIME_BUDGET_MS') ?: '10000');
+        $budgetRaw = App::env('CHROMIUM_VIRTUAL_TIME_BUDGET_MS');
+        $budget = is_numeric($budgetRaw) ? (int) $budgetRaw : 10000;
         if ($budget > 0) {
             $flags[] = '--virtual-time-budget=' . $budget;
         }
@@ -114,5 +131,21 @@ final class ChromiumPdfRenderer
         }
 
         return $pdf;
+    }
+
+    /**
+     * Use App::env (reads $_SERVER) — not raw getenv(), which is empty on many FPM pools with putenv disabled.
+     */
+    private static function envString(string $key): string
+    {
+        $v = App::env($key);
+        if (is_string($v) && $v !== '') {
+            return $v;
+        }
+        if (isset($_ENV[$key]) && is_string($_ENV[$key]) && $_ENV[$key] !== '') {
+            return $_ENV[$key];
+        }
+
+        return '';
     }
 }

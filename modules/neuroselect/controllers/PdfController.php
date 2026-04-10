@@ -14,9 +14,11 @@ use modules\neuroselect\ChromiumPdfRenderer;
 use modules\neuroselect\HtmlToPdfRenderer;
 use modules\neuroselect\PdfDebugSessionLog;
 use modules\neuroselect\PdfGenerationEngine;
+use modules\neuroselect\PdfShiftRenderer;
 use modules\neuroselect\WkhtmlPdfRenderer;
 
 use Craft;
+use craft\helpers\App;
 use craft\web\Controller;
 use craft\helpers\FileHelper;
 use craft\mail\Message;
@@ -51,7 +53,7 @@ class PdfController extends Controller
 
         // Chromium loads the URL like a real browser (best WYSIWYG). Dompdf/wkhtmltopdf also fetch server-side.
         // Set PIR_PDF_FETCH_BASE_URL if the browser URL is not reachable from this server (no trailing slash).
-        $fetchBase = getenv('PIR_PDF_FETCH_BASE_URL');
+        $fetchBase = App::env('PIR_PDF_FETCH_BASE_URL');
         if (is_string($fetchBase) && $fetchBase !== '') {
             $parts = parse_url($source);
             if ($parts !== false && !empty($parts['path'])) {
@@ -72,7 +74,8 @@ class PdfController extends Controller
         // #region agent log
         $pu = parse_url($source);
         $sheetBranch = 'fallback_url';
-        if (is_string(getenv('PIR_PDF_STYLESHEET_URL')) && getenv('PIR_PDF_STYLESHEET_URL') !== '') {
+        $pirSheetUrl = App::env('PIR_PDF_STYLESHEET_URL');
+        if (is_string($pirSheetUrl) && $pirSheetUrl !== '') {
             $sheetBranch = 'env_url';
         } else {
             $p9 = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9.css';
@@ -80,9 +83,11 @@ class PdfController extends Controller
                 $sheetBranch = 'webroot_pdf9';
             }
         }
+        $resolvedChromeBin = ChromiumPdfRenderer::binaryPath();
+        $fetchBaseLog = App::env('PIR_PDF_FETCH_BASE_URL');
         PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::actionGeneratePdf', 'pre_render', [
             'engine' => $engine,
-            'fetch_base_set' => is_string(getenv('PIR_PDF_FETCH_BASE_URL')) && getenv('PIR_PDF_FETCH_BASE_URL') !== '',
+            'fetch_base_set' => is_string($fetchBaseLog) && $fetchBaseLog !== '',
             'source_host' => $pu['host'] ?? '',
             'source_path' => $pu['path'] ?? '',
             'sheet_branch' => $sheetBranch,
@@ -91,12 +96,24 @@ class PdfController extends Controller
             'dompdf_append_len' => strlen($pirSheet['dompdfAppend'] ?? ''),
             'php_can_exec' => \function_exists('exec'),
             'php_can_proc_open' => \function_exists('proc_open'),
-            'chromium_bin_resolved' => ChromiumPdfRenderer::binaryPath() !== null,
+            'chromium_bin_resolved' => $resolvedChromeBin !== null,
+            'chromium_bin_basename' => $resolvedChromeBin ? basename($resolvedChromeBin) : null,
+            'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
+            'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
         ]);
         // #endregion
 
         if ($engine === PdfGenerationEngine::CHROMIUM) {
             $pdfBody = ChromiumPdfRenderer::renderUrlToPdf($source, $pdfEngineDetail);
+        } elseif ($engine === PdfGenerationEngine::PDFSHIFT) {
+            // Chromium-class rendering via PDFShift; report URL must be reachable from their servers (use_print).
+            $pdfBody = PdfShiftRenderer::renderUrlToPdf(
+                $source,
+                $footer['source'],
+                null,
+                null,
+                $pdfEngineDetail
+            );
         } elseif ($engine === PdfGenerationEngine::WKHTML) {
             $pdfBody = WkhtmlPdfRenderer::render(
                 $source,
@@ -122,6 +139,8 @@ class PdfController extends Controller
             $msg = match ($engine) {
                 PdfGenerationEngine::CHROMIUM => 'PDF generation failed (Chromium).' . $suffix
                     . ' Install Chrome/Chromium or set CHROMIUM_BIN; use PIR_PDF_ENGINE=dompdf as a fallback.',
+                PdfGenerationEngine::PDFSHIFT => 'PDF generation failed (PDFShift).' . $suffix
+                    . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.',
                 PdfGenerationEngine::WKHTML => 'PDF generation failed (wkhtmltopdf). Install the binary (e.g. brew install wkhtmltopdf) and set WKHTMLTOPDF_BIN if it is not on PATH.' . $suffix,
                 PdfGenerationEngine::DOMPDF => 'PDF generation failed (Dompdf).' . $suffix,
                 default => 'PDF generation failed.' . $suffix,
@@ -287,7 +306,7 @@ class PdfController extends Controller
             }
         }
 
-        $env = getenv('PIR_PDF_STYLESHEET_URL');
+        $env = App::env('PIR_PDF_STYLESHEET_URL');
         if (is_string($env) && $env !== '') {
             return [
                 'dompdfUrl' => $env,

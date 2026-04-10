@@ -12,11 +12,13 @@ namespace modules\neuroselect\controllers;
 
 
 use Craft;
+use craft\helpers\App;
 use craft\helpers\FileHelper;
 use craft\web\Controller;
 use modules\neuroselect\ChromiumPdfRenderer;
 use modules\neuroselect\HtmlToPdfRenderer;
 use modules\neuroselect\PdfGenerationEngine;
+use modules\neuroselect\PdfShiftRenderer;
 use modules\neuroselect\WkhtmlPdfRenderer;
 use craft\elements\GlobalSet;
 use verbb\supertable\SuperTable;
@@ -480,6 +482,10 @@ class SurveyController extends Controller
             return ChromiumPdfRenderer::renderUrlToPdf($source, $errorDetail);
         }
 
+        if ($engine === PdfGenerationEngine::PDFSHIFT) {
+            return PdfShiftRenderer::renderUrlToPdf($source, $footerHtml, $headerHtml, null, $errorDetail);
+        }
+
         if ($engine === PdfGenerationEngine::WKHTML) {
             return WkhtmlPdfRenderer::render($source, $footerHtml, $surveyCss, $errorDetail, $headerHtml);
         }
@@ -489,7 +495,7 @@ class SurveyController extends Controller
 
     private function resolveSurveyStylesheetPathOrUrl(): string
     {
-        $env = getenv('NEUROQ_PDF_STYLESHEET_URL');
+        $env = App::env('NEUROQ_PDF_STYLESHEET_URL');
         if (is_string($env) && $env !== '') {
             return $env;
         }

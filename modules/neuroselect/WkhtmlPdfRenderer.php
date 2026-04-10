@@ -3,6 +3,7 @@
 namespace modules\neuroselect;
 
 use Craft;
+use craft\helpers\App;
 
 final class WkhtmlPdfRenderer
 {
@@ -24,7 +25,8 @@ final class WkhtmlPdfRenderer
             return false;
         }
 
-        $bin = getenv('WKHTMLTOPDF_BIN') ?: 'wkhtmltopdf';
+        $b = App::env('WKHTMLTOPDF_BIN');
+        $bin = (is_string($b) && $b !== '') ? $b : 'wkhtmltopdf';
         if (!is_string($bin) || $bin === '') {
             Craft::error('WKHTMLTOPDF_BIN is empty.', __METHOD__);
             $errorDetail = 'WKHTMLTOPDF_BIN is not configured.';
