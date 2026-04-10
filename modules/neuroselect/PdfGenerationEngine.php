@@ -23,8 +23,8 @@ final class PdfGenerationEngine
             return strtolower(trim($e));
         }
 
-        // Chromium requires exec(); many shared hosts disable it alongside shell_exec.
-        $canRunChromium = ChromiumPdfRenderer::binaryPath() !== null && \function_exists('exec');
+        // Chromium needs a subprocess; many hosts disable exec() but leave proc_open() enabled.
+        $canRunChromium = ChromiumPdfRenderer::binaryPath() !== null && SafeProcess::canRunSubprocess();
 
         return $canRunChromium ? self::CHROMIUM : self::DOMPDF;
     }

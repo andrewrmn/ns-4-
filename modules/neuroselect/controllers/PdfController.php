@@ -89,6 +89,9 @@ class PdfController extends Controller
             'dompdf_inline_len' => strlen($pirSheet['dompdfInline'] ?? ''),
             'dompdf_url_set' => ($pirSheet['dompdfUrl'] ?? '') !== '',
             'dompdf_append_len' => strlen($pirSheet['dompdfAppend'] ?? ''),
+            'php_can_exec' => \function_exists('exec'),
+            'php_can_proc_open' => \function_exists('proc_open'),
+            'chromium_bin_resolved' => ChromiumPdfRenderer::binaryPath() !== null,
         ]);
         // #endregion
 

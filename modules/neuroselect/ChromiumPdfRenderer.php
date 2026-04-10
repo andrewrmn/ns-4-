@@ -54,8 +54,8 @@ final class ChromiumPdfRenderer
     {
         $errorDetail = null;
 
-        if (!\function_exists('exec')) {
-            $errorDetail = 'PHP exec() is disabled on this server. Set PIR_PDF_ENGINE=dompdf or ask the host to allow exec for headless Chrome.';
+        if (!SafeProcess::canRunSubprocess()) {
+            $errorDetail = 'PHP exec() and proc_open() are unavailable. Set PIR_PDF_ENGINE=dompdf or ask the host to allow one of them for headless Chrome.';
 
             return false;
         }
@@ -93,9 +93,7 @@ final class ChromiumPdfRenderer
         $cmd .= ' --print-to-pdf=' . escapeshellarg($outPath);
         $cmd .= ' ' . escapeshellarg($url);
 
-        $output = [];
-        $exitCode = 1;
-        \exec($cmd . ' 2>&1', $output, $exitCode);
+        [$output, $exitCode] = SafeProcess::run($cmd . ' 2>&1');
 
         if ($exitCode !== 0 || !is_file($outPath)) {
             $tail = trim(implode("\n", array_slice($output, -8)));

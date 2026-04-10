@@ -18,8 +18,8 @@ final class WkhtmlPdfRenderer
     ): string|false {
         $errorDetail = null;
 
-        if (!\function_exists('exec')) {
-            $errorDetail = 'PHP exec() is disabled on this server. Use PIR_PDF_ENGINE=dompdf or ask the host to allow exec.';
+        if (!SafeProcess::canRunSubprocess()) {
+            $errorDetail = 'PHP exec() and proc_open() are unavailable. Use PIR_PDF_ENGINE=dompdf or ask the host to allow one of them.';
 
             return false;
         }
@@ -84,9 +84,7 @@ final class WkhtmlPdfRenderer
             $cmd .= ($i > 0 ? ' ' : '') . escapeshellarg($segment);
         }
 
-        $output = [];
-        $exitCode = 1;
-        \exec($cmd . ' 2>&1', $output, $exitCode);
+        [$output, $exitCode] = SafeProcess::run($cmd . ' 2>&1');
 
         @unlink($footerPath);
         if ($headerPath !== null) {
