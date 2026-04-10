@@ -161,26 +161,16 @@
                                                     {% for item in commerceOrder.getLineItems() %}
                                                         {{ item.qty }} - {{ item.snapshot.title }} <br/>
                                                     {% endfor %}
-                                                    <br/><strong>Autoship frequency:</strong> <br/>Every {{ order.getPaymentForm('description') }}   <br/><br/><strong>Shipping to: </strong> <br/>
-                                                    {% if commerceOrder.shippingAddress.firstName is not empty or commerceOrder.shippingAddress.lastName is not empty %}
-                                                        {{ commerceOrder.shippingAddress.firstName }} {{ commerceOrder.shippingAddress.lastName }}<br/>
+                                                    <br/><strong>Autoship frequency:</strong> <br/>Every {{ order.getPaymentForm('description') }}</span></h1>
+                                                <p style="margin: 0; padding-top: 20px; color: #393d47; direction: ltr; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: normal; line-height: 120%; text-align: center;"><strong>Shipping to:</strong></p>
+                                                <div style="text-align: center; margin-top: 8px;">
+                                                    {% if commerceOrder.shippingAddress %}
+                                                        {% include 'shop/_includes/addresses/address' with { address: commerceOrder.shippingAddress } %}
+                                                    {% else %}
+                                                        <p style="margin: 0; color: #393d47; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; font-size: 14px;">No shipping address on file.</p>
                                                     {% endif %}
-                                                    {% if commerceOrder.shippingAddress.address1 is not empty %}
-                                                        {{ commerceOrder.shippingAddress.address1 }}</br>
-                                                    {% endif %}
-                                                    {% if commerceOrder.shippingAddress.address2 is not empty %}
-                                                        {{ commerceOrder.shippingAddress.address2 }}</br>
-                                                    {% endif %}
-                                                    {% if commerceOrder.shippingAddress.city is defined %}
-                                                        {{ commerceOrder.shippingAddress.city }},
-                                                    {% endif %}
-                                                    {% if commerceOrder.shippingAddress.stateText is defined %}
-                                                        {{ commerceOrder.shippingAddress.stateText }}
-                                                    {% endif %}
-                                                    {% if commerceOrder.shippingAddress.zipCode is defined %}
-                                                        {{ commerceOrder.shippingAddress.zipCode }}
-                                                    {% endif %}
-                                                    <br/><br/><strong>Next shipping date: <br/></strong> {{ order.subscription.endDate|date('m/d/Y') }}   </span></h1>
+                                                </div>
+                                                <h1 style="margin: 0; padding-top: 20px; color: #393d47; direction: ltr; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder"><strong>Next shipping date: <br/></strong> {{ order.subscription.endDate|date('m/d/Y') }}   </span></h1>
                                             </td>
                                         </tr>
                                     </table>
