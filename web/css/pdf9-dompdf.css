@@ -1,14 +1,29 @@
 /*
  * PIR NeuroSelect — Dompdf-only supplements (appended after pdf9.css in PHP).
- * Dompdf’s flexbox implementation is incomplete vs Chrome; these rules approximate
- * the multi-column product layout with floats so widths from pdf9.css apply.
+ * Float-based columns; pdf9.css also sets display:flex on some .col-* — Dompdf
+ * mixes those poorly and causes overlap. BFC + line-height + flex overrides fix most of it.
  */
 
-/* Main horizontal product rows */
+#pir,
+#pir * {
+	box-sizing: border-box !important;
+}
+
+/* Separate vertical sections so a short float row doesn’t collide with the next block */
+#pir .wrapper-full {
+	clear: both !important;
+	overflow: visible !important;
+	padding-bottom: 8px !important;
+	margin-bottom: 4px !important;
+}
+
+/* Contain floats (Dompdf often ignores ::after clearfix) */
 #pir .wrapper-wide > .d-flex,
 #pir .wrapper-wide .d-flex.flex-wrap {
 	display: block !important;
 	width: 100% !important;
+	overflow: hidden !important;
+	clear: both !important;
 }
 
 #pir .wrapper-wide > .d-flex::after,
@@ -21,6 +36,14 @@
 	visibility: hidden;
 }
 
+/* pdf9 uses display:flex on label columns — must be block when using float layout */
+#pir .col-12.col-md-2,
+#pir .col-12.col-md-4,
+#pir .col-12.col-md-6,
+#pir .wrapper-wide .d-flex > .d-flex[class*="col-"] {
+	display: block !important;
+}
+
 #pir .wrapper-wide > .d-flex > .col-12,
 #pir .wrapper-wide > .d-flex > [class*="col-"],
 #pir .wrapper-wide .d-flex.flex-wrap > .col-12,
@@ -28,10 +51,40 @@
 	float: left !important;
 }
 
-/* Stack nested flex columns inside each cell (pathways, suggested use, etc.) */
+/* Nested flex stacks inside each product cell */
 #pir .wrapper-wide .d-flex [class*="col-"] .d-flex,
 #pir .wrapper-wide .d-flex.flex-wrap [class*="col-"] .d-flex {
 	display: block !important;
+	clear: none !important;
+	float: none !important;
+	width: auto !important;
+	max-width: 100% !important;
+}
+
+/* Readable line-height (fixes “stacked” / overlapping baselines) */
+#pir .p-sm,
+#pir .user-content,
+#pir .user-content p,
+#pir .pathways p {
+	line-height: 1.4 !important;
+}
+
+#pir h1,
+#pir h2,
+#pir h3,
+#pir .h2,
+#pir .h3 {
+	line-height: 1.25 !important;
+}
+
+#pir .pir-section-title {
+	line-height: 1.2 !important;
+}
+
+/* Narrow columns: avoid overflow drawing on top of neighbors */
+#pir .wrapper-wide .d-flex > [class*="col-"] {
+	word-wrap: break-word !important;
+	overflow-wrap: break-word !important;
 }
 
 /* Header block: provider + patient meta */
@@ -39,6 +92,8 @@
 #pir #pir-header .d-md-flex,
 #pir #pir-header .col-12.d-flex {
 	display: block !important;
+	overflow: hidden !important;
+	clear: both !important;
 }
 
 #pir #pir-header .col-12.d-flex > .pr-8,
@@ -63,16 +118,20 @@
 #pir .suggested-use-count {
 	display: block !important;
 	text-align: center !important;
+	line-height: 1 !important;
 }
 
 #pir .suggested-use-count > span {
 	display: inline-block !important;
 	vertical-align: middle !important;
+	margin: 1px 2px !important;
 }
 
 /* Reference list tri-column */
 #pir .reference-list-content {
 	display: block !important;
+	overflow: hidden !important;
+	clear: both !important;
 }
 
 #pir .reference-list-content::after {
@@ -87,6 +146,7 @@
 #pir .reference-list-content > * {
 	float: left !important;
 	display: block !important;
+	word-wrap: break-word !important;
 }
 
 /* Sleep / survey-style rows */
@@ -95,6 +155,8 @@
 #pir .survey-product,
 #pir .foundation {
 	display: block !important;
+	overflow: hidden !important;
+	clear: both !important;
 }
 
 #pir .sleep-table__hd > *,

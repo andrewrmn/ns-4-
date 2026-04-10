@@ -84,6 +84,8 @@ final class HtmlToPdfRenderer
         $options->set('isRemoteEnabled', true);
         $options->set('isHtml5ParserEnabled', true);
         $options->set('defaultFont', 'Helvetica');
+        // Slightly taller line boxes than default — reduces cramped/overlapping text in CPDF.
+        $options->set('fontHeightRatio', 1.15);
 
         try {
             $dompdf = new Dompdf($options);
