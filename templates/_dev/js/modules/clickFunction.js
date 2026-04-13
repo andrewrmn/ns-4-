@@ -19,6 +19,18 @@ class ClickFunctions {
 
 	events() {
 
+		$(document).on('keydown.subNavDismiss', function (e) {
+			if (e.key !== 'Escape' && e.which !== 27) {
+				return;
+			}
+			if (!$('body').hasClass('sub-nav-is-active')) {
+				return;
+			}
+			$('.has-sub-nav.is-active').removeClass('is-active');
+			$('body').removeClass('sub-nav-is-active');
+			$('.menu-mask').attr('data-click-target', '');
+		});
+
 		$('*[data-click-target]').click(function(event) {
 			event.preventDefault();
 			//event.stopProgagation();

@@ -105,7 +105,6 @@ const Carousel = __webpack_require__(10);
 const Form = __webpack_require__(11);
 //const Acids = require('./modules/acids.js');
 const Graphs = __webpack_require__(12);
-//const SurveyForm = require('./modules/surveyForm.js');
 
 $(function(){
 	//create the app.
@@ -120,7 +119,7 @@ $(function(){
 	let form = new Form();
 	//let acids = new Acids();
 	let graphs = new Graphs();
-	//let surveyform = new SurveyForm();
+
 });
 
 
@@ -348,6 +347,18 @@ class ClickFunctions {
 	}
 
 	events() {
+
+		$(document).on('keydown.subNavDismiss', function (e) {
+			if (e.key !== 'Escape' && e.which !== 27) {
+				return;
+			}
+			if (!$('body').hasClass('sub-nav-is-active')) {
+				return;
+			}
+			$('.has-sub-nav.is-active').removeClass('is-active');
+			$('body').removeClass('sub-nav-is-active');
+			$('.menu-mask').attr('data-click-target', '');
+		});
 
 		$('*[data-click-target]').click(function(event) {
 			event.preventDefault();

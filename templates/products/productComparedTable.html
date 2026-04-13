@@ -254,7 +254,8 @@
             <td>
                 <table class="compare-check-tab border-right border-right-0" id="val-methylationPathway-{{ loop.index }}">
                     <tr class="bg-trans"><td></td></tr>                    
-                    <tr data-arrows="1"><td class="precursor-potential">{% if product.comparisonAttributes.type('methylationPathway').one().hasMethylationPathway %}<img src="../images/svgs/chart-checkmark.svg" />{% endif %}</td></tr>
+                    {% set methylationBlock = product.comparisonAttributes.type('methylationPathway').one() %}
+                    <tr data-arrows="1"><td class="precursor-potential">{% if methylationBlock and methylationBlock.hasMethylationPathway %}<img src="../images/svgs/chart-checkmark.svg" />{% endif %}</td></tr>
                     
                 </table>
             </td>
@@ -272,7 +273,8 @@
             <td>
                 <table class="compare-check-tab border-right border-right-0" id="val-other-{{ loop.index }}">
                     <tr class="bg-trans"><td></td></tr>
-                    <tr class="bg-grey"><td class="precursor-potential">{{ product.comparisonAttributes.type('other').one().additionalInformation|trim|raw }}</td></tr>
+                    {% set otherBlock = product.comparisonAttributes.type('other').one() %}
+                    <tr class="bg-grey"><td class="precursor-potential">{{ otherBlock ? (otherBlock.additionalInformation|default('')|trim)|raw : '' }}</td></tr>
                 </table>
             </td>
             {% endfor %}
@@ -308,7 +310,8 @@
 {% endif %}
 
 {% macro attributeIcon(product, type, ingredient) %}
-    {% set keyIngredients = product.comparisonAttributes.type(type).one().keyIngredients.all() %}
+    {% set comparisonBlock = product.comparisonAttributes.type(type).one() %}
+    {% set keyIngredients = comparisonBlock ? comparisonBlock.keyIngredients.all() : [] %}
     {% set match = keyIngredients|filter(row => row.ingredients == ingredient)|first %}
     {% if match %}
         {% switch match.precursorPotential %}

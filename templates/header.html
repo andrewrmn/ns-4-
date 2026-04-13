@@ -95,7 +95,7 @@
                 {% if currentUser %}
                     <div class="account-link has-sub-nav" id="account-nav">
                         <svg width="14" height="14"><use xlink:href="#shape-person-circle"></use></svg>
-                        <span data-click-target="account-nav" data-click-bodyClass="sub-nav-is-active">{{ currentUser.friendlyName|capitalize }}</span>
+                        <span class="js-header-item" data-click-target="account-nav" data-click-bodyClass="sub-nav-is-active">{{ currentUser.friendlyName|capitalize }}</span>
                         <span class="arrow-wrap"><svg width="12" height="7"><use xlink:href="#shape-arrow-down"></use></svg></span>
 
                         <ul class="sub-nav">

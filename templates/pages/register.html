@@ -9,10 +9,6 @@
 {% set account = user ?? null %}
 
 {% block content %}
-{% set countries = craft.commerce.countries.allCountriesAsList %}
-
-
-
 {% set model = address is defined ? address : null %}
 
 <div class="wrapper-full content-block bg-light section-short">
@@ -139,13 +135,14 @@
 							<label for="state">State</label>
 
 							<div class="select-wrap">
+								{% set usStates = craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode()['US'] ?? {} %}
 								<select class="address-country u-full-width input-middle required-field" name="fields[state]" id="state"
 									required>
 									<option value="">State *</option>
-									{% for state in craft.commerce.states.allEnabledStates %}
-									<option value="{{ state.name }}" {% if account and account.fields.state is defined and
-										account.fields.state==state.name %} selected {% endif %}>
-										{{ state.name }}
+									{% for stateCode, stateLabel in usStates %}
+									<option value="{{ stateLabel }}" {% if account and account.fields.state is defined and
+										account.fields.state == stateLabel %} selected{% endif %}>
+										{{ stateLabel }}
 									</option>
 									{% endfor %}
 								</select>

@@ -133,11 +133,12 @@
 							<label for="state">State</label>
 
 							<div class="select-wrap">
+								{% set usStates = craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode()['US'] ?? {} %}
 								<select class="address-country u-full-width input-middle required-field" name="fields[state]" id="state"
 									required>
-									<option>State *</option>
-									{% for state in craft.commerce.states.allEnabledStates %}
-									<option value="{{ state.name }}">{{ state.name }}</option>
+									<option value="">State *</option>
+									{% for stateCode, stateLabel in usStates %}
+									<option value="{{ stateLabel }}" {% if account is defined and account.state is defined and account.state == stateLabel %} selected{% endif %}>{{ stateLabel }}</option>
 									{% endfor %}
 								</select>
 
