@@ -35,10 +35,10 @@ return [
     ],
 
     'staging' => [
-        'allowAdminChanges' => true,
+        'allowAdminChanges' => false,
     ],
 
     'production' => [
-        'allowAdminChanges' => true,
+        'allowAdminChanges' => false,
     ],
 ];
