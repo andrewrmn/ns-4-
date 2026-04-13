@@ -478,6 +478,54 @@ tabs:
         width: 100
       -
         elementCondition: null
+        heading: 'Terms Agreement'
+        type: craft\fieldlayoutelements\Heading
+        uid: cf2e17f6-0f49-47d7-a1ce-faf25f2e58ca
+        userCondition: null
+      -
+        elementCondition: null
+        fieldUid: 05c56ca3-6be1-4e5d-ad5d-89680941572c # All Terms Agreed
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        uid: 57626543-7ffb-4e07-bec5-075dda3458a1
+        userCondition: null
+        warning: null
+        width: 100
+      -
+        elementCondition: null
+        fieldUid: 0f3e7004-0c19-4a15-a08e-3df9b4d5eb84 # All Terms Agreed Signature
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        uid: a736da3f-fb64-4355-9ada-d703764dbe30
+        userCondition: null
+        warning: null
+        width: 100
+      -
+        elementCondition: null
+        fieldUid: a591c12c-d308-4561-931f-e25563dde61c # All Terms Agreed Date
+        instructions: null
+        label: null
+        required: false
+        tip: null
+        type: craft\fieldlayoutelements\CustomField
+        uid: 0cb9a1be-b9cb-4cac-a44c-51e0f8e87041
+        userCondition: null
+        warning: null
+        width: 100
+      -
+        elementCondition: null
+        heading: 'Legacy Terms Agreements'
+        type: craft\fieldlayoutelements\Heading
+        uid: 5d22dbef-d091-42c1-a2c6-c1659f41b03b
+        userCondition: null
+      -
+        elementCondition: null
         fieldUid: c741b7ae-7aaa-4445-94e5-3e7e5803086d # N0011 Product Resale Agreement
         instructions: null
         label: null

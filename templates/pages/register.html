@@ -10,6 +10,15 @@
 
 {% block content %}
 {% set model = address is defined ? address : null %}
+{% set legalDocuments = craft.app.globals.getSetByHandle('legalDocuments') %}
+{% set legalModalWasOpened = craft.app.request.getBodyParam('registerLegalModalOpened') == '1' %}
+{% set legalSignValue = '' %}
+{% if legalModalWasOpened %}
+{% set legalSignValue = craft.app.request.getBodyParam('fields[allTermsAgreedSignature]', '') %}
+{% if legalSignValue is empty and account %}
+{% set legalSignValue = account.allTermsAgreedSignature ?? '' %}
+{% endif %}
+{% endif %}
 
 <div class="wrapper-full content-block bg-light section-short">
 	<div class="wrapper wrapper--thin text-center">
@@ -135,13 +144,14 @@
 							<label for="state">State</label>
 
 							<div class="select-wrap">
-								{% set usStates = craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode()['US'] ?? {} %}
+								{% set usStates = craft.commerce.store.getStore().getAdministrativeAreasListByCountryCode()['US'] ?? {}
+								%}
 								<select class="address-country u-full-width input-middle required-field" name="fields[state]" id="state"
 									required>
 									<option value="">State *</option>
 									{% for stateCode, stateLabel in usStates %}
 									<option value="{{ stateLabel }}" {% if account and account.fields.state is defined and
-										account.fields.state == stateLabel %} selected{% endif %}>
+										account.fields.state==stateLabel %} selected{% endif %}>
 										{{ stateLabel }}
 									</option>
 									{% endfor %}
@@ -191,7 +201,7 @@
 					class="field-wrap has-tool-tip {% if account and account.hasErrors('password') %}field-wrap--error{% endif %}">
 					<label for="password">Password</label>
 					<input id="password" placeholder="Password *" class="required-field" minlength="8" type="password"
-						name="password" required>
+						name="password" autocomplete="current-password" required>
 
 					<div class="tool-tip">
 						<p>Password requires:</p>
@@ -383,14 +393,97 @@
 				{% endif %}
 			</div>
 
-			<div class="field-wrap">
-				<p class="p-sm">Once your application is processed, you will receive an email to acknowledge and sign the
-					NeuroScience Terms and Conditions, Product Resale Agreement, and MAP policy via DocuSign.</p>
+			<input type="hidden" name="registerLegalModalOpened" id="register-legal-modal-opened"
+				value="{{ craft.app.request.getBodyParam('registerLegalModalOpened') == '1' ? '1' : '0' }}">
+
+			<div class="field-wrap mt-4 mb-3">
+				<p class="p-sm mb-3">Before you can submit this application, you must open the legal agreements below, read
+					the Terms and Conditions, Product Resale Agreement, and Minimum Advertised Pricing (MAP)
+					Policy, then confirm your agreement by checking the box and typing your full legal name as
+					electronic signature.</p>
+				<button type="button" class="btn form-terms register-legal-open mt-0" data-click-target="register-legal-modal"
+					data-click-bodyClass="terms-modal">Review and agree to legal documents</button>
+				<p class="p-sm register-legal-complete-msg d-none" id="register-legal-complete-msg" aria-live="polite">Legal
+					agreements acknowledged. You may submit your application.</p>
 			</div>
+
+			<div class="modal-wrap" id="register-legal-modal">
+				<div class="modal register-legal-modal">
+					<a class="modal__close" href="#" data-click-target="register-legal-modal" data-click-bodyClass="terms-modal">
+						<div>
+							<p class="sr-only">Close</p>
+							<svg width="18" height="18" aria-hidden="true">
+								<use xlink:href="#shape-close"></use>
+							</svg>
+						</div>
+					</a>
+					<div class="modal__inner">
+						<div class="modal__inner-hd">
+							<div class="h2 text-flush">Legal agreements</div>
+						</div>
+
+						<div class="register-legal-doc">
+							<h3 class="h6 mb-2">Terms and Conditions</h3>
+							<div class="register-legal-doc__scroll user-content rte">
+								{{ legalDocuments.n0007Content|raw }}
+							</div>
+						</div>
+
+						<div class="register-legal-doc">
+							<h3 class="h6 mb-2">Product Resale Agreement</h3>
+							<div class="register-legal-doc__scroll user-content rte">
+								{{ legalDocuments.n0011Content|raw }}
+							</div>
+						</div>
+
+						<div class="register-legal-doc">
+							<h3 class="h6 mb-2">Minimum Advertised Pricing Policy</h3>
+							<div class="register-legal-doc__scroll user-content rte">
+								{{ legalDocuments.n0003Content|raw }}
+							</div>
+						</div>
+
+						<input type="hidden" name="fields[allTermsAgreed]" value="">
+
+						<div class="field-wrap mt-4">
+							<label class="visible-label" for="legal-agree-checkbox">I have read and agree to the Terms and
+								Conditions, Product Resale Agreement, and Minimum Advertised Pricing Policy above.</label>
+							<label class="visible-label radio-btn">
+								<input type="checkbox" name="fields[allTermsAgreed]" value="1" id="legal-agree-checkbox" {%
+									if craft.app.request.getBodyParam('registerLegalModalOpened')=='1' and
+									craft.app.request.getBodyParam('fields[allTermsAgreed]')=='1' %} checked{% endif %}>
+								<span class="slider"></span>
+							</label>
+						</div>
+
+						<div class="field-wrap mt-3">
+							<label class="visible-label" for="legal-typed-name">Electronic signature</label>
+							<input type="text" id="legal-typed-name" name="fields[allTermsAgreedSignature]"
+								class="register-legal-signature-field" autocomplete="off" placeholder="Type your full legal name"
+								maxlength="255" value="{{ legalSignValue }}">
+							<p class="p-sm mt-1">By typing your name, you acknowledge that it constitutes your electronic
+								signature and that you agree to be bound by these documents to the same extent as a written
+								signature.</p>
+						</div>
+
+						<input type="hidden" name="fields[allTermsAgreedDate]" id="register-all-terms-agreed-date"
+							value="{{ craft.app.request.getBodyParam('fields[allTermsAgreedDate]', '')|e('html_attr') }}">
+
+						<div class="text-center mt-4">
+							<button type="button" class="btn" data-click-target="register-legal-modal"
+								data-click-bodyClass="terms-modal">Close</button>
+						</div>
+					</div>
+				</div>
+				<span class="modal-screen" data-click-target="register-legal-modal" data-click-bodyClass="terms-modal"></span>
+			</div>
+
+			<p class="p-sm errors text-center mb-2" id="register-legal-form-error" hidden></p>
 
 			<div class="text-center mb-4">
 				<input id="register-now" type="submit" value="Submit" class="disabled" disabled>
-				<small>Please fill out all required fields before submitting your application.</small>
+				<small>Please fill out all required fields and complete the legal agreements before submitting your
+					application.</small>
 			</div>
 
 			<div class="text-center">
@@ -409,46 +502,108 @@
 
 
 {% js %}
-//window.localStorage.removeItem('ns-state');
-//window.localStorage.removeItem('ns-country');
-//window.localStorage.removeItem('ns-question');
-
 var $ = jQuery,
-submit = $('#register-now');
+submit = $('#register-now'),
+form = $('form.form-compact');
 
-function validateForm() {
-var isValid = true;
-$('.required-field').each(function() {
-if ( $(this).val() === '' || $(this).val() === false ) {
-isValid = false;
-console.log($(this).attr('name') + ' == ' + isValid);
+function legalModalOpenedOk() {
+return $('#register-legal-modal-opened').val() === '1';
 }
 
+function legalAgreementOk() {
+var nameVal = ($('#legal-typed-name').val() || '').trim();
+return $('#legal-agree-checkbox').is(':checked') && nameVal.length > 0;
+}
+
+function legalFlowComplete() {
+return legalModalOpenedOk() && legalAgreementOk();
+}
+
+function setAllTermsAgreedDateToNow() {
+var d = new Date();
+var mm = String(d.getMonth() + 1).padStart(2, '0');
+var dd = String(d.getDate()).padStart(2, '0');
+var yyyy = d.getFullYear();
+$('#register-all-terms-agreed-date').val(mm + '/' + dd + '/' + yyyy);
+}
+
+function updateLegalCompleteMessage() {
+var msg = $('#register-legal-complete-msg');
+if (legalAgreementOk()) {
+msg.removeClass('d-none');
+} else {
+msg.addClass('d-none');
+}
+}
+
+function baseRequiredFieldsOk() {
+var isValid = true;
+$('.required-field').each(function() {
+var $el = $(this),
+el = $el[0];
+if ($el.attr('type') === 'file') {
+if (!el.files || el.files.length === 0) {
+isValid = false;
+}
+return;
+}
+var v = $el.val();
+if (v === '' || v === false || v == null) {
+isValid = false;
+}
 });
 if ($('#howMuchWillYouOrder').val() != '') {
 isValid = false;
 }
-
-
-
-if(isValid){
-console.log('valid');
-}
 return isValid;
 }
 
-$('form :input').change(function() {
-if( validateForm() == true ) {
-submit.removeClass('disabled').removeAttr('disabled');
-console.log('-------------- Valid --------------');
-} else {
-submit.addClass('disabled').attr('disabled', 'disabled');
-console.log('===============');
-console.log('INVALID');
-console.log('===============');
+function validateForm() {
+return baseRequiredFieldsOk() && legalFlowComplete();
 }
 
-console.log('valid form = ' + validateForm());
+function refreshSubmitState() {
+updateLegalCompleteMessage();
+$('#register-legal-form-error').attr('hidden', 'hidden').text('');
+if( validateForm() == true ) {
+submit.removeClass('disabled').removeAttr('disabled');
+} else {
+submit.addClass('disabled').attr('disabled', 'disabled');
+}
+}
+
+$('form :input').on('change input', function() {
+refreshSubmitState();
+});
+
+$('.register-legal-open').on('click', function() {
+$('#register-legal-modal-opened').val('1');
+refreshSubmitState();
+});
+
+function markLegalModalOpened() {
+$('#register-legal-modal-opened').val('1');
+}
+
+$('#legal-agree-checkbox, #legal-typed-name').on('change input', function() {
+markLegalModalOpened();
+refreshSubmitState();
+});
+
+form.on('submit', function(e) {
+if (!legalFlowComplete()) {
+e.preventDefault();
+$('#register-legal-form-error').text('Please click "Review and agree to legal documents," read each agreement, check the consent box, and type your full legal name before submitting.').removeAttr('hidden');
+$('.register-legal-open').focus();
+return false;
+}
+$('#register-legal-form-error').attr('hidden', 'hidden').text('');
+if (!baseRequiredFieldsOk()) {
+e.preventDefault();
+return false;
+}
+setAllTermsAgreedDateToNow();
+return true;
 });
 
 var email = $('#email'),
@@ -490,6 +645,8 @@ countryVal = window.localStorage.getItem('ns-country');
 if( countryVal ) {
 country.val(countryVal);
 }
+
+refreshSubmitState();
 
 });
 
