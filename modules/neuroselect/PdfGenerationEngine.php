@@ -7,9 +7,9 @@ use craft\helpers\App;
 /**
  * Which backend generates HTML→PDF for PIR and Neuro Q survey flows.
  *
- * Env PIR_PDF_ENGINE: chromium | pdfshift | wkhtmltopdf | dompdf
- * If unset: chromium when a Chrome/Chromium binary is available, else pdfshift when
- * PDFSHIFT_API_KEY or PIR_PDFSHIFT_API_KEY is set, else dompdf.
+ * Env PIR_PDF_ENGINE: chromium | pdfshift | wkhtmltopdf | dompdf (explicit value always wins).
+ * If unset: PDFShift when PDFSHIFT_API_KEY or PIR_PDFSHIFT_API_KEY is set (even if Chrome exists),
+ * else Chromium when a binary is available, else Dompdf.
  */
 final class PdfGenerationEngine
 {
@@ -28,13 +28,15 @@ final class PdfGenerationEngine
             return strtolower(trim($e));
         }
 
-        // Chromium needs a subprocess; many hosts disable exec() but leave proc_open() enabled.
+        // Prefer PDFShift whenever configured so production (no Chrome) and staging match; local Mac
+        // otherwise picked Chromium first and skipped PDFShift.
+        if (PdfShiftRenderer::isConfigured()) {
+            return self::PDFSHIFT;
+        }
+
         $canRunChromium = ChromiumPdfRenderer::binaryPath() !== null && SafeProcess::canRunSubprocess();
         if ($canRunChromium) {
             return self::CHROMIUM;
-        }
-        if (PdfShiftRenderer::isConfigured()) {
-            return self::PDFSHIFT;
         }
 
         return self::DOMPDF;
