@@ -18,6 +18,7 @@ use modules\neuroselect\PdfShiftRenderer;
 use modules\neuroselect\WkhtmlPdfRenderer;
 
 use Craft;
+use craft\elements\User;
 use craft\helpers\App;
 use craft\web\Controller;
 use craft\helpers\FileHelper;
@@ -40,39 +41,41 @@ class PdfController extends Controller
 
     protected bool|int|array $allowAnonymous = true;
 
-    public function actionGeneratePdf()
+    private function pirPdfFooterHtml(): string
     {
-        if (empty($_POST['source'])) {
-            return $this->pdfErrorResponse('Missing page URL for PDF conversion.', 400);
-        }
+        return '<div style="border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; "><div style="font-size: 4pt; font-family: sans-serif;">***Do not exceed suggested use</div><div style="font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; ">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</div><div style="font-size: 4pt; font-family: sans-serif;">Product information was requested by a healthcare provider and is not intended to diagnose, treat, cure or prevent any diseases. References provided are not specific to an individual and do not change based on the product information request. Products selected are based on specific requests or information presented indicating the goal is to select ingredients with mechanisms that scientifically promote biochemical pathway(s) or clinical indication(s) to theoretically shift toward the statistical median or have research indicating a symptom could be correlated to an element in a pathway.</div></div>';
+    }
 
-        $source = (string)$_POST['source'];
-        $submissionId = $_POST['submissionId'];
-        $userId = $_POST['userId'];
-        $submissionType = $_POST['submissionType'];
-
-        // Chromium loads the URL like a real browser (best WYSIWYG). Dompdf/wkhtmltopdf also fetch server-side.
-        // Set PIR_PDF_FETCH_BASE_URL if the browser URL is not reachable from this server (no trailing slash).
+    /**
+     * Rewrite report URL for server-side/PDFShift fetch when PIR_PDF_FETCH_BASE_URL is set.
+     */
+    private function normalizePirPdfSource(string $source): string
+    {
         $fetchBase = App::env('PIR_PDF_FETCH_BASE_URL');
         if (is_string($fetchBase) && $fetchBase !== '') {
             $parts = parse_url($source);
             if ($parts !== false && !empty($parts['path'])) {
                 $query = isset($parts['query']) ? ('?' . $parts['query']) : '';
-                $source = rtrim($fetchBase, '/') . $parts['path'] . $query;
+
+                return rtrim($fetchBase, '/') . $parts['path'] . $query;
             }
         }
 
-        $footer = [
-            'source' => '<div style="border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; "><div style="font-size: 4pt; font-family: sans-serif;">***Do not exceed suggested use</div><div style="font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; ">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</div><div style="font-size: 4pt; font-family: sans-serif;">Product information was requested by a healthcare provider and is not intended to diagnose, treat, cure or prevent any diseases. References provided are not specific to an individual and do not change based on the product information request. Products selected are based on specific requests or information presented indicating the goal is to select ingredients with mechanisms that scientifically promote biochemical pathway(s) or clinical indication(s) to theoretically shift toward the statistical median or have research indicating a symptom could be correlated to an element in a pathway.</div></div>',
-            'height' => '80px',
-        ];
+        return $source;
+    }
 
-        $engine = PdfGenerationEngine::engineId();
+    /**
+     * @param string|null $pdfEngineDetail
+     */
+    private function renderPirPdfBody(string $normalizedSource, ?string &$pdfEngineDetail = null): string|false
+    {
         $pdfEngineDetail = null;
+        $footerInner = $this->pirPdfFooterHtml();
+        $engine = PdfGenerationEngine::engineId();
         $pirSheet = $this->resolvePirPdfStylesheet();
 
         // #region agent log
-        $pu = parse_url($source);
+        $pu = parse_url($normalizedSource);
         $sheetBranch = 'fallback_url';
         $pirSheetUrl = App::env('PIR_PDF_STYLESHEET_URL');
         if (is_string($pirSheetUrl) && $pirSheetUrl !== '') {
@@ -85,7 +88,7 @@ class PdfController extends Controller
         }
         $resolvedChromeBin = ChromiumPdfRenderer::binaryPath();
         $fetchBaseLog = App::env('PIR_PDF_FETCH_BASE_URL');
-        PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::actionGeneratePdf', 'pre_render', [
+        PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::renderPirPdfBody', 'pre_render', [
             'engine' => $engine,
             'fetch_base_set' => is_string($fetchBaseLog) && $fetchBaseLog !== '',
             'source_host' => $pu['host'] ?? '',
@@ -104,71 +107,65 @@ class PdfController extends Controller
         // #endregion
 
         if ($engine === PdfGenerationEngine::CHROMIUM) {
-            $pdfBody = ChromiumPdfRenderer::renderUrlToPdf($source, $pdfEngineDetail);
-        } elseif ($engine === PdfGenerationEngine::PDFSHIFT) {
-            // Chromium-class rendering via PDFShift; report URL must be reachable from their servers (use_print).
-            $pdfBody = PdfShiftRenderer::renderUrlToPdf(
-                $source,
-                $footer['source'],
+            return ChromiumPdfRenderer::renderUrlToPdf($normalizedSource, $pdfEngineDetail);
+        }
+        if ($engine === PdfGenerationEngine::PDFSHIFT) {
+            return PdfShiftRenderer::renderUrlToPdf(
+                $normalizedSource,
+                $footerInner,
                 null,
                 null,
                 $pdfEngineDetail
             );
-        } elseif ($engine === PdfGenerationEngine::WKHTML) {
-            $pdfBody = WkhtmlPdfRenderer::render(
-                $source,
-                $footer['source'],
+        }
+        if ($engine === PdfGenerationEngine::WKHTML) {
+            return WkhtmlPdfRenderer::render(
+                $normalizedSource,
+                $footerInner,
                 $pirSheet['wkhtmlArg'],
                 $pdfEngineDetail,
                 null
             );
-        } else {
-            $pdfBody = HtmlToPdfRenderer::fromUrl(
-                $source,
-                $pirSheet['dompdfUrl'],
-                null,
-                $footer['source'],
-                $pirSheet['dompdfInline'],
-                $pirSheet['dompdfAppend'] ?? null,
-                $pdfEngineDetail
-            );
         }
 
-        if ($pdfBody === false || $pdfBody === '') {
-            $suffix = $pdfEngineDetail ? ' ' . $pdfEngineDetail : ' See storage logs.';
-            $msg = match ($engine) {
-                PdfGenerationEngine::CHROMIUM => 'PDF generation failed (Chromium).' . $suffix
-                    . ' Install Chrome/Chromium or set CHROMIUM_BIN; use PIR_PDF_ENGINE=dompdf as a fallback.',
-                PdfGenerationEngine::PDFSHIFT => 'PDF generation failed (PDFShift).' . $suffix
-                    . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.',
-                PdfGenerationEngine::WKHTML => 'PDF generation failed (wkhtmltopdf). Install the binary (e.g. brew install wkhtmltopdf) and set WKHTMLTOPDF_BIN if it is not on PATH.' . $suffix,
-                PdfGenerationEngine::DOMPDF => 'PDF generation failed (Dompdf).' . $suffix,
-                default => 'PDF generation failed.' . $suffix,
-            };
+        return HtmlToPdfRenderer::fromUrl(
+            $normalizedSource,
+            $pirSheet['dompdfUrl'],
+            null,
+            $footerInner,
+            $pirSheet['dompdfInline'],
+            $pirSheet['dompdfAppend'] ?? null,
+            $pdfEngineDetail
+        );
+    }
 
-            return $this->pdfErrorResponse(trim($msg), 422);
-        }
+    private function pirPdfGenerationErrorResponse(string $engine, ?string $pdfEngineDetail): Response
+    {
+        $suffix = $pdfEngineDetail ? ' ' . $pdfEngineDetail : ' See storage logs.';
+        $msg = match ($engine) {
+            PdfGenerationEngine::CHROMIUM => 'PDF generation failed (Chromium).' . $suffix
+                . ' Install Chrome/Chromium or set CHROMIUM_BIN; use PIR_PDF_ENGINE=dompdf as a fallback.',
+            PdfGenerationEngine::PDFSHIFT => 'PDF generation failed (PDFShift).' . $suffix
+                . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.',
+            PdfGenerationEngine::WKHTML => 'PDF generation failed (wkhtmltopdf). Install the binary (e.g. brew install wkhtmltopdf) and set WKHTMLTOPDF_BIN if it is not on PATH.' . $suffix,
+            PdfGenerationEngine::DOMPDF => 'PDF generation failed (Dompdf).' . $suffix,
+            default => 'PDF generation failed.' . $suffix,
+        };
 
-        if (strncmp($pdfBody, '%PDF', 4) !== 0) {
-            Craft::warning('PDF engine returned non-PDF (first 400 chars): ' . substr($pdfBody, 0, 400), __METHOD__);
+        return $this->pdfErrorResponse(trim($msg), 422);
+    }
 
-            return $this->pdfErrorResponse(
-                'PDF conversion did not return a valid file. Ensure the report URL returns HTML Craft can fetch (set PIR_PDF_FETCH_BASE_URL if needed).',
-                422
-            );
-        }
-
+    private function writePirPdfToDisk(int|string $userId, mixed $submissionId, string $pdfBody): void
+    {
         $filename = 'NS-PIR-' . $userId . '-' . $submissionId . '.pdf';
         $dir = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'pir-documents';
         FileHelper::createDirectory($dir);
         $saveTo = $dir . DIRECTORY_SEPARATOR . $filename;
         file_put_contents($saveTo, $pdfBody);
+    }
 
-        $user = Craft::$app->users->getUserById($userId);
-        if (!$user) {
-            return $this->pdfErrorResponse('User not found.', 404);
-        }
-
+    private function markPirPdfGeneratedOnUser(User $user, mixed $submissionId, string $submissionType): void
+    {
         $superTableData = [];
         $currentSubmissions = null;
         $field = null;
@@ -187,91 +184,132 @@ class PdfController extends Controller
             $currentSubmissions = $user->productSubmission;
         }
 
-        if ($field && $currentSubmissions !== null) {
-            $blockTypes = SuperTable::$plugin->getService()->getBlockTypesByFieldId($field->id);
-            $blockType = $blockTypes[0];
-
-            $i = 1;
-            foreach ($currentSubmissions as $block) {
-                $pdfGen = $block->submissionId != $submissionId ? $block->pdfGenerated : 1;
-
-                if ($submissionType === 'qrscan') {
-                    $superTableData[$i] = [
-                        'type' => $blockType->id,
-                        'enabled' => true,
-                        'fields' => [
-                            'submissionId' => $block->submissionId,
-                            'date' => $block->date,
-                            'data' => $block->data,
-                            'category' => $block->category,
-                            'pdfGenerated' => $pdfGen,
-                        ],
-                    ];
-                }
-                if ($submissionType === 'pathway') {
-                    $superTableData[$i] = [
-                        'type' => $blockType->id,
-                        'enabled' => true,
-                        'fields' => [
-                            'submissionId' => $block->submissionId,
-                            'date' => $block->date,
-                            'pathways' => $block->pathways,
-                            'category' => $block->category,
-                            'age' => $block->age,
-                            'gender' => $block->gender,
-                            'pdfGenerated' => $pdfGen,
-                        ],
-                    ];
-                }
-                if ($submissionType === 'clinicalindication') {
-                    $superTableData[$i] = [
-                        'type' => $blockType->id,
-                        'enabled' => true,
-                        'fields' => [
-                            'submissionId' => $block->submissionId,
-                            'date' => $block->date,
-                            'clinicalindicators' => $block->clinicalindicators,
-                            'category' => $block->category,
-                            'age' => $block->age,
-                            'gender' => $block->gender,
-                            'pdfGenerated' => $pdfGen,
-                        ],
-                    ];
-                }
-                if ($submissionType === 'products') {
-                    $superTableData[$i] = [
-                        'type' => $blockType->id,
-                        'enabled' => true,
-                        'fields' => [
-                            'submissionId' => $block->submissionId,
-                            'date' => $block->date,
-                            'products' => $block->products,
-                            'age' => $block->age,
-                            'gender' => $block->gender,
-                            'pdfGenerated' => $pdfGen,
-                        ],
-                    ];
-                }
-
-                ++$i;
-            }
-
-            if ($submissionType === 'qrscan') {
-                $user->setFieldValues(['qrScanSubmissions' => $superTableData]);
-            }
-            if ($submissionType === 'pathway') {
-                $user->setFieldValues(['pathwaySubmissions' => $superTableData]);
-            }
-            if ($submissionType === 'clinicalindication') {
-                $user->setFieldValues(['clinicalIndicationSubmission' => $superTableData]);
-            }
-            if ($submissionType === 'products') {
-                $user->setFieldValues(['productSubmission' => $superTableData]);
-            }
-
-            Craft::$app->getElements()->saveElement($user);
+        if (!$field || $currentSubmissions === null) {
+            return;
         }
 
+        $blockTypes = SuperTable::$plugin->getService()->getBlockTypesByFieldId($field->id);
+        $blockType = $blockTypes[0];
+
+        $i = 1;
+        foreach ($currentSubmissions as $block) {
+            $pdfGen = $block->submissionId != $submissionId ? $block->pdfGenerated : 1;
+
+            if ($submissionType === 'qrscan') {
+                $superTableData[$i] = [
+                    'type' => $blockType->id,
+                    'enabled' => true,
+                    'fields' => [
+                        'submissionId' => $block->submissionId,
+                        'date' => $block->date,
+                        'data' => $block->data,
+                        'category' => $block->category,
+                        'pdfGenerated' => $pdfGen,
+                    ],
+                ];
+            }
+            if ($submissionType === 'pathway') {
+                $superTableData[$i] = [
+                    'type' => $blockType->id,
+                    'enabled' => true,
+                    'fields' => [
+                        'submissionId' => $block->submissionId,
+                        'date' => $block->date,
+                        'pathways' => $block->pathways,
+                        'category' => $block->category,
+                        'age' => $block->age,
+                        'gender' => $block->gender,
+                        'pdfGenerated' => $pdfGen,
+                    ],
+                ];
+            }
+            if ($submissionType === 'clinicalindication') {
+                $superTableData[$i] = [
+                    'type' => $blockType->id,
+                    'enabled' => true,
+                    'fields' => [
+                        'submissionId' => $block->submissionId,
+                        'date' => $block->date,
+                        'clinicalindicators' => $block->clinicalindicators,
+                        'category' => $block->category,
+                        'age' => $block->age,
+                        'gender' => $block->gender,
+                        'pdfGenerated' => $pdfGen,
+                    ],
+                ];
+            }
+            if ($submissionType === 'products') {
+                $superTableData[$i] = [
+                    'type' => $blockType->id,
+                    'enabled' => true,
+                    'fields' => [
+                        'submissionId' => $block->submissionId,
+                        'date' => $block->date,
+                        'products' => $block->products,
+                        'age' => $block->age,
+                        'gender' => $block->gender,
+                        'pdfGenerated' => $pdfGen,
+                    ],
+                ];
+            }
+
+            ++$i;
+        }
+
+        if ($submissionType === 'qrscan') {
+            $user->setFieldValues(['qrScanSubmissions' => $superTableData]);
+        }
+        if ($submissionType === 'pathway') {
+            $user->setFieldValues(['pathwaySubmissions' => $superTableData]);
+        }
+        if ($submissionType === 'clinicalindication') {
+            $user->setFieldValues(['clinicalIndicationSubmission' => $superTableData]);
+        }
+        if ($submissionType === 'products') {
+            $user->setFieldValues(['productSubmission' => $superTableData]);
+        }
+
+        Craft::$app->getElements()->saveElement($user);
+    }
+
+    public function actionGeneratePdf()
+    {
+        if (empty($_POST['source'])) {
+            return $this->pdfErrorResponse('Missing page URL for PDF conversion.', 400);
+        }
+
+        $source = $this->normalizePirPdfSource((string)$_POST['source']);
+        $submissionId = $_POST['submissionId'];
+        $userId = $_POST['userId'];
+        $submissionType = (string)$_POST['submissionType'];
+        $engine = PdfGenerationEngine::engineId();
+
+        $pdfEngineDetail = null;
+        $pdfBody = $this->renderPirPdfBody($source, $pdfEngineDetail);
+
+        if ($pdfBody === false || $pdfBody === '') {
+            return $this->pirPdfGenerationErrorResponse($engine, $pdfEngineDetail);
+        }
+
+        if (strncmp($pdfBody, '%PDF', 4) !== 0) {
+            Craft::warning('PDF engine returned non-PDF (first 400 chars): ' . substr($pdfBody, 0, 400), __METHOD__);
+
+            return $this->pdfErrorResponse(
+                'PDF conversion did not return a valid file. Ensure the report URL returns HTML Craft can fetch (set PIR_PDF_FETCH_BASE_URL if needed).',
+                422
+            );
+        }
+
+        $this->writePirPdfToDisk($userId, $submissionId, $pdfBody);
+
+        $user = Craft::$app->users->getUserById((int)$userId);
+        if (!$user) {
+            return $this->pdfErrorResponse('User not found.', 404);
+        }
+
+        $this->markPirPdfGeneratedOnUser($user, $submissionId, $submissionType);
+
+        $filename = 'NS-PIR-' . $userId . '-' . $submissionId . '.pdf';
         $payload = [
             'success' => true,
             'Status ' => 'Success',
@@ -374,6 +412,32 @@ class PdfController extends Controller
 
         $filename = 'NS-PIR-' . $userId . '-' . $submissionId . '.pdf';
         $filePath = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'pir-documents' . DIRECTORY_SEPARATOR . $filename;
+
+        if (!is_file($filePath)) {
+            $regenSource = isset($_POST['source']) ? trim((string)$_POST['source']) : '';
+            $regenType = isset($_POST['submissionType']) ? trim((string)$_POST['submissionType']) : '';
+            if ($regenSource !== '' && $regenType !== '') {
+                $normalized = $this->normalizePirPdfSource($regenSource);
+                $pdfEngineDetail = null;
+                $pdfBody = $this->renderPirPdfBody($normalized, $pdfEngineDetail);
+                if ($pdfBody === false || $pdfBody === '') {
+                    $suffix = $pdfEngineDetail ? ' ' . $pdfEngineDetail : '';
+
+                    return $this->emailPdfErrorResponse('Could not generate PDF for email.' . $suffix, 422);
+                }
+                if (strncmp($pdfBody, '%PDF', 4) !== 0) {
+                    Craft::warning('PIR email regenerate: non-PDF body (first 200 chars): ' . substr($pdfBody, 0, 200), __METHOD__);
+
+                    return $this->emailPdfErrorResponse(
+                        'PDF conversion did not return a valid file. Ensure the report URL is reachable (set PIR_PDF_FETCH_BASE_URL if needed).',
+                        422
+                    );
+                }
+                $this->writePirPdfToDisk($userId, $submissionId, $pdfBody);
+                $this->markPirPdfGeneratedOnUser($user, $submissionId, $regenType);
+                $filePath = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'pir-documents' . DIRECTORY_SEPARATOR . $filename;
+            }
+        }
 
         if (!is_file($filePath)) {
             return $this->emailPdfErrorResponse('PDF file not found. Generate the report first.', 422);

@@ -42,6 +42,9 @@
                             <input type="hidden" name="action" value="neuroselect-module/pdf/email-pdf">
 
                             {{ csrfInput() }}
+                            <input type="hidden" name="source"
+                                value="{{ url(craft.app.request.pathInfo) }}?q={{ user.email|url_encode }}">
+                            <input type="hidden" name="submissionType" value="{{ submissionType }}">
                             <input type="hidden" name="submissionId" value="{{ submission.submissionId }}">
                             <input type="hidden" name="userId" value="{{ user.id }}">
 
@@ -470,6 +473,7 @@
         <p class="h3 mb-2">Email was not sent</p>
         <p>Please try again. If the issue persists, please download the PDF manually and <a
                 href="mailto:customerservice@neurorelief.com">let us know about your issue</a>.</p>
+        <p class="p-sm text-muted mt-2" id="email-fail-detail" style="display: none;"></p>
     </div>
 
 
@@ -581,15 +585,20 @@
         }).done(function (data) {
             $('html').removeClass('email-queue thinking');
             if (data && data.success) {
+                $('#email-fail-detail').hide().text('');
                 $('#email-sent').addClass('is-active');
                 setTimeout(function () {
                     $('#email-sent').removeClass('is-active');
                 }, 5000);
             } else {
+                var m = (data && data.message) ? data.message : '';
+                $('#email-fail-detail').text(m).toggle(!!m);
                 $('#email-fail').addClass('is-active');
             }
         }).fail(function (xhr) {
             $('html').removeClass('email-queue thinking');
+            var detail = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : '';
+            $('#email-fail-detail').text(detail).toggle(!!detail);
             $('#email-fail').addClass('is-active');
         });
 

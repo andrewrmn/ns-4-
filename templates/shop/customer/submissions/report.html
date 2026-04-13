@@ -40,6 +40,8 @@
                                 <input type="hidden" name="action" value="/appConnector/pdf/emailPdf">
 
                                 {{ csrfInput() }}
+                                <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ user.email|url_encode }}">
+                                <input type="hidden" name="submissionType" value="{{ submissionType }}">
                                 <input type="hidden" name="submissionId" value="{{ submission.submissionId }}">
                                 <input type="hidden" name="userId" value="{{ user.id }}">
 
