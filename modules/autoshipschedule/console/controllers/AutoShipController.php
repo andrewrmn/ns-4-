@@ -3,6 +3,7 @@
 namespace modules\autoshipschedule\console\controllers;
 
 use Craft;
+use craft\helpers\App;
 use craft\commerce\elements\Order as CommerceOrder;
 use craft\mail\Message;
 use craft\web\View;
@@ -66,6 +67,12 @@ class AutoShipController extends Controller
 
     public function actionUpcomingAutoshipEmail()
     {
+        if (!filter_var(App::env('AUTOSHIP_UPCOMING_EMAIL_ENABLED') ?? true, FILTER_VALIDATE_BOOLEAN)) {
+            $this->stdout("Skipped: AUTOSHIP_UPCOMING_EMAIL_ENABLED is not true.\n");
+
+            return;
+        }
+
         StripePlugin::$app->settings->initializeStripe();
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
 
