@@ -53,14 +53,10 @@
                 {% if currentUser and currentUser.isInGroup('patients') %}
                 <input type="hidden" name="shippingMethodHandle" value="patientShipping" />
                 {% endif %}
-
                 {% set hcpEmail = '' %}
                 {% set isPatient = 'no' %}
-
                 {% if currentUser and currentUser.isInGroup('patients') %}
                 {% set isPatient = 'yes' %}
-
-
 
                 {% endif %}
                 <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
