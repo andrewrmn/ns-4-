@@ -172,8 +172,8 @@
                   {% set monthNeuroCash = 0 %}
                   {% set monthOrderItemTotal = 0 %}
                   {% for order in ordersInMonth %}
-                  {% if order.user.patientNeurocashDiscount %}
-                  {% set neurocashPercentage = hcpNeurocashPercentage - order.user.patientNeurocashDiscount %}
+                  {% if order.customer.user and order.customer.user.patientNeurocashDiscount %}
+                  {% set neurocashPercentage = hcpNeurocashPercentage - order.customer.user.patientNeurocashDiscount %}
                   {% else %}
                   {% set neurocashPercentage = hcpNeurocashPercentage %}
                   {% endif %}
@@ -183,7 +183,7 @@
 
                   <tr {% if loop.last %}data-NeuroCash-{{ month|lower }}="{{ monthNeuroCash }}" id="ul-cash-{{ month|lower }}" {% endif %}>
                     <td>{{ order.dateOrdered|date('m/d/y') }}</td>
-                    <td>{% if order.user.firstName %}{{ order.user.firstName }} {{ order.user.lastName }}{% else %}{{ order.user.username }}{% endif %}</td>
+                    <td>{% if order.customer.user %}{% if order.customer.user.firstName %}{{ order.customer.user.firstName }} {{ order.customer.user.lastName }}{% else %}{{ order.customer.user.username }}{% endif %}{% endif %}</td>
                     <td>{{ order.itemTotal |commerceCurrency(convert=true, format=true)}}</td>
                     {% set total = order.itemTotal * (neurocashPercentage / 100) %}
                     <td>{{ total |commerceCurrency(convert=true, format=true) }}</td>
@@ -285,8 +285,8 @@
                   {% set monthNeuroCash = 0 %}
                   {% set monthOrderItemTotal = 0 %}
                   {% for order in ordersInMonth %}
-                  {% if order.user.patientNeurocashDiscount %}
-                  {% set neurocashPercentage = hcpNeurocashPercentage - order.user.patientNeurocashDiscount %}
+                  {% if order.customer.user and order.customer.user.patientNeurocashDiscount %}
+                  {% set neurocashPercentage = hcpNeurocashPercentage - order.customer.user.patientNeurocashDiscount %}
                   {% else %}
                   {% set neurocashPercentage = hcpNeurocashPercentage %}
                   {% endif %}
@@ -294,7 +294,7 @@
                   {% set monthNeuroCash = monthNeuroCash + order.itemTotal * ( neurocashPercentage / 100) %}
                   {% set monthOrderItemTotal = monthOrderItemTotal + order.itemTotal %}
                   <tr {% if loop.last %}data-NeuroCash-{{ month|lower }}="{{ monthOrderItemTotal }}" id="ul-cash-{{ month|lower }}" {% endif %}>
-                    <td>{% if order.user.firstName %}{{ order.user.firstName }} {{ order.user.lastName }}{% else %}{{ order.user.username }}{% endif %}</td>
+                    <td>{% if order.customer.user %}{% if order.customer.user.firstName %}{{ order.customer.user.firstName }} {{ order.customer.user.lastName }}{% else %}{{ order.customer.user.username }}{% endif %}{% endif %}</td>
                     <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
                     <td class="text-center">{{ order.itemTotal |commerceCurrency(convert=true, format=true)}}</td>
                     <td class="text-center"><a class="" href="{{ url('hcp/order?number=' ~ order.number) }}">#{{ order.id }}</a></td>

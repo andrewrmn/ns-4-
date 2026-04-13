@@ -324,7 +324,7 @@
                   <tbody>
                     {% for order in recentOrders %}
                     <tr>
-                      <td><a href="{{ url('hcp/patient?id=' ~ order.user.id ) }}">{{ order.user.firstName }} {{ order.user.lastName }}</a></td>
+                      <td><a href="{{ url('hcp/patient?id=' ~ order.customer.user.id ) }}">{{ order.customer.user.firstName }} {{ order.customer.user.lastName }}</a></td>
                       <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
                       <td class="text-center">
                         {% if order.autoship == 'yes' %}

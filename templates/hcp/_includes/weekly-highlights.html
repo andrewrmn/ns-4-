@@ -14,8 +14,8 @@
     {% set orderTotalPrice = 0 %}
     {% set neuroCash = 0 %}
     {% for order in weeklyOrders %}
-      {% if order.user.patientNeurocashDiscount %}
-        {% set wPct = hcpNeurocashPercentage - order.user.patientNeurocashDiscount %}
+      {% if order.customer.user and order.customer.user.patientNeurocashDiscount %}
+        {% set wPct = hcpNeurocashPercentage - order.customer.user.patientNeurocashDiscount %}
       {% else %}
         {% set wPct = hcpNeurocashPercentage %}
       {% endif %}

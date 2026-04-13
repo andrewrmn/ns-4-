@@ -79,7 +79,7 @@
 @mixin h5 {
     font-weight: 700;
     font-size: 13px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     line-height: $base-line-height;
     margin-bottom: 8px;
@@ -89,7 +89,7 @@
     font-family: $sans-serif;
     font-weight: 700;
     font-size: 11px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     line-height: $base-line-height;
     margin-bottom: 8px;
@@ -174,25 +174,27 @@ p {
     @include para;
 }
 
-.user-content p + p {
+.user-content p+p {
     margin-top: 30px;
 }
 
-p, .p, .user-content {
-    + [class^=btn] {
+p,
+.p,
+.user-content {
+    +[class^=btn] {
         margin-top: 20px;
 
-        @include start-at($medium){
+        @include start-at($medium) {
             margin-top: 30px;
         }
     }
 
-    + .text-flush {
+    +.text-flush {
         margin-top: 0;
     }
 }
 
-.text-flush + .text-flush {
+.text-flush+.text-flush {
     margin-top: 0;
 }
 
@@ -207,4 +209,12 @@ small {
 
 .text-flush {
     margin-bottom: 0;
+}
+
+
+.rte--black p,
+.rte--black ul,
+.rte--black ol,
+.rte--black li {
+    color: #383F44;
 }

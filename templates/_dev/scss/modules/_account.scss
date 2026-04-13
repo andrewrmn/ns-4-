@@ -31,7 +31,7 @@
         margin-bottom: 12px;
     }
 
-    a.is-active  {
+    a.is-active {
         color: $brand;
     }
 
@@ -52,10 +52,24 @@
     flex-grow: 1;
     order: 1;
     max-width: 100%;
+    background: #F4F5F7;
 
     @include start-at($large) {
         padding-bottom: 72px;
     }
+}
+
+.patient-links a {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.625;
+    margin-bottom: 8px;
+}
+
+.patient-links a.is-active {
+    color: #7B858E;
 }
 
 
@@ -85,7 +99,7 @@
         justify-content: flex-end;
         color: $success;
 
-        > * {
+        >* {
             display: flex;
             align-items: center;
         }
@@ -111,7 +125,7 @@
     }
 
 
-    + .link {
+    +.link {
         margin-top: 10px;
     }
 }
@@ -125,7 +139,7 @@
         font-size: 14px;
     }
 
-    > * + * {
+    >*+* {
         margin-left: 5px;
         display: block;
     }

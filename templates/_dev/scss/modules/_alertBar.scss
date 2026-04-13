@@ -49,13 +49,13 @@
 }
 
 .alert-bar__cta {
-    width: 100px;
+    min-width: 120px;
 
     .btn {
         background: $orange;
         font-size: 1.3rem;
-        width: 100px;
-        min-width: 100px;
+        white-space: nowrap;
+        min-width: 120px;
         padding: 4px 8px;
         border-color: $orange;
 
@@ -66,9 +66,7 @@
         }
     }
 
-    @include start-at($medium) {
-
-    }
+    @include start-at($medium) {}
 }
 
 
@@ -83,6 +81,7 @@
     svg {
         fill: $white;
     }
+
     @include stop-at($medium) {
         position: absolute;
         right: 10px;
