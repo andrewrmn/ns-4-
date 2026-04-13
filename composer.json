@@ -1,11 +1,11 @@
 {
     "require": {
+        "craftcms/ckeditor": "^3.15.0",
         "craftcms/cms": "^4",
-        "dompdf/dompdf": "^2.0",
         "craftcms/commerce": "^4",
         "craftcms/commerce-paypal-checkout": "^2",
         "craftcms/element-api": "^4.2.0",
-        "craftcms/redactor": "^3",
+        "dompdf/dompdf": "^2.0",
         "enupal/snapshot": "^2",
         "enupal/stripe": "^5",
         "presseddigital/linkit": "^4",
@@ -41,13 +41,6 @@
         ]
     },
     "repositories": [
-        {
-            "type": "path",
-            "url": "./plugins/*",
-            "options": {
-                "symlink": true
-            }
-        },
         {
             "type": "composer",
             "url": "https://composer.craftcms.com",

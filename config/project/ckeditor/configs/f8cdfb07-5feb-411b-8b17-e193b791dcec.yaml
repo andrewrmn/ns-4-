@@ -1,0 +1,5 @@
+headingLevels: false
+name: Simple
+toolbar:
+  - bold
+  - italic
