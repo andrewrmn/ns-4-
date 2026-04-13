@@ -443,8 +443,18 @@ class PdfController extends Controller
             return $this->emailPdfErrorResponse('PDF file not found. Generate the report first.', 422);
         }
 
-        $settings = Craft::$app->systemSettings->getSettings('email');
-        $fromEmail = $settings['fromEmail'] ?? null;
+        $pdfBytes = file_get_contents($filePath);
+        if ($pdfBytes === false || $pdfBytes === '') {
+            Craft::error('PIR email: could not read PDF at ' . $filename, __METHOD__);
+
+            return $this->emailPdfErrorResponse('Could not read the PDF file for attachment.', 500);
+        }
+
+        // Use parsed env (same as Craft core / AdminEmailsModule). systemSettings raw values can still
+        // contain $SMTP_FROM-style placeholders and produce invalid From headers / SMTP rejection.
+        $mailSettings = App::mailSettings();
+        $fromEmail = App::parseEnv($mailSettings->fromEmail);
+        $fromName = App::parseEnv($mailSettings->fromName) ?: '';
         if ($fromEmail === null || $fromEmail === '') {
             Craft::error('Email settings are missing a From address.', __METHOD__);
 
@@ -467,24 +477,46 @@ class PdfController extends Controller
         $html .= 'P: <a href="tel:+18883427272">888-342-7272</a><br />';
         $html .= 'F: <a href="tel:+17152943921">715-294-3921</a>';
 
-        $message->setFrom([$fromEmail => $settings['fromName'] ?? '']);
+        $plain = "Dear Healthcare Provider,\n\n"
+            . "The requested NeuroScience Product Information Request (PIR) is attached.\n\n"
+            . "If you have any questions, please contact Customer Service at 888-342-7272. Please do not reply to this email.\n\n"
+            . "NeuroScience\n373 280th Street, Osceola, WI 54020\nP: 888-342-7272  F: 715-294-3921";
+
+        $message->setFrom([$fromEmail => $fromName]);
+        $replyTo = App::parseEnv($mailSettings->replyToEmail ?? '');
+        if ($replyTo !== null && $replyTo !== '') {
+            $message->setReplyTo($replyTo);
+        }
         $message->setTo($email);
         $message->setSubject($subject);
+        $message->setTextBody($plain);
         $message->setHtmlBody($html);
-        $message->attach($filePath, []);
+        $message->attachContent($pdfBytes, [
+            'fileName' => $filename,
+            'contentType' => 'application/pdf',
+        ]);
 
         try {
             $sent = Craft::$app->getMailer()->send($message);
         } catch (\Throwable $e) {
             Craft::error('PIR email send exception: ' . $e->getMessage(), __METHOD__);
+            Craft::$app->getErrorHandler()->logException($e);
 
             return $this->emailPdfErrorResponse('Mailer error. Check storage logs.', 500);
         }
 
         if (!$sent) {
-            Craft::warning('PIR email mailer->send() returned false for ' . $email, __METHOD__);
+            $bytes = strlen($pdfBytes);
+            Craft::warning(
+                "PIR email mailer->send() returned false (recipient={$email}, attachment_bytes={$bytes}). "
+                . 'Look in storage/logs for the preceding error from the mail transport (often SMTP auth, TLS, or size limits).',
+                __METHOD__
+            );
 
-            return $this->emailPdfErrorResponse('Mailer could not send. Check email transport settings.', 422);
+            return $this->emailPdfErrorResponse(
+                'Mailer could not send. Check Craft Settings → Email and storage/logs for the SMTP error.',
+                422
+            );
         }
 
         return $this->asJson(['success' => true]);
