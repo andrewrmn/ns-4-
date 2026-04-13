@@ -17,285 +17,297 @@
 
         {% set cartLineItemsByAddOrder = cart.lineItems|sort((a, b) => a.id <=> b.id) %}
 
-        {% set productsOrdersThisMonth = [] %}
-        {% set purchaseError = false %}
-        {% set pupCounter = 0 %}
+            {% set productsOrdersThisMonth = [] %}
+            {% set purchaseError = false %}
+            {% set pupCounter = 0 %}
 
-        {% if currentUser and currentUser.isInGroup('personal') %}
-        {% set isPUP = true %}
-        {% set end = now|date_modify('-1 month')|atom %}
+            {% if currentUser and currentUser.isInGroup('personal') %}
+            {% set isPUP = true %}
+            {% set end = now|date_modify('-1 month')|atom %}
 
-        {% set orders = craft.orders.dateOrdered('>= ' ~ end).isCompleted().customer(currentUser).all() %}
-
-
-        {% for order in orders %}
-        {% set pupCounter = ( pupCounter | default(0) ) + order.totalQty %}
-        {% for item in order.lineItems %}
-        {% if item.qty > 2 %}
-        {% set maxedProd = item.sku %}
-        {% set productsOrdersThisMonth = productsOrdersThisMonth|merge([maxedProd]) %}
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        {% endif %}
+            {% set orders = craft.orders.dateOrdered('>= ' ~ end).isCompleted().customer(currentUser).all() %}
 
 
-
-        <form id="commerce-cart" method="post">
-            <input type="hidden" name="action" value="commerce/cart/update-cart">
-            {% if cart.makeThisARecurringOrder %}
-            <input type="hidden" name="successMessage" value="{{ 'Autoship updated.'|hash }}">
-            {% else %}
-            <input type="hidden" name="successMessage" value="{{ 'Cart updated.'|hash }}">
+            {% for order in orders %}
+            {% set pupCounter = ( pupCounter | default(0) ) + order.totalQty %}
+            {% for item in order.lineItems %}
+            {% if item.qty > 2 %}
+            {% set maxedProd = item.sku %}
+            {% set productsOrdersThisMonth = productsOrdersThisMonth|merge([maxedProd]) %}
             {% endif %}
-            {{ redirectInput('shop/cart') }}
-            {{ csrfInput() }}
-            {% if currentUser and currentUser.isInGroup('patients') %}
-            <input type="hidden" name="shippingMethodHandle" value="patientShipping" />
+            {% endfor %}
+            {% endfor %}
             {% endif %}
 
-            {% set hcpEmail = '' %}
-            {% set isPatient = 'no' %}
-
-            {% if currentUser and currentUser.isInGroup('patients') %}
-            {% set isPatient = 'yes' %}
 
 
+            <form id="commerce-cart" method="post">
+                <input type="hidden" name="action" value="commerce/cart/update-cart">
+                {% if cart.makeThisARecurringOrder %}
+                <input type="hidden" name="successMessage" value="{{ 'Autoship updated.'|hash }}">
+                {% else %}
+                <input type="hidden" name="successMessage" value="{{ 'Cart updated.'|hash }}">
+                {% endif %}
+                {{ redirectInput('shop/cart') }}
+                {{ csrfInput() }}
+                {% if currentUser and currentUser.isInGroup('patients') %}
+                <input type="hidden" name="shippingMethodHandle" value="patientShipping" />
+                {% endif %}
 
-            {% endif %}
-            <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
-            <input type="hidden" name="fields[isPatient]" value="{{isPatient}}" />
+                {% set hcpEmail = '' %}
+                {% set isPatient = 'no' %}
+
+                {% if currentUser and currentUser.isInGroup('patients') %}
+                {% set isPatient = 'yes' %}
 
 
-            {% if hcpEmail %}
-            <input type="hidden" name="fields[relatedHcp]" value="{{hcpEmail}}" />
-            {% endif %}
 
-            <div class="cart d-md-flex flex-justify-between">
-                <div class="col-12 col-md-7 col-lg-8">
-                    <div class="card">
-                        <div>
-                            {% set counter = '0' %}
-                            {% for item in cartLineItemsByAddOrder %}
-                            {% if item.purchasable.sku != '20039' and item.purchasable.sku != '20043' and
-                            item.purchasable.sku != '20048' and item.purchasable.sku != '20047' and item.purchasable.sku
-                            != '20044S' and item.purchasable.sku != '20045S' and item.purchasable.sku != '20041S' %}
-                            {% set counter = counter + item.qty %}
+                {% endif %}
+                <input type="hidden" name="options[isPatient]" value="{{isPatient}}" />
+                <input type="hidden" name="fields[isPatient]" value="{{isPatient}}" />
+
+
+                {% if hcpEmail %}
+                <input type="hidden" name="fields[relatedHcp]" value="{{hcpEmail}}" />
+                {% endif %}
+
+                <div class="cart d-md-flex flex-justify-between">
+                    <div class="col-12 col-md-7 col-lg-8">
+                        <div class="card mb-4">
+                            <div>
+                                {% set counter = '0' %}
+                                {% for item in cartLineItemsByAddOrder %}
+                                {% if item.purchasable.sku != '20039' and item.purchasable.sku != '20043' and
+                                item.purchasable.sku != '20048' and item.purchasable.sku != '20047' and
+                                item.purchasable.sku
+                                != '20044S' and item.purchasable.sku != '20045S' and item.purchasable.sku != '20041S' %}
+                                {% set counter = counter + item.qty %}
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
+                                {% if counter < 11 %} {% if currentUser and not currentUser.isInGroup('patients') %}
+                                    <div class="wrapper text-center section-x-short section--flush-top">
+                                    <p class="text-black p-sm px-lg-3"><b>NeuroRewards Program:</b> Receive 1 free
+                                        bottle
+                                        for every 11 bottles purchased (excludes Calm PRT).</p>
+                            </div>
                             {% endif %}
-                            {% endfor %}
+                            {% endif %}
+                            {% if counter >= 11 %}{% if currentUser and not currentUser.isInGroup('patients') %}
+                            <div class="wrapper text-center section-x-short section--flush-top">
+                                <p class="text-black p-sm px-lg-3"><b>NeuroRewards Program:</b> Your cart qualifies!
+                                    Receive
+                                    1 free bottle for every 11 bottles purchased (excludes Calm PRT).</p>
+                            </div>
+                            {% endif %}{% endif %}
+                            {% endif %}
 
-                            {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
-                            {% if counter < 11 %} {% if currentUser and not currentUser.isInGroup('patients') %} <div
+                            {% if isPUP %}
+                            <div class="wrapper text-center section-x-short section--flush-top pup-notes d-none">
+                                <p class="p-sm px-lg-3 text-error">Due to restrictions on Personal Purchasing Accounts,
+                                    you
+                                    are not able to purchase more than 5 bottles in a calendar month.</p>
+                            </div>
+                            {% endif %}
+
+                            {% if counter < 2 and currentUser and currentUser.isInGroup('patients') %} <div
                                 class="wrapper text-center section-x-short section--flush-top">
-                                <p class="text-black p-sm px-lg-3"><b>NeuroRewards Program:</b> Receive 1 free bottle
-                                    for every 11 bottles purchased (excludes Calm PRT).</p>
+                                {% if cart.total > 70 %}
+                                <p class="text-black p-sm px-lg-3">Congratulations, your cart qualifies for free
+                                    shipping!
+                                </p>
+                                {% else %}
+                                <p class="text-black p-sm px-lg-3">Add 1 more bottle of any product to receive free 2
+                                    day
+                                    shipping!</p>
+                                {% endif %}
                         </div>
                         {% endif %}
-                        {% endif %}
-                        {% if counter >= 11 %}{% if currentUser and not currentUser.isInGroup('patients') %}
+                        {% if counter >= 2 and currentUser and currentUser.isInGroup('patients') %}
                         <div class="wrapper text-center section-x-short section--flush-top">
-                            <p class="text-black p-sm px-lg-3"><b>NeuroRewards Program:</b> Your cart qualifies! Receive
-                                1 free bottle for every 11 bottles purchased (excludes Calm PRT).</p>
-                        </div>
-                        {% endif %}{% endif %}
-                        {% endif %}
-
-                        {% if isPUP %}
-                        <div class="wrapper text-center section-x-short section--flush-top pup-notes d-none">
-                            <p class="p-sm px-lg-3 text-error">Due to restrictions on Personal Purchasing Accounts, you
-                                are not able to purchase more than 5 bottles in a calendar month.</p>
-                        </div>
-                        {% endif %}
-
-                        {% if counter < 2 and currentUser and currentUser.isInGroup('patients') %} <div
-                            class="wrapper text-center section-x-short section--flush-top">
-                            {% if cart.total > 70 %}
                             <p class="text-black p-sm px-lg-3">Congratulations, your cart qualifies for free shipping!
                             </p>
-                            {% else %}
-                            <p class="text-black p-sm px-lg-3">Add 1 more bottle of any product to receive free 2 day
-                                shipping!</p>
-                            {% endif %}
-                    </div>
-                    {% endif %}
-                    {% if counter >= 2 and currentUser and currentUser.isInGroup('patients') %}
-                    <div class="wrapper text-center section-x-short section--flush-top">
-                        <p class="text-black p-sm px-lg-3">Congratulations, your cart qualifies for free shipping!</p>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="cart-products">
-                    {% set lineItemHasErrors = false %}
-
-
-                    {% for item in cartLineItemsByAddOrder %}
-                    {% set purchaseError = false %}
-                    {% set allowQTY = 10000 %}
-
-                    {# PUP account #}
-                    {# Check if product has been purchased 3 or more times in the past month #}
-                    {% if item.sku in productsOrdersThisMonth %}
-                    {% set purchaseError = true %}
-                    {% endif %}
-                    {% if isPUP %}
-                    {% set allowQTY = 5 - pupCounter %}
-                    {% endif %}
-
-
-
-                    {% if item.hasErrors() %}
-                    {# if the line item has errors lets record it so we can hide totals later (since they wont make
-                    sense) #}
-                    {% set lineItemHasErrors = true %}
-                    {% endif %}
-
-                    <div class="cart-product">
-
-                        <div class="cart-product__image">
-                            {% for row in item.purchasable.product.productFields.all() %}
-                            {% if row.productImages|length > 0 %}
-                            {% set img = row.productImages.one() %}
-                            <img src="{{ img.url }}" alt="{{ img.title }}" />
-                            {% else %}
-                            <img src="{{ siteUrl }}images/products/no-image.png" alt="no image available" />
-                            {% endif %}
-                            {% endfor %}
                         </div>
-                        <div class="cart-product__details">
-                            <div>
-                                <strong class="h5"><a href="{{ item.purchasable.product.url }}">{{ item.description
-                                        }}</a></strong>
+                        {% endif %}
+                    </div>
+                    <div class="cart-products">
+                        {% set lineItemHasErrors = false %}
 
-                                {% if item.onSale %}
-                                <span class="price">
-                                    <span title="{{ item.price}}"><s>{{ item.price|commerceCurrency(cart.currency)
-                                            }}</s></span>
-                                    <span title="{{ item.salePrice}}">{{ item.salePrice|commerceCurrency(cart.currency)
-                                        }}</span>
-                                </span>
+
+                        {% for item in cartLineItemsByAddOrder %}
+                        {% set purchaseError = false %}
+                        {% set allowQTY = 10000 %}
+
+                        {# PUP account #}
+                        {# Check if product has been purchased 3 or more times in the past month #}
+                        {% if item.sku in productsOrdersThisMonth %}
+                        {% set purchaseError = true %}
+                        {% endif %}
+                        {% if isPUP %}
+                        {% set allowQTY = 5 - pupCounter %}
+                        {% endif %}
+
+
+
+                        {% if item.hasErrors() %}
+                        {# if the line item has errors lets record it so we can hide totals later (since they wont make
+                        sense) #}
+                        {% set lineItemHasErrors = true %}
+                        {% endif %}
+
+                        <div class="cart-product">
+
+                            <div class="cart-product__image">
+                                {% for row in item.purchasable.product.productFields.all() %}
+                                {% if row.productImages|length > 0 %}
+                                {% set img = row.productImages.one() %}
+                                <img src="{{ img.url }}" alt="{{ img.title }}" />
                                 {% else %}
+                                <img src="{{ siteUrl }}images/products/no-image.png" alt="no image available" />
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="cart-product__details">
+                                <div>
+                                    <strong class="h5"><a href="{{ item.purchasable.product.url }}">{{ item.description
+                                            }}</a></strong>
+
+                                    {% if item.onSale %}
+                                    <span class="price">
+                                        <span title="{{ item.price}}"><s>{{ item.price|commerceCurrency(cart.currency)
+                                                }}</s></span>
+                                        <span title="{{ item.salePrice}}">{{
+                                            item.salePrice|commerceCurrency(cart.currency)
+                                            }}</span>
+                                    </span>
+                                    {% else %}
+                                    <span class="price">
+                                        <span title="{{ item.price}}">{{ item.price|commerceCurrency(cart.currency)
+                                            }}</span>
+                                    </span>
+                                    {% endif %}
+
+                                    {% if item.purchasable.sku == '20039' or item.purchasable.sku == '20043' or
+                                    item.purchasable.sku == '20048' or item.purchasable.sku == '20047' or
+                                    item.purchasable.sku == '20044S' or item.purchasable.sku == '20045S' or
+                                    item.purchasable.sku == '20041S' or item.purchasable.sku == '20054S' %}
+                                    <small class="text-italic" style="font-size:11px;">This item does not count towards
+                                        NeuroRewards, however it can be redeemed as the free product</small>
+                                    {% endif %}
+
+
+                                    {% if item.purchasable.maxQty|length %}
+                                    <small class="text-error text-italic">
+                                        Limit of {{ item.purchasable.maxQty }} per order
+                                    </small>
+                                    {% endif %}
+
+                                    {% if item.purchasable.product.productNote %}
+                                    <small class="text-error text-italic">
+                                        {{ item.purchasable.product.productNote }}
+                                    </small>
+                                    {% endif %}
+                                    {% if purchaseError %}
+                                    <small class="text-error">You cannot purchase this product more than 3 times in a
+                                        month</small>
+                                    {% endif %}
+                                </div>
+
+                                <input type="text" class="input-auto d-none" placeholder="My Note"
+                                    name="lineItems[{{ item.id }}][note]" value="{{ item.note }}">
+                            </div>
+
+                            <div class="quanity-field">
+                                <button type="button"
+                                    onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                                    -
+                                </button>
+                                <span {% if item.getFirstError('qty') %}class="has-error" {% endif %}>
+                                    <input class="qty-field" type="number" name="lineItems[{{ item.id }}][qty]" min="0"
+                                        {% if purchaseError %}max="0" {% elseif isPUP %}max="3" {% else
+                                        %}max="{{ item.purchasable.maxQty }}" {% endif %}
+                                        value="{% if purchaseError %}0{% else %}{{ item.qty }}{% endif %}"> </span>
+                                <button type="button"
+                                    onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                                    +
+                                </button>
+                            </div>
+
+                            <div class="cart-product__price">
+                                {% if not lineItemHasErrors %}
+
+                                {% endif %}
                                 <span class="price">
-                                    <span title="{{ item.price}}">{{ item.price|commerceCurrency(cart.currency)
-                                        }}</span>
-                                </span>
-                                {% endif %}
-
-                                {% if item.purchasable.sku == '20039' or item.purchasable.sku == '20043' or
-                                item.purchasable.sku == '20048' or item.purchasable.sku == '20047' or
-                                item.purchasable.sku == '20044S' or item.purchasable.sku == '20045S' or
-                                item.purchasable.sku == '20041S' or item.purchasable.sku == '20054S' %}
-                                <small class="text-italic" style="font-size:11px;">This item does not count towards
-                                    NeuroRewards, however it can be redeemed as the free product</small>
-                                {% endif %}
-
-
-                                {% if item.purchasable.maxQty|length %}
-                                <small class="text-error text-italic">
-                                    Limit of {{ item.purchasable.maxQty }} per order
-                                </small>
-                                {% endif %}
-
-                                {% if item.purchasable.product.productNote %}
-                                <small class="text-error text-italic">
-                                    {{ item.purchasable.product.productNote }}
-                                </small>
-                                {% endif %}
-                                {% if purchaseError %}
-                                <small class="text-error">You cannot purchase this product more than 3 times in a
-                                    month</small>
-                                {% endif %}
-                            </div>
-
-                            <input type="text" class="input-auto d-none" placeholder="My Note"
-                                name="lineItems[{{ item.id }}][note]" value="{{ item.note }}">
-                        </div>
-
-                        <div class="quanity-field">
-                            <button type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
-                                -
-                            </button>
-                            <span {% if item.getFirstError('qty') %}class="has-error" {% endif %}>
-                                <input class="qty-field" type="number" name="lineItems[{{ item.id }}][qty]" min="0" {%
-                                    if purchaseError %}max="0" {% elseif isPUP %}max="3" {% else
-                                    %}max="{{ item.purchasable.maxQty }}" {% endif %}
-                                    value="{% if purchaseError %}0{% else %}{{ item.qty }}{% endif %}"> </span>
-                            <button type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
-                                +
-                            </button>
-                        </div>
-
-                        <div class="cart-product__price">
-                            {% if not lineItemHasErrors %}
-
-                            {% endif %}
-                            <span class="price">
-                                <span title="{{ item.subtotal}}"><span class="t">Subtotal:</span> {{
-                                    item.subtotal|commerceCurrency(cart.currency) }}</span>
-                            </span>
-                        </div>
-                    </div>
-
-                    {% if not lineItemHasErrors %}
-                    {% for adjustment in item.adjustments %}
-                    <div class="adjustment">
-                        <div class="adjustment__details">
-
-                            <p class="adjustment__title h6 mb-0">{{ adjustment.name|title }}</p>
-
-                            {% if adjustment.isEstimated %}<i class="p-sm text-light m-0">{{ 'Estimated'|t('commerce')
-                                }}</i>{% endif %}
-                            <p class="p-sm mt-0">{{ adjustment.description }}</p>
-                        </div>
-                        <div class="adjustment__price">
-                            <span title="{{ adjustment.amount }}">{{ adjustment.amount|commerceCurrency(cart.currency)
-                                }}</span>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                    {% endif %}
-
-
-                    {% endfor %}
-                    {# End product loop #}
-
-                </div>
-
-
-
-
-                <div class="mt-6">
-
-
-                    <div class="cart-update-wrap">
-                        <div>
-                            <button class="btn-alt" type="submit">Update Cart</button>
-                        </div>
-
-                        {% if not allowedGuest %}
-
-                        {% if not cart.makeThisARecurringOrder %}
-                        <div class="coupon-wrap-wrap">
-                            <div class="coupon-wrap">
-                                <span class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}">
-                                    <input type="text" name="couponCode" width="11"
-                                        class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
-                                        value="{{ cart.couponCode }}" placeholder="{{ " Code"|t }}">
+                                    <span title="{{ item.subtotal}}"><span class="t">Subtotal:</span> {{
+                                        item.subtotal|commerceCurrency(cart.currency) }}</span>
                                 </span>
                             </div>
-                            {% if cart.getFirstError('couponCode') %}
-                            <span class="flash">{{ cart.getFirstError('couponCode') }}</span>
-                            {% endif %}
                         </div>
+
+                        {% if not lineItemHasErrors %}
+                        {% for adjustment in item.adjustments %}
+                        <div class="adjustment">
+                            <div class="adjustment__details">
+
+                                <p class="adjustment__title h6 mb-0">{{ adjustment.name|title }}</p>
+
+                                {% if adjustment.isEstimated %}<i class="p-sm text-light m-0">{{
+                                    'Estimated'|t('commerce')
+                                    }}</i>{% endif %}
+                                <p class="p-sm mt-0">{{ adjustment.description }}</p>
+                            </div>
+                            <div class="adjustment__price">
+                                <span title="{{ adjustment.amount }}">{{
+                                    adjustment.amount|commerceCurrency(cart.currency)
+                                    }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+
                         {% endif %}
-                        {% endif %}
+
+
+                        {% endfor %}
+                        {# End product loop #}
+
                     </div>
 
 
 
-                </div>
 
-            </div>
+                    <div class="mt-6">
+
+
+                        <div class="cart-update-wrap">
+                            <div>
+                                <button class="btn-alt" type="submit">Update Cart</button>
+                            </div>
+
+                            {% if not allowedGuest %}
+
+                            {% if not cart.makeThisARecurringOrder %}
+                            <div class="coupon-wrap-wrap">
+                                <div class="coupon-wrap">
+                                    <span class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}">
+                                        <input type="text" name="couponCode" width="11"
+                                            class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
+                                            value="{{ cart.couponCode }}" placeholder="{{ " Code"|t }}">
+                                    </span>
+                                </div>
+                                {% if cart.getFirstError('couponCode') %}
+                                <span class="flash">{{ cart.getFirstError('couponCode') }}</span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+
+
+
+                    </div>
+
+                </div>
     </div>
     <div class="col-12 col-md-5 col-lg-4 pl-md-3 pl-lg-6">
 
