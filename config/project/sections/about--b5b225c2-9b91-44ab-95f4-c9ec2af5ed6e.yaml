@@ -12,6 +12,6 @@ siteSettings:
   9980c1bd-fa51-4b79-b81f-bf4576d54b1e: # NeuroScience
     enabledByDefault: true
     hasUrls: true
-    template: page.html
+    template: pages/page
     uriFormat: about
 type: single

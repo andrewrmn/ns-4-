@@ -10,6 +10,7 @@
 
 return [
     '*' => [
+        'errorTemplatePrefix' => 'pages/',
         'defaultWeekStartDay' => 0,
         'omitScriptNameInUrls' => true,
         'cpTrigger' => 'admin',

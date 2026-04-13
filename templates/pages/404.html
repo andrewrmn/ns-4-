@@ -2,10 +2,8 @@
  # 404 template
  # ------------
  #
- # This template is loaded whenever Craft cannot figure out how to
- # respond to an incoming request. No setup is involved to get your
- # 404 page working; you just need to call it 404.html and put it
- # at the root of your craft/templates/ folder.
+ # This template is loaded for HTTP 404 responses. It lives at
+ # templates/pages/404.html; general.php sets errorTemplatePrefix => 'pages/'.
  #
  # You can also create 400.html, 403.html, 500.html, and 503.html
  # templates if you’d like. If Craft can’t find an error template
@@ -16,7 +14,7 @@
  # http://craftcms.com/docs/routing
  #}
 
-{% extends "_layout" %}
+{% extends "layouts/_layout" %}
 {% set title = "404" %}
 
 {% block content %}

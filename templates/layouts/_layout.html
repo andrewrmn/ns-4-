@@ -70,7 +70,7 @@
 	{% include 'partials/alertBar' %}
 	{% endif %}
 
-	{% include 'header' %}
+	{% include 'partials/header' %}
 
 	<main id="content" class="{% block mainClass %}{% endblock %}">
 		{% block content %}
@@ -81,7 +81,7 @@
 		{% endblock %}
 	</main>
 
-	{% include 'footer' %}
+	{% include 'partials/footer' %}
 
 	<script src="/js/TweenMax.min.js"></script>
 	<script src="/js/main.js"></script>

@@ -1,6 +1,6 @@
 {% set title = 'Order'  %}
 
-{% extends "_layout" %}
+{% extends "layouts/_layout" %}
 
 {% set number = craft.app.request.getRequiredParam('number') %}
 {% set order = craft.orders.number(number).one() %}

@@ -55,7 +55,7 @@
 		{% include 'partials/alertBar' %}
 	{% endif %}
 
-	{% include 'header' %}
+	{% include 'partials/header' %}
 
 	{% if currentUser %}
 	{%  set user = currentUser %}
@@ -78,7 +78,7 @@
 		{% redirect '/login/' %}
 	{% endif %}
 
-	{% include 'footer' %}
+	{% include 'partials/footer' %}
 
 
 	<script src="/js/main.js"></script>
