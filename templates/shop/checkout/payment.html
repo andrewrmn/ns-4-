@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% set cartLineItemsByAddOrder = cart.lineItems|sort((a, b) => a.id <=> b.id) %}
+
 {% set storedCards = craft.commerce.paymentSources.allPaymentSourcesByUserId(currentUser.id ?? null) %}
 
 {# Get the available gateways to be used later in this page #}
@@ -31,7 +33,7 @@
 						<li class="order-review-list--products">
 							<h4 class="h5">Products</h4>
 							<ul class="order-review-product-list">
-								{% for item in cart.lineItems %}
+								{% for item in cartLineItemsByAddOrder %}
 								<li>
 									<p class="text-bold text-black">{{ item.description }}</p>
 									{% if item.salePrice %}
@@ -49,8 +51,7 @@
 
 						<li class="inline-item">
 							<p class="text-bold text-black"><strong>{{ adjustment.name }}</strong></p>
-							<p><span class="right">{% if adjustment.amount < 0 %}-{% endif %}{{
-										adjustment.amount|commerceCurrency(cart.currency)|trim('()') }} {% if adjustment.description %}<span
+							<p><span class="right">{{ adjustment.amount|commerceCurrency(cart.currency) }} {% if adjustment.description %}<span
 										class="p-sm">({{ adjustment.description }})</span>{% endif %}</span></p>
 						</li>
 						{% endfor %}
