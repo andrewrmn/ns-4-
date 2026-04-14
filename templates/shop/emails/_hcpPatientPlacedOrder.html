@@ -1,3 +1,37 @@
+{# PHP passes patient when known; resolve user like _orderReceivedPatient. #}
+{% set _patientUser = patient ?? (order.customer ? order.customer.user : null) %}
+{% if not _patientUser and order.email|default('')|trim != '' %}
+{% set _patientUser = craft.users().email(order.email|trim).one() %}
+{% endif %}
+{% set _patientDisplayName = '' %}
+{# 1) Profile first + last #}
+{% if _patientUser and (_patientUser.firstName|default('')|trim or _patientUser.lastName|default('')|trim) %}
+{% set _patientDisplayName = (_patientUser.firstName|default('')|trim ~ ' ' ~ _patientUser.lastName|default('')|trim)|trim %}
+{% endif %}
+{# 2–3) Order addresses (before username/email so checkout names still show if account name is empty) #}
+{% if not _patientDisplayName %}
+{% set _billing = order.billingAddress ?? null %}
+{% if _billing and (_billing.firstName|default('')|trim or _billing.lastName|default('')|trim) %}
+{% set _patientDisplayName = (_billing.firstName|default('')|trim ~ ' ' ~ _billing.lastName|default('')|trim)|trim %}
+{% endif %}
+{% endif %}
+{% if not _patientDisplayName %}
+{% set _shipping = order.shippingAddress ?? null %}
+{% if _shipping and (_shipping.firstName|default('')|trim or _shipping.lastName|default('')|trim) %}
+{% set _patientDisplayName = (_shipping.firstName|default('')|trim ~ ' ' ~ _shipping.lastName|default('')|trim)|trim %}
+{% endif %}
+{% endif %}
+{# 4) Craft User fullName #}
+{% if not _patientDisplayName and _patientUser and _patientUser.fullName|default('')|trim %}
+{% set _patientDisplayName = _patientUser.fullName|trim %}
+{% endif %}
+{# 5–6) Account identifiers #}
+{% if not _patientDisplayName and _patientUser %}
+{% set _patientDisplayName = (_patientUser.username ?? _patientUser.email ?? '')|trim %}
+{% endif %}
+{% if not _patientDisplayName %}
+{% set _patientDisplayName = order.email|default('A patient') %}
+{% endif %}
 <!DOCTYPE html>
 
 <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -181,7 +215,7 @@
 																			style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;">
 																			<span style="font-size:34px;color:#0080be;"><strong><span
 																						style="font-size:34px;"><span style="font-size:34px;">{{
-																							order.customer.user.firstName ~ ' ' ~ order.customer.user.lastName
+																							_patientDisplayName
 																							}}<br /></span></span></strong></span></p>
 																		<p
 																			style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;">

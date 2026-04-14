@@ -340,6 +340,7 @@ class StripeWebhookModule extends \yii\base\Module
                           [
                           	'order' => $commerceOrder,
                           	'hcp' => $hcp,
+                          	'patient' => $patient,
                           ]
                       );
                       $subject = "New order on your NeuroScience storefront";
