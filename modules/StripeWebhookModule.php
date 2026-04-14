@@ -23,6 +23,35 @@ use yii\base\Event;
 
 class StripeWebhookModule extends \yii\base\Module
 {
+  // #region agent log
+  private static function debugAgentLog(string $message, array $data, string $hypothesisId): void
+  {
+    $payload = [
+      'sessionId' => 'ee9ea5',
+      'hypothesisId' => $hypothesisId,
+      'location' => 'StripeWebhookModule.php',
+      'message' => $message,
+      'data' => $data,
+      'timestamp' => (int) round(microtime(true) * 1000),
+    ];
+    $line = json_encode($payload, JSON_UNESCAPED_SLASHES) . "\n";
+    $paths = [dirname(__DIR__) . '/.cursor/debug-ee9ea5.log'];
+    try {
+      if (Craft::$app !== null) {
+        $paths[] = Craft::$app->getPath()->getStoragePath() . '/logs/autoship-webhook-ee9ea5.ndjson';
+      }
+    } catch (\Throwable $ignore) {
+    }
+    foreach ($paths as $p) {
+      $dir = dirname($p);
+      if (!is_dir($dir)) {
+        @mkdir($dir, 0755, true);
+      }
+      @file_put_contents($p, $line, FILE_APPEND | LOCK_EX);
+    }
+  }
+  // #endregion
+
   /**
    * Commerce order number for autoship renewals may live on invoice line metadata (first charge)
    * or only on the subscription / invoice (recurring); the cron “about to renew” job uses
@@ -79,12 +108,40 @@ class StripeWebhookModule extends \yii\base\Module
 
     Event::on(Orders::class, Orders::EVENT_AFTER_PROCESS_WEBHOOK, function (WebhookEvent $e) {
       $webhookData = $e->stripeData;
+      // #region agent log
+      $inv = $webhookData['data']['object'] ?? [];
+      self::debugAgentLog('enupal_after_process_webhook', [
+        'event_type' => $webhookData['type'] ?? null,
+        'invoice_id' => is_array($inv) ? ($inv['id'] ?? null) : null,
+        'billing_reason' => is_array($inv) ? ($inv['billing_reason'] ?? null) : null,
+      ], 'A');
+      // #endregion
       switch ($webhookData['type']) {
         case 'invoice.paid':
         $invoice = $webhookData['data']['object'] ?? [];
-        if (isset($invoice['lines']['data'])) {
-          $templateOrderNumber = self::resolveAutoshipCommerceOrderNumberFromInvoice($invoice);
-          if ($templateOrderNumber) {
+        if (!isset($invoice['lines']['data'])) {
+          // #region agent log
+          self::debugAgentLog('invoice_paid_missing_lines_data', [
+            'invoice_id' => $invoice['id'] ?? null,
+          ], 'B');
+          // #endregion
+          break;
+        }
+        $templateOrderNumber = self::resolveAutoshipCommerceOrderNumberFromInvoice($invoice);
+          // #region agent log
+          $sub = $invoice['subscription'] ?? null;
+          self::debugAgentLog('invoice_paid_resolution', [
+            'resolved_nonempty' => (bool) $templateOrderNumber,
+            'template_order_len' => $templateOrderNumber ? strlen((string) $templateOrderNumber) : 0,
+            'lines_count' => count($invoice['lines']['data'] ?? []),
+            'first_line_has_md_orderNumber' => !empty($invoice['lines']['data'][0]['metadata']['orderNumber']),
+            'invoice_md_has_orderNumber' => !empty($invoice['metadata']['orderNumber']),
+            'subscription_field_type' => is_string($sub) ? 'string' : (is_array($sub) ? 'array' : gettype($sub)),
+            'subscription_id_len' => is_string($sub) ? strlen($sub) : 0,
+            'parent_has_sub_details' => !empty($invoice['parent']['subscription_details']['subscription']),
+          ], 'B');
+          // #endregion
+        if ($templateOrderNumber) {
               $order = Order::find()->where(['variants' => '{"orderNumber":"' . $templateOrderNumber . '"}'])->one();
               if ($order) {
                 $entryStatus = OrderStatus::find()->where(['isDefault' => 1])->one();
@@ -94,8 +151,23 @@ class StripeWebhookModule extends \yii\base\Module
                 }
               }
               $commerceOrder = CommerceOrder::find()->where(['number' => $templateOrderNumber])->orderBy(['id' => 'DESC'])->one();
+              // #region agent log
+              self::debugAgentLog('commerce_template_lookup', [
+                'commerce_order_found' => (bool) $commerceOrder,
+                'commerce_order_id' => $commerceOrder ? (int) $commerceOrder->id : null,
+              ], 'C');
+              // #endregion
               if ($commerceOrder) {
-                $clonedCommerceOrder = Craft::$app->getElements()->duplicateElement($commerceOrder);
+                try {
+                  $clonedCommerceOrder = Craft::$app->getElements()->duplicateElement($commerceOrder);
+                } catch (\Throwable $dupEx) {
+                  // #region agent log
+                  self::debugAgentLog('duplicate_element_failed', [
+                    'message' => $dupEx->getMessage(),
+                  ], 'D');
+                  // #endregion
+                  throw $dupEx;
+                }
                 $commercePlugin = new Commerce('commerce');
                 $autoshipStatus = $commercePlugin->getOrderStatuses()->getOrderStatusByHandle('autoShip');
                 if ($autoshipStatus) {
@@ -104,6 +176,13 @@ class StripeWebhookModule extends \yii\base\Module
                 $clonedCommerceOrder->dateCreated = new \DateTime();
                 $clonedCommerceOrder->dateOrdered = new \DateTime();
                 Craft::$app->elements->saveElement($clonedCommerceOrder);
+                // #region agent log
+                self::debugAgentLog('renewal_order_saved', [
+                  'cloned_commerce_order_id' => (int) $clonedCommerceOrder->id,
+                  'cloned_number_len' => strlen((string) $clonedCommerceOrder->number),
+                  'autoship_status_assigned' => (bool) $autoshipStatus,
+                ], 'D');
+                // #endregion
 
                 // single value
                 //$sql = "UPDATE craft_commerce_orders SET totalPaid='99.99' WHERE id = $clonedCommerceOrder->id";
@@ -306,9 +385,13 @@ class StripeWebhookModule extends \yii\base\Module
                   Craft::warning("StripeWebhookModule: Email sending skipped - order: " . ($order ? "yes" : "no") . ", commerceOrder: " . ($commerceOrder ? "yes" : "no") . ", reference: " . ($commerceOrder && $commerceOrder->reference ? $commerceOrder->reference : "no"), __METHOD__);
                 }
               } // if commerce order
-          } else {
-            Craft::warning('StripeWebhookModule: invoice.paid — could not resolve Commerce orderNumber (lines, invoice, or subscription metadata); renewal order not created.', __METHOD__);
-          }
+        } else {
+          // #region agent log
+          self::debugAgentLog('order_number_unresolved', [
+            'invoice_id' => $invoice['id'] ?? null,
+          ], 'B');
+          // #endregion
+          Craft::warning('StripeWebhookModule: invoice.paid — could not resolve Commerce orderNumber (lines, invoice, or subscription metadata); renewal order not created.', __METHOD__);
         }
         break;
       }
