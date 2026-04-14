@@ -13,6 +13,7 @@ use enupal\stripe\Stripe as EnupalStripe;
 use Stripe\Invoice as StripeInvoice;
 use Stripe\Subscription as StripeSubscription;
 
+use craft\errors\ElementException;
 use craft\mail\Message;
 use craft\elements\User;
 use craft\events\ModelEvent;
@@ -177,16 +178,37 @@ class StripeWebhookModule extends \yii\base\Module
     }
 
     try {
+      // Webhooks run without a CP user; Commerce order duplicate/save expects an identity with
+      // commerce-editOrders (or equivalent). Completed clones must get a new unique `number`
+      // or the DB unique constraint / validation fails (logged as duplicate_element_failed).
+      $originalIdentity = Craft::$app->getUser()->getIdentity();
+      $admin = User::find()->admin()->status(null)->orderBy(['id' => SORT_ASC])->one();
+      if ($admin) {
+        Craft::$app->getUser()->setIdentity($admin);
+      }
       try {
-        $clonedCommerceOrder = Craft::$app->getElements()->duplicateElement($commerceOrder);
+        $newOrderNumber = str_replace('-', '', StringHelper::UUID());
+        $clonedCommerceOrder = Craft::$app->getElements()->duplicateElement($commerceOrder, [
+          'number' => $newOrderNumber,
+          'isCompleted' => false,
+          'dateOrdered' => null,
+          'reference' => $commerceOrder->reference,
+        ]);
       } catch (\Throwable $dupEx) {
         // #region agent log
-        self::debugAgentLog('duplicate_element_failed', [
+        $logData = [
+          'exception_class' => get_class($dupEx),
           'message' => $dupEx->getMessage(),
           'stripe_event_type' => $stripeEventType,
-        ], 'D');
+        ];
+        if ($dupEx instanceof ElementException) {
+          $logData['element_errors'] = $dupEx->element->getErrors();
+        }
+        self::debugAgentLog('duplicate_element_failed', $logData, 'D');
         // #endregion
         throw $dupEx;
+      } finally {
+        Craft::$app->getUser()->setIdentity($originalIdentity);
       }
       $commercePlugin = new Commerce('commerce');
       $autoshipStatus = $commercePlugin->getOrderStatuses()->getOrderStatusByHandle('autoShip');
@@ -195,6 +217,7 @@ class StripeWebhookModule extends \yii\base\Module
       }
       $clonedCommerceOrder->dateCreated = new \DateTime();
       $clonedCommerceOrder->dateOrdered = new \DateTime();
+      $clonedCommerceOrder->isCompleted = true;
       Craft::$app->elements->saveElement($clonedCommerceOrder);
       // #region agent log
       self::debugAgentLog('renewal_order_saved', [
