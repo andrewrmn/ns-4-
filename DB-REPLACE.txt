@@ -4,4 +4,4 @@
 4: Run: php craft commerce/upgrade
 5: add fields (addressAttention and addressPhone)
 6: Wait for migration to complete
-7: Go to Admin > Settings > Sites > Update URL
+7: Go to Admin > Settings > Check the image paths

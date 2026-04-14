@@ -17,9 +17,19 @@
 {% endif %}
 {% endif %}
 
-<div class="tabcontent patient-tabcontent">
+  <div class="tabcontent patient-tabcontent">
   <div class="dashboard grey-bg px-md-6 px-4 py-md-5 py-4">
     {% include 'hcp/_includes/top-search-patient' %}
+    {% set errorMessage = craft.app.session.getFlash('error', null, true) %}
+    {% set noticeMessage = craft.app.session.getFlash('notice', null, true) %}
+    <div class="errorMessage">
+    {% if errorMessage %}
+        <p class="text-red">{{ errorMessage }}</p>
+    {% endif %}
+    {% if noticeMessage %}
+        <p class="text-green">{{ noticeMessage }}</p>
+    {% endif %}
+    </div>
     <div class="newpatient jennifer-test pb-4">
       <a class="d-block mb-4" href="{{ url('hcp/dashboard') }}">< Back</a>
       <h2><span>Patient:</span> <strong>{% if patientUser.fullName %}{{ patientUser.fullName }}{% else %}{{ patientUser.username }}{% endif %}</strong> {% if patientUser.status == 'suspended' %}(Suspended){% endif %}</h2>
@@ -324,7 +334,7 @@
                   <tbody>
                     {% for order in recentOrders %}
                     <tr>
-                      <td><a href="{{ url('hcp/patient?id=' ~ order.customer.user.id ) }}">{{ order.customer.user.firstName }} {{ order.customer.user.lastName }}</a></td>
+                      <td><a href="{{ url('hcp/patient?id=' ~ patientId) }}">{% if patientUser.fullName %}{{ patientUser.fullName }}{% elseif patientUser.firstName or patientUser.lastName %}{{ (patientUser.firstName ~ ' ' ~ patientUser.lastName)|trim }}{% else %}{{ patientUser.username }}{% endif %}</a></td>
                       <td class="text-center">{{ order.dateOrdered|date('m/d/y') }}</td>
                       <td class="text-center">
                         {% if order.autoship == 'yes' %}

@@ -6,7 +6,6 @@
         "craftcms/commerce-paypal-checkout": "^2",
         "craftcms/element-api": "^4.2.0",
         "dompdf/dompdf": "^2.0",
-        "enupal/snapshot": "^2",
         "enupal/stripe": "^5",
         "presseddigital/linkit": "^4",
         "surprisehighway/craft-avatax": "^3",

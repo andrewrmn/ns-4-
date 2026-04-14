@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc4aef9a5a0b32aef27428d4cb94077f",
+    "content-hash": "39d3ba94d304aa009ff9964dfd7318da",
     "packages": [
         {
             "name": "avalara/avataxclient",
@@ -1515,57 +1515,6 @@
             "time": "2025-08-12T10:13:48+00:00"
         },
         {
-            "name": "enupal/snapshot",
-            "version": "2.0.2",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/enupal/snapshot/zipball/8efed936137c7205f08d21f079a523c594cd6c69",
-                "reference": "8efed936137c7205f08d21f079a523c594cd6c69",
-                "shasum": ""
-            },
-            "require": {
-                "craftcms/cms": "^4.0.0",
-                "knplabs/knp-snappy": "^1.0"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "Enupal Snapshot",
-                "handle": "enupal-snapshot",
-                "changelogUrl": "https://raw.githubusercontent.com/enupal/snapshot/master/CHANGELOG.md",
-                "components": {
-                    "app": "enupal\\snapshot\\services\\App"
-                },
-                "class": "enupal\\snapshot\\Snapshot"
-            },
-            "autoload": {
-                "psr-4": {
-                    "enupal\\snapshot\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Enupal",
-                    "homepage": "https://enupal.com"
-                }
-            ],
-            "description": "PDF or Image generation from a Url or HTML page",
-            "keywords": [
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms",
-                "image",
-                "pdf",
-                "snapshot"
-            ],
-            "support": {
-                "email": "info@enupal.com",
-                "issues": "https://github.com/enupal/snapshot/issues",
-                "docs": "https://docs.enupal.com/enupal-snapshot/"
-            },
-            "time": "2023-08-11T21:11:30+00:00"
-        },
-        {
             "name": "enupal/stripe",
             "version": "5.5.2",
             "dist": {
@@ -2330,63 +2279,6 @@
                 "source": "https://github.com/jsonrainbow/json-schema/tree/6.8.0"
             },
             "time": "2026-04-02T12:43:11+00:00"
-        },
-        {
-            "name": "knplabs/knp-snappy",
-            "version": "v1.4.4",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/3db13fe45d12a7bccb2b83f622e5a90f7e40b111",
-                "reference": "3db13fe45d12a7bccb2b83f622e5a90f7e40b111",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "psr/log": "^1.0||^2.0||^3.0",
-                "symfony/process": "~3.4||~4.3||~5.0||~6.0"
-            },
-            "suggest": {
-                "h4cc/wkhtmltoimage-amd64": "Provides wkhtmltoimage-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltoimage-i386": "Provides wkhtmltoimage-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltopdf-amd64": "Provides wkhtmltopdf-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltopdf-i386": "Provides wkhtmltopdf-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "wemersonjanuario/wkhtmltopdf-windows": "Provides wkhtmltopdf executable for Windows, use version `~0.12` as dependency"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Knp\\Snappy\\": "src/Knp/Snappy"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KNP Labs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
-                }
-            ],
-            "description": "PHP library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
-            "homepage": "http://github.com/KnpLabs/snappy",
-            "keywords": [
-                "knp",
-                "knplabs",
-                "pdf",
-                "snapshot",
-                "thumbnail",
-                "wkhtmltopdf"
-            ],
-            "time": "2023-09-13T12:18:19+00:00"
         },
         {
             "name": "league/fractal",

@@ -228,11 +228,32 @@ class HcpController extends Controller
     {
         $recId = Craft::$app->request->getQueryParam('recId');
         $hcpUser = Craft::$app->getUser()->getIdentity();
+
+        if (!$hcpUser) {
+            Craft::$app->session->setFlash('error', 'You must be signed in to resend a recommendation.');
+
+            return $this->redirect('login');
+        }
+
         $recEntry = Entry::find()->id($recId)->relatedTo($hcpUser)->one();
-        if ($recEntry) {
-            $patientUser = $recEntry->patientAccount->anyStatus()->one();
-            $products = $recEntry->recommendedProducts->all();
-            Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
+        if (!$recEntry) {
+            Craft::$app->session->setFlash('error', 'That recommendation could not be found.');
+
+            return $this->redirect('hcp/dashboard');
+        }
+
+        $patientUser = $recEntry->patientAccount->anyStatus()->one();
+        if (!$patientUser || !$patientUser->email) {
+            Craft::error('re-send-recommendation: missing patient or email for recId ' . (string) $recId, __METHOD__);
+            Craft::$app->session->setFlash('error', 'Patient email is missing; the recommendation could not be resent.');
+
+            return $this->redirect('hcp/dashboard');
+        }
+
+        $products = $recEntry->recommendedProducts->all();
+        Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
+
+        try {
             $body = Craft::$app->getView()->renderTemplate(
                 'hcp/_emails/recommendations',
                 ['products' => $products, 'patient' => $patientUser, 'hcp' => $hcpUser, 'recommendationNote' => $recEntry->recommendationNote]
@@ -244,12 +265,23 @@ class HcpController extends Controller
             $message->setTo($patientUser->email);
             $message->setSubject($subject);
             $message->setHtmlBody($body);
-            $mailer->send($message);
+            $sent = $mailer->send($message);
+            if (!$sent) {
+                Craft::error('re-send-recommendation: mailer->send returned false for patient ' . $patientUser->email, __METHOD__);
+                Craft::$app->session->setFlash('error', 'The email could not be sent. Please try again.');
+
+                return $this->redirect('hcp/patient?id=' . $patientUser->id);
+            }
+        } catch (\Throwable $e) {
+            Craft::error('re-send-recommendation: ' . $e->getMessage(), __METHOD__);
+            Craft::$app->session->setFlash('error', 'The email could not be sent. Please try again.');
 
             return $this->redirect('hcp/patient?id=' . $patientUser->id);
         }
 
-        return $this->redirect('404');
+        Craft::$app->session->setFlash('notice', 'The recommendation email was sent again to your patient.');
+
+        return $this->redirect('hcp/patient?id=' . $patientUser->id);
     }
 
     public function actionRemoveRecommendation()

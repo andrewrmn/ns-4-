@@ -1,0 +1,20 @@
+{# Commerce customer may have no userId (e.g. Stripe); match HCP patient by email like hcp/order.html. #}
+{% set patientUser = order.customer ? order.customer.user : null %}
+{% if not patientUser and order.customer and order.customer.email %}
+  {% set patientUser = craft.users().email(order.customer.email).relatedTo({targetElement: currentUser, field: 'relatedHcp'}).one() %}
+{% endif %}
+{% if not patientUser %}
+  {% set orderEmail = order.email|default('')|trim %}
+  {% if orderEmail %}
+    {% set patientUser = craft.users().email(orderEmail).relatedTo({targetElement: currentUser, field: 'relatedHcp'}).one() %}
+  {% endif %}
+{% endif %}
+{% if patientUser %}
+  <a href="{{ url('hcp/patient?id=' ~ patientUser.id) }}">{% if patientUser.fullName %}{{ patientUser.fullName }}{% elseif patientUser.firstName or patientUser.lastName %}{{ (patientUser.firstName ~ ' ' ~ patientUser.lastName)|trim }}{% else %}{{ patientUser.username }}{% endif %}</a>
+{% elseif order.customer and order.customer.email %}
+  <span>{{ order.customer.email }}</span>
+{% elseif order.email %}
+  <span>{{ order.email }}</span>
+{% else %}
+  —
+{% endif %}
