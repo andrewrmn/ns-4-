@@ -6,23 +6,25 @@
 {% endif %}
 
 {% if currentUser.relatedHcp.one().hcpProductsStore|length %}
-	{% set hcpRecommendedProducts = currentUser.relatedHcp.one().hcpProductsStore
-			.id(patientAvailableProducts)
-			.disableInNueroselect(false)
-			.all() %}
+{% set hcpRecommendedProducts = currentUser.relatedHcp.one().hcpProductsStore
+.id(patientAvailableProducts)
+.disableInPf(false)
+.all() %}
 {% else %}
-	{% set hcpRecommendedProducts = craft.products()
-    .orderBy('title')
-    .id(patientAvailableProducts)
-    .disableInNueroselect(false)
-    .all() %}
+{% set hcpRecommendedProducts = craft.products()
+.orderBy('title')
+.id(patientAvailableProducts)
+.disableInPf(false)
+.all() %}
 {% endif %}
 {% if hcpRecommendedProducts | length %}
 <section class="hcpStoreProducts my-6" id="shop-product-store">
   <h4 class="h3 text-bold mt-5 mb-3">Shop {{ hcpName }}'s storefront</h4>
 
-  {% if currentUser.relatedHcp.one().hcpStorefrontDiscount and currentUser.relatedHcp.one().hcpStorefrontDiscount != '0' %}
-  <p class="text-italic mb-4">{{ hcpName }} has enabled a <b>{{ currentUser.relatedHcp.one().hcpStorefrontDiscount }}% discount</b> for you</p>
+  {% if currentUser.relatedHcp.one().hcpStorefrontDiscount and currentUser.relatedHcp.one().hcpStorefrontDiscount != '0'
+  %}
+  <p class="text-italic mb-4">{{ hcpName }} has enabled a <b>{{ currentUser.relatedHcp.one().hcpStorefrontDiscount }}%
+      discount</b> for you</p>
   {% endif %}
 
   <ul class="products">
@@ -32,9 +34,9 @@
         {% for row in product.productFields.all() %}
         {% set img = row.productImages.one() %}
         {% if img|length %}
-        <img src="{{ img.url }}" alt="{{ img.title }}"  />
+        <img src="{{ img.url }}" alt="{{ img.title }}" />
         {% else %}
-        <img src="{{ siteUrl }}images/products/product-fallback.svg" alt="Bottle icon"  />
+        <img src="{{ siteUrl }}images/products/product-fallback.svg" alt="Bottle icon" />
         {% endif %}
         {% endfor %}
 
@@ -48,7 +50,7 @@
   <script>
     var $ = jQuery;
     let prodPreviews = $('.js-preview-bundle');
-    $($('.js-preview-bundle').get().reverse()).each(function() {
+    $($('.js-preview-bundle').get().reverse()).each(function () {
       $(this).prependTo("ul.products");
     });
   </script>
