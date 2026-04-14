@@ -1,37 +1,5 @@
-{# PHP passes patient when known; resolve user like _orderReceivedPatient. #}
-{% set _patientUser = patient ?? (order.customer ? order.customer.user : null) %}
-{% if not _patientUser and order.email|default('')|trim != '' %}
-{% set _patientUser = craft.users().email(order.email|trim).one() %}
-{% endif %}
-{% set _patientDisplayName = '' %}
-{# 1) Profile first + last #}
-{% if _patientUser and (_patientUser.firstName|default('')|trim or _patientUser.lastName|default('')|trim) %}
-{% set _patientDisplayName = (_patientUser.firstName|default('')|trim ~ ' ' ~ _patientUser.lastName|default('')|trim)|trim %}
-{% endif %}
-{# 2–3) Order addresses (before username/email so checkout names still show if account name is empty) #}
-{% if not _patientDisplayName %}
-{% set _billing = order.billingAddress ?? null %}
-{% if _billing and (_billing.firstName|default('')|trim or _billing.lastName|default('')|trim) %}
-{% set _patientDisplayName = (_billing.firstName|default('')|trim ~ ' ' ~ _billing.lastName|default('')|trim)|trim %}
-{% endif %}
-{% endif %}
-{% if not _patientDisplayName %}
-{% set _shipping = order.shippingAddress ?? null %}
-{% if _shipping and (_shipping.firstName|default('')|trim or _shipping.lastName|default('')|trim) %}
-{% set _patientDisplayName = (_shipping.firstName|default('')|trim ~ ' ' ~ _shipping.lastName|default('')|trim)|trim %}
-{% endif %}
-{% endif %}
-{# 4) Craft User fullName #}
-{% if not _patientDisplayName and _patientUser and _patientUser.fullName|default('')|trim %}
-{% set _patientDisplayName = _patientUser.fullName|trim %}
-{% endif %}
-{# 5–6) Account identifiers #}
-{% if not _patientDisplayName and _patientUser %}
-{% set _patientDisplayName = (_patientUser.username ?? _patientUser.email ?? '')|trim %}
-{% endif %}
-{% if not _patientDisplayName %}
-{% set _patientDisplayName = order.email|default('A patient') %}
-{% endif %}
+{# patientDisplayName is built in PHP (HcpPatientOrderEmailHelper) so it is never blank in clients. #}
+{% set _patientDisplayName = patientDisplayName ?? 'Your patient' %}
 <!DOCTYPE html>
 
 <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -236,48 +204,65 @@
 						</tbody>
 					</table>
 					<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation"
-						style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+						style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-size: auto;" width="100%">
 						<tbody>
 							<tr>
 								<td>
 									<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack"
 										role="presentation"
-										style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF; color: #000000; width: 650px;"
+										style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-size: auto; background-color: #FFFFFF; color: #333; width: 650px;"
 										width="650">
 										<tbody>
+											{% for item in order.lineItems %}
+											{% if loop.first or loop.index % 2 == 1 %}
 											<tr>
-
-												{% for item in order.lineItems %}
+											{% endif %}
 												<td class="column column-1"
-													style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+													style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; border-right: 1px solid #EFEFEF; vertical-align: top; border-top: 0px; border-bottom: 0px; border-left: 0px;"
 													width="50%">
 													<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2"
 														role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 														<tr>
-															<td class="pad"
-																style="width:100%;padding-right:0px;padding-left:0px;padding-top:5px;padding-bottom:5px;">
-																{% for row in item.purchasable.product.productFields.all() %}
-																{% if row.productImages|length > 0 %}
-																{% set img = row.productImages.one() %}
-																<div align="center" class="alignment" style="line-height:10px"><img
-																		alt="{{ img.title }}" src="{{ siteUrl }}{{ img.url }}"
+															<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;padding-top:5px;">
+																<div align="center" class="alignment" style="line-height:10px">
+																	{% for row in item.purchasable.product.productFields.all() %}
+																	{% if row.productImages|length > 0 %}
+																	{% set img = row.productImages.one() %}
+																	<img alt="{{ img.title }}" src="{{ siteUrl }}{{ img.url }}"
+																		style="display: block; height: auto; border: 0; width: 250px; max-width: 100%;"
+																		title="{{ img.title }}" />
+																	{% else %}
+																	<img alt="no image available" src="{{ siteUrl }}images/products/no-image.png"
 																		style="display: block; height: auto; border: 0; width: 146px; max-width: 100%;"
-																		title="I'm an image" width="146" /></div>
-																{% else %}
-																<div align="center" class="alignment" style="line-height:10px"><img
-																		alt="{{ img.title }}" src="{{ siteUrl }}{{ img.url }}"
-																		style="display: block; height: auto; border: 0; width: 146px; max-width: 100%;"
-																		title="I'm an image" width="146" /></div>
-																{% endif %}
-																{% endfor %}
+																		title="Image" width="146" />
+																	{% endif %}
+																	{% endfor %}
+																</div>
+															</td>
+														</tr>
+													</table>
+													<table border="0" cellpadding="0" cellspacing="0" class="text_block block-3"
+														role="presentation"
+														style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+														<tr>
+															<td class="pad" style="padding-bottom:40px;">
+																<div style="font-family: sans-serif">
+																	<div class=""
+																		style="font-size: 12px; mso-line-height-alt: 14.399999999999999px; color: #555555; line-height: 1.2; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif;">
+																		<p
+																			style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">
+																			<span style="font-size:15px;"><span style="">{{ item.qty }} x {{ item.description
+																					}}</span></span></p>
+																	</div>
+																</div>
 															</td>
 														</tr>
 													</table>
 												</td>
-												{% endfor %}
-
-
+											{% if loop.index % 2 == 0 or loop.index == loop.last %}
 											</tr>
+											{% endif %}
+											{% endfor %}
 										</tbody>
 									</table>
 								</td>

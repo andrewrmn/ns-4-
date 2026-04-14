@@ -31,6 +31,21 @@ class HcpWorkspaceDiscountAdjuster extends Component implements AdjusterInterfac
                     $adjustment->sourceSnapshot = ['data' => 'value'];
                     $adjustment->amount = -$discount;
                     $adjustment->setOrder($order);
+                    // #region agent log
+                    $logPayload = json_encode([
+                        'sessionId' => '5f5fa1',
+                        'runId' => 'pre-fix',
+                        'hypothesisId' => 'H1',
+                        'location' => 'HcpWorkspaceDiscountAdjuster.php:adjust',
+                        'message' => 'provider adjustment after create',
+                        'data' => [
+                            'lineItemId' => $adjustment->lineItemId,
+                            'getLineItemNull' => $adjustment->getLineItem() === null,
+                        ],
+                        'timestamp' => (int) round(microtime(true) * 1000),
+                    ]) . "\n";
+                    @file_put_contents(dirname(__DIR__, 3) . '/.cursor/debug-5f5fa1.log', $logPayload, FILE_APPEND);
+                    // #endregion
                     $adjustments[] = $adjustment;
                 }
             }

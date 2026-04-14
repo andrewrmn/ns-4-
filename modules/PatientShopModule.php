@@ -42,7 +42,12 @@ class PatientShopModule extends Module
                 Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_SITE);
                 $body = Craft::$app->getView()->renderTemplate(
                     'shop/emails/_hcpPatientPlacedOrder',
-                    ['order' => $order, 'hcp' => $hcp, 'patient' => $patient]
+                    [
+                        'order' => $order,
+                        'hcp' => $hcp,
+                        'patient' => $patient,
+                        'patientDisplayName' => HcpPatientOrderEmailHelper::patientDisplayName($order, $patient),
+                    ]
                 );
                 $subject = 'New order on your NeuroScience storefront';
                 $mailer = Craft::$app->getMailer();
