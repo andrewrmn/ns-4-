@@ -16,6 +16,7 @@ use Stripe\Subscription as StripeSubscription;
 use craft\mail\Message;
 use craft\elements\User;
 use craft\events\ModelEvent;
+use craft\helpers\StringHelper;
 use craft\helpers\UrlHelper;
 use craft\mail\Mailer;
 use craft\elements\Entry;
@@ -204,106 +205,49 @@ class StripeWebhookModule extends \yii\base\Module
       ], 'D');
       // #endregion
 
-      $sql = "UPDATE `craft_commerce_orders` SET
-                  `totalPaid` = '{$commerceOrder->totalPaid}',
-                  `totalPrice` = '{$commerceOrder->totalPrice}',
-                  `itemTotal` = '{$commerceOrder->itemTotal}',
-                  `total` = '{$commerceOrder->total}',
-                  `totalDiscount` = '{$commerceOrder->totalDiscount}',
-                  `totalTax` = '{$commerceOrder->totalTax}',
-                  `totalTaxIncluded` = '{$commerceOrder->totalTaxIncluded}',
-                  `shippingMethodName` = '{$commerceOrder->shippingMethodName}',
-                  `totalShippingCost` = '{$commerceOrder->totalShippingCost}',
-                  `itemSubTotal` = '{$commerceOrder->itemSubTotal}'
-                WHERE id = $clonedCommerceOrder->id";
-      Craft::$app->db->createCommand($sql)->execute();
+      Craft::$app->db->createCommand()->update(
+        '{{%commerce_orders}}',
+        [
+          'totalPaid' => $commerceOrder->totalPaid,
+          'totalPrice' => $commerceOrder->totalPrice,
+          'itemTotal' => $commerceOrder->itemTotal,
+          'total' => $commerceOrder->total,
+          'totalDiscount' => $commerceOrder->totalDiscount,
+          'totalTax' => $commerceOrder->totalTax,
+          'totalTaxIncluded' => $commerceOrder->totalTaxIncluded,
+          'shippingMethodName' => $commerceOrder->shippingMethodName,
+          'totalShippingCost' => $commerceOrder->totalShippingCost,
+          'itemSubTotal' => $commerceOrder->itemSubTotal,
+        ],
+        ['id' => $clonedCommerceOrder->id]
+      )->execute();
 
-      $sql = "SELECT * FROM craft_commerce_orderadjustments WHERE orderId = $commerceOrder->id";
-      $orderlineQ = Craft::$app->db->createCommand($sql)->queryAll();
-      if ($orderlineQ) {
-        $date = date('Y-m-d H:i:s');
-        foreach ($orderlineQ as $lineitemsdup) {
-          $sql = "INSERT INTO craft_commerce_orderadjustments (
-                      `orderId`,
-                      `type`,
-                      `name`,
-                      `description`,
-                      `amount`,
-                      `included`,
-                      `sourceSnapshot`
-                    ) VALUES (
-                      '{$clonedCommerceOrder->id}',
-                      '{$lineitemsdup['type']}',
-                      '{$lineitemsdup['name']}',
-                      '{$lineitemsdup['description']}',
-                      '{$lineitemsdup['amount']}',
-                      '{$lineitemsdup['included']}',
-                      '{$lineitemsdup['sourceSnapshot']}'
-                    )";
-          Craft::$app->db->createCommand($sql)->execute();
+      // duplicateElement may copy line items; we always replace from the template order.
+      Craft::$app->db->createCommand()->delete('{{%commerce_lineitems}}', ['orderId' => $clonedCommerceOrder->id])->execute();
+      Craft::$app->db->createCommand()->delete('{{%commerce_orderadjustments}}', ['orderId' => $clonedCommerceOrder->id])->execute();
+
+      $date = date('Y-m-d H:i:s');
+      $sql = "SELECT * FROM {{%commerce_orderadjustments}} WHERE [[orderId]] = :oid";
+      $orderlineQ = Craft::$app->db->createCommand($sql, [':oid' => $commerceOrder->id])->queryAll();
+      foreach ($orderlineQ as $adjRow) {
+        unset($adjRow['id']);
+        $adjRow['orderId'] = (int) $clonedCommerceOrder->id;
+        if (array_key_exists('uid', $adjRow)) {
+          $adjRow['uid'] = StringHelper::UUID();
         }
+        Craft::$app->db->createCommand()->insert('{{%commerce_orderadjustments}}', $adjRow)->execute();
       }
 
-      $sql = "SELECT * FROM craft_commerce_lineitems WHERE orderId = $commerceOrder->id";
-      $orderlineQ = Craft::$app->db->createCommand($sql)->queryAll();
-      if ($orderlineQ) {
-        $date = date('Y-m-d H:i:s');
-        foreach ($orderlineQ as $lineitemsdup) {
-          $sql = "INSERT INTO craft_commerce_lineitems (
-                      `orderId`,
-                      `purchasableId`,
-                      `options`,
-                      `optionsSignature`,
-                      `price`,
-                      `saleAmount`,
-                      `salePrice`,
-                      `weight`,
-                      `height`,
-                      `length`,
-                      `width`,
-                      `total`,
-                      `qty`,
-                      `note`,
-                      `snapshot`,
-                      `taxCategoryId`,
-                      `shippingCategoryId`,
-                      `dateCreated`,
-                      `dateUpdated`,
-                      `uid`,
-                      `subtotal`,
-                      `lineItemStatusId`,
-                      `privateNote`,
-                      `sku`,
-                      `description`
-                    ) VALUES (
-                      '{$clonedCommerceOrder->id}',
-                      '{$lineitemsdup['purchasableId']}',
-                      '{$lineitemsdup['options']}',
-                      '{$lineitemsdup['optionsSignature']}',
-                      '{$lineitemsdup['price']}',
-                      '{$lineitemsdup['saleAmount']}',
-                      '{$lineitemsdup['salePrice']}',
-                      '{$lineitemsdup['weight']}',
-                      '{$lineitemsdup['height']}',
-                      '{$lineitemsdup['length']}',
-                      '{$lineitemsdup['width']}',
-                      '{$lineitemsdup['total']}',
-                      '{$lineitemsdup['qty']}',
-                      '{$lineitemsdup['note']}',
-                      '{$lineitemsdup['snapshot']}',
-                      '{$lineitemsdup['taxCategoryId']}',
-                      '{$lineitemsdup['shippingCategoryId']}',
-                      '{$date}',
-                      '{$date}',
-                      '{$lineitemsdup['uid']}',
-                      '{$lineitemsdup['subtotal']}',
-                      null,
-                      '{$lineitemsdup['privateNote']}',
-                      '{$lineitemsdup['sku']}',
-                      '{$lineitemsdup['description']}'
-                    )";
-          Craft::$app->db->createCommand($sql)->execute();
-        }
+      $sql = "SELECT * FROM {{%commerce_lineitems}} WHERE [[orderId]] = :oid";
+      $orderlineQ = Craft::$app->db->createCommand($sql, [':oid' => $commerceOrder->id])->queryAll();
+      foreach ($orderlineQ as $liRow) {
+        unset($liRow['id']);
+        $liRow['orderId'] = (int) $clonedCommerceOrder->id;
+        $liRow['uid'] = StringHelper::UUID();
+        $liRow['dateCreated'] = $date;
+        $liRow['dateUpdated'] = $date;
+        $liRow['lineItemStatusId'] = null;
+        Craft::$app->db->createCommand()->insert('{{%commerce_lineitems}}', $liRow)->execute();
       }
 
       $orderNumber = $clonedCommerceOrder->number;

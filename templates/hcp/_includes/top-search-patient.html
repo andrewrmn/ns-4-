@@ -1,34 +1,36 @@
+{% set hcpPatientsForSelect = craft.users().group('patients').relatedTo({targetElement: currentUser, field:
+'relatedHcp'}).limit(null).orderBy('lastName asc, firstName asc').anyStatus().all() %}
+{% set topSearchSelectedId = craft.app.request.getQueryParam('id') %}
+{% if not topSearchSelectedId %}
+{% set topSearchSelectedId = craft.app.request.getQueryParam('patientId') %}
+{% endif %}
+
 <div class="search">
     <form>
-        <input style="text-align: left;" type="text" name="searchPatient" autocomplete="off" placeholder="Search Patient">
+        <label for="hcp-top-patient-select" class="sr-only">View Patient</label>
+        <div class="select-wrap">
+            <select id="hcp-top-patient-select" name="viewPatient" class="form-control hcp-top-patient-select"
+                autocomplete="off">
+                <option value="" disabled {% if not topSearchSelectedId %}selected{% endif %}>View Patient</option>
+                {% for patient in hcpPatientsForSelect %}
+                {% set patientLabel = patient.fullName ? patient.fullName : patient.username %}
+                <option value="{{ patient.id }}" {% if topSearchSelectedId==patient.id %}selected{% endif %}>{{
+                    patientLabel }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="text-right">
-          <a class="h6" href="{{ url('hcp/all-patient-history') }}">See All Patients</a>
+            <a class="h6" href="{{ url('hcp/all-patient-history') }}">View all</a>
         </div>
     </form>
 </div>
-{% do view.registerCssFile('//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css') %}
-{% do view.registerJsFile('//code.jquery.com/ui/1.13.1/jquery-ui.js') %}
 {% js %}
-    $(document).ready(function(){
-        $( "input[name='searchPatient']" ).val('');
-        $( "input[name='searchPatient']" ).autocomplete({
-            source: function( request, response ) {
-                $.ajax({
-                    url: "/hcp/ajax/search-patients",
-                    dataType: "json",
-                    data: {
-                        q: request.term
-                    },
-                    success: function( data ) {
-                        response( data );
-                    }
-                });
-            },
-            minLength: 0,
-            select: function( event, ui ) {
-                window.location.href = "{{ url('hcp/patient?id=') }}=" + ui.item.value;
-                ui.item.value = ui.item.label;
-            }
-        })
-    })
+$(document).ready(function(){
+$('#hcp-top-patient-select').on('change', function(){
+var id = $(this).val();
+if (id) {
+window.location.href = "{{ url('hcp/patient') }}?id=" + encodeURIComponent(id);
+}
+});
+});
 {% endjs %}

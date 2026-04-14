@@ -1,7 +1,7 @@
 {
     "require": {
         "craftcms/ckeditor": "^3.15.0",
-        "craftcms/cms": "^4",
+        "craftcms/cms": "^4.17.13.1",
         "craftcms/commerce": "^4",
         "craftcms/commerce-paypal-checkout": "^2",
         "craftcms/element-api": "^4.2.0",
