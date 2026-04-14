@@ -38,8 +38,8 @@
                         {% paginate craft.users().relatedTo({targetElement: currentUser, field: 'relatedHcp'}).limit(100).group('patients').orderBy('dateCreated DESC').anyStatus() as pageInfo, pageUsers %}
                         {% if pageUsers|length %}
                             {% for patientAccount in pageUsers %}
-                                {% set orderTotalPrice = craft.orders().isCompleted(true).user(patientAccount).sum('itemTotal') %}
-                                {% set totalPlacedOrders = craft.orders().isCompleted(true).user(patientAccount).count() %}
+                                {% set orderTotalPrice = craft.orders().isCompleted(true).customer(patientAccount).sum('itemTotal') %}
+                                {% set totalPlacedOrders = craft.orders().isCompleted(true).customer(patientAccount).count() %}
                                 <tr>
                                     <td><span class="arrow-right"><img src="../../images/blue-arrow.png" width="12" /></span><a href="{{ url('hcp/patient?id=' ~ patientAccount.id) }}">{% if patientAccount.fullName %}{{ patientAccount.fullName }}{% else %}{{ patientAccount.username }}{% endif %}</a></td>
                                     <td>{{ patientAccount.email }}</td>

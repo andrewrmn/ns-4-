@@ -1,4 +1,4 @@
-{% set patientOrderQuery = craft.orders().user(currentUser).limit(100).orderBy('dateCreated DESC').isCompleted(true) %}
+{% set patientOrderQuery = craft.orders().customer(currentUser).limit(100).orderBy('dateCreated DESC').isCompleted(true) %}
 {% paginate patientOrderQuery as pageInfo, pageOrders %}
 <section class="patientOrderHistory my-6 py-4" id="order-history">
   <h4 class="h3 text-bold mb-3">Order History</h4>

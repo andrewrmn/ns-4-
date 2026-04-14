@@ -5,6 +5,7 @@ namespace modules;
 use Craft;
 use craft\commerce\elements\Order as CommerceOrder;
 use craft\commerce\Plugin as Commerce;
+use craft\commerce\records\Transaction as CommerceTransactionRecord;
 use enupal\stripe\services\Orders;
 use enupal\stripe\elements\Order;
 use enupal\stripe\records\OrderStatus;
@@ -94,14 +95,70 @@ class StripeWebhookModule extends \yii\base\Module
   }
 
   /**
+   * Commerce 4 derives paid state from successful purchase/capture transactions, not the
+   * `commerce_orders.totalPaid` column alone. Record a purchase for the renewal so CP shows Paid.
+   */
+  private static function recordAutoshipRenewalPurchaseTransaction(
+    int $clonedOrderId,
+    CommerceOrder $templateOrder,
+    string $stripeInvoiceId
+  ): void {
+    $cloned = CommerceOrder::find()->where(['id' => $clonedOrderId])->one();
+    if (!$cloned) {
+      Craft::warning('StripeWebhookModule: renewal purchase transaction skipped — cloned order not found (id ' . $clonedOrderId . ').', __METHOD__);
+
+      return;
+    }
+
+    if (!$cloned->getGateway()) {
+      $cloned->gatewayId = $templateOrder->gatewayId;
+      $cloned->paymentSourceId = $templateOrder->paymentSourceId;
+      Craft::$app->getElements()->saveElement($cloned, false);
+      $cloned = CommerceOrder::find()->where(['id' => $clonedOrderId])->one();
+      if (!$cloned) {
+        return;
+      }
+    }
+
+    $transactions = Commerce::getInstance()->getTransactions();
+    $tx = $transactions->createTransaction($cloned, null, CommerceTransactionRecord::TYPE_PURCHASE);
+    $tx->status = CommerceTransactionRecord::STATUS_SUCCESS;
+    $tx->reference = $stripeInvoiceId !== '' ? 'stripe-invoice:' . $stripeInvoiceId : 'stripe-autoship-renewal';
+    $tx->message = 'Stripe subscription renewal';
+
+    if (!$transactions->saveTransaction($tx)) {
+      Craft::error(
+        'StripeWebhookModule: failed to save renewal purchase transaction for Commerce order ' . $clonedOrderId,
+        __METHOD__
+      );
+    }
+  }
+
+  /**
    * Clone template Commerce order for an autoship renewal. Stripe sends multiple success signals
    * (`invoice.paid`, `invoice.payment_succeeded`, sometimes `invoice_payment.paid`); we accept any
    * with the same invoice payload (or load invoice from invoice_payment) and idempotently skip
    * duplicate deliveries for the same Stripe invoice id.
+   *
+   * Only `billing_reason === subscription_cycle` is handled: the first subscription invoice
+   * (`subscription_create`) must not clone Commerce orders — checkout already completed the real order.
    */
   private static function processAutoshipRenewalFromStripeInvoice(array $invoice, string $stripeEventType): void
   {
     $stripeInvoiceId = (string) ($invoice['id'] ?? '');
+    $billingReason = (string) ($invoice['billing_reason'] ?? '');
+
+    if ($billingReason !== 'subscription_cycle') {
+      // #region agent log
+      self::debugAgentLog('autoship_renewal_skip_non_cycle_invoice', [
+        'invoice_id' => $invoice['id'] ?? null,
+        'billing_reason' => $billingReason !== '' ? $billingReason : null,
+        'stripe_event_type' => $stripeEventType,
+      ], 'B');
+      // #endregion
+
+      return;
+    }
 
     if (!isset($invoice['lines']['data'])) {
         // #region agent log
@@ -163,6 +220,8 @@ class StripeWebhookModule extends \yii\base\Module
       return;
     }
 
+    $templateCommerceOrder = $commerceOrder;
+
     $lockKey = 'autoshipRenewalStripeInv:' . $stripeInvoiceId;
     if ($stripeInvoiceId !== '') {
       if (!Craft::$app->cache->add($lockKey, 1, 3600)) {
@@ -187,18 +246,53 @@ class StripeWebhookModule extends \yii\base\Module
         Craft::$app->getUser()->setIdentity($admin);
       }
       try {
+        // #region agent log
+        self::debugAgentLog('duplicate_element_attempt', [
+          'commerce_order_id' => (int) $commerceOrder->id,
+          'customer_id' => $commerceOrder->getCustomerId(),
+          'has_customer' => $commerceOrder->getCustomer() !== null,
+          'payment_source_id' => $commerceOrder->paymentSourceId,
+          'gateway_id' => $commerceOrder->gatewayId,
+          'recalculation_mode' => $commerceOrder->getRecalculationMode(),
+          'stripe_event_type' => $stripeEventType,
+        ], 'F');
+        // #endregion
         $newOrderNumber = str_replace('-', '', StringHelper::UUID());
+        // Clear paymentSourceId for the duplicate save: Order::afterSave reads getPaymentSource()
+        // and throws if paymentSourceId is set but the customer user cannot be loaded (deleted user,
+        // broken customerId, etc.). Gateway is restored from the template below.
         $clonedCommerceOrder = Craft::$app->getElements()->duplicateElement($commerceOrder, [
           'number' => $newOrderNumber,
           'isCompleted' => false,
           'dateOrdered' => null,
           'reference' => $commerceOrder->reference,
+          'paymentSourceId' => null,
+          'recalculationMode' => CommerceOrder::RECALCULATION_MODE_NONE,
         ]);
       } catch (\Throwable $dupEx) {
         // #region agent log
+        $prevChain = [];
+        $p = $dupEx->getPrevious();
+        $depth = 0;
+        while ($p instanceof \Throwable && $depth < 4) {
+          $prevChain[] = [
+            'class' => get_class($p),
+            'message' => $p->getMessage(),
+            'file' => $p->getFile(),
+            'line' => $p->getLine(),
+          ];
+          $p = $p->getPrevious();
+          $depth++;
+        }
         $logData = [
           'exception_class' => get_class($dupEx),
           'message' => $dupEx->getMessage(),
+          'file' => $dupEx->getFile(),
+          'line' => $dupEx->getLine(),
+          'code' => $dupEx->getCode(),
+          'previous_chain' => $prevChain,
+          'trace_preview' => substr($dupEx->getTraceAsString(), 0, 3500),
+          'admin_impersonated' => (bool) $admin,
           'stripe_event_type' => $stripeEventType,
         ];
         if ($dupEx instanceof ElementException) {
@@ -210,7 +304,11 @@ class StripeWebhookModule extends \yii\base\Module
       } finally {
         Craft::$app->getUser()->setIdentity($originalIdentity);
       }
-      $commercePlugin = new Commerce('commerce');
+      $clonedCommerceOrder->gatewayId = $templateCommerceOrder->gatewayId;
+      if ($templateCommerceOrder->paymentSourceId !== null && $templateCommerceOrder->getCustomer() !== null) {
+        $clonedCommerceOrder->paymentSourceId = $templateCommerceOrder->paymentSourceId;
+      }
+      $commercePlugin = Commerce::getInstance();
       $autoshipStatus = $commercePlugin->getOrderStatuses()->getOrderStatusByHandle('autoShip');
       if ($autoshipStatus) {
         $clonedCommerceOrder->orderStatusId = $autoshipStatus->id;
@@ -272,6 +370,12 @@ class StripeWebhookModule extends \yii\base\Module
         $liRow['lineItemStatusId'] = null;
         Craft::$app->db->createCommand()->insert('{{%commerce_lineitems}}', $liRow)->execute();
       }
+
+      self::recordAutoshipRenewalPurchaseTransaction(
+        (int) $clonedCommerceOrder->id,
+        $templateCommerceOrder,
+        $stripeInvoiceId
+      );
 
       $orderNumber = $clonedCommerceOrder->number;
       Craft::info("StripeWebhookModule: Starting email trigger for order number: {$orderNumber}", __METHOD__);

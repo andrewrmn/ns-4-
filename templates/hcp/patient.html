@@ -54,7 +54,7 @@
         </div>
 
 
-        {% set orderTotalPrice = craft.orders().isCompleted().user(patientUser).sum('itemTotal') %}
+        {% set orderTotalPrice = craft.orders().isCompleted().customer(patientUser).sum('itemTotal') %}
 
         <div class="weekly-highlight">
           <h3>Patient Snapshot</h3>
@@ -75,7 +75,7 @@
             <div class="circle">
               <div>
                 <h2 class="text-center"><span class="arrow-right mb-2">{% if
-                    craft.orders().isCompleted().user(patientUser).count() %}<img
+                    craft.orders().isCompleted().customer(patientUser).count() %}<img
                       src="../images/svgs/chart-checkmark.svg" width="24" />{% else %}<img
                       src="../images/svgs/close.svg" width="24" />{% endif %}</span></h2>
                 <p>First Order Placed</p>
@@ -370,7 +370,7 @@
       <div class="col-12">
         <section class="wrapper-wides">
           <h3>Orders</h3>
-          {% set recentOrders = craft.orders().user(patientUser).limit('-1').orderBy('dateOrdered
+          {% set recentOrders = craft.orders().customer(patientUser).limit('-1').orderBy('dateOrdered
           DESC').isCompleted().all() %}
 
           <div class="mt-3">

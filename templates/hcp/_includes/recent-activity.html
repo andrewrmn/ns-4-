@@ -30,8 +30,8 @@
             <tbody>
               {% for newAccount in latestAccounts %}
               {% if newAccount.email %}
-              {% set totalPlacedOrders = craft.orders().isCompleted(true).user(newAccount).count() %}
-              {% set orderTotalPrice = craft.orders().isCompleted(true).user(newAccount).sum('itemTotal') %}
+              {% set totalPlacedOrders = craft.orders().isCompleted(true).customer(newAccount).count() %}
+              {% set orderTotalPrice = craft.orders().isCompleted(true).customer(newAccount).sum('itemTotal') %}
               <tr>
                 <td><a href="{{ url('hcp/patient?id=' ~ newAccount.id) }}">{% if newAccount.fullName %}{{ newAccount.fullName }}{% else %}{{ newAccount.username }}{% endif %}</a></td>
                 <td class="text-center">

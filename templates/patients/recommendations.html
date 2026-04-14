@@ -125,7 +125,7 @@
                 {% endif %}
             </section>
 
-            {% set patientOrders = craft.orders().user(currentUser).limit(null).orderBy('dateCreated DESC').isCompleted(true).all() %}
+            {% set patientOrders = craft.orders().customer(currentUser).limit(null).orderBy('dateCreated DESC').isCompleted(true).all() %}
                         {% if patientOrders|length %}
                             <section class="patientOrderHistory mt-3">
                                 <h4 class="h3 text-bold mb-3">View order history</h4>

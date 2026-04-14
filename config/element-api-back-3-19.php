@@ -443,8 +443,8 @@ return [
           $usersQL = $usersQ->limit($limit)->offset($offset);
           $users = $usersQL->all();
           foreach ($users as $key => $user) {
-            $autoShipCount = Order::find()->user($user)->orderStatus('autoShip')->makeThisARecurringOrder(1)->count();
-            $orderCount = Order::find()->user($user)->orderStatus(['not', 'autoShip'])->count();
+            $autoShipCount = Order::find()->customer($user)->orderStatus('autoShip')->makeThisARecurringOrder(1)->count();
+            $orderCount = Order::find()->customer($user)->orderStatus(['not', 'autoShip'])->count();
             $usersData[$key]['email'] = $user->email;
             $usersData[$key]['id'] = $user->id;
             $usersData[$key]['firstName'] = $user->firstName;
@@ -490,7 +490,7 @@ return [
           $limit = 100;
           $offset = ($page - 1) * $limit;
           $ordersData = [];
-          $ordersQ = Order::find()->user($user)->orderStatus(['not', 'autoShip']);
+          $ordersQ = Order::find()->customer($user)->orderStatus(['not', 'autoShip']);
           $ordersQL = $ordersQ->limit($limit)->offset($offset);
           $orders = $ordersQL->all();
           foreach ($orders as $key => $order) {
@@ -534,7 +534,7 @@ return [
           $limit = 100;
           $offset = ($page - 1) * $limit;
           $ordersData = [];
-          $ordersQ = Order::find()->user($user)->orderStatus('autoShip')->makeThisARecurringOrder(1)->isCompleted();
+          $ordersQ = Order::find()->customer($user)->orderStatus('autoShip')->makeThisARecurringOrder(1)->isCompleted();
           $ordersQL = $ordersQ->limit($limit)->offset($offset);
           $orders = $ordersQL->all();
           foreach ($orders as $key => $order) {
@@ -631,9 +631,9 @@ function getAddress($user){
 function getOrders($user, $autoShip = false){
   $ordersData = [];
   if( $autoShip )
-    $orders = Order::find()->user($user)->orderStatus('autoShip')->all();
+    $orders = Order::find()->customer($user)->orderStatus('autoShip')->all();
   else
-    $orders = Order::find()->user($user)->orderStatus(['not', 'autoShip'])->all();
+    $orders = Order::find()->customer($user)->orderStatus(['not', 'autoShip'])->all();
   if( !is_null($orders) ){
     foreach ($orders as $key => $order) {
       $ordersData[$key]['email'] = $order->email;

@@ -5,7 +5,7 @@
 
 {% set cartLineItemsByAddOrder = cart.lineItems|sort((a, b) => a.id <=> b.id) %}
 
-{% set storedCards = craft.commerce.paymentSources.allPaymentSourcesByUserId(currentUser.id ?? null) %}
+{% set storedCards = craft.commerce.paymentSources.allPaymentSourcesByCustomerId(currentUser.id ?? null) %}
 
 {# Get the available gateways to be used later in this page #}
 {% set availableGateways = craft.commerce.gateways.allCustomerEnabledGateways %}

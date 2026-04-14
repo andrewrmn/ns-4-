@@ -5,7 +5,7 @@
 {% extends 'layouts/_accounts-patient' %}
 
 {% set number = craft.app.request.getRequiredParam('number') %}
-{% set order = craft.orders.number(number).user(currentUser).one() %}
+{% set order = craft.orders.number(number).customer(currentUser).one() %}
 
 {#% if not order or order.isCompleted == false %}
     {% redirect 'shop/customer' %}
