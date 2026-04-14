@@ -87,6 +87,8 @@
 	<div class="is-hidden">
 		{% include 'partials/svgs.svg' %}
 	</div>
+
+	{% include 'partials/adminQuickLinks' %}
 	{% set customerMasId = '' %}
 	{% if currentUser %}
 	{% set customerMasId = currentUser.masId %}

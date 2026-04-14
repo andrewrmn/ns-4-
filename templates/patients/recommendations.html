@@ -114,9 +114,9 @@
                             {% endfor %}
                         </div>
 
-                        {# Update recommendation entry view #}
-                        {% do recommendation.setAttributes({recommendationViewed: 1}, false) %}
-                        {% do craft.app.getElements().saveElement(recommendation) %}
+                        {# Mark viewed after full recommendations page load (setFieldValue — not setAttributes) #}
+                        {% do recommendation.setFieldValue('recommendationViewed', true) %}
+                        {% do craft.app.getElements().saveElement(recommendation, false) %}
 
                     {% endfor %}
 

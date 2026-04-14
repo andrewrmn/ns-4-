@@ -1,0 +1,64 @@
+// ---------------------------------------------------------------------
+//  Admin quick links (CP) — frontend, admins only
+// ---------------------------------------------------------------------
+
+.admin-quick-links {
+	display: none;
+
+	@include start-at($medium) {
+		display: block;
+		position: fixed;
+		right: 1.6rem;
+		bottom: 1.6rem;
+		z-index: 900;
+		width: 16rem;
+		max-width: calc(100vw - 3.2rem);
+		padding: 1.2rem 1.4rem;
+		//border: 1px solid $border;
+		border-radius: 4px;
+
+		font-size: 1.3rem;
+		line-height: 1.4;
+
+
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 16px;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(2px);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+	}
+
+	&__title {
+		margin: 0 0 0.8rem;
+		padding: 0;
+		font-family: $main-font;
+		font-size: 1.3rem;
+		font-weight: 700;
+		color: $navy;
+	}
+
+	&__list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			margin: 0 0 0.4rem;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		a {
+			color: $brand;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+
+			&:hover,
+			&:focus {
+				color: darken($brand, 8%);
+			}
+		}
+	}
+}

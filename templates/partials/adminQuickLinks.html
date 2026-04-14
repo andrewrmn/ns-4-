@@ -1,0 +1,11 @@
+{% if currentUser and currentUser.admin %}
+<nav class="admin-quick-links" aria-label="Admin quick links to Control Panel">
+	<p class="admin-quick-links__title">Admin Quick Links</p>
+	<ul class="admin-quick-links__list">
+		<li><a href="{{ cpUrl() }}">Dashboard</a></li>
+		<li><a href="{{ cpUrl('users') }}">Users</a></li>
+		<li><a href="{{ cpUrl('commerce/orders') }}">Orders</a></li>
+		<li><a href="{{ cpUrl('commerce/products') }}">Products</a></li>
+	</ul>
+</nav>
+{% endif %}

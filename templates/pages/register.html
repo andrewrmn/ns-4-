@@ -524,7 +524,15 @@ var d = new Date();
 var mm = String(d.getMonth() + 1).padStart(2, '0');
 var dd = String(d.getDate()).padStart(2, '0');
 var yyyy = d.getFullYear();
-$('#register-all-terms-agreed-date').val(mm + '/' + dd + '/' + yyyy);
+var h24 = d.getHours();
+var h12 = h24 % 12;
+if (h12 === 0) {
+h12 = 12;
+}
+var ampm = h24 < 12 ? 'am' : 'pm';
+var mins = String(d.getMinutes()).padStart(2, '0');
+var stamp = mm + '/' + dd + '/' + yyyy + ' ' + h12 + ':' + mins + ampm;
+$('#register-all-terms-agreed-date').val(stamp);
 }
 
 function updateLegalCompleteMessage() {

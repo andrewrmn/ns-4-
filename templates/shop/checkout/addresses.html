@@ -67,41 +67,115 @@
 
 <script>
 
+    // #region agent log
+    (function () {
+        var form = document.querySelector('form[method="post"]');
+        if (!form || !form.querySelector('input[name="action"][value="commerce/cart/update-cart"]')) {
+            return;
+        }
+        form.addEventListener('invalid', function (e) {
+            var t = e.target;
+            fetch('http://127.0.0.1:7801/ingest/461f39e8-90c8-4100-95f6-757287f9e498', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '435c2e' },
+                body: JSON.stringify({
+                    sessionId: '435c2e',
+                    hypothesisId: 'H6',
+                    location: 'checkout/addresses.html:invalid',
+                    message: 'html5 constraint blocked submit',
+                    data: {
+                        name: (t && t.name ? String(t.name).slice(0, 120) : ''),
+                        disabled: !!(t && t.disabled),
+                        inHiddenBilling: !!(t && t.closest && t.closest('.js-address-fieldset.BillingAddress.is-hidden')),
+                        inHiddenBody: !!(t && t.closest && t.closest('.js-body.is-hidden'))
+                    },
+                    timestamp: Date.now()
+                })
+            }).catch(function () {});
+        }, true);
+    })();
+    // #endregion
+
+    /**
+     * Required inputs inside display:none (.is-hidden) still block native form validation.
+     * Disable controls that are not meant to be submitted so Confirm addresses can POST.
+     */
+    function syncCheckoutAddressFormConstraints() {
+        var sameAs = document.querySelector('#billingAddressSameAsShipping');
+        var billingFs = document.querySelector('.js-address-fieldset.BillingAddress');
+
+        if (billingFs && sameAs && !sameAs.checked) {
+            billingFs.querySelectorAll('input, select, textarea').forEach(function (el) {
+                if (el.type === 'hidden') {
+                    return;
+                }
+                el.disabled = false;
+            });
+        }
+
+        document.querySelectorAll('.js-address-fieldset').forEach(function (fieldset) {
+            var newBox = fieldset.querySelector('.js-address-select-new');
+            if (!newBox) {
+                return;
+            }
+            var body = newBox.querySelector('.js-body');
+            var radio = newBox.querySelector('.js-radio input[type="radio"]');
+            if (!body || !radio) {
+                return;
+            }
+            var useNew = radio.checked && radio.value === '';
+            body.querySelectorAll('input, select, textarea').forEach(function (el) {
+                if (el.type === 'hidden') {
+                    return;
+                }
+                el.disabled = !useNew;
+            });
+        });
+
+        if (billingFs && sameAs && sameAs.checked) {
+            billingFs.querySelectorAll('input, select, textarea').forEach(function (el) {
+                if (el.type === 'hidden') {
+                    return;
+                }
+                el.disabled = true;
+            });
+        }
+    }
+
     var $fieldsets = document.querySelectorAll('.js-address-fieldset');
 
     if ($fieldsets && $fieldsets.length) {
-        $fieldsets.forEach(function (el) {
-            var $addressSelects = el.querySelectorAll('.js-address-select');
+        $fieldsets.forEach(function (fieldset) {
+            fieldset.addEventListener('change', function (ev) {
+                if (!ev.target || !ev.target.matches || !ev.target.matches('input[type="radio"]')) {
+                    return;
+                }
+                var newBox = fieldset.querySelector('.js-address-select-new');
+                if (!newBox) {
+                    return;
+                }
+                var body = newBox.querySelector('.js-body');
+                var newRadio = newBox.querySelector('.js-radio input[type="radio"]');
+                if (body && newRadio) {
+                    if (newRadio.checked) {
+                        body.classList.remove('is-hidden');
+                    } else {
+                        body.classList.add('is-hidden');
+                    }
+                }
+                syncCheckoutAddressFormConstraints();
+            });
+
+            var $addressSelects = fieldset.querySelectorAll('.js-address-select');
 
             if ($addressSelects && $addressSelects.length) {
                 $addressSelects.forEach(function (el) {
                     var $radio = el.querySelector('.js-radio input');
                     var $body = el.querySelector('.js-body');
 
-                    if ($radio) {
-                        if ($body) {
-                            // Creating new address
-                            $radio.addEventListener('change', function (ev) {
-                                if (ev.target.checked) {
-                                    $body.classList.remove('is-hidden');
-                                } else {
-                                    $body.classList.add('is-hidden');
-                                }
-                            });
-
-                            if ($radio.checked) {
-                                $body.classList.remove('is-hidden');
-                            }
-                        } else {
-                            // Selecting existing address
-                            $radio.addEventListener('change', function (ev) {
-                                if (ev.target.checked) {
-                                    var $newBox = document.querySelector('.js-address-select[data-model-name="' + ev.target.dataset.modelName + '"]');
-                                    if ($newBox) {
-                                        $newBox.querySelector('.js-body').classList.add('is-hidden');
-                                    }
-                                }
-                            });
+                    if ($radio && $body) {
+                        if ($radio.checked) {
+                            $body.classList.remove('is-hidden');
                         }
                     }
                 });
@@ -109,11 +183,14 @@
         });
     }
 
+    syncCheckoutAddressFormConstraints();
+
     var $billingSameAs = document.querySelector('#billingAddressSameAsShipping');
     if ($billingSameAs) {
         $billingSameAs.addEventListener('change', function (ev) {
             var $billingFieldSet = document.querySelector('.js-address-fieldset.BillingAddress');
             $billingFieldSet.classList.toggle('is-hidden');
+            syncCheckoutAddressFormConstraints();
         });
 
         {% if cart.billingAddressId and cart.billingAddress.hasErrors() %}

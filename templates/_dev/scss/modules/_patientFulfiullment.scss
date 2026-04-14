@@ -1425,6 +1425,25 @@
   border: 1px solid #eaeaea;
 }
 
+// Patient dashboard: recommendations preview cards reuse .new-badge from hcp.css
+#recommendations .recommendation-preview-tile {
+  position: relative;
+}
+
+#recommendations .recommendation-preview-tile--new .new-badge {
+  display: flex;
+  width: 56px;
+  height: 56px;
+  top: 0;
+  right: 60px;
+  z-index: 2;
+  padding: 0;
+}
+
+#recommendations .recommendation-preview-tile--new .new-badge div {
+  font-size: 14px;
+}
+
 .page-education.user-is-patient .banner {
   display: none;
 }

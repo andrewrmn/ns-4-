@@ -50,6 +50,9 @@ return [
         'neuroselect-module' => [
             'class' => \modules\NeuroSelectModule::class,
         ],
+        'checkout-address-debug' => [
+            'class' => \modules\CheckoutAddressDebugModule::class,
+        ],
     ],
     'bootstrap' => [
         'pending-user-module',
@@ -62,5 +65,6 @@ return [
         'patient-shop',
         'autoship-schedule',
         'neuroselect-module',
+        'checkout-address-debug',
     ],
 ];

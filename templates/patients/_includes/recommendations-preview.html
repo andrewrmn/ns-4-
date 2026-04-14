@@ -6,7 +6,8 @@
   <div class="products d-md-flex flex-wrap mt-4 products-recs-list">
     {% for recommendation in recommendations %}
     {% for product in recommendation.recommendedProducts.limit(1).all() %}
-    <div class="col-12 col-md-4 rounded-image mb-4">
+    <div class="col-12 col-md-4 rounded-image mb-4 recommendation-preview-tile {% if not recommendation.recommendationViewed %}recommendation-preview-tile--new{% endif %}">
+      {% if not recommendation.recommendationViewed %}<div class="new-badge" aria-hidden="true"><div>New!</div></div>{% endif %}
       <a href="{{ url('patients/recommendations') }}">
         {% if product.patientPortalImage|length %}
 
