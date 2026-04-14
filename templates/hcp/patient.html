@@ -184,7 +184,10 @@
                 <div class="modal__inner">
                   <div class="user-content js-modal-content">
                     <h3 class="text-center mx-auto">Update Products</h3>
-                    {% set products = craft.products.orderBy('score').all() %}
+                    {% set excludedProds = craft.products.search('productCategories:Bundle').ids() %}
+                    {% set excludedProds = excludedProds|join(', not ') %}
+                    {% set excludedProducts = craft.products.orderBy('title').id(excludedProds).all() %}
+                    {% set products = craft.products.orderBy('title asc').id('not ' ~ excludedProds).disableInPf(false).all() %}
                     {% set recProds = recommendation.recommendedProducts.all() %}
                     {% set prodsInRec = [] %}
                     {% for product in recProds %}
@@ -199,11 +202,19 @@
                         {{ hiddenInput('patientId', patientId) }}
 
                         <div class="row">
+                          {% for product in excludedProducts %}
+                          <div class="col--xs--6 col--md--4 pr-2">
+                            <div class="form-check py-1">
+                              <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}-rec{{ loop.parent.loop.index }}"{% if product.id in prodsInRec %} checked{% endif %}>
+                              <label class="form-check-label d-inline" for="{{ product.slug }}-rec{{ loop.parent.loop.index }}">{{ product.title }}</label>
+                            </div>
+                          </div>
+                          {% endfor %}
                           {% for product in products %}
                           <div class="col--xs--6 col--md--4 pr-2">
                             <div class="form-check py-1">
-                              <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}-{{ loop.index }}"{% if product.id in prodsInRec %} checked{% endif %}>
-                              <label class="form-check-label d-inline" for="{{ product.slug }}-{{ loop.index }}">{{ product.title }}</label>
+                              <input class="form-check-input" name="recommendedProducts[]" type="checkbox" value="{{ product.id }}" id="{{ product.slug }}-rec{{ loop.parent.loop.index }}"{% if product.id in prodsInRec %} checked{% endif %}>
+                              <label class="form-check-label d-inline" for="{{ product.slug }}-rec{{ loop.parent.loop.index }}">{{ product.title }}</label>
                             </div>
                           </div>
                           {% endfor %}
