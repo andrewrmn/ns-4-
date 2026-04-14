@@ -13112,7 +13112,6 @@ input[type=submit].submit-plain {
 .radio-inline label,
 .checkbox label {
   margin-bottom: 0;
-  line-height: 0;
   padding-top: 2px;
 }
 

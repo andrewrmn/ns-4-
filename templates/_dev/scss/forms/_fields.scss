@@ -2,9 +2,7 @@
 //  Fields
 // ---------------------------------------------------------------------
 
-.form {
-
-}
+.form {}
 
 .form-wrap {
     transition: opacity $transition;
@@ -244,8 +242,8 @@ input[type="submit"].submit-plain {
     display: none;
 }
 
-.isIE .select .ginput_container{
-     select {
+.isIE .select .ginput_container {
+    select {
         padding-right: 0;
     }
 
@@ -262,7 +260,7 @@ input[type="submit"].submit-plain {
 .radio-list {
     margin-top: 10px;
 
-    label{
+    label {
         padding: 4px 0;
     }
 
@@ -270,11 +268,11 @@ input[type="submit"].submit-plain {
         margin-right: 4px;
     }
 
-    @include start-at($medium){
+    @include start-at($medium) {
         display: flex;
         flex-wrap: wrap;
 
-        > * {
+        >* {
             width: 33.333%;
         }
     }
@@ -317,20 +315,20 @@ input[type="submit"].submit-plain {
         }
     }
 
-    input:checked + .slider {
+    input:checked+.slider {
         background-color: $brand-alt;
     }
 
-    input:disabled + .slider {
+    input:disabled+.slider {
         opacity: 0.2;
         background: $gray;
     }
 
-    input:focus + .slider {
+    input:focus+.slider {
         box-shadow: $shadow;
     }
 
-    input:checked + .slider:before {
+    input:checked+.slider:before {
         transform: translateX(22px);
     }
 }
@@ -346,13 +344,13 @@ input[type="submit"].submit-plain {
     display: flex;
     align-items: center;
 
-    > * + * {
+    >*+* {
         margin-left: 10px;
     }
 
     label {
         margin-bottom: 0;
-        line-height: 0;
+        //line-height: 0;
         padding-top: 2px;
     }
 }
@@ -378,7 +376,7 @@ input[type="submit"].submit-plain {
         cursor: pointer;
     }
 
-    input:checked + label {
+    input:checked+label {
 
         &:before {
             background-color: $black;
@@ -441,6 +439,7 @@ input[type="submit"].submit-plain {
     opacity: 0.4;
     transition: opacity $trans;
 }
+
 @mixin placeholder-focus {
     color: $gray;
     opacity: 0.1;
@@ -449,18 +448,23 @@ input[type="submit"].submit-plain {
 ::-webkit-input-placeholder {
     @include placeholder;
 }
+
 ::-moz-placeholder {
     @include placeholder;
 }
+
 :-ms-input-placeholder {
     @include placeholder;
 }
+
 input:focus::-webkit-input-placeholder {
     @include placeholder-focus;
 }
+
 input:focus::-moz-placeholder {
     @include placeholder-focus;
 }
+
 input:focus:-ms-input-placeholder {
     @include placeholder-focus;
 }
