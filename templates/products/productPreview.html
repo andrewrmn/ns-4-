@@ -72,7 +72,13 @@
             <h3 class="h5 text-white mb-2">{{ product.variants[0].title }}</h3>
             {% set pId = product.variants[0].id %}
 
-            <p class="p">{{ product.variants[0].salePrice|commerceCurrency(cart.currency) }}</p>
+            <p class="p">
+              {% if not currentUser.isInGroup('patients') %}
+                {{ product.variants[0].salePrice|commerceCurrency(cart.currency) }}
+              {% elseif product.variants[0].suggestedRetailPrice %}
+                ${{ product.variants[0].suggestedRetailPrice }}
+              {% endif %}
+            </p>
 
             {% if pId != '' and inStock %}
             <form method="POST" class="js-add-to-cart">
