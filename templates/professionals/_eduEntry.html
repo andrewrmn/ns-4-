@@ -1,11 +1,9 @@
 {% set login = true %}
 {% for row in entry.educationMaterials %}
-{% if row.restrictedAccess | length %}
+{% if row.restrictedAccess %}
 {% set login = false %}
 {% if currentUser and not currentUser.isInGroup('neuroselectOnly') %}
-{% if not currentUser.isInGroup('patients') %}
 {% set login = true %}
-{% endif %}
 {% endif %}
 {% endif %}
 {% endfor %}
@@ -125,13 +123,7 @@
         {% if currentUser and currentUser.isInGroup('neuroselectOnly') %}
         <p>Please login to main account to view this information.</p>
         {% else %}
-        {% if currentUser.isInGroup('patients') %}
-        <p>Your account type does not have access to these materials.</p>
-        {% redirect "/patients/dashboard" %}
-        {% else %}
         {{ generalTextNotifications.mustBeRegistered }}
-        {% endif %}
-
         {% endif %}
 
     </div>

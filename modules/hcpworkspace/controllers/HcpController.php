@@ -520,7 +520,27 @@ class HcpController extends Controller
         $request = Craft::$app->getRequest();
         $availableProducts = $request->getBodyParam('availableProducts');
         $patientId = $request->getBodyParam('patientId');
+        $hcp = Craft::$app->getUser()->getIdentity();
+        $hcpUserId = $hcp ? (int)$hcp->id : 0;
+
+        // #region agent log
+        $agentLog = static function (string $hypothesisId, array $data) use ($hcpUserId, $patientId): void {
+            $row = [
+                'sessionId' => 'd4a68d',
+                'timestamp' => (int) round(microtime(true) * 1000),
+                'hypothesisId' => $hypothesisId,
+                'location' => 'HcpController::actionSetProductsAvailability',
+                'message' => 'setProductsAvailability',
+                'data' => array_merge(['hcpUserId' => $hcpUserId, 'patientId' => $patientId], $data),
+            ];
+            $path = Craft::getAlias('@root') . DIRECTORY_SEPARATOR . '.cursor' . DIRECTORY_SEPARATOR . 'debug-d4a68d.log';
+            @file_put_contents($path, json_encode($row) . "\n", FILE_APPEND | LOCK_EX);
+            Craft::warning('[d4a68d] ' . json_encode($row), __METHOD__);
+        };
+        // #endregion
+
         if (empty($patientId)) {
+            $agentLog('H1', ['branch' => 'empty_patient_id']);
             return $this->redirectToPostedUrl();
         }
 
@@ -528,8 +548,11 @@ class HcpController extends Controller
             $availableProducts = [];
         }
 
+        $agentLog('H2', ['availableProductsCount' => count($availableProducts)]);
+
         $isHcpPatient = $this->_isHcpPatient($patientId);
         if (!$isHcpPatient) {
+            $agentLog('H3', ['isHcpPatient' => false, 'branch' => 'redirect_dashboard']);
             return $this->redirect('hcp/dashboard');
         }
 
@@ -538,7 +561,15 @@ class HcpController extends Controller
         $patientUser->setFieldValues([
             'restrictedProducts' => $availableProducts,
         ]);
-        Craft::$app->elements->saveElement($patientUser);
+        // Only custom fields change; full user validation can false-fail on username/email (UniqueValidator) for existing patients.
+        $saved = Craft::$app->elements->saveElement($patientUser, false);
+        $agentLog('H4', [
+            'isHcpPatient' => true,
+            'runValidation' => false,
+            'runId' => 'post-fix',
+            'saveElement' => (bool)$saved,
+            'elementErrorFieldKeys' => array_keys($patientUser->getErrors()),
+        ]);
 
         return $this->redirectToPostedUrl();
     }
