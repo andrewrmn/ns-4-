@@ -1,7 +1,49 @@
+{# Same availability as patient shop (templates/patients/_includes/shop.html) #}
+{% set isPatientShop = currentUser and currentUser.isInGroup('patients') %}
+
+{% if isPatientShop %}
+{% set patientAvailableProducts = null %}
+{% if currentUser.restrictedProducts|length %}
+{% set patientAvailableProducts = currentUser.restrictedProducts.ids() %}
+{% endif %}
+{% if currentUser.relatedHcp.one().hcpProductsStore|length %}
+{% set hcpRecommendedProducts = currentUser.relatedHcp.one().hcpProductsStore
+.id(patientAvailableProducts)
+.disableInPf(false)
+.all() %}
+{% else %}
+{% set hcpRecommendedProducts = craft.products()
+.orderBy('title')
+.id(patientAvailableProducts)
+.disableInPf(false)
+.all() %}
+{% endif %}
+{% set allowedPatientProductIds = hcpRecommendedProducts|map(p => p.id) %}
+{% set poolIds = allowedPatientProductIds|filter(pid => pid != product.id) %}
+{% set relatedListProducts = poolIds|length ? craft.products()
+.id(poolIds)
+.disableInPf(false)
+.orderBy('RAND()')
+.limit(4)
+.all() : [] %}
+{% else %}
+{% set relatedListProducts = null %}
+
+{% if product.relatedProducts|length >= 1 %}
+{% set relatedListProducts = product.relatedProducts %}
+{% endif %}
+
+{% if relatedListProducts is null or relatedListProducts|length < 1 %}
+{% set tags = craft.categories.relatedTo(product).level(2) %}
+{% set relatedListProducts = craft.products.relatedTo(tags).limit(4) %}
+{% endif %}
+{% endif %}
+
+{% if not isPatientShop or relatedListProducts|length %}
 <div class="wrapper-full border-top sections py-6 py-md-8">
 
     <header class="pb-4 text-center bsg-light">
-        <h4 class="h2 text-flush">Consider a Network Approach</h4>
+        <h4 class="h2 text-flush">{% if isPatientShop %}Shop more products{% else %}Consider a Network Approach{% endif %}</h4>
         <p></p>
     </header>
 
@@ -9,24 +51,11 @@
 		<img class="mx-auto col-sm-10 col-md-8 col-lg-7" src="/images/featured-products.png" alt="featured products" />
 	</div>
     <div class="wrapper-wide">
-        {% if product.relatedProducts|length >= 1 %}
-
-            <ul class="products">
-                {% for product in product.relatedProducts %}
-                    {% include 'products/productPreview.html' %}
-                {% endfor %}
-            </ul>
-
-        {% else %}
-
-            {% set tags = craft.categories.relatedTo(product).level(2) %}
-            {% set products = craft.products.relatedTo(tags).limit(4) %}
-            <ul class="products">
-                {% for product in products %}
-                    {% include 'products/productPreview.html' %}
-                {% endfor %}
-            </ul>
-
-        {% endif %}
+        <ul class="products">
+            {% for relatedProduct in relatedListProducts %}
+                {% include 'products/productPreview.html' with { product: relatedProduct } %}
+            {% endfor %}
+        </ul>
     </div>
 </div>
+{% endif %}
