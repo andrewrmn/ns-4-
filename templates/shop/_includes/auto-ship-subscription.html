@@ -1,6 +1,8 @@
 {% switch cart.recurringOrderFrequency.value %}
+    {% case "1Days" %}
+        {% set paymentForm = '1Days' %}
     {% case "2Days" %}
-        {% set paymentForm = '2Days' %}
+        {% set paymentForm = '1Days' %}
     {% case "15Days" %}
         {% set paymentForm = '15Days' %}
     {% case "45Days" %}

@@ -12,6 +12,7 @@ web/surveys/*.pdf
 web/surveys/*
 live-logs
 xx_legacy_plugins
+storage/logs
 
 *.sql
 

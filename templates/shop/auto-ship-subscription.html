@@ -1,7 +1,8 @@
-{% set allowedPlans = ['2Days', '15Days', '30Days', '45Days', '60Days', '90Days'] %}
-{% set paymentForm = cart.recurringOrderFrequency.value in allowedPlans
+{% set allowedPlans = ['1Days', '2Days', '15Days', '30Days', '45Days', '60Days', '90Days'] %}
+{% set rawFrequency = cart.recurringOrderFrequency.value in allowedPlans
   ? cart.recurringOrderFrequency.value
   : '30Days' %}
+{% set paymentForm = (rawFrequency == '2Days') ? '1Days' : rawFrequency %}
 
 
 

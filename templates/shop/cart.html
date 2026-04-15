@@ -331,46 +331,40 @@
             <div class="text-right align-text-top">
                 {% if not lineItemHasErrors %}
                 <div class="d-flex flex-items-baseline flex-justify-between py-2">
-                    <span class="p-sm">Cart Subtotal:</span>
+                    <span class="p-sm">Subtotal:</span>
                     <span title="{{ cart.itemSubTotal }}">{{ cart.itemSubTotal|commerceCurrency(cart.currency) }}</span>
                 </div>
 
                 <hr />
 
                 <div class="d-flex flex-items-baseline flex-justify-between py-2">
-                    <span class="p-sm">Discount Total:</span>
+                    <span class="p-sm">Discount:</span>
                     <span title="{{cart.getTotalDiscount()}}">{{ cart.getTotalDiscount()|commerceCurrency(cart.currency)
                         }}</span>
                 </div>
 
                 <hr />
 
+                {% set shippingCost = cart.getTotalShippingCost() %}
+                {% set shippingKnown = cart.shippingMethodHandle or shippingCost != 0 %}
                 <div class="d-flex flex-items-baseline flex-justify-between py-2">
-                    <span class="p-sm">Shipping Total:</span>
-                    <span title="{{cart.getTotalShippingCost()}}">{{
-                        cart.getTotalShippingCost()|commerceCurrency(cart.currency) }}</span>
+                    <span class="p-sm">Shipping:</span>
+                    {% if shippingKnown %}
+                    <span title="{{ shippingCost }}">{{ shippingCost|commerceCurrency(cart.currency) }}</span>
+                    {% else %}
+                    <span class="p-sm text-gray" title="{{ 'Shipping is calculated at checkout'|t }}">--</span>
+                    {% endif %}
                 </div>
 
                 <hr />
 
                 <div class="d-flex flex-items-baseline flex-justify-between py-2">
-                    <span class="p-sm">Tax Total:</span>
+                    <span class="p-sm">Taxes:</span>
                     <span title="{{cart.getTotalTax()}}">{{ cart.getTotalTax()|commerceCurrency(cart.currency) }}</span>
                 </div>
 
-                <div class="d-none">
-                    <hr />
-
-                    <div class="d-flex flex-items-baseline flex-justify-between py-2">
-                        <span class="p-sm">Order Total (tax inc):</span>
-                        <span title="{{cart.getTotalTaxIncluded()}}">{{
-                            cart.getTotalTaxIncluded()|commerceCurrency(cart.currency) }}</span>
-                    </div>
-                </div>
-                <hr />
-
                 <div class="d-flex flex-items-baseline flex-justify-between py-2">
-                    <span class="p-sm text-bold">Order Total:</span>
+                    <span class="p-sm text-bold">Order Subtotal:</span>
                     <strong><span title="{{ cart.totalPrice }}">{{ cart.totalPrice|commerceCurrency(cart.currency)
                             }}</span></strong>
                 </div>
