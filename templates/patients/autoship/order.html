@@ -227,10 +227,11 @@
           <div class="autoship-duration-list">
             {% set field = craft.app.fields.getFieldByHandle('recurringOrderFrequency') %}
             {% for option in field.options %}
+            {% set autoshipFreqLabel = {'2Days': '1 day', '1Days': '1 day'}[option.value]|default(option.label) %}
             <div>
               <input type="radio" id="{{ option.label|url_encode }}" name="recurringOrderFrequency"
                 value="{{ option.value }}" {% if option.value|lower==paymentForm.handle|lower %} checked{% endif %} />
-              <label for="{{ option.label|url_encode }}"><span>{{ option.label }}</span></label>
+              <label for="{{ option.label|url_encode }}"><span>{{ autoshipFreqLabel }}</span></label>
             </div>
             {% endfor %}
           </div>

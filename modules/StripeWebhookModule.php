@@ -360,18 +360,50 @@ class StripeWebhookModule extends \yii\base\Module
         $stripeInvoiceId
       );
 
-      $orderNumber = $clonedCommerceOrder->number;
-      Craft::info("StripeWebhookModule: Starting email trigger for order number: {$orderNumber}", __METHOD__);
+      $cloneNumber = $clonedCommerceOrder->number;
+      Craft::info("StripeWebhookModule: Starting email trigger for clone order number: {$cloneNumber}", __METHOD__);
 
-      $order = Order::find()->where(['variants' => '{"orderNumber":"' . $orderNumber . '"}'])->one();
-      $commerceOrder = CommerceOrder::find()->where(['number' => $orderNumber])->orderBy(['id' => 'DESC'])->one();
+      // Enupal `variants` JSON is keyed to the original template Commerce `number`, not the renewal clone’s new number.
+      $enupalOrder = Order::find()->where(['variants' => '{"orderNumber":"' . $cloneNumber . '"}'])->one();
+      if (!$enupalOrder) {
+        $enupalOrder = Order::find()->where(['variants' => '{"orderNumber":"' . $templateCommerceOrder->number . '"}'])->one();
+      }
+      $commerceOrder = CommerceOrder::find()->id((int) $clonedCommerceOrder->id)->status(null)->one();
 
-      Craft::info('StripeWebhookModule: Order check - order: ' . ($order ? "found (ID: {$order->id})" : 'not found'), __METHOD__);
-      Craft::info('StripeWebhookModule: CommerceOrder check - commerceOrder: ' . ($commerceOrder ? "found (ID: {$commerceOrder->id})" : 'not found'), __METHOD__);
-      Craft::info('StripeWebhookModule: Reference check - reference: ' . ($commerceOrder && $commerceOrder->reference ? $commerceOrder->reference : 'not found'), __METHOD__);
+      $referenceForEmail = ($commerceOrder && $commerceOrder->reference) ? $commerceOrder->reference : $templateCommerceOrder->reference;
 
-      if ($order && $commerceOrder && $commerceOrder->reference) {
-        Craft::info("StripeWebhookModule: All checks passed, sending patient email to: {$order->email}", __METHOD__);
+      Craft::info('StripeWebhookModule: Enupal order for email: ' . ($enupalOrder ? "found (ID: {$enupalOrder->id})" : 'not found'), __METHOD__);
+      Craft::info('StripeWebhookModule: CommerceOrder for email: ' . ($commerceOrder ? "found (ID: {$commerceOrder->id})" : 'not found'), __METHOD__);
+      Craft::info('StripeWebhookModule: Reference for email gate: ' . ($referenceForEmail ? 'yes' : 'no'), __METHOD__);
+
+      // #region agent log
+      @file_put_contents(
+        '/Users/andrewross/Sites/neuroscience-3/.cursor/debug-ee9ea5.log',
+        json_encode([
+          'sessionId' => 'ee9ea5',
+          'hypothesisId' => 'H1',
+          'runId' => 'verify',
+          'location' => 'StripeWebhookModule.php:autoship-renewal-email',
+          'message' => 'renewal email prerequisites',
+          'data' => [
+            'cloneNumber' => $cloneNumber,
+            'templateNumber' => $templateCommerceOrder->number ?? '',
+            'enupalOrderId' => $enupalOrder ? (int) $enupalOrder->id : null,
+            'commerceCloneId' => $commerceOrder ? (int) $commerceOrder->id : null,
+            'referenceForEmail' => (bool) $referenceForEmail,
+            'willSend' => (bool) ($enupalOrder && $commerceOrder && $referenceForEmail),
+          ],
+          'timestamp' => (int) (microtime(true) * 1000),
+        ], JSON_UNESCAPED_SLASHES) . "\n",
+        FILE_APPEND | LOCK_EX
+      );
+      // #endregion
+
+      if ($enupalOrder && $commerceOrder && $referenceForEmail) {
+        if (!$commerceOrder->reference && $templateCommerceOrder->reference) {
+          $commerceOrder->reference = $templateCommerceOrder->reference;
+        }
+        Craft::info("StripeWebhookModule: All checks passed, sending patient email to: {$enupalOrder->email}", __METHOD__);
 
         try {
           $body = Craft::$app->getView()->renderTemplate(
@@ -384,7 +416,7 @@ class StripeWebhookModule extends \yii\base\Module
           $mailer = Craft::$app->getMailer();
           $message = new Message();
           $message->setFrom(['info@neuroscienceinc.com' => 'NeuroScience']);
-          $message->setTo($order->email);
+          $message->setTo($enupalOrder->email);
           $message->setSubject($subject);
           $message->setHtmlBody($body);
           $result = $mailer->send($message);
@@ -394,7 +426,7 @@ class StripeWebhookModule extends \yii\base\Module
         }
 
         try {
-          $patient = Craft::$app->getUsers()->getUserByUsernameOrEmail($order->email);
+          $patient = Craft::$app->getUsers()->getUserByUsernameOrEmail($enupalOrder->email);
           $hcp = $patient && $patient->relatedHcp ? ($patient->relatedHcp->count() ? $patient->relatedHcp->one() : null) : null;
           if (!is_null($hcp) && $hcp->hcpEmailNotifications) {
             Craft::info("StripeWebhookModule: Sending HCP email to: {$hcp->email}", __METHOD__);
@@ -444,7 +476,12 @@ class StripeWebhookModule extends \yii\base\Module
           Craft::error('StripeWebhookModule: Error sending admin email: ' . $e->getMessage(), __METHOD__);
         }
       } else {
-        Craft::warning('StripeWebhookModule: Email sending skipped - order: ' . ($order ? 'yes' : 'no') . ', commerceOrder: ' . ($commerceOrder ? 'yes' : 'no') . ', reference: ' . ($commerceOrder && $commerceOrder->reference ? 'yes' : 'no'), __METHOD__);
+        Craft::warning(
+          'StripeWebhookModule: Email sending skipped — enupalOrder: ' . ($enupalOrder ? 'yes' : 'no')
+          . ', commerceOrder: ' . ($commerceOrder ? 'yes' : 'no')
+          . ', reference: ' . ($referenceForEmail ? 'yes' : 'no'),
+          __METHOD__
+        );
       }
     } catch (\Throwable $e) {
       Craft::error(

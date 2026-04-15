@@ -4,6 +4,8 @@ namespace modules;
 
 use Craft;
 use craft\commerce\elements\Order;
+use craft\commerce\Plugin as Commerce;
+use craft\commerce\records\Transaction as CommerceTransactionRecord;
 use craft\helpers\UrlHelper;
 use craft\mail\Message;
 use craft\web\User as WebUser;
@@ -24,6 +26,10 @@ class PatientShopModule extends Module
             if ($order->makeThisARecurringOrder && !Craft::$app->request->isCpRequest) {
                 $order->orderStatusId = 5;
                 Craft::$app->getElements()->saveElement($order, false);
+                $freshOrder = Order::find()->id((int) $order->id)->status(null)->one();
+                if ($freshOrder) {
+                    self::ensureSuccessfulPurchaseRecordForStripeAutoshipInitial($freshOrder);
+                }
                 $cancelSubscriptionOrderId = $order->cancelSubscriptionOrderId;
                 if ($cancelSubscriptionOrderId) {
                     $subscriptionId = $cancelSubscriptionOrderId;
@@ -96,5 +102,108 @@ class PatientShopModule extends Module
         );
 
         Craft::info('Patient shop module loaded', __METHOD__);
+    }
+
+    /**
+     * Stripe/Enupal can complete the Commerce order without a successful **purchase** transaction row,
+     * so CP shows “Unpaid”. Renewals get an explicit purchase in StripeWebhookModule; mirror that here
+     * for the initial autoship checkout only when no successful purchase already exists.
+     */
+    private static function ensureSuccessfulPurchaseRecordForStripeAutoshipInitial(Order $order): void
+    {
+        foreach ($order->getTransactions() as $tx) {
+            if ($tx->type === CommerceTransactionRecord::TYPE_PURCHASE && $tx->status === CommerceTransactionRecord::STATUS_SUCCESS) {
+                // #region agent log
+                @file_put_contents(
+                    '/Users/andrewross/Sites/neuroscience-3/.cursor/debug-ee9ea5.log',
+                    json_encode([
+                        'sessionId' => 'ee9ea5',
+                        'hypothesisId' => 'H2',
+                        'runId' => 'verify',
+                        'location' => 'PatientShopModule.php:ensureSuccessfulPurchase',
+                        'message' => 'initial autoship purchase tx',
+                        'data' => ['orderId' => (int) $order->id, 'outcome' => 'skip_existing_success_purchase'],
+                        'timestamp' => (int) (microtime(true) * 1000),
+                    ], JSON_UNESCAPED_SLASHES) . "\n",
+                    FILE_APPEND | LOCK_EX
+                );
+                // #endregion
+
+                return;
+            }
+        }
+
+        if (!$order->getGateway()) {
+            Craft::warning(
+                'PatientShopModule: skipped synthetic purchase transaction — Commerce order has no gateway (id '
+                . $order->id . ')',
+                __METHOD__
+            );
+
+            // #region agent log
+            @file_put_contents(
+                '/Users/andrewross/Sites/neuroscience-3/.cursor/debug-ee9ea5.log',
+                json_encode([
+                    'sessionId' => 'ee9ea5',
+                    'hypothesisId' => 'H2',
+                    'runId' => 'verify',
+                    'location' => 'PatientShopModule.php:ensureSuccessfulPurchase',
+                    'message' => 'initial autoship purchase tx',
+                    'data' => ['orderId' => (int) $order->id, 'outcome' => 'skip_no_gateway'],
+                    'timestamp' => (int) (microtime(true) * 1000),
+                ], JSON_UNESCAPED_SLASHES) . "\n",
+                FILE_APPEND | LOCK_EX
+            );
+            // #endregion
+
+            return;
+        }
+
+        $transactions = Commerce::getInstance()->getTransactions();
+        $tx = $transactions->createTransaction($order, null, CommerceTransactionRecord::TYPE_PURCHASE);
+        $tx->status = CommerceTransactionRecord::STATUS_SUCCESS;
+        $tx->reference = 'stripe:autoship-initial-checkout';
+        $tx->message = 'Stripe autoship initial checkout';
+
+        if (!$transactions->saveTransaction($tx)) {
+            Craft::error(
+                'PatientShopModule: failed to save initial autoship purchase transaction for order ' . $order->id,
+                __METHOD__
+            );
+
+            // #region agent log
+            @file_put_contents(
+                '/Users/andrewross/Sites/neuroscience-3/.cursor/debug-ee9ea5.log',
+                json_encode([
+                    'sessionId' => 'ee9ea5',
+                    'hypothesisId' => 'H2',
+                    'runId' => 'verify',
+                    'location' => 'PatientShopModule.php:ensureSuccessfulPurchase',
+                    'message' => 'initial autoship purchase tx',
+                    'data' => ['orderId' => (int) $order->id, 'outcome' => 'save_failed'],
+                    'timestamp' => (int) (microtime(true) * 1000),
+                ], JSON_UNESCAPED_SLASHES) . "\n",
+                FILE_APPEND | LOCK_EX
+            );
+            // #endregion
+
+            return;
+        }
+
+        // #region agent log
+        @file_put_contents(
+            '/Users/andrewross/Sites/neuroscience-3/.cursor/debug-ee9ea5.log',
+            json_encode([
+                'sessionId' => 'ee9ea5',
+                'hypothesisId' => 'H2',
+                'runId' => 'verify',
+                'location' => 'PatientShopModule.php:ensureSuccessfulPurchase',
+                'message' => 'initial autoship purchase tx',
+                'data' => ['orderId' => (int) $order->id, 'outcome' => 'saved_success_purchase'],
+                'timestamp' => (int) (microtime(true) * 1000),
+            ], JSON_UNESCAPED_SLASHES) . "\n",
+            FILE_APPEND | LOCK_EX
+        );
+        // #endregion
     }
 }

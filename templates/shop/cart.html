@@ -363,6 +363,8 @@
                     <span title="{{cart.getTotalTax()}}">{{ cart.getTotalTax()|commerceCurrency(cart.currency) }}</span>
                 </div>
 
+                <hr />
+
                 <div class="d-flex flex-items-baseline flex-justify-between py-2">
                     <span class="p-sm text-bold">Order Subtotal:</span>
                     <strong><span title="{{ cart.totalPrice }}">{{ cart.totalPrice|commerceCurrency(cart.currency)
@@ -545,33 +547,34 @@ $stateName.attr('name', $stateName.data('modelname')+'[stateValue]');
 {% endfor %}
 {% set _dbgLi = [] %}
 {% for i in cart.lineItems|sort((a, b) => a.id <=> b.id) %}
-{% set _dbgLi = _dbgLi|merge([{ id: i.id, adjNames: i.adjustments|map(adj => adj.name) }]) %}
-{% endfor %}
-{% set _dbgOrdAdj = cart.orderAdjustments|map(a => a.name) %}
-<script>
-// #region agent log
-(function () {
-    var payload = {
-        sessionId: '5f5fa1',
-        runId: 'pre-fix',
-        hypothesisId: 'H1-H4',
-        location: 'templates/shop/cart.html',
-        message: 'cart adjustment placement snapshot',
-        timestamp: Date.now(),
-        data: {
-            allAdjustments: {{ _dbgAllAdj|json_encode|raw }},
-            perLineItem: {{ _dbgLi|json_encode|raw }},
-            orderAdjustmentNames: {{ _dbgOrdAdj|json_encode|raw }}
+    {% set _dbgLi = _dbgLi|merge([{ id: i.id, adjNames: i.adjustments|map(adj => adj.name) }]) %}
+    {% endfor %}
+    {% set _dbgOrdAdj = cart.orderAdjustments|map(a => a.name) %}
+    <script>
+        // #region agent log
+        (function () {
+            var payload = {
+                sessionId: '5f5fa1',
+                runId: 'pre-fix',
+                hypothesisId: 'H1-H4',
+                location: 'templates/shop/cart.html',
+                message: 'cart adjustment placement snapshot',
+                timestamp: Date.now(),
+                data: {
+                    allAdjustments: {{ _dbgAllAdj| json_encode | raw
+        }},
+        perLineItem: { { _dbgLi | json_encode | raw } },
+        orderAdjustmentNames: { { _dbgOrdAdj | json_encode | raw } }
         }
     };
-    fetch('http://127.0.0.1:7801/ingest/461f39e8-90c8-4100-95f6-757287f9e498', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '5f5fa1' },
-        body: JSON.stringify(payload)
-    }).catch(function () {});
-})();
-// #endregion
-</script>
-{% endif %}
+        fetch('http://127.0.0.1:7801/ingest/461f39e8-90c8-4100-95f6-757287f9e498', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '5f5fa1' },
+            body: JSON.stringify(payload)
+        }).catch(function () { });
+}) ();
+        // #endregion
+    </script>
+    {% endif %}
 
-{% endblock %}
+    {% endblock %}
