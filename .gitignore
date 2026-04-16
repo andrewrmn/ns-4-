@@ -18,4 +18,4 @@ storage/logs
 
 # Contains environment-specific secrets (AWS, Stripe); not tracked
 config/project/project.yaml
-TODO
+TODO.md

@@ -24,7 +24,7 @@
       {% if it[purchasablesId] is defined %}{% set qty = it[purchasablesId] %}{% endif %}
     {% endfor %}
   {% endif %}
-  {% set lineItem = craft.commerce.lineitems.createLineItem(cart.id, purchasablesId, {"note":""}, qty, "") %}
+  {% set lineItem = craft.commerce.lineitems.createLineItem(cart, purchasablesId, {"note":""}, qty, "") %}
   {% do cart.addLineItem(lineItem) %}
 {% endfor %}
 {% do cart.setFieldValues({"recurringOrderFrequency": data.recurringOrderFrequency, "makeThisARecurringOrder": 1}) %}
