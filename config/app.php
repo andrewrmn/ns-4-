@@ -53,6 +53,12 @@ return [
         'checkout-address-debug' => [
             'class' => \modules\CheckoutAddressDebugModule::class,
         ],
+        'email-test' => [
+            'class' => \modules\EmailTestModule::class,
+        ],
+        'activation-email' => [
+            'class' => \modules\ActivationEmailModule::class,
+        ],
     ],
     'bootstrap' => [
         'pending-user-module',
@@ -66,5 +72,7 @@ return [
         'autoship-schedule',
         'neuroselect-module',
         'checkout-address-debug',
+        'email-test',
+        'activation-email',
     ],
 ];
