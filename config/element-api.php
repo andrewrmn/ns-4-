@@ -8,6 +8,7 @@ use craft\commerce\models\OrderAdjustment;
 use craft\commerce\models\LineItem;
 use craft\commerce\base\Purchasable;
 use craft\elements\User;
+use craft\elements\Address as AddressElement;
 use craft\elements\Entry;
 use craft\helpers\UrlHelper;
 use craft\helpers\Html;
@@ -43,7 +44,7 @@ return [
       'elementType' => 'craft\elements\User',
       //'first' => true,
       'transformer' => function($entry) {
-        requireLogin();
+        return requireLogin();
       },
     ],
 
@@ -70,13 +71,13 @@ return [
       'elementType' => Order::class,
       'criteria' => [
         'isCompleted' => '1',
-        'order' => 'dateOrdered desc'
+        'orderBy' => 'dateOrdered desc',
       ],
       'transformer' => function (Order $order) {
 
         $neuroCash = '';
         if( $order->hcpEmail ) {
-          $neuroCash = money_format('%i', ($order->itemTotal * .30));
+          $neuroCash = formatApiMoney($order->itemTotal * .30);
         }
 
         $ttlQty = $order->totalQty;
@@ -90,12 +91,12 @@ return [
           'number' => $order->number,
           'dateOrdered' => $order->dateOrdered,
           'isPaid' => $order->isPaid,
-          'paymentMethod' => $order->gateway->name,
+          'paymentMethod' => $order->gateway?->name,
           'totalQty' => $order->totalQty,
           'totalTaxIncluded' => $order->totalTax,
           'totalDiscount' => $order->totalDiscount,
           'couponCode' => $order->couponCode,
-          'totalPrice' => money_format('%i', $order->totalPrice),
+          'totalPrice' => formatApiMoney($order->totalPrice),
           'adjustments' => array_map(function( OrderAdjustment $adjustments  ){
             //$price = $lineItem->subtotal / $lineItem->qty;
             return [
@@ -123,35 +124,13 @@ return [
               'tax' => $lineItem->tax,
               'discount' => $lineItem->discount,
               'NeuroRewardsCount' => $neuroRewardsCount,
-              'subtotal' => money_format('%i', $lineItem->subtotal),
-              'total' => money_format('%i', $lineItem->total)
+              'subtotal' => formatApiMoney($lineItem->subtotal),
+              'total' => formatApiMoney($lineItem->total)
             ];
           }, $order->lineItems),
           'customerEmail' => $order->email,
-          'billingAddress' => Array(
-            'firstName' => $order->billingAddress->firstName,
-            'lastName' => $order->billingAddress->lastName,
-            'address1' => $order->billingAddress->address1,
-            'address2' => $order->billingAddress->address2,
-            'city' => $order->billingAddress->city,
-            'zip' => $order->billingAddress->zipCode,
-            'phone' => $order->billingAddress->phone,
-            'businessName' => $order->billingAddress->businessName,
-            'state' => $order->billingAddress->stateText,
-            'country' => $order->billingAddress->countryText
-          ),
-          'shippingAddress' => Array(
-            'firstName' => $order->shippingAddress->firstName,
-            'lastName' => $order->shippingAddress->lastName,
-            'address1' => $order->shippingAddress->address1,
-            'address2' => $order->shippingAddress->address2,
-            'city' => $order->shippingAddress->city,
-            'zip' => $order->shippingAddress->zipCode,
-            'phone' => $order->shippingAddress->phone,
-            'businessName' => $order->shippingAddress->businessName,
-            'state' => $order->shippingAddress->stateText,
-            'country' => $order->shippingAddress->countryText
-          ),
+          'billingAddress' => orderAddressForSage($order->billingAddress),
+          'shippingAddress' => orderAddressForSage($order->shippingAddress),
           'shippingMethodHandle' => $order->shippingMethodHandle,
           'totalShippingCost' => $order->totalShippingCost,
           'hcpEmail' => $order->hcpEmail,
@@ -169,14 +148,14 @@ return [
       'elementType' => Order::class,
       'criteria' => [
         'isCompleted' => '1',
-        'order' => 'dateOrdered desc',
-        'orderStatusId' => [1, 5]
+        'orderBy' => 'dateOrdered desc',
+        'orderStatusId' => [1, 5],
       ],
       'transformer' => function (Order $order) {
 
         $neuroCash = '';
         if( $order->hcpEmail ) {
-          $neuroCash = money_format('%i', ($order->itemTotal * .30));
+          $neuroCash = formatApiMoney($order->itemTotal * .30);
         }
 
         $ttlQty = $order->totalQty;
@@ -190,12 +169,12 @@ return [
           'number' => $order->number,
           'dateOrdered' => $order->dateOrdered,
           'isPaid' => $order->isPaid,
-          'paymentMethod' => $order->gateway->name,
+          'paymentMethod' => $order->gateway?->name,
           'totalQty' => $order->totalQty,
           'totalTaxIncluded' => $order->totalTax,
           'totalDiscount' => $order->totalDiscount,
           'couponCode' => $order->couponCode,
-          'totalPrice' => money_format('%i', $order->totalPrice),
+          'totalPrice' => formatApiMoney($order->totalPrice),
           'adjustments' => array_map(function( OrderAdjustment $adjustments  ){
             //$price = $lineItem->subtotal / $lineItem->qty;
             return [
@@ -224,35 +203,13 @@ return [
               'tax' => $lineItem->tax,
               'discount' => $lineItem->discount,
               'NeuroRewardsCount' => $neuroRewardsCount,
-              'subtotal' => money_format('%i', $lineItem->subtotal),
-              'total' => money_format('%i', $lineItem->total)
+              'subtotal' => formatApiMoney($lineItem->subtotal),
+              'total' => formatApiMoney($lineItem->total)
             ];
           }, $order->lineItems),
           'customerEmail' => $order->email,
-          'billingAddress' => Array(
-            'firstName' => $order->billingAddress->firstName,
-            'lastName' => $order->billingAddress->lastName,
-            'address1' => $order->billingAddress->address1,
-            'address2' => $order->billingAddress->address2,
-            'city' => $order->billingAddress->city,
-            'zip' => $order->billingAddress->zipCode,
-            'phone' => $order->billingAddress->phone,
-            'businessName' => $order->billingAddress->businessName,
-            'state' => $order->billingAddress->stateText,
-            'country' => $order->billingAddress->countryText
-          ),
-          'shippingAddress' => Array(
-            'firstName' => $order->shippingAddress->firstName,
-            'lastName' => $order->shippingAddress->lastName,
-            'address1' => $order->shippingAddress->address1,
-            'address2' => $order->shippingAddress->address2,
-            'city' => $order->shippingAddress->city,
-            'zip' => $order->shippingAddress->zipCode,
-            'phone' => $order->shippingAddress->phone,
-            'businessName' => $order->shippingAddress->businessName,
-            'state' => $order->shippingAddress->stateText,
-            'country' => $order->shippingAddress->countryText
-          ),
+          'billingAddress' => orderAddressForSage($order->billingAddress),
+          'shippingAddress' => orderAddressForSage($order->shippingAddress),
           'shippingMethodHandle' => $order->shippingMethodHandle,
           'totalShippingCost' => $order->totalShippingCost,
           'hcpEmail' => $order->hcpEmail,
@@ -278,7 +235,7 @@ return [
 
           $neuroCash = '';
           if( $order->hcpEmail ) {
-            $neuroCash = money_format('%i', ($order->itemTotal * .30));
+            $neuroCash = formatApiMoney($order->itemTotal * .30);
           }
 
           $ttlQty = $order->totalQty;
@@ -290,12 +247,12 @@ return [
             'number' => $order->number,
             'dateOrdered' => $order->dateOrdered,
             'isPaid' => $order->isPaid,
-            'paymentMethod' => $order->gateway->name,
+            'paymentMethod' => $order->gateway?->name,
             'totalQty' => $order->totalQty,
             'totalTaxIncluded' => $order->totalTax,
             'totalDiscount' => $order->totalDiscount,
             'couponCode' => $order->couponCode,
-            'totalPrice' => money_format('%i', $order->totalPrice),
+            'totalPrice' => formatApiMoney($order->totalPrice),
 
             'adjustments' => array_map(function( OrderAdjustment $adjustments  ){
               //$price = $lineItem->subtotal / $lineItem->qty;
@@ -327,36 +284,14 @@ return [
                 'tax' => $lineItem->tax,
                 'discount' => $lineItem->discount,
                 'NeuroRewardsCount' => $neuroRewardsCount,
-                'subtotal' => money_format('%i', $lineItem->subtotal),
-                'total' => money_format('%i', $lineItem->total)
+                'subtotal' => formatApiMoney($lineItem->subtotal),
+                'total' => formatApiMoney($lineItem->total)
               ];
             }, $order->lineItems),
 
             'customerEmail' => $order->email,
-            'billingAddress' => Array(
-              'firstName' => $order->billingAddress->firstName,
-              'lastName' => $order->billingAddress->lastName,
-              'address1' => $order->billingAddress->address1,
-              'address2' => $order->billingAddress->address2,
-              'city' => $order->billingAddress->city,
-              'zip' => $order->billingAddress->zipCode,
-              'phone' => $order->billingAddress->phone,
-              'businessName' => $order->billingAddress->businessName,
-              'state' => $order->billingAddress->stateText,
-              'country' => $order->billingAddress->countryText
-            ),
-            'shippingAddress' => Array(
-              'firstName' => $order->shippingAddress->firstName,
-              'lastName' => $order->shippingAddress->lastName,
-              'address1' => $order->shippingAddress->address1,
-              'address2' => $order->shippingAddress->address2,
-              'city' => $order->shippingAddress->city,
-              'zip' => $order->shippingAddress->zipCode,
-              'phone' => $order->shippingAddress->phone,
-              'businessName' => $order->shippingAddress->businessName,
-              'state' => $order->shippingAddress->stateText,
-              'country' => $order->shippingAddress->countryText
-            ),
+            'billingAddress' => orderAddressForSage($order->billingAddress),
+            'shippingAddress' => orderAddressForSage($order->shippingAddress),
             'shippingMethodHandle' => $order->shippingMethodHandle,
             'totalShippingCost' => $order->totalShippingCost,
             'hcpEmail' => $order->hcpEmail,
@@ -519,8 +454,8 @@ return [
             $ordersData[$key]['dateOrdered'] = $order->dateOrdered->format('D jS M Y');
             $ordersData[$key]['lineItems'] = $order->lineItems;
             $ordersData[$key]['status'] = $order->orderStatus->name;
-            $ordersData[$key]['billingAddress'] = $order->billingAddress->addressLines;
-            $ordersData[$key]['shippingAddress'] = $order->shippingAddress->addressLines;
+            $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
+            $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
             $ordersData[$key]['discount'] = $order->totalDiscount;
             $ordersData[$key]['subtotal'] = $order->itemTotal;
             $ordersData[$key]['total'] = $order->totalPrice;
@@ -620,8 +555,8 @@ return [
             $ordersData[$key]['dateOrdered'] = $order->dateOrdered->format('D jS M Y');
             $ordersData[$key]['lineItems'] = $order->lineItems;
             $ordersData[$key]['status'] = $order->orderStatus->name;
-            $ordersData[$key]['billingAddress'] = $order->billingAddress->addressLines;
-            $ordersData[$key]['shippingAddress'] = $order->shippingAddress->addressLines;
+            $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
+            $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
             $ordersData[$key]['discount'] = $order->totalDiscount;
             $ordersData[$key]['subtotal'] = $order->itemTotal;
             $ordersData[$key]['total'] = $order->totalPrice;
@@ -683,8 +618,8 @@ return [
             $ordersData[$key]['paidStatus'] = $order->paidStatus;
 
             $ordersData[$key]['lineItems'] = $order->lineItems;
-            $ordersData[$key]['billingAddress'] = $order->billingAddress->addressLines;
-            $ordersData[$key]['shippingAddress'] = $order->shippingAddress->addressLines;
+            $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
+            $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
             $ordersData[$key]['discount'] = $order->totalDiscount;
             $ordersData[$key]['subtotal'] = $order->itemTotal;
             $ordersData[$key]['total'] = $order->totalPrice;
@@ -696,11 +631,11 @@ return [
           $total_pages = ceil($total/100);
           $links = [];
           if( $page == 1 && $page < $total_pages && $count > 100 ){
-            $links = ['next' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders' . $user->id . '?page=' . ($page + 1) ];
+            $links = ['next' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders/' . $user->id . '?page=' . ($page + 1) ];
           }elseif( $page > 1 && $page < $total_pages && $count > 100 ){
-            $links = ['previous' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders' . $user->id . '?page=' . ($page - 1), 'next' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders' . $user->id . '?page=' . ($page + 1) ];
+            $links = ['previous' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders/' . $user->id . '?page=' . ($page - 1), 'next' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders/' . $user->id . '?page=' . ($page + 1) ];
           }elseif( $page == $total_pages && $count > 100 ){
-            $links = ['previous' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders' . $user->id . '?page=' . ($page - 1)];
+            $links = ['previous' => UrlHelper::siteUrl() . 'customers/patient/autoship-orders/' . $user->id . '?page=' . ($page - 1)];
           }
           $ordersData['meta'] = ['pagination' => ['total' => $total, 'count' => $count, 'per_page' => 100, 'current_page' => $page, 'total_pages' => $total_pages, 'links' => $links]];
           return $ordersData;
@@ -711,9 +646,79 @@ return [
   ]
 ];
 
+/**
+ * money_format() was removed in PHP 8; order endpoints used it for JSON currency strings.
+ */
+function formatApiMoney(mixed $amount): string
+{
+    return number_format((float)$amount, 2, '.', '');
+}
+
+/**
+ * Legacy Sage JSON used Commerce 3 address field names; Craft 4 stores orders on [[AddressElement]].
+ *
+ * @return array<string, mixed>
+ */
+function orderAddressForSage(?AddressElement $address): array
+{
+    if ($address === null) {
+        return [
+            'firstName' => null,
+            'lastName' => null,
+            'address1' => null,
+            'address2' => null,
+            'city' => null,
+            'zip' => null,
+            'phone' => null,
+            'businessName' => null,
+            'state' => null,
+            'country' => null,
+        ];
+    }
+
+    $countryLabel = $address->countryCode;
+    try {
+        $countryLabel = $address->getCountry()->getName();
+    } catch (\Throwable) {
+    }
+
+    return [
+        'firstName' => $address->firstName,
+        'lastName' => $address->lastName,
+        'address1' => $address->addressLine1,
+        'address2' => $address->addressLine2,
+        'city' => $address->locality,
+        'zip' => $address->postalCode,
+        'phone' => null,
+        'businessName' => $address->organization,
+        'state' => $address->administrativeArea,
+        'country' => $countryLabel,
+    ];
+}
+
+/**
+ * @return string[]
+ */
+function orderAddressLines(?AddressElement $address): array
+{
+    if ($address === null) {
+        return [];
+    }
+
+    return array_values(array_filter([
+        $address->addressLine1,
+        $address->addressLine2,
+        trim(implode(', ', array_filter([
+            $address->locality,
+            $address->administrativeArea,
+            $address->postalCode,
+        ]))),
+    ]));
+}
+
 function getPatients($user){
   $patientsData = [];
-  $patients = User::find()->group('patients')->relatedTo(['taregt' => $user, 'field' => 'relatedHcp'])->all();
+  $patients = User::find()->group('patients')->relatedTo(['field' => 'relatedHcp', 'targetElement' => $user])->all();
   foreach ($patients as $key => $patient) {
     $patientsData[$key]['email'] = $patient->email;
     $patientsData[$key]['id'] = $patient->id;
@@ -751,7 +756,7 @@ function getAddress($user){
   if (!$user instanceof \craft\elements\User) {
     return [];
   }
-  return $user->getAddresses()->all();
+  return $user->getAddresses();
 }
 
 function getOrders($user, $autoShip = false){
@@ -765,11 +770,11 @@ function getOrders($user, $autoShip = false){
       $ordersData[$key]['email'] = $order->email;
       $ordersData[$key]['orderNumber'] = $order->number;
       //$ordersData[$key]['dateOrdered'] = $order->dateOrdered->format('D jS M Y');
-      $ordersData[$key]['billingAddress'] = $order->billingAddress->addressLines;
-      $ordersData[$key]['shippingAddress'] = $order->shippingAddress->addressLines;
+      $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
+      $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
       $ordersData[$key]['lineItems'] = $order->lineItems;
       $ordersData[$key]['status'] = $order->orderStatus->name;
-      $ordersData[$key]['shippingMethod'] = $order->shippingMethod->name;
+      $ordersData[$key]['shippingMethod'] = $order->shippingMethod?->name;
       $ordersData[$key]['discount'] = $order->totalDiscount;
       //$ordersData[$key]['subtotal'] = $order->subtotal;
       $ordersData[$key]['total'] = $order->totalPrice;

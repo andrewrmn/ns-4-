@@ -799,6 +799,27 @@ class ProductFilter {
 			}
 		}
 
+		function updateSanescoSectionVisibility() {
+			var $sanesco = $('.products-sanesco');
+			if (!$sanesco.length) {
+				return;
+			}
+			var visibleCount = 0;
+			if (activeTags.length <= 0) {
+				$sanesco.removeClass('is-hidden');
+			} else {
+				visibleCount = $sanesco.find('.product-preview').filter(function () {
+					var $p = $(this);
+					return !$p.hasClass('in-active') && !$p.hasClass('un-active');
+				}).length;
+				if (visibleCount === 0) {
+					$sanesco.addClass('is-hidden');
+				} else {
+					$sanesco.removeClass('is-hidden');
+				}
+			}
+		}
+
 		//console.log('here');
 		var products = $('.product-preview'),
 			tagFilter = $('.tag-filter'),
@@ -939,6 +960,7 @@ class ProductFilter {
 				first = true;
 			}
 			updateCount(filter);
+			updateSanescoSectionVisibility();
 
 		});
 
@@ -955,6 +977,7 @@ class ProductFilter {
 			setTimeout(function(){
 				el.removeClass('is-active');
 			}, 3000);
+			updateSanescoSectionVisibility();
         });
 
 	}

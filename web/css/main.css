@@ -13519,7 +13519,8 @@ ul.products .product-preview.in-active, ul.products .product-preview.un-active {
   outline: none;
   display: block;
 }
-.product-preview a:not(.product-hover-info) img, .product-preview a:not(.product-hover-info) svg,
+.product-preview a:not(.product-hover-info) img,
+.product-preview a:not(.product-hover-info) svg,
 .product-preview .product-preview__inner img,
 .product-preview .product-preview__inner svg {
   max-width: calc(100% - 40px);

@@ -37,7 +37,7 @@
         {% set excludes = [] %}
        
 
-        {% for category in craft.categories.group('productCategories').level(1).offset(2).all()|filter(c => c.slug not in ['sale', 'bundle']) %}
+        {% for category in craft.categories.group('productCategories').level(1).offset(2).all()|filter(c => c.slug not in ['sale', 'bundle', 'sanesco']) %}
 
             <li class="has-sub-nav" id="{{ category.slug }}-nav">
                 <span class="js-product-cat-nav">
@@ -50,6 +50,7 @@
                 <ul class="sub-nav">
 
                     {% for child in children.all() %}
+                        {% if child.slug != 'sanesco' %}
                         <li class="tag-filter in-active {% if child.body|length %}js-symptom-link has-modal-content{% endif %}" data-tag-filter="{{ child.slug }}">
                             <span class="js-cat-title">{{ child.title }}{% if child.body|length %}{% endif %}</span>
 
@@ -64,6 +65,7 @@
                             </div>
                             {% endif %}
                         </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </li>

@@ -12,7 +12,7 @@ ul.products {
 	justify-content: flex-start;
 	flex-wrap: wrap;
 
-	@include start-at($small){
+	@include start-at($small) {
 		width: calc(100% + 20px);
 		margin-left: -10px;
 	}
@@ -26,16 +26,16 @@ ul.products {
 			display: none;
 		}
 
-		@include start-at($small){
+		@include start-at($small) {
 			width: calc(50% - 20px);
-    		margin: 0 10px 20px;
+			margin: 0 10px 20px;
 		}
 
-		@include start-at($medium){
+		@include start-at($medium) {
 			width: calc(33% - 18px);
 		}
 
-		@include start-at($large){
+		@include start-at($large) {
 			width: calc(25% - 20px);
 
 		}
@@ -80,7 +80,8 @@ ul.products {
 		outline: none;
 		display: block;
 
-		img, svg {
+		img,
+		svg {
 			max-width: calc(100% - 40px);
 			//margin: 0 auto 20px;
 			margin: 0 auto;
@@ -119,14 +120,14 @@ ul.products {
 	opacity: 0;
 	transition: opacity $trans;
 
-	> span {
+	>span {
 		position: absolute;
 		bottom: 18px;
 		font-size: 10px;
 		color: darken($gray-light, 5%);
 	}
 
-	> * {
+	>* {
 		transform: translate3d(0, 12px, 0);
 		transition: transform $trans;
 	}
@@ -163,7 +164,8 @@ ul.products {
 .product-preview:hover {
 	.product-hover-info {
 		opacity: 1;
-		> * {
+
+		>* {
 			transform: translate3d(0, 0, 0);
 
 		}
@@ -192,7 +194,7 @@ ul.products {
 	color: $white;
 	display: none;
 
-	> span {
+	>span {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -205,7 +207,7 @@ ul.products {
 		padding: 24px;
 	}
 
-	> span > span {
+	>span>span {
 		@include h6;
 		letter-spacing: 1px;
 		display: flex;
@@ -249,7 +251,7 @@ ul.products {
 		background: $navy;
 	}
 
-    //
+	//
 	// &:before {
 	// 	content: '';
 	// 	width: 11px;
@@ -264,7 +266,7 @@ ul.products {
 	// &.calming {
 	// 	color: $purple;
 	// 	border: 1px solid $purple;
-    //
+	//
 	// 	&:before {
 	// 		transform-origin: center;
 	// 		transform: rotate(-30deg);
@@ -287,11 +289,11 @@ ul.products {
 		left: 8px;
 		z-index: 1;
 		width: 60px;
-	    height: 60px;
-	    border-radius: 50%;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    line-height: 1.4;
+		height: 60px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		line-height: 1.4;
 	}
 }
