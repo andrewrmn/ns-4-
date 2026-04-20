@@ -19,3 +19,6 @@ storage/logs
 # Contains environment-specific secrets (AWS, Stripe); not tracked
 config/project/project.yaml
 TODO.md
+
+# Cursor agent debug instrumentation (NDJSON)
+.cursor/debug-*.log
