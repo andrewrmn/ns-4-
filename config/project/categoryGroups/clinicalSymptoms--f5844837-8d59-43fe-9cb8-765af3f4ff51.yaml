@@ -28,12 +28,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: 41a662b0-620a-46bd-9ab6-b9a64b7bba98
+            uid: fddd9de0-0470-4036-9abe-6f68172e57dd
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: fd039bd4-2f05-4277-a5a6-2ea24b072d10
+        uid: 92ce136f-7f1b-448a-8d04-094a0ef71347
         userCondition: null
 handle: clinicalSymptoms
 name: 'Clinical Symptoms'

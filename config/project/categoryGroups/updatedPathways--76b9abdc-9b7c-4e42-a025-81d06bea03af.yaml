@@ -28,12 +28,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: 265f78e0-d467-47f8-a26e-c98947d372f7
+            uid: fbacfc40-9f61-46a8-82a9-7e2c36be6f6a
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 3002c0a0-8dad-4f9b-b476-8456ad53d0a9
+        uid: fed3e11f-fdca-4267-9888-a6974dd6d6c9
         userCondition: null
 handle: updatedPathways
 name: 'Updated Pathways'

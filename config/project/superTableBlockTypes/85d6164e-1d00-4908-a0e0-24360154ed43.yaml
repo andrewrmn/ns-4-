@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c7fd8225-08be-4e67-a926-04b27c74ecc8
+            uid: 95b86cca-716d-41c0-bc99-552178540fd4
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d4ab26c8-5f5b-4543-ab2d-c182ecf2a031
+            uid: 0f16c38b-9ef8-4b10-bad0-4b1896aaec0f
             userCondition: null
             warning: null
             width: 100
@@ -38,7 +38,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 9b2686bc-5ed0-412b-b07b-a292c7c5e720
+            uid: 8559f9ef-6fe1-4409-992f-5187ef34e71b
             userCondition: null
             warning: null
             width: 100
@@ -50,12 +50,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: bd982b97-65bb-4814-9e8f-e3f4b0b67a4e
+            uid: ab027487-4d0d-435f-9a49-ebbc065c7cc9
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 2d1053e2-8565-4f65-b079-5ad4f3acda6b
+        uid: 846be882-6ead-4039-b582-c8eea357665e
         userCondition: null
 fields:
   6c31e057-1749-4bb2-9ee4-0ac2c38f7e0c: # Email
@@ -146,14 +146,17 @@ fields:
     settings:
       availableTransforms: '*'
       availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      characterLimit: null
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: true
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
+      showWordCount: false
+      sourceEditingGroups: '*'
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field

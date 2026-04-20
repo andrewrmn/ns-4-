@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 4effa237-62e2-4b9c-ab7b-3b24d5b113c3
+            uid: 5aab04dd-aad2-4244-9b48-046512b25257
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 86f596f5-2163-4f6e-9761-6eeb39a8ee19
+            uid: 66782b83-5756-4668-8bc2-a0d5eed4574c
             userCondition: null
             warning: null
             width: 100
@@ -38,12 +38,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 0d2d7cfe-c202-451d-add5-78da3f951ab8
+            uid: 059decf8-41c8-4d5b-b372-a38b5b0951b4
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 8310a390-a080-441b-824b-53c28b5d01de
+        uid: 80a5ff01-7b67-41cb-8e27-45634a5e12dc
         userCondition: null
 fields:
   6d46cc52-8b50-4cfb-99bc-14782782d963: # Description
@@ -57,14 +57,17 @@ fields:
     settings:
       availableTransforms: '*'
       availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      characterLimit: null
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: true
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
+      showWordCount: false
+      sourceEditingGroups: '*'
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field
@@ -99,14 +102,17 @@ fields:
     settings:
       availableTransforms: '*'
       availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      characterLimit: null
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: true
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: false
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
+      showWordCount: false
+      sourceEditingGroups: '*'
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field

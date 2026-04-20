@@ -27,12 +27,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 54d5760c-b8fc-4e45-97c8-ca32ec41c3be
+            uid: 97859f63-30e5-485e-8e19-436f36726ae4
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: b29228f4-676c-4d70-bb3a-5e6fdda8d6cc
+        uid: eddbe594-ae41-4a72-b985-a8540e02f474
         userCondition: null
 handle: login
 hasTitleField: false

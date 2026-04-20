@@ -36,10 +36,12 @@ permissions:
   - 'createentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
   - 'createentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
   - 'createentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'createfoldersinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
   - 'deleteentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
   - 'deleteentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
   - 'deleteentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
   - 'deleteentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'deletefilesandfoldersinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
   - 'deletepeerentries:6c1630f3-e220-4731-8275-a2f31e2bda2d' # News
   - 'deletepeerentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
   - 'deletepeerentries:bad38a62-ef16-4379-8cba-0e7dfbab754f' # Pages
@@ -60,6 +62,7 @@ permissions:
   - 'deletepeerentrydrafts:e011d030-7864-4189-9080-75b764853710' # Personal Use Purchasing Register
   - 'deletepeerentrydrafts:e2114991-fe88-4d06-b236-dda841abc628' # Homepage
   - 'deletepeerentrydrafts:e3272832-0ed6-494f-8e33-8e30afdaed2a' # Sleep Promo
+  - 'deletepeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
   - deleteusers
   - 'editglobalset:03ce674d-8ec5-4ca5-9416-ada9c81df133' # Pathways Table
   - 'editglobalset:14aa199d-d6e5-4452-bcaf-883d2715be11' # Legal Documents
@@ -69,11 +72,16 @@ permissions:
   - 'editglobalset:8df44416-3efd-4db4-ab88-7d436d62d9bf' # General Text Notifications
   - 'editglobalset:ba3ec8b7-7ff0-4aff-9c1b-bccc3843068a' # Updated Pathways Table
   - 'editglobalset:f634c74c-ffa3-443c-9eda-bd18b55092b8' # QR Scan Table
+  - 'editimagesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
+  - 'editpeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
+  - 'editpeerimagesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
   - editusers
   - impersonateusers
   - moderateusers
   - performupdates
   - registerusers
+  - 'replacepeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
+  - 'saveassetinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
   - 'seomatic:content-meta'
   - 'seomatic:content-meta:facebook'
   - 'seomatic:content-meta:general'
@@ -112,3 +120,5 @@ permissions:
   - 'utility:system-messages'
   - 'utility:system-report'
   - 'utility:updates'
+  - 'viewpeerfilesinvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'
+  - 'viewvolume:7d8fed8f-0af5-4e9f-bde0-eb2d76ddf7dd'

@@ -27,7 +27,7 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: e1584022-177b-4071-89cb-ea5e2b71fa15
+            uid: 5abc923c-b665-48b6-899f-f467cafda683
             userCondition: null
             warning: null
             width: 100
@@ -39,7 +39,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 42891c71-17bb-4226-a917-f9b1f060beb9
+            uid: 276f421e-03a0-4c61-a30c-74b30eac2943
             userCondition: null
             warning: null
             width: 100
@@ -51,7 +51,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 8820ce1d-ae38-436b-9d62-4b18e43c552f
+            uid: 09e41257-0a2b-45ee-b2dd-adf59e401e99
             userCondition: null
             warning: null
             width: 100
@@ -63,7 +63,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ecbb5ec3-51c4-400d-b940-7f0434714e1c
+            uid: c56fda98-6c11-4e50-91ca-4fe57bb343ce
             userCondition: null
             warning: null
             width: 100
@@ -75,7 +75,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2cd46929-709f-4397-9244-07bc70fdfcd0
+            uid: f25fe5b4-5969-419e-826b-178c0a90deb4
             userCondition: null
             warning: null
             width: 100
@@ -87,7 +87,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ff9a5e17-13bc-4111-89fd-e5abc758b2e3
+            uid: b902b2d4-10aa-424c-8714-f076d3086fc5
             userCondition: null
             warning: null
             width: 100
@@ -99,7 +99,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 98bf4920-20d0-4da7-a54d-d084bcf3dc26
+            uid: 2d58f4eb-6f4a-4a94-9585-3945de755912
             userCondition: null
             warning: null
             width: 100
@@ -117,7 +117,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 72c08eb1-108d-4a36-91f3-61468c628e26
+            uid: 042e2b0b-e153-44d9-8fed-d0bc266ea168
             userCondition: null
             warning: null
             width: 100

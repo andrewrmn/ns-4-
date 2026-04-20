@@ -1,15 +1,15 @@
-columnSuffix: plxhmykp
-contentColumnType: text
-fieldGroup: aa06a404-5068-4c0d-9e2d-845531dba984 # Register Form
-handle: allTermsAgreedSignature
+columnSuffix: fevzdfip
+contentColumnType: string
+fieldGroup: a8843661-a567-4e21-8928-2108d60edafe # Avatax
+handle: addressPhone
 instructions: null
-name: 'All Terms Agreed Signature'
+name: 'Phone Number'
 searchable: false
 settings:
   byteLimit: null
   charLimit: null
   code: false
-  columnType: null
+  columnType: string
   initialRows: 4
   multiline: false
   placeholder: null

@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 83bf9196-4917-4e50-be6c-15980c0fd5c8
+            uid: 85a6e1ca-8197-4547-8d34-c248e4f51c4d
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d4712521-ed9c-4996-9d54-639370c863db
+            uid: fbcb2959-59d2-4fa1-a387-15bf448f9bda
             userCondition: null
             warning: null
             width: 100
@@ -38,12 +38,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 3f79679d-9734-43c1-8905-3d35038b95fb
+            uid: 7a0317d5-ac00-4515-9a7c-a8ed9a8bb873
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 837c0c67-0895-4dab-ab21-2702028937f2
+        uid: 6f5c2dc6-5994-464b-8a73-1e812a3d68e6
         userCondition: null
 fields:
   05bf280e-e841-40b5-b0bb-a19853338165: # Show Alert
@@ -101,52 +101,52 @@ fields:
             - presseddigital\linkit\models\Entry
             -
               __assoc__:
-                0:
+                -
                   - enabled
                   - 1
-                2:
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select an entry'
           -
             - presseddigital\linkit\models\Category
             -
               __assoc__:
-                0:
+                -
                   - enabled
                   - 1
-                2:
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select a category'
           -
             - presseddigital\linkit\models\Asset
             -
               __assoc__:
-                0:
+                -
                   - enabled
                   - 1
-                2:
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select an asset'
           -
             - presseddigital\linkit\models\Product
             -
               __assoc__:
-                0:
+                -
                   - enabled
                   - 1
-                2:
+                -
                   - sources
                   - '*'
-                3:
+                -
                   - customSelectionLabel
                   - 'Select an entry'
     translationKeyFormat: null
@@ -163,14 +163,17 @@ fields:
     settings:
       availableTransforms: '*'
       availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      characterLimit: null
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: true
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
+      showWordCount: false
+      sourceEditingGroups: '*'
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field

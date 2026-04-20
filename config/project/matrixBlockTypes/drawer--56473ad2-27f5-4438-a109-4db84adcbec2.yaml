@@ -13,7 +13,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: d6f1b5fa-a071-4541-8305-02e2cddfa2f8
+            uid: 7eb3916b-3108-4d65-88ca-bf24d6a9e5b3
             userCondition: null
             warning: null
             width: 100
@@ -25,12 +25,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 85275af7-4fb7-42d8-b69e-c3085bc5cef1
+            uid: 11a03587-1b58-435a-b0c0-bccfeb5d4941
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 9daa2b1f-2b23-4088-ad8e-e40c21428791
+        uid: b2515491-e6f3-4f8c-b291-206f7ca3a6ae
         userCondition: null
 fields:
   6d176f65-7a88-4847-8591-1f85fd2bd695: # Headline
@@ -65,7 +65,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null

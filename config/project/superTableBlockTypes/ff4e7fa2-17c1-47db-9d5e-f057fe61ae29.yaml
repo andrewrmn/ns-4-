@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 73b39a2f-f453-49a1-a50d-927fa669a6b6
+            uid: 1716c1a3-a565-44b6-a96a-2782fbce1a5f
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 7a5e6166-b640-4ecb-80f2-c019986d3809
+            uid: 069fec8a-86d8-4cbe-9539-6bd9826e1818
             userCondition: null
             warning: null
             width: 100
@@ -38,7 +38,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: fda6dd8a-60e9-4f43-95b3-1f2dea6ec481
+            uid: fc9f9dc6-a2ec-4f10-bbfd-6c2faa6978d8
             userCondition: null
             warning: null
             width: 100
@@ -50,7 +50,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 02f7aacd-2ff6-44fc-9774-49ec1328c6b6
+            uid: e69b72b1-cde3-4d1c-8543-080ddccc0437
             userCondition: null
             warning: null
             width: 100
@@ -62,7 +62,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2882f197-6b21-459f-9f11-cdac2d356908
+            uid: 936189a4-9114-492f-ade1-b34e5b3acff9
             userCondition: null
             warning: null
             width: 100
@@ -74,12 +74,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a7b5aff7-ca9d-4616-8085-41e314d26d69
+            uid: 291ff357-7edb-4b5f-ad8d-febe185c82e4
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 013ab673-d959-4ffc-bf7f-fe10f8fda191
+        uid: 78dfff03-7554-407d-b1d1-08744305582d
         userCondition: null
 fields:
   0d914fff-b4b8-42a3-b98d-77caaba8781d: # Restricted Access?
@@ -141,14 +141,17 @@ fields:
     settings:
       availableTransforms: '*'
       availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      characterLimit: null
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: true
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: true
+      showWordCount: false
+      sourceEditingGroups: '*'
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field

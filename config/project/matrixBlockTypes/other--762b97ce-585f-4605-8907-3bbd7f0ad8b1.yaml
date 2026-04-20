@@ -13,12 +13,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ea3323aa-ecf6-44d4-868d-300f05cde564
+            uid: 82301c9c-3dfc-4186-9c4a-4d357c3f4f92
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 4dacb7e7-308d-42c7-8209-de8ed2d9500f
+        uid: f988c805-8596-45a3-913b-86607cf44ae9
         userCondition: null
 fields:
   0e5103db-1b8c-4e6b-bdb0-ed490e0ede55: # Additional Information
@@ -32,14 +32,18 @@ fields:
     settings:
       availableTransforms: '*'
       availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
+      characterLimit: null
+      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
       columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: false
+      defaultTransform: null
       purifierConfig: null
       purifyHtml: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
+      showWordCount: false
+      sourceEditingGroups:
+        - __ADMINS__
+      wordLimit: null
     translationKeyFormat: null
     translationMethod: none
     type: craft\ckeditor\Field

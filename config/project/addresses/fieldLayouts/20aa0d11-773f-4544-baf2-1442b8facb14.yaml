@@ -9,7 +9,7 @@ tabs:
         required: false
         tip: null
         type: craft\commerce\fieldlayoutelements\UserAddressSettings
-        uid: d4214c3d-86d2-4090-92cd-d87f55489b53
+        uid: 6d87d3e4-535f-4f16-b70b-fc3ed5a14b82
         userCondition: null
         warning: null
       -
@@ -35,7 +35,7 @@ tabs:
         tip: null
         title: null
         type: craft\fieldlayoutelements\addresses\LabelField
-        uid: 67c34128-785c-4a77-880b-cc0df67b0222
+        uid: 0e7c749c-ae29-4b0c-b352-45f07d187665
         userCondition: null
         warning: null
         width: 100
@@ -49,7 +49,7 @@ tabs:
         requirable: false
         tip: null
         type: craft\fieldlayoutelements\addresses\CountryCodeField
-        uid: 22365bbd-4d0d-4975-9e7c-93f507626e39
+        uid: a610801e-bf79-4c69-a3c7-bf6f83ca6a7c
         userCondition: null
         warning: null
         width: 100
@@ -60,30 +60,30 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\addresses\AddressField
-        uid: 78cedde0-f3ed-4abf-8534-7dd88d76b17a
+        uid: 6d0c6f1c-0d84-49bc-b7a9-62907685a1fb
         userCondition: null
         warning: null
       -
         elementCondition: null
-        fieldUid: b3bca242-9def-4d67-acae-974b7e4148f1 # Attention
+        fieldUid: 5e117cad-bb4f-42d5-8e50-4f787f128637 # Attention
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: c090b64d-0b3f-484b-82d8-9018f9a9e5d9
+        uid: 5968d653-c921-488d-a4f9-fa1852f66509
         userCondition: null
         warning: null
         width: 100
       -
         elementCondition: null
-        fieldUid: 3b3253b6-ecf7-4883-8cf0-ff7f386d533b # Phone Number
+        fieldUid: dea345ea-f53c-463d-b0cc-7eb1eb5f76f3 # Phone Number
         instructions: null
         label: null
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: f026be03-3558-46bd-b68e-e0fd220738e4
+        uid: b2276fff-c524-405d-88cb-c962917738cb
         userCondition: null
         warning: null
         width: 100
@@ -112,7 +112,7 @@ tabs:
         tip: null
         title: null
         type: craft\fieldlayoutelements\FullNameField
-        uid: 4428970b-498b-4272-88e9-6733622126cf
+        uid: 15e152f9-6cd9-49d5-b0ff-4315f4f31275
         userCondition: null
         warning: null
         width: 100
@@ -141,10 +141,10 @@ tabs:
         tip: null
         title: null
         type: craft\fieldlayoutelements\addresses\OrganizationField
-        uid: 8fa5b7be-9fbf-4b6d-97e9-edadd8d8a7f3
+        uid: dad40e45-5352-4451-85ec-90618fde9cdd
         userCondition: null
         warning: null
         width: 100
     name: Content
-    uid: ae52b62c-0adc-4d72-bd51-5c3fc36228ca
+    uid: ddf63961-edac-4aa5-ab57-84fcbd7b67cd
     userCondition: null

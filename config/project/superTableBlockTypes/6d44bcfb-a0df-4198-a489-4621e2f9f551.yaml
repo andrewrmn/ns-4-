@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 330e5f22-45b2-45a9-9622-2f995264f636
+            uid: 805ea729-ca27-4e8b-91c0-ab00354d5399
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 4c099156-4989-4aa5-8dd6-ff0bc8f2460f
+            uid: a0712a53-b2e7-41c4-84c5-d137d079c3f6
             userCondition: null
             warning: null
             width: 100
@@ -38,7 +38,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5dfdd5af-7452-47ad-b9f3-2bd9a8d36017
+            uid: 9f33f11b-fe89-4149-a624-bf66805cc093
             userCondition: null
             warning: null
             width: 100
@@ -50,7 +50,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c6d21161-b377-4859-9545-1d360c4f071e
+            uid: e2f20c15-50ba-477a-ab21-130145d1fed3
             userCondition: null
             warning: null
             width: 100
@@ -62,7 +62,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 21bce659-6b4c-4c28-985b-ab0fd3fd0818
+            uid: 336140f4-37a2-46de-89fa-b14b936f1ea8
             userCondition: null
             warning: null
             width: 100
@@ -348,23 +348,65 @@ fields:
     type: craft\fields\PlainText
   d69fddcb-416a-4178-abae-a4cb54913272: # Body
     columnSuffix: null
-    contentColumnType: text
+    contentColumnType: string
     fieldGroup: null
     handle: body
     instructions: null
     name: Body
     searchable: true
     settings:
-      availableTransforms: '*'
-      availableVolumes: '*'
-      ckeConfig: 3c7d8a91-2b4e-4f63-9c1d-8e5f6a7b9c0d # Standard
-      columnType: text
-      defaultTransform: ''
-      enableSourceEditingForNonAdmins: true
-      purifierConfig: null
-      purifyHtml: true
-      showUnpermittedFiles: false
-      showUnpermittedVolumes: true
+      errorMessage: 'Unable to find component class ''craft\redactor\Field''.'
+      expectedType: craft\redactor\Field
+      settings:
+        __assoc__:
+          -
+            - availableTransforms
+            - '*'
+          -
+            - availableVolumes
+            - '*'
+          -
+            - columnType
+            - text
+          -
+            - configSelectionMode
+            - choose
+          -
+            - defaultTransform
+            - ''
+          -
+            - manualConfig
+            - ''
+          -
+            - purifierConfig
+            - ''
+          -
+            - purifyHtml
+            - '1'
+          -
+            - redactorConfig
+            - ''
+          -
+            - removeEmptyTags
+            - '1'
+          -
+            - removeInlineStyles
+            - '1'
+          -
+            - removeNbsp
+            - '1'
+          -
+            - showHtmlButtonForNonAdmins
+            - '1'
+          -
+            - showUnpermittedFiles
+            - false
+          -
+            - showUnpermittedVolumes
+            - true
+          -
+            - uiMode
+            - enlarged
     translationKeyFormat: null
     translationMethod: none
-    type: craft\ckeditor\Field
+    type: craft\fields\MissingField

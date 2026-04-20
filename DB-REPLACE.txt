@@ -1,7 +1,26 @@
 1: Download Live DB
 2: Delete local DB & Import Live
+2.2: if fails run queries:
+
+UPDATE craft_commerce_orderadjustments
+SET dateCreated = '1970-01-01 00:00:00'
+WHERE dateCreated = '0000-00-00 00:00:00';
+
+UPDATE craft_commerce_orderadjustments
+SET dateUpdated = '1970-01-01 00:00:00'
+WHERE dateUpdated = '0000-00-00 00:00:00';
+
+
 3: Run: php craft migrate/all
 4: Run: php craft commerce/upgrade
-5: add fields (addressAttention and addressPhone)
-6: Wait for migration to complete
-7: Go to Admin > Settings > Check the image paths
+4.2: add fields (addressAttention and addressPhone)
+5: Wait for migration to complete
+
+6.1: Change Site URL
+6.2: Go to Admin > Settings > Add the file systems
+6.3 Convert to CKEditor:
+ - php craft ckeditor/convert/redactor
+   (choose: yes, 0) for all
+6.4 Rebuild project/ apply
+
+7: Page tempalte paths: About page.html ----> pages/page.html
