@@ -37,52 +37,52 @@ settings:
         - presseddigital\linkit\models\Entry
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select an entry'
       -
         - presseddigital\linkit\models\Category
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select a category'
       -
         - presseddigital\linkit\models\Asset
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select an asset'
       -
         - presseddigital\linkit\models\Product
         -
           __assoc__:
-            0:
+            -
               - enabled
               - 1
-            2:
+            -
               - sources
               - '*'
-            3:
+            -
               - customSelectionLabel
               - 'Select an entry'
 translationKeyFormat: null

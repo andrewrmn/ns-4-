@@ -16,7 +16,7 @@ WHERE dateUpdated = '0000-00-00 00:00:00';
 4.2: add fields (addressAttention and addressPhone)
 5: Wait for migration to complete
 
-6.1: Change Site URL
+6.1: Change Site URL: DEFAULT_SITE_URL
 6.2: Go to Admin > Settings > Add the file systems
 6.3 Convert to CKEditor:
  - php craft ckeditor/convert/redactor
@@ -24,3 +24,5 @@ WHERE dateUpdated = '0000-00-00 00:00:00';
 6.4 Rebuild project/ apply
 
 7: Page tempalte paths: About page.html ----> pages/page.html
+
+- STRIPE DEV MODE?
