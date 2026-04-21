@@ -46,7 +46,7 @@ $vhbp: $small;
         color: $gray-dark;
 
         @include start-at($large) {
-            font-size: 72px;
+            font-size: 82px;
         }
 
         span {
@@ -54,7 +54,7 @@ $vhbp: $small;
         }
     }
 
-    > * {
+    >* {
         display: flex;
         align-items: center;
         position: relative;
@@ -70,7 +70,7 @@ $vhbp: $small;
                 z-index: -1;
                 display: block;
                 top: 0;
-                background: transparent linear-gradient(90deg, rgba(255,255,255,1) 74%, rgba(255,255,255,0) 100%);
+                background: transparent linear-gradient(90deg, rgba(255, 255, 255, 1) 74%, rgba(255, 255, 255, 0) 100%);
             }
 
         }
@@ -84,14 +84,13 @@ $vhbp: $small;
     //max-width: 680px;
 
 
-    .hxl {
-
-    }
+    .hxl {}
 
 
     @include start-at($vhbp) {
         padding-right: 40px;
     }
+
     @include start-at($large) {
         padding-right: 80px;
     }

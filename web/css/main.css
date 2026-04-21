@@ -5752,7 +5752,7 @@ audio, canvas, video {
   font-size: 30px;
   font-weight: 300;
   letter-spacing: -0.5px;
-  line-height: 1.1;
+  line-height: 1;
   margin-bottom: 15px;
   max-width: 750px;
 }
@@ -7185,7 +7185,7 @@ hr {
   }
 }
 .logo a {
-  width: 164px;
+  width: 184px;
   display: block;
 }
 .logo a img {
@@ -7782,7 +7782,7 @@ hr {
 }
 @media (min-width: 1040px) {
   .video-hero__content .hxl {
-    font-size: 72px;
+    font-size: 82px;
   }
 }
 .video-hero__content .hxl span {

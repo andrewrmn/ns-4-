@@ -1,8 +1,8 @@
 // Project Specific Variables
-const projectPath 		= './templates/';
-const devPath 			= projectPath + '_dev';
-const buildPath 		= './web';
-const projectURL 		= 'http://local.neuroscience';
+const projectPath = './templates/';
+const devPath = projectPath + '_dev';
+const buildPath = './web';
+const projectURL = 'http://local.ns4';
 
 // npm packages
 const gulp = require('gulp');
@@ -42,24 +42,24 @@ function browserSync(done) {
 }
 // BrowserSync Reload
 function browserSyncReload(done) {
-  browsersync.reload();
-  done();
+	browsersync.reload();
+	done();
 }
 // Clean assets
 function clean() {
-  return del([buildPath + '/css']);
+	return del([buildPath + '/css']);
 }
 
 function css() {
-  console.log('Compiling CSS...');
-  return gulp
-    .src([devPath + '/scss/compile.scss'])
-	.pipe(rename({ basename: "main" }))
-    .pipe(sass({includePaths: ['node_modules/']}).on('error', sass.logError))
-    .pipe(autoprefixer({ cascade: false }))
-	//.pipe(cleanCSS())
-    .pipe(gulp.dest(buildPath + '/css/'))
-	.pipe(browsersync.stream());
+	console.log('Compiling CSS...');
+	return gulp
+		.src([devPath + '/scss/compile.scss'])
+		.pipe(rename({ basename: "main" }))
+		.pipe(sass({ includePaths: ['node_modules/'] }).on('error', sass.logError))
+		.pipe(autoprefixer({ cascade: false }))
+		//.pipe(cleanCSS())
+		.pipe(gulp.dest(buildPath + '/css/'))
+		.pipe(browsersync.stream());
 }
 
 function scripts() {
@@ -78,13 +78,13 @@ function scripts() {
 
 function images() {
 	return gulp
-	.src([devPath + '/images/**/*.{png,jpg,gif,ico,svg}'])
-	.pipe(newer(buildPath + '/images/'))
-	.pipe(imagemin({
-		progressive: true,
-		use: [pngquant()]
-	}))
-	.pipe(gulp.dest(buildPath + '/images/'))
+		.src([devPath + '/images/**/*.{png,jpg,gif,ico,svg}'])
+		.pipe(newer(buildPath + '/images/'))
+		.pipe(imagemin({
+			progressive: true,
+			use: [pngquant()]
+		}))
+		.pipe(gulp.dest(buildPath + '/images/'))
 }
 
 function watchFiles() {
@@ -93,10 +93,10 @@ function watchFiles() {
 	// images();
 	gulp.watch(devPath + '/scss/**/*.scss', css, browserSync);
 	gulp.watch(
-	    [
-	      devPath + "/js/**/*"
-	    ],
-	    gulp.series(scripts, browserSyncReload)
+		[
+			devPath + "/js/**/*"
+		],
+		gulp.series(scripts, browserSyncReload)
 	);
 	gulp.watch(devPath + '/images/**/*', images);
 	gulp.watch(projectPath + '**/*.html', browserSyncReload);
