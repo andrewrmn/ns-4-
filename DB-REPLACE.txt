@@ -26,3 +26,5 @@ WHERE dateUpdated = '0000-00-00 00:00:00';
 7: Page tempalte paths: About page.html ----> pages/page.html
 
 - STRIPE DEV MODE?
+
+-- CLEAR ALL ACTIVE CARTS

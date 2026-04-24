@@ -533,7 +533,7 @@
             type: 'post',
             cache: false,
             data: form.serialize(),
-            url: '/actions/neuroselect-module/pdf/generate-pdf',
+            url: '{{ siteUrl|e('js') }}actions/neuroselect-module/pdf/generate-pdf',
             dataType: 'json'
         }).done(function (data) {
             $('html').removeClass('thinking').removeClass('generating');
@@ -580,7 +580,7 @@
             type: 'post',
             cache: false,
             data: form.serialize(),
-            url: '/actions/neuroselect-module/pdf/email-pdf',
+            url: '{{ siteUrl|e('js') }}actions/neuroselect-module/pdf/email-pdf',
             dataType: 'json'
         }).done(function (data) {
             $('html').removeClass('email-queue thinking');

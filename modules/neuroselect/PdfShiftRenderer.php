@@ -11,6 +11,8 @@ use GuzzleHttp\Exception\GuzzleException;
  *
  * Env: PDFSHIFT_API_KEY or PIR_PDFSHIFT_API_KEY (required)
  * PIR_PDFSHIFT_SANDBOX: defaults to true (watermarked, no credits). Set to false for live conversions.
+ * PIR_PDFSHIFT_TIMEOUT: optional, seconds 1–900 for PDFShift conversion (default 240). Raises load budget for slow hosts.
+ * PIR_PDFSHIFT_IGNORE_LONG_POLLING: optional, default true — avoids hanging on long-poll/WebSocket when wait_for_network is on.
  */
 final class PdfShiftRenderer
 {
@@ -91,6 +93,21 @@ final class PdfShiftRenderer
         }
         if (self::useSandbox()) {
             $payload['sandbox'] = true;
+        }
+
+        $timeoutEnv = App::env('PIR_PDFSHIFT_TIMEOUT');
+        if (is_string($timeoutEnv) && $timeoutEnv !== '') {
+            $t = (int) $timeoutEnv;
+            if ($t >= 1 && $t <= 900) {
+                $payload['timeout'] = $t;
+            }
+        } else {
+            $payload['timeout'] = 240;
+        }
+
+        $ilp = App::env('PIR_PDFSHIFT_IGNORE_LONG_POLLING');
+        if ($ilp === null || $ilp === '' || filter_var($ilp, FILTER_VALIDATE_BOOLEAN)) {
+            $payload['ignore_long_polling'] = true;
         }
 
         $processor = App::env('PIR_PDFSHIFT_PROCESSOR_VERSION');
