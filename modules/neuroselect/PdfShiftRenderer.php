@@ -11,12 +11,16 @@ use GuzzleHttp\Exception\GuzzleException;
  *
  * Env: PDFSHIFT_API_KEY or PIR_PDFSHIFT_API_KEY (required)
  * PIR_PDFSHIFT_SANDBOX: defaults to true (watermarked, no credits). Set to false for live conversions.
- * PIR_PDFSHIFT_TIMEOUT: optional, seconds 1–900 for PDFShift conversion (default 240). Raises load budget for slow hosts.
+ * PIR_PDFSHIFT_TIMEOUT: optional seconds (default = cap). Clamped to your PDFShift plan max (see TIMEOUT_CAP).
+ * PIR_PDFSHIFT_TIMEOUT_CAP: optional override when PDFShift raises your account limit (default 100; standard plans reject >100s).
  * PIR_PDFSHIFT_IGNORE_LONG_POLLING: optional, default true — avoids hanging on long-poll/WebSocket when wait_for_network is on.
  */
 final class PdfShiftRenderer
 {
     private const ENDPOINT = 'https://api.pdfshift.io/v3/convert/pdf';
+
+    /** Standard PDFShift plans reject timeout > 100s unless support raises your account limit. */
+    private const TIMEOUT_CAP_DEFAULT = 100;
 
     /**
      * PDFShift sandbox mode: same API key; adds watermark and does not consume credits.
@@ -49,6 +53,19 @@ final class PdfShiftRenderer
         }
 
         return null;
+    }
+
+    private static function pdfshiftTimeoutCapSeconds(): int
+    {
+        $cap = App::env('PIR_PDFSHIFT_TIMEOUT_CAP');
+        if (is_string($cap) && $cap !== '') {
+            $c = (int) $cap;
+            if ($c >= 1 && $c <= 900) {
+                return $c;
+            }
+        }
+
+        return self::TIMEOUT_CAP_DEFAULT;
     }
 
     /**
@@ -95,15 +112,11 @@ final class PdfShiftRenderer
             $payload['sandbox'] = true;
         }
 
+        $cap = self::pdfshiftTimeoutCapSeconds();
         $timeoutEnv = App::env('PIR_PDFSHIFT_TIMEOUT');
-        if (is_string($timeoutEnv) && $timeoutEnv !== '') {
-            $t = (int) $timeoutEnv;
-            if ($t >= 1 && $t <= 900) {
-                $payload['timeout'] = $t;
-            }
-        } else {
-            $payload['timeout'] = 240;
-        }
+        $t = (is_string($timeoutEnv) && $timeoutEnv !== '') ? (int) $timeoutEnv : $cap;
+        $t = max(1, min($t, $cap));
+        $payload['timeout'] = $t;
 
         $ilp = App::env('PIR_PDFSHIFT_IGNORE_LONG_POLLING');
         if ($ilp === null || $ilp === '' || filter_var($ilp, FILTER_VALIDATE_BOOLEAN)) {
