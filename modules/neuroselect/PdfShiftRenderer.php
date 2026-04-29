@@ -51,6 +51,17 @@ final class PdfShiftRenderer
         return filter_var($v, FILTER_VALIDATE_BOOLEAN);
     }
 
+    /** True when env requests disable_javascript on the PDFShift payload (normalizes typo-prone booleans). */
+    public static function envDisablesJavascript(): bool
+    {
+        $v = App::env('PIR_PDFSHIFT_DISABLE_JAVASCRIPT');
+        if ($v === null || $v === '') {
+            return false;
+        }
+
+        return filter_var(trim((string) $v), FILTER_VALIDATE_BOOLEAN);
+    }
+
     public static function isConfigured(): bool
     {
         $k = self::apiKey();
@@ -144,8 +155,7 @@ final class PdfShiftRenderer
             }
         }
 
-        $noJs = App::env('PIR_PDFSHIFT_DISABLE_JAVASCRIPT');
-        if (is_string($noJs) && $noJs !== '' && filter_var($noJs, FILTER_VALIDATE_BOOLEAN)) {
+        if (self::envDisablesJavascript()) {
             $payload['disable_javascript'] = true;
         }
 
@@ -215,7 +225,8 @@ final class PdfShiftRenderer
             'use_print' => $payload['use_print'] ?? null,
             'ignore_long_polling' => $payload['ignore_long_polling'] ?? null,
             'has_css_extra' => ($payload['css'] ?? '') !== '',
-            'disable_javascript' => $payload['disable_javascript'] ?? false,
+            'disable_javascript_payload' => (bool) ($payload['disable_javascript'] ?? false),
+            'env_disable_js_reads_true' => self::envDisablesJavascript(),
             'source_host' => (string) (parse_url($url, PHP_URL_HOST) ?: ''),
             'err_snip' => substr($msg, 0, 420),
         ]);

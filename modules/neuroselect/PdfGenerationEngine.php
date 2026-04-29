@@ -10,6 +10,7 @@ use craft\helpers\App;
  * Env PIR_PDF_ENGINE: chromium | pdfshift | wkhtmltopdf | dompdf (explicit value always wins).
  * If unset: PDFShift when PDFSHIFT_API_KEY or PIR_PDFSHIFT_API_KEY is set (even if Chrome exists),
  * else Chromium when a binary is available, else Dompdf.
+ * Set PIR_PDF_ENGINE explicitly (dompdf | pdfshift | …) when debugging; dompdf skips PDFShift timeouts for slow/report URLs.
  */
 final class PdfGenerationEngine
 {

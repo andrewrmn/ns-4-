@@ -127,6 +127,7 @@ class PdfController extends Controller
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
             'pdfshift_use_print' => $engine === PdfGenerationEngine::PDFSHIFT ? PdfShiftRenderer::usePrint() : false,
             'pdfshift_css_preview' => $engine === PdfGenerationEngine::PDFSHIFT ? substr($this->pirPdfShiftCssUrl($pirSheet), 0, 96) : '',
+            'pdfshift_disable_js_env' => PdfShiftRenderer::envDisablesJavascript(),
         ]);
         // #endregion
 
