@@ -11,7 +11,8 @@ use GuzzleHttp\Exception\GuzzleException;
  *
  * Env: PDFSHIFT_API_KEY or PIR_PDFSHIFT_API_KEY (required)
  * PIR_PDFSHIFT_SANDBOX: defaults to true (watermarked, no credits). Set to false for live conversions.
- * PIR_PDFSHIFT_TIMEOUT: optional seconds (default = cap). Clamped to your PDFShift plan max (see TIMEOUT_CAP).
+ * PIR_PDFSHIFT_TIMEOUT: optional seconds — page-load budget PDFShift waits for HTML. Clamped by PIR_PDFSHIFT_TIMEOUT_CAP.
+ *   Omit to use PAGE_LOAD_TIMEOUT_DEFAULT (30s — faster failures while iterating; raise in production via .env if needed).
  * PIR_PDFSHIFT_TIMEOUT_CAP: optional override when PDFShift raises your account limit (default 100; standard plans reject >100s).
  * PIR_PDFSHIFT_IGNORE_LONG_POLLING: optional — only when wait_for_network is true (default false here); skips long poll wait.
  * PIR_PDFSHIFT_DISABLE_JAVASCRIPT: optional true — skips in-page scripts (GTM, etc.). Use if timeouts persist after matching legacy css/use_print options.
@@ -23,6 +24,9 @@ final class PdfShiftRenderer
 
     /** Standard PDFShift plans reject timeout > 100s unless support raises your account limit. */
     private const TIMEOUT_CAP_DEFAULT = 100;
+
+    /** When PIR_PDFSHIFT_TIMEOUT is unset: ask PDFShift for a short page-load window (faster errors while testing). */
+    private const PAGE_LOAD_TIMEOUT_DEFAULT = 30;
 
     /**
      * PDFShift sandbox mode: same API key; adds watermark and does not consume credits.
@@ -140,9 +144,14 @@ final class PdfShiftRenderer
 
         $cap = self::pdfshiftTimeoutCapSeconds();
         $timeoutEnv = App::env('PIR_PDFSHIFT_TIMEOUT');
-        $t = (is_string($timeoutEnv) && $timeoutEnv !== '') ? (int) $timeoutEnv : $cap;
+        $t = (is_string($timeoutEnv) && $timeoutEnv !== '')
+            ? (int) $timeoutEnv
+            : self::PAGE_LOAD_TIMEOUT_DEFAULT;
         $t = max(1, min($t, $cap));
         $payload['timeout'] = $t;
+
+        // Guzzle must outlive PDFShift’s work slightly, but track $t so we do not sit on 180s after a 30s API budget.
+        $guzzleTotalSec = min(300, max(45, $t + 30));
 
         $wfn = App::env('PIR_PDFSHIFT_WAIT_FOR_NETWORK');
         $waitForNetwork = is_string($wfn) && $wfn !== '' && filter_var($wfn, FILTER_VALIDATE_BOOLEAN);
@@ -173,8 +182,8 @@ final class PdfShiftRenderer
 
         try {
             $client = Craft::createGuzzleClient([
-                'timeout' => 180,
-                'connect_timeout' => 30,
+                'timeout' => $guzzleTotalSec,
+                'connect_timeout' => 15,
                 'http_errors' => false,
             ]);
             $response = $client->post(self::ENDPOINT, [
