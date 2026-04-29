@@ -84,8 +84,28 @@ class PdfController extends Controller
     }
 
     /**
- * @param string|null $pdfEngineDetail
- */
+     * Styles for PDFShift `css` field: merged local pdf9 + pdf9-dompdf (same as Dompdf) when loaded from disk,
+     * otherwise HTTPS URL — avoids PDFShift fetching the site URL (often fails with CSS errors vs origin/WAF timing).
+     */
+    private function pirPdfShiftMergedCssOrUrl(array $pirResolved): string
+    {
+        $inline = $pirResolved['dompdfInline'] ?? null;
+        if (is_string($inline) && $inline !== '') {
+            $out = $inline;
+            $append = $pirResolved['dompdfAppend'] ?? null;
+            if (is_string($append) && $append !== '') {
+                $out .= "\n\n" . $append;
+            }
+
+            return $out;
+        }
+
+        return $this->pirPdfShiftCssUrl($pirResolved);
+    }
+
+    /**
+     * @param string|null $pdfEngineDetail
+     */
     private function pipelineUrlFingerprint(string $url): array
     {
         $p = parse_url($url);
@@ -133,21 +153,24 @@ class PdfController extends Controller
             'source_host' => $pu['host'] ?? '',
             'source_path' => $pu['path'] ?? '',
             'sheet_branch' => $sheetBranch,
+            'pdfshift_css_payload' => isset($pirSheet['dompdfInline']) && is_string($pirSheet['dompdfInline']) && $pirSheet['dompdfInline'] !== ''
+                ? 'inline_merge'
+                : 'url',
             'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
             'pdfshift_use_print' => PdfShiftRenderer::usePrint(),
-            'pdfshift_css_preview' => substr($this->pirPdfShiftCssUrl($pirSheet), 0, 96),
+            'pdfshift_css_preview' => substr($this->pirPdfShiftMergedCssOrUrl($pirSheet), 0, 96),
             'pdfshift_disable_js_env' => PdfShiftRenderer::envDisablesJavascript(),
         ]);
         // #endregion
 
-        $shiftCssUrl = $this->pirPdfShiftCssUrl($pirSheet);
+        $shiftCss = $this->pirPdfShiftMergedCssOrUrl($pirSheet);
 
         return PdfShiftRenderer::renderUrlToPdf(
             $normalizedSource,
             $footerInner,
             null,
-            $shiftCssUrl,
+            $shiftCss,
             $pdfEngineDetail
         );
     }
