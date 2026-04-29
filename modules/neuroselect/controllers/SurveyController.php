@@ -14,6 +14,7 @@ namespace modules\neuroselect\controllers;
 use Craft;
 use craft\helpers\App;
 use craft\helpers\FileHelper;
+use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use modules\neuroselect\ChromiumPdfRenderer;
 use modules\neuroselect\HtmlToPdfRenderer;
@@ -483,7 +484,12 @@ class SurveyController extends Controller
         }
 
         if ($engine === PdfGenerationEngine::PDFSHIFT) {
-            return PdfShiftRenderer::renderUrlToPdf($source, $footerHtml, $headerHtml, null, $errorDetail);
+            $cssResolved = $this->resolveSurveyStylesheetPathOrUrl();
+            $cssShift = preg_match('#^https?://#i', $cssResolved)
+                ? $cssResolved
+                : UrlHelper::siteUrl('css/' . basename($cssResolved));
+
+            return PdfShiftRenderer::renderUrlToPdf($source, $footerHtml, $headerHtml, $cssShift, $errorDetail);
         }
 
         if ($engine === PdfGenerationEngine::WKHTML) {

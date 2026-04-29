@@ -13,7 +13,9 @@ use GuzzleHttp\Exception\GuzzleException;
  * PIR_PDFSHIFT_SANDBOX: defaults to true (watermarked, no credits). Set to false for live conversions.
  * PIR_PDFSHIFT_TIMEOUT: optional seconds (default = cap). Clamped to your PDFShift plan max (see TIMEOUT_CAP).
  * PIR_PDFSHIFT_TIMEOUT_CAP: optional override when PDFShift raises your account limit (default 100; standard plans reject >100s).
- * PIR_PDFSHIFT_IGNORE_LONG_POLLING: optional, default true — avoids hanging on long-poll/WebSocket when wait_for_network is on.
+ * PIR_PDFSHIFT_IGNORE_LONG_POLLING: optional — only when wait_for_network is true (default false here); skips long poll wait.
+ * PIR_PDFSHIFT_DISABLE_JAVASCRIPT: optional true — skips in-page scripts (GTM, etc.). Use if timeouts persist after matching legacy css/use_print options.
+ * PIR_PDFSHIFT_USE_PRINT: optional — defaults false to match legacy neuroselect plugin (pdfshift v2 used use_print false). Set true for @media print.
  */
 final class PdfShiftRenderer
 {
@@ -31,6 +33,19 @@ final class PdfShiftRenderer
         $v = App::env('PIR_PDFSHIFT_SANDBOX');
         if ($v === null || $v === '') {
             return true;
+        }
+
+        return filter_var($v, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Legacy plugin (PDFShift API v2) sent use_print false — faster/simpler than print CSS everywhere.
+     */
+    public static function usePrint(): bool
+    {
+        $v = App::env('PIR_PDFSHIFT_USE_PRINT');
+        if ($v === null || $v === '') {
+            return false;
         }
 
         return filter_var($v, FILTER_VALIDATE_BOOLEAN);
@@ -90,7 +105,7 @@ final class PdfShiftRenderer
         $payload = [
             'source' => $url,
             'format' => 'A4',
-            'use_print' => true,
+            'use_print' => self::usePrint(),
         ];
 
         if ($footerInnerHtml !== '') {
@@ -118,9 +133,20 @@ final class PdfShiftRenderer
         $t = max(1, min($t, $cap));
         $payload['timeout'] = $t;
 
-        $ilp = App::env('PIR_PDFSHIFT_IGNORE_LONG_POLLING');
-        if ($ilp === null || $ilp === '' || filter_var($ilp, FILTER_VALIDATE_BOOLEAN)) {
-            $payload['ignore_long_polling'] = true;
+        $wfn = App::env('PIR_PDFSHIFT_WAIT_FOR_NETWORK');
+        $waitForNetwork = is_string($wfn) && $wfn !== '' && filter_var($wfn, FILTER_VALIDATE_BOOLEAN);
+        $payload['wait_for_network'] = $waitForNetwork;
+
+        if ($waitForNetwork) {
+            $ilp = App::env('PIR_PDFSHIFT_IGNORE_LONG_POLLING');
+            if ($ilp === null || $ilp === '' || filter_var($ilp, FILTER_VALIDATE_BOOLEAN)) {
+                $payload['ignore_long_polling'] = true;
+            }
+        }
+
+        $noJs = App::env('PIR_PDFSHIFT_DISABLE_JAVASCRIPT');
+        if (is_string($noJs) && $noJs !== '' && filter_var($noJs, FILTER_VALIDATE_BOOLEAN)) {
+            $payload['disable_javascript'] = true;
         }
 
         $processor = App::env('PIR_PDFSHIFT_PROCESSOR_VERSION');
@@ -180,6 +206,20 @@ final class PdfShiftRenderer
 
         Craft::warning($msg, __METHOD__);
         $errorDetail = trim($msg);
+
+        // #region agent log
+        PdfDebugSessionLog::write('H_PWFN,H_DB', __METHOD__, 'pdfshift_failure', [
+            'http_code' => $code,
+            'pdfshift_timeout_sec' => $payload['timeout'] ?? null,
+            'wait_for_network' => $payload['wait_for_network'] ?? null,
+            'use_print' => $payload['use_print'] ?? null,
+            'ignore_long_polling' => $payload['ignore_long_polling'] ?? null,
+            'has_css_extra' => ($payload['css'] ?? '') !== '',
+            'disable_javascript' => $payload['disable_javascript'] ?? false,
+            'source_host' => (string) (parse_url($url, PHP_URL_HOST) ?: ''),
+            'err_snip' => substr($msg, 0, 420),
+        ]);
+        // #endregion
 
         return false;
     }

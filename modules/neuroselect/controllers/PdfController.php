@@ -20,6 +20,7 @@ use modules\neuroselect\WkhtmlPdfRenderer;
 use Craft;
 use craft\elements\User;
 use craft\helpers\App;
+use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use craft\helpers\FileHelper;
 use craft\mail\Message;
@@ -65,6 +66,27 @@ class PdfController extends Controller
     }
 
     /**
+     * HTTP(S) URL for PDFShift `css` — matches legacy packaged plugin passing https://…/pdf9.css (see xx_legacy_plugins).
+     */
+    private function pirPdfShiftCssUrl(array $pirResolved): string
+    {
+        $override = App::env('PIR_PDFSHIFT_CSS_URL');
+        if (is_string($override) && $override !== '') {
+            return $override;
+        }
+        $u = $pirResolved['dompdfUrl'] ?? null;
+        if (is_string($u) && $u !== '') {
+            return $u;
+        }
+        $p9 = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9.css';
+        if (is_file($p9) && (int) @filesize($p9) > 0) {
+            return UrlHelper::siteUrl('css/pdf9.css');
+        }
+
+        return 'https://www.neuroscienceinc.com/css/pdf9.css';
+    }
+
+    /**
      * @param string|null $pdfEngineDetail
      */
     private function renderPirPdfBody(string $normalizedSource, ?string &$pdfEngineDetail = null): string|false
@@ -103,6 +125,8 @@ class PdfController extends Controller
             'chromium_bin_basename' => $resolvedChromeBin ? basename($resolvedChromeBin) : null,
             'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
+            'pdfshift_use_print' => $engine === PdfGenerationEngine::PDFSHIFT ? PdfShiftRenderer::usePrint() : false,
+            'pdfshift_css_preview' => $engine === PdfGenerationEngine::PDFSHIFT ? substr($this->pirPdfShiftCssUrl($pirSheet), 0, 96) : '',
         ]);
         // #endregion
 
@@ -110,11 +134,13 @@ class PdfController extends Controller
             return ChromiumPdfRenderer::renderUrlToPdf($normalizedSource, $pdfEngineDetail);
         }
         if ($engine === PdfGenerationEngine::PDFSHIFT) {
+            $shiftCssUrl = $this->pirPdfShiftCssUrl($pirSheet);
+
             return PdfShiftRenderer::renderUrlToPdf(
                 $normalizedSource,
                 $footerInner,
                 null,
-                null,
+                $shiftCssUrl,
                 $pdfEngineDetail
             );
         }
