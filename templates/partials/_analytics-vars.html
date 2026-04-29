@@ -1,0 +1,3 @@
+{# Sets analyticsEnabled — only true when Craft’s environment name is “live” (whitelist below).
+   CRAFT_ENVIRONMENT is defined from .env in web/index.php (same as config/*/general.php switching). #}
+{% set analyticsEnabled = constant('CRAFT_ENVIRONMENT') in ['production', 'staging'] %}

@@ -15,25 +15,12 @@
 <link rel="shortcut icon" type="image/ico" href="/images/favicons/favicon.png" />
 <link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" />
 <link rel="icon" href="/images/favicons/android-favicon.png">
+
+{% include 'partials/analytics-vars' %}
+
 <script src="/js/jquery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117519601-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-117519601-1');
-</script>
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-N46834T');</script>
-<!-- End Google Tag Manager -->
+{% include 'partials/analytics-google-head-scripts' %}
 
 {% hook 'seomaticRender' %}
 <script type="text/javascript" src="https://www.sagepayments.net/pay/1.0.2/js/pay.min.js"></script>

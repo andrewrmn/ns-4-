@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+	{% include 'partials/analytics-vars' %}
 	<meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
@@ -17,35 +18,15 @@
 	<link rel="stylesheet" href="/css/hcp.css?v=15.0.0">
 	{% endif %}	
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117519601-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+	{% include 'partials/analytics-google-head-scripts' %}
 
-	  gtag('config', 'UA-117519601-1');
-	</script>
-
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-N46834T');</script>
-	<!-- End Google Tag Manager -->
-	
-	<!-- Start of HubSpot Embed Code -->
-	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/23208015.js"></script>
-	<!-- End of HubSpot Embed Code -->
+	{% include 'partials/analytics-hubspot' %}
 
 	<script src="/js/jquery.js"></script>
 </head>
 
 <body>
-	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N46834T"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<!-- End Google Tag Manager (noscript) -->
+	{% include 'partials/analytics-google-body-noscript' %}
 
 	<a href="#content" class="sr-only">Skip to content</a>
 
