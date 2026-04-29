@@ -22,12 +22,21 @@
 </head>
 
 <body>
-	{% include 'partials/analytics-google-body-noscript' %}
+	{% if constant('CRAFT_ENVIRONMENT') in ['production', 'staging'] %}
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N46834T" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
-	{% include 'partials/analytics-hubspot' %}
+	<!-- Start of HubSpot Embed Code -->
+	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/23208015.js"></script>
+	<!-- End of HubSpot Embed Code -->
 
-
-	{% include 'partials/analytics-tealium-loader-shop' %}
+	<!-- Loading script asynchronously -->
+	<script type="text/javascript">
+		(function (a, b, c, d) { a = '//tags.tiqcdn.com/utag/advantagepublisherservices/aps/prod/utag.js'; b = document; c = 'script'; d = b.createElement(c); d.src = a; d.type = 'text/java' + c; d.async = true; a = b.getElementsByTagName(c)[0]; a.parentNode.insertBefore(d, a); })();
+	</script>
+	{% endif %}
 
 	<a href="#content" class="sr-only">Skip to content</a>
 	<!--[if lt IE 8]>

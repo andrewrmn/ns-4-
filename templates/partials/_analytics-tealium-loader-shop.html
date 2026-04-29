@@ -1,7 +1,0 @@
-{# Tealium utag loader only (shop commerce layout never included utag_data). #}
-{% if analyticsEnabled %}
-<!-- Loading script asynchronously -->
-<script type="text/javascript">
-		(function (a, b, c, d) { a = '//tags.tiqcdn.com/utag/advantagepublisherservices/aps/prod/utag.js'; b = document; c = 'script'; d = b.createElement(c); d.src = a; d.type = 'text/java' + c; d.async = true; a = b.getElementsByTagName(c)[0]; a.parentNode.insertBefore(d, a); })();
-</script>
-{% endif %}
