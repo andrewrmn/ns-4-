@@ -169,6 +169,8 @@ final class PdfShiftRenderer
             $headers['X-Processor-Version'] = $processor;
         }
 
+        $pdfshiftRequestStartedMs = (int) round(microtime(true) * 1000);
+
         try {
             $client = Craft::createGuzzleClient([
                 'timeout' => 180,
@@ -182,19 +184,49 @@ final class PdfShiftRenderer
         } catch (GuzzleException $e) {
             Craft::warning('PDFShift: ' . $e->getMessage(), __METHOD__);
             $errorDetail = 'PDFShift request failed.';
+            $elapsedMs = (int) round(microtime(true) * 1000) - $pdfshiftRequestStartedMs;
+            // #region agent log
+            PdfDebugSessionLog::write('H_PIPELINE', __METHOD__, 'pipeline_4_pdfshift_guzzle_exception', [
+                'pipeline_step' => '4_guzzle',
+                'elapsed_ms' => $elapsedMs,
+                'exc_class' => $e::class,
+            ]);
+            // #endregion
 
             return false;
         }
+
+        $elapsedMs = (int) round(microtime(true) * 1000) - $pdfshiftRequestStartedMs;
 
         $code = $response->getStatusCode();
         $body = (string) $response->getBody();
         $ct = strtolower($response->getHeaderLine('Content-Type'));
 
         if ($code >= 200 && $code < 300 && strncmp($body, '%PDF', 4) === 0) {
+            // #region agent log
+            PdfDebugSessionLog::write('H_PIPELINE', __METHOD__, 'pipeline_4_pdfshift_http_ok', [
+                'pipeline_step' => '4_http',
+                'http_code' => $code,
+                'elapsed_ms' => $elapsedMs,
+                'pdf_bytes' => strlen($body),
+                'source_host' => (string) (parse_url($url, PHP_URL_HOST) ?: ''),
+            ]);
+            // #endregion
+
             return $body;
         }
 
         if (str_contains($ct, 'application/pdf') && strncmp($body, '%PDF', 4) === 0) {
+            // #region agent log
+            PdfDebugSessionLog::write('H_PIPELINE', __METHOD__, 'pipeline_4_pdfshift_http_ok_alt', [
+                'pipeline_step' => '4_http',
+                'http_code' => $code,
+                'elapsed_ms' => $elapsedMs,
+                'pdf_bytes' => strlen($body),
+                'source_host' => (string) (parse_url($url, PHP_URL_HOST) ?: ''),
+            ]);
+            // #endregion
+
             return $body;
         }
 
@@ -218,8 +250,10 @@ final class PdfShiftRenderer
         $errorDetail = trim($msg);
 
         // #region agent log
-        PdfDebugSessionLog::write('H_PWFN,H_DB', __METHOD__, 'pdfshift_failure', [
+        PdfDebugSessionLog::write('H_PWFN,H_DB,H_PIPELINE', __METHOD__, 'pdfshift_failure', [
             'http_code' => $code,
+            'elapsed_ms' => $elapsedMs,
+            'pipeline_step' => '4_http',
             'pdfshift_timeout_sec' => $payload['timeout'] ?? null,
             'wait_for_network' => $payload['wait_for_network'] ?? null,
             'use_print' => $payload['use_print'] ?? null,

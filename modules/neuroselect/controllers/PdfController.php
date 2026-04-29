@@ -13,7 +13,6 @@ namespace modules\neuroselect\controllers;
 use modules\neuroselect\PdfDebugSessionLog;
 use modules\neuroselect\PdfGenerationEngine;
 use modules\neuroselect\PdfShiftRenderer;
-
 use Craft;
 use craft\elements\User;
 use craft\helpers\App;
@@ -49,17 +48,18 @@ class PdfController extends Controller
      */
     private function normalizePirPdfSource(string $source): string
     {
+        $out = $source;
         $fetchBase = App::env('PIR_PDF_FETCH_BASE_URL');
         if (is_string($fetchBase) && $fetchBase !== '') {
             $parts = parse_url($source);
             if ($parts !== false && !empty($parts['path'])) {
                 $query = isset($parts['query']) ? ('?' . $parts['query']) : '';
 
-                return rtrim($fetchBase, '/') . $parts['path'] . $query;
+                $out = rtrim($fetchBase, '/') . $parts['path'] . $query;
             }
         }
 
-        return $source;
+        return $out;
     }
 
     /**
@@ -84,8 +84,28 @@ class PdfController extends Controller
     }
 
     /**
-     * @param string|null $pdfEngineDetail
-     */
+ * @param string|null $pdfEngineDetail
+ */
+    private function pipelineUrlFingerprint(string $url): array
+    {
+        $p = parse_url($url);
+        if ($p === false) {
+            return ['parse_ok' => false, 'len' => strlen($url)];
+        }
+        $q = [];
+        if (!empty($p['query'])) {
+            parse_str((string) $p['query'], $q);
+        }
+
+        return [
+            'parse_ok' => true,
+            'scheme' => (string) ($p['scheme'] ?? ''),
+            'host' => (string) ($p['host'] ?? ''),
+            'path' => (string) ($p['path'] ?? ''),
+            'query_param_keys' => array_keys($q),
+        ];
+    }
+
     private function renderPirPdfBody(string $normalizedSource, ?string &$pdfEngineDetail = null): string|false
     {
         $pdfEngineDetail = null;
@@ -106,7 +126,8 @@ class PdfController extends Controller
         }
         $fetchBaseLog = App::env('PIR_PDF_FETCH_BASE_URL');
 
-        PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::renderPirPdfBody', 'pre_render', [
+        PdfDebugSessionLog::write('H_PIPELINE', 'PdfController::renderPirPdfBody', 'pipeline_3_before_pdfshift', [
+            'pipeline_step' => 3,
             'engine' => PdfGenerationEngine::PDFSHIFT,
             'fetch_base_set' => is_string($fetchBaseLog) && $fetchBaseLog !== '',
             'source_host' => $pu['host'] ?? '',
@@ -263,7 +284,26 @@ class PdfController extends Controller
             return $this->pdfErrorResponse('Missing page URL for PDF conversion.', 400);
         }
 
-        $source = $this->normalizePirPdfSource((string)$_POST['source']);
+        $postedRaw = (string) $_POST['source'];
+
+        // #region agent log
+        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_1_post_received', [
+            'pipeline_step' => 1,
+            'posted_len' => strlen($postedRaw),
+            'posted' => $this->pipelineUrlFingerprint($postedRaw),
+        ]);
+        // #endregion
+
+        $source = $this->normalizePirPdfSource($postedRaw);
+
+        // #region agent log
+        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_2_after_normalize', [
+            'pipeline_step' => 2,
+            'normalized_len' => strlen($source),
+            'normalized' => $this->pipelineUrlFingerprint($source),
+        ]);
+        // #endregion
+
         $submissionId = $_POST['submissionId'];
         $userId = $_POST['userId'];
         $submissionType = (string)$_POST['submissionType'];
@@ -274,6 +314,14 @@ class PdfController extends Controller
         if ($pdfBody === false || $pdfBody === '') {
             return $this->pirPdfGenerationErrorResponse($pdfEngineDetail);
         }
+
+        // #region agent log
+        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_5_after_engine', [
+            'pipeline_step' => 5,
+            'looks_like_pdf' => strncmp($pdfBody, '%PDF', 4) === 0,
+            'body_len' => strlen($pdfBody),
+        ]);
+        // #endregion
 
         if (strncmp($pdfBody, '%PDF', 4) !== 0) {
             Craft::warning('PDF engine returned non-PDF (first 400 chars): ' . substr($pdfBody, 0, 400), __METHOD__);
@@ -307,6 +355,13 @@ class PdfController extends Controller
             $payload['csrfParam'] = $req->csrfParam;
             $payload['csrfTokenValue'] = $req->getCsrfToken(true);
         }
+
+        // #region agent log
+        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_7_response_json', [
+            'pipeline_step' => 7,
+            'saved_filename' => $filename,
+        ]);
+        // #endregion
 
         return $this->asJson($payload);
     }

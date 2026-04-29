@@ -370,7 +370,7 @@ class SurveyController extends Controller
 
     if( !empty($_POST['source']) ) {
 
-      $source = $_POST['source'];
+      $source = (string) $_POST['source'];
       $submissionId = $_POST['submissionId'];
 
       $headerHtml = "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>";
