@@ -20,7 +20,7 @@ final class WkhtmlPdfRenderer
         $errorDetail = null;
 
         if (!SafeProcess::canRunSubprocess()) {
-            $errorDetail = 'PHP exec() and proc_open() are unavailable. Use PIR_PDF_ENGINE=dompdf or ask the host to allow one of them.';
+            $errorDetail = 'PHP exec() and proc_open() are unavailable. PIR/survey PDFs use PDFShift; this path is not used for those flows.';
 
             return false;
         }

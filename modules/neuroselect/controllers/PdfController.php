@@ -10,12 +10,9 @@
 
 namespace modules\neuroselect\controllers;
 
-use modules\neuroselect\ChromiumPdfRenderer;
-use modules\neuroselect\HtmlToPdfRenderer;
 use modules\neuroselect\PdfDebugSessionLog;
 use modules\neuroselect\PdfGenerationEngine;
 use modules\neuroselect\PdfShiftRenderer;
-use modules\neuroselect\WkhtmlPdfRenderer;
 
 use Craft;
 use craft\elements\User;
@@ -93,7 +90,6 @@ class PdfController extends Controller
     {
         $pdfEngineDetail = null;
         $footerInner = $this->pirPdfFooterHtml();
-        $engine = PdfGenerationEngine::engineId();
         $pirSheet = $this->resolvePirPdfStylesheet();
 
         // #region agent log
@@ -108,76 +104,38 @@ class PdfController extends Controller
                 $sheetBranch = 'webroot_pdf9';
             }
         }
-        $resolvedChromeBin = ChromiumPdfRenderer::binaryPath();
         $fetchBaseLog = App::env('PIR_PDF_FETCH_BASE_URL');
+
         PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::renderPirPdfBody', 'pre_render', [
-            'engine' => $engine,
+            'engine' => PdfGenerationEngine::PDFSHIFT,
             'fetch_base_set' => is_string($fetchBaseLog) && $fetchBaseLog !== '',
             'source_host' => $pu['host'] ?? '',
             'source_path' => $pu['path'] ?? '',
             'sheet_branch' => $sheetBranch,
-            'dompdf_inline_len' => strlen($pirSheet['dompdfInline'] ?? ''),
-            'dompdf_url_set' => ($pirSheet['dompdfUrl'] ?? '') !== '',
-            'dompdf_append_len' => strlen($pirSheet['dompdfAppend'] ?? ''),
-            'php_can_exec' => \function_exists('exec'),
-            'php_can_proc_open' => \function_exists('proc_open'),
-            'chromium_bin_resolved' => $resolvedChromeBin !== null,
-            'chromium_bin_basename' => $resolvedChromeBin ? basename($resolvedChromeBin) : null,
             'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
-            'pdfshift_use_print' => $engine === PdfGenerationEngine::PDFSHIFT ? PdfShiftRenderer::usePrint() : false,
-            'pdfshift_css_preview' => $engine === PdfGenerationEngine::PDFSHIFT ? substr($this->pirPdfShiftCssUrl($pirSheet), 0, 96) : '',
+            'pdfshift_use_print' => PdfShiftRenderer::usePrint(),
+            'pdfshift_css_preview' => substr($this->pirPdfShiftCssUrl($pirSheet), 0, 96),
             'pdfshift_disable_js_env' => PdfShiftRenderer::envDisablesJavascript(),
         ]);
         // #endregion
 
-        if ($engine === PdfGenerationEngine::CHROMIUM) {
-            return ChromiumPdfRenderer::renderUrlToPdf($normalizedSource, $pdfEngineDetail);
-        }
-        if ($engine === PdfGenerationEngine::PDFSHIFT) {
-            $shiftCssUrl = $this->pirPdfShiftCssUrl($pirSheet);
+        $shiftCssUrl = $this->pirPdfShiftCssUrl($pirSheet);
 
-            return PdfShiftRenderer::renderUrlToPdf(
-                $normalizedSource,
-                $footerInner,
-                null,
-                $shiftCssUrl,
-                $pdfEngineDetail
-            );
-        }
-        if ($engine === PdfGenerationEngine::WKHTML) {
-            return WkhtmlPdfRenderer::render(
-                $normalizedSource,
-                $footerInner,
-                $pirSheet['wkhtmlArg'],
-                $pdfEngineDetail,
-                null
-            );
-        }
-
-        return HtmlToPdfRenderer::fromUrl(
+        return PdfShiftRenderer::renderUrlToPdf(
             $normalizedSource,
-            $pirSheet['dompdfUrl'],
-            null,
             $footerInner,
-            $pirSheet['dompdfInline'],
-            $pirSheet['dompdfAppend'] ?? null,
+            null,
+            $shiftCssUrl,
             $pdfEngineDetail
         );
     }
 
-    private function pirPdfGenerationErrorResponse(string $engine, ?string $pdfEngineDetail): Response
+    private function pirPdfGenerationErrorResponse(?string $pdfEngineDetail): Response
     {
         $suffix = $pdfEngineDetail ? ' ' . $pdfEngineDetail : ' See storage logs.';
-        $msg = match ($engine) {
-            PdfGenerationEngine::CHROMIUM => 'PDF generation failed (Chromium).' . $suffix
-                . ' Install Chrome/Chromium or set CHROMIUM_BIN; use PIR_PDF_ENGINE=dompdf as a fallback.',
-            PdfGenerationEngine::PDFSHIFT => 'PDF generation failed (PDFShift).' . $suffix
-                . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.',
-            PdfGenerationEngine::WKHTML => 'PDF generation failed (wkhtmltopdf). Install the binary (e.g. brew install wkhtmltopdf) and set WKHTMLTOPDF_BIN if it is not on PATH.' . $suffix,
-            PdfGenerationEngine::DOMPDF => 'PDF generation failed (Dompdf).' . $suffix,
-            default => 'PDF generation failed.' . $suffix,
-        };
+        $msg = 'PDF generation failed (PDFShift).' . $suffix
+            . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.';
 
         return $this->pdfErrorResponse(trim($msg), 422);
     }
@@ -309,13 +267,12 @@ class PdfController extends Controller
         $submissionId = $_POST['submissionId'];
         $userId = $_POST['userId'];
         $submissionType = (string)$_POST['submissionType'];
-        $engine = PdfGenerationEngine::engineId();
 
         $pdfEngineDetail = null;
         $pdfBody = $this->renderPirPdfBody($source, $pdfEngineDetail);
 
         if ($pdfBody === false || $pdfBody === '') {
-            return $this->pirPdfGenerationErrorResponse($engine, $pdfEngineDetail);
+            return $this->pirPdfGenerationErrorResponse($pdfEngineDetail);
         }
 
         if (strncmp($pdfBody, '%PDF', 4) !== 0) {
@@ -355,8 +312,7 @@ class PdfController extends Controller
     }
 
     /**
-     * PIR print CSS: optional PIR_PDF_STYLESHEET_URL, else web/css/pdf9.css under @webroot, else production URL.
-     * Dompdf: HtmlToPdfRenderer fetches HTTP(S) URLs with Guzzle and inlines CSS (Dompdf often skips remote &lt;link&gt; on hosts).
+     * PIR print stylesheet for PDFShift `css`: optional PIR_PDF_STYLESHEET_URL, else web/css/pdf9.css under @webroot, else production URL.
      *
      * @return array{dompdfUrl: ?string, dompdfInline: ?string, dompdfAppend: ?string, wkhtmlArg: string}
      */

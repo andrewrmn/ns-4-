@@ -71,14 +71,14 @@ final class ChromiumPdfRenderer
         $errorDetail = null;
 
         if (!SafeProcess::canRunSubprocess()) {
-            $errorDetail = 'PHP exec() and proc_open() are unavailable. Set PIR_PDF_ENGINE=dompdf or ask the host to allow one of them for headless Chrome.';
+            $errorDetail = 'PHP exec() and proc_open() are unavailable. PIR/survey PDFs use PDFShift; this path is not used for those flows.';
 
             return false;
         }
 
         $bin = self::binaryPath();
         if ($bin === null) {
-            $errorDetail = 'Chromium/Chrome not found. Install Chrome or set CHROMIUM_BIN, or use PIR_PDF_ENGINE=dompdf.';
+            $errorDetail = 'Chromium/Chrome not found. PIR/survey PDFs use PDFShift; install Chrome or set CHROMIUM_BIN only if you call this renderer directly.';
 
             return false;
         }
