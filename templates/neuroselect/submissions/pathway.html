@@ -1,6 +1,11 @@
 
 
 
+    {# Minimal PDF smoke test: query from PdfController PDF fetch, OR pirPathwayPdfShiftHtmlTest (App::env via NeuroSelectModule). #}
+    {% set pirPdfTestMode = craft.app.request.getQueryParam('pir_pdf_test') == '1' or pirPathwayPdfShiftHtmlTest %}
+    {% if pirPdfTestMode %}
+        {% include 'neuroselect/submissions/pathway_pdf_test_stub' %}
+    {% else %}
     {% for submission in user.pathwaySubmissions.all() %}
         {% if craft.app.request.segments|last == submission.submissionId %}
 
@@ -114,3 +119,4 @@
 
         {% endif %}
     {% endfor %}
+    {% endif %}

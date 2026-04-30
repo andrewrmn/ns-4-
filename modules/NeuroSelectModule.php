@@ -4,8 +4,11 @@ namespace modules;
 
 use Craft;
 use craft\console\Application as ConsoleApplication;
+use craft\events\CreateTwigEvent;
 use craft\events\RegisterUrlRulesEvent;
+use craft\helpers\App as AppHelper;
 use craft\web\UrlManager;
+use craft\web\View;
 use yii\base\Event;
 use yii\base\Module;
 
@@ -53,6 +56,17 @@ class NeuroSelectModule extends Module
                     'cpActionTrigger4' => 'neuroselect-module/update/do-something',
                     'cpActionTrigger5' => 'neuroselect-module/survey/do-something',
                 ]);
+            }
+        );
+
+        // Twig: expose PIR_PATHWAY_PDFSHIFT_HTML_TEST (use App::env — getenv() is empty on many PHP-FPM pools).
+        Event::on(
+            View::class,
+            View::EVENT_AFTER_CREATE_TWIG,
+            function (CreateTwigEvent $event): void {
+                $v = AppHelper::env('PIR_PATHWAY_PDFSHIFT_HTML_TEST');
+                $on = is_string($v) && $v !== '' && filter_var(trim($v), FILTER_VALIDATE_BOOLEAN);
+                $event->twig->addGlobal('pirPathwayPdfShiftHtmlTest', $on);
             }
         );
 
