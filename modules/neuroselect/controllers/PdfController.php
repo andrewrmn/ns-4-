@@ -84,20 +84,15 @@ class PdfController extends Controller
     }
 
     /**
-     * Styles for PDFShift `css` field: merged local pdf9 + pdf9-dompdf (same as Dompdf) when loaded from disk,
-     * otherwise HTTPS URL — avoids PDFShift fetching the site URL (often fails with CSS errors vs origin/WAF timing).
+     * Styles for PDFShift `css` field: local pdf9.css only when on disk (Chromium does not need pdf9-dompdf.css).
+     * Dompdf flow still uses resolvePirPdfStylesheet()’s inline + append; PDFShift must not get Dompdf-only hacks.
+     * Otherwise HTTPS URL (public fallbacks avoid origin fetch issues).
      */
     private function pirPdfShiftMergedCssOrUrl(array $pirResolved): string
     {
         $inline = $pirResolved['dompdfInline'] ?? null;
         if (is_string($inline) && $inline !== '') {
-            $out = $inline;
-            $append = $pirResolved['dompdfAppend'] ?? null;
-            if (is_string($append) && $append !== '') {
-                $out .= "\n\n" . $append;
-            }
-
-            return $out;
+            return $inline;
         }
 
         return $this->pirPdfShiftCssUrl($pirResolved);
@@ -154,7 +149,7 @@ class PdfController extends Controller
             'source_path' => $pu['path'] ?? '',
             'sheet_branch' => $sheetBranch,
             'pdfshift_css_payload' => isset($pirSheet['dompdfInline']) && is_string($pirSheet['dompdfInline']) && $pirSheet['dompdfInline'] !== ''
-                ? 'inline_merge'
+                ? 'inline_pdf9_only'
                 : 'url',
             'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),

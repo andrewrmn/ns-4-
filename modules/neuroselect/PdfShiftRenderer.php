@@ -258,6 +258,12 @@ final class PdfShiftRenderer
         Craft::warning($msg, __METHOD__);
         $errorDetail = trim($msg);
 
+        $cssRaw = $payload['css'] ?? null;
+        $cssBytes = is_string($cssRaw) ? strlen($cssRaw) : 0;
+        $cssDelivery = $cssBytes === 0
+            ? 'none'
+            : (preg_match('#^\s*https?://#i', $cssRaw) ? 'url' : 'inline');
+
         // #region agent log
         PdfDebugSessionLog::write('H_PWFN,H_DB,H_PIPELINE', __METHOD__, 'pdfshift_failure', [
             'http_code' => $code,
@@ -267,7 +273,10 @@ final class PdfShiftRenderer
             'wait_for_network' => $payload['wait_for_network'] ?? null,
             'use_print' => $payload['use_print'] ?? null,
             'ignore_long_polling' => $payload['ignore_long_polling'] ?? null,
-            'has_css_extra' => ($payload['css'] ?? '') !== '',
+            'has_css_extra' => $cssBytes > 0,
+            'css_delivery' => $cssDelivery,
+            'css_byte_len' => $cssBytes,
+            'css_head64' => $cssBytes > 0 ? substr($cssRaw, 0, 64) : '',
             'disable_javascript_payload' => (bool) ($payload['disable_javascript'] ?? false),
             'env_disable_js_reads_true' => self::envDisablesJavascript(),
             'source_host' => (string) (parse_url($url, PHP_URL_HOST) ?: ''),
