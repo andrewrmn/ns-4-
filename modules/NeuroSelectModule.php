@@ -3,7 +3,6 @@
 namespace modules;
 
 use Craft;
-use craft\console\Application as ConsoleApplication;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use yii\base\Event;
@@ -19,11 +18,7 @@ class NeuroSelectModule extends Module
 {
     public function init(): void
     {
-        if (Craft::$app instanceof ConsoleApplication) {
-            $this->controllerNamespace = 'modules\\neuroselect\\console\\controllers';
-        } else {
-            $this->controllerNamespace = 'modules\\neuroselect\\controllers';
-        }
+        $this->controllerNamespace = 'modules\\neuroselect\\controllers';
 
         parent::init();
 

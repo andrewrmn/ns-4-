@@ -320,7 +320,7 @@
                                                         {% set products = row.products| split(', ') %}
 
                                                         {% for product in craft.products %}
-                                                            {% if product.id in products %}
+                                                            {% if product.id in products and not product.disableInNueroselect %}
                                                                 {{ product.title }}{% if not loop.last %}, {% endif %}
                                                             {% endif %}
                                                         {% endfor %}
@@ -346,7 +346,7 @@
                                                     {% set products = row.products| split(', ') %}
 
                                                     {% for product in craft.products.all() %}
-                                                        {% if product.id in products %}
+                                                        {% if product.id in products and not product.disableInNueroselect %}
                                                             {{ product.title }}{% if not loop.last %}, {% endif %}
                                                         {% endif %}
                                                     {% endfor %}

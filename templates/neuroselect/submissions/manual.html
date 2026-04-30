@@ -10,7 +10,7 @@
         {% set productList = [] %}
 
         {% for product in craft.products %}
-            {% if product.id in products %}
+            {% if product.id in products and not product.disableInNueroselect %}
                 {% if productList|length < 5 %}
                     {% set productList = productList|merge([product]) %}
                 {% endif %}

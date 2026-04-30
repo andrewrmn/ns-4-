@@ -11,6 +11,8 @@
 namespace modules\neuroselect\controllers;
 
 
+use modules\neuroselect\NeuroselectProductHelper;
+
 use Craft;
 use craft\web\Controller;
 use verbb\supertable\SuperTable;
@@ -53,8 +55,7 @@ class UpdateController extends Controller
                 $pathways = implode (", ", $pathways);
             }
             if( isset($_POST['products']) ) {
-                $products = $_POST['products'];
-                $products = implode (", ", $products);
+                $products = NeuroselectProductHelper::normalizeProductsPostParam($_POST['products']);
             }
             $newSub = 'no';
 

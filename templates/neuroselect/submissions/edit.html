@@ -227,6 +227,7 @@
                                     }) %}
 
                                     {% for product in allProducts.orderBy('title asc') %}
+                                    {% if not product.disableInNueroselect %}
                                     {% set checked = false %}
 
                                     {% if product.id in products %}
@@ -241,7 +242,7 @@
                                         </div>
                                     </div>
 
-
+                                    {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>

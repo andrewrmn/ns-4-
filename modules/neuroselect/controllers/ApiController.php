@@ -11,6 +11,8 @@
 namespace modules\neuroselect\controllers;
 
 
+use modules\neuroselect\NeuroselectProductHelper;
+
 use Craft;
 use craft\web\Controller;
 use yii\web\Response;
@@ -676,7 +678,7 @@ class ApiController extends Controller
 
         //get the post data now that it is stored in $_POST. Under the hood this is the same thing as doing $statusText = $_POST['OrderStatus'];
         $productField = Craft::$app->request->getBodyParam('Products');
-        $products = implode (", ", $productField);
+        $products = NeuroselectProductHelper::normalizeProductsPostParam($productField);
         $age = Craft::$app->request->getBodyParam('Age');
         $gender = Craft::$app->request->getBodyParam('Gender');
         $userToken = Craft::$app->request->getBodyParam('Token');
