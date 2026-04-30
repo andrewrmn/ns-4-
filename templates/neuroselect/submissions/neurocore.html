@@ -1,5 +1,5 @@
 {% set title = 'PIR' %}
-{% extends 'layouts/_layout' %}
+{% extends "layouts/_layout" %}
 
 {% block content %}
 
@@ -37,6 +37,7 @@
 {% set gridJustify = 'flex-justify-start' %}
 {% set colWidth = 'col-12 col-md-6' %}
 {% endif %}
+
 
 <article class="pir {{ printSize }}" id="pir">
   <header class="wrapper-full bg-light" id="pir-header">
@@ -540,7 +541,7 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '{{ siteUrl|e('js') }}actions/neuroselect-module/pdf/generate-pdf',
+      url: '/actions/neuroselect-module/pdf/generate-pdf',
       dataType: 'json'
     }).done(function (data) {
       $('html').removeClass('thinking').removeClass('generating');
@@ -587,7 +588,7 @@
       type: 'post',
       cache: false,
       data: form.serialize(),
-      url: '{{ siteUrl|e('js') }}actions/neuroselect-module/pdf/email-pdf',
+      url: '/actions/neuroselect-module/pdf/email-pdf',
       dataType: 'json'
     }).done(function (data) {
       $('html').removeClass('email-queue thinking');

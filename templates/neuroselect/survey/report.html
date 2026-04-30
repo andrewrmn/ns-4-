@@ -1,8 +1,9 @@
-{% extends 'layouts/_layout' %}
+{% extends "layouts/_layout" %}
 
 {% block mainClass %}pir-width{% endblock %}
 
 {% block content %}
+
 
 {% set report = craft.app.request.segments|last %}
 
@@ -14,6 +15,7 @@
 {% elseif currentUser %}
 {% set user = currentUser %}
 {% endif %}
+
 
 
 {% set pdfGenerated = false %}
@@ -108,7 +110,10 @@
 
 {% set noProds = false %}
 
+{# PDF generator loads this URL in headless Chrome; absoluteUrl already includes ?account=… so appending ?account again breaks the query string and submission lookup. #}
 {% set neuroqPdfSourceUrl = craft.app.request.absoluteUrl|split('?')|first ~ '?account=' ~ (user.email|url_encode) %}
+
+
 
 {% if subject == 'sleep' or subject == 'stress' %}
 {% if submission.product1 is empty and submission.product2 is empty and submission.product3 is empty and
@@ -119,6 +124,8 @@ submission.product4 is empty and submission.product5 is empty %}
 {% set noProds = true %}
 {% endif %}
 {% endif %}
+
+
 
 
 {% set gridJustify = 'flex-justify-between' %}
@@ -142,6 +149,7 @@ submission.product4 is empty and submission.product5 is empty %}
 {% set gridJustify = 'flex-justify-start' %}
 {% set colWidth = 'col-12 col-md-6' %}
 {% endif %}
+
 
 
 <article class="pir {{ printSize }}" id="pir">

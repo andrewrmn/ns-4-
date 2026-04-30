@@ -14,9 +14,12 @@ namespace modules\neuroselect\controllers;
 use Craft;
 use craft\helpers\App;
 use craft\helpers\FileHelper;
-use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use modules\neuroselect\ChromiumPdfRenderer;
+use modules\neuroselect\HtmlToPdfRenderer;
+use modules\neuroselect\PdfGenerationEngine;
 use modules\neuroselect\PdfShiftRenderer;
+use modules\neuroselect\WkhtmlPdfRenderer;
 use craft\elements\GlobalSet;
 use verbb\supertable\SuperTable;
 use craft\helpers\DateTimeHelper;
@@ -370,7 +373,7 @@ class SurveyController extends Controller
 
     if( !empty($_POST['source']) ) {
 
-      $source = (string) $_POST['source'];
+      $source = $_POST['source'];
       $submissionId = $_POST['submissionId'];
 
       $headerHtml = "<div style=\"border-bottom: 1px solid #F4F5F7; padding: 4px 3%; width: 100%; margin: 0 auto; font-family: sans-serif; \"><img style=\"width: 110px; float: left; height: auto; display: inline-block; vertical-align: middle;\" src=\"https://www.neuroscienceinc.com/images/NeuroScience-logo.svg\" /> <span style=\"font-size: 6pt; font-weight: bold; color: #0081B6; font-family: sans-serif; float: right; margin: 8px 0 0; display: inline-block; vertical-align: middle; \">(888) 342-7272</div></div>";
@@ -464,7 +467,7 @@ class SurveyController extends Controller
   }
 
     /**
-     * Neuro Q survey PDF: PDFShift only (same as PIR).
+     * Neuro Q survey PDF: same PIR_PDF_ENGINE as PIR (chromium ≈ browser, wkhtml header/footer, dompdf fallback).
      *
      * @param string|null $errorDetail
      * @return string|false raw PDF bytes
@@ -472,12 +475,22 @@ class SurveyController extends Controller
     private function renderSurveyPdfBody(string $source, string $headerHtml, string $footerHtml, ?string &$errorDetail = null): string|false
     {
         $errorDetail = null;
+        $engine = PdfGenerationEngine::engineId();
         $surveyCss = $this->resolveSurveyStylesheetPathOrUrl();
-        $cssShift = preg_match('#^https?://#i', $surveyCss)
-            ? $surveyCss
-            : UrlHelper::siteUrl('css/' . basename($surveyCss));
 
-        return PdfShiftRenderer::renderUrlToPdf($source, $footerHtml, $headerHtml, $cssShift, $errorDetail);
+        if ($engine === PdfGenerationEngine::CHROMIUM) {
+            return ChromiumPdfRenderer::renderUrlToPdf($source, $errorDetail);
+        }
+
+        if ($engine === PdfGenerationEngine::PDFSHIFT) {
+            return PdfShiftRenderer::renderUrlToPdf($source, $footerHtml, $headerHtml, null, $errorDetail);
+        }
+
+        if ($engine === PdfGenerationEngine::WKHTML) {
+            return WkhtmlPdfRenderer::render($source, $footerHtml, $surveyCss, $errorDetail, $headerHtml);
+        }
+
+        return HtmlToPdfRenderer::fromUrl($source, $surveyCss, $headerHtml, $footerHtml, null, null, $errorDetail);
     }
 
     private function resolveSurveyStylesheetPathOrUrl(): string

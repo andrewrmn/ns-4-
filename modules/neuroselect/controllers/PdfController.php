@@ -10,13 +10,16 @@
 
 namespace modules\neuroselect\controllers;
 
+use modules\neuroselect\ChromiumPdfRenderer;
+use modules\neuroselect\HtmlToPdfRenderer;
 use modules\neuroselect\PdfDebugSessionLog;
 use modules\neuroselect\PdfGenerationEngine;
 use modules\neuroselect\PdfShiftRenderer;
+use modules\neuroselect\WkhtmlPdfRenderer;
+
 use Craft;
 use craft\elements\User;
 use craft\helpers\App;
-use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use craft\helpers\FileHelper;
 use craft\mail\Message;
@@ -48,109 +51,27 @@ class PdfController extends Controller
      */
     private function normalizePirPdfSource(string $source): string
     {
-        $out = $source;
         $fetchBase = App::env('PIR_PDF_FETCH_BASE_URL');
         if (is_string($fetchBase) && $fetchBase !== '') {
             $parts = parse_url($source);
             if ($parts !== false && !empty($parts['path'])) {
                 $query = isset($parts['query']) ? ('?' . $parts['query']) : '';
 
-                $out = rtrim($fetchBase, '/') . $parts['path'] . $query;
+                return rtrim($fetchBase, '/') . $parts['path'] . $query;
             }
         }
 
-        return $out;
-    }
-
-    /**
-     * HTTP(S) URL for PDFShift `css` — matches legacy packaged plugin passing https://…/pdf9.css (see xx_legacy_plugins).
-     */
-    private function pirPdfShiftCssUrl(array $pirResolved): string
-    {
-        $override = App::env('PIR_PDFSHIFT_CSS_URL');
-        if (is_string($override) && $override !== '') {
-            return $override;
-        }
-        $u = $pirResolved['dompdfUrl'] ?? null;
-        if (is_string($u) && $u !== '') {
-            return $u;
-        }
-        $p9 = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'pdf9.css';
-        if (is_file($p9) && (int) @filesize($p9) > 0) {
-            return UrlHelper::siteUrl('css/pdf9.css');
-        }
-
-        return 'https://www.neuroscienceinc.com/css/pdf9.css';
-    }
-
-    /**
-     * Extra PDFShift `css` value (+ log label).
-     *
-     * Runtime evidence (400 “run the CSS”) with site URL and with inline pdf9 (~5.8k) — omit Dompdf-append
-     * didn’t help. Default **`public_url`**: Chromium fetches a stable CDN copy (neuroscienceinc.com) PDFShift reaches
-     * reliably vs staging host parser/fetch quirks. Override via:
-     *
-     * PIR_PDFSHIFT_CSS_FOR_SHIFT: public_url | inline | site_url | omit
-     * PIR_PDFSHIFT_PUBLIC_PDF9_CSS_URL: optional HTTPS URL when mode is public_url (defaults neuroscienceinc pdf9.css)
-     */
-    private function pirPdfShiftResolvedExtraCss(array $pirResolved): array
-    {
-        $modeRaw = App::env('PIR_PDFSHIFT_CSS_FOR_SHIFT');
-        $mode = is_string($modeRaw) && $modeRaw !== '' ? strtolower(trim($modeRaw)) : 'public_url';
-        if (!in_array($mode, ['public_url', 'inline', 'site_url', 'omit'], true)) {
-            $mode = 'public_url';
-        }
-
-        $hasInline = isset($pirResolved['dompdfInline']) && is_string($pirResolved['dompdfInline']) && $pirResolved['dompdfInline'] !== '';
-
-        if ($mode === 'omit') {
-            return ['extraCss' => null, 'strategy_log' => 'omit'];
-        }
-        if ($mode === 'inline' && $hasInline) {
-            return ['extraCss' => $pirResolved['dompdfInline'], 'strategy_log' => 'inline_pdf9'];
-        }
-        if ($mode === 'site_url' && $hasInline) {
-            return ['extraCss' => UrlHelper::siteUrl('css/pdf9.css'), 'strategy_log' => 'site_url_pdf9'];
-        }
-        if ($mode === 'public_url' && $hasInline) {
-            $cdn = App::env('PIR_PDFSHIFT_PUBLIC_PDF9_CSS_URL');
-            if (is_string($cdn) && $cdn !== '') {
-                return ['extraCss' => $cdn, 'strategy_log' => 'public_custom_url'];
-            }
-
-            return ['extraCss' => 'https://www.neuroscienceinc.com/css/pdf9.css', 'strategy_log' => 'public_neuroscience_pdf9'];
-        }
-
-        return ['extraCss' => $this->pirPdfShiftCssUrl($pirResolved), 'strategy_log' => 'fallback_pirPdfShiftCssUrl'];
+        return $source;
     }
 
     /**
      * @param string|null $pdfEngineDetail
      */
-    private function pipelineUrlFingerprint(string $url): array
-    {
-        $p = parse_url($url);
-        if ($p === false) {
-            return ['parse_ok' => false, 'len' => strlen($url)];
-        }
-        $q = [];
-        if (!empty($p['query'])) {
-            parse_str((string) $p['query'], $q);
-        }
-
-        return [
-            'parse_ok' => true,
-            'scheme' => (string) ($p['scheme'] ?? ''),
-            'host' => (string) ($p['host'] ?? ''),
-            'path' => (string) ($p['path'] ?? ''),
-            'query_param_keys' => array_keys($q),
-        ];
-    }
-
     private function renderPirPdfBody(string $normalizedSource, ?string &$pdfEngineDetail = null): string|false
     {
         $pdfEngineDetail = null;
         $footerInner = $this->pirPdfFooterHtml();
+        $engine = PdfGenerationEngine::engineId();
         $pirSheet = $this->resolvePirPdfStylesheet();
 
         // #region agent log
@@ -165,44 +86,71 @@ class PdfController extends Controller
                 $sheetBranch = 'webroot_pdf9';
             }
         }
+        $resolvedChromeBin = ChromiumPdfRenderer::binaryPath();
         $fetchBaseLog = App::env('PIR_PDF_FETCH_BASE_URL');
-        $cssShiftModeEnv = App::env('PIR_PDFSHIFT_CSS_FOR_SHIFT');
-
-        $shiftResolved = $this->pirPdfShiftResolvedExtraCss($pirSheet);
-        $shiftCss = $shiftResolved['extraCss'];
-        $cssPreview = is_string($shiftCss) ? substr($shiftCss, 0, 96) : '';
-
-        PdfDebugSessionLog::write('H_PIPELINE', 'PdfController::renderPirPdfBody', 'pipeline_3_before_pdfshift', [
-            'pipeline_step' => 3,
-            'engine' => PdfGenerationEngine::PDFSHIFT,
+        PdfDebugSessionLog::write('H1,H4,H5', 'PdfController::renderPirPdfBody', 'pre_render', [
+            'engine' => $engine,
             'fetch_base_set' => is_string($fetchBaseLog) && $fetchBaseLog !== '',
             'source_host' => $pu['host'] ?? '',
             'source_path' => $pu['path'] ?? '',
             'sheet_branch' => $sheetBranch,
-            'pdfshift_css_for_shift_env' => is_string($cssShiftModeEnv) ? $cssShiftModeEnv : '',
-            'pdfshift_css_strategy' => $shiftResolved['strategy_log'],
+            'dompdf_inline_len' => strlen($pirSheet['dompdfInline'] ?? ''),
+            'dompdf_url_set' => ($pirSheet['dompdfUrl'] ?? '') !== '',
+            'dompdf_append_len' => strlen($pirSheet['dompdfAppend'] ?? ''),
+            'php_can_exec' => \function_exists('exec'),
+            'php_can_proc_open' => \function_exists('proc_open'),
+            'chromium_bin_resolved' => $resolvedChromeBin !== null,
+            'chromium_bin_basename' => $resolvedChromeBin ? basename($resolvedChromeBin) : null,
             'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
-            'pdfshift_use_print' => PdfShiftRenderer::usePrint(),
-            'pdfshift_css_preview' => $cssPreview,
-            'pdfshift_disable_js_env' => PdfShiftRenderer::envDisablesJavascript(),
         ]);
         // #endregion
 
-        return PdfShiftRenderer::renderUrlToPdf(
+        if ($engine === PdfGenerationEngine::CHROMIUM) {
+            return ChromiumPdfRenderer::renderUrlToPdf($normalizedSource, $pdfEngineDetail);
+        }
+        if ($engine === PdfGenerationEngine::PDFSHIFT) {
+            return PdfShiftRenderer::renderUrlToPdf(
+                $normalizedSource,
+                $footerInner,
+                null,
+                null,
+                $pdfEngineDetail
+            );
+        }
+        if ($engine === PdfGenerationEngine::WKHTML) {
+            return WkhtmlPdfRenderer::render(
+                $normalizedSource,
+                $footerInner,
+                $pirSheet['wkhtmlArg'],
+                $pdfEngineDetail,
+                null
+            );
+        }
+
+        return HtmlToPdfRenderer::fromUrl(
             $normalizedSource,
-            $footerInner,
+            $pirSheet['dompdfUrl'],
             null,
-            $shiftCss,
+            $footerInner,
+            $pirSheet['dompdfInline'],
+            $pirSheet['dompdfAppend'] ?? null,
             $pdfEngineDetail
         );
     }
 
-    private function pirPdfGenerationErrorResponse(?string $pdfEngineDetail): Response
+    private function pirPdfGenerationErrorResponse(string $engine, ?string $pdfEngineDetail): Response
     {
         $suffix = $pdfEngineDetail ? ' ' . $pdfEngineDetail : ' See storage logs.';
-        $msg = 'PDF generation failed (PDFShift).' . $suffix
-            . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.';
+        $msg = match ($engine) {
+            PdfGenerationEngine::CHROMIUM => 'PDF generation failed (Chromium).' . $suffix
+                . ' Install Chrome/Chromium or set CHROMIUM_BIN; use PIR_PDF_ENGINE=dompdf as a fallback.',
+            PdfGenerationEngine::PDFSHIFT => 'PDF generation failed (PDFShift).' . $suffix
+                . ' Set PDFSHIFT_API_KEY (or PIR_PDFSHIFT_API_KEY) and ensure the report URL is publicly reachable.',
+            PdfGenerationEngine::WKHTML => 'PDF generation failed (wkhtmltopdf). Install the binary (e.g. brew install wkhtmltopdf) and set WKHTMLTOPDF_BIN if it is not on PATH.' . $suffix,
+            PdfGenerationEngine::DOMPDF => 'PDF generation failed (Dompdf).' . $suffix,
+            default => 'PDF generation failed.' . $suffix,
+        };
 
         return $this->pdfErrorResponse(trim($msg), 422);
     }
@@ -330,44 +278,18 @@ class PdfController extends Controller
             return $this->pdfErrorResponse('Missing page URL for PDF conversion.', 400);
         }
 
-        $postedRaw = (string) $_POST['source'];
-
-        // #region agent log
-        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_1_post_received', [
-            'pipeline_step' => 1,
-            'posted_len' => strlen($postedRaw),
-            'posted' => $this->pipelineUrlFingerprint($postedRaw),
-        ]);
-        // #endregion
-
+        $source = $this->normalizePirPdfSource((string)$_POST['source']);
         $submissionId = $_POST['submissionId'];
         $userId = $_POST['userId'];
-        $submissionType = (string) $_POST['submissionType'];
-
-        $source = $this->normalizePirPdfSource($postedRaw);
-
-        // #region agent log
-        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_2_after_normalize', [
-            'pipeline_step' => 2,
-            'normalized_len' => strlen($source),
-            'normalized' => $this->pipelineUrlFingerprint($source),
-        ]);
-        // #endregion
+        $submissionType = (string)$_POST['submissionType'];
+        $engine = PdfGenerationEngine::engineId();
 
         $pdfEngineDetail = null;
         $pdfBody = $this->renderPirPdfBody($source, $pdfEngineDetail);
 
         if ($pdfBody === false || $pdfBody === '') {
-            return $this->pirPdfGenerationErrorResponse($pdfEngineDetail);
+            return $this->pirPdfGenerationErrorResponse($engine, $pdfEngineDetail);
         }
-
-        // #region agent log
-        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_5_after_engine', [
-            'pipeline_step' => 5,
-            'looks_like_pdf' => strncmp($pdfBody, '%PDF', 4) === 0,
-            'body_len' => strlen($pdfBody),
-        ]);
-        // #endregion
 
         if (strncmp($pdfBody, '%PDF', 4) !== 0) {
             Craft::warning('PDF engine returned non-PDF (first 400 chars): ' . substr($pdfBody, 0, 400), __METHOD__);
@@ -402,18 +324,12 @@ class PdfController extends Controller
             $payload['csrfTokenValue'] = $req->getCsrfToken(true);
         }
 
-        // #region agent log
-        PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_7_response_json', [
-            'pipeline_step' => 7,
-            'saved_filename' => $filename,
-        ]);
-        // #endregion
-
         return $this->asJson($payload);
     }
 
     /**
-     * PIR print stylesheet for PDFShift `css`: optional PIR_PDF_STYLESHEET_URL, else web/css/pdf9.css under @webroot, else production URL.
+     * PIR print CSS: optional PIR_PDF_STYLESHEET_URL, else web/css/pdf9.css under @webroot, else production URL.
+     * Dompdf: HtmlToPdfRenderer fetches HTTP(S) URLs with Guzzle and inlines CSS (Dompdf often skips remote &lt;link&gt; on hosts).
      *
      * @return array{dompdfUrl: ?string, dompdfInline: ?string, dompdfAppend: ?string, wkhtmlArg: string}
      */
