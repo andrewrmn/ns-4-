@@ -84,18 +84,44 @@ class PdfController extends Controller
     }
 
     /**
-     * Styles for PDFShift `css` field: local pdf9.css only when on disk (Chromium does not need pdf9-dompdf.css).
-     * Dompdf flow still uses resolvePirPdfStylesheet()’s inline + append; PDFShift must not get Dompdf-only hacks.
-     * Otherwise HTTPS URL (public fallbacks avoid origin fetch issues).
+     * Extra PDFShift `css` value (+ log label).
+     *
+     * Runtime evidence (400 “run the CSS”) with site URL and with inline pdf9 (~5.8k) — omit Dompdf-append
+     * didn’t help. Default **`public_url`**: Chromium fetches a stable CDN copy (neuroscienceinc.com) PDFShift reaches
+     * reliably vs staging host parser/fetch quirks. Override via:
+     *
+     * PIR_PDFSHIFT_CSS_FOR_SHIFT: public_url | inline | site_url | omit
+     * PIR_PDFSHIFT_PUBLIC_PDF9_CSS_URL: optional HTTPS URL when mode is public_url (defaults neuroscienceinc pdf9.css)
      */
-    private function pirPdfShiftMergedCssOrUrl(array $pirResolved): string
+    private function pirPdfShiftResolvedExtraCss(array $pirResolved): array
     {
-        $inline = $pirResolved['dompdfInline'] ?? null;
-        if (is_string($inline) && $inline !== '') {
-            return $inline;
+        $modeRaw = App::env('PIR_PDFSHIFT_CSS_FOR_SHIFT');
+        $mode = is_string($modeRaw) && $modeRaw !== '' ? strtolower(trim($modeRaw)) : 'public_url';
+        if (!in_array($mode, ['public_url', 'inline', 'site_url', 'omit'], true)) {
+            $mode = 'public_url';
         }
 
-        return $this->pirPdfShiftCssUrl($pirResolved);
+        $hasInline = isset($pirResolved['dompdfInline']) && is_string($pirResolved['dompdfInline']) && $pirResolved['dompdfInline'] !== '';
+
+        if ($mode === 'omit') {
+            return ['extraCss' => null, 'strategy_log' => 'omit'];
+        }
+        if ($mode === 'inline' && $hasInline) {
+            return ['extraCss' => $pirResolved['dompdfInline'], 'strategy_log' => 'inline_pdf9'];
+        }
+        if ($mode === 'site_url' && $hasInline) {
+            return ['extraCss' => UrlHelper::siteUrl('css/pdf9.css'), 'strategy_log' => 'site_url_pdf9'];
+        }
+        if ($mode === 'public_url' && $hasInline) {
+            $cdn = App::env('PIR_PDFSHIFT_PUBLIC_PDF9_CSS_URL');
+            if (is_string($cdn) && $cdn !== '') {
+                return ['extraCss' => $cdn, 'strategy_log' => 'public_custom_url'];
+            }
+
+            return ['extraCss' => 'https://www.neuroscienceinc.com/css/pdf9.css', 'strategy_log' => 'public_neuroscience_pdf9'];
+        }
+
+        return ['extraCss' => $this->pirPdfShiftCssUrl($pirResolved), 'strategy_log' => 'fallback_pirPdfShiftCssUrl'];
     }
 
     /**
@@ -140,6 +166,11 @@ class PdfController extends Controller
             }
         }
         $fetchBaseLog = App::env('PIR_PDF_FETCH_BASE_URL');
+        $cssShiftModeEnv = App::env('PIR_PDFSHIFT_CSS_FOR_SHIFT');
+
+        $shiftResolved = $this->pirPdfShiftResolvedExtraCss($pirSheet);
+        $shiftCss = $shiftResolved['extraCss'];
+        $cssPreview = is_string($shiftCss) ? substr($shiftCss, 0, 96) : '';
 
         PdfDebugSessionLog::write('H_PIPELINE', 'PdfController::renderPirPdfBody', 'pipeline_3_before_pdfshift', [
             'pipeline_step' => 3,
@@ -148,18 +179,15 @@ class PdfController extends Controller
             'source_host' => $pu['host'] ?? '',
             'source_path' => $pu['path'] ?? '',
             'sheet_branch' => $sheetBranch,
-            'pdfshift_css_payload' => isset($pirSheet['dompdfInline']) && is_string($pirSheet['dompdfInline']) && $pirSheet['dompdfInline'] !== ''
-                ? 'inline_pdf9_only'
-                : 'url',
+            'pdfshift_css_for_shift_env' => is_string($cssShiftModeEnv) ? $cssShiftModeEnv : '',
+            'pdfshift_css_strategy' => $shiftResolved['strategy_log'],
             'pdfshift_configured' => PdfShiftRenderer::isConfigured(),
             'pdfshift_sandbox' => PdfShiftRenderer::useSandbox(),
             'pdfshift_use_print' => PdfShiftRenderer::usePrint(),
-            'pdfshift_css_preview' => substr($this->pirPdfShiftMergedCssOrUrl($pirSheet), 0, 96),
+            'pdfshift_css_preview' => $cssPreview,
             'pdfshift_disable_js_env' => PdfShiftRenderer::envDisablesJavascript(),
         ]);
         // #endregion
-
-        $shiftCss = $this->pirPdfShiftMergedCssOrUrl($pirSheet);
 
         return PdfShiftRenderer::renderUrlToPdf(
             $normalizedSource,

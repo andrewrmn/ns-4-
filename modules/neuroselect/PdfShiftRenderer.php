@@ -17,6 +17,8 @@ use GuzzleHttp\Exception\GuzzleException;
  * PIR_PDFSHIFT_IGNORE_LONG_POLLING: optional — only when wait_for_network is true (default false here); skips long poll wait.
  * PIR_PDFSHIFT_DISABLE_JAVASCRIPT: optional true — skips in-page scripts (GTM, etc.). Use if timeouts persist after matching legacy css/use_print options.
  * PIR_PDFSHIFT_USE_PRINT: optional — defaults false to match legacy neuroselect plugin (pdfshift v2 used use_print false). Set true for @media print.
+ * PIR_PDFSHIFT_CSS_FOR_SHIFT: public_url | inline | site_url | omit — how to pass PDFShift `css`. Default public_url (CDN pdf9).
+ * PIR_PDFSHIFT_PUBLIC_PDF9_CSS_URL: optional override URL when mode is public_url.
  */
 final class PdfShiftRenderer
 {
