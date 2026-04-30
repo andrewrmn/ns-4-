@@ -3,6 +3,7 @@
 namespace modules\neuroselect\console\controllers;
 
 use Craft;
+use craft\elements\Asset;
 use craft\elements\User;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -16,6 +17,9 @@ use yii\console\ExitCode;
  *
  * ./craft neuroselect-module/reports/recent-reports
  * ./craft neuroselect-module/reports/recent-reports --limit=50
+ *
+ * Only includes rows where a PDF exists: NeuroSelect uses the “PDF Generated” lightswitch;
+ * Neuro Q checks for the survey PDF asset (same as the report templates); NeuroCore uses a non-empty report URL.
  */
 class ReportsController extends Controller
 {
@@ -40,16 +44,16 @@ class ReportsController extends Controller
     public function actionRecentReports(): int
     {
         $limit = max(1, min(5000, $this->limit));
-        $perFieldFetch = max($limit * 5, 250);
+        $perFieldFetch = max($limit * 40, 1200);
 
         $sources = [
-            ['label' => 'Neuro Q', 'handle' => 'surveySubmissions', 'preferRowDate' => false],
-            ['label' => 'NeuroSelect · pathway', 'handle' => 'pathwaySubmissions', 'preferRowDate' => true],
-            ['label' => 'NeuroSelect · clinical indication', 'handle' => 'clinicalIndicationSubmission', 'preferRowDate' => true],
-            ['label' => 'NeuroSelect · product', 'handle' => 'productSubmission', 'preferRowDate' => true],
-            ['label' => 'NeuroSelect · sleep', 'handle' => 'sleepSubmission', 'preferRowDate' => true],
-            ['label' => 'NeuroSelect · NeuroCore', 'handle' => 'neuroCoreSubmissions', 'preferRowDate' => true],
-            ['label' => 'NeuroSelect · QR scan', 'handle' => 'qrScanSubmissions', 'preferRowDate' => true],
+            ['label' => 'Neuro Q', 'handle' => 'surveySubmissions', 'preferRowDate' => false, 'pdfMode' => 'neuroq_asset'],
+            ['label' => 'NeuroSelect · pathway', 'handle' => 'pathwaySubmissions', 'preferRowDate' => true, 'pdfMode' => 'pdf_generated'],
+            ['label' => 'NeuroSelect · clinical indication', 'handle' => 'clinicalIndicationSubmission', 'preferRowDate' => true, 'pdfMode' => 'pdf_generated'],
+            ['label' => 'NeuroSelect · product', 'handle' => 'productSubmission', 'preferRowDate' => true, 'pdfMode' => 'pdf_generated'],
+            ['label' => 'NeuroSelect · sleep', 'handle' => 'sleepSubmission', 'preferRowDate' => true, 'pdfMode' => 'pdf_generated'],
+            ['label' => 'NeuroSelect · NeuroCore', 'handle' => 'neuroCoreSubmissions', 'preferRowDate' => true, 'pdfMode' => 'report_url'],
+            ['label' => 'NeuroSelect · QR scan', 'handle' => 'qrScanSubmissions', 'preferRowDate' => true, 'pdfMode' => 'pdf_generated'],
         ];
 
         $rows = [];
@@ -68,6 +72,9 @@ class ReportsController extends Controller
                 ->all();
 
             foreach ($blocks as $block) {
+                if (!$this->hasPdfForReport($block, (string) $src['pdfMode'])) {
+                    continue;
+                }
                 [$ts, $dt] = $this->resolveInstant($block, (bool) $src['preferRowDate']);
                 $rows[] = [
                     'ts' => $ts,
@@ -81,7 +88,7 @@ class ReportsController extends Controller
         usort($rows, static fn (array $a, array $b): int => $b['ts'] <=> $a['ts']);
         $rows = array_slice($rows, 0, $limit);
 
-        $this->stdout(sprintf("Most recent %d report rows (Neuro Q + NeuroSelect), site TZ %s\n\n", count($rows), Craft::$app->getTimeZone()));
+        $this->stdout(sprintf("Most recent %d rows with PDF (Neuro Q + NeuroSelect), site TZ %s\n\n", count($rows), Craft::$app->getTimeZone()));
 
         foreach ($rows as $i => $r) {
             $this->stdout(sprintf(
@@ -93,9 +100,68 @@ class ReportsController extends Controller
             ));
         }
 
-        $this->stdout("\nNotes: Neuro Q uses each block’s save time (no separate date field). NeuroSelect prefers the row “date” field when it parses; otherwise block save time.\n");
+        $this->stdout("\nNotes: PDF = NeuroSelect “PDF Generated” on (except NeuroCore: non-empty report URL; Neuro Q: NS-SURVEY-{id}.pdf in volume folder id 22 per report templates). Dates: Neuro Q uses block save time; NeuroSelect prefers row “date” when parseable.\n");
 
         return ExitCode::OK;
+    }
+
+    /**
+     * @param 'neuroq_asset'|'pdf_generated'|'report_url' $pdfMode
+     */
+    private function hasPdfForReport(SuperTableBlockElement $block, string $pdfMode): bool
+    {
+        return match ($pdfMode) {
+            'neuroq_asset' => $this->neuroSurveyPdfAssetExists($block),
+            'pdf_generated' => $this->isPdfGeneratedLightswitchOn($block),
+            'report_url' => $this->neuroCoreReportUrlPresent($block),
+            default => false,
+        };
+    }
+
+    /**
+     * Matches `templates/neuroselect/survey/report.html` (folderId 22, NS-SURVEY-{submissionId}.pdf).
+     */
+    private function neuroSurveyPdfAssetExists(SuperTableBlockElement $block): bool
+    {
+        try {
+            $submissionId = $block->getFieldValue('submissionId');
+        } catch (Throwable) {
+            return false;
+        }
+
+        if (!is_string($submissionId) || $submissionId === '') {
+            return false;
+        }
+
+        $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
+
+        return Asset::find()
+            ->filename($filename)
+            ->folderId(22)
+            ->limit(1)
+            ->exists();
+    }
+
+    private function isPdfGeneratedLightswitchOn(SuperTableBlockElement $block): bool
+    {
+        try {
+            $v = $block->getFieldValue('pdfGenerated');
+        } catch (Throwable) {
+            return false;
+        }
+
+        return $v === true || $v === 1 || $v === '1';
+    }
+
+    private function neuroCoreReportUrlPresent(SuperTableBlockElement $block): bool
+    {
+        try {
+            $url = $block->getFieldValue('reportUrl');
+        } catch (Throwable) {
+            return false;
+        }
+
+        return is_string($url) && trim($url) !== '';
     }
 
     /**

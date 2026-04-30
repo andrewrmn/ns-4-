@@ -26,8 +26,6 @@ use yii\web\Response;
 /**
  * Pdf Controller
  *
- * Pathway PDF minimal HTML test: set PIR_PATHWAY_PDFSHIFT_HTML_TEST=true in .env; pathway PDF requests
- * get `pir_pdf_test=1` so `pathway.html` renders `pathway_pdf_test_stub.html` (smoke test for PDFShift).
  *
  * https://craftcms.com/docs/plugins/controllers
  *
@@ -43,28 +41,6 @@ class PdfController extends Controller
     private function pirPdfFooterHtml(): string
     {
         return '<div style="border-top: 1px solid #F4F5F7; padding: 8px 20px 0; width: 90%; margin: 0 auto; font-family: sans-serif; "><div style="font-size: 4pt; font-family: sans-serif;">***Do not exceed suggested use</div><div style="font-size: 4pt; font-weight: bold; font-family: sans-serif; padding: 2px; border: 1px solid #000; margin-bottom: 5px; ">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</div><div style="font-size: 4pt; font-family: sans-serif;">Product information was requested by a healthcare provider and is not intended to diagnose, treat, cure or prevent any diseases. References provided are not specific to an individual and do not change based on the product information request. Products selected are based on specific requests or information presented indicating the goal is to select ingredients with mechanisms that scientifically promote biochemical pathway(s) or clinical indication(s) to theoretically shift toward the statistical median or have research indicating a symptom could be correlated to an element in a pathway.</div></div>';
-    }
-
-    private const PIR_PDF_TEST_QUERY_KEY = 'pir_pdf_test';
-
-    /**
-     * When PIR_PATHWAY_PDFSHIFT_HTML_TEST is true, append `pir_pdf_test=1` for pathway PDFs so Twig can render a minimal page.
-     */
-    private function appendPirPathwayPdfTestQuery(string $url, string $submissionType): string
-    {
-        $v = App::env('PIR_PATHWAY_PDFSHIFT_HTML_TEST');
-        if (!is_string($v) || $v === '' || !filter_var($v, FILTER_VALIDATE_BOOLEAN)) {
-            return $url;
-        }
-        if ($submissionType !== 'pathway') {
-            return $url;
-        }
-        if (str_contains($url, self::PIR_PDF_TEST_QUERY_KEY . '=')) {
-            return $url;
-        }
-        $sep = str_contains($url, '?') ? '&' : '?';
-
-        return $url . $sep . self::PIR_PDF_TEST_QUERY_KEY . '=1';
     }
 
     /**
@@ -369,14 +345,12 @@ class PdfController extends Controller
         $submissionType = (string) $_POST['submissionType'];
 
         $source = $this->normalizePirPdfSource($postedRaw);
-        $source = $this->appendPirPathwayPdfTestQuery($source, $submissionType);
 
         // #region agent log
         PdfDebugSessionLog::write('H_PIPELINE', __CLASS__ . '::actionGeneratePdf', 'pipeline_2_after_normalize', [
             'pipeline_step' => 2,
             'normalized_len' => strlen($source),
             'normalized' => $this->pipelineUrlFingerprint($source),
-            'pir_pathway_pdf_test_query' => str_contains($source, self::PIR_PDF_TEST_QUERY_KEY . '='),
         ]);
         // #endregion
 
@@ -528,7 +502,6 @@ class PdfController extends Controller
             $regenType = isset($_POST['submissionType']) ? trim((string)$_POST['submissionType']) : '';
             if ($regenSource !== '' && $regenType !== '') {
                 $normalized = $this->normalizePirPdfSource($regenSource);
-                $normalized = $this->appendPirPathwayPdfTestQuery($normalized, $regenType);
                 $pdfEngineDetail = null;
                 $pdfBody = $this->renderPirPdfBody($normalized, $pdfEngineDetail);
                 if ($pdfBody === false || $pdfBody === '') {
