@@ -123,7 +123,7 @@ submission.product4 is empty and submission.product5 is empty %}
 
                 {% set pdfGenerated = craft.assets().filename(filename).folderId('22').all() %}
 
-                {% if submission.email %}
+                {% if submission.email and not neuroselectHideDownloadReport %}
                 <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
                   <input type="hidden" name="action" value="/neuroselect-module/survey/email-survey">
                   {{ csrfInput() }}
@@ -157,6 +157,7 @@ submission.product4 is empty and submission.product5 is empty %}
                 </div>
 
 
+                {% if not neuroselectHideDownloadReport %}
                 <form id="pdf-gen-form" method="post" accept-charset="UTF-8"
                   class="ml-4{% if pdfGenerated %} d-none{% endif %}">
                   <input type="hidden" name="action" value="/neuroselect-module/survey/survey-pdf">
@@ -174,6 +175,7 @@ submission.product4 is empty and submission.product5 is empty %}
                     <span>Download Report</span>
                   </button>
                 </form>
+                {% endif %}
 
                 <a id="new-file" class="sr-only no-print" href="{{ siteUrl }}surveys/{{filename}}" target="_blank"></a>
               </div>

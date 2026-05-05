@@ -55,6 +55,7 @@
 
           <div class="d-flex flex-justify-end">
             {% set hasPDF = true %}
+            {% if not neuroselectHideDownloadReport %}
             <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
               <input type="hidden" name="action" value="neuroselect-module/pdf/email-pdf">
               {{ csrfInput() }}
@@ -69,6 +70,7 @@
                 <span>Email Report</span>
               </button>
             </form>
+            {% endif %}
 
 
 

@@ -39,6 +39,7 @@
                         {% set filename = 'NS-PIR-' ~ user.id ~ '-' ~ submission.submissionId ~ '.pdf' %}
 
 
+                        {% if not neuroselectHideDownloadReport %}
                         <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
                             <input type="hidden" name="action" value="neuroselect-module/pdf/email-pdf">
 
@@ -57,6 +58,7 @@
                                 <span>Email Report</span>
                             </button>
                         </form>
+                        {% endif %}
 
 
                         <div class="{% if not submission.pdfGenerated %}d-none{% endif %}" id="download-pdf"
@@ -75,6 +77,7 @@
                         </div>
 
 
+                        {% if not neuroselectHideDownloadReport %}
                         <form id="pdf-gen-form" action="" method="post" accept-charset="UTF-8"
                             class="ml-4{% if submission.pdfGenerated %} d-none{% endif %}">
                             <input type="hidden" name="action" value="neuroselect-module/pdf/generate-pdf">
@@ -94,6 +97,7 @@
                                 <span>Download Report</span>
                             </button>
                         </form>
+                        {% endif %}
 
                         <a id="new-file" class="sr-only no-print" href="{{ siteUrl }}pir-documents/{{filename}}"
                             target="_blank"></a>

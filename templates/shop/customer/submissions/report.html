@@ -36,7 +36,7 @@
                             {% set hasPDF = false %}
                             {% set filename = 'NS-PIR-' ~ user.id ~ '-' ~ submission.submissionId  ~ '.pdf' %}
 
-                            {% if not currentUser.isInGroup('neuroselectOnly') %}
+                            {% if not currentUser.isInGroup('neuroselectOnly') and not neuroselectHideDownloadReport %}
                             <form id="pdf-email-form" action="" method="post" accept-charset="UTF-8">
                                 <input type="hidden" name="action" value="/appConnector/pdf/emailPdf">
 
@@ -65,6 +65,7 @@
                             </div>
 
 
+                            {% if not neuroselectHideDownloadReport %}
                             <form id="pdf-gen-form" action="" method="post" accept-charset="UTF-8" class="ml-4{% if submission.pdfGenerated %} d-none{% endif %}">
                                 <input type="hidden" name="action" value="/appConnector/pdf/generatePdf">
 
@@ -79,6 +80,7 @@
                                     <span>Download Report</span>
                                 </button>
                             </form>
+                            {% endif %}
 
                             <a id="new-file" class="sr-only no-print" href="{{ siteUrl }}pir-documents/{{filename}}"  target="_blank"></a>
                         </div>
