@@ -10,7 +10,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 2faeba88-9060-4121-aefb-1c1f0ca257d3
+        uid: 90125a23-e423-4f8d-b546-04f89e8c009d
         userCondition: null
         warning: null
         width: 50
@@ -22,7 +22,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: f7ef44d3-408e-4b2c-b862-b6f92257f290
+        uid: 1acbd2e8-fb28-484e-9477-8205c53c969f
         userCondition: null
         warning: null
         width: 25
@@ -34,7 +34,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: cdf48031-7df1-4b64-8935-720165e7bebe
+        uid: 22b9d788-2304-4cd0-8b09-5ad39524a79c
         userCondition: null
         warning: null
         width: 25
@@ -46,7 +46,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 2928544c-1cdb-42f4-9dd4-29b884e6a175
+        uid: 9bb894d3-bed6-435b-9927-ba5f47286fa8
         userCondition: null
         warning: null
         width: 100
@@ -58,7 +58,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 819c4e4f-22c6-4df6-b317-00ec6644bbb2
+        uid: d529d13a-b9bb-472d-8069-63a7b6f15eed
         userCondition: null
         warning: null
         width: 50
@@ -70,7 +70,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: 6afe6607-a1d0-481a-9a77-ab96c29e3d99
+        uid: b69945cc-0113-49e6-a0d4-c2c69d2f351e
         userCondition: null
         warning: null
         width: 50
@@ -82,7 +82,7 @@ tabs:
         required: false
         tip: null
         type: craft\fieldlayoutelements\CustomField
-        uid: fbefb0f7-cb85-4a9f-b335-0ef2bf6de18c
+        uid: f4985c3d-e191-4962-acb3-fb7ff112b45e
         userCondition: null
         warning: null
         width: 100

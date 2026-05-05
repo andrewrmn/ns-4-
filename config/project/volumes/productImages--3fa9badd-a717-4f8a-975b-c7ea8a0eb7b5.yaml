@@ -27,7 +27,7 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\assets\AssetTitleField
-            uid: 394e7ba8-0943-4537-9d8b-a221c109ca62
+            uid: 2bac1d95-1930-4d49-bfa6-fdc61a6d5a6e
             userCondition: null
             warning: null
             width: 100
@@ -40,5 +40,5 @@ name: 'Product Images'
 sortOrder: 2
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-transformFs: ''
+transformFs: null
 transformSubpath: ''

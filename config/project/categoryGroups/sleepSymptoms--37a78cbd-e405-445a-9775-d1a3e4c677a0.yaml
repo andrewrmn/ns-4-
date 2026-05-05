@@ -28,12 +28,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: e9d4b5ab-2ae3-4ed3-ad82-82acb52febf2
+            uid: 5509e5e0-1d0d-4655-b219-681c545d47e2
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: e813bfde-0e1d-41f1-8bdf-2a9c7483d3c1
+        uid: f44953f6-0f97-43f2-b888-7265d589bbf7
         userCondition: null
 handle: sleepSymptoms
 name: 'Sleep Symptoms'

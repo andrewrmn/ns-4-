@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 58c3de67-ade3-49d2-b356-bac0a86abbfa
+            uid: 2278f1c4-ea4e-469e-82d5-48fad9a3404a
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a53b4804-e87c-4715-b850-28f632b0080d
+            uid: 90150409-194d-4d14-bb8a-0741ce74fa53
             userCondition: null
             warning: null
             width: 100
@@ -38,7 +38,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: dfe4cc3f-256f-43c1-b845-b9c7b8c66f2b
+            uid: 61af26d0-492e-4623-a475-36d06f3ade36
             userCondition: null
             warning: null
             width: 100
@@ -50,7 +50,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 7caebdd0-74d3-48c1-996f-e3d4fbaf22df
+            uid: 9a1e78b5-25d1-4d63-84ff-b6ffd439a71c
             userCondition: null
             warning: null
             width: 100
@@ -62,7 +62,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: b30c2f0b-fe60-4511-8ec0-3e9e1ff569d6
+            uid: 0480a3ef-5797-474f-9bd8-3d483517188e
             userCondition: null
             warning: null
             width: 100
@@ -74,12 +74,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: bb638fb7-9d5e-4de8-bcff-174c12d5ea33
+            uid: a13a68c2-f049-4b7f-9457-4308223ec6fa
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: e96a1d55-ae1b-4fea-b1a0-63dadd9364d6
+        uid: b70aceec-0224-435c-9354-cb5f4df18cd2
         userCondition: null
 fields:
   71a8b34f-03e0-4728-a681-0262c3f3d678: # Resources
@@ -118,7 +118,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null
@@ -237,7 +237,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null

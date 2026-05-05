@@ -13,7 +13,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 5264bd04-6a83-45b7-9d0f-1e22be9803ae
+            uid: c9b73c90-9bb5-4dfa-be95-e8371c75990c
             userCondition: null
             warning: null
             width: 100
@@ -25,7 +25,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 2a85b7d0-7b1c-4342-8add-f3e6a05fb224
+            uid: 17a91da4-bd28-4a97-b44b-39674ef57f9d
             userCondition: null
             warning: null
             width: 100
@@ -37,7 +37,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 7d4cacba-74ac-40a0-8b60-f54ca3e96938
+            uid: ad1c85a4-20ad-4eed-8d6e-72dd58d1685e
             userCondition: null
             warning: null
             width: 100
@@ -49,7 +49,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 337e26f6-3bd2-4864-92e3-0948c7d2c207
+            uid: a2c56a17-c771-4642-9203-e09b46aab626
             userCondition: null
             warning: null
             width: 100
@@ -61,7 +61,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 524c9fd7-d0e6-4ced-910f-a2262c98bb78
+            uid: 3dc6b3cb-553f-4fb7-8c6a-d3603d724954
             userCondition: null
             warning: null
             width: 100
@@ -73,7 +73,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: e278a968-fbc1-41af-b11b-47d8a79f3a62
+            uid: 686f8bdd-58d3-419b-928f-fc917bf5ef34
             userCondition: null
             warning: null
             width: 100
@@ -85,7 +85,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 4a8ec011-362d-48ce-be7b-ab6cd24c16d5
+            uid: 456fe8f4-1d2f-4c6f-866c-adf4e57795fc
             userCondition: null
             warning: null
             width: 100
@@ -97,7 +97,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: a362684e-244b-4392-82a3-338100f24c35
+            uid: b818f860-f57f-4ff5-961a-e8a5737db907
             userCondition: null
             warning: null
             width: 100
@@ -109,7 +109,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: b9c00728-55cb-4039-bc14-a0260b6c342f
+            uid: ad835dc1-691f-41fb-8f87-980baa17562f
             userCondition: null
             warning: null
             width: 100
@@ -121,7 +121,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: b716749f-85a2-42cd-9d98-7b9a3212430e
+            uid: 42de8669-bbeb-450b-aced-c0b5d7b8fb04
             userCondition: null
             warning: null
             width: 100
@@ -133,12 +133,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 08312b6d-b731-426c-bfbd-ac3814db0ff6
+            uid: e1c6e6b7-3113-4b9a-8e1a-83b1b41ada14
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 0f07e698-e2ee-46d6-8d73-9c620c7b88c1
+        uid: e51473ce-6e24-44f6-bdab-82af7f38336e
         userCondition: null
 fields:
   2c984c17-8feb-4039-a5fe-d49c4202d079: # Background
@@ -200,7 +200,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null

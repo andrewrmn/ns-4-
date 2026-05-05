@@ -12,17 +12,6 @@ settings:
       __assoc__:
         -
           - label
-          - '1 day'
-        -
-          - value
-          - 1Days
-        -
-          - default
-          - ''
-    -
-      __assoc__:
-        -
-          - label
           - '15 days'
         -
           - value

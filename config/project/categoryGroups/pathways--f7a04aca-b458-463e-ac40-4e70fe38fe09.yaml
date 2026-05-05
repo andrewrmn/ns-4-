@@ -28,12 +28,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: 273ee45a-890d-4271-bf9f-ca7f02ce4562
+            uid: 7b23dcd7-87e3-412e-ba9a-b96272a28a64
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 959a930d-d0e6-448f-954c-a93539f5af0a
+        uid: 493b715b-8c79-49b2-b990-6de4e7897dbe
         userCondition: null
 handle: pathways
 name: 'QR Scan Pathways'

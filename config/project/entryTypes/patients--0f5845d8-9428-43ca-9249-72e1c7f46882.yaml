@@ -27,12 +27,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 1612875a-e164-4b75-93b0-e323b87ec544
+            uid: 8c0c289e-168e-4a9b-9d3c-d3d108d72fa8
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 44d6b297-8f19-4a2f-bc65-51d1a34dbae3
+        uid: 97d530b6-8375-4578-ad86-f02c650031c2
         userCondition: null
 handle: patients
 hasTitleField: true

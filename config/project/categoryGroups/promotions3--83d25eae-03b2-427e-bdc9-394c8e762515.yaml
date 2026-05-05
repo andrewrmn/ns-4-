@@ -1,6 +1,6 @@
 defaultPlacement: end
 fieldLayouts:
-  8f6cd17e-923c-4d9c-b579-ad6bd5216890:
+  43e79c63-9adc-4469-a5cf-c0621c497a8f:
     tabs:
       -
         elementCondition: null
@@ -28,12 +28,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: 489607f9-79f4-49d7-8379-d1167452410b
+            uid: 1df8e753-8915-492d-ae73-fd4f7c5ed00d
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: c08787ff-fe9b-47a9-ab09-7907cb742b23
+        uid: 6bc177f0-74a8-4cf8-8df0-1ec093fbb9d5
         userCondition: null
 handle: promotions3
 name: Promotions

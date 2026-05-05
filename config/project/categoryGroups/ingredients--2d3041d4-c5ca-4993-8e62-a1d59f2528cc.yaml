@@ -28,12 +28,12 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\TitleField
-            uid: a997a618-8c28-456e-aab9-61eb99371046
+            uid: 4513189a-7f8c-430e-b5f5-21f53193aa83
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 98bb7f61-a88d-4894-bdd1-d3aa9c189835
+        uid: b0314696-56e2-47e5-9c8b-0de8cc0c64ce
         userCondition: null
 handle: ingredients
 name: Ingredients

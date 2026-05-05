@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: ab63c23a-f179-4cb9-8fb1-cdd41a404ace
+            uid: e6cbad4e-660c-4935-9a66-183426747d95
             userCondition: null
             warning: null
             width: 100
@@ -26,7 +26,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: dc9e570f-8e1e-4d91-bd90-ec6b8b768f7e
+            uid: aac67b67-5de1-4fa1-aa71-033faf5dca7a
             userCondition: null
             warning: null
             width: 100
@@ -38,12 +38,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: 53eb286e-aa07-4d27-b1ca-ff2144aa854e
+            uid: 93bd8e79-d9fa-44a2-9d00-5b9cd95ce14c
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 9da02316-8c58-481d-8f54-20d8a81b359d
+        uid: 4db43d9f-b5cd-4243-98bf-373a7e2a013e
         userCondition: null
 fields:
   989e8fee-a375-4704-b002-91f68bccec4e: # Stress content
@@ -58,7 +58,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null
@@ -84,7 +84,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null
@@ -110,7 +110,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: mediumtext
       defaultTransform: null
       purifierConfig: null

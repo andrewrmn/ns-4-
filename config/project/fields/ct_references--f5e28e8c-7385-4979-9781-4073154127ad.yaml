@@ -9,7 +9,7 @@ settings:
   availableTransforms: '*'
   availableVolumes: '*'
   characterLimit: null
-  ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+  ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
   columnType: text
   defaultTransform: null
   purifierConfig: null

@@ -14,7 +14,7 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: cb1fea43-f965-4921-aedb-0dbdf4a6284b
+            uid: a76486ab-de48-48cb-81d2-cb83c9cff7a9
             userCondition: null
             warning: null
             width: 100
@@ -26,12 +26,12 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c95b0459-271d-400b-ad11-fc96ef93f5fb
+            uid: 12bc45f3-0521-4a9e-a67e-77fce998647a
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: 4d2aa807-e3c2-4e19-911b-ab3d6f2291ab
+        uid: 7a64e39b-5c15-4a93-a8ba-29d26c4f23a6
         userCondition: null
 fields:
   8e6ec6f8-d9bb-4336-b939-97523357eeee: # Drawer Content
@@ -46,7 +46,7 @@ fields:
       availableTransforms: '*'
       availableVolumes: '*'
       characterLimit: null
-      ckeConfig: 42413eea-7d73-4c19-ba3d-37a4d3879182 # Simple
+      ckeConfig: 45ee12db-a387-4bf5-bf41-95d8744b1ffa # Simple
       columnType: text
       defaultTransform: null
       purifierConfig: null
