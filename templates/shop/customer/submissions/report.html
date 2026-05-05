@@ -1,3 +1,4 @@
+{% set neuroselectHideDownloadReport = true %}
 {% set gridJustify = 'flex-justify-between' %}
 {% set colWidth = 'col-12 col-md-4' %}
 {% set printSize = 'print-size-normal' %}
@@ -52,12 +53,15 @@
                             </form>
                             {% endif %}
 
-                            <div class="{% if not submission.pdfGenerated %}d-none{% endif %}" id="download-pdf">
+                            <div class="{% if not submission.pdfGenerated %}d-none{% endif %}" id="download-pdf"
+                                data-pdf-exists="{{ submission.pdfGenerated ? '1' : '0' }}">
+                                {% if not neuroselectHideDownloadReport %}
                                 <a class="d-flex flex-items-center ml-4" href="{{ siteUrl }}pir-documents/{{filename}}" id="pir-download-report" target="_blank">
 
                                     <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24"><path d="M16 18h-8v-1h8v1zm-2 1h-6v1h6v-1zm10-14v13h-4v6h-16v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 10h-12v7h12v-7zm4-8h-20v9h2v-3h16v3h2v-9zm-1.5 1c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>
                                     <span>Download Report</span>
                                 </a>
+                                {% endif %}
                             </div>
 
 
@@ -458,6 +462,7 @@
 
 <script>
     var $ = jQuery;
+    var neuroselectHideDownloadReport = {{ neuroselectHideDownloadReport ? 'true' : 'false' }};
     $('main#content').addClass('pir-width');
 
     $('#pdf-gen-form').submit(function(e) {
@@ -475,13 +480,18 @@
             dataType: 'json'
         }).done(function (data) {
             $('html').removeClass('thinking').removeClass('generating');
-            $('#download-pdf').removeClass('d-none');
+            $('#download-pdf').attr('data-pdf-exists', '1');
+            if (!neuroselectHideDownloadReport) {
+                $('#download-pdf').removeClass('d-none');
+            }
             form.addClass('d-none');
 
             if( $('html').hasClass('email-queue') ) {
                 $('#pdf-email-form-submit')[0].click();
             } else {
-                $('#new-file')[0].click();
+                if (!neuroselectHideDownloadReport) {
+                    $('#new-file')[0].click();
+                }
             }
 
 
@@ -496,7 +506,7 @@
 
         var form = $(this);
 
-        if( $('#download-pdf').hasClass('d-none') ) {
+        if( $('#download-pdf').hasClass('d-none') && $('#download-pdf').attr('data-pdf-exists') !== '1' ) {
             //console.log('Genereating PDF first');
             $('#pdf-gen-form-submit')[0].click();
             $('html').addClass('email-queue');

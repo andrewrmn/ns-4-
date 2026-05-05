@@ -1,3 +1,4 @@
+{% set neuroselectHideDownloadReport = true %}
 {% set gridJustify = 'flex-justify-between' %}
 {% set colWidth = 'col-12 col-md-4' %}
 {% set printSize = 'print-size-normal' %}
@@ -58,7 +59,9 @@
                         </form>
 
 
-                        <div class="{% if not submission.pdfGenerated %}d-none{% endif %}" id="download-pdf">
+                        <div class="{% if not submission.pdfGenerated %}d-none{% endif %}" id="download-pdf"
+                            data-pdf-exists="{{ submission.pdfGenerated ? '1' : '0' }}">
+                            {% if not neuroselectHideDownloadReport %}
                             <a class="d-flex flex-items-center ml-4" href="{{ siteUrl }}pir-documents/{{filename}}"
                                 id="pir-download-report" target="_blank">
 
@@ -68,6 +71,7 @@
                                 </svg>
                                 <span>Download Report</span>
                             </a>
+                            {% endif %}
                         </div>
 
 
@@ -520,6 +524,7 @@
 
 <script>
     var $ = jQuery;
+    var neuroselectHideDownloadReport = {{ neuroselectHideDownloadReport ? 'true' : 'false' }};
     $('main#content').addClass('pir-width');
 
     $('#pdf-gen-form').submit(function (e) {
@@ -537,7 +542,10 @@
             dataType: 'json'
         }).done(function (data) {
             $('html').removeClass('thinking').removeClass('generating');
-            $('#download-pdf').removeClass('d-none');
+            $('#download-pdf').attr('data-pdf-exists', '1');
+            if (!neuroselectHideDownloadReport) {
+                $('#download-pdf').removeClass('d-none');
+            }
             form.addClass('d-none');
 
             if (data && data.csrfParam && data.csrfTokenValue) {
@@ -547,7 +555,9 @@
             if ($('html').hasClass('email-queue')) {
                 $('#pdf-email-form-submit')[0].click();
             } else {
-                $('#new-file')[0].click();
+                if (!neuroselectHideDownloadReport) {
+                    $('#new-file')[0].click();
+                }
             }
 
 
@@ -567,7 +577,7 @@
 
         var form = $(this);
 
-        if ($('#download-pdf').hasClass('d-none')) {
+        if ($('#download-pdf').hasClass('d-none') && $('#download-pdf').attr('data-pdf-exists') !== '1') {
             //console.log('Genereating PDF first');
             $('#pdf-gen-form-submit')[0].click();
             $('html').addClass('email-queue');

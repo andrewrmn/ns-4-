@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% set neuroselectHideDownloadReport = true %}
 
 {% set report = craft.app.request.segments|last %}
 
@@ -195,7 +196,9 @@ submission.product4 is empty and submission.product5 is empty %}
                     </form>
                     {% endif %}
 
-                    <div class="{% if pdfGenerated|length == 0 %}d-none{% endif %}" id="download-pdf">
+                    <div class="{% if pdfGenerated|length == 0 %}d-none{% endif %}" id="download-pdf"
+                      data-pdf-exists="{{ pdfGenerated|length ? '1' : '0' }}">
+                      {% if not neuroselectHideDownloadReport %}
                       <a class="d-flex flex-items-center ml-4" href="{{ siteUrl }}surveys/{{filename}}"
                         id="pir-download-report" target="_blank">
 
@@ -205,6 +208,7 @@ submission.product4 is empty and submission.product5 is empty %}
                         </svg>
                         <span>Download Report</span>
                       </a>
+                      {% endif %}
                     </div>
 
 
@@ -1197,6 +1201,7 @@ submission.product4 is empty and submission.product5 is empty %}
 
 <script>
   var $ = jQuery;
+  var neuroselectHideDownloadReport = {{ neuroselectHideDownloadReport ? 'true' : 'false' }};
 
   $('#pdf-gen-form').submit(function (e) {
     //console.log('generating...');
@@ -1213,13 +1218,18 @@ submission.product4 is empty and submission.product5 is empty %}
       //console.log(data);
       //console.log('PDF generated successfully');
       $('html').removeClass('thinking').removeClass('generating');
-      $('#download-pdf').removeClass('d-none');
+      $('#download-pdf').attr('data-pdf-exists', '1');
+      if (!neuroselectHideDownloadReport) {
+        $('#download-pdf').removeClass('d-none');
+      }
       form.addClass('d-none');
 
       if ($('html').hasClass('email-queue')) {
         $('#pdf-email-form-submit')[0].click();
       } else {
-        $('#new-file')[0].click();
+        if (!neuroselectHideDownloadReport) {
+          $('#new-file')[0].click();
+        }
       }
 
     }).fail(function (error) {
@@ -1234,7 +1244,7 @@ submission.product4 is empty and submission.product5 is empty %}
     //console.log('Prepping email...');
     var form = $(this);
 
-    if ($('#download-pdf').hasClass('d-none')) {
+    if ($('#download-pdf').hasClass('d-none') && $('#download-pdf').attr('data-pdf-exists') !== '1') {
       //console.log('Genereating PDF first');
       $('#pdf-gen-form-submit')[0].click();
       $('html').addClass('email-queue');
