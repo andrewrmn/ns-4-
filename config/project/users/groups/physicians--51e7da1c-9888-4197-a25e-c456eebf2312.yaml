@@ -1,3 +1,14 @@
 description: null
 handle: physicians
 name: 'Health Care Professionals'
+permissions:
+  - 'createentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'createentries:d5038d99-7e50-41b6-929d-f6758a226fbe' # HCP Recommendations
+  - 'saveentries:a1f1eb80-3641-4931-a3f7-a87d28489c60' # Neuro Q
+  - 'saveentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'saveentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'saveentries:d5038d99-7e50-41b6-929d-f6758a226fbe' # HCP Recommendations
+  - 'viewentries:a1f1eb80-3641-4931-a3f7-a87d28489c60' # Neuro Q
+  - 'viewentries:a7d38fe9-86e0-495c-9bca-a8567b4a1159' # Healthcare Providers
+  - 'viewentries:cf21ce66-449e-4403-a1c7-77f684812ccb' # Patients
+  - 'viewentries:d5038d99-7e50-41b6-929d-f6758a226fbe' # HCP Recommendations
