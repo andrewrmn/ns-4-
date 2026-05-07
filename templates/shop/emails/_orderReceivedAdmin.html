@@ -1,4 +1,21 @@
 <h2>A new order has been received</h2>
 
 <p>View Order: {{ order.cpEditUrl }}</p>
-<br />
+
+<h3>Order Information</h3>
+<p>
+  Date Received: {{ order.dateOrdered|date('D jS M Y') }}<br>
+  Order Number: {{ order.number }}<br>
+  Short Number: {{ order.shortNumber }}<br>
+  Total Quantity: {{ order.totalQty }}<br>
+  Total Price: {{ order.totalPrice|commerceCurrency(order.currency) }}
+</p>
+
+{% set customer = order.customer %}
+<h3>Customer Information</h3>
+<p>
+  Name: {{ customer.fullName ?? order.billingAddress.fullName ?? order.email }}<br>
+  {% if customer.masId %}MAS ID: {{ customer.masId }}<br>{% endif %}
+  Email: {{ order.email }}<br>
+  {% if customer %}See User Profile: {{ customer.cpEditUrl }}{% endif %}
+</p>
