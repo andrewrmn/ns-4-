@@ -72,8 +72,8 @@ final class PdfShiftRenderer
             'source' => $url,
             'format' => 'A4',
             'use_print' => true,
-            'disable_javascript' => true,
             'timeout' => 60,
+            'ignore_long_polling' => true,
         ];
 
         if ($footerInnerHtml !== '') {
