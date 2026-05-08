@@ -424,7 +424,9 @@ class SurveyController extends Controller
       $filename = 'NS-SURVEY-' . $submissionId . '.pdf';
       $filePath = Craft::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'surveys' . DIRECTORY_SEPARATOR . $filename;
 
-      $settings = Craft::$app->systemSettings->getSettings('email');
+      $mailSettings = App::mailSettings();
+      $fromEmail = App::parseEnv($mailSettings->fromEmail);
+      $fromName = App::parseEnv($mailSettings->fromName) ?: '';
       $message = new Message();
 
       // Send to
@@ -446,7 +448,7 @@ class SurveyController extends Controller
 
       $html   .= 'Clinically validated. Scientific symptom assessment. Targeted supplement selection.';
 
-      $message->setFrom([$settings['fromEmail'] => $settings['fromName']]);
+      $message->setFrom([$fromEmail => $fromName]);
       $message->setTo($mail);
       $message->setSubject($subject);
       $message->setHtmlBody($html);
