@@ -3,7 +3,7 @@
 
 {% block content %}
 
-{% set neuroselectHideDownloadReport = false %}
+{% set neuroselectHideDownloadReport = true %}
 
 {% for submission in currentUser.neuroCoreSubmissions %}
 {% if craft.app.request.segments|last == submission.activationCode %}

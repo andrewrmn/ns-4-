@@ -1,10 +1,10 @@
-{% extends "layouts/_layout" %}
+{% extends craft.app.request.getParam('pdfmode') ? "layouts/_pdf" : "layouts/_layout" %}
 
 {% block mainClass %}pir-width{% endblock %}
 
 {% block content %}
 
-{% set neuroselectHideDownloadReport = false %}
+{% set neuroselectHideDownloadReport = true %}
 
 {% set report = craft.app.request.segments|last %}
 

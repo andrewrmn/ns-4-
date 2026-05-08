@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/main.css?v=23.0.3">
+<link rel="stylesheet" href="/css/print-pdf.css?v=1" media="print">
+{% set _seg1 = craft.app.request.getSegment(1) %}
+{% set _seg2 = craft.app.request.getSegment(2) %}
+{% if _seg2 == 'report' and _seg1 and _seg1|lower in ['neuro-q', 'survey', 'neuro-q'] %}
+<link rel="stylesheet" href="/css/survey-print.css?v=2" media="print">
+{% endif %}
+</head>
+<body>
+<div class="{% block mainClass %}{% endblock %}">
+{% block content %}{% endblock %}
+</div>
+</body>
+</html>

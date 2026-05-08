@@ -1,5 +1,5 @@
 {% set title = 'PIR' %}
-{% extends "layouts/_layout" %}
+{% extends craft.app.request.getParam('pdfmode') ? "layouts/_pdf" : "layouts/_layout" %}
 
 {% block content %}
 
