@@ -163,7 +163,7 @@ submission.product4 is empty and submission.product5 is empty %}
                   <input type="hidden" name="action" value="/neuroselect-module/survey/survey-pdf">
                   {{ csrfInput() }}
 
-                  <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ report }}">
+                  <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ report }}&pdfmode=1">
 
                   <input type="hidden" name="submissionId" value="{{ report }}">
 

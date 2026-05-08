@@ -21,7 +21,7 @@
 </head>
 
 <body class="">
-	{% if constant('CRAFT_ENVIRONMENT') in ['production', 'staging'] %}
+	{% if constant('CRAFT_ENVIRONMENT') in ['production', 'staging'] and not craft.app.request.getParam('pdfmode') %}
 	<!-- Google Tag Manager (noscript) -->
 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N46834T" height="0" width="0"
 			style="display:none;visibility:hidden"></iframe></noscript>
@@ -80,8 +80,10 @@
 
 	{% include 'partials/footer' %}
 
+	{% if not craft.app.request.getParam('pdfmode') %}
 	<script src="/js/TweenMax.min.js"></script>
 	<script src="/js/main.js"></script>
+	{% endif %}
 	<span class="menu-mask" data-click-target="" data-click-bodyClass="sub-nav-is-active"></span>
 	<div class="is-hidden">
 		{% include 'partials/svgs.svg' %}

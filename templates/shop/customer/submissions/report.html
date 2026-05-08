@@ -41,7 +41,7 @@
                                 <input type="hidden" name="action" value="/appConnector/pdf/emailPdf">
 
                                 {{ csrfInput() }}
-                                <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ user.email|url_encode }}">
+                                <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ user.email|url_encode }}&pdfmode=1">
                                 <input type="hidden" name="submissionType" value="{{ submissionType }}">
                                 <input type="hidden" name="submissionId" value="{{ submission.submissionId }}">
                                 <input type="hidden" name="userId" value="{{ user.id }}">
@@ -70,7 +70,7 @@
                                 <input type="hidden" name="action" value="/appConnector/pdf/generatePdf">
 
                                 {{ csrfInput() }}
-                                <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ user.email }}">
+                                <input type="hidden" name="source" value="{{ craft.request.url }}?q={{ user.email }}&pdfmode=1">
                                 <input type="hidden" name="submissionId" value="{{ submission.submissionId }}">
                                 <input type="hidden" name="submissionType" value="{{ submissionType }}">
                                 <input type="hidden" name="userId" value="{{ user.id }}">

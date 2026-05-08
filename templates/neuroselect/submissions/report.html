@@ -45,7 +45,7 @@
 
                             {{ csrfInput() }}
                             <input type="hidden" name="source"
-                                value="{{ url(craft.app.request.pathInfo) }}?q={{ user.email|url_encode }}">
+                                value="{{ url(craft.app.request.pathInfo) }}?q={{ user.email|url_encode }}&pdfmode=1">
                             <input type="hidden" name="submissionType" value="{{ submissionType }}">
                             <input type="hidden" name="submissionId" value="{{ submission.submissionId }}">
                             <input type="hidden" name="userId" value="{{ user.id }}">
@@ -84,7 +84,7 @@
 
                             {{ csrfInput() }}
                             <input type="hidden" name="source"
-                                value="{{ url(craft.app.request.pathInfo) }}?q={{ user.email }}">
+                                value="{{ url(craft.app.request.pathInfo) }}?q={{ user.email }}&pdfmode=1">
                             <input type="hidden" name="submissionId" value="{{ submission.submissionId }}">
                             <input type="hidden" name="submissionType" value="{{ submissionType }}">
                             <input type="hidden" name="userId" value="{{ user.id }}">

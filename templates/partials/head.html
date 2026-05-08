@@ -18,7 +18,7 @@
 
 <script src="/js/jquery.js"></script>
 
-{% if constant('CRAFT_ENVIRONMENT') in ['production', 'staging'] %}
+{% if constant('CRAFT_ENVIRONMENT') in ['production', 'staging'] and not craft.app.request.getParam('pdfmode') %}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117519601-1"></script>
 <script>
@@ -38,5 +38,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 {% endif %}
 
+{% if not craft.app.request.getParam('pdfmode') %}
 {% hook 'seomaticRender' %}
 <script type="text/javascript" src="https://www.sagepayments.net/pay/1.0.2/js/pay.min.js"></script>
+{% endif %}

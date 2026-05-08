@@ -112,7 +112,7 @@
 {% set noProds = false %}
 
 {# PDF generator loads this URL in headless Chrome; absoluteUrl already includes ?account=… so appending ?account again breaks the query string and submission lookup. #}
-{% set neuroqPdfSourceUrl = craft.app.request.absoluteUrl|split('?')|first ~ '?account=' ~ (user.email|url_encode) %}
+{% set neuroqPdfSourceUrl = craft.app.request.absoluteUrl|split('?')|first ~ '?account=' ~ (user.email|url_encode) ~ '&pdfmode=1' %}
 
 
 
