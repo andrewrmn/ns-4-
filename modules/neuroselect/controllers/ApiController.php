@@ -55,21 +55,14 @@ class ApiController extends Controller
     //protected array|int|bool $allowAnonymous = ['index', 'login'];
     protected bool|int|array $allowAnonymous = true;
 
+    public bool $enableCsrfValidation = false;
+
     // Public Methods
     // =========================================================================
 
     ////////////////////////// Login //////////////////////////
     public function actionLogin()
     {
-
-        $type = Craft::$app->request->getContentType();
-
-        if ( $type == 'application/json' ) {
-            $rest_json = file_get_contents("php://input");
-            $_POST = json_decode($rest_json, true);
-        }
-
-        $request = Craft::$app->getRequest();
         $this->requirePostRequest();
         $username = Craft::$app->request->getBodyParam('Username');
         $user = Craft::$app->users->getUserByUsernameOrEmail($username);
