@@ -55,7 +55,7 @@ class ApiController extends Controller
     //protected array|int|bool $allowAnonymous = ['index', 'login'];
     protected bool|int|array $allowAnonymous = true;
 
-    public bool $enableCsrfValidation = false;
+    public $enableCsrfValidation = false;
 
     // Public Methods
     // =========================================================================
