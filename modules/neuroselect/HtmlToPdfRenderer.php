@@ -198,7 +198,11 @@ final class HtmlToPdfRenderer
 
                         return $tag;
                     }
-                    $chunk = str_ireplace('</style>', '', $body);
+                    // @charset is only valid as the first byte of a CSS *file*, not inside a <style> block.
+                    // Dompdf's CSS parser misbehaves (wide letter-spacing, misread font sizes) when it
+                    // encounters @charset inside inlined <style> content, so strip it before inlining.
+                    $chunk = preg_replace('/^\s*@charset\s+[^;]+;\s*/i', '', $body);
+                    $chunk = str_ireplace('</style>', '', $chunk);
                     $inlinedBytes += strlen($chunk);
                     ++$fetchOk;
                     ++$removedLinks;

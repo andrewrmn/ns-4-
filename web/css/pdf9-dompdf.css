@@ -4,6 +4,48 @@
  * mixes those poorly and causes overlap. BFC + line-height + flex overrides fix most of it.
  */
 
+/*
+ * Dompdf ignores @media queries, so the .col-md-* widths defined inside
+ * @media (min-width: 800px) in main.css never apply. Restate them here unconditionally
+ * so columns are proportioned correctly at A4 width.
+ */
+.col-md-1  { width:  8.3333% !important; }
+.col-md-2  { width: 16.6667% !important; }
+.col-md-3  { width: 25%      !important; }
+.col-md-4  { width: 33.3333% !important; }
+.col-md-5  { width: 41.6667% !important; }
+.col-md-6  { width: 50%      !important; }
+.col-md-7  { width: 58.3333% !important; }
+.col-md-8  { width: 66.6667% !important; }
+.col-md-9  { width: 75%      !important; }
+.col-md-10 { width: 83.3333% !important; }
+.col-md-11 { width: 91.6667% !important; }
+.col-md-12 { width: 100%     !important; }
+
+/*
+ * Base typography for Dompdf: avoid rem units and custom fonts that require
+ * external file loads. All Dompdf built-in fonts (Helvetica, Times, Courier) work
+ * without network requests.
+ */
+body {
+    font-family: Helvetica, Arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
+}
+
+/* Reset letter-spacing globally — Dompdf can misinterpret px values from main.css
+ * when the @charset declaration disrupts its CSS parser. These are safe to zero out
+ * here because pdf9.css restores intentional spacing where it matters. */
+h1, h2, h3, h4, h5, h6,
+.h2, .h3, .h4, .h5,
+p, span, div, li, td, th {
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
+    font-family: Helvetica, Arial, sans-serif !important;
+}
+
 #pir,
 #pir * {
 	box-sizing: border-box !important;

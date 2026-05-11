@@ -48,7 +48,6 @@ return [
       },
     ],
 
-
     'api/products' => [
       'elementType' => Product::class,
       'paginate' => true,
@@ -129,8 +128,8 @@ return [
             ];
           }, $order->lineItems),
           'customerEmail' => $order->email,
-          'billingAddress' => orderAddressForSage($order->billingAddress),
-          'shippingAddress' => orderAddressForSage($order->shippingAddress),
+          'billingAddress' => orderAddressForSage(resolveOrderAddress($order, 'billing'), $order),
+          'shippingAddress' => orderAddressForSage(resolveOrderAddress($order, 'shipping'), $order),
           'shippingMethodHandle' => $order->shippingMethodHandle,
           'totalShippingCost' => $order->totalShippingCost,
           'hcpEmail' => $order->hcpEmail,
@@ -141,7 +140,6 @@ return [
 
       },
     ],
-
 
     // orders
     'sage/orders/processing' => [
@@ -208,8 +206,8 @@ return [
             ];
           }, $order->lineItems),
           'customerEmail' => $order->email,
-          'billingAddress' => orderAddressForSage($order->billingAddress),
-          'shippingAddress' => orderAddressForSage($order->shippingAddress),
+          'billingAddress' => orderAddressForSage(resolveOrderAddress($order, 'billing'), $order),
+          'shippingAddress' => orderAddressForSage(resolveOrderAddress($order, 'shipping'), $order),
           'shippingMethodHandle' => $order->shippingMethodHandle,
           'totalShippingCost' => $order->totalShippingCost,
           'hcpEmail' => $order->hcpEmail,
@@ -290,8 +288,8 @@ return [
             }, $order->lineItems),
 
             'customerEmail' => $order->email,
-            'billingAddress' => orderAddressForSage($order->billingAddress),
-            'shippingAddress' => orderAddressForSage($order->shippingAddress),
+            'billingAddress' => orderAddressForSage(resolveOrderAddress($order, 'billing'), $order),
+            'shippingAddress' => orderAddressForSage(resolveOrderAddress($order, 'shipping'), $order),
             'shippingMethodHandle' => $order->shippingMethodHandle,
             'totalShippingCost' => $order->totalShippingCost,
             'hcpEmail' => $order->hcpEmail,
@@ -454,8 +452,8 @@ return [
             $ordersData[$key]['dateOrdered'] = $order->dateOrdered->format('D jS M Y');
             $ordersData[$key]['lineItems'] = $order->lineItems;
             $ordersData[$key]['status'] = $order->orderStatus->name;
-            $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
-            $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
+            $ordersData[$key]['billingAddress'] = orderAddressLines(resolveOrderAddress($order, 'billing'));
+            $ordersData[$key]['shippingAddress'] = orderAddressLines(resolveOrderAddress($order, 'shipping'));
             $ordersData[$key]['discount'] = $order->totalDiscount;
             $ordersData[$key]['subtotal'] = $order->itemTotal;
             $ordersData[$key]['total'] = $order->totalPrice;
@@ -555,8 +553,8 @@ return [
             $ordersData[$key]['dateOrdered'] = $order->dateOrdered->format('D jS M Y');
             $ordersData[$key]['lineItems'] = $order->lineItems;
             $ordersData[$key]['status'] = $order->orderStatus->name;
-            $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
-            $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
+            $ordersData[$key]['billingAddress'] = orderAddressLines(resolveOrderAddress($order, 'billing'));
+            $ordersData[$key]['shippingAddress'] = orderAddressLines(resolveOrderAddress($order, 'shipping'));
             $ordersData[$key]['discount'] = $order->totalDiscount;
             $ordersData[$key]['subtotal'] = $order->itemTotal;
             $ordersData[$key]['total'] = $order->totalPrice;
@@ -618,8 +616,8 @@ return [
             $ordersData[$key]['paidStatus'] = $order->paidStatus;
 
             $ordersData[$key]['lineItems'] = $order->lineItems;
-            $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
-            $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
+            $ordersData[$key]['billingAddress'] = orderAddressLines(resolveOrderAddress($order, 'billing'));
+            $ordersData[$key]['shippingAddress'] = orderAddressLines(resolveOrderAddress($order, 'shipping'));
             $ordersData[$key]['discount'] = $order->totalDiscount;
             $ordersData[$key]['subtotal'] = $order->itemTotal;
             $ordersData[$key]['total'] = $order->totalPrice;
@@ -655,16 +653,31 @@ function formatApiMoney(mixed $amount): string
 }
 
 /**
- * Legacy Sage JSON used Commerce 3 address field names; Craft 4 stores orders on [[AddressElement]].
- *
+ * Commerce 4 trashes address elements after snapshotting; fall back to a trashed-inclusive
+ * query so completed orders don't lose their address data.
+ */
+function resolveOrderAddress(\craft\commerce\elements\Order $order, string $type): ?AddressElement
+{
+    $address = $type === 'billing' ? $order->billingAddress : $order->shippingAddress;
+    if ($address !== null) {
+        return $address;
+    }
+    $addressId = $type === 'billing' ? ($order->billingAddressId ?? null) : ($order->shippingAddressId ?? null);
+    if ($addressId) {
+        return AddressElement::find()->id($addressId)->trashed(null)->one() ?: null;
+    }
+    return null;
+}
+
+/**
  * @return array<string, mixed>
  */
-function orderAddressForSage(?AddressElement $address): array
+function orderAddressForSage(?AddressElement $address, ?Order $order = null): array
 {
     if ($address === null) {
         return [
-            'firstName' => null,
-            'lastName' => null,
+            'firstName' => $order?->customer?->firstName,
+            'lastName' => $order?->customer?->lastName,
             'address1' => null,
             'address2' => null,
             'city' => null,
@@ -683,8 +696,8 @@ function orderAddressForSage(?AddressElement $address): array
     }
 
     return [
-        'firstName' => $address->firstName,
-        'lastName' => $address->lastName,
+        'firstName' => $address->firstName ?: $order?->customer?->firstName,
+        'lastName' => $address->lastName ?: $order?->customer?->lastName,
         'address1' => $address->addressLine1,
         'address2' => $address->addressLine2,
         'city' => $address->locality,
@@ -770,8 +783,8 @@ function getOrders($user, $autoShip = false){
       $ordersData[$key]['email'] = $order->email;
       $ordersData[$key]['orderNumber'] = $order->number;
       //$ordersData[$key]['dateOrdered'] = $order->dateOrdered->format('D jS M Y');
-      $ordersData[$key]['billingAddress'] = orderAddressLines($order->billingAddress);
-      $ordersData[$key]['shippingAddress'] = orderAddressLines($order->shippingAddress);
+      $ordersData[$key]['billingAddress'] = orderAddressLines(resolveOrderAddress($order, 'billing'));
+      $ordersData[$key]['shippingAddress'] = orderAddressLines(resolveOrderAddress($order, 'shipping'));
       $ordersData[$key]['lineItems'] = $order->lineItems;
       $ordersData[$key]['status'] = $order->orderStatus->name;
       $ordersData[$key]['shippingMethod'] = $order->shippingMethod?->name;

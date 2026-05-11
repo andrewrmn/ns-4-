@@ -1,4 +1,4 @@
-{% set neuroselectHideDownloadReport = true %}
+{% set neuroselectHideDownloadReport = not (currentUser and currentUser.admin) %}
 {% set gridJustify = 'flex-justify-between' %}
 {% set colWidth = 'col-12 col-md-4' %}
 {% set printSize = 'print-size-normal' %}
