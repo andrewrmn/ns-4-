@@ -103,12 +103,17 @@ class PendingUserModule extends Module
         parent::init();
         self::$instance = $this;
 
-        // Set new users created via front-end registration form to pending status
+        // Set new users created via front-end registration form to pending status.
+        // Exception: HCP-created patients (have relatedHcp set) should auto-activate when they set their password.
         Event::on(
             Users::class,
             Users::EVENT_BEFORE_ACTIVATE_USER,
             function (UserEvent $event) {
                 if (Craft::$app->request->getIsSiteRequest()) {
+                    $user = $event->user;
+                    if ($user && $user->relatedHcp && count($user->relatedHcp->all()) > 0) {
+                        return;
+                    }
                     $event->isValid = false;
                 }
             }
