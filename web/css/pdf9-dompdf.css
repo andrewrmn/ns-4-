@@ -5,22 +5,28 @@
  */
 
 /*
- * Dompdf ignores @media queries, so the .col-md-* widths defined inside
- * @media (min-width: 800px) in main.css never apply. Restate them here unconditionally
- * so columns are proportioned correctly at A4 width.
+ * Dompdf column widths (Dompdf ignores @media queries so col-md-* widths from
+ * main.css are never applied). Columns are floated inside #pir, so widths must
+ * sum to ≤ 100% per row. Each row has a col-md-2 label (~16.6%) plus product
+ * columns, so product columns get the remaining ~83.4% split by count.
+ *
+ * print-size-normal = 2–3 products, print-size-md = 4, print-size-small = 5.
+ * pdf9.css already handles small/single; only normal and md need widths here.
  */
-.col-md-1  { width:  8.3333% !important; }
-.col-md-2  { width: 16.6667% !important; }
-.col-md-3  { width: 25%      !important; }
-.col-md-4  { width: 33.3333% !important; }
-.col-md-5  { width: 41.6667% !important; }
-.col-md-6  { width: 50%      !important; }
-.col-md-7  { width: 58.3333% !important; }
-.col-md-8  { width: 66.6667% !important; }
-.col-md-9  { width: 75%      !important; }
-.col-md-10 { width: 83.3333% !important; }
-.col-md-11 { width: 91.6667% !important; }
-.col-md-12 { width: 100%     !important; }
+
+/* Label column — all sizes */
+#pir .col-12.col-md-2 {
+    width: 16.6% !important;
+}
+
+/* 2 products: col-md-6 each → 83.4% ÷ 2 = 41.7% */
+#pir.print-size-normal .col-12.col-md-6 { width: 41.7% !important; }
+
+/* 3 products: col-md-4 each → 83.4% ÷ 3 = 27.8% */
+#pir.print-size-normal .col-12.col-md-4 { width: 27.8% !important; }
+
+/* 4 products: pdf9.css sets col-md-2 to 14% → 86% ÷ 4 = 21.5% */
+#pir.print-size-md .col-12.col-md-4 { width: 21.5% !important; }
 
 /*
  * Base typography for Dompdf: avoid rem units and custom fonts that require
@@ -45,6 +51,7 @@ p, span, div, li, td, th {
     word-spacing: 0 !important;
     font-family: Helvetica, Arial, sans-serif !important;
 }
+
 
 #pir,
 #pir * {
@@ -190,6 +197,30 @@ p, span, div, li, td, th {
 	display: block !important;
 	word-wrap: break-word !important;
 }
+
+/* Ingredient list: main.css sets li to display:flex which Dompdf handles poorly,
+ * causing overlapping ingredient titles and large empty gaps between items.
+ * Force block layout so each item stacks cleanly. */
+#pir .ingredient-list li {
+	display: block !important;
+	list-style: none !important;
+	overflow: hidden !important;
+	margin-bottom: 8px !important;
+}
+
+#pir .ingredient-list li:before {
+	display: none !important;
+	content: none !important;
+}
+
+#pir .ingredient-list li > div {
+	display: block !important;
+	width: 100% !important;
+}
+
+/* Reduce excessive pt-6/pb-6 padding (48px each) in ingredient columns for Dompdf */
+#key-ingredients .pt-6 { padding-top: 16px !important; }
+#key-ingredients .pb-6 { padding-bottom: 16px !important; }
 
 /* Sleep / survey-style rows */
 #pir .sleep-table__hd,
