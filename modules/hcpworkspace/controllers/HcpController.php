@@ -99,6 +99,7 @@ class HcpController extends Controller
                 return $this->asJson([
                     'success' => 1,
                     'message' => '',
+                    'patientId' => $user->id,
                 ]);
             }
 
@@ -568,6 +569,35 @@ class HcpController extends Controller
         Subscription::update($subscriptionId, ['trial_end' => $timestamp, 'proration_behavior' => 'none']);
 
         return $this->redirectToPostedUrl();
+    }
+
+    public function actionSearchPatients()
+    {
+        $hcpUser = Craft::$app->getUser()->getIdentity();
+
+        if (!$hcpUser) {
+            return $this->asJson([]);
+        }
+
+        $q = Craft::$app->request->getParam('q');
+
+        $query = User::find()
+            ->group('patients')
+            ->relatedTo(['targetElement' => $hcpUser, 'field' => 'relatedHcp'])
+            ->anyStatus();
+
+        if ($q) {
+            $query->search($q);
+        }
+
+        $patients = $query->all();
+        $results = [];
+        foreach ($patients as $patient) {
+            $name = $patient->firstName ? $patient->firstName . ' ' . $patient->lastName : $patient->username;
+            $results[] = ['label' => $name, 'value' => $patient->id];
+        }
+
+        return $this->asJson($results);
     }
 
     public function actionTest()

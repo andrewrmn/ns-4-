@@ -79,16 +79,20 @@
 
         $('#newPatientForm').submit(function(ev) {
             ev.preventDefault();
-            $("input[name='sendRecommendation']").val(0);
+            var sendRec = $("input[name='sendRecommendation']").val();
             var data = $(this).serialize();
+            $("input[name='sendRecommendation']").val(0);
             $.post('/',
                 data,
                 function(response) {
                     if (response.success) {
-                        $('#newPatientForm')[0].reset();
-                        $("div.errorMessage").html('');
-                        $("div#success-message-modal").addClass('is-active');
-                        $('div#success-message-modal').html($('div#success-message-modal').html().replace('[patientId]', response.patientId));
+                        if (sendRec == 1 && response.patientId) {
+                            window.location.href = '/hcp/recommendation?patientId=' + response.patientId;
+                        } else {
+                            $('#newPatientForm')[0].reset();
+                            $("div.errorMessage").html('');
+                            $("div#success-message-modal").addClass('is-active');
+                        }
                     } else {
                         $("div.errorMessage").html("<p class='text-red'>" + response.message + "</p>")
                     }

@@ -14,9 +14,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="searchPatient w-50">
-                        <input type="text" name="searchPatient" placeholder="Type patients name to start a recommendation" />
+                        <select id="patientSelect">
+                            <option value="">Select a patient...</option>
+                        </select>
                     </div>
-                    <p class="p-sm text-italic">Type patients name to start a recommendation</p>
+                    <p class="p-sm text-italic">Select a patient to start a recommendation</p>
                 </div>
             </div>
         </div>
@@ -33,29 +35,19 @@
      </div>
 
 {% endblock %}
-{% do view.registerCssFile('//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css') %}
-{% do view.registerJsFile('//code.jquery.com/ui/1.13.1/jquery-ui.js') %}
 {% js %}
     $(document).ready(function(){
-        $( "input[name='searchPatient']" ).val('');
-        $( "input[name='searchPatient']" ).autocomplete({
-            source: function( request, response ) {
-                $.ajax({
-                    url: "/hcp/ajax/search-patients",
-                    dataType: "json",
-                    data: {
-                        q: request.term
-                    },
-                    success: function( data ) {
-                        response( data );
-                    }
-                });
-            },
-            minLength: 3,
-            select: function( event, ui ) {
-                window.location.href = "{{ url('hcp/recommendation?patientId=') }}=" + ui.item.value;
-                ui.item.value = ui.item.label;
+        $.getJSON("/hcp/ajax/search-patients", function(data) {
+            $.each(data, function(i, patient) {
+                $('#patientSelect').append($('<option>', { value: patient.value, text: patient.label }));
+            });
+        });
+
+        $('#patientSelect').on('change', function() {
+            var patientId = $(this).val();
+            if (patientId) {
+                window.location.href = "{{ url('hcp/recommendation') }}?patientId=" + patientId;
             }
-        })
+        });
     })
 {% endjs %}

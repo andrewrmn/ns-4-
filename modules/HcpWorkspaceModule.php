@@ -41,6 +41,7 @@ class HcpWorkspaceModule extends Module
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event): void {
                 $event->rules['neuroselect/hcp/<action:[\w\-]+>'] = 'hcp-workspace/hcp/<action>';
+                $event->rules['hcp/ajax/search-patients'] = 'hcp-workspace/hcp/search-patients';
             }
         );
 
