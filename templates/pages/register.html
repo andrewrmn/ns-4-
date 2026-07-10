@@ -79,7 +79,7 @@
 						<div class="field-wrap">
 							<label for="Credentials">Credentials</label>
 							<input id="credentials" placeholder="Credentials *" class="required-field" type="text"
-								name="fields[credentials]" value="{{ account.fields.credentials ?? '' }}" required>
+								name="fields[credentials]" value="{{ account.credentials ?? '' }}" required>
 
 							{% if account is defined %}
 							{{ errorList(account.getErrors('credentials')) }}
@@ -93,7 +93,7 @@
 						<div class="field-wrap {% if account and account.hasErrors('businessName') %}field-wrap--error{% endif %}">
 							<label for="businessName">Business Name</label>
 							<input type="text" class="required-field" placeholder="Business Name *" name="fields[businessName]"
-								id="businessName" value="{{ account.fields.businessName ?? '' }}" minlength="2" maxlength="100"
+								id="businessName" value="{{ account.businessName ?? '' }}" minlength="2" maxlength="100"
 								required />
 						</div>
 					</div>
@@ -101,7 +101,7 @@
 						<div class="field-wrap">
 							<label for="npiNumber">NPI Number</label>
 							<input type="text" class="input-left" name="fields[npiNumber]" id="npiNumber" placeholder="NPI Number"
-								value="{{ account.fields.npiNumber ?? '' }}" />
+								value="{{ account.npiNumber ?? '' }}" />
 						</div>
 					</div>
 			</fieldset>
@@ -114,14 +114,14 @@
 						<div class="field-wrap {% if account and account.hasErrors('address') %}field-wrap--error{% endif %}">
 							<label for="address">Street Address</label>
 							<input id="address" class="required-field" type="text" placeholder="Street Address *"
-								name="fields[address]" value="{{ account.fields.address ?? '' }}" required>
+								name="fields[address]" value="{{ account.address ?? '' }}" required>
 						</div>
 					</div>
 					<div class="col--xs--12 col--sm--4">
 						<div class="field-wrap">
 							<label for="addressLine2">Suite/Apt #</label>
 							<input id="addressLine2" type="text" class="input-left" placeholder="Suite/Apt #"
-								name="fields[addressLine2]" value="{{ account.fields.addressLine2 ?? '' }}">
+								name="fields[addressLine2]" value="{{ account.addressLine2 ?? '' }}">
 
 							{% if account is defined %}
 							{{ errorList(account.getErrors('addressLine2')) }}
@@ -133,7 +133,7 @@
 						<div class="field-wrap {% if account and account.hasErrors('city') %}field-wrap--error{% endif %}">
 							<label for="city">City</label>
 							<input id="city" class="required-field" type="text" placeholder="City *" name="fields[city]"
-								value="{{ account.fields.city ?? '' }}" required>
+								value="{{ account.city ?? '' }}" required>
 						</div>
 					</div>
 					<div class="col--xs--8 col--sm--5">
@@ -150,8 +150,8 @@
 									required>
 									<option value="">State *</option>
 									{% for stateCode, stateLabel in usStates %}
-									<option value="{{ stateLabel }}" {% if account and account.fields.state is defined and
-										account.fields.state==stateLabel %} selected{% endif %}>
+									<option value="{{ stateLabel }}" {% if account and account.state is defined and
+										account.state==stateLabel %} selected{% endif %}>
 										{{ stateLabel }}
 									</option>
 									{% endfor %}
@@ -164,7 +164,7 @@
 						<div class="field-wrap {% if account and account.hasErrors('zip') %}field-wrap--error{% endif %}">
 							<label for="zip">Zip</label>
 							<input id="zip" class="required-field" placeholder="Zip *" type="text" name="fields[zip]" maxlength="5"
-								value="{{ account.fields.zip ?? '' }}" required>
+								value="{{ account.zip ?? '' }}" required>
 						</div>
 					</div>
 
@@ -217,7 +217,7 @@
 						<div class="field-wrap {% if account and account.hasErrors('phone') %}field-wrap--error{% endif %}">
 							<label for="phone">Phone</label>
 							<input type="text" class="required-field" name="fields[phone]" id="phone" placeholder="Phone number *"
-								required value="{{ account.fields.phone ?? '' }}" />
+								required value="{{ account.phone ?? '' }}" />
 						</div>
 					</div>
 
@@ -225,7 +225,7 @@
 						<div class="field-wrap">
 							<label for="fax">Fax</label>
 							<input type="text" class="input-left" name="fields[fax]" id="fax" placeholder="Fax number"
-								value="{{ account.fields.fax ?? '' }}" />
+								value="{{ account.fax ?? '' }}" />
 
 						</div>
 					</div>
@@ -234,7 +234,7 @@
 				<div class="field-wrap">
 					<label for="website">Website</label>
 					<input type="text" placeholder="Website" name="fields[website]" id="website"
-						value="{{ account.fields.website ?? '' }}" minlength="2" maxlength="100" />
+						value="{{ account.website ?? '' }}" minlength="2" maxlength="100" />
 				</div>
 
 				<div class="field-wrap">
@@ -281,7 +281,7 @@
 								your practice? *</label>
 							<input type="text" placeholder="Practice specialty/scope?"
 								name="fields[whatIsTheSpecialtyScopeOfYourPractice]" id="whatIsTheSpecialtyScopeOfYourPractice"
-								value="{{ account.fields.whatIsTheSpecialtyScopeOfYourPractice ?? '' }}" minlength="2"
+								value="{{ account.whatIsTheSpecialtyScopeOfYourPractice ?? '' }}" minlength="2"
 								maxlength="100" />
 							{% if account is defined %}
 							{{ errorList(account.getErrors('whatIsTheSpecialtyScopeOfYourPractice')) }}
@@ -295,7 +295,7 @@
 								business?</label>
 							<input type="number" placeholder="Years in business?" class="input-left "
 								name="fields[howManyYearsHaveYouBeenInBusiness]" id="howManyYearsHaveYouBeenInBusiness"
-								value="{{ account.fields.howManyYearsHaveYouBeenInBusiness ?? '' }}" minlength="2" maxlength="100" />
+								value="{{ account.howManyYearsHaveYouBeenInBusiness ?? '' }}" minlength="2" maxlength="100" />
 							{% if account is defined %}
 							{{ errorList(account.getErrors('howManyYearsHaveYouBeenInBusiness')) }}
 							{% endif %}
